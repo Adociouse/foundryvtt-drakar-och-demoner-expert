@@ -1,0 +1,7 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.claude/settings.local.json
+packs/*/LOCK
+packs/*/LOG
+packs/*/LOG.old

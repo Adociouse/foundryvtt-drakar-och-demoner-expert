@@ -1,0 +1,13 @@
+<div class="dode-damage-card">
+  <header class="roll-card-header">
+    <strong>{{label}}</strong> — {{formula}}
+  </header>
+  <div class="roll-card-result">
+    <span class="damage-total">{{rollTotal}}</span>
+    {{#if targetName}}
+      <span class="target-info">mot {{targetName}} (ABS {{targetAbs}}) → <strong>{{finalDamage}}</strong> skada</span>
+    {{else}}
+      <span class="target-info">Inget mål valt — bruttoskada visad, dra av målets ABS manuellt.</span>
+    {{/if}}
+  </div>
+</div>

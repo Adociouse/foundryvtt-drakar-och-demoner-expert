@@ -1,0 +1,34 @@
+{
+  "name": "Hela",
+  "type": "besvarjelse",
+  "system": {
+    "school": "animism",
+    "sValue": 12,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Helar E KP hos offret.</p>",
+    "ritual": false,
+    "kvick": false
+  },
+  "_id": "GUt7uFFwbms6DnCg",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389839556,
+    "modifiedTime": 1784389839557,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!GUt7uFFwbms6DnCg"
+}

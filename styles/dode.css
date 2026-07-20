@@ -1,0 +1,354 @@
+.dode.sheet {
+  font-family: var(--font-primary);
+}
+
+/*
+ * Bakgrundsbild — beskuren läderstruktur (character-sheet-leather.png, se
+ * assets/backgrounds — beskrivet i historiken nedan). Ereb Altor-illustrationen
+ * (assets/backgrounds/Ereb_Altor.png) användes här tillfälligt men bytt tillbaka
+ * — den hör till kampanjvärldens joinskärm/canvas, inte arkets/guidens
+ * innertextur. Läderstrukturen är en ren, mönsterfri yta som täcker rent vid
+ * vilket fönsterformat som helst och stör inte läsbarheten (0.4 overlay räcker).
+ * Gäller både karaktärsarket OCH rollpersonsskaparen (.character-wizard) — samma
+ * visuella identitet genom hela flödet, inte bara på det färdiga arket.
+ */
+.dode.sheet.character,
+.dode.sheet.character-wizard {
+  background-image:
+    linear-gradient(rgba(11, 10, 19, 0.4), rgba(11, 10, 19, 0.4)),
+    url("../assets/backgrounds/character-sheet-leather.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/*
+ * Trärammen från originalbilden (imagen_20260719_201503_2.png) som en
+ * border-image runt hela arket, istället för som background — den beskär sig
+ * aldrig fel oavsett fönsterstorlek eftersom border-image bara målar en fast
+ * kant, inte skalar hela bilden mot en godtycklig fönsterproportion.
+ * border-image-slice: 96 är den exakta gränsen mellan träram och läderfält,
+ * uppmätt pixel för pixel i originalbilden (1024px bred, symmetrisk ram).
+ * Ingen "fill" i slice-värdet — mitten lämnas omålad så bakgrundsbilden ovan
+ * syns igenom istället för att bilden skalas och dubbelmålas i mitten.
+ */
+.dode.sheet.character,
+.dode.sheet.character-wizard {
+  border-style: solid;
+  border-width: 32px;
+  border-image-source: url("../assets/backgrounds/imagen_20260719_201503_2.png");
+  border-image-slice: 96;
+  border-image-width: 32px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+}
+
+.dode.sheet .sheet-header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.dode.sheet .sheet-header .profile-img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border: 1px solid var(--color-border-light-tertiary);
+}
+
+.dode.sheet .header-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dode.sheet .actor-name,
+.dode.sheet .item-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.dode.sheet .identity-row,
+.dode.sheet .derived-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.dode.sheet .social-standing {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  opacity: 0.85;
+}
+
+.dode.sheet .identity-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dode.sheet .drop-zone {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px dashed var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+}
+
+.dode.sheet .drop-zone .drop-label {
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+.dode.sheet .drop-zone .drop-hint {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.dode.sheet .attr-mod-total {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.dode.sheet .attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.dode.sheet .attribute {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.35rem;
+}
+
+.dode.sheet .attribute input {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.dode.sheet .attribute .group {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.dode.sheet .skills-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dode.sheet .skill-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dode.sheet .skill-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.15rem;
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+}
+
+.dode.sheet .skill-row .skill-name {
+  flex: 1;
+  cursor: pointer;
+}
+
+.dode.sheet .skill-row-empty {
+  opacity: 0.6;
+  font-style: italic;
+  padding: 0.25rem;
+}
+
+.dode-roll-card {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+
+.dode-roll-card .roll-card-result {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.dode-roll-card.perfekt .outcome-label { color: #1a7a1a; font-weight: bold; }
+.dode-roll-card.fummel .outcome-label { color: #a11; font-weight: bold; }
+.dode-roll-card.lyckat .outcome-label { color: #1a7a1a; }
+.dode-roll-card.misslyckat .outcome-label { color: #a11; }
+
+.dode-damage-card {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+
+.dode-damage-card .roll-card-result {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.dode-damage-card .damage-total {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #a11;
+}
+
+.dode-damage-card .target-info {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.dode.sheet .effektgrad-input {
+  width: 2.5rem;
+}
+
+.character-wizard .wizard-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+}
+
+.character-wizard .wizard-bp-ledger {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.character-wizard .wizard-step {
+  min-height: 380px;
+}
+
+.character-wizard .hint {
+  opacity: 0.7;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.character-wizard .wizard-roll-result {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.character-wizard .wizard-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.character-wizard .wizard-card {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.4rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.character-wizard .wizard-card img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+
+.character-wizard .wizard-card-grid-kon {
+  grid-template-columns: repeat(2, minmax(110px, 160px));
+  justify-content: center;
+}
+
+.character-wizard .wizard-kon-icon {
+  display: block;
+  font-size: 2.5rem;
+  margin: 0.5rem 0;
+  opacity: 0.85;
+}
+
+.character-wizard .wizard-card.selected {
+  border-color: var(--color-border-highlight, #ff6400);
+  border-width: 2px;
+  background: rgba(255, 100, 0, 0.08);
+}
+
+.character-wizard .wizard-card-meta {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.character-wizard .wizard-detail {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.character-wizard .wizard-attribute-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.character-wizard .wizard-attribute {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.character-wizard .wizard-attribute label {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75rem;
+}
+
+.character-wizard .wizard-attribute-value {
+  font-size: 1.3rem;
+}
+
+.character-wizard .wizard-requirements {
+  list-style: none;
+  margin: 0.3rem 0;
+  padding: 0;
+}
+
+.character-wizard .wizard-requirements .met { color: #1a7a1a; }
+.character-wizard .wizard-requirements .unmet { color: #a11; }
+.character-wizard .wizard-requirements .unverified { opacity: 0.6; font-style: italic; }
+
+.character-wizard .wizard-summary {
+  border-collapse: collapse;
+  margin-bottom: 0.5rem;
+}
+
+.character-wizard .wizard-summary td {
+  padding: 0.15rem 0.6rem 0.15rem 0;
+}
+
+.character-wizard .wizard-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border-light-tertiary);
+}

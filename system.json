@@ -1,0 +1,87 @@
+{
+  "id": "drakar-och-demoner-expert",
+  "title": "Drakar och Demoner Expert",
+  "description": "Drakar och Demoner Expert (1991) — det svenska rollspelet. Implementerar FV-systemet (1T20 ≤ FV), sju grundegenskaper, sju raser, magi och strid.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Johan Hagström",
+      "url": "https://github.com/TODO"
+    }
+  ],
+  "esmodules": [
+    "scripts/dode.mjs"
+  ],
+  "styles": [
+    "styles/dode.css"
+  ],
+  "languages": [
+    {
+      "lang": "sv",
+      "name": "Svenska",
+      "path": "lang/sv.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {}
+    },
+    "Item": {
+      "fardighet": {},
+      "ras": {},
+      "yrke": {},
+      "vapen": {},
+      "rustning": {},
+      "besvarjelse": {}
+    }
+  },
+  "packs": [
+    {
+      "name": "raser",
+      "label": "Raser",
+      "path": "packs/raser",
+      "type": "Item",
+      "system": "drakar-och-demoner-expert"
+    },
+    {
+      "name": "yrken",
+      "label": "Yrken",
+      "path": "packs/yrken",
+      "type": "Item",
+      "system": "drakar-och-demoner-expert"
+    },
+    {
+      "name": "vapen-utrustning",
+      "label": "Vapen & Utrustning",
+      "path": "packs/vapen-utrustning",
+      "type": "Item",
+      "system": "drakar-och-demoner-expert"
+    },
+    {
+      "name": "besvarjelser",
+      "label": "Besvärjelser",
+      "path": "packs/besvarjelser",
+      "type": "Item",
+      "system": "drakar-och-demoner-expert"
+    },
+    {
+      "name": "monster",
+      "label": "Monster & Varelser",
+      "path": "packs/monster",
+      "type": "Actor",
+      "system": "drakar-och-demoner-expert"
+    }
+  ],
+  "socket": false,
+  "compatibility": {
+    "minimum": "12",
+    "verified": "14"
+  },
+  "url": "https://github.com/TODO/drakar-och-demoner-expert",
+  "manifest": "https://raw.githubusercontent.com/TODO/drakar-och-demoner-expert/main/system.json",
+  "download": "https://github.com/TODO/drakar-och-demoner-expert/releases/latest/download/drakar-och-demoner-expert.zip",
+  "license": "MIT",
+  "readme": "README.md",
+  "changelog": "CHANGELOG.md"
+}

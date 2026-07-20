@@ -1,0 +1,38 @@
+{
+  "name": "Bredyxa",
+  "type": "vapen",
+  "system": {
+    "grip": "1-2H",
+    "styGroup": 2,
+    "damage": "1d8+2",
+    "length": 1,
+    "weight": 2,
+    "baseValue": 11,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 125,
+    "range": "",
+    "description": ""
+  },
+  "_id": "Hfa4SAKCI5SV8GWx",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825212,
+    "modifiedTime": 1784389825214,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Hfa4SAKCI5SV8GWx"
+}

@@ -1,0 +1,171 @@
+{
+  "name": "Lejon",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 26
+      },
+      "fys": {
+        "value": 11
+      },
+      "sto": {
+        "value": 17
+      },
+      "smi": {
+        "value": 16
+      },
+      "int": {
+        "value": 5
+      },
+      "psy": {
+        "value": 11
+      },
+      "kar": {
+        "value": 10
+      }
+    },
+    "abs": 2,
+    "damageBonus": "1d6",
+    "movement": "L16",
+    "moral": 10,
+    "count": "1 hane, 1T4 honor, 2T4 ungar",
+    "habitat": "4",
+    "rarity": "Ovanlig",
+    "attacks": [
+      {
+        "name": "2 Klor",
+        "fv": 13,
+        "damage": "1d6",
+        "note": "GC 65%"
+      },
+      {
+        "name": "Bett",
+        "fv": 13,
+        "damage": "1d8",
+        "note": "GC 65%"
+      }
+    ],
+    "hp": {
+      "value": null,
+      "max": 0
+    },
+    "skills": "",
+    "special": "",
+    "biography": ""
+  },
+  "_id": "OMJ8KfCHcYGMGqiv",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Lejon",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784391938145,
+    "modifiedTime": 1784391938152,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!OMJ8KfCHcYGMGqiv"
+}

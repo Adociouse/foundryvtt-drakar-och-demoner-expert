@@ -1,0 +1,33 @@
+{
+  "name": "Munk",
+  "type": "yrke",
+  "system": {
+    "requirements": "INT 12, PSY 12",
+    "professionAbility": "<p>Meditation: 1 SR per +1 FV, kumulativt upp till max dubbelt ursprungligt FV, gäller ett enda slag inom en minut efter meditationen.</p>",
+    "skillList": "<p>Språk, Avväpna, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk, Heraldik, Historia, Knopar, Kulturkännedom, Kunskap om demoner/magi/odöda, Läkekonst, Massage, Målning, Räkning, Simma, Spela instrument, Språkkunskap, Stridskonster, Trästav, Zoologi, Örtkunskap.</p>",
+    "description": "",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-kvinna.png"
+  },
+  "_id": "zpl0XjtJRt7Ujtno",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389796958,
+    "modifiedTime": 1784389796960,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!zpl0XjtJRt7Ujtno"
+}

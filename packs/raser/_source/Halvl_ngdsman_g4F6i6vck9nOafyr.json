@@ -1,0 +1,45 @@
+{
+  "name": "Halvlängdsman",
+  "type": "ras",
+  "system": {
+    "bpCost": 15,
+    "attributeMods": {
+      "sty": -4,
+      "fys": 3,
+      "smi": 3,
+      "int": 0,
+      "psy": 2,
+      "kar": 0
+    },
+    "stoRange": {
+      "min": 3,
+      "max": 6,
+      "normal": 5
+    },
+    "automaticAbilities": "<p>+4 FV i Gömma sig. +1T3 BC i Provsmaka. Svåra att se när de vill gömma sig.</p>",
+    "description": "",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-kvinna.png"
+  },
+  "_id": "g4F6i6vck9nOafyr",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389765004,
+    "modifiedTime": 1784389765006,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!g4F6i6vck9nOafyr"
+}

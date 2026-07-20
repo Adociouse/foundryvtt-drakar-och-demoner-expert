@@ -1,0 +1,232 @@
+<div class="dode-wizard-body">
+  <header class="wizard-progress">
+    <strong>Steg {{stepIndex}}/{{stepCount}}: {{stepLabel}}</strong>
+    <span class="wizard-bp-ledger">BP kvar: <strong>{{bp.remaining}}</strong> / {{bp.start}}</span>
+  </header>
+
+  {{#if showKon}}
+  <section class="wizard-step">
+    <p class="hint">Välj kön. Styr vilka porträttbilder som visas för ras och yrke i nästa steg.</p>
+    <div class="wizard-card-grid wizard-card-grid-kon">
+      {{#each konOptions as |option|}}
+        <div class="wizard-card {{#if option.selected}}selected{{/if}}" data-kon="{{option.value}}" data-action="selectKon">
+          <i class="fa-solid {{option.icon}} wizard-kon-icon"></i>
+          <div class="wizard-card-name">{{option.label}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if showNiva}}
+  <section class="wizard-step">
+    <p class="hint">Välj rollpersonens nivå. Nivån styr bakgrundspoäng (BP) — högre nivå ger fler BP att spendera på ras, förmågor, socialt stånd och startkapital senare i guiden.</p>
+    <div class="wizard-card-grid">
+      {{#each nivaOptions as |option|}}
+        <div class="wizard-card {{#if option.selected}}selected{{/if}}" data-niva="{{option.value}}" data-action="selectNiva">
+          <div class="wizard-card-name">{{option.label}}</div>
+          <div class="wizard-card-meta">{{option.bp}} BP</div>
+        </div>
+      {{/each}}
+    </div>
+    {{#if selectedNivaOption}}
+      <div class="wizard-detail">
+        <h4>{{selectedNivaOption.label}}</h4>
+        <p>{{selectedNivaOption.description}}</p>
+      </div>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showGrunder}}
+  <section class="wizard-step">
+    <label>Namn
+      <input type="text" name="state.name" value="{{state.name}}" placeholder="Rollpersonens namn" autofocus />
+    </label>
+  </section>
+  {{/if}}
+
+  {{#if showRas}}
+  <section class="wizard-step">
+    <p class="hint">Välj en ras. Automatiska förmågor och egenskapsmodifikationer visas nedan.</p>
+    <div class="wizard-card-grid">
+      {{#each races as |race|}}
+        <div class="wizard-card {{#if race.selected}}selected{{/if}}" data-uuid="{{race.uuid}}" data-action="selectRace">
+          <img src="{{race.img}}" />
+          <div class="wizard-card-name">{{race.name}}</div>
+          <div class="wizard-card-meta">{{race.system.bpCost}} BP</div>
+        </div>
+      {{/each}}
+    </div>
+    {{#if selectedRace}}
+      <div class="wizard-detail">
+        <h4>{{selectedRace.name}}</h4>
+        {{{selectedRace.system.automaticAbilities}}}
+      </div>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showAlder}}
+  <section class="wizard-step">
+    <label>Åldersgrupp
+      <select name="state.ageCategory">
+        {{#each ageCategories as |cat|}}
+          <option value="{{cat.value}}" {{#if cat.selected}}selected{{/if}}>{{cat.value}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <div class="wizard-roll-result">
+      {{#if startCapital.roll}}
+        <p>Startkapital: {{startCapital.baseSm}} sm × {{startCapital.capitalMultiplier}} (åldersmultiplikator, RP s.28) = <strong>{{startCapital.finalSm}} sm</strong></p>
+      {{else}}
+        <p class="hint">Startkapital inte framslaget än (steget innan).</p>
+      {{/if}}
+    </div>
+    <p class="hint">Åldersmodifikationer på grundegenskaper är inte extraherade från källan än (RP s.24-25) — ingen sådan modifiering tillämpas tills vidare. EP-budgeten kommer i PLAN_WIZARD_V2.md Fas 5.</p>
+  </section>
+  {{/if}}
+
+  {{#if showAttribut}}
+  <section class="wizard-step">
+    <button type="button" data-action="rollAllAttributes"><i class="fa-solid fa-dice"></i> Slå alla</button>
+    <div class="wizard-attribute-grid">
+      {{#each rollableAttributes as |key|}}
+        <div class="wizard-attribute" data-attr="{{key}}">
+          <label>{{key}}</label>
+          <div class="wizard-attribute-value">{{lookup (lookup ../effectiveAttributes key) "base"}}</div>
+          <button type="button" data-action="rollAttribute" title="Slå 3T6"><i class="fa-solid fa-dice-d6"></i></button>
+        </div>
+      {{/each}}
+      <div class="wizard-attribute" data-attr="sto">
+        <label>sto</label>
+        <div class="wizard-attribute-value">{{effectiveAttributes.sto.base}}</div>
+        <span class="hint">2T6+6 (sätts av "Slå alla")</span>
+      </div>
+    </div>
+    {{#if selectedRace}}
+      <p class="hint">Totalt inkl. rasmod från {{selectedRace.name}} visas i nästa steg.</p>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showYrke}}
+  <section class="wizard-step">
+    <p class="hint">Välj ett yrke. Du slår grundegenskaper i nästa steg — kravkontrollen fylls i då.</p>
+    <div class="wizard-card-grid">
+      {{#each professions as |profession|}}
+        <div class="wizard-card {{#if profession.selected}}selected{{/if}}" data-uuid="{{profession.uuid}}" data-action="selectProfession">
+          <img src="{{profession.img}}" />
+          <div class="wizard-card-name">{{profession.name}}</div>
+          <div class="wizard-card-meta">{{profession.system.requirements}}</div>
+        </div>
+      {{/each}}
+    </div>
+    {{#if selectedProfession}}
+      <div class="wizard-detail">
+        <h4>{{selectedProfession.name}}</h4>
+        <p><strong>Krav:</strong> {{selectedProfession.system.requirements}}</p>
+        {{#if requirementCheck}}
+          <ul class="wizard-requirements">
+            {{#each requirementCheck.entries as |entry|}}
+              {{#if entry.unverified}}
+                <li class="unverified">
+                  <i class="fa-solid fa-circle-question"></i>
+                  {{entry.key}} {{entry.required}} (ej slaget än)
+                </li>
+              {{else if entry.met}}
+                <li class="met">
+                  <i class="fa-solid fa-check"></i>
+                  {{entry.key}} {{entry.required}} (du har {{entry.total}})
+                </li>
+              {{else}}
+                <li class="unmet">
+                  <i class="fa-solid fa-xmark"></i>
+                  {{entry.key}} {{entry.required}} (du har {{entry.total}})
+                </li>
+              {{/if}}
+            {{/each}}
+          </ul>
+        {{/if}}
+        {{{selectedProfession.system.professionAbility}}}
+      </div>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showSocialt}}
+  <section class="wizard-step">
+    <p class="hint">Slå fram socialt stånd. Varje spenderad BP ger +1 på slaget (RP s.27).</p>
+    <button type="button" data-action="rollSocialStanding"><i class="fa-solid fa-dice"></i> Slå 2T6</button>
+    <div class="wizard-roll-result">
+      {{#if socialStanding.roll}}
+        <p>Slag {{socialStanding.roll}} + {{socialStanding.bpSpent}} BP = <strong>{{socialStanding.total}}</strong> → {{socialStanding.rank}}</p>
+      {{else}}
+        <p class="hint">Inget slag gjort än.</p>
+      {{/if}}
+    </div>
+    <label>BP att spendera på socialt stånd
+      <input type="number" min="0" name="state.socialStanding.bpSpent" value="{{socialStanding.bpSpent}}" />
+    </label>
+  </section>
+  {{/if}}
+
+  {{#if showKapital}}
+  <section class="wizard-step">
+    <p class="hint">Slå fram startkapital: 2T6 + BP + halva BP:et du la på socialt stånd (avrundat uppåt), takat vid {{startCapital.cap}} (RP s.27-28).</p>
+    <button type="button" data-action="rollStartCapital"><i class="fa-solid fa-dice"></i> Slå 2T6</button>
+    <div class="wizard-roll-result">
+      {{#if startCapital.roll}}
+        <p>Slag {{startCapital.roll}} + {{startCapital.bpSpent}} BP + {{startCapital.halfSocialBp}} (halva socialt-BP) = <strong>{{startCapital.total}}</strong> → {{startCapital.baseSm}} sm</p>
+        <p class="hint">Åldersmultiplikatorn tillämpas i Ålder-steget — se PLAN_WIZARD_V2.md Fas 4.</p>
+      {{else}}
+        <p class="hint">Inget slag gjort än.</p>
+      {{/if}}
+    </div>
+    <label>BP att spendera på startkapital
+      <input type="number" min="0" name="state.startCapital.bpSpent" value="{{startCapital.bpSpent}}" />
+    </label>
+  </section>
+  {{/if}}
+
+  {{#if showGranska}}
+  <section class="wizard-step">
+    <h4>Sammanfattning</h4>
+    <table class="wizard-summary">
+      <tr><td>Kön</td><td>{{#each konOptions as |option|}}{{#if option.selected}}{{option.label}}{{/if}}{{/each}}</td></tr>
+      <tr><td>Nivå</td><td>{{#if selectedNivaOption}}{{selectedNivaOption.label}}{{else}}—{{/if}}</td></tr>
+      <tr><td>Namn</td><td>{{state.name}}</td></tr>
+      <tr><td>Ras</td><td>{{#if selectedRace}}{{selectedRace.name}}{{else}}—{{/if}}</td></tr>
+      <tr><td>Yrke</td><td>{{#if selectedProfession}}{{selectedProfession.name}}{{else}}—{{/if}}</td></tr>
+      <tr><td>Socialt stånd</td><td>{{#if socialStanding.rank}}{{socialStanding.rank}} ({{socialStanding.total}}){{else}}—{{/if}}</td></tr>
+      <tr><td>Startkapital</td><td>{{#if startCapital.finalSm}}{{startCapital.baseSm}} sm × {{startCapital.capitalMultiplier}} = {{startCapital.finalSm}} sm{{else}}—{{/if}}</td></tr>
+      <tr><td>Ålder</td><td>{{state.ageCategory}}</td></tr>
+    </table>
+    <table class="wizard-summary">
+      {{#each attributes as |labelKey key|}}
+        <tr>
+          <td>{{localize labelKey}}</td>
+          <td>{{lookup (lookup ../effectiveAttributes key) "base"}} {{#if (lookup (lookup ../effectiveAttributes key) "mod")}}({{lookup (lookup ../effectiveAttributes key) "modLabel"}}) = {{lookup (lookup ../effectiveAttributes key) "total"}}{{/if}}</td>
+        </tr>
+      {{/each}}
+    </table>
+    <table class="wizard-summary">
+      <tr><td>BP — start ({{selectedNivaOption.label}})</td><td>{{bp.start}}</td></tr>
+      <tr><td>BP — spenderat på ras</td><td>{{state.bp.spentRas}}</td></tr>
+      <tr><td>BP — spenderat på socialt stånd</td><td>{{socialStanding.bpSpent}}</td></tr>
+      <tr><td>BP — spenderat på startkapital</td><td>{{startCapital.bpSpent}}</td></tr>
+      <tr><td>BP — kvar</td><td>{{bp.remaining}}</td></tr>
+    </table>
+    <p class="hint">Efter att rollpersonen skapats: lägg till färdigheter och utrustning direkt på arket (dra från kompendier eller "Ny färdighet"-knappen).</p>
+  </section>
+  {{/if}}
+
+  <footer class="wizard-nav">
+    <button type="button" data-action="prevStep" {{#if isFirstStep}}disabled{{/if}}>Föregående</button>
+    {{#if isLastStep}}
+      <button type="button" data-action="createCharacter" class="primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Skapa rollperson</button>
+    {{else}}
+      <button type="button" data-action="nextStep" {{#unless canAdvance}}disabled{{/unless}}>Nästa</button>
+    {{/if}}
+  </footer>
+</div>

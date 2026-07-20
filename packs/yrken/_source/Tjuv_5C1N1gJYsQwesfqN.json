@@ -1,0 +1,33 @@
+{
+  "name": "Tjuv",
+  "type": "yrke",
+  "system": {
+    "requirements": "SMI 16",
+    "professionAbility": "<p>Spendera 1 PSY = +1 CL på valfri färdighet, max +3 (3 PSY). Max 2 gånger per sovperiod (8 tim, alver 4 tim).</p>",
+    "skillList": "<p>Max 2 vapenfärdigheter, språk, Administration, Akrobatik, Buktala, Dra vapen, Dolk, Drogkunskap, Förfalskning, Geografi, Giftkunskap, Gyckelkonster, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Simma, Skådespeleri, Spela instrument, Stavhopp, Teckenspråk, Trästav, Undre världen, Änterhake.</p>",
+    "description": "",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-kvinna.png"
+  },
+  "_id": "5C1N1gJYsQwesfqN",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389796958,
+    "modifiedTime": 1784389796961,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5C1N1gJYsQwesfqN"
+}

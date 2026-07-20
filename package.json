@@ -1,0 +1,13 @@
+{
+  "name": "drakar-och-demoner-expert",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Byggverktyg för kompendiepaketen i Drakar och Demoner Expert-systemet. Systemet självt kräver ingen build — se CLAUDE.md.",
+  "scripts": {
+    "packs:unpack": "node scripts/build/unpack-all.mjs",
+    "packs:pack": "node scripts/build/pack-all.mjs"
+  },
+  "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "^1.1.0"
+  }
+}

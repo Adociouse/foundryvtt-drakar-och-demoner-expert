@@ -1,0 +1,103 @@
+{
+  "DODE": {
+    "Attribute": {
+      "STY": "Styrka",
+      "STO": "Storlek",
+      "FYS": "Fysik",
+      "SMI": "Smidighet",
+      "INT": "Intelligens",
+      "PSY": "Psyke",
+      "KAR": "Karisma"
+    },
+    "SkillCategory": {
+      "A": "Kategori A",
+      "B": "Kategori B"
+    },
+    "WeaponGrip": {
+      "1H": "Enhand",
+      "2H": "Tvåhand",
+      "1-2H": "En/tvåhand"
+    },
+    "WeaponType": {
+      "Latt": "Lätt",
+      "Tung": "Tung"
+    },
+    "WeaponCategory": {
+      "Narstrid": "Närstrid",
+      "Projektil": "Projektil",
+      "Kast": "Kastvapen"
+    },
+    "ArmorSlot": {
+      "Kropp": "Kropp",
+      "Huvud": "Huvud",
+      "Skold": "Sköld"
+    },
+    "MagicSchool": {
+      "Alkemi": "Alkemi",
+      "Animism": "Animism",
+      "Demonologi": "Demonologi",
+      "Elementarmagi": "Elementarmagi",
+      "Harmonism": "Harmonism",
+      "Haxkonster": "Häxkonster",
+      "Illusionism": "Illusionism",
+      "Mentalism": "Mentalism",
+      "Nekromanti": "Nekromanti",
+      "Rostmagi": "Röstmagi",
+      "Spiritism": "Spiritism",
+      "Stavmagi": "Stavmagi",
+      "Symbolism": "Symbolism"
+    },
+    "Sheet": {
+      "Character": "Rollperson",
+      "Npc": "Monster/NPC",
+      "Item": "Föremål",
+      "Ras": "Ras",
+      "Yrke": "Yrke",
+      "Vapen": "Vapen",
+      "Rustning": "Rustning",
+      "Besvarjelse": "Besvärjelse"
+    },
+    "Skill": {
+      "New": "Ny färdighet",
+      "Group": "Grupp"
+    },
+    "Derived": {
+      "KP": "Kroppspoäng",
+      "Psy": "PSY",
+      "DamageBonus": "Skadebonus",
+      "Abs": "ABS",
+      "Movement": "Förflyttning",
+      "CarryCapacity": "Bärförmåga"
+    },
+    "RollCard": {
+      "Perfekt": "Perfekt!",
+      "Fummel": "Fummel!",
+      "Lyckat": "Lyckat",
+      "Misslyckat": "Misslyckat"
+    },
+    "Actor": {
+      "Ras": "Ras",
+      "RasDrop": "Släpp en ras här",
+      "Yrke": "Yrke",
+      "YrkeDrop": "Släpp ett yrke här",
+      "Utrustning": "Utrustning",
+      "Base": "Bas",
+      "Mod": "Mod",
+      "Total": "Totalt"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Rollperson",
+      "npc": "Monster/NPC"
+    },
+    "Item": {
+      "fardighet": "Färdighet",
+      "ras": "Ras",
+      "yrke": "Yrke",
+      "vapen": "Vapen",
+      "rustning": "Rustning",
+      "besvarjelse": "Besvärjelse"
+    }
+  }
+}

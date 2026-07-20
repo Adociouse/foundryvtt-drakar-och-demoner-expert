@@ -1,0 +1,38 @@
+{
+  "name": "Dolk",
+  "type": "vapen",
+  "system": {
+    "grip": "1H",
+    "styGroup": 1,
+    "damage": "1d4+1",
+    "length": 1,
+    "weight": 0.5,
+    "baseValue": 9,
+    "weaponType": "latt",
+    "category": "narstrid",
+    "price": 40,
+    "range": "",
+    "description": ""
+  },
+  "_id": "TnTigfxjU5S8HV1d",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825211,
+    "modifiedTime": 1784389825213,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!TnTigfxjU5S8HV1d"
+}

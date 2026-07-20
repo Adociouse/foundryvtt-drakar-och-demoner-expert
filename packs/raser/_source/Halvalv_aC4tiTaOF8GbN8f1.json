@@ -1,0 +1,45 @@
+{
+  "name": "Halvalv",
+  "type": "ras",
+  "system": {
+    "bpCost": 15,
+    "attributeMods": {
+      "sty": 0,
+      "fys": 0,
+      "smi": 2,
+      "int": 0,
+      "psy": 0,
+      "kar": 1
+    },
+    "stoRange": {
+      "min": 7,
+      "max": 16,
+      "normal": 12
+    },
+    "automaticAbilities": "<p>+2 FV Upptäcka fara, +2 FV Lyssna. Dubbelt bättre hörsel och syn jämfört med människa. Lever längre än människor (dock inte odödliga). Passar alla yrken.</p>",
+    "description": "",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-kvinna.png"
+  },
+  "_id": "aC4tiTaOF8GbN8f1",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389765004,
+    "modifiedTime": 1784389765006,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!aC4tiTaOF8GbN8f1"
+}

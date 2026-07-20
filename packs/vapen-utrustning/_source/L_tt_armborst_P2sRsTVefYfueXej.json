@@ -1,0 +1,38 @@
+{
+  "name": "Lätt armborst",
+  "type": "vapen",
+  "system": {
+    "grip": "2H",
+    "styGroup": 2,
+    "damage": "2d4+2",
+    "weight": 2,
+    "baseValue": 9,
+    "weaponType": "latt",
+    "category": "projektil",
+    "range": "150 m",
+    "price": 310,
+    "description": "<p>Laddningstid: 3 SR.</p>",
+    "length": 0
+  },
+  "_id": "P2sRsTVefYfueXej",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825212,
+    "modifiedTime": 1784389825215,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!P2sRsTVefYfueXej"
+}

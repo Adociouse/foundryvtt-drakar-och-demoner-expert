@@ -1,0 +1,38 @@
+{
+  "name": "Morgonstjärna",
+  "type": "vapen",
+  "system": {
+    "grip": "1-2H",
+    "styGroup": 4,
+    "damage": "2d8+2",
+    "length": 1,
+    "weight": 3,
+    "baseValue": 11,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 250,
+    "range": "",
+    "description": ""
+  },
+  "_id": "SDHvVp3BP8PI7u1V",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825212,
+    "modifiedTime": 1784389825215,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!SDHvVp3BP8PI7u1V"
+}

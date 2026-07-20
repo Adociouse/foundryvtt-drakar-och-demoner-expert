@@ -1,0 +1,21 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>Grundegenskapskrav
+    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="t.ex. STY 14, FYS 12" />
+  </label>
+</section>
+
+<section class="item-description">
+  <h3>Yrkesförmåga</h3>
+  {{editor system.professionAbility target="system.professionAbility" button=true engine="prosemirror"}}
+  <h3>Möjliga yrkesfärdigheter</h3>
+  {{editor system.skillList target="system.skillList" button=true engine="prosemirror"}}
+  <h3>Beskrivning</h3>
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

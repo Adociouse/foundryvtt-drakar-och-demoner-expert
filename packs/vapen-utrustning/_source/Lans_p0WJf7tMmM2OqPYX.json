@@ -1,0 +1,38 @@
+{
+  "name": "Lans",
+  "type": "vapen",
+  "system": {
+    "grip": "1H",
+    "styGroup": 3,
+    "damage": "1d10+1",
+    "length": 5,
+    "weight": 3,
+    "baseValue": 15,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 125,
+    "range": "",
+    "description": ""
+  },
+  "_id": "p0WJf7tMmM2OqPYX",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825211,
+    "modifiedTime": 1784389825214,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!p0WJf7tMmM2OqPYX"
+}

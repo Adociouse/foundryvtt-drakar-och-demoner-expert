@@ -1,0 +1,32 @@
+{
+  "name": "Läderhuva",
+  "type": "rustning",
+  "system": {
+    "slot": "huvud",
+    "abs": 2,
+    "price": 15,
+    "weight": 0,
+    "description": ""
+  },
+  "_id": "ouQoHJXm2xJO8ckt",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825227,
+    "modifiedTime": 1784389825229,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ouQoHJXm2xJO8ckt"
+}

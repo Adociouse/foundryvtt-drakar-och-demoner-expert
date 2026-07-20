@@ -1,0 +1,19 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>Plats
+    <select name="system.slot">{{selectOptions armorSlots selected=system.slot localize=true}}</select>
+  </label>
+  <label>Abs <input type="number" name="system.abs" value="{{system.abs}}" min="0" /></label>
+  <label>Vikt (BEP) <input type="number" name="system.weight" value="{{system.weight}}" step="0.1" /></label>
+  <label>Pris (sm) <input type="number" name="system.price" value="{{system.price}}" /></label>
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

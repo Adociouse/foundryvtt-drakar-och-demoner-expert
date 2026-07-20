@@ -1,0 +1,27 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>Grundegenskap
+    <select name="system.attribute">
+      {{selectOptions attributes selected=system.attribute localize=true}}
+    </select>
+  </label>
+  <label>Kategori
+    <select name="system.category">
+      {{selectOptions skillCategories selected=system.category localize=true}}
+    </select>
+  </label>
+  <label>FV <input type="number" name="system.fv" value="{{system.fv}}" min="0" /></label>
+  <label class="checkbox-field">
+    <input type="checkbox" name="system.yrkesfardighet" {{checked system.yrkesfardighet}} /> Yrkesfärdighet
+  </label>
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

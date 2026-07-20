@@ -1,0 +1,32 @@
+{
+  "name": "Romersk hjälm",
+  "type": "rustning",
+  "system": {
+    "slot": "huvud",
+    "abs": 6,
+    "price": 200,
+    "weight": 0,
+    "description": ""
+  },
+  "_id": "AkLCtXIOCLFFcFWA",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825228,
+    "modifiedTime": 1784389825230,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AkLCtXIOCLFFcFWA"
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Bard",
+  "type": "yrke",
+  "system": {
+    "requirements": "SMI 12, KAR 14",
+    "professionAbility": "<p>Sjunger eller spelar minst 1 minut och klarar ett färdighetsslag → åhörare uppfattar barden som KAR +5 högre; KAR-baserade färdigheter (Övertala, Muta, Bluffa, Skådespeleri) får +5 CL i en timme.</p>",
+    "skillList": "<p>En valfri vapenfärdighet, språk, Administration, Akrobatik, Buktala, Dans, Djurträning, Dolk, Förfalskning, Geografi, Gycklekonster, Hantverk, Hasardspel, Heraldik, Historia, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Målning, Schack & brädspel, Simma, Skådespeleri, Spela instrument, Språkkunskap, Trästav.</p>",
+    "description": "",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-kvinna.png"
+  },
+  "_id": "cVVzSZakJAMGZHCP",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389796957,
+    "modifiedTime": 1784389796959,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!cVVzSZakJAMGZHCP"
+}

@@ -1,0 +1,35 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>BP-kostnad <input type="number" name="system.bpCost" value="{{system.bpCost}}" min="0" /></label>
+</section>
+
+<section class="attribute-mods">
+  <h3>Egenskapsmodifikationer</h3>
+  <div class="mod-grid">
+    <label>{{localize "DODE.Attribute.STY"}} <input type="number" name="system.attributeMods.sty" value="{{system.attributeMods.sty}}" /></label>
+    <label>{{localize "DODE.Attribute.FYS"}} <input type="number" name="system.attributeMods.fys" value="{{system.attributeMods.fys}}" /></label>
+    <label>{{localize "DODE.Attribute.SMI"}} <input type="number" name="system.attributeMods.smi" value="{{system.attributeMods.smi}}" /></label>
+    <label>{{localize "DODE.Attribute.INT"}} <input type="number" name="system.attributeMods.int" value="{{system.attributeMods.int}}" /></label>
+    <label>{{localize "DODE.Attribute.PSY"}} <input type="number" name="system.attributeMods.psy" value="{{system.attributeMods.psy}}" /></label>
+    <label>{{localize "DODE.Attribute.KAR"}} <input type="number" name="system.attributeMods.kar" value="{{system.attributeMods.kar}}" /></label>
+  </div>
+  <p class="hint">STO anges som intervall nedan, inte som en fast modifierare (se RASER.md).</p>
+  <div class="sto-range">
+    <label>STO min <input type="number" name="system.stoRange.min" value="{{system.stoRange.min}}" /></label>
+    <label>STO max <input type="number" name="system.stoRange.max" value="{{system.stoRange.max}}" /></label>
+    <label>STO normal <input type="number" name="system.stoRange.normal" value="{{system.stoRange.normal}}" /></label>
+  </div>
+</section>
+
+<section class="item-description">
+  <h3>Automatiska förmågor</h3>
+  {{editor system.automaticAbilities target="system.automaticAbilities" button=true engine="prosemirror"}}
+  <h3>Beskrivning</h3>
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

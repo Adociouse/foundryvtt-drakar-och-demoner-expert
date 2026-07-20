@@ -1,0 +1,103 @@
+<div class="dode-character-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" />
+  <div class="header-fields">
+    <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+    <div class="identity-row">
+      <div class="drop-zone" data-item-id="{{race.id}}">
+        <span class="drop-label">{{localize "DODE.Actor.Ras"}}</span>
+        {{#if race}}
+          <a data-action="editItem">{{race.name}}</a>
+          <button type="button" data-action="clearRas" title="Ta bort"><i class="fa-solid fa-xmark"></i></button>
+        {{else}}
+          <span class="drop-hint">{{localize "DODE.Actor.RasDrop"}}</span>
+        {{/if}}
+      </div>
+      <div class="drop-zone" data-item-id="{{profession.id}}">
+        <span class="drop-label">{{localize "DODE.Actor.Yrke"}}</span>
+        {{#if profession}}
+          <a data-action="editItem">{{profession.name}}</a>
+          <button type="button" data-action="clearYrke" title="Ta bort"><i class="fa-solid fa-xmark"></i></button>
+        {{else}}
+          <span class="drop-hint">{{localize "DODE.Actor.YrkeDrop"}}</span>
+        {{/if}}
+      </div>
+      <label>Ålder <input type="text" name="system.alder" value="{{system.alder}}" /></label>
+      {{#if system.socialStanding.rank}}
+        <span class="social-standing" title="Socialt stånd (RP s.27)">{{system.socialStanding.rank}}</span>
+      {{/if}}
+    </div>
+    <div class="derived-row">
+      <span>{{localize "DODE.Derived.KP"}}: <input class="hp-value" type="number" name="system.hp.value" value="{{system.hp.value}}" /> / {{system.hp.max}}</span>
+      <span>{{localize "DODE.Derived.Psy"}}: <input class="hp-value" type="number" name="system.resources.psy.value" value="{{system.resources.psy.value}}" /> / {{system.resources.psy.max}}</span>
+      <span>{{localize "DODE.Derived.DamageBonus"}}: {{system.damageBonus}}</span>
+      <span>{{localize "DODE.Derived.Abs"}}: {{system.abs}}</span>
+      <span>{{localize "DODE.Derived.Movement"}}: {{system.movement}}</span>
+      <span>{{localize "DODE.Derived.CarryCapacity"}}: {{system.carryCapacity}} kg</span>
+    </div>
+  </div>
+</header>
+
+<section class="attributes-grid">
+  {{#each attributes as |labelKey key|}}
+    <div class="attribute">
+      <label>{{localize labelKey}}</label>
+      <input type="number" name="system.attributes.{{key}}.value" value="{{lookup (lookup ../system.attributes key) "value"}}" title="{{localize 'DODE.Actor.Base'}}" />
+      <span class="attr-mod-total">
+        <span title="{{localize 'DODE.Actor.Mod'}}">{{lookup (lookup ../system.attributes key) "mod"}}</span>
+        →
+        <strong title="{{localize 'DODE.Actor.Total'}}">{{lookup (lookup ../system.attributes key) "total"}}</strong>
+      </span>
+      <span class="group">{{localize "DODE.Skill.Group"}} {{lookup (lookup ../system.attributes key) "group"}}</span>
+    </div>
+  {{/each}}
+</section>
+
+<section class="skills">
+  <header class="skills-header">
+    <h3>Färdigheter</h3>
+    <button type="button" data-action="addSkill"><i class="fa-solid fa-plus"></i> Ny färdighet</button>
+  </header>
+  <ol class="skill-list">
+    {{#each skills as |skill|}}
+      <li class="skill-row" data-item-id="{{skill.id}}">
+        <a data-action="editSkill" class="skill-name">{{skill.name}}</a>
+        <span class="skill-fv">FV {{skill.system.fv}}</span>
+        <button type="button" data-action="rollSkill" title="Slå"><i class="fa-solid fa-dice-d20"></i></button>
+        <button type="button" data-action="deleteSkill" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{else}}
+      <li class="skill-row-empty">Inga färdigheter ännu.</li>
+    {{/each}}
+  </ol>
+</section>
+
+<section class="gear">
+  <header class="skills-header">
+    <h3>{{localize "DODE.Actor.Utrustning"}}</h3>
+  </header>
+  <ol class="skill-list">
+    {{#each gear as |entry|}}
+      <li class="skill-row" data-item-id="{{entry.item.id}}">
+        <a data-action="editItem" class="skill-name">{{entry.item.name}}</a>
+        {{#if entry.isVapen}}
+          <span class="skill-fv">{{entry.item.system.damage}}</span>
+          <button type="button" data-action="rollDamage" title="Slå skada"><i class="fa-solid fa-burst"></i></button>
+        {{else if entry.isRustning}}
+          <span class="skill-fv">Abs {{entry.item.system.abs}}</span>
+        {{else if entry.isBesvarjelse}}
+          <span class="fv-input">E <input type="number" class="effektgrad-input" data-effektgrad value="1" min="1" /></span>
+          <button type="button" data-action="castSpell" title="Kasta"><i class="fa-solid fa-hand-sparkles"></i></button>
+        {{/if}}
+        <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{else}}
+      <li class="skill-row-empty">Ingen utrustning ännu — dra hit vapen, rustning eller besvärjelser från ett kompendium.</li>
+    {{/each}}
+  </ol>
+</section>
+
+<section class="biography">
+  {{editor system.biography target="system.biography" button=true engine="prosemirror"}}
+</section>
+</div>

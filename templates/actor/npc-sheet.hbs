@@ -1,0 +1,63 @@
+<div class="dode-npc-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" />
+  <div class="header-fields">
+    <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+    <div class="derived-row">
+      <span>{{localize "DODE.Derived.KP"}}: <input class="hp-value" type="number" name="system.hp.value" value="{{system.hp.value}}" /> / {{system.hp.max}}</span>
+      <span>ABS <input type="number" name="system.abs" value="{{system.abs}}" min="0" /></span>
+      <span>SB <input type="text" name="system.damageBonus" value="{{system.damageBonus}}" /></span>
+      <span>Förfl. <input type="text" name="system.movement" value="{{system.movement}}" /></span>
+      <span>Moral <input type="number" name="system.moral" value="{{system.moral}}" /></span>
+    </div>
+    <div class="derived-row">
+      <span>Antal <input type="text" name="system.count" value="{{system.count}}" /></span>
+      <span>Hemvist <input type="text" name="system.habitat" value="{{system.habitat}}" /></span>
+      <span>Vanlighet <input type="text" name="system.rarity" value="{{system.rarity}}" /></span>
+    </div>
+  </div>
+</header>
+
+<section class="attributes-grid">
+  {{#each attributes as |labelKey key|}}
+    <div class="attribute">
+      <label>{{localize labelKey}}</label>
+      <input type="number" name="system.attributes.{{key}}.value" value="{{lookup (lookup ../system.attributes key) "value"}}" />
+      <span class="group">{{localize "DODE.Skill.Group"}} {{lookup (lookup ../system.attributes key) "group"}}</span>
+    </div>
+  {{/each}}
+</section>
+
+<section class="attacks">
+  <header class="skills-header">
+    <h3>Anfall</h3>
+    <button type="button" data-action="addAttack"><i class="fa-solid fa-plus"></i> Nytt anfall</button>
+  </header>
+  <ol class="skill-list">
+    {{#each system.attacks as |attack index|}}
+      <li class="skill-row" data-attack-index="{{index}}">
+        <input type="text" name="system.attacks.{{index}}.name" value="{{attack.name}}" placeholder="Namn" />
+        <span class="fv-input">FV <input type="number" name="system.attacks.{{index}}.fv" value="{{attack.fv}}" /></span>
+        <input type="text" name="system.attacks.{{index}}.damage" value="{{attack.damage}}" placeholder="Skada" />
+        <input type="text" name="system.attacks.{{index}}.note" value="{{attack.note}}" placeholder="Notering" />
+        <button type="button" data-action="rollAttack" title="Slå anfall"><i class="fa-solid fa-dice-d20"></i></button>
+        <button type="button" data-action="rollAttackDamage" title="Slå skada"><i class="fa-solid fa-burst"></i></button>
+        <button type="button" data-action="deleteAttack" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{else}}
+      <li class="skill-row-empty">Inga anfall ännu.</li>
+    {{/each}}
+  </ol>
+</section>
+
+<section class="npc-fields">
+  <label>Färdigheter (fritext) <input type="text" name="system.skills" value="{{system.skills}}" /></label>
+</section>
+
+<section class="npc-special">
+  <h3>Speciellt</h3>
+  {{editor system.special target="system.special" button=true engine="prosemirror"}}
+  <h3>Beskrivning</h3>
+  {{editor system.biography target="system.biography" button=true engine="prosemirror"}}
+</section>
+</div>

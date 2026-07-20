@@ -1,0 +1,38 @@
+{
+  "name": "Slunga",
+  "type": "vapen",
+  "system": {
+    "grip": "1H",
+    "styGroup": 1,
+    "damage": "1d6",
+    "weight": 0.25,
+    "weaponType": "latt",
+    "category": "projektil",
+    "range": "90 m",
+    "price": 12,
+    "length": 0,
+    "baseValue": 0,
+    "description": ""
+  },
+  "_id": "ERayfkzHhCtMVvlp",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825213,
+    "modifiedTime": 1784389825215,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ERayfkzHhCtMVvlp"
+}

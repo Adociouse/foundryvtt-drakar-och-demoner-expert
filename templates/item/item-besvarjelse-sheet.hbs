@@ -1,0 +1,21 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>Magiskola
+    <select name="system.school">{{selectOptions magicSchools selected=system.school localize=true}}</select>
+  </label>
+  <label>Skolvärde (S) <input type="number" name="system.sValue" value="{{system.sValue}}" min="0" /></label>
+  <label>Varaktighet <input type="text" name="system.duration" value="{{system.duration}}" /></label>
+  <label>Räckvidd <input type="text" name="system.range" value="{{system.range}}" /></label>
+  <label class="checkbox-field"><input type="checkbox" name="system.ritual" {{checked system.ritual}} /> Ritual</label>
+  <label class="checkbox-field"><input type="checkbox" name="system.kvick" {{checked system.kvick}} /> Kvick</label>
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

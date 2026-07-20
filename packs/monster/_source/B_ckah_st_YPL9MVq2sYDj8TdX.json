@@ -1,0 +1,171 @@
+{
+  "name": "Bäckahäst",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 46
+      },
+      "fys": {
+        "value": 17
+      },
+      "sto": {
+        "value": 26
+      },
+      "smi": {
+        "value": 16
+      },
+      "int": {
+        "value": 8
+      },
+      "psy": {
+        "value": 14
+      },
+      "kar": {
+        "value": 10
+      }
+    },
+    "abs": 1,
+    "damageBonus": "2d6",
+    "movement": "L24/S12",
+    "moral": 15,
+    "count": "1",
+    "habitat": "7",
+    "rarity": "Mycket sällsynt",
+    "attacks": [
+      {
+        "name": "Bett",
+        "fv": 17,
+        "damage": "1d8",
+        "note": "GC 85%"
+      },
+      {
+        "name": "2 Hovar",
+        "fv": 15,
+        "damage": "1d6",
+        "note": "GC 75%"
+      }
+    ],
+    "special": "<p>Ser ut som en vanlig grå eller vit häst — men har rovdjurständer. Andas luft OCH vatten. Psykisk attack på 10 m (PSY mot PSY): lyckas → offret tvingas psykiskt klättra upp och rida, rusar sedan ut i vatten för att dränka offret.</p>",
+    "hp": {
+      "value": null,
+      "max": 0
+    },
+    "skills": "",
+    "biography": ""
+  },
+  "_id": "YPL9MVq2sYDj8TdX",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Bäckahäst",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784391938148,
+    "modifiedTime": 1784391938155,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!YPL9MVq2sYDj8TdX"
+}

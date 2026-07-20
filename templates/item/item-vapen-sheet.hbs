@@ -1,0 +1,29 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>Fattning
+    <select name="system.grip">{{selectOptions weaponGrips selected=system.grip localize=true}}</select>
+  </label>
+  <label>STY-grupp <input type="number" name="system.styGroup" value="{{system.styGroup}}" min="0" /></label>
+  <label>Skada <input type="text" name="system.damage" value="{{system.damage}}" placeholder="1T6+1" /></label>
+  <label>Längd (kategori 0-5) <input type="number" name="system.length" value="{{system.length}}" /></label>
+  <label>Vikt (BEP) <input type="number" name="system.weight" value="{{system.weight}}" step="0.1" /></label>
+  <label>Basvärde (BV) <input type="number" name="system.baseValue" value="{{system.baseValue}}" /></label>
+  <label>Typ
+    <select name="system.weaponType">{{selectOptions weaponTypes selected=system.weaponType localize=true}}</select>
+  </label>
+  <label>Kategori
+    <select name="system.category">{{selectOptions weaponCategories selected=system.category localize=true}}</select>
+  </label>
+  <label>Räckvidd <input type="text" name="system.range" value="{{system.range}}" /></label>
+  <label>Pris (sm) <input type="number" name="system.price" value="{{system.price}}" /></label>
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

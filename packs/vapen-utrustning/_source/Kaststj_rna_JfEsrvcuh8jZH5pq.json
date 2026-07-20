@@ -1,0 +1,38 @@
+{
+  "name": "Kaststjärna",
+  "type": "vapen",
+  "system": {
+    "grip": "1H",
+    "styGroup": 1,
+    "damage": "1d4",
+    "weight": 0.2,
+    "weaponType": "latt",
+    "category": "kast",
+    "range": "SMI×1 rutor",
+    "price": 30,
+    "length": 0,
+    "baseValue": 0,
+    "description": ""
+  },
+  "_id": "JfEsrvcuh8jZH5pq",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1784389825213,
+    "modifiedTime": 1784389825216,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!JfEsrvcuh8jZH5pq"
+}
