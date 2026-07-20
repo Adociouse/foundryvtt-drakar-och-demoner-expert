@@ -69,6 +69,11 @@ npm run packs:pack     # packs/<namn>/_source/*.json → LevelDB
 
 **Kör aldrig `packs:unpack`/`packs:pack` medan Foundry-servern är igång** — LevelDB tillåter bara en skrivande klient åt gången.
 
-## Licens
+## Licens och rättigheter
 
-MIT — se [LICENSE](LICENSE).
+Källkoden i det här repot (`scripts/`, `templates/`, `styles/`, byggverktygen) är licensierad under MIT — se [LICENSE](LICENSE).
+
+MIT-licensen gäller **bara implementationen**, inte spelet den bygger på:
+
+- **Foundry Virtual Tabletop** är en separat mjukvara med sin egen licens från Foundry Gaming, LLC. Det här repot innehåller inte Foundry själv och kräver en egen giltig Foundry-licens för att användas.
+- **Drakar och Demoner Expert** — reglerna, namnen, ras-/yrkesbeskrivningarna och övrigt speldatainnehåll som återges i kompendierna (`packs/`) — tillhör sina respektive rättighetsinnehavare. Det här projektet är ett fan-/communityskapat kompatibilitetsverktyg och är inte officiellt anslutet till eller godkänt av rättighetsinnehavarna för Drakar och Demoner.
