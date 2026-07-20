@@ -7,7 +7,85 @@
     "skillList": "<p>Språk, Alkemi, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk, Hypnotisera, Kulturkännedom, Kunskap om demoner/magi/odöda, Läkekonst, Massage, Orientering, Simma, Trästav, Zoologi, Örtkunskap, Överlevnad.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Alkemi",
+        "attribute": "int"
+      },
+      {
+        "name": "Djurhelning",
+        "attribute": "psy"
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi"
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int"
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Hypnotisera",
+        "attribute": "psy"
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int"
+      },
+      {
+        "name": "Kunskap om demoner",
+        "attribute": "int"
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int"
+      },
+      {
+        "name": "Kunskap om odöda",
+        "attribute": "int"
+      },
+      {
+        "name": "Läkekonst",
+        "attribute": "int"
+      },
+      {
+        "name": "Massage",
+        "attribute": "smi"
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi"
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int"
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Överlevnad",
+        "attribute": "int"
+      }
+    ]
   },
   "_id": "viLRzlEEhczFdWAt",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare.png",

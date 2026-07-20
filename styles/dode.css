@@ -345,6 +345,38 @@
   padding: 0.15rem 0.6rem 0.15rem 0;
 }
 
+.character-wizard .wizard-skill-buy {
+  white-space: nowrap;
+}
+
+.character-wizard .wizard-skill-buy button {
+  padding: 0.05rem 0.4rem;
+  font-size: 0.8rem;
+  width: auto;
+}
+
+.character-wizard .wizard-ability-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.character-wizard .wizard-ability-row label {
+  flex: 1;
+}
+
+.character-wizard .wizard-equipment-card .wizard-skill-buy {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.dode.sheet.character .life-goal-field {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
 .character-wizard .wizard-nav {
   display: flex;
   justify-content: space-between;

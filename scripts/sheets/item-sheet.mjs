@@ -20,6 +20,7 @@ class DoDEItemSheetBase extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.system = this.item.system;
     context.attributes = CONFIG.DODE.attributes;
     context.skillCategories = CONFIG.DODE.skillCategories;
+    context.costTiers = CONFIG.DODE.costTiers;
     context.weaponGrips = CONFIG.DODE.weaponGrips;
     context.weaponTypes = CONFIG.DODE.weaponTypes;
     context.weaponCategories = CONFIG.DODE.weaponCategories;

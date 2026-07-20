@@ -1,6 +1,6 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
-const STEPS = ["kon", "niva", "grunder", "ras", "yrke", "attribut", "socialt", "kapital", "alder", "granska"];
+const STEPS = ["kon", "niva", "grunder", "ras", "yrke", "attribut", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
 const STEP_LABELS = {
   kon: "Kön",
   niva: "Nivå",
@@ -8,9 +8,13 @@ const STEP_LABELS = {
   ras: "Ras",
   yrke: "Yrke",
   attribut: "Grundegenskaper",
+  formagor: "Särskilda förmågor",
   socialt: "Socialt stånd",
   kapital: "Startkapital",
   alder: "Ålder",
+  fardigheter: "Färdigheter",
+  livsmal: "Livsmål",
+  utrustning: "Utrustning",
   granska: "Granska"
 };
 const AGE_CATEGORIES = ["Ung", "Mogen", "Medelålders", "Gammal"];
@@ -64,8 +68,37 @@ const NIVA_OPTIONS = [
  * uppdelning) finns och aktiveras automatiskt den dagen tabellen fylls i, men
  * ger `ageMod: 0` för alla åldrar tills dess. Gissa inte fram värden.
  *
- * Avgränsat bort denna omgång (se memory.md / PLAN_WIZARD_V2.md): EP-köp av
- * färdigheter, Livsmål, Särskilda förmågor.
+ * EP-budgeten (Fas 5) räknas fram i `"alder"`-steget — nivå×ålder-tabell
+ * (KH s.3/RP s.28) + kvarvarande BP × 5 (RP s.28) — och visas där, men inget
+ * spenderar den ännu. `maxStartFv` (KH s.3, max FV en färdighet får ha vid
+ * skapande) beräknas samtidigt, redo för Fas 6/7:s färdighetsköp.
+ *
+ * Färdigheter (Fas 6) auto-genereras i `"fardigheter"`-steget: de 16 primära
+ * färdigheterna (RP s.36) + yrkets `professionSkills` (item-yrke.mjs), båda vid
+ * bas-FV = BC (grupp av grundegenskapen, samma `DODE.attributeToGroup` som
+ * DataModellens egen beräkning).
+ *
+ * EP-köp (Fas 7) sker i samma `"fardigheter"`-steg: varje färdighet har en
+ * "+1 FV"/"−1 FV"-kontroll, kostnad enligt `DODE.skillCost` (RP s.30, kumulativ
+ * tabell, INTE grundkostnad × antal steg). Knappen grånas (inte hård spärr på
+ * något annat än sig själv) om EP inte räcker eller `maxStartFv` (KH s.3) är
+ * nådd. `state.fardigheter[namn]` lagrar bara den köpta delen ovanpå BC — se
+ * `#skillPreview`.
+ *
+ * Särskilda förmågor (Fas 8, MVP) — `"formagor"`-steget mellan `attribut` och
+ * `socialt`. Antalet fritext-slots styrs av nivå (`DODE.abilityRollsByNiva`,
+ * KH s.3 — samma tabell som BP), men VAD spelaren skriver i varje slot är fri
+ * text, inte en tabellslagning — ingen komplett förmågetabell är extraherad
+ * (forskningslucka, se item-yrke.mjs-liknande kommentar i actor-character.mjs).
+ *
+ * Livsmål (Fas 9) — `"livsmal"`-steget: dropdown över `DODE.lifeGoals` (21
+ * poster) + ett fritextfält som skriver över listvalet om ifyllt. Utrustning
+ * (Fas 9) — `"utrustning"`-steget: kort-rutnät över `vapen-utrustning`-
+ * kompendiet (vapen+rustning i samma pack), köp/sälj drar `state.startCapital
+ * .finalSm` ner mot 0, grånad "Köp" när priset överstiger kvarvarande kapital.
+ * Ingen ny Item-schema behövdes — `vapen`/`rustning` hade redan `price`.
+ *
+ * Avgränsat bort denna omgång (se memory.md / PLAN_WIZARD_V2.md): HH Öde-typer.
  */
 export default class DoDECharacterWizard extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -85,6 +118,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       selectProfession: DoDECharacterWizard.#onSelectProfession,
       rollSocialStanding: DoDECharacterWizard.#onRollSocialStanding,
       rollStartCapital: DoDECharacterWizard.#onRollStartCapital,
+      buySkillFv: DoDECharacterWizard.#onBuySkillFv,
+      sellSkillFv: DoDECharacterWizard.#onSellSkillFv,
+      buyEquipment: DoDECharacterWizard.#onBuyEquipment,
+      sellEquipment: DoDECharacterWizard.#onSellEquipment,
       createCharacter: DoDECharacterWizard.#onCreateCharacter
     },
     form: { handler: () => {}, submitOnChange: true, closeOnSubmit: false }
@@ -109,7 +146,27 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // enda-källa-princip som DataModellens prepareDerivedData använder).
     bp: { spentRas: 0, spentFormagor: 0, spentFardigheter: 0 },
     socialStanding: { roll: 0, bpSpent: 0 },
-    startCapital: { roll: 0, bpSpent: 0 }
+    startCapital: { roll: 0, bpSpent: 0 },
+    // EP-köp (Fas 7) — namn på färdighet → antal FV köpta UTÖVER baschansen (BC).
+    // Bara den köpta delen lagras här; BC self räknas alltid om från effektiva
+    // attribut i #skillPreview, så ett omkastat attributslag eller rasbyte
+    // aldrig lämnar en färdighet med en stale bas-FV.
+    fardigheter: {},
+    // Särskilda förmågor (Fas 8, MVP) — fritext-slots, storleken styrs av
+    // DODE.abilityRollsByNiva[niva] och synkas i #specialAbilitySlots() varje
+    // render (inte här vid init) eftersom den beror på ett värde som kan ändras.
+    specialAbilities: [],
+    // Livsmål (Fas 9) — lifeGoal är dropdown-valet (en av DODE.lifeGoals),
+    // lifeGoalCustom är fritext som skriver över det om ifyllt (se
+    // #onCreateCharacter). Två separata fält istf att skriva fritext direkt i
+    // samma fält som dropdownen, så ett tidigare listval inte tyst skrivs över
+    // av ett tomt fritextfält (bara ifyllt fritext vinner, se villkoret nedan).
+    lifeGoal: "",
+    lifeGoalCustom: "",
+    // Utrustning (Fas 9) — uuid → antal köpta. Bara den köpta mängden lagras;
+    // pris/kapital räknas om varje render i #equipmentResult, samma
+    // enda-källa-princip som resten av guiden.
+    equipment: {}
   };
 
   async _prepareContext(options) {
@@ -118,8 +175,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
     const racePack = game.packs.get("drakar-och-demoner-expert.raser");
     const professionPack = game.packs.get("drakar-och-demoner-expert.yrken");
+    const equipmentPack = game.packs.get("drakar-och-demoner-expert.vapen-utrustning");
     const races = racePack ? await racePack.getDocuments() : [];
     const professions = professionPack ? await professionPack.getDocuments() : [];
+    const equipmentDocs = equipmentPack ? await equipmentPack.getDocuments() : [];
 
     const selectedRace = this.state.raceUuid ? races.find((r) => r.uuid === this.state.raceUuid) : null;
     const selectedProfession = this.state.professionUuid
@@ -142,6 +201,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.showGrunder = stepId === "grunder";
     context.showRas = stepId === "ras";
     context.showAlder = stepId === "alder";
+    context.showFardigheter = stepId === "fardigheter";
+    context.showFormagor = stepId === "formagor";
+    context.showLivsmal = stepId === "livsmal";
+    context.showUtrustning = stepId === "utrustning";
     context.showAttribut = stepId === "attribut";
     context.showYrke = stepId === "yrke";
     context.showSocialt = stepId === "socialt";
@@ -163,6 +226,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.socialStanding = socialResult;
     context.startCapital = capitalResult;
     context.bp = this.#bpLedger(socialResult, capitalResult);
+    const epBudget = this.#epResult(context.bp);
     context.races = races.map((r) => ({
       uuid: r.uuid, name: r.name, img: this.#genderedImg(r), system: r.system, selected: r.uuid === this.state.raceUuid
     }));
@@ -176,6 +240,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.attributes = CONFIG.DODE.attributes;
     context.effectiveAttributes = effectiveAttributes;
     context.requirementCheck = requirementCheck;
+    const skillPreview = this.#skillPreview(effectiveAttributes, selectedProfession, epBudget);
+    context.skillPreview = skillPreview;
+    context.ep = {
+      max: epBudget.max,
+      maxStartFv: epBudget.maxStartFv,
+      spent: skillPreview.epSpent,
+      remaining: skillPreview.epRemaining
+    };
+    context.abilitySlots = CONFIG.DODE.abilityRollsByNiva[this.state.niva] ?? 1;
+    context.specialAbilities = this.#specialAbilitySlots();
+    context.specialAbilityNames = context.specialAbilities
+      .map((a) => a.name.trim())
+      .filter((name) => name.length > 0)
+      .join(", ");
+    context.lifeGoalOptions = CONFIG.DODE.lifeGoals.map((goal) => ({ value: goal, selected: goal === this.state.lifeGoal }));
+    context.finalLifeGoal = this.state.lifeGoalCustom.trim() || this.state.lifeGoal;
+    context.equipmentResult = this.#equipmentResult(equipmentDocs, capitalResult);
     context.canAdvance = this.#canAdvance(stepId);
     return context;
   }
@@ -201,6 +282,18 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const start = CONFIG.DODE.bpByNiva[this.state.niva] ?? CONFIG.DODE.bpByNiva.vanlig;
     const total = spent.spentRas + spent.spentFormagor + socialResult.bpSpent + capitalResult.bpSpent + spent.spentFardigheter;
     return { start, spent: total, remaining: start - total };
+  }
+
+  /**
+   * EP-budget — RP s.28/KH s.3: nivå×ålder-tabell + kvarvarande BP × 5.
+   * `maxStartFv` (KH s.3) är en ren tabellslagning, ingen persisterad ingång.
+   * Speglar actor-character.mjs.
+   */
+  #epResult(bpLedger) {
+    const budget = CONFIG.DODE.epBudgetTable[this.state.niva]?.[this.state.ageCategory] ?? 0;
+    const max = budget + Math.max(0, bpLedger.remaining) * 5;
+    const maxStartFv = CONFIG.DODE.maxStartFvTable[this.state.niva]?.[this.state.ageCategory] ?? null;
+    return { max, maxStartFv };
   }
 
   /** Socialt stånd — RP s.27: 2T6 + spenderade BP. Speglar actor-character.mjs. */
@@ -253,6 +346,95 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       };
     }
     return result;
+  }
+
+  /**
+   * Auto-tilldelade färdigheter — PLAN_WIZARD_V2.md Fas 6: de 16 primära
+   * färdigheterna (RP s.36, DODE.primarySkills) + yrkets `professionSkills`
+   * (item-yrke.mjs, se dess schemakommentar för forskningsluckan där inte alla
+   * "tillåtna" färdigheter finns med). Bas-FV = BC = grupp av grundegenskapen
+   * (REGLER_EGENSKAPER.md) — samma `DODE.attributeToGroup` som DataModellens
+   * egna attributberäkning använder. Yrkesfärdigheter som redan är primära
+   * hoppas över (annars skulle samma färdighetsnamn skapas två gånger på
+   * samma rollperson) — filtrerat på namn, skiftlägesokänsligt.
+   *
+   * EP-köp (Fas 7): `state.fardigheter[namn]` är antal FV köpta UTÖVER BC.
+   * Kostnaden att nå aktuell FV från BC räknas med `DODE.skillCost` (RP s.30,
+   * kumulativ tabell — INTE grundkostnad × antal steg rakt av). `epSpent`
+   * summeras över ALLA färdigheter samtidigt (delad EP-pool), så
+   * `canIncrease` för en enskild färdighet alltid speglar den verkliga
+   * kvarvarande poolen efter allt annat som redan köpts, inte en lokal
+   * per-färdighet-budget.
+   */
+  #skillPreview(effectiveAttributes, selectedProfession, epBudget) {
+    const bc = (attribute) => {
+      const total = effectiveAttributes[attribute]?.total;
+      return total == null ? 0 : CONFIG.DODE.attributeToGroup(total);
+    };
+    const buildEntry = (name, attribute, costTier) => {
+      const baseFv = bc(attribute);
+      const bought = this.state.fardigheter[name] ?? 0;
+      const fv = baseFv + bought;
+      const cost = CONFIG.DODE.skillCost(costTier, baseFv, fv);
+      return { name, attribute, costTier, baseFv, fv, cost };
+    };
+    const primaryNames = new Set(CONFIG.DODE.primarySkills.map((s) => s.name.toLowerCase()));
+    const primary = CONFIG.DODE.primarySkills.map((s) => buildEntry(s.name, s.attribute, "primar"));
+    const professionSkills = (selectedProfession?.system?.professionSkills ?? [])
+      .filter((s) => !primaryNames.has(s.name.toLowerCase()))
+      .map((s) => buildEntry(s.name, s.attribute, "yrkesfardighet"));
+    const all = [...primary, ...professionSkills];
+    const epSpent = all.reduce((sum, entry) => sum + entry.cost, 0);
+    const epRemaining = (epBudget?.max ?? 0) - epSpent;
+    const maxStartFv = epBudget?.maxStartFv ?? null;
+    for (const entry of all) {
+      entry.canDecrease = entry.fv > entry.baseFv;
+      entry.nextCost = maxStartFv != null && entry.fv < maxStartFv
+        ? CONFIG.DODE.skillCost(entry.costTier, entry.fv, entry.fv + 1)
+        : null;
+      entry.canIncrease = entry.nextCost !== null && entry.nextCost <= epRemaining;
+    }
+    return { primary, professionSkills, total: all.length, epSpent, epRemaining, maxStartFv };
+  }
+
+  /**
+   * Säkerställer att `state.specialAbilities` har exakt så många slots som
+   * nivån ger rätt till (`DODE.abilityRollsByNiva`, KH s.3) — fyller på med
+   * tomma poster om nivån höjts, kapar bakifrån (tar bort de senast tillagda,
+   * inte godtyckliga) om nivån sänkts. Muterar `state.specialAbilities`
+   * direkt (samma mönster som övriga state-synk i denna klass) så att
+   * fält-bindningarna i _onRender pekar på samma array-referens som mallen
+   * fick i sin context.
+   */
+  #specialAbilitySlots() {
+    const n = CONFIG.DODE.abilityRollsByNiva[this.state.niva] ?? 1;
+    const slots = this.state.specialAbilities;
+    while (slots.length < n) slots.push({ name: "", source: "", description: "" });
+    if (slots.length > n) slots.length = n;
+    return slots;
+  }
+
+  /**
+   * Utrustning (Fas 9) — köp/sälj från `vapen-utrustning`-kompendiet (vapen+
+   * rustning i samma pack), draget mot `state.startCapital.finalSm`. Ingen
+   * `qty`-fält på Item-schemat (plan: "Ingen ny schema för utrustning") — antal
+   * lagras bara i `state.equipment[uuid]`, materialiseras till N separata
+   * embeddade kopior i #onCreateCharacter.
+   */
+  #equipmentResult(equipmentDocs, capitalResult) {
+    const items = equipmentDocs.map((doc) => {
+      const qty = this.state.equipment[doc.uuid] ?? 0;
+      const price = doc.system.price ?? 0;
+      return { uuid: doc.uuid, name: doc.name, img: doc.img, type: doc.type, price, qty };
+    });
+    const spent = items.reduce((sum, entry) => sum + entry.price * entry.qty, 0);
+    const budget = capitalResult?.finalSm ?? 0;
+    const remaining = budget - spent;
+    for (const entry of items) {
+      entry.canBuy = entry.price <= remaining;
+      entry.canSell = entry.qty > 0;
+    }
+    return { items, budget, spent, remaining };
   }
 
   /**
@@ -317,6 +499,26 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     capitalBpInput?.addEventListener("change", (ev) => {
       this.state.startCapital.bpSpent = Math.max(0, Number(ev.target.value) || 0);
       this.render();
+    });
+
+    // Särskilda förmågor — fritext, ingen re-render vid varje tangenttryckning
+    // (samma anledning som namnfältet ovan: skulle tappa fokus/markörposition).
+    this.element.querySelectorAll("[data-ability-index]").forEach((el) => {
+      el.addEventListener("input", (ev) => {
+        const idx = Number(el.dataset.abilityIndex);
+        const field = el.dataset.abilityField;
+        if (this.state.specialAbilities[idx]) this.state.specialAbilities[idx][field] = ev.target.value;
+      });
+    });
+
+    const lifeGoalSelect = this.element.querySelector('[name="state.lifeGoal"]');
+    lifeGoalSelect?.addEventListener("change", (ev) => {
+      this.state.lifeGoal = ev.target.value;
+      this.render();
+    });
+    const lifeGoalCustomInput = this.element.querySelector('[name="state.lifeGoalCustom"]');
+    lifeGoalCustomInput?.addEventListener("input", (ev) => {
+      this.state.lifeGoalCustom = ev.target.value;
     });
   }
 
@@ -386,9 +588,66 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
+  /**
+   * Köper +1 FV på en färdighet med EP — RP s.30. Knappen är redan `disabled`
+   * i mallen när `skill.canIncrease` är falskt (inte nog EP kvar, eller
+   * `maxStartFv` nådd), men `data-can-increase` speglas hit som en andra
+   * spärr ifall action-anropet ändå triggas (t.ex. programmatisk klick vid
+   * test) — ingen hård serverside-validering behövs för ett lokalt
+   * wizard-state, men "lita inte blint på UI-disabled" är ändå god praxis.
+   */
+  static #onBuySkillFv(event, target) {
+    const el = target.closest("[data-skill]");
+    const name = el?.dataset.skill;
+    if (!name || el.dataset.canIncrease !== "true") {
+      ui.notifications.warn("Inte tillräckligt med EP kvar, eller max-FV vid skapande redan nådd.");
+      return;
+    }
+    this.state.fardigheter[name] = (this.state.fardigheter[name] ?? 0) + 1;
+    this.render();
+  }
+
+  /** Ångrar ett EP-köp på en färdighet (återbetalar EP:t implicit via omräkningen i #skillPreview). */
+  static #onSellSkillFv(event, target) {
+    const name = target.closest("[data-skill]")?.dataset.skill;
+    if (!name) return;
+    const current = this.state.fardigheter[name] ?? 0;
+    if (current <= 0) return;
+    this.state.fardigheter[name] = current - 1;
+    this.render();
+  }
+
+  /** Köper 1 st av en utrustningspost — draget mot startCapital.finalSm, se #equipmentResult. */
+  static #onBuyEquipment(event, target) {
+    const el = target.closest("[data-uuid]");
+    const uuid = el?.dataset.uuid;
+    if (!uuid || el.dataset.canBuy !== "true") {
+      ui.notifications.warn("Inte tillräckligt med startkapital kvar.");
+      return;
+    }
+    this.state.equipment[uuid] = (this.state.equipment[uuid] ?? 0) + 1;
+    this.render();
+  }
+
+  /** Säljer tillbaka 1 st (återbetalar kapitalet implicit via omräkningen i #equipmentResult). */
+  static #onSellEquipment(event, target) {
+    const uuid = target.closest("[data-uuid]")?.dataset.uuid;
+    if (!uuid) return;
+    const current = this.state.equipment[uuid] ?? 0;
+    if (current <= 0) return;
+    this.state.equipment[uuid] = current - 1;
+    this.render();
+  }
+
   static async #onCreateCharacter() {
     const raceDoc = this.state.raceUuid ? await fromUuid(this.state.raceUuid) : null;
     const professionDoc = this.state.professionUuid ? await fromUuid(this.state.professionUuid) : null;
+    const effectiveAttributes = this.#effectiveAttributes(raceDoc, this.state.ageCategory);
+    const socialResult = this.#socialStandingResult();
+    const capitalResult = this.#startCapitalResult(socialResult);
+    const bpLedger = this.#bpLedger(socialResult, capitalResult);
+    const epBudget = this.#epResult(bpLedger);
+    const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
 
     const actor = await Actor.create({
       name: this.state.name || "Ny rollperson",
@@ -399,6 +658,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         bp: this.state.bp,
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,
+        ep: { spent: skillPreview.epSpent },
+        // Bara ifyllda förmågerader sparas — tomma slots (spelaren lämnade en
+        // eller flera outnyttjade) skräpar annars ner arkets kommande
+        // förmågelista med tomma rader.
+        specialAbilities: this.state.specialAbilities.filter((a) => a.name.trim().length > 0),
+        lifeGoal: this.state.lifeGoalCustom.trim() || this.state.lifeGoal,
         attributes: {
           sty: { value: this.state.attributes.sty },
           sto: { value: this.state.attributes.sto },
@@ -422,6 +687,26 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       const professionObj = professionDoc.toObject();
       professionObj.img = this.#genderedImg(professionDoc);
       itemsToCreate.push(professionObj);
+    }
+    for (const skill of [...skillPreview.primary, ...skillPreview.professionSkills]) {
+      itemsToCreate.push({
+        name: skill.name,
+        type: "fardighet",
+        system: { attribute: skill.attribute, category: "a", fv: skill.fv, costTier: skill.costTier }
+      });
+    }
+    // Utrustning — en separat embeddad kopia per köpt enhet (Item-schemat har
+    // inget `qty`-fält, se klassdokblocket). Låga MVP-kvantiteter förväntas
+    // (vapen/rustning, inte staplade pilar), så detta är inget prestandaproblem.
+    for (const [uuid, qty] of Object.entries(this.state.equipment)) {
+      if (qty <= 0) continue;
+      const doc = await fromUuid(uuid);
+      if (!doc) continue;
+      // Varje köpt enhet måste bli ett eget embedded Item med eget _id — annars
+      // kolliderar flera köp av samma kompendieföremål (samma _id från
+      // toObject()) i en och samma createEmbeddedDocuments-anrop. `_id: null`
+      // tvingar Foundry att generera ett nytt slumpat id per post.
+      for (let i = 0; i < qty; i++) itemsToCreate.push({ ...doc.toObject(), _id: null });
     }
     if (itemsToCreate.length) await actor.createEmbeddedDocuments("Item", itemsToCreate);
 

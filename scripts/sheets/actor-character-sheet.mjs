@@ -17,6 +17,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       deleteSkill: DoDECharacterSheet.#onDeleteSkill,
       editItem: DoDECharacterSheet.#onEditItem,
       deleteItem: DoDECharacterSheet.#onDeleteItem,
+      addAbility: DoDECharacterSheet.#onAddAbility,
+      deleteAbility: DoDECharacterSheet.#onDeleteAbility,
       clearRas: DoDECharacterSheet.#onClearRas,
       clearYrke: DoDECharacterSheet.#onClearYrke,
       rollDamage: DoDECharacterSheet.#onRollDamage,
@@ -86,6 +88,26 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static async #onDeleteItem(event, target) {
     const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
     if (item) await item.delete();
+  }
+
+  /**
+   * `specialAbilities` är ett vanligt ArrayField på rollpersonens egen data,
+   * inte embeddade Items (till skillnad från färdigheter/utrustning) — lägg
+   * till/ta bort skriver om hela arrayen via `actor.update`, inte
+   * `createEmbeddedDocuments`/`deleteEmbeddedDocuments`.
+   */
+  static async #onAddAbility() {
+    const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
+    current.push({ name: "", source: "", description: "" });
+    await this.actor.update({ "system.specialAbilities": current });
+  }
+
+  static async #onDeleteAbility(event, target) {
+    const index = Number(target.closest("[data-index]")?.dataset.index);
+    if (Number.isNaN(index)) return;
+    const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
+    current.splice(index, 1);
+    await this.actor.update({ "system.specialAbilities": current });
   }
 
   static async #onClearRas() {

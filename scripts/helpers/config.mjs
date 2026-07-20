@@ -58,6 +58,17 @@ DODE.bpByNiva = {
   hjalte: 175
 };
 
+// Antal slag/slots för särskilda förmågor per nivå — REGEL_Hjalte.md, samma
+// tabell som DODE.bpByNiva (KH s.3). Ingen komplett förmågetabell finns
+// extraherad (forskningslucka, PLAN_WIZARD_V2.md Fas 8) — bara ANTALET är
+// känt, inte VILKA förmågor som går att slå/välja. Styr guidens
+// "formagor"-steg (fritext-slots), inte en tabellslagning.
+DODE.abilityRollsByNiva = {
+  vanlig: 1,
+  extraordinar: 2,
+  hjalte: 3
+};
+
 // Socialt stånd — REGEL_SocialtStand.md, källa RP s.27. 2T6 + spenderade BP
 // (1 BP = +1 på slaget). Källdokumentet drar självt slutsatsen att detta
 // 9-ståndssystemet är auktoritativt för Expert — ersätter det tidigare
@@ -101,6 +112,81 @@ DODE.ageCapitalMultiplier = {
   Mogen: 1.5,
   "Medelålders": 2,
   Gammal: 2.5
+};
+
+// EP-budget vid rollpersonsskapande — REGEL_Hjalte.md, källa KH s.3/RP s.28.
+// Beror på nivå × ålder. "Kvarvarande BP × 5" läggs till separat, se
+// prepareDerivedData i actor-character.mjs.
+DODE.epBudgetTable = {
+  vanlig: { Ung: 150, Mogen: 200, "Medelålders": 250, Gammal: 300 },
+  extraordinar: { Ung: 175, Mogen: 225, "Medelålders": 275, Gammal: 325 },
+  hjalte: { Ung: 200, Mogen: 250, "Medelålders": 300, Gammal: 350 }
+};
+
+// Livsmål — CHARACTERMANCER-WORKFLOW.md, källa "Expert Regler" (21 poster).
+// Guiden erbjuder dessa i en dropdown + fritextalternativ ("Annat") — se
+// character-wizard.mjs "livsmal"-steget.
+DODE.lifeGoals = [
+  "Anarkism", "Berömmelse", "Den starkes rätt", "Egoism", "Finess",
+  "Frihet", "Harmoni & Barmhärtighet", "Jämlikhet", "Kärlek",
+  "Konservatism", "Kunskap", "Lag & Ordning", "Makt", "Naturvän",
+  "Ridderlighet", "Rikedom", "Rättvisa–Hämnd", "Skämt", "Stolthet",
+  "Stridsära", "Upptäckarlust"
+];
+
+// Max FV en färdighet får ha vid rollpersonsskapande — REGEL_Hjalte.md, källa
+// KH s.3. Konsumeras av EP-färdighetsköpet (PLAN_WIZARD_V2.md Fas 6/7), inte
+// av något ännu — bara beräknat och visat i guiden denna fas.
+DODE.maxStartFvTable = {
+  vanlig: { Ung: 13, Mogen: 15, "Medelålders": 17, Gammal: 19 },
+  extraordinar: { Ung: 15, Mogen: 17, "Medelålders": 19, Gammal: 20 },
+  hjalte: { Ung: 17, Mogen: 19, "Medelålders": 20, Gammal: 20 }
+};
+
+// Primära färdigheter — REGLER_FARDIGHETER.md, källa RP s.36. Alla rollpersoner
+// börjar med dessa (grundkostnad 2 EP/FV-steg vid EP-köp, se DODE.skillCost
+// nedan). Auto-genereras av rollpersonsskaparen (PLAN_WIZARD_V2.md Fas 6) vid
+// fv = grupp av grundegenskapen (baschans/BC, REGLER_EGENSKAPER.md).
+DODE.primarySkills = [
+  { name: "Bluffa", attribute: "kar" },
+  { name: "Finna dolda ting", attribute: "int" },
+  { name: "Första hjälpen", attribute: "int" },
+  { name: "Gömma sig", attribute: "int" },
+  { name: "Hoppa", attribute: "smi" },
+  { name: "Klättra", attribute: "smi" },
+  { name: "Köpslå", attribute: "kar" },
+  { name: "Lyssna", attribute: "int" },
+  { name: "Läsa/skriva modersmål", attribute: "int" },
+  { name: "Rida", attribute: "smi" },
+  { name: "Spåra", attribute: "int" },
+  { name: "Stjäla föremål", attribute: "smi" },
+  { name: "Tala modersmål", attribute: "int" },
+  { name: "Upptäcka fara", attribute: "psy" },
+  { name: "Värdera", attribute: "int" },
+  { name: "Övertala", attribute: "kar" }
+];
+
+// Färdighetens EP-kostnadskategori — RP s.30: primär/yrkesfärdighet/sekundär
+// ger olika grundkostnad (2/3/5 EP per FV-steg) vid EP-köp. Konsumeras av
+// DODE.skillCost nedan (PLAN_WIZARD_V2.md Fas 7).
+DODE.costTiers = {
+  primar: "DODE.CostTier.Primar",
+  yrkesfardighet: "DODE.CostTier.Yrkesfardighet",
+  sekundar: "DODE.CostTier.Sekundar"
+};
+
+// EP-kostnad för att höja en färdighets FV — RP s.30. Grundkostnad per
+// kostnadskategori × skillnaden i kumulativt C-värde mellan start- och
+// slut-FV (inte grundkostnad × antal steg rakt av — kostnaden per steg ökar
+// med FV, se kumulativa tabellen). Verifierad mot bokens exempel: Klättra
+// (primär) FV 4→10 ska ge 12 EP (PLAN_WIZARD_V2.md Fas 7, testat nedan).
+DODE.skillCostTierBase = { primar: 2, yrkesfardighet: 3, sekundar: 5 };
+DODE.skillCostCumulative = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 21, 24, 27, 31, 35, 39, 44];
+DODE.skillCost = function (costTier, fromFv, toFv) {
+  const base = DODE.skillCostTierBase[costTier] ?? DODE.skillCostTierBase.sekundar;
+  const from = DODE.skillCostCumulative[fromFv] ?? DODE.skillCostCumulative.at(-1);
+  const to = DODE.skillCostCumulative[toFv] ?? DODE.skillCostCumulative.at(-1);
+  return base * (to - from);
 };
 
 // ⚠ FORSKNINGSLUCKA (PLAN_WIZARD_V2.md Fas 4) — åldersmodifikationer på

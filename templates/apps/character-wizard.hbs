@@ -2,6 +2,7 @@
   <header class="wizard-progress">
     <strong>Steg {{stepIndex}}/{{stepCount}}: {{stepLabel}}</strong>
     <span class="wizard-bp-ledger">BP kvar: <strong>{{bp.remaining}}</strong> / {{bp.start}}</span>
+    <span class="wizard-bp-ledger">EP kvar: <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
   </header>
 
   {{#if showKon}}
@@ -82,8 +83,12 @@
       {{else}}
         <p class="hint">Startkapital inte framslaget än (steget innan).</p>
       {{/if}}
+      <p>EP-budget för färdigheter: <strong>{{ep.max}}</strong> (nivå×ålder-tabell + kvarvarande BP × 5, RP s.28)</p>
+      {{#if ep.maxStartFv}}
+        <p class="hint">Max FV en färdighet får ha vid skapande: {{ep.maxStartFv}} (KH s.3).</p>
+      {{/if}}
     </div>
-    <p class="hint">Åldersmodifikationer på grundegenskaper är inte extraherade från källan än (RP s.24-25) — ingen sådan modifiering tillämpas tills vidare. EP-budgeten kommer i PLAN_WIZARD_V2.md Fas 5.</p>
+    <p class="hint">Åldersmodifikationer på grundegenskaper är inte extraherade från källan än (RP s.24-25) — ingen sådan modifiering tillämpas tills vidare. EP-budgeten spenderas i nästa steg, på färdigheter.</p>
   </section>
   {{/if}}
 
@@ -107,6 +112,22 @@
     {{#if selectedRace}}
       <p class="hint">Totalt inkl. rasmod från {{selectedRace.name}} visas i nästa steg.</p>
     {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showFormagor}}
+  <section class="wizard-step">
+    <p class="hint">Särskilda förmågor — fritext. Antal rader ({{abilitySlots}}) styrs av nivå (KH s.3). Ingen komplett förmågetabell finns extraherad än, så det här är fritt textinnehåll, inte en tärningstabell — skriv in vad förmågan gör.</p>
+    {{#each specialAbilities as |slot i|}}
+      <div class="wizard-ability-row">
+        <label>Förmåga
+          <input type="text" data-ability-index="{{i}}" data-ability-field="name" value="{{slot.name}}" placeholder="Namn på förmåga" />
+        </label>
+        <label>Beskrivning
+          <input type="text" data-ability-index="{{i}}" data-ability-field="description" value="{{slot.description}}" placeholder="Valfritt" />
+        </label>
+      </div>
+    {{/each}}
   </section>
   {{/if}}
 
@@ -189,6 +210,88 @@
   </section>
   {{/if}}
 
+  {{#if showFardigheter}}
+  <section class="wizard-step">
+    <p class="hint">Grundfärdighetsvärde (FV) = baschans (BC, grupp av grundegenskapen — REGLER_EGENSKAPER.md). Höj FV med EP nedan — RP s.30: kostnaden ökar per steg (kumulativ tabell), och beror på färdighetens kategori (primär 2 / yrkesfärdighet 3 / sekundär 5 EP per grundsteg). Knappen grånas när EP inte räcker eller max-FV vid skapande ({{ep.maxStartFv}}, KH s.3) är nådd.</p>
+    <h4>Primära färdigheter ({{skillPreview.primary.length}})</h4>
+    <table class="wizard-summary wizard-skill-table">
+      {{#each skillPreview.primary as |skill|}}
+        <tr>
+          <td>{{skill.name}}</td>
+          <td>{{skill.attribute}}</td>
+          <td>FV {{skill.fv}}{{#if skill.cost}} ({{skill.cost}} EP){{/if}}</td>
+          <td class="wizard-skill-buy">
+            <button type="button" data-action="sellSkillFv" data-skill="{{skill.name}}" {{#unless skill.canDecrease}}disabled{{/unless}}>−</button>
+            <button type="button" data-action="buySkillFv" data-skill="{{skill.name}}" data-can-increase="{{skill.canIncrease}}" {{#unless skill.canIncrease}}disabled{{/unless}}>+1{{#if skill.nextCost}} ({{skill.nextCost}} EP){{/if}}</button>
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+    <h4>Yrkesfärdigheter ({{skillPreview.professionSkills.length}})</h4>
+    {{#if selectedProfession}}
+      {{#if skillPreview.professionSkills.length}}
+        <table class="wizard-summary wizard-skill-table">
+          {{#each skillPreview.professionSkills as |skill|}}
+            <tr>
+              <td>{{skill.name}}</td>
+              <td>{{skill.attribute}}</td>
+              <td>FV {{skill.fv}}{{#if skill.cost}} ({{skill.cost}} EP){{/if}}</td>
+              <td class="wizard-skill-buy">
+                <button type="button" data-action="sellSkillFv" data-skill="{{skill.name}}" {{#unless skill.canDecrease}}disabled{{/unless}}>−</button>
+                <button type="button" data-action="buySkillFv" data-skill="{{skill.name}}" data-can-increase="{{skill.canIncrease}}" {{#unless skill.canIncrease}}disabled{{/unless}}>+1{{#if skill.nextCost}} ({{skill.nextCost}} EP){{/if}}</button>
+              </td>
+            </tr>
+          {{/each}}
+        </table>
+      {{else}}
+        <p class="hint">Inga strukturerade yrkesfärdigheter för {{selectedProfession.name}} än — se item-yrke.mjs:s forskningslucka. Lägg till manuellt via arkets "Ny färdighet"-knapp efter skapande.</p>
+      {{/if}}
+    {{else}}
+      <p class="hint">Inget yrke valt.</p>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showLivsmal}}
+  <section class="wizard-step">
+    <p class="hint">Välj ett livsmål från listan (21 st, Expert Regler) eller skriv eget nedan.</p>
+    <label>Livsmål
+      <select name="state.lifeGoal">
+        <option value=""></option>
+        {{#each lifeGoalOptions as |option|}}
+          <option value="{{option.value}}" {{#if option.selected}}selected{{/if}}>{{option.value}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <label>Eget livsmål (skriver över listvalet om ifyllt)
+      <input type="text" name="state.lifeGoalCustom" value="{{state.lifeGoalCustom}}" placeholder="Valfritt" />
+    </label>
+    {{#if finalLifeGoal}}
+      <p class="hint">Valt livsmål: <strong>{{finalLifeGoal}}</strong></p>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showUtrustning}}
+  <section class="wizard-step">
+    <p class="hint">Köp utrustning för startkapitalet. Kort grånas när priset överstiger kvarvarande kapital.</p>
+    <p class="wizard-roll-result">Kapital kvar: <strong>{{equipmentResult.remaining}}</strong> / {{equipmentResult.budget}} sm</p>
+    <div class="wizard-card-grid wizard-equipment-grid">
+      {{#each equipmentResult.items as |entry|}}
+        <div class="wizard-card wizard-equipment-card" data-uuid="{{entry.uuid}}">
+          <img src="{{entry.img}}" />
+          <div class="wizard-card-name">{{entry.name}}</div>
+          <div class="wizard-card-meta">{{entry.price}} sm{{#if entry.qty}} · {{entry.qty}} st{{/if}}</div>
+          <div class="wizard-skill-buy">
+            <button type="button" data-action="sellEquipment" data-uuid="{{entry.uuid}}" {{#unless entry.canSell}}disabled{{/unless}}>−</button>
+            <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>Köp</button>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </section>
+  {{/if}}
+
   {{#if showGranska}}
   <section class="wizard-step">
     <h4>Sammanfattning</h4>
@@ -201,6 +304,11 @@
       <tr><td>Socialt stånd</td><td>{{#if socialStanding.rank}}{{socialStanding.rank}} ({{socialStanding.total}}){{else}}—{{/if}}</td></tr>
       <tr><td>Startkapital</td><td>{{#if startCapital.finalSm}}{{startCapital.baseSm}} sm × {{startCapital.capitalMultiplier}} = {{startCapital.finalSm}} sm{{else}}—{{/if}}</td></tr>
       <tr><td>Ålder</td><td>{{state.ageCategory}}</td></tr>
+      <tr><td>EP</td><td>{{ep.spent}} spenderat av {{ep.max}}{{#if ep.maxStartFv}} (max FV {{ep.maxStartFv}}){{/if}} — {{ep.remaining}} kvar</td></tr>
+      <tr><td>Färdigheter</td><td>{{skillPreview.total}} st ({{skillPreview.primary.length}} primära + {{skillPreview.professionSkills.length}} yrkesfärdigheter)</td></tr>
+      <tr><td>Särskilda förmågor</td><td>{{#if specialAbilityNames}}{{specialAbilityNames}}{{else}}—{{/if}}</td></tr>
+      <tr><td>Livsmål</td><td>{{#if finalLifeGoal}}{{finalLifeGoal}}{{else}}—{{/if}}</td></tr>
+      <tr><td>Utrustning</td><td>{{equipmentResult.spent}} sm spenderat av {{equipmentResult.budget}} — {{equipmentResult.remaining}} kvar</td></tr>
     </table>
     <table class="wizard-summary">
       {{#each attributes as |labelKey key|}}

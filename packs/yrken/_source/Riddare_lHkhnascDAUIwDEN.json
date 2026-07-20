@@ -7,7 +7,45 @@
     "skillList": "<p>Max 5 vapenfärdigheter, språk, Administration, Avväpna, Dans, Djurträning, Dra vapen, Dolk, Geografi, Heraldik, Historia, Kulturkännedom, Kunskap om magi/odöda, Målning, Räkning, Schack & brädspel, Simma, Spela instrument, Språkkunskap, Trästav, Två vapen.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int"
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int"
+      },
+      {
+        "name": "Heraldik",
+        "attribute": "int"
+      },
+      {
+        "name": "Historia",
+        "attribute": "int"
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int"
+      },
+      {
+        "name": "Räkning",
+        "attribute": "int"
+      },
+      {
+        "name": "Schack & Brädspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Språkkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int"
+      }
+    ]
   },
   "_id": "lHkhnascDAUIwDEN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare.png",

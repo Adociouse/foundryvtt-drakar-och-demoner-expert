@@ -13,6 +13,11 @@
       "A": "Kategori A",
       "B": "Kategori B"
     },
+    "CostTier": {
+      "Primar": "Primär",
+      "Yrkesfardighet": "Yrkesfärdighet",
+      "Sekundar": "Sekundär"
+    },
     "WeaponGrip": {
       "1H": "Enhand",
       "2H": "Tvåhand",

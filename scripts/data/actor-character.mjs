@@ -71,7 +71,30 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         baseSm: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         finalSm: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
+      // EP-pool för färdighetsköp vid rollpersonsskapande — RP s.28/KH s.3.
+      // `spent` är den enda verkliga inmatningen (skrivs av Fas 6/7:s
+      // färdighetsköp, inte av något ännu); `max`/`remaining` är helt härledda
+      // (nivå×ålder-tabell + kvarvarande BP×5) och sätts i prepareDerivedData,
+      // samma mönster som `bp.start`/`spent`/`remaining` ovan.
+      ep: new fields.SchemaField({
+        spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+      }),
       alder: new fields.StringField({ required: false, initial: "" }),
+      // Särskilda förmågor — MVP, PLAN_WIZARD_V2.md Fas 8. ⚠ FORSKNINGSLUCKA:
+      // ingen komplett källtabell för VILKA förmågor som finns/vad de gör är
+      // extraherad (RP+REG, ospecificerat sidintervall). Antalet slots
+      // (DODE.abilityRollsByNiva, KH s.3) är känt och styr guidens
+      // "formagor"-steg — men VAD spelaren skriver i varje slot är fritext,
+      // inte en tabellslagning. `source` är fri text ("bas"/"ras"/"yrke"/
+      // "hjalte" är förslag, inte enforcade choices) för framtida
+      // filtrering/gruppering den dag en riktig tabell finns.
+      specialAbilities: new fields.ArrayField(
+        new fields.SchemaField({
+          name: new fields.StringField({ required: true, initial: "" }),
+          source: new fields.StringField({ required: false, initial: "" }),
+          description: new fields.HTMLField({ required: false, initial: "" })
+        })
+      ),
       hp: new fields.SchemaField({
         value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
         max: new fields.NumberField({ required: true, integer: true, initial: 0 })
@@ -82,6 +105,11 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
           max: new fields.NumberField({ required: true, integer: true, initial: 0 })
         })
       }),
+      // Livsmål — CHARACTERMANCER-WORKFLOW.md, källa "Expert Regler" (21 poster,
+      // se DODE.lifeGoals i config.mjs). Ett av de 21 ELLER fritext — bara en
+      // sträng, ingen strukturell skillnad mellan de två (fritext skriver bara
+      // över listvalet). `destinyNote` (HH Öde-typer) hör till Fas 10, inte hit.
+      lifeGoal: new fields.StringField({ required: false, initial: "" }),
       biography: new fields.HTMLField({ required: false, initial: "" })
     };
   }
@@ -147,6 +175,15 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     bp.start = DODE.bpByNiva[this.niva] ?? DODE.bpByNiva.vanlig;
     bp.spent = bp.spentRas + bp.spentFormagor + bp.spentSocialt + bp.spentKapital + bp.spentFardigheter;
     bp.remaining = bp.start - bp.spent;
+
+    // EP-budget — RP s.28/KH s.3: nivå×ålder-tabell + kvarvarande BP × 5
+    // ("Kvarvarande BP × 5", RP s.28). maxStartFv (KH s.3) är en ren
+    // tabellslagning, ingen persisterad ingång.
+    const ep = this.ep;
+    const epBudget = DODE.epBudgetTable[this.niva]?.[this.alder] ?? 0;
+    ep.max = epBudget + Math.max(0, bp.remaining) * 5;
+    ep.remaining = ep.max - ep.spent;
+    this.maxStartFv = DODE.maxStartFvTable[this.niva]?.[this.alder] ?? null;
 
     // KP = (STO + FYS) / 2, avrundat till närmaste heltal — REGLER_EGENSKAPER.md / REGLER_STRID.md
     this.hp.max = Math.round((a.sto.total + a.fys.total) / 2);

@@ -7,7 +7,37 @@
     "skillList": "<p>Max 3 vapenfärdigheter, språk, Akrobatik, Dans, Dolk, Geografi, Gycklekonster, Hantverk, Hasardspel, Knopar, Kulturkännedom, Muta, Navigation, Orientering, Schack & brädspel, Simma, Sjökunnighet, Spela instrument, Spå väder, Stavhopp, Trästav, Undre världen, Änterhake.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Geografi",
+        "attribute": "int"
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Undre världen",
+        "attribute": "int"
+      },
+      {
+        "name": "Änterhake",
+        "attribute": "smi"
+      },
+      {
+        "name": "Navigation",
+        "attribute": "int"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      },
+      {
+        "name": "Sjökunnighet",
+        "attribute": "int"
+      }
+    ]
   },
   "_id": "9N3pZYM7VCLYGCEm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare.png",

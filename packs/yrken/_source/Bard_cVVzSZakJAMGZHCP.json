@@ -7,7 +7,105 @@
     "skillList": "<p>En valfri vapenfärdighet, språk, Administration, Akrobatik, Buktala, Dans, Djurträning, Dolk, Förfalskning, Geografi, Gycklekonster, Hantverk, Hasardspel, Heraldik, Historia, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Målning, Schack & brädspel, Simma, Skådespeleri, Spela instrument, Språkkunskap, Trästav.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Akrobatik",
+        "attribute": "smi"
+      },
+      {
+        "name": "Buktala",
+        "attribute": "psy"
+      },
+      {
+        "name": "Dans",
+        "attribute": "smi"
+      },
+      {
+        "name": "Djurträning",
+        "attribute": "psy"
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi"
+      },
+      {
+        "name": "Förfalskning",
+        "attribute": "int"
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int"
+      },
+      {
+        "name": "Gycklekonster",
+        "attribute": "smi"
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Heraldik",
+        "attribute": "int"
+      },
+      {
+        "name": "Historia",
+        "attribute": "int"
+      },
+      {
+        "name": "Hypnotisera",
+        "attribute": "psy"
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi"
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int"
+      },
+      {
+        "name": "Låsdyrkning",
+        "attribute": "smi"
+      },
+      {
+        "name": "Läppläsning",
+        "attribute": "int"
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar"
+      },
+      {
+        "name": "Målning",
+        "attribute": "smi"
+      },
+      {
+        "name": "Schack & Brädspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      },
+      {
+        "name": "Skådespeleri",
+        "attribute": "kar"
+      },
+      {
+        "name": "Spela instrument",
+        "attribute": "kar"
+      },
+      {
+        "name": "Språkkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi"
+      }
+    ]
   },
   "_id": "cVVzSZakJAMGZHCP",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard.png",

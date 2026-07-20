@@ -7,7 +7,33 @@
     "skillList": "<p>Max 3 vapenfärdigheter, språk, Animism, Djurhelning, Djurträning, Dolk, Drogkunskap, Geografi, Geologi, Giftkunskap, Hantverk, Hantera fällor, Knopar, Kulturkännedom, Orientering, Simma, Spå väder, Zoologi, Örtkunskap, Överlevnad.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Örtkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int"
+      },
+      {
+        "name": "Smyga",
+        "attribute": "smi"
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      },
+      {
+        "name": "Överlevnad",
+        "attribute": "int"
+      }
+    ]
   },
   "_id": "WqmtsnTlaj04nMA0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare.png",

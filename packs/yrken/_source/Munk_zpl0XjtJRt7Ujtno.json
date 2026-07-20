@@ -7,7 +7,57 @@
     "skillList": "<p>Språk, Avväpna, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk, Heraldik, Historia, Knopar, Kulturkännedom, Kunskap om demoner/magi/odöda, Läkekonst, Massage, Målning, Räkning, Simma, Spela instrument, Språkkunskap, Stridskonster, Trästav, Zoologi, Örtkunskap.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Astrologi",
+        "attribute": "int"
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int"
+      },
+      {
+        "name": "Läkekonst",
+        "attribute": "int"
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int"
+      },
+      {
+        "name": "Schack & Brädspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int"
+      },
+      {
+        "name": "Judo",
+        "attribute": "smi"
+      },
+      {
+        "name": "Karate",
+        "attribute": "smi"
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi"
+      },
+      {
+        "name": "Teckenspråk",
+        "attribute": "int"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      }
+    ]
   },
   "_id": "zpl0XjtJRt7Ujtno",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk.png",

@@ -7,7 +7,45 @@
     "skillList": "<p>Alla vapenfärdigheter, språk, Avväpna, Bärsärkagång, Dra vapen, Dolk, Geografi, Hantverk, Hasardspel, Kulturkännedom, Simma, Stridskonster, Trästav, Två vapen.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Avväpna",
+        "attribute": "smi"
+      },
+      {
+        "name": "Bärsärkagång",
+        "attribute": "psy"
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi"
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi"
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int"
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi"
+      }
+    ]
   },
   "_id": "FqfsY2CF2RbG1mBy",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare.png",

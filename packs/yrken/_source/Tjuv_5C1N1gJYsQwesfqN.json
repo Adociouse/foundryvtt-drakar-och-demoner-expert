@@ -7,7 +7,25 @@
     "skillList": "<p>Max 2 vapenfärdigheter, språk, Administration, Akrobatik, Buktala, Dra vapen, Dolk, Drogkunskap, Förfalskning, Geografi, Giftkunskap, Gyckelkonster, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Simma, Skådespeleri, Spela instrument, Stavhopp, Teckenspråk, Trästav, Undre världen, Änterhake.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Judo",
+        "attribute": "smi"
+      },
+      {
+        "name": "Slagsmål",
+        "attribute": "sty"
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi"
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi"
+      }
+    ]
   },
   "_id": "5C1N1gJYsQwesfqN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv.png",

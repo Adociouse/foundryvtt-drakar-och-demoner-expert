@@ -72,6 +72,24 @@
   </ol>
 </section>
 
+<section class="special-abilities">
+  <header class="skills-header">
+    <h3>Särskilda förmågor</h3>
+    <button type="button" data-action="addAbility"><i class="fa-solid fa-plus"></i> Ny förmåga</button>
+  </header>
+  <ol class="skill-list">
+    {{#each system.specialAbilities as |ability i|}}
+      <li class="skill-row ability-row" data-index="{{i}}">
+        <input type="text" name="system.specialAbilities.{{i}}.name" value="{{ability.name}}" placeholder="Namn" class="skill-name" />
+        <input type="text" name="system.specialAbilities.{{i}}.description" value="{{ability.description}}" placeholder="Beskrivning" class="ability-description" />
+        <button type="button" data-action="deleteAbility" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{else}}
+      <li class="skill-row-empty">Inga särskilda förmågor ännu.</li>
+    {{/each}}
+  </ol>
+</section>
+
 <section class="gear">
   <header class="skills-header">
     <h3>{{localize "DODE.Actor.Utrustning"}}</h3>
@@ -98,6 +116,9 @@
 </section>
 
 <section class="biography">
+  <label class="life-goal-field">Livsmål
+    <input type="text" name="system.lifeGoal" value="{{system.lifeGoal}}" placeholder="T.ex. Berömmelse, Kunskap, Rikedom..." />
+  </label>
   {{editor system.biography target="system.biography" button=true engine="prosemirror"}}
 </section>
 </div>

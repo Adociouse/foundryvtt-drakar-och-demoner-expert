@@ -16,8 +16,10 @@
     </select>
   </label>
   <label>FV <input type="number" name="system.fv" value="{{system.fv}}" min="0" /></label>
-  <label class="checkbox-field">
-    <input type="checkbox" name="system.yrkesfardighet" {{checked system.yrkesfardighet}} /> Yrkesfärdighet
+  <label>EP-kostnadskategori
+    <select name="system.costTier">
+      {{selectOptions costTiers selected=system.costTier localize=true}}
+    </select>
   </label>
 </section>
 

@@ -7,7 +7,89 @@
     "skillList": "<p>En valfri vapenfärdighet, språk, Administration, Akrobatik, Dra vapen, Dolk, Förfalskning, Geografi, Giftkunskap, Hantera fällor, Hasardspel, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Muta, Simma, Skådespeleri, Stavhopp, Stridskonster, Teckenspråk, Trästav, Undre världen, Änterhake.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lonnmordare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lonnmordare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lonnmordare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Akrobatik",
+        "attribute": "smi"
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi"
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi"
+      },
+      {
+        "name": "Förfalskning",
+        "attribute": "int"
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int"
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int"
+      },
+      {
+        "name": "Hantera fällor",
+        "attribute": "smi"
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int"
+      },
+      {
+        "name": "Hypnotisera",
+        "attribute": "psy"
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi"
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int"
+      },
+      {
+        "name": "Låsdyrkning",
+        "attribute": "smi"
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar"
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys"
+      },
+      {
+        "name": "Skådespeleri",
+        "attribute": "kar"
+      },
+      {
+        "name": "Stavhopp",
+        "attribute": "smi"
+      },
+      {
+        "name": "Teckenspråk",
+        "attribute": "int"
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi"
+      },
+      {
+        "name": "Undre världen",
+        "attribute": "int"
+      },
+      {
+        "name": "Änterhake",
+        "attribute": "smi"
+      }
+    ]
   },
   "_id": "QBQmqQDsrcCuDzRN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lonnmordare.png",

@@ -7,7 +7,21 @@
     "skillList": "<p>Språk, Alkemi, Astrologi, Djurhelning, Djurträning, Drogkunskap, Geografi, Giftkunskap, Kulturkännedom, Kunskap om demoner/magi/odöda, Magisk kanalisering, en valfri magiskola, Räkning, Simma, Språkkunskap, Trästav, Zoologi, Örtkunskap.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Alkemi",
+        "attribute": "int"
+      },
+      {
+        "name": "Astrologi",
+        "attribute": "int"
+      },
+      {
+        "name": "Djurhelning",
+        "attribute": "psy"
+      }
+    ]
   },
   "_id": "XkPUZFz1f0e1avVM",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker.png",
