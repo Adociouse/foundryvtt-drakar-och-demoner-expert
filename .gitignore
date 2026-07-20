@@ -5,3 +5,10 @@ node_modules/
 packs/*/LOCK
 packs/*/LOG
 packs/*/LOG.old
+
+# AI-assistentens arbetsfiler (CLAUDE.md, ACTIVE_TASK.md, memory.md, PLAN_*.md m.fl.)
+# — ska finnas kvar lokalt för Claude Code att läsa, men inte publiceras i repot.
+# Rotnivå-only (/*.md) så framtida publik dokumentation i undermappar inte träffas.
+# Lägg till "!/nagot.md" här om en ny fil vid roten SKA vara publik (som README.md).
+/*.md
+!/README.md
