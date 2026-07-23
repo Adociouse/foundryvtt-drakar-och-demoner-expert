@@ -23,7 +23,23 @@
   },
   "_id": "g4F6i6vck9nOafyr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman.png",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rasmodifikationer (Halvlängdsman)",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        { "key": "system.attributes.sty.bonus", "mode": 2, "value": "-4", "priority": 20 },
+        { "key": "system.attributes.fys.bonus", "mode": 2, "value": "3", "priority": 20 },
+        { "key": "system.attributes.smi.bonus", "mode": 2, "value": "3", "priority": 20 },
+        { "key": "system.attributes.psy.bonus", "mode": 2, "value": "2", "priority": 20 }
+      ],
+      "flags": { "dode": { "source": "race" } },
+      "_id": "ae0hlngracemods1",
+      "_key": "!items.effects!g4F6i6vck9nOafyr.ae0hlngracemods1"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {

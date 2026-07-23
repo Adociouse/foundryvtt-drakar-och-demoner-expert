@@ -10,7 +10,8 @@ const fields = foundry.data.fields;
 export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const attribute = () => new fields.SchemaField({
-      value: new fields.NumberField({ required: true, integer: true, initial: 10, min: 0 })
+      value: new fields.NumberField({ required: true, integer: true, initial: 10, min: 0 }),
+      bonus: new fields.NumberField({ required: true, integer: true, initial: 0 })
     });
 
     return {
@@ -31,13 +32,14 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         initial: "man",
         choices: ["man", "kvinna"]
       }),
-      // Rollpersonsnivå — KH s.3, se helpers/config.mjs DODE.bpByNiva för BP-poolen.
-      // Styr ännu bara den informativa BP-siffran i guiden — EP-budget/max-FV-koppling
-      // och faktisk BP-spendering kommer i senare faser (PLAN_WIZARD_V2.md).
+      // Rollpersonsnivå — HH s.37-39 (fyra nivåer), se helpers/config.mjs
+      // DODE.bpByNiva för BP-poolen. Ödestypen (Slumpens hjälte/Sann hjälte/
+      // Gudafödd) ÄR nivåvalet här — ingen separat mekanisk öde-axel, se
+      // PLAN_WIZARD_V2.md.
       niva: new fields.StringField({
         required: true,
         initial: "vanlig",
-        choices: ["vanlig", "extraordinar", "hjalte"]
+        choices: ["vanlig", "slumpens-hjalte", "sann-hjalte", "gudafodd"]
       }),
       // BP-ledger — RP s.27-30/KH s.3. Spenderas på ras (RASER.md bpCost), särskilda
       // förmågor, socialt stånd och startkapital (RP s.27-28). Grundegenskaper är
@@ -114,31 +116,48 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     };
   }
 
+  prepareBaseData() {
+    for (const key of Object.keys(DODE.attributes)) {
+      this.attributes[key].bonus = 0;
+    }
+  }
+
   prepareDerivedData() {
     const a = this.attributes;
 
     const rasItem = this.parent?.items?.find((i) => i.type === "ras") ?? null;
-    const mods = rasItem?.system?.attributeMods ?? {};
-    // Åldersmodifikationer — RP s.24-25, forskningslucka (se DODE.ageAttributeModifiers
-    // i config.mjs). Tomt tills tabellen extraherats — ageMod blir 0 för alla åldrar.
-    const ageMods = DODE.ageAttributeModifiers[this.alder] ?? {};
 
-    // Racial- och åldersmodifierare appliceras på alla attribut UTOM STO, som anges
-    // som ett intervall spelaren väljer inom snarare än en additiv modifierare —
-    // se item-ras.mjs. `mod` är summan av `raceMod`+`ageMod`, uppdelad för
-    // spårbarhet (samma transparensprincip som resten av systemet).
-    for (const key of ["sty", "fys", "smi", "int", "psy", "kar"]) {
-      a[key].raceMod = mods[key] ?? 0;
-      a[key].ageMod = ageMods[key] ?? 0;
-      a[key].mod = a[key].raceMod + a[key].ageMod;
-      a[key].total = a[key].value + a[key].mod;
-      a[key].group = DODE.attributeToGroup(a[key].total);
+    // ActiveEffects (race transfer AEs + age AEs) target system.attributes.*.bonus
+    // and are applied before prepareDerivedData runs. If the AE pipeline populated
+    // bonus, use it directly. If not (legacy characters whose ras item lacks transfer
+    // AEs, or no age AE exists), fall back to the manual computation so existing
+    // character data isn't broken.
+    const hasRaceAE = this.parent?.effects?.some(
+      (e) => e.getFlag?.("dode", "source") === "race"
+    ) ?? false;
+    const hasAgeAE = this.parent?.effects?.some(
+      (e) => e.getFlag?.("dode", "source") === "age"
+    ) ?? false;
+
+    if (!hasRaceAE && rasItem) {
+      const mods = rasItem.system?.attributeMods ?? {};
+      for (const key of Object.keys(DODE.attributes)) {
+        if (key === "sto") continue;
+        a[key].bonus += mods[key] ?? 0;
+      }
     }
-    a.sto.raceMod = 0;
-    a.sto.ageMod = 0;
-    a.sto.mod = 0;
-    a.sto.total = a.sto.value;
-    a.sto.group = DODE.attributeToGroup(a.sto.total);
+    if (!hasAgeAE && this.alder) {
+      const ageMods = DODE.ageAttributeModifiers[this.alder] ?? {};
+      for (const key of Object.keys(DODE.attributes)) {
+        a[key].bonus += ageMods[key] ?? 0;
+      }
+    }
+
+    for (const key of Object.keys(DODE.attributes)) {
+      a[key].total = a[key].value + a[key].bonus;
+      a[key].group = DODE.attributeToGroup(a[key].total);
+      a[key].bonusDisplay = a[key].bonus > 0 ? `+${a[key].bonus}` : `${a[key].bonus}`;
+    }
 
     this.race = rasItem;
     this.profession = this.parent?.items?.find((i) => i.type === "yrke") ?? null;

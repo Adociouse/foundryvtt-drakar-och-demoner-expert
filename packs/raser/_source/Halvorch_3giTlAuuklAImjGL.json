@@ -23,7 +23,23 @@
   },
   "_id": "3giTlAuuklAImjGL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvorch.png",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rasmodifikationer (Halvorch)",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        { "key": "system.attributes.sty.bonus", "mode": 2, "value": "2", "priority": 20 },
+        { "key": "system.attributes.fys.bonus", "mode": 2, "value": "2", "priority": 20 },
+        { "key": "system.attributes.smi.bonus", "mode": 2, "value": "-1", "priority": 20 },
+        { "key": "system.attributes.kar.bonus", "mode": 2, "value": "-3", "priority": 20 }
+      ],
+      "flags": { "dode": { "source": "race" } },
+      "_id": "ae0horcracemods1",
+      "_key": "!items.effects!3giTlAuuklAImjGL.ae0horcracemods1"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {

@@ -117,6 +117,17 @@
   opacity: 0.85;
 }
 
+.dode.sheet .attr-bonus {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.dode.sheet .attr-total {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
 .dode.sheet .attributes-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);

@@ -23,7 +23,23 @@
   },
   "_id": "osxxtEzS9uugtho6",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/anka.png",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Rasmodifikationer (Anka)",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        { "key": "system.attributes.sty.bonus", "mode": 2, "value": "-2", "priority": 20 },
+        { "key": "system.attributes.fys.bonus", "mode": 2, "value": "2", "priority": 20 },
+        { "key": "system.attributes.smi.bonus", "mode": 2, "value": "2", "priority": 20 },
+        { "key": "system.attributes.kar.bonus", "mode": 2, "value": "-5", "priority": 20 }
+      ],
+      "flags": { "dode": { "source": "race" } },
+      "_id": "ae0ankaracemods1",
+      "_key": "!items.effects!osxxtEzS9uugtho6.ae0ankaracemods1"
+    }
+  ],
   "folder": null,
   "sort": 0,
   "ownership": {

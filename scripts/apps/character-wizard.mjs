@@ -25,11 +25,14 @@ const KON_OPTIONS = [
   { value: "man", label: "Man", icon: "fa-mars" },
   { value: "kvinna", label: "Kvinna", icon: "fa-venus" }
 ];
-// Rollpersonsnivåer — REGEL_Hjalte.md, källa KH s.3. BP-talen hämtas från CONFIG.DODE.bpByNiva.
+// Rollpersonsnivåer — HH s.37-39 (fyra nivåer, narrativa kategorier utan egen
+// mekanisk effekt utöver BP/EP-poolen — se DODE.bpByNiva i config.mjs).
+// Bildsökvägarna pekar på assets/niva-<slug>.png (kopierade in för guiden).
 const NIVA_OPTIONS = [
-  { value: "vanlig", label: "Vanlig", description: "En vanlig människa som levt ett vanligt liv — kan vara adlig eller skicklig men har inte utfört hjältedåd." },
-  { value: "extraordinar", label: "Extraordinär", description: "Mer av en hjälte — har kanske redan utfört hjältedåd, och gudarna håller ett öga på henne eller honom." },
-  { value: "hjalte", label: "Hjälte", description: "Utvald av gudarna, med högre egenskaper och färdigheter, för storslagna äventyr." }
+  { value: "vanlig", label: "Vanlig", description: "Ingen guds redskap. Ditt öde är ditt eget.", img: "systems/drakar-och-demoner-expert/assets/niva-vanlig.png" },
+  { value: "slumpens-hjalte", label: "Slumpens hjälte", description: "Ödet grep in mitt i livet. Gudarnas redskap — men med fri vilja.", img: "systems/drakar-och-demoner-expert/assets/niva-slumpens-hjalte.png" },
+  { value: "sann-hjalte", label: "Sann hjälte", description: "Vald vid första andetaget. Livet format av gudarna.", img: "systems/drakar-och-demoner-expert/assets/niva-sann-hjalte.png" },
+  { value: "gudafodd", label: "Gudafödd", description: "Son eller dotter av en gud. Mäktigast. Sällsyntast. Ödets barn.", img: "systems/drakar-och-demoner-expert/assets/niva-gudafodd.png" }
 ];
 
 /**
@@ -44,12 +47,15 @@ const NIVA_OPTIONS = [
  * och ärvs av de embeddade items när rollpersonen skapas (#genderedImg). Ingen
  * regelmekanik är kopplad till valet.
  *
- * Rollpersonsnivå (Vanlig/Extraordinär/Hjälte, KH s.3) väljs i steg 2 och driver
- * BP-poolen (125/150/175 — DODE.bpByNiva). En löpande BP-räknare visas på alla
- * steg (PLAN_WIZARD_V2.md Fas 2). Ras, socialt stånd och startkapital drar/ger
- * BP (Fas 2+3); särskilda förmågor och färdigheter har egna ledger-fält
- * förberedda i DataModel:en men spenderas inte än — deras wizard-steg byggs i
- * senare faser, se PLAN_WIZARD_V2.md.
+ * Rollpersonsnivå (Vanlig/Slumpens hjälte/Sann hjälte/Gudafödd, HH s.37-39)
+ * väljs i steg 2 och driver BP-poolen (125/150/175/200 — DODE.bpByNiva). En
+ * löpande BP-räknare visas på alla steg (PLAN_WIZARD_V2.md Fas 2). Ras,
+ * socialt stånd och startkapital drar/ger BP (Fas 2+3); särskilda förmågor och
+ * färdigheter har egna ledger-fält förberedda i DataModel:en men spenderas
+ * inte än — deras wizard-steg byggs i senare faser, se PLAN_WIZARD_V2.md.
+ * De fyra nivåerna ÄR ödestypen — HH pp.37-39 anger ingen mekanisk effekt
+ * kopplad till Öde-typen utöver KH:s BP/EP-nivåskala, så nivåvalet gör dubbel
+ * tjänst istället för att vara en separat wizard-sektion.
  *
  * ⚠ Grundegenskaper spenderar INTE BP i den bokexakta modellen (de slås fram med
  * 3T6, RP s.9) — bara ras, särskilda förmågor, socialt stånd, startkapital och
@@ -98,7 +104,6 @@ const NIVA_OPTIONS = [
  * .finalSm` ner mot 0, grånad "Köp" när priset överstiger kvarvarande kapital.
  * Ingen ny Item-schema behövdes — `vapen`/`rustning` hade redan `price`.
  *
- * Avgränsat bort denna omgång (se memory.md / PLAN_WIZARD_V2.md): HH Öde-typer.
  */
 export default class DoDECharacterWizard extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -330,8 +335,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const ageMods = CONFIG.DODE.ageAttributeModifiers[ageCategory] ?? {};
     const result = {};
     for (const [key, value] of Object.entries(this.state.attributes)) {
+      // STO: rasmoden är intervall-baserad (aldrig additiv), men åldersmoden appliceras.
       const raceMod = key === "sto" ? 0 : (raceMods[key] ?? 0);
-      const ageMod = key === "sto" ? 0 : (ageMods[key] ?? 0);
+      const ageMod = ageMods[key] ?? 0;
       const mod = raceMod + ageMod;
       const modParts = [];
       if (raceMod) modParts.push(`${raceMod} ras`);
@@ -709,6 +715,25 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       for (let i = 0; i < qty; i++) itemsToCreate.push({ ...doc.toObject(), _id: null });
     }
     if (itemsToCreate.length) await actor.createEmbeddedDocuments("Item", itemsToCreate);
+
+    const ageMods = CONFIG.DODE.ageAttributeModifiers[this.state.ageCategory] ?? {};
+    const ageAeChanges = Object.entries(ageMods)
+      .filter(([, v]) => v !== 0)
+      .map(([key, value]) => ({
+        key: `system.attributes.${key}.bonus`,
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: String(value)
+      }));
+    if (ageAeChanges.length) {
+      await actor.createEmbeddedDocuments("ActiveEffect", [{
+        name: `Åldersmod (${this.state.ageCategory})`,
+        changes: ageAeChanges,
+        origin: "system.age",
+        transfer: false,
+        disabled: false,
+        "flags.dode.source": "age"
+      }]);
+    }
 
     await this.close();
     actor.sheet.render(true);

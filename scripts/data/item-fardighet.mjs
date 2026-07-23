@@ -18,6 +18,7 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
         choices: ["a", "b"]
       }),
       fv: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
+      bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       // Ersätter den tidigare `yrkesfardighet`-booleanen (PLAN_WIZARD_V2.md Fas 6)
       // — RP s.30 skiljer på tre kostnadskategorier (2/3/5 EP per FV-steg vid
       // EP-köp, Fas 7), inte bara yrkesfärdighet/inte. Rollpersonsskaparens

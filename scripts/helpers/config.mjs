@@ -50,23 +50,55 @@ DODE.magicSchools = {
   symbolism: "DODE.MagicSchool.Symbolism"
 };
 
-// Rollpersonsnivåer — REGEL_Hjalte.md, källa KH s.3. BP-pool per nivå (spenderas på
-// ras/förmågor/socialt stånd/startkapital/färdigheter i senare faser — se PLAN_WIZARD_V2.md).
+// Rollpersonsnivåer — HH s.37-39 (fyra nivåer: Vanlig / Slumpens hjälte / Sann
+// hjälte / Gudafödd hjälte). BP-pool per nivå (spenderas på ras/förmågor/
+// socialt stånd/startkapital/färdigheter i senare faser — se PLAN_WIZARD_V2.md).
+// Source: HH p.6 — base 125 BP for ALL hero types ("läggs till de 125 man normalt får").
+// No per-type BP differentiation exists in HH — all ödestyper start at 125 BP.
+// Extra BP comes from hjältedåd rolls (see DODE.hjaltedadTable).
+// DESIGN DECISION: fixed 125 for all tiers. To implement the full HH system,
+// use hjältedådstabell rolls instead of fixed tiers.
 DODE.bpByNiva = {
   vanlig: 125,
-  extraordinar: 150,
-  hjalte: 175
+  "slumpens-hjalte": 125,
+  "sann-hjalte": 125,
+  gudafodd: 125
 };
 
-// Antal slag/slots för särskilda förmågor per nivå — REGEL_Hjalte.md, samma
-// tabell som DODE.bpByNiva (KH s.3). Ingen komplett förmågetabell finns
-// extraherad (forskningslucka, PLAN_WIZARD_V2.md Fas 8) — bara ANTALET är
-// känt, inte VILKA förmågor som går att slå/välja. Styr guidens
-// "formagor"-steg (fritext-slots), inte en tabellslagning.
+// Source: HH p.6 — "En nyskapad hjälte får slå 1T6 slag på tabellen"
+DODE.hjaltedadRollCount = "1T6";
+
+// Source: HH p.6-7, Hjältedådstabell (1T20)
+// Hero creation: roll 1T6 to determine how many times to roll on this table.
+// Each roll adds the listed bonus BP (and HP) to the hero's base 125 BP.
+// Player may choose freely instead of rolling (HH p.6: "eller välja det man tycker passar bäst").
+DODE.hjaltedadTable = [
+  { range: [1,3],   name: "Torneringsseger",    bonusBP: 15,        bonusHP: 0,   notes: "5 hjältepoäng" },
+  { range: [4,5],   name: "Duell",              bonusBP: "1T10+10", bonusHP: "1T10", notes: "" },
+  { range: [6,7],   name: "Monsterbane",        bonusBP: "1T10+10", bonusHP: "1T10", notes: "" },
+  { range: [8,9],   name: "Korsfarare",         bonusBP: 20,        bonusHP: 10,  notes: "" },
+  { range: [10,11], name: "Upptäcktsresande",   bonusBP: 20,        bonusHP: 10,  notes: "" },
+  { range: [12,13], name: "Monsterbane (stor)", bonusBP: "1T20+10", bonusHP: "1T10+5", notes: "" },
+  { range: [14,14], name: "Gravplundrare",      bonusBP: 20,        bonusHP: 10,  notes: "+10 Startkapital" },
+  { range: [15,15], name: "Vapenbärare",        bonusBP: 25,        bonusHP: 0,   notes: "Magiskt vapen" },
+  { range: [16,16], name: "Rövare",             bonusBP: 20,        bonusHP: 10,  notes: "+10 Startkapital" },
+  { range: [17,17], name: "Segerherre",         bonusBP: 30,        bonusHP: 0,   notes: "15 hjältepoäng" },
+  { range: [18,18], name: "Drakdödare",         bonusBP: 35,        bonusHP: 20,  notes: "" },
+  { range: [19,19], name: "Räddaren i nöden",   bonusBP: 30,        bonusHP: 10,  notes: "" },
+  { range: [20,20], name: "SL Special",         bonusBP: 50,        bonusHP: 35,  notes: "SL bestämmer" },
+];
+
+// DEPRECATED — no HH basis. Source: HH — hjälteförmågor are HP-based (5 HP per
+// roll on 1T20+HP table), not slot-based. This table has no HH basis.
+// Kept (rather than removed) because character-wizard.mjs still reads it to
+// gate the "formagor"-stegets fritext-slots (context.abilitySlots,
+// #specialAbilitySlots()) — zeroed out until that step is rebuilt around the
+// HP-based roll mechanic (forskningslucka, PLAN_WIZARD_V2.md Fas 8).
 DODE.abilityRollsByNiva = {
-  vanlig: 1,
-  extraordinar: 2,
-  hjalte: 3
+  vanlig: 0,
+  "slumpens-hjalte": 0,
+  "sann-hjalte": 0,
+  gudafodd: 0
 };
 
 // Socialt stånd — REGEL_SocialtStand.md, källa RP s.27. 2T6 + spenderade BP
@@ -114,13 +146,17 @@ DODE.ageCapitalMultiplier = {
   Gammal: 2.5
 };
 
-// EP-budget vid rollpersonsskapande — REGEL_Hjalte.md, källa KH s.3/RP s.28.
-// Beror på nivå × ålder. "Kvarvarande BP × 5" läggs till separat, se
-// prepareDerivedData i actor-character.mjs.
+// EP-budget vid rollpersonsskapande — HH, Erfarenhetspoäng-tabellen (verifierad
+// mot fysisk bok 2026-07-21). Beror på nivå × ålder. "Kvarvarande BP × 5" läggs
+// till separat, se prepareDerivedData i actor-character.mjs.
+// Källtabellen har tre kolumner (Vanlig/Slump | Sann | Gudafödd) — "vanlig" och
+// "slumpens-hjalte" delar samma kolumn i källan.
+// Source: D&DE Hjältarnas Handbok, Erfarenhetspoäng table (verified from physical book 2026-07-21)
 DODE.epBudgetTable = {
-  vanlig: { Ung: 150, Mogen: 200, "Medelålders": 250, Gammal: 300 },
-  extraordinar: { Ung: 175, Mogen: 225, "Medelålders": 275, Gammal: 325 },
-  hjalte: { Ung: 200, Mogen: 250, "Medelålders": 300, Gammal: 350 }
+  vanlig: { Ung: 200, Mogen: 250, "Medelålders": 300, Gammal: 350 },
+  "slumpens-hjalte": { Ung: 200, Mogen: 250, "Medelålders": 300, Gammal: 350 },
+  "sann-hjalte": { Ung: 225, Mogen: 275, "Medelålders": 325, Gammal: 375 },
+  gudafodd: { Ung: 250, Mogen: 300, "Medelålders": 350, Gammal: 400 }
 };
 
 // Livsmål — CHARACTERMANCER-WORKFLOW.md, källa "Expert Regler" (21 poster).
@@ -134,13 +170,17 @@ DODE.lifeGoals = [
   "Stridsära", "Upptäckarlust"
 ];
 
-// Max FV en färdighet får ha vid rollpersonsskapande — REGEL_Hjalte.md, källa
-// KH s.3. Konsumeras av EP-färdighetsköpet (PLAN_WIZARD_V2.md Fas 6/7), inte
-// av något ännu — bara beräknat och visat i guiden denna fas.
+// Max FV en färdighet får ha vid rollpersonsskapande — HH, Erfarenhetspoäng-
+// tabellen (verifierad mot fysisk bok 2026-07-21). Konsumeras av EP-
+// färdighetsköpet (PLAN_WIZARD_V2.md Fas 6/7).
+// Källtabellen har tre kolumner (Vanlig/Slump | Sann | Gudafödd) — "vanlig" och
+// "slumpens-hjalte" delar samma kolumn i källan.
+// Source: D&DE Hjältarnas Handbok, Erfarenhetspoäng table (verified from physical book 2026-07-21)
 DODE.maxStartFvTable = {
-  vanlig: { Ung: 13, Mogen: 15, "Medelålders": 17, Gammal: 19 },
-  extraordinar: { Ung: 15, Mogen: 17, "Medelålders": 19, Gammal: 20 },
-  hjalte: { Ung: 17, Mogen: 19, "Medelålders": 20, Gammal: 20 }
+  vanlig: { Ung: 21, Mogen: 23, "Medelålders": 25, Gammal: 27 },
+  "slumpens-hjalte": { Ung: 21, Mogen: 23, "Medelålders": 25, Gammal: 27 },
+  "sann-hjalte": { Ung: 23, Mogen: 25, "Medelålders": 27, Gammal: 29 },
+  gudafodd: { Ung: 25, Mogen: 27, "Medelålders": 29, Gammal: 31 }
 };
 
 // Primära färdigheter — REGLER_FARDIGHETER.md, källa RP s.36. Alla rollpersoner
@@ -189,14 +229,17 @@ DODE.skillCost = function (costTier, fromFv, toFv) {
   return base * (to - from);
 };
 
-// ⚠ FORSKNINGSLUCKA (PLAN_WIZARD_V2.md Fas 4) — åldersmodifikationer på
-// grundegenskaper (RP s.24-25) är INTE extraherade ännu. Tomt tills vidare, INTE
-// gissade värden — actor-character.mjs och character-wizard.mjs läser detta
-// objekt med `?? 0`-fallback, så ageMod blir 0 (ingen effekt) för alla åldrar
-// tills tabellen fylls i här. Infrastrukturen (raceMod/ageMod-uppdelning i
-// prepareDerivedData, wizardens förhandsvisning) är på plats och aktiveras
-// automatiskt så fort raderna nedan fylls i — ingen kodändring ska behövas då.
-DODE.ageAttributeModifiers = {};
+// Åldersmodifikationer på grundegenskaper.
+// Source: D&DE Grundreglerboken s.8 (verified from physical book 2026-07-21)
+// STO är 0 i alla åldersgrupper (ingen modifiering). KON förekommer inte i denna
+// tabell. Nycklarna matchar DODE.attributes (lowercase) och actor.system.alder /
+// wizard.state.ageCategory.
+DODE.ageAttributeModifiers = {
+  Ung:          { smi: 1 },
+  Mogen:        { smi: -1, psy: 1 },
+  "Medelålders": { sty: -2, fys: -1, smi: -1, int: 1, psy: 1, kar: 1 },
+  Gammal:       { sty: -3, fys: -2, smi: -2, psy: 2 }
+};
 
 // Grupp-tabell — REGLER_EGENSKAPER.md, källa REG s.5-6. Grupp-värdet ger BC (baschans) i färdigheter.
 DODE.groupTable = [

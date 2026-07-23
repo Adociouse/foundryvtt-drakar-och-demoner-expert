@@ -21,10 +21,11 @@
 
   {{#if showNiva}}
   <section class="wizard-step">
-    <p class="hint">Välj rollpersonens nivå. Nivån styr bakgrundspoäng (BP) — högre nivå ger fler BP att spendera på ras, förmågor, socialt stånd och startkapital senare i guiden.</p>
+    <p class="hint">Välj rollpersonens nivå (Hjältarnas Handbok s.37-39). Nivån styr bakgrundspoäng (BP) — högre nivå ger fler BP att spendera på ras, förmågor, socialt stånd och startkapital senare i guiden. Nivån är en ren narrativ kategori — ingen ytterligare mekanisk bonus utöver BP/EP-poolen.</p>
     <div class="wizard-card-grid">
       {{#each nivaOptions as |option|}}
         <div class="wizard-card {{#if option.selected}}selected{{/if}}" data-niva="{{option.value}}" data-action="selectNiva">
+          <img src="{{option.img}}" />
           <div class="wizard-card-name">{{option.label}}</div>
           <div class="wizard-card-meta">{{option.bp}} BP</div>
         </div>
@@ -88,7 +89,7 @@
         <p class="hint">Max FV en färdighet får ha vid skapande: {{ep.maxStartFv}} (KH s.3).</p>
       {{/if}}
     </div>
-    <p class="hint">Åldersmodifikationer på grundegenskaper är inte extraherade från källan än (RP s.24-25) — ingen sådan modifiering tillämpas tills vidare. EP-budgeten spenderas i nästa steg, på färdigheter.</p>
+    <p class="hint">Åldersmodifikationer på grundegenskaper tillämpas (RP s.24-25): Ung STY-1/STO-1/SMI+1/PSY+1, Gammal STY-2/STO-1/INT+1/PSY+2/SMI-1. EP-budgeten spenderas i nästa steg, på färdigheter.</p>
   </section>
   {{/if}}
 

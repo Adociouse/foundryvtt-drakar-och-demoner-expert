@@ -43,11 +43,10 @@
     <div class="attribute">
       <label>{{localize labelKey}}</label>
       <input type="number" name="system.attributes.{{key}}.value" value="{{lookup (lookup ../system.attributes key) "value"}}" title="{{localize 'DODE.Actor.Base'}}" />
-      <span class="attr-mod-total">
-        <span title="{{localize 'DODE.Actor.Mod'}}">{{lookup (lookup ../system.attributes key) "mod"}}</span>
-        →
-        <strong title="{{localize 'DODE.Actor.Total'}}">{{lookup (lookup ../system.attributes key) "total"}}</strong>
-      </span>
+      {{#if (lookup (lookup ../system.attributes key) "bonus")}}
+        <span class="attr-bonus" title="{{localize 'DODE.Actor.Mod'}}">{{lookup (lookup ../system.attributes key) "bonusDisplay"}}</span>
+      {{/if}}
+      <strong class="attr-total" title="{{localize 'DODE.Actor.Total'}}">{{lookup (lookup ../system.attributes key) "total"}}</strong>
       <span class="group">{{localize "DODE.Skill.Group"}} {{lookup (lookup ../system.attributes key) "group"}}</span>
     </div>
   {{/each}}

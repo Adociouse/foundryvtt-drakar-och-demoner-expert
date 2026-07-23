@@ -7,6 +7,7 @@ import DoDEVapenData from "./data/item-vapen.mjs";
 import DoDERustningData from "./data/item-rustning.mjs";
 import DoDEBesvarjelseData from "./data/item-besvarjelse.mjs";
 import DoDEActor from "./documents/actor.mjs";
+import DoDeActiveEffect from "./documents/dode-active-effect.mjs";
 import DoDECharacterSheet from "./sheets/actor-character-sheet.mjs";
 import DoDENpcSheet from "./sheets/actor-npc-sheet.mjs";
 import {
@@ -25,6 +26,7 @@ Hooks.once("init", () => {
 
   CONFIG.DODE = DODE;
   CONFIG.Actor.documentClass = DoDEActor;
+  CONFIG.ActiveEffect.documentClass = DoDeActiveEffect;
 
   Object.assign(CONFIG.Actor.dataModels, {
     character: DoDECharacterData,
@@ -73,7 +75,10 @@ Hooks.once("init", () => {
 
 Hooks.on("renderActorDirectory", (app, html) => {
   const root = html instanceof HTMLElement ? html : html[0];
-  const header = root?.querySelector(".directory-header .action-buttons") ?? root?.querySelector(".directory-header");
+  const header =
+    root?.querySelector(".directory-header .action-buttons") ??
+    root?.querySelector(".directory-header .header-actions") ??
+    root?.querySelector(".directory-header");
   if (!header) return;
   if (header.querySelector(".dode-open-wizard")) return;
 
@@ -83,4 +88,33 @@ Hooks.on("renderActorDirectory", (app, html) => {
   button.innerHTML = '<i class="fa-solid fa-hat-wizard"></i> Ny rollperson (guide)';
   button.addEventListener("click", () => game.dode.openCharacterWizard());
   header.appendChild(button);
+});
+
+Hooks.on("updateActor", async (actor, changes) => {
+  if (actor.type !== "character") return;
+  const flat = foundry.utils.flattenObject(changes);
+  if (!("system.alder" in flat)) return;
+  const ageMods = DODE.ageAttributeModifiers[actor.system.alder] ?? {};
+  const aeChanges = Object.entries(ageMods)
+    .filter(([, v]) => v !== 0)
+    .map(([key, value]) => ({
+      key: `system.attributes.${key}.bonus`,
+      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+      value: String(value)
+    }));
+  const existing = actor.effects.find((e) => e.getFlag("dode", "source") === "age");
+  if (existing && aeChanges.length) {
+    await existing.update({ name: `Åldersmod (${actor.system.alder})`, changes: aeChanges });
+  } else if (existing && !aeChanges.length) {
+    await existing.delete();
+  } else if (aeChanges.length) {
+    await actor.createEmbeddedDocuments("ActiveEffect", [{
+      name: `Åldersmod (${actor.system.alder})`,
+      changes: aeChanges,
+      origin: "system.age",
+      transfer: false,
+      disabled: false,
+      "flags.dode.source": "age"
+    }]);
+  }
 });
