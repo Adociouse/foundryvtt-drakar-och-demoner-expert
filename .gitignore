@@ -1,14 +1,31 @@
+# === OS / Editor ===
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+
+# === Node / Build ===
 node_modules/
-.claude/
+.npm/
+*.log
+
+# === Foundry runtime (LevelDB noise) ===
 packs/*/LOCK
 packs/*/LOG
 packs/*/LOG.old
 
-# AI-assistentens arbetsfiler (CLAUDE.md, ACTIVE_TASK.md, memory.md, PLAN_*.md m.fl.)
-# — ska finnas kvar lokalt för Claude Code att läsa, men inte publiceras i repot.
-# Rotnivå-only (/*.md) så framtida publik dokumentation i undermappar inte träffas.
-# Lägg till "!/nagot.md" här om en ny fil vid roten SKA vara publik (som README.md).
+# === AI agent working files ===
+# CLAUDE.md, ACTIVE_TASK.md, memory.md, PLAN_*.md live at the repo root.
+# They're essential for the AI agent but not part of the published system.
+# The wildcard catches all root .md files; README.md is explicitly allowed.
 /*.md
 !/README.md
+
+# === Docs: AI-generated analysis (not maintained, will go stale) ===
+docs/ARCHITECTURE_RULE_AUDIT.md
+docs/FOUNDRY_MIGRATION_PLAN.md
+
+# === Claude Code internals ===
+.claude/
