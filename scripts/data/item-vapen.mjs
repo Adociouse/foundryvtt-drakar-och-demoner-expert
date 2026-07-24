@@ -4,6 +4,10 @@ const fields = foundry.data.fields;
 export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
+      // Utrustad? Styr om vapnets ActiveEffects (transfer:true) appliceras på
+      // aktören — DoDeActiveEffect.apply() släcker effekten när equipped === false.
+      // Använd för magiska vapen som ger attribut-/färdighetsbonusar medan de bärs.
+      equipped: new fields.BooleanField({ required: false, initial: true }),
       grip: new fields.StringField({ required: true, initial: "1H", choices: ["1H", "2H", "1-2H"] }),
       styGroup: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       damage: new fields.StringField({ required: true, initial: "1d6" }),

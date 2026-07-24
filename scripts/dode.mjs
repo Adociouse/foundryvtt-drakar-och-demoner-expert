@@ -6,8 +6,10 @@ import DoDEYrkeData from "./data/item-yrke.mjs";
 import DoDEVapenData from "./data/item-vapen.mjs";
 import DoDERustningData from "./data/item-rustning.mjs";
 import DoDEBesvarjelseData from "./data/item-besvarjelse.mjs";
+import DoDEFormagaData from "./data/item-formaga.mjs";
 import DoDEActor from "./documents/actor.mjs";
 import DoDeActiveEffect from "./documents/dode-active-effect.mjs";
+import SceneEffects from "./utils/scene-effects.mjs";
 import DoDECharacterSheet from "./sheets/actor-character-sheet.mjs";
 import DoDENpcSheet from "./sheets/actor-npc-sheet.mjs";
 import {
@@ -16,7 +18,8 @@ import {
   DoDEYrkeSheet,
   DoDEVapenSheet,
   DoDERustningSheet,
-  DoDEBesvarjelseSheet
+  DoDEBesvarjelseSheet,
+  DoDEFormagaSheet
 } from "./sheets/item-sheet.mjs";
 import DoDECharacterWizard from "./apps/character-wizard.mjs";
 import { DODE } from "./helpers/config.mjs";
@@ -38,7 +41,8 @@ Hooks.once("init", () => {
     yrke: DoDEYrkeData,
     vapen: DoDEVapenData,
     rustning: DoDERustningData,
-    besvarjelse: DoDEBesvarjelseData
+    besvarjelse: DoDEBesvarjelseData,
+    formaga: DoDEFormagaData
   });
 
   Actors.unregisterSheet("core", ActorSheet);
@@ -60,7 +64,8 @@ Hooks.once("init", () => {
     ["yrke", DoDEYrkeSheet],
     ["vapen", DoDEVapenSheet],
     ["rustning", DoDERustningSheet],
-    ["besvarjelse", DoDEBesvarjelseSheet]
+    ["besvarjelse", DoDEBesvarjelseSheet],
+    ["formaga", DoDEFormagaSheet]
   ];
   for (const [type, sheetClass] of itemSheets) {
     Items.registerSheet("drakar-och-demoner-expert", sheetClass, {
@@ -70,7 +75,12 @@ Hooks.once("init", () => {
     });
   }
 
-  game.dode = { openCharacterWizard: () => new DoDECharacterWizard().render(true) };
+  game.dode = {
+    openCharacterWizard: () => new DoDECharacterWizard().render(true),
+    // Scen-/miljömodifikationer via ActiveEffects (flags.dode.source:"scene").
+    // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
+    SceneEffects
+  };
 });
 
 Hooks.on("renderActorDirectory", (app, html) => {

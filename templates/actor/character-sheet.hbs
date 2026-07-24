@@ -87,6 +87,19 @@
       <li class="skill-row-empty">Inga särskilda förmågor ännu.</li>
     {{/each}}
   </ol>
+
+  {{#if formagor.length}}
+    <h4 class="formaga-item-heading">Förmågor med effekter</h4>
+    <ol class="skill-list">
+      {{#each formagor as |formaga|}}
+        <li class="skill-row" data-item-id="{{formaga.id}}">
+          <a data-action="editItem" class="skill-name">{{formaga.name}}</a>
+          {{#if formaga.system.source}}<span class="skill-fv">{{formaga.system.source}}</span>{{/if}}
+          <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+        </li>
+      {{/each}}
+    </ol>
+  {{/if}}
 </section>
 
 <section class="gear">
@@ -105,6 +118,13 @@
         {{else if entry.isBesvarjelse}}
           <span class="fv-input">E <input type="number" class="effektgrad-input" data-effektgrad value="1" min="1" /></span>
           <button type="button" data-action="castSpell" title="Kasta"><i class="fa-solid fa-hand-sparkles"></i></button>
+        {{/if}}
+        {{#if entry.canEquip}}
+          <button type="button" data-action="toggleEquipped"
+            class="equip-toggle {{#if entry.item.system.equipped}}is-equipped{{/if}}"
+            title="{{#if entry.item.system.equipped}}Utrustad — klicka för att ta av{{else}}Ej utrustad — klicka för att utrusta{{/if}}">
+            <i class="fa-solid {{#if entry.item.system.equipped}}fa-shield{{else}}fa-shield-halved{{/if}}"></i>
+          </button>
         {{/if}}
         <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
       </li>

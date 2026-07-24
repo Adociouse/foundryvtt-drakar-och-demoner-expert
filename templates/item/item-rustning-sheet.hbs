@@ -5,6 +5,7 @@
 </header>
 
 <section class="item-fields">
+  <label class="checkbox-field"><input type="checkbox" name="system.equipped" {{checked system.equipped}} /> Utrustad (aktiverar ev. ActiveEffects)</label>
   <label>Plats
     <select name="system.slot">{{selectOptions armorSlots selected=system.slot localize=true}}</select>
   </label>

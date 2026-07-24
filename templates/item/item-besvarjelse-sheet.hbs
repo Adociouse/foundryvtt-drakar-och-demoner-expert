@@ -13,6 +13,16 @@
   <label>Räckvidd <input type="text" name="system.range" value="{{system.range}}" /></label>
   <label class="checkbox-field"><input type="checkbox" name="system.ritual" {{checked system.ritual}} /> Ritual</label>
   <label class="checkbox-field"><input type="checkbox" name="system.kvick" {{checked system.kvick}} /> Kvick</label>
+  <label>Effektvaraktighet (stridsrundor)
+    <input type="number" name="system.spellDuration" value="{{system.spellDuration}}" min="0" />
+  </label>
+  {{#if system.spellEffect.length}}
+    <p class="hint">{{system.spellEffect.length}} temporär effektändring definierad —
+      läggs på målet via <code>applySpellEffect()</code>.</p>
+  {{else}}
+    <p class="hint">Temporära effektändringar (<code>spellEffect</code>) authoras i
+      besvärjelsens _source-JSON/via API — rikta mot <code>*.bonus</code>, läge ADD.</p>
+  {{/if}}
 </section>
 
 <section class="item-description">

@@ -17,6 +17,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       deleteSkill: DoDECharacterSheet.#onDeleteSkill,
       editItem: DoDECharacterSheet.#onEditItem,
       deleteItem: DoDECharacterSheet.#onDeleteItem,
+      toggleEquipped: DoDECharacterSheet.#onToggleEquipped,
       addAbility: DoDECharacterSheet.#onAddAbility,
       deleteAbility: DoDECharacterSheet.#onDeleteAbility,
       clearRas: DoDECharacterSheet.#onClearRas,
@@ -47,8 +48,14 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
         item,
         isVapen: item.type === "vapen",
         isRustning: item.type === "rustning",
-        isBesvarjelse: item.type === "besvarjelse"
+        isBesvarjelse: item.type === "besvarjelse",
+        // Utrustningsbara typer (vapen/rustning) visar en av/på-växel som styr
+        // om föremålets ActiveEffects appliceras — se DoDeActiveEffect.apply().
+        canEquip: item.type === "vapen" || item.type === "rustning"
       }));
+    // Förmåga-Item (bär transfer-AE:er, alltid aktiva). Separat från fritext-
+    // arrayen system.specialAbilities.
+    context.formagor = this.actor.items.filter((i) => i.type === "formaga");
     context.race = this.actor.system.race;
     context.profession = this.actor.system.profession;
     return context;
@@ -88,6 +95,11 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static async #onDeleteItem(event, target) {
     const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
     if (item) await item.delete();
+  }
+
+  static async #onToggleEquipped(event, target) {
+    const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
+    if (item) await item.update({ "system.equipped": !item.system.equipped });
   }
 
   /**
@@ -148,7 +160,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       return;
     }
 
-    if (GEAR_TYPES.includes(item.type) || item.type === "fardighet") {
+    if (GEAR_TYPES.includes(item.type) || item.type === "fardighet" || item.type === "formaga") {
       await this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
     }
   }

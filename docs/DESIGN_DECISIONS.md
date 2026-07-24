@@ -16,7 +16,16 @@ Actor and Item data uses Foundry's `TypeDataModel` / `SchemaField` pattern. Each
 
 ### ActiveEffects as the modifier backbone
 
-All attribute modifiers flow through Foundry's native `ActiveEffect` system. A custom subclass `DoDeActiveEffect` (`scripts/documents/dode-active-effect.mjs`) adds a `flags.dode.condition` hook for conditional modifiers (currently all-pass — the extension point exists for future scene/context evaluation). AE `changes` target `system.attributes.*.bonus` using `ACTIVE_EFFECT_MODES.ADD`. Foundry's pipeline applies effects between `prepareEmbeddedDocuments()` and `prepareDerivedData()`, so derived values (KP, SB, movement, grouping) always see the final bonus. ActiveEffects do **not** currently cover: skill modifiers (planned, requires `flags.dode.skillModifiers`), spell duration tracking, enchanted item bonuses, or scene-level modifiers. Those are future extensions of the same AE system, not separate systems.
+All attribute modifiers flow through Foundry's native `ActiveEffect` system. A custom subclass `DoDeActiveEffect` (`scripts/documents/dode-active-effect.mjs`) adds a `flags.dode.condition` hook for conditional modifiers (currently all-pass — the extension point exists for future scene/context evaluation) **and** an equipment gate: `apply()` returns `null` when the source item has `system.equipped === false`, so unequipped gear contributes nothing. AE `changes` target `system.attributes.*.bonus` using `ACTIVE_EFFECT_MODES.ADD`. Foundry's pipeline applies effects between `prepareEmbeddedDocuments()` and `prepareDerivedData()`, so derived values (KP, SB, movement, grouping) always see the final bonus.
+
+The AE system now covers four modifier sources beyond race/age, each tagged with `flags.dode.source` for identification:
+
+- **Equipment** (`vapen`/`rustning`): an `equipped` boolean gates the item's transfer AEs (source flag = the item type). Note: derived ABS is still computed independently in `prepareDerivedData()` and is *not* gated by `equipped` — only AE bonuses are.
+- **Förmåga** (`formaga` — a new Item type): carries transfer AEs that are always active while embedded (no `equipped` field → never gated). The structured counterpart to the free-text `system.specialAbilities[]` array.
+- **Spell** (`besvarjelse`): a `spellEffect[]` (AE change definitions) + `spellDuration` (rounds) schema. `DoDEActor#applySpellEffect()` creates a temporary embedded AE (`duration.rounds`, `flags.dode.source: "spell"`, `flags.dode.spellName`). The cast→apply wiring is a deliberate stub — the method is callable but not auto-invoked from `castSpell()` yet (targeting/hit logic is combat, fas 6+).
+- **Scene** (`scripts/utils/scene-effects.mjs`, `game.dode.SceneEffects`): `applyToScene(effectData)` / `removeFromScene(name)` apply/remove AEs across all actors with tokens on the active scene, tagged `flags.dode.source: "scene"`.
+
+Still **not** covered: skill modifiers (planned, requires `flags.dode.skillModifiers` / `effectiveFv` on fardighet) and curse-specific tooling. A visual ActiveEffect editor on the custom item sheets is also not built — `formaga` AEs and spell `spellEffect[]` are authored via `_source` JSON / the API for now.
 
 ### Race and profession as embedded Items with transfer AEs
 
@@ -60,7 +69,11 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 | Förmågor 4-source aggregation system | **Partial** | MVP: free-text slots (`specialAbilities[]`), count by niva. No structured ability table, no race/yrke ability aggregation. |
 | HP-based hjälteförmågor (post-creation) | **Not Started** | HH describes 1T20+accumulated HP on a table (18 entries). No sheet UI for spending HP on abilities. |
 | Skill modifier system (base FV vs. effective CL) | **Not Started** | Designed in SPEC. Requires `modifiers[]` on fardighet + `effectiveFv` derivation. |
-| Universal modifier system (spells, items, scenes, curses) | **Not Started** | AE infrastructure exists. No spell/item/scene/curse modifiers created yet. |
+| Universal modifier system (spells, items, scenes, curses) | **Partial** | Equipment/förmåga/spell/scene AEs built (see §1). Equipment `equipped` gate in `DoDeActiveEffect.apply()`. New `formaga` Item type. `besvarjelse` gained `spellEffect[]`/`spellDuration` + `DoDEActor#applySpellEffect()` (cast→apply is stub). `SceneEffects` util at `game.dode.SceneEffects`. **Not** live-verified in Foundry yet. Remaining: skill modifiers, curses, in-sheet AE editor. |
+| Equipment AEs (`equipped` gate on vapen/rustning) | **Done** | `equipped` boolean on both types; `apply()` suppresses when false. Sheet equip-toggle + item-sheet checkbox. Default `equipped: true`. ABS derivation is *not* gated (documented). |
+| Förmåga Item type (`formaga`) with transfer AEs | **Done** | New DataModel + sheet + `system.json`/`dode.mjs`/lang registration. Always-active while embedded. Droppable on character sheet, listed under Särskilda förmågor. No in-sheet AE editor yet. |
+| Spell temporary AEs (`spellEffect[]`/`spellDuration`) | **Partial** | Schema on `besvarjelse` + `applySpellEffect()` on the actor (creates AE with `duration.rounds`, `flags.dode.source:"spell"`). Cast→apply wiring intentionally stubbed. `spellEffect[]` authored via JSON/API. |
+| Scene modifier utility (`SceneEffects`) | **Done** | `scripts/utils/scene-effects.mjs`, exposed as `game.dode.SceneEffects`. `applyToScene`/`removeFromScene` over active-scene token actors, `flags.dode.source:"scene"`. |
 | Hjälteförmågor wizard step (0 slots currently) | **Not Started** | `abilityRollsByNiva` exists but the HP-based table mechanic is unbuilt. |
 | Game Settings registration | **Not Started** | Zero `game.settings.register()` calls anywhere. Needed for: active source books, NPC SB auto-apply, fumble table automation. |
 | RollTable for hjältedådstabell | **Not Started** | `DODE.hjaltedadTable` remains a JS array in `config.mjs`. No `RollTable` document or compendium pack. |

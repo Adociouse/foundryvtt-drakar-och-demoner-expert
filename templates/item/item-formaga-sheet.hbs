@@ -1,0 +1,20 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>Källa
+    <input type="text" name="system.source" value="{{system.source}}" placeholder="bas / ras / yrke / hjalte" />
+  </label>
+  <p class="hint">Förmågans regeleffekter läggs som ActiveEffects på detta föremål
+    (transfer:true). De appliceras automatiskt så fort förmågan ligger på en
+    rollperson — rikta ändringarna mot <code>system.attributes.*.bonus</code> med
+    läget ADD. En förmåga har ingen utrustad/av-växel; den är alltid aktiv.</p>
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

@@ -67,4 +67,43 @@ export default class DoDEActor extends Actor {
       await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor: this }), content: `<p>${note}</p>` });
     }
   }
+
+  /**
+   * Lägger en besvärjelses temporära ActiveEffect på ett mål. Skapar en embeddad
+   * ActiveEffect med duration.rounds = besvärjelsens spellDuration och flaggorna
+   * flags.dode.source:"spell" + flags.dode.spellName. Changes riktas alltid mot
+   * `.bonus`-fält via mode ADD — schemat (item-besvarjelse.mjs `spellEffect`)
+   * garanterar detta.
+   *
+   * STUB: Detta är kopplingspunkten mot en framtida "vid träff"-kedja. Metoden är
+   * fullt körbar (kan anropas manuellt eller från en makro), men wire:as medvetet
+   * INTE in i castSpell() automatiskt än — måltilldelning/träfflogik är fas 6+.
+   *
+   * @param {Item} item En "besvarjelse"-item med spellEffect/spellDuration.
+   * @param {Actor} [target=this] Aktören effekten läggs på (default: kastaren själv).
+   */
+  async applySpellEffect(item, target = this) {
+    if (!item || item.type !== "besvarjelse") return;
+    const changes = (item.system.spellEffect ?? [])
+      .filter((c) => c.key && c.value !== "")
+      .map((c) => ({
+        key: c.key,
+        mode: c.mode ?? CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: String(c.value)
+      }));
+    if (!changes.length) return;
+
+    const rounds = item.system.spellDuration ?? 0;
+    return target.createEmbeddedDocuments("ActiveEffect", [{
+      name: item.name,
+      img: item.img,
+      changes,
+      duration: rounds > 0 ? { rounds } : {},
+      origin: item.uuid,
+      transfer: false,
+      disabled: false,
+      "flags.dode.source": "spell",
+      "flags.dode.spellName": item.name
+    }]);
+  }
 }
