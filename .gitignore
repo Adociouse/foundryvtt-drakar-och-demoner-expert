@@ -22,6 +22,7 @@ packs/*/LOG.old
 # The wildcard catches all root .md files; README.md is explicitly allowed.
 /*.md
 !/README.md
+!/CHANGELOG.md
 
 # === Docs: AI-generated analysis (not maintained, will go stale) ===
 docs/ARCHITECTURE_RULE_AUDIT.md
