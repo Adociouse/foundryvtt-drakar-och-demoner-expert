@@ -2,6 +2,7 @@
   "name": "Ringbrynja",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 6,
     "price": 175,

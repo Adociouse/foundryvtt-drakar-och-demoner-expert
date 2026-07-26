@@ -6,7 +6,7 @@
   "authors": [
     {
       "name": "Johan Hagström",
-      "url": "https://github.com/TODO"
+      "url": "https://github.com/Adociouse"
     }
   ],
   "esmodules": [
@@ -80,8 +80,8 @@
     "verified": "14"
   },
   "url": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert",
-  "manifest": "https://raw.githubusercontent.com/TODO/drakar-och-demoner-expert/main/system.json",
-  "download": "https://github.com/TODO/drakar-och-demoner-expert/releases/latest/download/drakar-och-demoner-expert.zip",
+  "manifest": "https://raw.githubusercontent.com/Adociouse/foundryvtt-drakar-och-demoner-expert/main/system.json",
+  "download": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/releases/latest/download/drakar-och-demoner-expert.zip",
   "bugs": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/issues",
   "license": "MIT",
   "readme": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/blob/master/README.md",

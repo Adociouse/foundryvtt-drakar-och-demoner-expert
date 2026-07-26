@@ -2,6 +2,7 @@
   "name": "Helrustning (metall)",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 8,
     "price": 200,

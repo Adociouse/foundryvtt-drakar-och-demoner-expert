@@ -2,6 +2,7 @@
   "name": "Läderhuva",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "huvud",
     "abs": 2,
     "price": 15,

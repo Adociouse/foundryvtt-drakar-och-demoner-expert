@@ -25,7 +25,7 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // är en lista av AE-change-definitioner — riktas alltid mot `.bonus`-fält
       // (aldrig `.value`), mode 2 = ADD (CONST.ACTIVE_EFFECT_MODES.ADD). Kastlogiken
       // (DoDEActor#applySpellEffect) skapar en embeddad ActiveEffect på aktören med
-      // flags.dode.source:"spell". Se actor.mjs. Själva "vid träff"-kedjan är stub —
+      // flags.<system.id>.source:"spell". Se actor.mjs. Själva "vid träff"-kedjan är stub —
       // metoden finns och kan anropas, men wire:as inte in i castSpell automatiskt än.
       spellDuration: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
       spellEffect: new fields.ArrayField(

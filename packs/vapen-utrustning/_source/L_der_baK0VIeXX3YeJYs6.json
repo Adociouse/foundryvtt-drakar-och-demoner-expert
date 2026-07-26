@@ -2,6 +2,7 @@
   "name": "Läder",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 2,
     "price": 25,

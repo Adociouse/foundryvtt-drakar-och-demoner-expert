@@ -2,6 +2,7 @@
   "name": "Tungt armborst",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "2H",
     "styGroup": 2,
     "damage": "2d6+2",

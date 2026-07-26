@@ -731,7 +731,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         origin: "system.age",
         transfer: false,
         disabled: false,
-        "flags.dode.source": "age"
+        [`flags.${game.system.id}.source`]: "age"
       }]);
     }
 

@@ -2,6 +2,7 @@
   "name": "Morgonstjärna",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "1-2H",
     "styGroup": 4,
     "damage": "2d8+2",

@@ -2,6 +2,7 @@
   "name": "Bredyxa",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "1-2H",
     "styGroup": 2,
     "damage": "1d8+2",

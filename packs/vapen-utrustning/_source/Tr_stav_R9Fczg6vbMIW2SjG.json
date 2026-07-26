@@ -2,6 +2,7 @@
   "name": "Trästav",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "2H",
     "styGroup": 1,
     "damage": "2d4",

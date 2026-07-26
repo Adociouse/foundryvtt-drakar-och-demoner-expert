@@ -2,6 +2,7 @@
   "name": "Fjällpansar",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 5,
     "price": 150,

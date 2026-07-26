@@ -2,6 +2,7 @@
   "name": "Liten båge",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "2H",
     "styGroup": 1,
     "damage": "1d4+1",

@@ -9,10 +9,13 @@
  * — den hör till kampanjvärldens joinskärm/canvas, inte arkets/guidens
  * innertextur. Läderstrukturen är en ren, mönsterfri yta som täcker rent vid
  * vilket fönsterformat som helst och stör inte läsbarheten (0.4 overlay räcker).
- * Gäller både karaktärsarket OCH rollpersonsskaparen (.character-wizard) — samma
- * visuella identitet genom hela flödet, inte bara på det färdiga arket.
+ * Gäller karaktärsarket, NPC-arket OCH rollpersonsskaparen (.character-wizard)
+ * — samma visuella identitet genom hela flödet, inte bara på det färdiga
+ * spelararket. NPC-arket saknade tidigare (till 2026-07-26) denna styling helt
+ * — ren förbiseende, inte ett medvetet designval (Johans fynd).
  */
 .dode.sheet.character,
+.dode.sheet.npc,
 .dode.sheet.character-wizard {
   background-image:
     linear-gradient(rgba(11, 10, 19, 0.4), rgba(11, 10, 19, 0.4)),
@@ -33,6 +36,7 @@
  * syns igenom istället för att bilden skalas och dubbelmålas i mitten.
  */
 .dode.sheet.character,
+.dode.sheet.npc,
 .dode.sheet.character-wizard {
   border-style: solid;
   border-width: 32px;
@@ -41,6 +45,18 @@
   border-image-width: 32px;
   border-image-outset: 0;
   border-image-repeat: stretch;
+}
+
+/*
+ * Scroll-fix (2026-07-26, samma rotorsak som guidens — se docs/DESIGN_DECISIONS.md
+ * §6): Foundrys kärn-CSS sätter .window-content { overflow: hidden } för ALLA
+ * ApplicationV2-fönster. Till skillnad från guiden har dessa ark ingen fastspikad
+ * nav-fot att skydda — hela arket (rubrik + innehåll) får bara scrolla som en enhet,
+ * vilket är standardbeteendet för de flesta Foundry-ark.
+ */
+.dode.sheet.character .window-content,
+.dode.sheet.npc .window-content {
+  overflow-y: auto;
 }
 
 .dode.sheet .sheet-header {
@@ -232,11 +248,37 @@
   width: 2.5rem;
 }
 
+/* Fönstrets innehåll är annars overflow:hidden per Foundrys kärn-CSS (ApplicationV2
+   .window-content), vilket klipper bort allt som inte får plats — utan denna flex-uppdelning
+   blir "Föregående"/"Nästa" oåtkomliga när ett steg (t.ex. färdigheter, med två
+   färdighetstabeller) är högre än fönstret. Rubrik och nav-fot hålls synliga; bara
+   steg-innehållet scrollar internt. */
+.character-wizard.application .window-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.character-wizard .dode-wizard-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.character-wizard .wizard-step-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+}
+
 .character-wizard .wizard-progress {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   font-size: 1rem;
+  flex: 0 0 auto;
   margin-bottom: 0.75rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--color-border-light-tertiary);
@@ -391,6 +433,7 @@
 .character-wizard .wizard-nav {
   display: flex;
   justify-content: space-between;
+  flex: 0 0 auto;
   margin-top: 1rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--color-border-light-tertiary);

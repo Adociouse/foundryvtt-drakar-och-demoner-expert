@@ -2,6 +2,7 @@
   "name": "Kaststjärna",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "1H",
     "styGroup": 1,
     "damage": "1d4",

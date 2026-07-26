@@ -2,6 +2,7 @@
   "name": "Lans",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "1H",
     "styGroup": 3,
     "damage": "1d10+1",

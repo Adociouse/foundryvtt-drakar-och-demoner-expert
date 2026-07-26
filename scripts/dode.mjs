@@ -77,7 +77,7 @@ Hooks.once("init", () => {
 
   game.dode = {
     openCharacterWizard: () => new DoDECharacterWizard().render(true),
-    // Scen-/miljömodifikationer via ActiveEffects (flags.dode.source:"scene").
+    // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects
   };
@@ -112,7 +112,7 @@ Hooks.on("updateActor", async (actor, changes) => {
       mode: CONST.ACTIVE_EFFECT_MODES.ADD,
       value: String(value)
     }));
-  const existing = actor.effects.find((e) => e.getFlag("dode", "source") === "age");
+  const existing = actor.effects.find((e) => e.getFlag(game.system.id, "source") === "age");
   if (existing && aeChanges.length) {
     await existing.update({ name: `Åldersmod (${actor.system.alder})`, changes: aeChanges });
   } else if (existing && !aeChanges.length) {
@@ -124,7 +124,7 @@ Hooks.on("updateActor", async (actor, changes) => {
       origin: "system.age",
       transfer: false,
       disabled: false,
-      "flags.dode.source": "age"
+      [`flags.${game.system.id}.source`]: "age"
     }]);
   }
 });

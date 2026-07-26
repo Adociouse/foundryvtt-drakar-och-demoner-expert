@@ -132,11 +132,15 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // bonus, use it directly. If not (legacy characters whose ras item lacks transfer
     // AEs, or no age AE exists), fall back to the manual computation so existing
     // character data isn't broken.
-    const hasRaceAE = this.parent?.effects?.some(
-      (e) => e.getFlag?.("dode", "source") === "race"
+    // Race AEs are transfer:true effects owned by the embedded ras Item — Foundry only
+    // surfaces those via Actor#appliedEffects, never via Actor#effects (that collection
+    // is actor-owned effects only). Age AEs ARE actor-owned (created directly on the
+    // actor, transfer:false), so `effects` is correct for those.
+    const hasRaceAE = this.parent?.appliedEffects?.some(
+      (e) => e.getFlag?.(game.system.id, "source") === "race"
     ) ?? false;
     const hasAgeAE = this.parent?.effects?.some(
-      (e) => e.getFlag?.("dode", "source") === "age"
+      (e) => e.getFlag?.(game.system.id, "source") === "age"
     ) ?? false;
 
     if (!hasRaceAE && rasItem) {

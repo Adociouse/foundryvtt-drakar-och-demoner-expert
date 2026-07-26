@@ -2,6 +2,7 @@
   "name": "Tunnhjälm",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "huvud",
     "abs": 8,
     "price": 300,

@@ -1,0 +1,56 @@
+{
+  "name": "Alvskölden",
+  "type": "rustning",
+  "system": {
+    "equipped": false,
+    "slot": "skold",
+    "abs": 2,
+    "weight": 0,
+    "price": 0,
+    "description": "<p>En liten, silverbeslagen sköld av alviskt smide. Träet är lättare än det ser ut och ett stilla sus av gammal magi omger bäraren, som stärks och härdas så länge skölden bärs.</p>"
+  },
+  "_id": "H8xIZM1JRcoreogr",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [
+    {
+      "name": "Alvskoldens vakenhet",
+      "img": "icons/svg/item-bag.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        {
+          "key": "system.attributes.fys.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        }
+      ],
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "source": "item",
+          "magical": true
+        }
+      },
+      "_id": "Nwwmq6OLkTkx9NIQ",
+      "_key": "!items.effects!H8xIZM1JRcoreogr.Nwwmq6OLkTkx9NIQ"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785098589508,
+    "modifiedTime": 1785098589508,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!H8xIZM1JRcoreogr"
+}

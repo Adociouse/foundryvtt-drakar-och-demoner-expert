@@ -1,0 +1,62 @@
+{
+  "name": "Väktarklingan",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "1H",
+    "styGroup": 2,
+    "damage": "1d8+2",
+    "length": 1,
+    "weight": 1,
+    "baseValue": 15,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 0,
+    "range": "",
+    "description": "<p>Ett bredsvärd smitt av tempelväktarna i en glömd alvstad, med runor invävda längs klingans rygg. Så länge svärdet bärs stärks bärarens arm av en gammal besvärjelse. Kan skada varelser som kräver magiska vapen (jfr. besvärjelsen Förtrolla vapen).</p>"
+  },
+  "_id": "NbrnTP3fAbnFbmOH",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [
+    {
+      "name": "Väktarklingans välsignelse",
+      "img": "icons/svg/item-bag.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        {
+          "key": "system.attributes.sty.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        }
+      ],
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "source": "item",
+          "magical": true
+        }
+      },
+      "_id": "nKYaXRvj7uff0LYT",
+      "_key": "!items.effects!NbrnTP3fAbnFbmOH.nKYaXRvj7uff0LYT"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785098589508,
+    "modifiedTime": 1785098589508,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NbrnTP3fAbnFbmOH"
+}

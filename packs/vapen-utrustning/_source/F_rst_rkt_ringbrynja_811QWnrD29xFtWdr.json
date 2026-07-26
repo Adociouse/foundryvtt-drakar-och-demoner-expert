@@ -2,6 +2,7 @@
   "name": "Förstärkt ringbrynja",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 7,
     "price": 175,

@@ -2,6 +2,7 @@
   "name": "Romersk hjälm",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "huvud",
     "abs": 6,
     "price": 200,

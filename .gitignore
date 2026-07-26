@@ -30,3 +30,7 @@ docs/FOUNDRY_MIGRATION_PLAN.md
 
 # === Claude Code internals ===
 .claude/
+
+# === Playwright MCP session artifacts (screenshots, page snapshots) ===
+.playwright-mcp/
+/*.png

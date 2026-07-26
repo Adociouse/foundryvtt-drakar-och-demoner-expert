@@ -5,6 +5,7 @@
     <span class="wizard-bp-ledger">EP kvar: <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
   </header>
 
+  <div class="wizard-step-container">
   {{#if showKon}}
   <section class="wizard-step">
     <p class="hint">Välj kön. Styr vilka porträttbilder som visas för ras och yrke i nästa steg.</p>
@@ -329,6 +330,7 @@
     <p class="hint">Efter att rollpersonen skapats: lägg till färdigheter och utrustning direkt på arket (dra från kompendier eller "Ny färdighet"-knappen).</p>
   </section>
   {{/if}}
+  </div>
 
   <footer class="wizard-nav">
     <button type="button" data-action="prevStep" {{#if isFirstStep}}disabled{{/if}}>Föregående</button>

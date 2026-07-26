@@ -2,6 +2,7 @@
   "name": "Tjockt tyg",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 1,
     "price": 20,

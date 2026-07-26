@@ -2,6 +2,7 @@
   "name": "Medelstor sköld",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "skold",
     "abs": 0,
     "description": "<p>Ger sköldarm + bröst-parering (alternativa systemet). Se Liten sköld för status.</p>",

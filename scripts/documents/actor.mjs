@@ -5,7 +5,7 @@ export default class DoDEActor extends Actor {
   /** @param {Item} item En "fardighet"-item ägd av denna actor. */
   async rollSkill(item) {
     if (!item) return;
-    return rollFV({ actor: this, label: item.name, fv: item.system.fv });
+    return rollFV({ actor: this, label: item.name, fv: item.system.total });
   }
 
   /** @param {number} index Index i NPC:ns system.attacks-array. */
@@ -71,7 +71,7 @@ export default class DoDEActor extends Actor {
   /**
    * Lägger en besvärjelses temporära ActiveEffect på ett mål. Skapar en embeddad
    * ActiveEffect med duration.rounds = besvärjelsens spellDuration och flaggorna
-   * flags.dode.source:"spell" + flags.dode.spellName. Changes riktas alltid mot
+   * flags.<system.id>.source:"spell" + flags.<system.id>.spellName. Changes riktas alltid mot
    * `.bonus`-fält via mode ADD — schemat (item-besvarjelse.mjs `spellEffect`)
    * garanterar detta.
    *
@@ -102,8 +102,8 @@ export default class DoDEActor extends Actor {
       origin: item.uuid,
       transfer: false,
       disabled: false,
-      "flags.dode.source": "spell",
-      "flags.dode.spellName": item.name
+      [`flags.${game.system.id}.source`]: "spell",
+      [`flags.${game.system.id}.spellName`]: item.name
     }]);
   }
 }

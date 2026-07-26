@@ -2,6 +2,7 @@
   "name": "Liten sköld",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "skold",
     "abs": 0,
     "description": "<p>Ger sköldarms parering (alternativa systemet). Mekaniken (extra parering, 1/20 sönderchans) är stridsintegration — ej modellerad ännu, se PLAN.md fas 6.</p>",

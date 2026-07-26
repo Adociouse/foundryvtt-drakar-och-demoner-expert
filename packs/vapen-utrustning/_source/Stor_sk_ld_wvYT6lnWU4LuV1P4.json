@@ -2,6 +2,7 @@
   "name": "Stor sköld",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "skold",
     "abs": 0,
     "description": "<p>1/20 chans att parerade projektiler fastnar i skölden. Ger sköldarm+mage+bröst-parering (alternativa systemet). Se Liten sköld för status.</p>",

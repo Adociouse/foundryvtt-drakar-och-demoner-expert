@@ -2,6 +2,7 @@
   "name": "Tvåhandssvärd",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "2H",
     "styGroup": 4,
     "damage": "2d10",

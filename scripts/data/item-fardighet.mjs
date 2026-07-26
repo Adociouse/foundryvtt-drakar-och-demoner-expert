@@ -3,6 +3,17 @@ const fields = foundry.data.fields;
 /**
  * Färdighet — REGLER_FARDIGHETER.md. FV lagras direkt (inte EP-kostnad ännu;
  * EP-köpsekonomin är ej påbörjad — se PLAN_WIZARD_V2.md Fas 7).
+ *
+ * Bas/bonus/total-mönster (samma som attributen, se actor-character.mjs) — `fv`
+ * är det EP-köpta grundvärdet, `bonus` är ett manuellt GM/spelar-redigerbart
+ * fritextfält (item-sheeten), `total` (= fv + bonus) är vad `rollSkill()`
+ * faktiskt slår mot. ⚠ Detta är BARA det platta fältmönstret, inte det fulla
+ * "Skill Modifier System" (automatiska ras-/yrkes-/förmågebaserade modifierare,
+ * PLAN_WIZARD_V2.md rad 604+/§3-backlogpost 7) — den delen kräver ett separat
+ * arkitekturbeslut (AE-changes kan inte rikta in sig på ett namngivet embeddat
+ * Item hos aktören, bara på aktörens egna schemafält, så ras-/yrkesförmågor kan
+ * inte idag applicera en färdighetsbonus via samma transfer-AE-mekanism som
+ * attributen använder). `bonus` här är alltså manuell, inte AE-driven.
  */
 export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -33,5 +44,10 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
       }),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
+  }
+
+  prepareDerivedData() {
+    this.total = this.fv + this.bonus;
+    this.bonusDisplay = this.bonus > 0 ? `+${this.bonus}` : `${this.bonus}`;
   }
 }

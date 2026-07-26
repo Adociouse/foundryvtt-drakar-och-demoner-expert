@@ -2,6 +2,7 @@
   "name": "Nitläderhuva",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "huvud",
     "abs": 3,
     "price": 35,

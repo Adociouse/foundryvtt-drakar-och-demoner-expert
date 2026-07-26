@@ -2,6 +2,7 @@
   "name": "Handyxa",
   "type": "vapen",
   "system": {
+    "equipped": false,
     "grip": "1H",
     "styGroup": 2,
     "damage": "1d6+2",

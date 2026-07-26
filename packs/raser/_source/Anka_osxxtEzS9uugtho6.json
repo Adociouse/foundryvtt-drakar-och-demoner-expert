@@ -35,7 +35,7 @@
         { "key": "system.attributes.smi.bonus", "mode": 2, "value": "2", "priority": 20 },
         { "key": "system.attributes.kar.bonus", "mode": 2, "value": "-5", "priority": 20 }
       ],
-      "flags": { "dode": { "source": "race" } },
+      "flags": { "drakar-och-demoner-expert": { "source": "race" } },
       "_id": "ae0ankaracemods1",
       "_key": "!items.effects!osxxtEzS9uugtho6.ae0ankaracemods1"
     }

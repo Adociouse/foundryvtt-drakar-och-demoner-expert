@@ -2,6 +2,7 @@
   "name": "Nitläder",
   "type": "rustning",
   "system": {
+    "equipped": false,
     "slot": "kropp",
     "abs": 3,
     "price": 70,
