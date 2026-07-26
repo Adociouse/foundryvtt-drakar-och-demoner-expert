@@ -88,17 +88,25 @@ DODE.hjaltedadTable = [
   { range: [20,20], name: "SL Special",         bonusBP: 50,        bonusHP: 35,  notes: "SL bestämmer" },
 ];
 
-// DEPRECATED — no HH basis. Source: HH — hjälteförmågor are HP-based (5 HP per
-// roll on 1T20+HP table), not slot-based. This table has no HH basis.
-// Kept (rather than removed) because character-wizard.mjs still reads it to
-// gate the "formagor"-stegets fritext-slots (context.abilitySlots,
-// #specialAbilitySlots()) — zeroed out until that step is rebuilt around the
-// HP-based roll mechanic (forskningslucka, PLAN_WIZARD_V2.md Fas 8).
+// Antal slag/slots för särskilda förmågor vid rollpersonsskapande — KH s.3,
+// raden "Antal slag för särskilda förmågor" (Vanlig/Extraordinär/Hjälte =
+// 1/2/3), se REGEL_Hjalte.md. Omnycklad till arkets 4-nivåskala (Fas 10):
+// vanlig→Vanlig, slumpens-hjalte→Extraordinär, sann-hjalte→Hjälte.
+// gudafodd: 4 är en ⚠ extrapolering (samma +1-mönster som övriga nivåtabeller)
+// — KH s.3 har bara tre nivåer, ingen bokkälla för en fjärde.
+//
+// OBS: detta är INTE samma sak som hjälteförmågor (HH s.20/46-48) — de är en
+// separat, HP-baserad post-creation-mekanik (5 HP per slag på en egen
+// 1T20-tabell) och hanteras inte av denna tabell eller av wizardens
+// "formagor"-steg. En tidigare session nollställde denna tabell av misstag
+// genom att blanda ihop de två mekanikerna — se PLAN_WIZARD_V2.md "SPEC —
+// Förmågor System Architecture" för den bredare (ännu inte byggda) förmåge-
+// arkitekturen som ska ersätta detta MVP-fritextsteg.
 DODE.abilityRollsByNiva = {
-  vanlig: 0,
-  "slumpens-hjalte": 0,
-  "sann-hjalte": 0,
-  gudafodd: 0
+  vanlig: 1,
+  "slumpens-hjalte": 2,
+  "sann-hjalte": 3,
+  gudafodd: 4
 };
 
 // Socialt stånd — REGEL_SocialtStand.md, källa RP s.27. 2T6 + spenderade BP
