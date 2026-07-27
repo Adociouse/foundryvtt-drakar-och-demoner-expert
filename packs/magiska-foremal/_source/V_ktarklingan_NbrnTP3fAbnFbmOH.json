@@ -16,7 +16,7 @@
     "description": "<p>Ett bredsvärd smitt av tempelväktarna i en glömd alvstad, med runor invävda längs klingans rygg. Så länge svärdet bärs stärks bärarens arm av en gammal besvärjelse. Kan skada varelser som kräver magiska vapen (jfr. besvärjelsen Förtrolla vapen).</p>"
   },
   "_id": "NbrnTP3fAbnFbmOH",
-  "img": "icons/svg/item-bag.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/vaktarklingan.png",
   "effects": [
     {
       "name": "Väktarklingans välsignelse",

@@ -3,6 +3,12 @@
 ## [Unreleased]
 
 ### Added
+- Artwork for all remaining game content — 33 equipment items, 2 magic items, 14 monsters (both `img` and `prototypeToken.texture.src`), 8 spells and 13 magic school symbols. Together with the race and profession portraits this brings coverage to 100%: no compendium document ships with a `icons/svg/*` placeholder any more
+- `img` on `CONFIG.DODE.magicSchoolSkills`, threaded through to the wizard's `magiskola` cards and onto the `fardighet` item the step creates — magic schools are config rows rather than compendium documents, so they had nowhere to hang art before
+- `docs/dev/ART_STYLE.md`: three new prompt templates (inventory object, bestiary creature, spell/arcane symbol) alongside the existing portrait one, plus a per-category asset path table
+- `CLAUDE.md`: mandatory pipeline step 2b ("Bildpipeline") — new game content ships with its art in the same pass
+
+### Added
 - Two magical compendium items in `vapen-utrustning`: Väktarklingan (sword, +2 STY while wielded) and Alvskölden (shield, +2 FYS while worn), both flagged `flags["drakar-och-demoner-expert"] = {source:"item", magical:true}` — first real content to exercise the equipment `equipped`-gate (previously only synthetic-item-tested)
 - `system.equipped: false` set explicitly on all 35 items in `vapen-utrustning` (was previously absent from the compendium source, silently defaulting to `true` via the DataModel) — compendium weapons/armor now start unequipped until toggled on
 

@@ -312,6 +312,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.magicSchools = CONFIG.DODE.magicSchoolSkills.map((s) => ({
       key: s.key,
       label: game.i18n.localize(s.labelKey),
+      img: s.img,
       selected: s.key === this.state.magicSchoolKey
     }));
     context.state = this.state;
@@ -1158,6 +1159,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       itemsToCreate.push({
         name: game.i18n.localize(school.labelKey),
         type: "fardighet",
+        img: school.img,
         system: { skillKey: school.key, attribute: school.attribute, category: "a", fv: 1, costTier: "yrkesfardighet" }
       });
     }

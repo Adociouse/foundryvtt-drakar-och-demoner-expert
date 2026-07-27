@@ -49,7 +49,7 @@
     "biography": ""
   },
   "_id": "HaAxPSiUCb5suSXq",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/ulv.png",
   "prototypeToken": {
     "name": "Ulv",
     "displayName": 0,
@@ -58,7 +58,7 @@
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/ulv.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",

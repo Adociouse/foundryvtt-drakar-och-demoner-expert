@@ -10,7 +10,7 @@
     "description": "<p>En liten, silverbeslagen sköld av alviskt smide. Träet är lättare än det ser ut och ett stilla sus av gammal magi omger bäraren, som stärks och härdas så länge skölden bärs.</p>"
   },
   "_id": "H8xIZM1JRcoreogr",
-  "img": "icons/svg/item-bag.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/alvskolden.png",
   "effects": [
     {
       "name": "Alvskoldens vakenhet",

@@ -55,7 +55,7 @@
     "biography": ""
   },
   "_id": "YPL9MVq2sYDj8TdX",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/backahast.png",
   "prototypeToken": {
     "name": "Bäckahäst",
     "displayName": 0,
@@ -64,7 +64,7 @@
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/backahast.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",

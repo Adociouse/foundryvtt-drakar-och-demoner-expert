@@ -49,7 +49,7 @@
     "biography": ""
   },
   "_id": "KL4nbuVrUxWaC8Cf",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/giftorm.png",
   "prototypeToken": {
     "name": "Giftorm",
     "displayName": 0,
@@ -58,7 +58,7 @@
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/giftorm.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",

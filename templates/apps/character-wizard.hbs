@@ -202,7 +202,7 @@
     <div class="wizard-card-grid">
       {{#each magicSchools as |school|}}
         <div class="wizard-card {{#if school.selected}}selected{{/if}}" data-school="{{school.key}}" data-action="selectMagicSchool">
-          <i class="fa-solid fa-hat-wizard wizard-kon-icon"></i>
+          <img src="{{school.img}}" />
           <div class="wizard-card-name">{{school.label}}</div>
         </div>
       {{/each}}

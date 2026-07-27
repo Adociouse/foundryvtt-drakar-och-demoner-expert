@@ -55,7 +55,7 @@
     "biography": ""
   },
   "_id": "RDiEDGh9PogVejU8",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/bevingad-mantikora.png",
   "prototypeToken": {
     "name": "Bevingad Mantikora",
     "displayName": 0,
@@ -64,7 +64,7 @@
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/bevingad-mantikora.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",

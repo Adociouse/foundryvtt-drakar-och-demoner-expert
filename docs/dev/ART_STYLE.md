@@ -33,13 +33,64 @@ portrait, highly detailed
 - **`waist-up portrait` + `centered square composition`** — midjebild, centrerad, 1:1.
 - **`portrait icon`** — orden spelar roll; de ger den inramade ikonkänslan snarare än en scen.
 
+## Andra motivtyper
+
+Porträttmallen ovan gäller **personer** (raser, yrken). Föremål, varelser och besvärjelser behöver egna mallar — att tvinga in ett svärd i "waist-up portrait"-mallen ger fel resultat. Stilsvansen (oljemålning, dämpad jordton, varma bärnstensdagrar, dramatiskt sidoljus) är gemensam för allt, så helheten hänger ihop.
+
+### Föremålsikon (vapen, rustning, utrustning)
+
+```
+Fantasy RPG inventory item icon of <FÖREMÅL, material och form>, a single object
+centered on a dark neutral background, painterly digital fantasy art in the style
+of a moody atmospheric oil painting, muted earthy color palette with warm amber
+highlights, dramatic side lighting, centered square composition, highly detailed
+```
+
+⚠ `a single object` och `centered on a dark neutral background` är det som skiljer den från porträttmallen — utan dem genererar modellen gärna en person som *bär* föremålet.
+
+### Varelseikon (monster)
+
+```
+Fantasy RPG bestiary illustration of <VARELSE, kroppstyp och utmärkande drag>,
+the full creature centered in frame, painterly digital fantasy art in the style of
+a moody atmospheric oil painting, muted earthy color palette with warm amber
+highlights, dramatic side lighting, dark blurred background, centered square
+composition, highly detailed
+```
+
+⚠ `the full creature centered in frame` — annars blir det ett närbildsporträtt av ett djurhuvud, vilket fungerar dåligt som token på kartan.
+
+### Besvärjelse- och magiskoleikon
+
+```
+Fantasy RPG spell icon depicting <EFFEKT eller SYMBOL>, a glowing arcane symbol
+on a dark background, no text and no lettering, painterly digital fantasy art in
+the style of a moody atmospheric oil painting, muted earthy color palette with
+warm amber highlights, dramatic lighting, centered square composition, highly
+detailed
+```
+
+⚠ `no text and no lettering` — bildmodeller lägger annars gärna in pseudo-runor som ser ut som obegriplig text.
+
 ## Filkonvention
 
 - 1024×1024 PNG, RGB.
-- `assets/tokens/raser/<slug>.png`, `<slug>-man.png`, `<slug>-kvinna.png`
-- `assets/tokens/yrken/<slug>.png`, `<slug>-man.png`, `<slug>-kvinna.png`
-- Slug = gemener, `å/ä→a`, `ö→o`, inga mellanslag (samma mönster som `DODE.skillKey`).
-- Kopplas in via `system.img` (fallback), `system.imgMan`, `system.imgKvinna` på ras-/yrkesitemet. Guiden väljer variant utifrån könssteget (`#genderedImg` i `character-wizard.mjs`).
+- Slug = gemener, `å/ä→a`, `ö→o`, bindestreck i stället för mellanslag (samma mönster som `DODE.skillKey`).
+
+| Mapp | Innehåll | Kopplas in via |
+|------|----------|----------------|
+| `assets/tokens/raser/` | `<slug>.png`, `<slug>-man.png`, `<slug>-kvinna.png` | `img` + `system.imgMan` / `system.imgKvinna` |
+| `assets/tokens/yrken/` | `<slug>.png`, `<slug>-man.png`, `<slug>-kvinna.png` | `img` + `system.imgMan` / `system.imgKvinna` |
+| `assets/tokens/utrustning/` | `<slug>.png` | `img` i `packs/vapen-utrustning/_source/` |
+| `assets/tokens/magiska-foremal/` | `<slug>.png` | `img` i `packs/magiska-foremal/_source/` |
+| `assets/tokens/besvarjelser/` | `<slug>.png` | `img` i `packs/besvarjelser/_source/` |
+| `assets/tokens/monster/` | `<slug>.png` | `img` **och** `prototypeToken.texture.src` |
+| `assets/tokens/magiskolor/` | `<skolnyckel>.png` | `img` på posten i `DODE.magicSchoolSkills` (ingen kompendiepost) |
+
+- Sökvägen skrivs alltid med systemprefix: `systems/drakar-och-demoner-expert/assets/tokens/<mapp>/<slug>.png`.
+- Guiden väljer man-/kvinnavariant utifrån könssteget (`#genderedImg` i `character-wizard.mjs`).
+
+⚠ **Kontrollera vad namnet betyder innan du skriver motivet.** Nyckeln är inte alltid samma ord som etiketten — `rostmagi` är **Röstmagi** (röst/ljud), inte metallrost. Slå upp i `lang/sv.json`.
 
 ## Verktyg
 

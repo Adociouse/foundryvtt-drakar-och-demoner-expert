@@ -101,7 +101,10 @@ DODE.magicSchoolSkills = Object.keys(DODE.magicSchools).map((school) => ({
   // skolan heter likadant överallt i UI:t.
   labelKey: DODE.magicSchools[school],
   school,
-  attribute: "int"
+  attribute: "int",
+  // Skolsymbolen ligger som en vanlig systemasset, inte i ett kompendium —
+  // skolorna är ju inga dokument. Filnamnet är alltid skolnyckeln.
+  img: `systems/drakar-och-demoner-expert/assets/tokens/magiskolor/${school}.png`
 }));
 
 // Rollpersonsnivåer — HH s.37-39 (fyra nivåer: Vanlig / Slumpens hjälte / Sann
