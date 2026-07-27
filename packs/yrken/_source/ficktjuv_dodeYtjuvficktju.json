@@ -8,11 +8,11 @@
     "skillList": "",
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Tjuv (T&L s.12).</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/ficktjuv-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/ficktjuv-kvinna.png"
   },
   "_id": "dodeYtjuvficktju",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/ficktjuv-man.png",
   "effects": [],
   "folder": null,
   "sort": 0,

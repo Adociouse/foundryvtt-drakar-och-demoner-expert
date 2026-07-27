@@ -18,11 +18,11 @@
     },
     "automaticAbilities": "<p>Havsnomadiskt alvsläkte. Enligt Alver s.23 kan en gråalv slå fram de släktesegna särskilda förmågorna <em>Uthållig simmare</em> (simmar i princip hur långt som helst oavsett vattnets temperatur) och <em>Delfinernas vän</em> (telepatisk kontakt med delfiner, som hjälper till i nödsituationer).</p>",
     "description": "<p>Gråalverna lever sitt liv på och vid havet. En gråalv kan inte bli sjösjuk och söker sig ständigt mot nya upplevelser.</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/graalv-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/graalv-kvinna.png"
   },
   "_id": "dodeAlvGraalv000",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/graalv-man.png",
   "effects": [
     {
       "name": "Rasmodifikationer (Gråalv)",

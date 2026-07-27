@@ -8,11 +8,11 @@
     "skillList": "",
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Tjuv (T&L s.12).</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gravplundrare-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gravplundrare-kvinna.png"
   },
   "_id": "dodeYtjuvgravplu",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gravplundrare-man.png",
   "effects": [],
   "folder": null,
   "sort": 0,

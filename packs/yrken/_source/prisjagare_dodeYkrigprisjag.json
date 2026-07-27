@@ -8,11 +8,11 @@
     "skillList": "",
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.6-7).</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/prisjagare-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/prisjagare-kvinna.png"
   },
   "_id": "dodeYkrigprisjag",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/prisjagare-man.png",
   "effects": [],
   "folder": null,
   "sort": 0,

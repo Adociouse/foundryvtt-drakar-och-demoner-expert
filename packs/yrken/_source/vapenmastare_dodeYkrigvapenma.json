@@ -8,11 +8,11 @@
     "skillList": "",
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.8-9).</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-kvinna.png"
   },
   "_id": "dodeYkrigvapenma",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-man.png",
   "effects": [],
   "folder": null,
   "sort": 0,

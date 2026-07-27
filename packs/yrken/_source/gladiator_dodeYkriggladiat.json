@@ -8,11 +8,11 @@
     "skillList": "",
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.4-5).</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gladiator-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gladiator-kvinna.png"
   },
   "_id": "dodeYkriggladiat",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gladiator-man.png",
   "effects": [],
   "folder": null,
   "sort": 0,

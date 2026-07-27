@@ -8,11 +8,11 @@
     "skillList": "",
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Bard (T&L s.8).</p>",
-    "imgMan": "",
-    "imgKvinna": ""
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fingerkonstnar-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fingerkonstnar-kvinna.png"
   },
   "_id": "dodeYbardfingerk",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fingerkonstnar-man.png",
   "effects": [],
   "folder": null,
   "sort": 0,
