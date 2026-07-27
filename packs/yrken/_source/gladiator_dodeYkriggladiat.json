@@ -1,0 +1,35 @@
+{
+  "name": "Gladiator",
+  "type": "yrke",
+  "system": {
+    "requirements": "STY 14, FYS 12, SMI 12",
+    "baseProfession": "krigare",
+    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Arenakrigare. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4-5.</p><p><em>Källa: KH s.4-5</em></p>",
+    "skillList": "",
+    "professionSkills": [],
+    "description": "<p>Specialisering av grundyrket Krigare (KH s.4-5).</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeYkriggladiat",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeYkriggladiat"
+}

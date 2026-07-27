@@ -2,7 +2,20 @@
 <header class="sheet-header">
   <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" />
   <div class="header-fields">
-    <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+    <div class="name-row">
+      <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+      {{#if isGM}}
+        <button type="button" class="wizard-lock-toggle {{#if wizardUnlocked}}is-unlocked{{/if}}" data-action="toggleWizardUnlock"
+          title="{{#if wizardUnlocked}}Upplåst för guide-redigering — klicka för att låsa{{else}}Lås upp för guide-redigering (spelaren får redigera en gång){{/if}}">
+          <i class="fa-solid {{#if wizardUnlocked}}fa-lock-open{{else}}fa-lock{{/if}}"></i>
+        </button>
+      {{/if}}
+      {{#if canEditInWizard}}
+        <button type="button" data-action="openWizardEdit" title="Öppna rollpersonen i guiden">
+          <i class="fa-solid fa-hat-wizard"></i> Redigera i guiden
+        </button>
+      {{/if}}
+    </div>
     <div class="identity-row">
       <div class="drop-zone" data-item-id="{{race.id}}">
         <span class="drop-label">{{localize "DODE.Actor.Ras"}}</span>
@@ -42,11 +55,9 @@
   {{#each attributes as |labelKey key|}}
     <div class="attribute">
       <label>{{localize labelKey}}</label>
-      <input type="number" name="system.attributes.{{key}}.value" value="{{lookup (lookup ../system.attributes key) "value"}}" title="{{localize 'DODE.Actor.Base'}}" />
-      {{#if (lookup (lookup ../system.attributes key) "bonus")}}
-        <span class="attr-bonus" title="{{localize 'DODE.Actor.Mod'}}">{{lookup (lookup ../system.attributes key) "bonusDisplay"}}</span>
-      {{/if}}
       <strong class="attr-total" title="{{localize 'DODE.Actor.Total'}}">{{lookup (lookup ../system.attributes key) "total"}}</strong>
+      <span class="attr-bonus" title="{{lookup (lookup ../system.attributes key) "bonusTooltip"}}">{{#if (lookup (lookup ../system.attributes key) "bonus")}}{{lookup (lookup ../system.attributes key) "bonusDisplay"}}{{else}}&nbsp;{{/if}}</span>
+      <input type="number" name="system.attributes.{{key}}.value" value="{{lookup (lookup ../system.attributes key) "value"}}" title="{{localize 'DODE.Actor.Base'}}" />
       <span class="group">{{localize "DODE.Skill.Group"}} {{lookup (lookup ../system.attributes key) "group"}}</span>
     </div>
   {{/each}}
@@ -80,6 +91,7 @@
 <section class="special-abilities">
   <header class="skills-header">
     <h3>Särskilda förmågor</h3>
+    <button type="button" data-action="rollAbility" title="Slå 2T20+BP mot RP s.25-27:s tabell"><i class="fa-solid fa-dice-d20"></i> Slå fram förmåga</button>
     <button type="button" data-action="addAbility"><i class="fa-solid fa-plus"></i> Ny förmåga</button>
   </header>
   <ol class="skill-list">

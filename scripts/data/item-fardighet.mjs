@@ -28,6 +28,12 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
         initial: "a",
         choices: ["a", "b"]
       }),
+      // Stabil, språkoberoende identitet — se DODE.skillKey i config.mjs och
+      // backlogpost 6a. Visningsnamnet (`name`) är för människor och kan
+      // översättas; ALL matchning i koden (guidens avstämning, dedupning,
+      // EP-köp) ska gå på `skillKey`. Tomt på äldre färdigheter skapade före
+      // 2026-07-27 — då härleds nyckeln ur namnet som fallback.
+      skillKey: new fields.StringField({ required: false, initial: "" }),
       fv: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       // Ersätter den tidigare `yrkesfardighet`-booleanen (PLAN_WIZARD_V2.md Fas 6)

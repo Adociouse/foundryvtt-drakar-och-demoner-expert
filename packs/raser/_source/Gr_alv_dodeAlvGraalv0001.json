@@ -1,0 +1,101 @@
+{
+  "name": "Gråalv",
+  "type": "ras",
+  "system": {
+    "bpCost": 25,
+    "attributeMods": {
+      "sty": -1,
+      "fys": 2,
+      "smi": 1,
+      "int": 3,
+      "psy": 1,
+      "kar": 2
+    },
+    "stoRange": {
+      "min": 5,
+      "max": 15,
+      "normal": 10
+    },
+    "automaticAbilities": "<p>Havsnomadiskt alvsläkte. Enligt Alver s.23 kan en gråalv slå fram de släktesegna särskilda förmågorna <em>Uthållig simmare</em> (simmar i princip hur långt som helst oavsett vattnets temperatur) och <em>Delfinernas vän</em> (telepatisk kontakt med delfiner, som hjälper till i nödsituationer).</p>",
+    "description": "<p>Gråalverna lever sitt liv på och vid havet. En gråalv kan inte bli sjösjuk och söker sig ständigt mot nya upplevelser.</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeAlvGraalv000",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [
+    {
+      "name": "Rasmodifikationer (Gråalv)",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        {
+          "key": "system.attributes.sty.bonus",
+          "mode": 2,
+          "value": "-1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.fys.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.smi.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.int.bonus",
+          "mode": 2,
+          "value": "3",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.psy.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.kar.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        }
+      ],
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "source": "race"
+        }
+      },
+      "_id": "dodeAlvGraalv0ae",
+      "_key": "!items.effects!dodeAlvGraalv000.dodeAlvGraalv0ae"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "raceGroup": "alvslakte"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeAlvGraalv000"
+}

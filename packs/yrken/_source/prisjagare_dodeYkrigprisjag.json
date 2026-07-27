@@ -1,0 +1,35 @@
+{
+  "name": "Prisjägare",
+  "type": "yrke",
+  "system": {
+    "requirements": "STY 14, FYS 12, SMI 14",
+    "baseProfession": "krigare",
+    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Har automatiskt minst <strong>CL 17</strong> i Upptäcka fara — ett sjätte sinne för all fysisk fara.</p><p><em>Källa: KH s.6-7</em></p>",
+    "skillList": "",
+    "professionSkills": [],
+    "description": "<p>Specialisering av grundyrket Krigare (KH s.6-7).</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeYkrigprisjag",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeYkrigprisjag"
+}

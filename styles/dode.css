@@ -86,12 +86,40 @@
   font-weight: bold;
 }
 
+/* Namnrad + guide-redigeringsknappar (se character-sheet.hbs). */
+.dode.sheet .name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dode.sheet .name-row .actor-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.dode.sheet .name-row button {
+  flex: 0 0 auto;
+  width: auto;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.dode.sheet .wizard-lock-toggle.is-unlocked {
+  color: var(--color-level-success, #4c9a4c);
+}
+
 .dode.sheet .identity-row,
 .dode.sheet .derived-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   font-size: 0.85rem;
+}
+
+.dode.sheet .derived-row .hp-value {
+  width: 2.5em;
+  text-align: center;
 }
 
 .dode.sheet .social-standing {
@@ -141,7 +169,7 @@
 
 .dode.sheet .attr-total {
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .dode.sheet .attributes-grid {
@@ -163,7 +191,7 @@
 .dode.sheet .attribute input {
   width: 100%;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
 .dode.sheet .attribute .group {
@@ -317,6 +345,27 @@
   padding: 0.4rem;
   text-align: center;
   cursor: pointer;
+}
+
+/* Grupprubriker i ras-/yrkesstegen — 13 raser och 36 yrken behöver indelning. */
+.character-wizard .wizard-group-heading {
+  margin: 0.6rem 0 0.25rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+  padding-bottom: 0.15rem;
+}
+
+/* Redigeringsläge: ras/yrke visas men går inte att byta (se character-wizard.mjs). */
+.character-wizard .wizard-card.is-locked {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.character-wizard .wizard-card.is-locked.selected {
+  opacity: 1;
 }
 
 .character-wizard .wizard-card img {

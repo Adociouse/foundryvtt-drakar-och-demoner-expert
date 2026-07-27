@@ -5,6 +5,34 @@
  */
 export const DODE = {};
 
+/**
+ * Innehållsregister — vilka kompendier som matar rollpersonsskaparen.
+ * Se docs/DESIGN_DECISIONS.md §7.5 för hela resonemanget. Kort version:
+ *
+ * 1. Koden ska ALDRIG hårdkoda pack-id:n (det gjorde character-wizard.mjs
+ *    tidigare) — då kan varken paket-omstrukturering eller en kampanjmodul
+ *    bidra med innehåll. En modul lägger till sitt eget pack i sin init-hook:
+ *      CONFIG.DODE.contentPacks.races.push("min-modul.egna-raser");
+ *
+ * 2. ⚠ MEDLEMSKAP HÄR ÄR ÅTKOMSTSPÄRREN. Packs som inte ska kunna väljas vid
+ *    rollpersonsskapande (`magiska-foremal`, `monster`) står medvetet INTE med.
+ *    Att istället filtrera på behörighet räcker inte — en GM klarar varje
+ *    behörighetskontroll (Document#testUserPermission kortsluter med
+ *    `user.isGM → OWNER`), så en GM som kör guiden hade kunnat köpa magiska
+ *    föremål till en ny rollperson. Lägg alltså inte till packs här "för att
+ *    de ändå är dolda för spelare".
+ *
+ * 3. Packs som den aktuella användaren inte får läsa hoppas över vid
+ *    upplösning (se #resolveContentPacks i character-wizard.mjs), så ett dolt
+ *    pack degraderar tyst istället för att krascha guiden.
+ */
+DODE.contentPacks = {
+  races: ["drakar-och-demoner-expert.raser"],
+  professions: ["drakar-och-demoner-expert.yrken"],
+  startingEquipment: ["drakar-och-demoner-expert.vapen-utrustning"],
+  spells: ["drakar-och-demoner-expert.besvarjelser"]
+};
+
 DODE.attributes = {
   sty: "DODE.Attribute.STY",
   sto: "DODE.Attribute.STO",
@@ -50,14 +78,54 @@ DODE.magicSchools = {
   symbolism: "DODE.MagicSchool.Symbolism"
 };
 
+/**
+ * Magiskolorna som FÄRDIGHETER — MAGI.md (MAG s.8-10).
+ *
+ * En magiskola är i regelverket inte en egen mekanik utan ett färdighetsvärde:
+ * MAGI.md kallar det uttryckligen "Färdighetsvärde i magiskolan", och FV i
+ * skolan avgör vilka besvärjelser man kan lära sig och max effektgrad. En
+ * magiker kan ha flera skolor; den med högst FV är den som allmän minimagi
+ * räknas till.
+ *
+ * Därför modelleras skolor som vanliga `fardighet`-Items istället för ett eget
+ * schemafält på rollpersonen — då fungerar EP-köp, FV-höjning, slagningar och
+ * arkets färdighetslista utan en enda ny mekanism. Guidens `magiskola`-steg
+ * skapar bara den valda skolan som en färdighet med costTier "yrkesfardighet".
+ *
+ * (Tre av skolorna låg tidigare som "(magiskola)"-poster i secondarySkills —
+ * borttagna därifrån 2026-07-27 så att alla 13 bor på ett ställe.)
+ */
+DODE.magicSchoolSkills = Object.keys(DODE.magicSchools).map((school) => ({
+  key: `magiskola-${school}`,
+  // Namnet hämtas från samma lokaliseringsnyckel som DODE.magicSchools, så
+  // skolan heter likadant överallt i UI:t.
+  labelKey: DODE.magicSchools[school],
+  school,
+  attribute: "int"
+}));
+
 // Rollpersonsnivåer — HH s.37-39 (fyra nivåer: Vanlig / Slumpens hjälte / Sann
 // hjälte / Gudafödd hjälte). BP-pool per nivå (spenderas på ras/förmågor/
 // socialt stånd/startkapital/färdigheter i senare faser — se PLAN_WIZARD_V2.md).
 // Source: HH p.6 — base 125 BP for ALL hero types ("läggs till de 125 man normalt får").
-// No per-type BP differentiation exists in HH — all ödestyper start at 125 BP.
 // Extra BP comes from hjältedåd rolls (see DODE.hjaltedadTable).
 // DESIGN DECISION: fixed 125 for all tiers. To implement the full HH system,
 // use hjältedådstabell rolls instead of fixed tiers.
+//
+// ⚠ RÄTTELSE 2026-07-27: kommentaren här påstod tidigare att "no per-type BP
+// differentiation exists" — det är FEL. Alver-supplementet s.22 ("Hur du skapar
+// en alv") har en explicit nivåtabell:
+//     Vanlig / Extraordinär / Hjälte
+//     BP                125 / 150 / 200→175
+//     Antal slag för förmågor  1 / 2 / 3
+//     Erfarenhetspoäng  150 / 200 / 250
+//     Max FV från start  15 / 17 / 19
+// Det SOURCEAR de 150/175 som §3 backlogpost 4 hittills flaggat som "unsourced
+// extrapolations" — talen var alltså rätt hela tiden, bara felaktigt attribuerade.
+// Värdena här lämnas AVSIKTLIGT oförändrade tills ett regelbeslut tas: boken
+// kallar dem "regelförslag" specifikt för alvskapande, och att ändra dem skulle
+// retroaktivt flytta budgeten för varje befintlig rollperson. Se backlogpost 4.
+// (DODE.abilityRollsByNiva nedan stämmer redan med bokens 1/2/3.)
 DODE.bpByNiva = {
   vanlig: 125,
   "slumpens-hjalte": 125,
@@ -107,6 +175,77 @@ DODE.abilityRollsByNiva = {
   "slumpens-hjalte": 2,
   "sann-hjalte": 3,
   gudafodd: 4
+};
+
+// Särskilda förmågor (RP s.25-27) — slås fram med 2T20 + spenderade BP (minst 1,
+// max +40). Ett slag ger EN rad ur denna tabell; DODE.abilityRollsByNiva ovan styr
+// bara HUR MÅNGA slag (slots) en rollperson får, inte innehållet i varje slag.
+// Portat från Roll20-projektets docs/extracts/DODE_Grundregelbok_fullextract.md
+// (rad 287-345) — redan en ren transkribering, inte fritt uppfunnet här. ⚠ Den
+// underliggande RP-sidan (s.25) är enligt samma extraktionsarbete kraftigt
+// OCR-skadad, så denna tabell är korsreferens-rekonstruerad snarare än en direkt
+// sida-för-sida-transkribering — se DESIGN_DECISIONS.md §3 (backlogpost 12).
+// Sista raden (78) fångar även högre resultat (2T20 max 40 + BP max 40 = 80 är
+// teoretiskt möjligt men källan listar ingen egen rad över 78) — en rimlig
+// tabellkonvention, inte en bekräftad regel.
+// OBS: detta är INTE hjälteförmågor (HH s.20/46-48, se kommentaren ovan) — den
+// mekaniken är en separat, ännu obyggd post-creation-funktion.
+DODE.specialAbilitiesTable = [
+  { range: [3, 4], name: "", description: "+1 på FV på valfri sekundär färdighet (utom förbjudna)" },
+  { range: [5, 6], name: "Sjöfararbakgrund", description: "+2 FV i Sjökunnighet och Navigera" },
+  { range: [7, 8], name: "Starka vrister", description: "+3 på FV i Hoppa" },
+  { range: [9, 10], name: "Bråkig uppväxt", description: "+3 på FV i Slagsmål" },
+  { range: [11, 12], name: "Hantverkarbakgrund", description: "+3 FV i valfri hantverksfärdighet" },
+  { range: [13, 14], name: "Smidig kropp", description: "+3 FV i Akrobatik" },
+  { range: [15, 16], name: "Köpmannabakgrund", description: "+3 FV i Värdera" },
+  { range: [17, 18], name: "God koordinationsförmåga", description: "+3 FV i Två vapen" },
+  { range: [19, 20], name: "Hobbyist", description: "FV 3 i valfri sekundär färdighet du kan lära från början" },
+  { range: [21, 22], name: "Starka nypor", description: "Alltid +3 på CL i Klättra" },
+  { range: [23, 24], name: "Mottagligt medium", description: "Alltid +5 CL i Magisk kanalisering (passiv)" },
+  { range: [25, 26], name: "Hängiven student", description: "+2 på valfritt FV; om FV-begränsning finns höjs den med 2" },
+  { range: [27, 28], name: "Övertygande tonfall", description: "Alltid +3 CL i Övertala och Muta" },
+  { range: [29, 30], name: "Sjätte sinne", description: "+1 på dina FV i Upptäcka fara och Finna dolda ting" },
+  { range: [31, 32], name: "Stirrande blick", description: "Alltid +5 CL i Hypnotisera" },
+  { range: [33, 34], name: "Magikänsla", description: "Alltid +5 CL i Känna magi" },
+  { range: [35, 36], name: "Gott språksinne", description: "Automatiskt FV 20 (B5) i Tala och Läsa/Skriva ett valfritt språk" },
+  { range: [37, 38], name: "Stort kunskapsområde", description: "Två ytterligare valfria sekundära färdigheter som yrkesfärdigheter" },
+  { range: [39, 40], name: "God bågskytt", description: "Alla räckvidder för projektilvapen ökas med 25%" },
+  { range: [41, 42], name: "Absolut gehör", description: "Grundkostnaden för Spela instrument och Sjunga är alltid 1" },
+  { range: [43, 44], name: "Precisionssinne", description: "+1 CL på alla vapenfärdigheter" },
+  { range: [45, 46], name: "Dubbelhänt", description: "Se rubriken \"Svärdshand\"" },
+  { range: [47, 48], name: "God tidskänsla", description: "Mycket god känsla för tidens gång; vet alltid på 10 min när" },
+  { range: [49, 51], name: "Absolut ögonmått", description: "Bedöma avstånd med 5% felmarginal" },
+  { range: [52, 54], name: "Mycket uppmärksam", description: "Alltid +2 CL i Finna dolda ting och Upptäcka fara" },
+  { range: [55, 55], name: "Blixtsnabba reflexer", description: "+3 på alla initiativslag" },
+  { range: [56, 56], name: "Bärsärk", description: "+5 på ditt FV i Bärsärkagång" },
+  { range: [57, 57], name: "Gott balanssinne", description: "+5 på SMI vid balansakter och landning efter fall" },
+  { range: [58, 58], name: "Hästarnas herre", description: "+10 på FV i Rida; kan aldrig bli avkastad (men kan trilla av)" },
+  { range: [59, 59], name: "Ambidextriös", description: "Se rubriken \"Svärdshand\"" },
+  { range: [60, 60], name: "Djurvän", description: "Blir aldrig angripen av vanliga djur" },
+  { range: [61, 61], name: "Turgubbe", description: "Kan alltid modifiera CL med +1 genom att spendera 1 PSY-poäng" },
+  { range: [62, 62], name: "Magisk empati", description: "Med PSY kan du övervinna effektgrader lagrade i magiska föremål och identifiera besvärjelser" },
+  { range: [63, 63], name: "Gudarnas gunstling", description: "Varje gång dina KP når noll: 25% chans att en gud griper in och återställer alla KP. Kritiska skador kan ej läkas på detta sätt" },
+  { range: [64, 64], name: "Lättlärd", description: "Grundkostnaden för sekundära färdigheter minskas till 4" },
+  { range: [65, 65], name: "Extremt smärttålig", description: "Totala KP multipliceras med 1,5 (ändrar även träffområdenas KP)" },
+  { range: [66, 66], name: "Snabbslående", description: "Slår alltid först i varje SR. Vid möte med annan med denna förmåga: normalt initiativslag" },
+  { range: [67, 67], name: "Baneman", description: "Svurit att bekämpa en speciell ras/folkslag; +5 CL vid alla attacker mot denna" },
+  { range: [68, 68], name: "God kroppskontroll", description: "Kontrollera adrenalin med normalt FYS-slag; höj STY och alla STY-baserade färdigheter med +5 under 3 SR. Max 2 gånger per dag" },
+  { range: [69, 69], name: "Järnnäve", description: "Alltid maximal skada i obeväpnad strid" },
+  { range: [70, 70], name: "Extremt orädd", description: "−5 på alla slag på Skräcktabellen" },
+  { range: [71, 71], name: "Orubblig vilja", description: "+5 på PSY på alla slag PSY mot PSY på Motståndstabellen" },
+  { range: [72, 72], name: "Härdig mot element", description: "+5 på FYS på alla Motståndslag mot eld, köld, vatten, vind, etc." },
+  { range: [73, 73], name: "Gott läkekött", description: "KP-förluster av fysiskt våld eller elementarbesvärjelser läker dubbelt så fort" },
+  { range: [74, 74], name: "God mental kontroll", description: "Återfår PSY-poäng förbrukade av besvärjelser på halva tiden. Ej för icke-magiker (räknas som resultat 73)" },
+  { range: [75, 75], name: "Naturlig färdighet med vapen", description: "+5 FV på en valfri vapenfärdighet" },
+  { range: [76, 76], name: "Kluven personlighet", description: "Förutom egen yrkesförmåga: välj även yrkesförmågan från valfritt annat yrke" },
+  { range: [77, 77], name: "God känsla för yrket", description: "Kostnaden för att lära sig en besvärjelse eller en yrkesfärdighet halveras alltid (avrunda uppåt). Halvera efter multiplikation" },
+  { range: [78, 999], name: "Hamnbytare", description: "Kan förvandla sig till ett djur (slå 1T6): 1 — varg, 2 — björn, 3 — hök, 4 — hjort, 5 — svan, 6 — katt. Verklig förvandling; övertar djurets egenskaper utom INT och INT-baserade färdigheter" }
+];
+
+// Slår fram en rad ur DODE.specialAbilitiesTable för ett givet 2T20+BP-resultat.
+// Mirrorar DODE.skillCost's funktion-i-config-stil.
+DODE.rollSpecialAbility = function (total) {
+  return DODE.specialAbilitiesTable.find((row) => total >= row.range[0] && total <= row.range[1]) ?? null;
 };
 
 // Socialt stånd — REGEL_SocialtStand.md, källa RP s.27. 2T6 + spenderade BP
@@ -191,27 +330,137 @@ DODE.maxStartFvTable = {
   gudafodd: { Ung: 25, Mogen: 27, "Medelålders": 29, Gammal: 31 }
 };
 
+/**
+ * Kanonisk, språkoberoende nyckel för en färdighet.
+ *
+ * ⚠ VARFÖR: visningsnamn är INTE stabila identifierare. Systemet matchade
+ * tidigare färdigheter på namn (`name.toLowerCase()`) i guidens avstämning,
+ * dedupning och EP-köp. Det fungerade bara så länge alla namn kom från samma
+ * svenska konfigtabell — i samma stund som namnen körs genom `game.i18n`, eller
+ * en Babele-liknande översättningsmodul döper om kompendiedokument, hade en
+ * rollperson skapad på ett språk och redigerad på ett annat TYST fått
+ * dubblerade färdigheter (backlogpost 6a, Johans observation 2026-07-27).
+ *
+ * Nyckeln utgår från det svenska namnet men fryses i tabellerna nedan som
+ * explicita `key`-fält — funktionen används därefter bara som fallback för
+ * data utan nyckel (äldre rollpersoner, yrkens `professionSkills`).
+ */
+DODE.skillKey = function (name) {
+  return String(name ?? "")
+    .toLowerCase()
+    .replace(/[åä]/g, "a")
+    .replace(/ö/g, "o")
+    .replace(/é/g, "e")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
+
 // Primära färdigheter — REGLER_FARDIGHETER.md, källa RP s.36. Alla rollpersoner
 // börjar med dessa (grundkostnad 2 EP/FV-steg vid EP-köp, se DODE.skillCost
 // nedan). Auto-genereras av rollpersonsskaparen (PLAN_WIZARD_V2.md Fas 6) vid
 // fv = grupp av grundegenskapen (baschans/BC, REGLER_EGENSKAPER.md).
 DODE.primarySkills = [
-  { name: "Bluffa", attribute: "kar" },
-  { name: "Finna dolda ting", attribute: "int" },
-  { name: "Första hjälpen", attribute: "int" },
-  { name: "Gömma sig", attribute: "int" },
-  { name: "Hoppa", attribute: "smi" },
-  { name: "Klättra", attribute: "smi" },
-  { name: "Köpslå", attribute: "kar" },
-  { name: "Lyssna", attribute: "int" },
-  { name: "Läsa/skriva modersmål", attribute: "int" },
-  { name: "Rida", attribute: "smi" },
-  { name: "Spåra", attribute: "int" },
-  { name: "Stjäla föremål", attribute: "smi" },
-  { name: "Tala modersmål", attribute: "int" },
-  { name: "Upptäcka fara", attribute: "psy" },
-  { name: "Värdera", attribute: "int" },
-  { name: "Övertala", attribute: "kar" }
+  { key: "bluffa", name: "Bluffa", attribute: "kar" },
+  { key: "finna-dolda-ting", name: "Finna dolda ting", attribute: "int" },
+  { key: "forsta-hjalpen", name: "Första hjälpen", attribute: "int" },
+  { key: "gomma-sig", name: "Gömma sig", attribute: "int" },
+  { key: "hoppa", name: "Hoppa", attribute: "smi" },
+  { key: "klattra", name: "Klättra", attribute: "smi" },
+  { key: "kopsla", name: "Köpslå", attribute: "kar" },
+  { key: "lyssna", name: "Lyssna", attribute: "int" },
+  { key: "lasa-skriva-modersmal", name: "Läsa/skriva modersmål", attribute: "int" },
+  { key: "rida", name: "Rida", attribute: "smi" },
+  { key: "spara", name: "Spåra", attribute: "int" },
+  { key: "stjala-foremal", name: "Stjäla föremål", attribute: "smi" },
+  { key: "tala-modersmal", name: "Tala modersmål", attribute: "int" },
+  { key: "upptacka-fara", name: "Upptäcka fara", attribute: "psy" },
+  { key: "vardera", name: "Värdera", attribute: "int" },
+  { key: "overtala", name: "Övertala", attribute: "kar" }
+];
+
+// Sekundära färdigheter — portat från Roll20-projektets docs/wiki/REGLER_FARDIGHETER.md
+// (rad 184-265), inte fritt uppfunnet här. Källdoket flaggar själv: "⚠ Grundkostnader
+// och BC — verifiera mot RP s.34–64 och REG s.19–43" — den flaggan bärs vidare hit
+// (Regelfilosofin: kuraterade dokument är facit, inte något att tyst "rätta").
+// Tio namn som redan finns i DODE.primarySkills ovan (Finna dolda ting, Gömma sig,
+// Hoppa, Klättra, Köpslå, Lyssna, Spåra, Stjäla föremål, Värdera, Övertala) är
+// medvetet uteslutna här — källtabellen listade dem även bland de sekundära, men en
+// rollperson har redan dessa som primära från skapandet, så de ska inte dyka upp
+// som ett nytt köpbart alternativ i färdighetsväljaren. "Uppfattningsfärdigheter"
+// (rubrikrad utan egen kostnad/BC i källan) är också utesluten — det är en
+// kategorirubrik, inte en enskild färdighet.
+// ⚠ Källtabellens "Kostnad"-kolumn varierar per färdighet (2/3/4/6/8/"varierar"),
+// men den nuvarande EP-köpsmekaniken (DODE.skillCostTierBase) använder en platt
+// grundkostnad per kategori (sekundär = 5) — denna lista bär bara namn+grundegenskap
+// vidare, ingen per-färdighet-kostnad. Se detta som en öppen avvikelse, inte tyst
+// ignorerad (jfr DESIGN_DECISIONS.md §3).
+DODE.secondarySkills = [
+  { key: "akrobatik", name: "Akrobatik", attribute: "smi" },
+  { key: "alkemi", name: "Alkemi", attribute: "int" },
+  { key: "astrologi", name: "Astrologi", attribute: "int" },
+  { key: "avvapna", name: "Avväpna", attribute: "smi" },
+  { key: "barsarkagang", name: "Bärsärkagång", attribute: "psy" },
+  { key: "buktala", name: "Buktala", attribute: "psy" },
+  { key: "dans", name: "Dans", attribute: "smi" },
+  { key: "djurhelning", name: "Djurhelning", attribute: "psy" },
+  { key: "djurtraning", name: "Djurträning", attribute: "psy" },
+  { key: "dolk", name: "Dolk", attribute: "smi" },
+  { key: "dra-vapen", name: "Dra vapen", attribute: "smi" },
+  { key: "drogkunskap", name: "Drogkunskap", attribute: "int" },
+  { key: "forfalskning", name: "Förfalskning", attribute: "int" },
+  { key: "geografi", name: "Geografi", attribute: "int" },
+  { key: "geologi", name: "Geologi", attribute: "int" },
+  { key: "giftkunskap", name: "Giftkunskap", attribute: "int" },
+  { key: "gycklekonster", name: "Gycklekonster", attribute: "smi" },
+  { key: "hantera-fallor", name: "Hantera fällor", attribute: "smi" },
+  // Grundegenskap "varierar" i källan (beror på hantverkstyp) — smi vald som
+  // rimlig standard (de flesta hantverk är handlagsbaserade), ⚠ approximation.
+  { key: "hantverk-spec", name: "Hantverk (spec.)", attribute: "smi" },
+  { key: "hasardspel", name: "Hasardspel", attribute: "int" },
+  { key: "heraldik", name: "Heraldik", attribute: "int" },
+  { key: "historia", name: "Historia", attribute: "int" },
+  { key: "hypnotisera", name: "Hypnotisera", attribute: "psy" },
+  { key: "judo", name: "Judo", attribute: "smi" },
+  { key: "karate", name: "Karate", attribute: "smi" },
+  { key: "knopar", name: "Knopar", attribute: "smi" },
+  { key: "kulturkannedom", name: "Kulturkännedom", attribute: "int" },
+  { key: "kunskap-om-demoner", name: "Kunskap om demoner", attribute: "int" },
+  { key: "kunskap-om-magi", name: "Kunskap om magi", attribute: "int" },
+  { key: "kunskap-om-ododa", name: "Kunskap om odöda", attribute: "int" },
+  { key: "lasdyrkning", name: "Låsdyrkning", attribute: "smi" },
+  { key: "lakekonst", name: "Läkekonst", attribute: "int" },
+  { key: "lapplasning", name: "Läppläsning", attribute: "int" },
+  { key: "lasa-skriva-sprak", name: "Läsa/Skriva språk", attribute: "int" },
+  { key: "magisk-kanalisering", name: "Magisk kanalisering", attribute: "int" },
+  { key: "massage", name: "Massage", attribute: "smi" },
+  { key: "muta", name: "Muta", attribute: "kar" },
+  { key: "malning", name: "Målning", attribute: "smi" },
+  { key: "navigation", name: "Navigation", attribute: "int" },
+  { key: "orientering", name: "Orientering", attribute: "int" },
+  { key: "rakning", name: "Räkning", attribute: "int" },
+  { key: "schack-bradspel", name: "Schack & Brädspel", attribute: "int" },
+  { key: "simma", name: "Simma", attribute: "fys" },
+  { key: "sjokunnighet", name: "Sjökunnighet", attribute: "int" },
+  { key: "sjunga", name: "Sjunga", attribute: "kar" },
+  { key: "skadespeleri", name: "Skådespeleri", attribute: "kar" },
+  { key: "slagsmal", name: "Slagsmål", attribute: "sty" },
+  { key: "smyga", name: "Smyga", attribute: "smi" },
+  { key: "spela-instrument", name: "Spela instrument", attribute: "kar" },
+  { key: "spa-vader", name: "Spå väder", attribute: "int" },
+  { key: "sprakkunskap", name: "Språkkunskap", attribute: "int" },
+  { key: "stavhopp", name: "Stavhopp", attribute: "smi" },
+  { key: "stridskonster", name: "Stridskonster", attribute: "smi" },
+  { key: "taktik", name: "Taktik", attribute: "int" },
+  { key: "tala-sprak-kate-b", name: "Tala språk (Kate. B)", attribute: "int" },
+  { key: "teckensprak", name: "Teckenspråk", attribute: "int" },
+  { key: "trastav", name: "Trästav", attribute: "smi" },
+  { key: "tva-vapen", name: "Två vapen", attribute: "smi" },
+  { key: "undre-varlden", name: "Undre världen", attribute: "int" },
+  { key: "vapenfardigheter", name: "Vapenfärdigheter", attribute: "smi" },
+  { key: "zoologi", name: "Zoologi", attribute: "int" },
+  { key: "anterhake", name: "Änterhake", attribute: "smi" },
+  { key: "ortkunskap", name: "Örtkunskap", attribute: "int" },
+  { key: "overlevnad", name: "Överlevnad", attribute: "int" }
 ];
 
 // Färdighetens EP-kostnadskategori — RP s.30: primär/yrkesfärdighet/sekundär

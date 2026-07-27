@@ -76,7 +76,10 @@ Hooks.once("init", () => {
   }
 
   game.dode = {
-    openCharacterWizard: () => new DoDECharacterWizard().render(true),
+    // Utan argument: skapaläge. Med en aktör: redigeringsläge (guiden laddar
+    // rollpersonen och sparar tillbaka utan att dubblera något) — se
+    // character-wizard.mjs och DESIGN_DECISIONS.md backlog 4c.
+    openCharacterWizard: (actor = null) => new DoDECharacterWizard(actor ? { actor } : {}).render(true),
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects

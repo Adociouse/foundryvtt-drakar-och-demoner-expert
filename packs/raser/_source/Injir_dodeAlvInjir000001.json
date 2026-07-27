@@ -1,0 +1,89 @@
+{
+  "name": "Injir",
+  "type": "ras",
+  "system": {
+    "bpCost": 25,
+    "attributeMods": {
+      "sty": 0,
+      "fys": 1,
+      "smi": 2,
+      "int": 3,
+      "psy": 0,
+      "kar": 1
+    },
+    "stoRange": {
+      "min": 7,
+      "max": 17,
+      "normal": 12
+    },
+    "automaticAbilities": "<p>Nomadiskt ryttarsläkte besläktat med skogsalverna. Enligt Alver s.24 kan en injir slå fram de släktesegna särskilda förmågorna <em>Skicklig ryttare</em> (+4 CL på Rida och Slåss till häst) och <em>Stålsättning</em> (sänker SP-skadan med 2 genom att helt ignorera smärtan).</p><p>Förmågan Härdig mot element ger +20 istället för +15 för injirer (Alver s.23).</p>",
+    "description": "<p>Injirerna är nomadiska ryttare som klarar temperaturer från −40 °C till +40 °C.</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeAlvInjir0000",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [
+    {
+      "name": "Rasmodifikationer (Injir)",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        {
+          "key": "system.attributes.fys.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.smi.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.int.bonus",
+          "mode": 2,
+          "value": "3",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.kar.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        }
+      ],
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "source": "race"
+        }
+      },
+      "_id": "dodeAlvInjir00ae",
+      "_key": "!items.effects!dodeAlvInjir0000.dodeAlvInjir00ae"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "raceGroup": "alvslakte"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeAlvInjir0000"
+}

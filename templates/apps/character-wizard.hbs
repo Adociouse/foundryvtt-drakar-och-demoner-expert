@@ -51,16 +51,23 @@
 
   {{#if showRas}}
   <section class="wizard-step">
-    <p class="hint">Välj en ras. Automatiska förmågor och egenskapsmodifikationer visas nedan.</p>
-    <div class="wizard-card-grid">
-      {{#each races as |race|}}
-        <div class="wizard-card {{#if race.selected}}selected{{/if}}" data-uuid="{{race.uuid}}" data-action="selectRace">
-          <img src="{{race.img}}" />
-          <div class="wizard-card-name">{{race.name}}</div>
-          <div class="wizard-card-meta">{{race.system.bpCost}} BP</div>
-        </div>
-      {{/each}}
-    </div>
+    {{#if isEditMode}}
+      <p class="hint">Rasen kan inte bytas i redigeringsläge — den definierar rollpersonen och styr rasbonusar via ActiveEffects. Behöver den ändå bytas: be SL dra en ny ras till arket.</p>
+    {{else}}
+      <p class="hint">Välj en ras. Automatiska förmågor och egenskapsmodifikationer visas nedan.</p>
+    {{/if}}
+    {{#each raceGroups as |group|}}
+      <h4 class="wizard-group-heading">{{group.label}}</h4>
+      <div class="wizard-card-grid">
+        {{#each group.races as |race|}}
+          <div class="wizard-card {{#if race.selected}}selected{{/if}} {{#if ../../isEditMode}}is-locked{{/if}}" data-uuid="{{race.uuid}}" {{#unless ../../isEditMode}}data-action="selectRace"{{/unless}}>
+            <img src="{{race.img}}" />
+            <div class="wizard-card-name">{{race.name}}</div>
+            <div class="wizard-card-meta">{{race.system.bpCost}} BP</div>
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
     {{#if selectedRace}}
       <div class="wizard-detail">
         <h4>{{selectedRace.name}}</h4>
@@ -119,9 +126,14 @@
 
   {{#if showFormagor}}
   <section class="wizard-step">
-    <p class="hint">Särskilda förmågor — fritext. Antal rader ({{abilitySlots}}) styrs av nivå (KH s.3). Ingen komplett förmågetabell finns extraherad än, så det här är fritt textinnehåll, inte en tärningstabell — skriv in vad förmågan gör.</p>
+    <p class="hint">Särskilda förmågor (RP s.25-27). Antal rader ({{abilitySlots}}) styrs av nivå (KH s.3). Ange hur mycket BP du vill spendera (minst 1, max 40) och tryck "Slå fram" för att slå 2T20+BP mot tabellen — fälten fylls i automatiskt men går att redigera för hand efteråt.</p>
     {{#each specialAbilities as |slot i|}}
       <div class="wizard-ability-row">
+        <label>BP att spendera
+          <input type="number" min="1" max="40" value="{{slot.bpSpent}}" data-ability-bp-index="{{i}}" />
+        </label>
+        <button type="button" data-action="rollFormaga" data-index="{{i}}"><i class="fa-solid fa-dice-d20"></i> Slå fram (2T20+BP)</button>
+        {{#if slot.rollResult}}<span class="wizard-ability-roll">Slag: {{slot.rollResult}}</span>{{/if}}
         <label>Förmåga
           <input type="text" data-ability-index="{{i}}" data-ability-field="name" value="{{slot.name}}" placeholder="Namn på förmåga" />
         </label>
@@ -135,16 +147,23 @@
 
   {{#if showYrke}}
   <section class="wizard-step">
-    <p class="hint">Välj ett yrke. Du slår grundegenskaper i nästa steg — kravkontrollen fylls i då.</p>
-    <div class="wizard-card-grid">
-      {{#each professions as |profession|}}
-        <div class="wizard-card {{#if profession.selected}}selected{{/if}}" data-uuid="{{profession.uuid}}" data-action="selectProfession">
-          <img src="{{profession.img}}" />
-          <div class="wizard-card-name">{{profession.name}}</div>
-          <div class="wizard-card-meta">{{profession.system.requirements}}</div>
-        </div>
-      {{/each}}
-    </div>
+    {{#if isEditMode}}
+      <p class="hint">Yrket kan inte bytas i redigeringsläge — det styr vilka yrkesfärdigheter rollpersonen har. Behöver det ändå bytas: be SL dra ett nytt yrke till arket.</p>
+    {{else}}
+      <p class="hint">Välj ett yrke. Du slår grundegenskaper i nästa steg — kravkontrollen fylls i då.</p>
+    {{/if}}
+    {{#each professionGroups as |group|}}
+      <h4 class="wizard-group-heading">{{group.label}}</h4>
+      <div class="wizard-card-grid">
+        {{#each group.professions as |profession|}}
+          <div class="wizard-card {{#if profession.selected}}selected{{/if}} {{#if ../../isEditMode}}is-locked{{/if}}" data-uuid="{{profession.uuid}}" {{#unless ../../isEditMode}}data-action="selectProfession"{{/unless}}>
+            <img src="{{profession.img}}" />
+            <div class="wizard-card-name">{{profession.name}}</div>
+            <div class="wizard-card-meta">{{profession.system.requirements}}</div>
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
     {{#if selectedProfession}}
       <div class="wizard-detail">
         <h4>{{selectedProfession.name}}</h4>
@@ -174,6 +193,20 @@
         {{{selectedProfession.system.professionAbility}}}
       </div>
     {{/if}}
+  </section>
+  {{/if}}
+
+  {{#if showMagiskola}}
+  <section class="wizard-step">
+    <p class="hint">Välj magikerns huvudskola (MAG s.8-10). En magiskola är i regelverket ett <em>färdighetsvärde</em> — skolan skapas som en färdighet, och du höjer FV med EP i färdighetssteget precis som andra yrkesfärdigheter. FV i skolan avgör vilka besvärjelser du kan lära dig och vilken högsta effektgrad du klarar.</p>
+    <div class="wizard-card-grid">
+      {{#each magicSchools as |school|}}
+        <div class="wizard-card {{#if school.selected}}selected{{/if}}" data-school="{{school.key}}" data-action="selectMagicSchool">
+          <i class="fa-solid fa-hat-wizard wizard-kon-icon"></i>
+          <div class="wizard-card-name">{{school.label}}</div>
+        </div>
+      {{/each}}
+    </div>
   </section>
   {{/if}}
 
@@ -223,8 +256,8 @@
           <td>{{skill.attribute}}</td>
           <td>FV {{skill.fv}}{{#if skill.cost}} ({{skill.cost}} EP){{/if}}</td>
           <td class="wizard-skill-buy">
-            <button type="button" data-action="sellSkillFv" data-skill="{{skill.name}}" {{#unless skill.canDecrease}}disabled{{/unless}}>−</button>
-            <button type="button" data-action="buySkillFv" data-skill="{{skill.name}}" data-can-increase="{{skill.canIncrease}}" {{#unless skill.canIncrease}}disabled{{/unless}}>+1{{#if skill.nextCost}} ({{skill.nextCost}} EP){{/if}}</button>
+            <button type="button" data-action="sellSkillFv" data-skill="{{skill.key}}" {{#unless skill.canDecrease}}disabled{{/unless}}>−</button>
+            <button type="button" data-action="buySkillFv" data-skill="{{skill.key}}" data-can-increase="{{skill.canIncrease}}" {{#unless skill.canIncrease}}disabled{{/unless}}>+1{{#if skill.nextCost}} ({{skill.nextCost}} EP){{/if}}</button>
           </td>
         </tr>
       {{/each}}
@@ -239,8 +272,8 @@
               <td>{{skill.attribute}}</td>
               <td>FV {{skill.fv}}{{#if skill.cost}} ({{skill.cost}} EP){{/if}}</td>
               <td class="wizard-skill-buy">
-                <button type="button" data-action="sellSkillFv" data-skill="{{skill.name}}" {{#unless skill.canDecrease}}disabled{{/unless}}>−</button>
-                <button type="button" data-action="buySkillFv" data-skill="{{skill.name}}" data-can-increase="{{skill.canIncrease}}" {{#unless skill.canIncrease}}disabled{{/unless}}>+1{{#if skill.nextCost}} ({{skill.nextCost}} EP){{/if}}</button>
+                <button type="button" data-action="sellSkillFv" data-skill="{{skill.key}}" {{#unless skill.canDecrease}}disabled{{/unless}}>−</button>
+                <button type="button" data-action="buySkillFv" data-skill="{{skill.key}}" data-can-increase="{{skill.canIncrease}}" {{#unless skill.canIncrease}}disabled{{/unless}}>+1{{#if skill.nextCost}} ({{skill.nextCost}} EP){{/if}}</button>
               </td>
             </tr>
           {{/each}}
@@ -335,7 +368,9 @@
   <footer class="wizard-nav">
     <button type="button" data-action="prevStep" {{#if isFirstStep}}disabled{{/if}}>Föregående</button>
     {{#if isLastStep}}
-      <button type="button" data-action="createCharacter" class="primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Skapa rollperson</button>
+      <button type="button" data-action="createCharacter" class="primary">
+        {{#if isEditMode}}<i class="fa-solid fa-floppy-disk"></i> Spara ändringar{{else}}<i class="fa-solid fa-wand-magic-sparkles"></i> Skapa rollperson{{/if}}
+      </button>
     {{else}}
       <button type="button" data-action="nextStep" {{#unless canAdvance}}disabled{{/unless}}>Nästa</button>
     {{/if}}

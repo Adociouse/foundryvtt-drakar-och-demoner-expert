@@ -8,6 +8,23 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
       requirements: new fields.StringField({ required: false, initial: "" }),
+      // Grundyrke som detta yrke är en specialisering av — tomt för grundyrkena
+      // själva. Krigar-/tjuv-/lönnmördar-/bardspecialiseringarna (KH s.4-9,
+      // T&L s.7-16) har alla sitt grundyrkes förmåga PLUS en egen, och ärver
+      // dess grundkrav. Fältet används i dagsläget bara för att gruppera korten
+      // i rollpersonsskaparens yrkessteg — ingen mekanik hänger på det, men
+      // utan gruppering blir 36 yrkeskort i ett platt rutnät oanvändbart.
+      // ⚠ `blank: true` krävs: en StringField med `choices` avvisar annars tom
+      // sträng, och eftersom grundyrkena har just "" här kraschade validering av
+      // VARJE befintligt yrke-item på en aktör ("baseProfession: may not be a
+      // blank string"). Fångades bara av liveverifiering — `node --check` ser
+      // inte DataModel-validering.
+      baseProfession: new fields.StringField({
+        required: false,
+        initial: "",
+        blank: true,
+        choices: ["", "krigare", "tjuv", "lonnmordare", "bard"]
+      }),
       professionAbility: new fields.HTMLField({ required: false, initial: "" }),
       skillList: new fields.HTMLField({ required: false, initial: "" }),
       // Strukturerad delmängd av yrkets tillåtna färdigheter — CHARACTERMANCER-

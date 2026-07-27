@@ -19,9 +19,12 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       deleteItem: DoDECharacterSheet.#onDeleteItem,
       toggleEquipped: DoDECharacterSheet.#onToggleEquipped,
       addAbility: DoDECharacterSheet.#onAddAbility,
+      rollAbility: DoDECharacterSheet.#onRollAbility,
       deleteAbility: DoDECharacterSheet.#onDeleteAbility,
       clearRas: DoDECharacterSheet.#onClearRas,
       clearYrke: DoDECharacterSheet.#onClearYrke,
+      toggleWizardUnlock: DoDECharacterSheet.#onToggleWizardUnlock,
+      openWizardEdit: DoDECharacterSheet.#onOpenWizardEdit,
       rollDamage: DoDECharacterSheet.#onRollDamage,
       castSpell: DoDECharacterSheet.#onCastSpell
     },
@@ -58,6 +61,13 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     context.formagor = this.actor.items.filter((i) => i.type === "formaga");
     context.race = this.actor.system.race;
     context.profession = this.actor.system.profession;
+    // Guide-redigering (DESIGN_DECISIONS.md backlog 4c): SL låser upp en
+    // specifik rollperson, spelaren går sedan själv in i guiden, och låset
+    // slår till igen när guiden sparar. `isGM` är Foundrys egen roll >= 3
+    // (Assistent-SL räknas som SL — se §6).
+    context.isGM = game.user.isGM;
+    context.wizardUnlocked = !!this.actor.getFlag(game.system.id, "wizardUnlocked");
+    context.canEditInWizard = context.isGM || context.wizardUnlocked;
     return context;
   }
 
@@ -76,9 +86,87 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (item) item.sheet.render(true);
   }
 
+  /**
+   * Visar en väljare byggd på CONFIG.DODE.primarySkills/secondarySkills + yrkets
+   * professionSkills (item-yrke.mjs) — redan innehavda färdigheter exkluderas.
+   * "Annat"-alternativet faller tillbaka till fritext (samma beteende som innan
+   * denna väljare fanns), så inget tas bort — bara ett riktigt förstahandsval
+   * läggs till. Se CLAUDE.md/DESIGN_DECISIONS.md §3 (Förmågor/färdighetskatalog,
+   * session 2026-07-27).
+   */
   static async #onAddSkill() {
+    // ⚠ Nyckel, inte namn (backlogpost 6a) — se DODE.skillKey i config.mjs.
+    const existingKeys = new Set(
+      this.actor.items
+        .filter((i) => i.type === "fardighet")
+        .map((i) => i.system.skillKey || CONFIG.DODE.skillKey(i.name))
+    );
+    // Yrkets egna färdigheter som redan täcks av primärlistan ska inte listas
+    // dubbelt under "Yrkesfärdighet" (matchar hur rollpersonsskaparen redan
+    // hanterar primär/yrkesfärdighet-överlapp, se #skillPreview i character-wizard.mjs).
+    const professionSkills = (this.actor.system.profession?.system?.professionSkills ?? [])
+      .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
+      .filter((s) => !CONFIG.DODE.primarySkills.some((p) => p.key === s.key));
+
+    const groups = [
+      { tier: "primar", label: game.i18n.localize("DODE.CostTier.Primar"), skills: CONFIG.DODE.primarySkills },
+      { tier: "yrkesfardighet", label: game.i18n.localize("DODE.CostTier.Yrkesfardighet"), skills: professionSkills },
+      { tier: "sekundar", label: game.i18n.localize("DODE.CostTier.Sekundar"), skills: CONFIG.DODE.secondarySkills }
+    ];
+
+    let optionsHtml = "";
+    for (const group of groups) {
+      const available = group.skills
+        .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
+        .filter((s) => !existingKeys.has(s.key));
+      if (!available.length) continue;
+      const opts = available
+        .map((s) => `<option value="${group.tier}|${s.key}|${s.attribute}|${s.name}">${s.name}</option>`)
+        .join("");
+      optionsHtml += `<optgroup label="${group.label}">${opts}</optgroup>`;
+    }
+
+    const content = `
+      <div class="form-group">
+        <label>${game.i18n.localize("DODE.Skill.Pick")}</label>
+        <select name="skillKey">
+          ${optionsHtml}
+          <option value="custom">${game.i18n.localize("DODE.Skill.Custom")}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>${game.i18n.localize("DODE.Skill.CustomName")}</label>
+        <input type="text" name="customName" />
+      </div>
+    `;
+
+    const result = await foundry.applications.api.DialogV2.input({
+      window: { title: game.i18n.localize("DODE.Skill.New") },
+      content
+    });
+    if (!result) return;
+
+    let name, attribute, costTier, key;
+    if (result.skillKey === "custom") {
+      name = (result.customName ?? "").trim();
+      if (!name) return;
+      attribute = "smi";
+      costTier = "sekundar";
+      // Egendefinierade färdigheter får en härledd nyckel — den är då lika
+      // stabil som namnet den skrevs in med, vilket är det bästa som går att
+      // göra för fritext.
+      key = CONFIG.DODE.skillKey(name);
+    } else {
+      const [tier, skillKey, attr, skillName] = String(result.skillKey).split("|");
+      key = skillKey;
+      name = skillName;
+      attribute = attr;
+      costTier = tier;
+    }
+    if (!name || existingKeys.has(key)) return;
+
     await this.actor.createEmbeddedDocuments("Item", [
-      { name: game.i18n.localize("DODE.Skill.New"), type: "fardighet" }
+      { name, type: "fardighet", system: { skillKey: key, attribute, costTier, fv: 1 } }
     ]);
   }
 
@@ -114,12 +202,73 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     await this.actor.update({ "system.specialAbilities": current });
   }
 
+  /**
+   * Mid-adventure-motsvarigheten till wizardens #onRollFormaga — samma tabell
+   * (CONFIG.DODE.specialAbilitiesTable, RP s.25-27), samma 2T20+BP-formel, men
+   * lägger till en HELT NY rad direkt istället för att fylla i en befintlig
+   * tom slot (den här sheeten har inga fasta "slots" kopplade till nivå som
+   * wizardens formagor-steg har). Fritextfälten förblir redigerbara efteråt.
+   */
+  static async #onRollAbility() {
+    const result = await foundry.applications.api.DialogV2.input({
+      window: { title: game.i18n.localize("DODE.Ability.Roll") },
+      content: `
+        <div class="form-group">
+          <label>${game.i18n.localize("DODE.Ability.BpSpent")}</label>
+          <input type="number" name="bpSpent" min="1" max="40" value="1" />
+        </div>
+      `
+    });
+    if (!result) return;
+
+    const bpSpent = Math.max(1, Math.min(40, Number(result.bpSpent) || 1));
+    const roll = await new Roll(`2d20+${bpSpent}`).evaluate();
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: game.i18n.localize("DODE.Ability.Roll")
+    });
+    const entry = CONFIG.DODE.rollSpecialAbility(roll.total);
+
+    const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
+    current.push({
+      name: entry?.name || `Förmåga (${roll.total})`,
+      source: "bas", // se schemakommentaren i actor-character.mjs — "bas" = grundboken (RP s.25-27)
+      description: entry?.description ?? ""
+    });
+    await this.actor.update({ "system.specialAbilities": current });
+  }
+
   static async #onDeleteAbility(event, target) {
     const index = Number(target.closest("[data-index]")?.dataset.index);
     if (Number.isNaN(index)) return;
     const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
     current.splice(index, 1);
     await this.actor.update({ "system.specialAbilities": current });
+  }
+
+  /**
+   * SL låser upp/låser rollpersonen för guide-redigering. Engångsnyckel:
+   * guiden nollställer flaggan när den sparar (#applyToActor), så varje
+   * upplåsning motsvarar en överenskommen ändring.
+   */
+  static async #onToggleWizardUnlock() {
+    if (!game.user.isGM) return;
+    const current = !!this.actor.getFlag(game.system.id, "wizardUnlocked");
+    await this.actor.setFlag(game.system.id, "wizardUnlocked", !current);
+    ui.notifications.info(
+      current
+        ? `${this.actor.name} är låst för guide-redigering igen.`
+        : `${this.actor.name} är upplåst — spelaren kan nu öppna guiden.`
+    );
+  }
+
+  static #onOpenWizardEdit() {
+    const unlocked = !!this.actor.getFlag(game.system.id, "wizardUnlocked");
+    if (!game.user.isGM && !unlocked) {
+      ui.notifications.warn("Rollpersonen är inte upplåst för redigering — be SL låsa upp den.");
+      return;
+    }
+    game.dode.openCharacterWizard(this.actor);
   }
 
   static async #onClearRas() {

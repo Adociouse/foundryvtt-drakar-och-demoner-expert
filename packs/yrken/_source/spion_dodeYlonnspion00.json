@@ -1,0 +1,35 @@
+{
+  "name": "Spion",
+  "type": "yrke",
+  "system": {
+    "requirements": "SMI 14, INT 14, PSY 14, KAR 14",
+    "baseProfession": "lonnmordare",
+    "professionAbility": "<p><strong>Lönnmördarens grundförmåga (bakhugg ×2/×4)</strong> plus:</p><p>Spendera 5 PSY → SL avslöjar information om en vald person.</p><p><em>Källa: T&L s.11</em></p>",
+    "skillList": "",
+    "professionSkills": [],
+    "description": "<p>Specialisering av grundyrket Lonnmordare (T&L s.11).</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeYlonnspion00",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeYlonnspion00"
+}

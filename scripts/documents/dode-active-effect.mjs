@@ -7,18 +7,27 @@ export default class DoDeActiveEffect extends ActiveEffect {
   // applicable effect (including item-transferred ones), so it's the correct override point.
   /** @override */
   shouldApplyChange(change, options = {}) {
+    if (!DoDeActiveEffect.isGateOpen(this)) return false;
+    return super.shouldApplyChange(change, options);
+  }
+
+  // Delad grindlogik mellan shouldApplyChange (faktisk applicering) och
+  // prepareDerivedData()s bonusSources-uppslag (tooltip-underlag i character-sheet.hbs)
+  // — de två får aldrig komma ur synk, annars visar tooltipen källor som i
+  // praktiken inte bidrar (t.ex. ett ej utrustat vapen).
+  static isGateOpen(effect) {
     // Utrustningseffekter (vapen/rustning) gäller bara medan föremålet är utrustat.
     // Transfer-effekter på ett Item behåller Itemet som `parent` i Foundry v11+
     // (de kopieras inte till aktören), så vi kan läsa källföremålets `equipped`-flagga
     // direkt. Källor utan `equipped` (förmågor, raser, ålders-/scen-/besvärjelse-AE:er)
     // saknar fältet -> `undefined !== false` -> effekten appliceras som vanligt.
-    if (this.parent?.system?.equipped === false) return false;
+    if (effect.parent?.system?.equipped === false) return false;
 
-    const condition = this.getFlag(game.system.id, "condition");
+    const condition = effect.getFlag(game.system.id, "condition");
     if (condition && !DoDeActiveEffect.evaluateCondition(condition)) {
       return false;
     }
-    return super.shouldApplyChange(change, options);
+    return true;
   }
 
   // TODO: Implement real condition evaluation (scene context, token state, etc.)

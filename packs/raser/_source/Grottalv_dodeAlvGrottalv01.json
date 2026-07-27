@@ -1,0 +1,101 @@
+{
+  "name": "Grottalv",
+  "type": "ras",
+  "system": {
+    "bpCost": 25,
+    "attributeMods": {
+      "sty": -1,
+      "fys": 1,
+      "smi": 2,
+      "int": 3,
+      "psy": 1,
+      "kar": 2
+    },
+    "stoRange": {
+      "min": 7,
+      "max": 17,
+      "normal": 12
+    },
+    "automaticAbilities": "<p>Underjordiskt alvsläkte. Enligt Alver s.23 kan en grottalv slå fram de släktesegna särskilda förmågorna <em>Metallkänsla</em> (identifierar metaller på syn, lukt och känsel) och <em>Mörkerseende</em> (ser i totalt kolmörker, till skillnad från övriga alver).</p><p>Banemansförmågan gäller för grottalver vanligtvis dvärgar (Alver s.23).</p>",
+    "description": "<p>Grottalverna lever i naturliga grottsystem under jorden och är skickliga konsthantverkare med ett ofelbart orienteringssinne under jord.</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeAlvGrottalv0",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [
+    {
+      "name": "Rasmodifikationer (Grottalv)",
+      "img": "icons/svg/aura.svg",
+      "transfer": true,
+      "disabled": false,
+      "changes": [
+        {
+          "key": "system.attributes.sty.bonus",
+          "mode": 2,
+          "value": "-1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.fys.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.smi.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.int.bonus",
+          "mode": 2,
+          "value": "3",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.psy.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.kar.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        }
+      ],
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "source": "race"
+        }
+      },
+      "_id": "dodeAlvGrottalae",
+      "_key": "!items.effects!dodeAlvGrottalv0.dodeAlvGrottalae"
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "raceGroup": "alvslakte"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeAlvGrottalv0"
+}

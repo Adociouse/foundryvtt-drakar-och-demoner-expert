@@ -64,7 +64,14 @@
     },
     "Skill": {
       "New": "Ny färdighet",
-      "Group": "Grupp"
+      "Group": "Grupp",
+      "Pick": "Välj färdighet",
+      "Custom": "Annat (skriv eget namn)",
+      "CustomName": "Eget namn (om \"Annat\" valt)"
+    },
+    "Ability": {
+      "Roll": "Slå fram särskild förmåga",
+      "BpSpent": "BP att spendera (1-40)"
     },
     "Derived": {
       "KP": "Kroppspoäng",

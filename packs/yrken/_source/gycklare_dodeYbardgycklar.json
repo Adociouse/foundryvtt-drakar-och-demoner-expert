@@ -1,0 +1,35 @@
+{
+  "name": "Gycklare",
+  "type": "yrke",
+  "system": {
+    "requirements": "SMI 14, KAR 16",
+    "baseProfession": "bard",
+    "professionAbility": "<p><strong>Bardens grundförmåga (sång/spel: KAR+5 för åhörare, +5 CL socialt i 1 timme)</strong> plus:</p><p>Spendera 1 PSY + en gyckelkonst → motståndaren blir häpen i <strong>1 SR</strong>.</p><p><em>Källa: T&L s.8</em></p>",
+    "skillList": "",
+    "professionSkills": [],
+    "description": "<p>Specialisering av grundyrket Bard (T&L s.8).</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeYbardgycklar",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeYbardgycklar"
+}

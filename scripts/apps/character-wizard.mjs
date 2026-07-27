@@ -1,12 +1,20 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
-const STEPS = ["kon", "niva", "grunder", "ras", "yrke", "attribut", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
+const ALL_STEPS = ["kon", "niva", "grunder", "ras", "yrke", "magiskola", "attribut", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
+// Steg som hoppas över i redigeringsläge (befintlig rollperson). Utrustning är
+// spelläge så fort rollpersonen finns — guiden kan inte skilja ett köp vid
+// skapandet från ett fynd i en grotta, så att köra butiken igen skulle antingen
+// dubblera utrustning eller radera loot. Köp efter skapandet hör hemma i en
+// handlar-/butiksaktör istället, se DESIGN_DECISIONS.md §7.2 + backlogposten om
+// butiksarkitektur.
+const EDIT_MODE_SKIPPED_STEPS = ["utrustning"];
 const STEP_LABELS = {
   kon: "Kön",
   niva: "Nivå",
   grunder: "Namn",
   ras: "Ras",
   yrke: "Yrke",
+  magiskola: "Magiskola",
   attribut: "Grundegenskaper",
   formagor: "Särskilda förmågor",
   socialt: "Socialt stånd",
@@ -121,13 +129,15 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       selectNiva: DoDECharacterWizard.#onSelectNiva,
       selectRace: DoDECharacterWizard.#onSelectRace,
       selectProfession: DoDECharacterWizard.#onSelectProfession,
+      selectMagicSchool: DoDECharacterWizard.#onSelectMagicSchool,
       rollSocialStanding: DoDECharacterWizard.#onRollSocialStanding,
       rollStartCapital: DoDECharacterWizard.#onRollStartCapital,
       buySkillFv: DoDECharacterWizard.#onBuySkillFv,
       sellSkillFv: DoDECharacterWizard.#onSellSkillFv,
       buyEquipment: DoDECharacterWizard.#onBuyEquipment,
       sellEquipment: DoDECharacterWizard.#onSellEquipment,
-      createCharacter: DoDECharacterWizard.#onCreateCharacter
+      rollFormaga: DoDECharacterWizard.#onRollFormaga,
+      createCharacter: DoDECharacterWizard.#onSubmitWizard
     },
     form: { handler: () => {}, submitOnChange: true, closeOnSubmit: false }
   };
@@ -135,6 +145,53 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   static PARTS = {
     form: { template: "systems/drakar-och-demoner-expert/templates/apps/character-wizard.hbs" }
   };
+
+  /**
+   * @param {object} [options]
+   * @param {Actor} [options.actor]  Befintlig rollperson att redigera. Utelämnas
+   *   vid nyskapande — `this.actor === null` är alltså skapaläget.
+   */
+  constructor(options = {}) {
+    super(options);
+    this.actor = options.actor ?? null;
+    if (this.actor) this.#loadStateFromActor(this.actor);
+  }
+
+  get isEditMode() {
+    return !!this.actor;
+  }
+
+  /**
+   * Stegen som faktiskt visas. Två filter:
+   *  - EDIT_MODE_SKIPPED_STEPS i redigeringsläge (utrustning).
+   *  - `magiskola` bara för magikeryrken — en krigare ska inte tvingas igenom
+   *    ett tomt magiskolesteg. Se #isMagicUser.
+   */
+  get steps() {
+    let steps = ALL_STEPS;
+    if (this.isEditMode) steps = steps.filter((s) => !EDIT_MODE_SKIPPED_STEPS.includes(s));
+    if (!this.#isMagicUser) steps = steps.filter((s) => s !== "magiskola");
+    return steps;
+  }
+
+  /**
+   * Magikeryrke? Avgörs på yrkets namn eftersom magiskoletillhörighet inte är
+   * ett schemafält på `yrke` — Magiker är det enda grundyrket med magiskolor
+   * (MAGI.md), och specialiseringar som Paladin/Fingerkonstnär får sin magi via
+   * sin yrkesförmåga, inte via en egen skola.
+   * ⚠ Namnbaserat, och därmed samma lokaliseringsrisk som backlogpost 6a
+   * beskriver — men här är namnet det enda vi har tills `yrke` får ett eget
+   * fält. Noterat i backloggen.
+   */
+  get #isMagicUser() {
+    return /magiker/i.test(this.#selectedProfessionName ?? "");
+  }
+
+  #selectedProfessionName = "";
+
+  get title() {
+    return this.isEditMode ? `Redigera: ${this.actor.name}` : "Ny rollperson";
+  }
 
   stepIndex = 0;
 
@@ -146,6 +203,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     attributes: { sty: null, sto: null, fys: null, smi: null, int: null, psy: null, kar: null },
     raceUuid: null,
     professionUuid: null,
+    // Vald magiskola (nyckel ur DODE.magicSchoolSkills) — materialiseras som en
+    // vanlig `fardighet` vid skapandet, inte som ett eget fält på rollpersonen.
+    magicSchoolKey: null,
     // BP-ledger — se klassdokblocket. spentSocialt/spentKapital lever INTE här —
     // de härleds från socialStanding.bpSpent/startCapital.bpSpent nedan (samma
     // enda-källa-princip som DataModellens prepareDerivedData använder).
@@ -174,16 +234,43 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     equipment: {}
   };
 
+  /**
+   * Slår upp alla dokument för en nyckel i CONFIG.DODE.contentPacks (t.ex.
+   * "races"), sammanslaget över samtliga registrerade packs — så att en
+   * kampanjmodul kan bidra med eget innehåll utan systemändring. Se
+   * config.mjs's kommentar vid DODE.contentPacks och DESIGN_DECISIONS.md §7.5.
+   *
+   * Packs som saknas (avinstallerad modul) eller som den aktuella användaren
+   * inte får läsa hoppas tyst över — ett dolt pack ska degradera guiden, inte
+   * krascha den.
+   */
+  static async #resolveContentPacks(key) {
+    const packIds = CONFIG.DODE.contentPacks?.[key] ?? [];
+    const docs = [];
+    for (const packId of packIds) {
+      const pack = game.packs.get(packId);
+      if (!pack) continue;
+      if (!pack.testUserPermission(game.user, "OBSERVER")) continue;
+      docs.push(...(await pack.getDocuments()));
+    }
+    return docs;
+  }
+
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const stepId = STEPS[this.stepIndex];
+    const steps = this.steps;
+    const stepId = steps[this.stepIndex];
 
-    const racePack = game.packs.get("drakar-och-demoner-expert.raser");
-    const professionPack = game.packs.get("drakar-och-demoner-expert.yrken");
-    const equipmentPack = game.packs.get("drakar-och-demoner-expert.vapen-utrustning");
-    const races = racePack ? await racePack.getDocuments() : [];
-    const professions = professionPack ? await professionPack.getDocuments() : [];
-    const equipmentDocs = equipmentPack ? await equipmentPack.getDocuments() : [];
+    const races = await DoDECharacterWizard.#resolveContentPacks("races");
+    const professions = await DoDECharacterWizard.#resolveContentPacks("professions");
+    // Utrustningssteget filtrerar dessutom bort allt som bär ActiveEffects —
+    // se #resolveContentPacks och DESIGN_DECISIONS.md §7.5.
+    const equipmentDocs = (await DoDECharacterWizard.#resolveContentPacks("startingEquipment"))
+      .filter((doc) => doc.effects.size === 0);
+
+    // Redigeringsläge: koppla ihop embeddad ras/yrke med kompendiedokumentet
+    // innan något annat räknas ut — annars beräknas baschansen utan rasbonus.
+    this.#resolveMissingSources(races, professions);
 
     const selectedRace = this.state.raceUuid ? races.find((r) => r.uuid === this.state.raceUuid) : null;
     const selectedProfession = this.state.professionUuid
@@ -191,16 +278,22 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       : null;
 
     const effectiveAttributes = this.#effectiveAttributes(selectedRace, this.state.ageCategory);
+    // Redigeringsläge: färdighetsladdningen behöver BC, som i sin tur behöver
+    // det uppslagna rasdokumentet — därför först här, inte i #loadStateFromActor.
+    this.#loadBoughtSkillFv(effectiveAttributes);
     const requirementCheck = selectedProfession
       ? DoDECharacterWizard.#checkRequirements(selectedProfession.system.requirements, effectiveAttributes)
       : null;
 
     context.stepId = stepId;
     context.stepIndex = this.stepIndex;
-    context.stepCount = STEPS.length;
+    context.stepCount = steps.length;
     context.stepLabel = STEP_LABELS[stepId];
     context.isFirstStep = this.stepIndex === 0;
-    context.isLastStep = this.stepIndex === STEPS.length - 1;
+    context.isLastStep = this.stepIndex === steps.length - 1;
+    // Redigeringsläge: ras/yrke visas men går inte att byta (se klassdokblocket
+    // och DESIGN_DECISIONS.md backlog 4c) — byte sker via drag-släpp på arket.
+    context.isEditMode = this.isEditMode;
     context.showKon = stepId === "kon";
     context.showNiva = stepId === "niva";
     context.showGrunder = stepId === "grunder";
@@ -215,6 +308,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.showSocialt = stepId === "socialt";
     context.showKapital = stepId === "kapital";
     context.showGranska = stepId === "granska";
+    context.showMagiskola = stepId === "magiskola";
+    context.magicSchools = CONFIG.DODE.magicSchoolSkills.map((s) => ({
+      key: s.key,
+      label: game.i18n.localize(s.labelKey),
+      selected: s.key === this.state.magicSchoolKey
+    }));
     context.state = this.state;
     context.konOptions = KON_OPTIONS.map((option) => ({
       ...option,
@@ -233,11 +332,43 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.bp = this.#bpLedger(socialResult, capitalResult);
     const epBudget = this.#epResult(context.bp);
     context.races = races.map((r) => ({
-      uuid: r.uuid, name: r.name, img: this.#genderedImg(r), system: r.system, selected: r.uuid === this.state.raceUuid
+      uuid: r.uuid, name: r.name, img: this.#genderedImg(r), system: r.system,
+      // Gruppmarkör från kompendiet, se grupperingen nedan.
+      raceGroup: r.getFlag(game.system.id, "raceGroup") ?? "",
+      selected: r.uuid === this.state.raceUuid
     }));
     context.professions = professions.map((p) => ({
       uuid: p.uuid, name: p.name, img: this.#genderedImg(p), system: p.system, selected: p.uuid === this.state.professionUuid
     }));
+    // Gruppering — utan den blir 13 ras- och 36 yrkeskort ett oöverblickbart
+    // platt rutnät.
+    //
+    // ⚠ Grupptillhörighet läses ur en FLAGGA på kompendieitemet, inte ur namnet.
+    // Ett första försök matchade på namn (/alv$/) och drog med "Halvalv" — som
+    // är en grundras från RP, inte ett alvsläkte ur Alver-supplementet. Samma
+    // lärdom som backlogpost 6a: namn är inte identitet. Flaggan gör dessutom
+    // att en kampanjmodul kan lägga sina egna raser i rätt grupp.
+    const isElfLineage = (r) => r.raceGroup === "alvslakte";
+    context.raceGroups = [
+      { label: "Grundraser", races: context.races.filter((r) => !isElfLineage(r)) },
+      { label: "Alvsläkten (Alver s.22)", races: context.races.filter(isElfLineage) }
+    ].filter((g) => g.races.length);
+    const PROFESSION_GROUPS = [
+      ["", "Grundyrken"],
+      ["krigare", "Krigarspecialiseringar (KH s.4-9)"],
+      ["tjuv", "Tjuvspecialiseringar (T&L s.12-16)"],
+      ["lonnmordare", "Lönnmördarspecialiseringar (T&L s.9-12)"],
+      ["bard", "Bardspecialiseringar (T&L s.7-9)"]
+    ];
+    context.professionGroups = PROFESSION_GROUPS
+      .map(([base, label]) => ({
+        label,
+        professions: context.professions.filter((p) => (p.system.baseProfession ?? "") === base)
+      }))
+      .filter((g) => g.professions.length);
+    // Speglas till ett fält eftersom `steps` (som avgör om magiskolesteget
+    // visas) är en synkron getter utan tillgång till de async-uppslagna yrkena.
+    this.#selectedProfessionName = selectedProfession?.name ?? "";
     context.selectedRace = selectedRace;
     context.selectedProfession = selectedProfession;
     context.ageCategories = AGE_CATEGORIES.map((c) => ({ value: c, selected: c === this.state.ageCategory }));
@@ -275,6 +406,159 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #genderedImg(doc) {
     const variant = this.state.kon === "kvinna" ? doc.system?.imgKvinna : doc.system?.imgMan;
     return variant || doc.img;
+  }
+
+  /**
+   * Fyller `state` från en befintlig rollperson (redigeringsläge). Motsatsen
+   * till #onCreateCharacter — allt som skrivs där måste kunna läsas tillbaka
+   * här, annars nollställs fältet tyst vid nästa sparning.
+   *
+   * ⚠ Utrustning laddas medvetet INTE (steget hoppas över, se
+   * EDIT_MODE_SKIPPED_STEPS). `state.equipment` förblir tomt, och
+   * #applyToActor rör aldrig aktörens föremål.
+   */
+  #loadStateFromActor(actor) {
+    const sys = actor.system;
+    this.state.name = actor.name ?? "";
+    this.state.kon = sys.kon ?? "man";
+    this.state.niva = sys.niva ?? "vanlig";
+    this.state.ageCategory = sys.alder || "Mogen";
+    this.state.lifeGoal = sys.lifeGoal ?? "";
+    this.state.lifeGoalCustom = "";
+    for (const key of Object.keys(this.state.attributes)) {
+      // BAS-värdet, inte total — guiden lägger själv på ras-/åldersmod i sin
+      // förhandsvisning (#effectiveAttributes). Att läsa `total` här skulle
+      // baka in bonusen i basen och dubbla den vid varje sparning.
+      this.state.attributes[key] = sys.attributes?.[key]?.value ?? null;
+    }
+    this.state.socialStanding = { roll: sys.socialStanding?.roll ?? 0, bpSpent: sys.socialStanding?.bpSpent ?? 0 };
+    this.state.startCapital = { roll: sys.startCapital?.roll ?? 0, bpSpent: sys.startCapital?.bpSpent ?? 0 };
+    this.state.bp = {
+      spentRas: sys.bp?.spentRas ?? 0,
+      spentFormagor: sys.bp?.spentFormagor ?? 0,
+      spentFardigheter: sys.bp?.spentFardigheter ?? 0
+    };
+    this.state.specialAbilities = (sys.specialAbilities ?? []).map((a) => ({
+      name: a.name ?? "", source: a.source ?? "", description: a.description ?? "",
+      bpSpent: 1, rollResult: null
+    }));
+
+    // Ras/yrke: vi sätter en egen `flags.<sysid>.sourceUuid` när items skapas
+    // (se #onCreateCharacter). ⚠ `_stats.compendiumSource` DUGER INTE ensamt —
+    // Foundry fyller det bara vid riktig kompendieimport, inte när vi skapar ur
+    // `toObject()`, så det är `null` på allt guiden själv byggt. Det ledde till
+    // att redigeringsläget tappade ras/yrke helt (och därmed räknade baschansen
+    // utan rasbonus). Sista utvägen är namnmatchning mot registret, vilket görs
+    // asynkront i _prepareContext eftersom det kräver uppslagna packs.
+    const raceItem = actor.items.find((i) => i.type === "ras");
+    const yrkeItem = actor.items.find((i) => i.type === "yrke");
+    this.state.raceUuid = raceItem?.getFlag(game.system.id, "sourceUuid")
+      ?? raceItem?._stats?.compendiumSource ?? null;
+    this.state.professionUuid = yrkeItem?.getFlag(game.system.id, "sourceUuid")
+      ?? yrkeItem?._stats?.compendiumSource ?? null;
+    this.#pendingSourceResolve = {
+      race: this.state.raceUuid ? null : raceItem?.name ?? null,
+      profession: this.state.professionUuid ? null : yrkeItem?.name ?? null
+    };
+
+    // Färdigheter: `state.fardigheter[namn]` är antal FV KÖPTA ÖVER baschansen.
+    // Vi känner inte BC förrän attribut/ras är kända, så räkna om det här på
+    // samma sätt som #skillPreview gör, och klampa till >= 0 (BC kan ha stigit
+    // sedan skapandet, t.ex. via en rasändring på arket).
+    this.state.fardigheter = {};
+    this.#pendingSkillLoad = true;
+  }
+
+  /**
+   * Andra halvan av färdighetsladdningen — kan först köras när ras-dokumentet
+   * är uppslaget (async) och BC därmed går att räkna ut. Anropas från
+   * _prepareContext första gången redigeringsläget renderas.
+   */
+  #loadBoughtSkillFv(effectiveAttributes) {
+    if (!this.#pendingSkillLoad || !this.actor) return;
+    const bc = (attribute) => {
+      const total = effectiveAttributes[attribute]?.total;
+      return total == null ? 0 : CONFIG.DODE.attributeToGroup(total);
+    };
+    for (const item of this.actor.items) {
+      if (item.type !== "fardighet") continue;
+      // Bara guidens egna kategorier laddas — "sekundar" (tillagda i spel,
+      // via färdighetsväljaren eller av SL) ligger utanför guidens steg och
+      // ska varken visas eller skrivas över. Se reconciliation-regeln i
+      // DESIGN_DECISIONS.md backlog 4c.
+      if (item.system.costTier === "sekundar") continue;
+      // Magiskolan är en färdighet som skapades av magiskolesteget, inte av
+      // #skillPreview — läs tillbaka valet så att steget visar rätt skola i
+      // redigeringsläge, och hoppa över den i FV-laddningen nedan (den ingår
+      // inte i skillPreview och skulle annars aldrig matcha).
+      const schoolHit = CONFIG.DODE.magicSchoolSkills.find((s) => s.key === item.system.skillKey);
+      if (schoolHit) {
+        this.state.magicSchoolKey = schoolHit.key;
+        continue;
+      }
+      const baseFv = bc(item.system.attribute);
+      // Nyckel, inte namn (backlogpost 6a). Äldre färdigheter saknar
+      // `skillKey` — härled den ur namnet så att de fortfarande matchar.
+      const key = item.system.skillKey || CONFIG.DODE.skillKey(item.name);
+      this.state.fardigheter[key] = Math.max(0, (item.system.fv ?? 0) - baseFv);
+    }
+    this.#pendingSkillLoad = false;
+  }
+
+  #pendingSkillLoad = false;
+  #pendingSourceResolve = null;
+
+  /**
+   * Sista utvägen för att koppla en redan embeddad ras/yrke till sitt
+   * kompendiedokument: matcha på namn. Körs bara när varken vår egen
+   * `sourceUuid`-flagga eller `_stats.compendiumSource` finns — alltså för
+   * rollpersoner skapade innan flaggan infördes.
+   */
+  #resolveMissingSources(races, professions) {
+    if (!this.#pendingSourceResolve) return;
+    const { race, profession } = this.#pendingSourceResolve;
+    if (race && !this.state.raceUuid) {
+      this.state.raceUuid = races.find((r) => r.name === race)?.uuid ?? null;
+    }
+    if (profession && !this.state.professionUuid) {
+      this.state.professionUuid = professions.find((p) => p.name === profession)?.uuid ?? null;
+    }
+    this.#pendingSourceResolve = null;
+  }
+
+  /**
+   * Standardvärden för rollpersonens porträtt + prototyptoken. Guiden satte
+   * tidigare varken `img` eller `prototypeToken` alls, så varje skapad
+   * rollperson fick Foundrys grå standardikon och en olänkad token utan syn.
+   *
+   * `actorLink: true` är det viktigaste fältet: för spelarrollpersoner ska
+   * token och ark vara samma dokument, annars blir varje utplacerad token en
+   * fristående kopia vars KP-ändringar inte syns på arket.
+   *
+   * bar1/bar2 sätts INTE här — de ärver `primaryTokenAttribute`/
+   * `secondaryTokenAttribute` från system.json (hp respektive resources.psy),
+   * vilket gäller alla aktörer och inte bara guidens.
+   *
+   * Porträttet ärvs från ras-/yrkesbilden (könsvarianten, se #genderedImg) —
+   * yrket först eftersom det är mer utmärkande än rasen.
+   */
+  #tokenDefaults(raceDoc, professionDoc) {
+    const portrait = professionDoc
+      ? this.#genderedImg(professionDoc)
+      : raceDoc
+        ? this.#genderedImg(raceDoc)
+        : null;
+    const name = this.state.name || "Ny rollperson";
+    const prototypeToken = {
+      name,
+      actorLink: true,
+      disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+      displayName: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+      displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+      sight: { enabled: true }
+    };
+    if (portrait) prototypeToken.texture = { src: portrait };
+    return { img: portrait, prototypeToken };
   }
 
   /**
@@ -377,18 +661,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       const total = effectiveAttributes[attribute]?.total;
       return total == null ? 0 : CONFIG.DODE.attributeToGroup(total);
     };
-    const buildEntry = (name, attribute, costTier) => {
+    // ⚠ All matchning går på `skillKey`, aldrig på visningsnamnet — se
+    // DODE.skillKey i config.mjs och backlogpost 6a. Yrkens `professionSkills`
+    // (kompendiedata) saknar ännu explicita nycklar, så de härleds ur namnet;
+    // konfigtabellernas nycklar är däremot frysta och överlever en omdöpning.
+    const buildEntry = (key, name, attribute, costTier) => {
       const baseFv = bc(attribute);
-      const bought = this.state.fardigheter[name] ?? 0;
+      const bought = this.state.fardigheter[key] ?? 0;
       const fv = baseFv + bought;
       const cost = CONFIG.DODE.skillCost(costTier, baseFv, fv);
-      return { name, attribute, costTier, baseFv, fv, cost };
+      return { key, name, attribute, costTier, baseFv, fv, cost };
     };
-    const primaryNames = new Set(CONFIG.DODE.primarySkills.map((s) => s.name.toLowerCase()));
-    const primary = CONFIG.DODE.primarySkills.map((s) => buildEntry(s.name, s.attribute, "primar"));
+    const primaryKeys = new Set(CONFIG.DODE.primarySkills.map((s) => s.key));
+    const primary = CONFIG.DODE.primarySkills.map((s) => buildEntry(s.key, s.name, s.attribute, "primar"));
     const professionSkills = (selectedProfession?.system?.professionSkills ?? [])
-      .filter((s) => !primaryNames.has(s.name.toLowerCase()))
-      .map((s) => buildEntry(s.name, s.attribute, "yrkesfardighet"));
+      .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
+      .filter((s) => !primaryKeys.has(s.key))
+      .map((s) => buildEntry(s.key, s.name, s.attribute, "yrkesfardighet"));
     const all = [...primary, ...professionSkills];
     const epSpent = all.reduce((sum, entry) => sum + entry.cost, 0);
     const epRemaining = (epBudget?.max ?? 0) - epSpent;
@@ -415,7 +704,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #specialAbilitySlots() {
     const n = CONFIG.DODE.abilityRollsByNiva[this.state.niva] ?? 1;
     const slots = this.state.specialAbilities;
-    while (slots.length < n) slots.push({ name: "", source: "", description: "" });
+    // bpSpent/rollResult är bara wizard-scratch för slå fram-knappen (se
+    // #onRollFormaga) — actor.system.specialAbilities schemat (SchemaField)
+    // har bara name/source/description, så extra nycklar rensas automatiskt
+    // bort av Foundry vid #onCreateCharacter, ingen manuell strippning behövs.
+    while (slots.length < n) slots.push({ name: "", source: "", description: "", bpSpent: 1, rollResult: null });
     if (slots.length > n) slots.length = n;
     return slots;
   }
@@ -476,6 +769,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       case "alder": return !!this.state.ageCategory;
       case "attribut": return Object.values(this.state.attributes).every((v) => v !== null);
       case "yrke": return !!this.state.professionUuid;
+      case "magiskola": return !!this.state.magicSchoolKey;
       case "socialt": return this.state.socialStanding.roll > 0;
       case "kapital": return this.state.startCapital.roll > 0;
       default: return true;
@@ -529,11 +823,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   static #onNextStep() {
-    if (!this.#canAdvance(STEPS[this.stepIndex])) {
+    const steps = this.steps;
+    if (!this.#canAdvance(steps[this.stepIndex])) {
       ui.notifications.warn("Fyll i det här steget innan du går vidare.");
       return;
     }
-    this.stepIndex = Math.min(this.stepIndex + 1, STEPS.length - 1);
+    this.stepIndex = Math.min(this.stepIndex + 1, steps.length - 1);
     this.render();
   }
 
@@ -582,6 +877,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
+  static #onSelectMagicSchool(event, target) {
+    this.state.magicSchoolKey = target.closest("[data-school]")?.dataset.school ?? null;
+    this.render();
+  }
+
   static async #onRollSocialStanding() {
     const roll = await new Roll("2d6").evaluate();
     this.state.socialStanding.roll = roll.total;
@@ -595,6 +895,38 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   /**
+   * Slår fram en särskild förmåga — RP s.25-27, CONFIG.DODE.specialAbilitiesTable
+   * (portad session 2026-07-27, se DESIGN_DECISIONS.md §3). "Du kan spendera
+   * valfritt antal BP (minst 1, max +40). Slå 2T20 och addera spenderade BP."
+   * BP-insatsen läses direkt från radens eget input (inte state-bunden via en
+   * change-listener som övriga BP-fält) eftersom slaget bara ska ske vid
+   * knapptryck, inte vid varje redigering av insatsen.
+   */
+  static async #onRollFormaga(event, target) {
+    const idx = Number(target.dataset.index);
+    const slot = this.state.specialAbilities[idx];
+    if (!slot) return;
+    const bpInput = this.element.querySelector(`[data-ability-bp-index="${idx}"]`);
+    const bpSpent = Math.max(1, Math.min(40, Number(bpInput?.value) || 1));
+    const roll = await new Roll(`2d20+${bpSpent}`).evaluate();
+    const result = CONFIG.DODE.rollSpecialAbility(roll.total);
+
+    slot.bpSpent = bpSpent;
+    slot.rollResult = roll.total;
+    if (result) {
+      slot.name = result.name || `Förmåga (${roll.total})`;
+      slot.description = result.description;
+      slot.source = "bas"; // se schemakommentaren i actor-character.mjs — "bas" = grundboken (RP s.25-27)
+    }
+
+    this.state.bp.spentFormagor = this.state.specialAbilities.reduce(
+      (sum, s) => sum + (s.bpSpent || 0),
+      0
+    );
+    this.render();
+  }
+
+  /**
    * Köper +1 FV på en färdighet med EP — RP s.30. Knappen är redan `disabled`
    * i mallen när `skill.canIncrease` är falskt (inte nog EP kvar, eller
    * `maxStartFv` nådd), men `data-can-increase` speglas hit som en andra
@@ -604,22 +936,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    */
   static #onBuySkillFv(event, target) {
     const el = target.closest("[data-skill]");
-    const name = el?.dataset.skill;
-    if (!name || el.dataset.canIncrease !== "true") {
+    // `data-skill` bär färdighetens NYCKEL (skillKey), inte visningsnamnet.
+    const key = el?.dataset.skill;
+    if (!key || el.dataset.canIncrease !== "true") {
       ui.notifications.warn("Inte tillräckligt med EP kvar, eller max-FV vid skapande redan nådd.");
       return;
     }
-    this.state.fardigheter[name] = (this.state.fardigheter[name] ?? 0) + 1;
+    this.state.fardigheter[key] = (this.state.fardigheter[key] ?? 0) + 1;
     this.render();
   }
 
   /** Ångrar ett EP-köp på en färdighet (återbetalar EP:t implicit via omräkningen i #skillPreview). */
   static #onSellSkillFv(event, target) {
-    const name = target.closest("[data-skill]")?.dataset.skill;
-    if (!name) return;
-    const current = this.state.fardigheter[name] ?? 0;
+    const key = target.closest("[data-skill]")?.dataset.skill;
+    if (!key) return;
+    const current = this.state.fardigheter[key] ?? 0;
     if (current <= 0) return;
-    this.state.fardigheter[name] = current - 1;
+    this.state.fardigheter[key] = current - 1;
     this.render();
   }
 
@@ -645,6 +978,111 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
+  /**
+   * Guidens slutknapp. Skapaläge → #onCreateCharacter (oförändrad).
+   * Redigeringsläge → #applyToActor, som ALDRIG skapar en ny aktör och aldrig
+   * skapar om ras/yrke/utrustning (se klassdokblocket).
+   */
+  static async #onSubmitWizard() {
+    if (this.isEditMode) return DoDECharacterWizard.#applyToActor.call(this);
+    return DoDECharacterWizard.#onCreateCharacter.call(this);
+  }
+
+  /**
+   * Sparar redigeringsläget tillbaka till en BEFINTLIG rollperson.
+   *
+   * ⚠ Kärnan i hela funktionen: ingenting får dubbleras. Att köra skaparvägen
+   * igen hade gett en ANDRA ras-item — och eftersom rasbonusen är en
+   * `transfer:true`-AE på det itemet hade rasbonusen applicerats två gånger
+   * (exakt buggklassen som fixades i session 8). Därför:
+   *   - Ras/yrke rörs inte alls (går inte att byta i redigeringsläge).
+   *   - Utrustning rörs inte alls (steget hoppas över).
+   *   - Ålders-AE:n rörs inte här — `updateActor`-hooken i dode.mjs sköter den
+   *     automatiskt när `system.alder` ändras.
+   *   - Färdigheter matchas på namn (skiftlägesokänsligt): uppdatera om de
+   *     finns, skapa om de saknas, ta ALDRIG bort. "sekundar"-färdigheter
+   *     (tillagda i spel) ligger utanför guidens steg och rörs aldrig.
+   */
+  static async #applyToActor() {
+    const actor = this.actor;
+    const raceDoc = this.state.raceUuid ? await fromUuid(this.state.raceUuid) : null;
+    const professionDoc = this.state.professionUuid ? await fromUuid(this.state.professionUuid) : null;
+    const effectiveAttributes = this.#effectiveAttributes(raceDoc, this.state.ageCategory);
+    const socialResult = this.#socialStandingResult();
+    const capitalResult = this.#startCapitalResult(socialResult);
+    const bpLedger = this.#bpLedger(socialResult, capitalResult);
+    const epBudget = this.#epResult(bpLedger);
+    const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
+
+    await actor.update({
+      name: this.state.name || actor.name,
+      system: {
+        kon: this.state.kon,
+        niva: this.state.niva,
+        bp: this.state.bp,
+        socialStanding: this.state.socialStanding,
+        startCapital: this.state.startCapital,
+        ep: { spent: skillPreview.epSpent },
+        specialAbilities: this.state.specialAbilities
+          .filter((a) => a.name.trim().length > 0)
+          .map((a) => ({ name: a.name, source: a.source, description: a.description })),
+        lifeGoal: this.state.lifeGoalCustom.trim() || this.state.lifeGoal,
+        attributes: {
+          sty: { value: this.state.attributes.sty },
+          sto: { value: this.state.attributes.sto },
+          fys: { value: this.state.attributes.fys },
+          smi: { value: this.state.attributes.smi },
+          int: { value: this.state.attributes.int },
+          psy: { value: this.state.attributes.psy },
+          kar: { value: this.state.attributes.kar }
+        },
+        alder: this.state.ageCategory
+      },
+      [`flags.${game.system.id}.wizardUnlocked`]: false
+    });
+
+    // Färdighetsavstämning — se dokblocket ovan.
+    // ⚠ Matchning på NYCKEL, aldrig på visningsnamn (backlogpost 6a) — annars
+    // skulle en rollperson skapad på ett språk och redigerad på ett annat tyst
+    // få dubbletter. Äldre färdigheter utan `skillKey` får sin nyckel härledd
+    // ur namnet, och backfillas nedan så att migreringen sker av sig själv.
+    const existingByKey = new Map(
+      actor.items
+        .filter((i) => i.type === "fardighet")
+        .map((i) => [i.system.skillKey || CONFIG.DODE.skillKey(i.name), i])
+    );
+    const toCreate = [];
+    const toUpdate = [];
+    for (const skill of [...skillPreview.primary, ...skillPreview.professionSkills]) {
+      const existing = existingByKey.get(skill.key);
+      if (existing) {
+        const needsFv = existing.system.fv !== skill.fv;
+        const needsTier = existing.system.costTier !== skill.costTier;
+        const needsKey = existing.system.skillKey !== skill.key;
+        if (needsFv || needsTier || needsKey) {
+          toUpdate.push({
+            _id: existing.id,
+            "system.fv": skill.fv,
+            "system.costTier": skill.costTier,
+            "system.skillKey": skill.key
+          });
+        }
+      } else {
+        toCreate.push({
+          name: skill.name,
+          type: "fardighet",
+          system: { skillKey: skill.key, attribute: skill.attribute, category: "a", fv: skill.fv, costTier: skill.costTier }
+        });
+      }
+    }
+    if (toUpdate.length) await actor.updateEmbeddedDocuments("Item", toUpdate);
+    if (toCreate.length) await actor.createEmbeddedDocuments("Item", toCreate);
+
+    ui.notifications.info(`${actor.name} uppdaterad via guiden.`);
+    await this.close();
+    actor.sheet.render(true);
+  }
+
   static async #onCreateCharacter() {
     const raceDoc = this.state.raceUuid ? await fromUuid(this.state.raceUuid) : null;
     const professionDoc = this.state.professionUuid ? await fromUuid(this.state.professionUuid) : null;
@@ -655,9 +1093,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const epBudget = this.#epResult(bpLedger);
     const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
 
+    const { img, prototypeToken } = this.#tokenDefaults(raceDoc, professionDoc);
+
     const actor = await Actor.create({
       name: this.state.name || "Ny rollperson",
       type: "character",
+      ...(img ? { img } : {}),
+      prototypeToken,
       system: {
         kon: this.state.kon,
         niva: this.state.niva,
@@ -684,21 +1126,39 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     });
 
     const itemsToCreate = [];
+    // ⚠ `toObject()` bär INTE med sig `_stats.compendiumSource` — Foundry sätter
+    // det bara vid riktig kompendieimport. Utan en egen källhänvisning kan
+    // redigeringsläget inte koppla tillbaka den embeddade rasen/yrket till sitt
+    // kompendiedokument (och räknar då baschansen utan rasbonus). Vi stämplar
+    // därför en egen flagga; #loadStateFromActor läser den först.
     if (raceDoc) {
       const raceObj = raceDoc.toObject();
       raceObj.img = this.#genderedImg(raceDoc);
+      foundry.utils.setProperty(raceObj, `flags.${game.system.id}.sourceUuid`, raceDoc.uuid);
       itemsToCreate.push(raceObj);
     }
     if (professionDoc) {
       const professionObj = professionDoc.toObject();
       professionObj.img = this.#genderedImg(professionDoc);
+      foundry.utils.setProperty(professionObj, `flags.${game.system.id}.sourceUuid`, professionDoc.uuid);
       itemsToCreate.push(professionObj);
     }
     for (const skill of [...skillPreview.primary, ...skillPreview.professionSkills]) {
       itemsToCreate.push({
         name: skill.name,
         type: "fardighet",
-        system: { attribute: skill.attribute, category: "a", fv: skill.fv, costTier: skill.costTier }
+        system: { skillKey: skill.key, attribute: skill.attribute, category: "a", fv: skill.fv, costTier: skill.costTier }
+      });
+    }
+    // Magiskola — en skola ÄR en färdighet i regelverket (MAGI.md, se
+    // DODE.magicSchoolSkills). FV höjs sedan med EP i färdighetssteget precis
+    // som vilken annan yrkesfärdighet som helst.
+    const school = CONFIG.DODE.magicSchoolSkills.find((s) => s.key === this.state.magicSchoolKey);
+    if (school) {
+      itemsToCreate.push({
+        name: game.i18n.localize(school.labelKey),
+        type: "fardighet",
+        system: { skillKey: school.key, attribute: school.attribute, category: "a", fv: 1, costTier: "yrkesfardighet" }
       });
     }
     // Utrustning — en separat embeddad kopia per köpt enhet (Item-schemat har

@@ -1,4 +1,5 @@
 import { DODE } from "../helpers/config.mjs";
+import DoDeActiveEffect from "../documents/dode-active-effect.mjs";
 
 const fields = foundry.data.fields;
 
@@ -157,10 +158,45 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       }
     }
 
+    // Per-attribut källuppdelning av bonusen, till Mod-tooltipen i character-sheet.hbs
+    // (t.ex. "Rasmodifikationer (Dvärg): +3\nVäktarklingans välsignelse: +2"). Läser
+    // samma AE-lista som Foundry redan applicerat bonusen från, filtrerad genom
+    // DoDeActiveEffect.isGateOpen — annars listar tooltipen källor som (t.ex. p.g.a.
+    // ej utrustat vapen) faktiskt inte bidrog till talet som visas.
+    const bonusSourcesByKey = {};
+    for (const key of Object.keys(DODE.attributes)) bonusSourcesByKey[key] = [];
+    for (const effect of this.parent?.appliedEffects ?? []) {
+      if (!DoDeActiveEffect.isGateOpen(effect)) continue;
+      for (const change of effect.changes ?? []) {
+        const match = /^system\.attributes\.(\w+)\.bonus$/.exec(change.key);
+        if (!match || !(match[1] in bonusSourcesByKey)) continue;
+        const value = Number(change.value) || 0;
+        if (!value) continue;
+        bonusSourcesByKey[match[1]].push({ label: effect.name || "?", value });
+      }
+    }
+
     for (const key of Object.keys(DODE.attributes)) {
       a[key].total = a[key].value + a[key].bonus;
       a[key].group = DODE.attributeToGroup(a[key].total);
       a[key].bonusDisplay = a[key].bonus > 0 ? `+${a[key].bonus}` : `${a[key].bonus}`;
+
+      const sources = bonusSourcesByKey[key];
+      // Fallback-vägen (rad ~146-158 ovan) skapar ingen AE, så lägg till en syntetisk
+      // källrad manuellt när den vägen användes — annars saknar äldre rollpersoner
+      // (utan ras-/ålders-AE) en förklaring för bonusen tooltipen ändå visar.
+      if (!hasRaceAE && rasItem) {
+        const v = rasItem.system?.attributeMods?.[key] ?? 0;
+        if (v) sources.push({ label: `Ras (${rasItem.name})`, value: v });
+      }
+      if (!hasAgeAE && this.alder) {
+        const v = DODE.ageAttributeModifiers[this.alder]?.[key] ?? 0;
+        if (v) sources.push({ label: `Ålder (${this.alder})`, value: v });
+      }
+      a[key].bonusSources = sources;
+      a[key].bonusTooltip = sources
+        .map((s) => `${s.label}: ${s.value > 0 ? "+" : ""}${s.value}`)
+        .join("\n");
     }
 
     this.race = rasItem;

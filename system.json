@@ -43,38 +43,53 @@
       "label": "Raser",
       "path": "packs/raser",
       "type": "Item",
-      "system": "drakar-och-demoner-expert"
+      "system": "drakar-och-demoner-expert",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     },
     {
       "name": "yrken",
       "label": "Yrken",
       "path": "packs/yrken",
       "type": "Item",
-      "system": "drakar-och-demoner-expert"
+      "system": "drakar-och-demoner-expert",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     },
     {
       "name": "vapen-utrustning",
       "label": "Vapen & Utrustning",
       "path": "packs/vapen-utrustning",
       "type": "Item",
-      "system": "drakar-och-demoner-expert"
+      "system": "drakar-och-demoner-expert",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     },
     {
       "name": "besvarjelser",
       "label": "Besvärjelser",
       "path": "packs/besvarjelser",
       "type": "Item",
-      "system": "drakar-och-demoner-expert"
+      "system": "drakar-och-demoner-expert",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "magiska-foremal",
+      "label": "Magiska föremål (SL)",
+      "path": "packs/magiska-foremal",
+      "type": "Item",
+      "system": "drakar-och-demoner-expert",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
     },
     {
       "name": "monster",
-      "label": "Monster & Varelser",
+      "label": "Monster & Varelser (SL)",
       "path": "packs/monster",
       "type": "Actor",
-      "system": "drakar-och-demoner-expert"
+      "system": "drakar-och-demoner-expert",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
     }
   ],
   "socket": false,
+  "primaryTokenAttribute": "hp",
+  "secondaryTokenAttribute": "resources.psy",
   "compatibility": {
     "minimum": "12",
     "verified": "14"

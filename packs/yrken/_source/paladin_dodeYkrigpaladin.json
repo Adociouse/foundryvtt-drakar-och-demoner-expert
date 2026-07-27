@@ -1,0 +1,35 @@
+{
+  "name": "Paladin",
+  "type": "yrke",
+  "system": {
+    "requirements": "STY 15, FYS 12, PSY 14, INT 12",
+    "baseProfession": "krigare",
+    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Lär Mentalism som yrkesfärdighet (skolvärde ≤ 12, ej allmänna besvärjelser); max 1/3 av EP får läggas på besvärjelser. Förlorar sina förmågor om gudens krav bryts.</p><p><em>Källa: KH s.5-6</em></p>",
+    "skillList": "",
+    "professionSkills": [],
+    "description": "<p>Specialisering av grundyrket Krigare (KH s.5-6).</p>",
+    "imgMan": "",
+    "imgKvinna": ""
+  },
+  "_id": "dodeYkrigpaladin",
+  "img": "icons/svg/mystery-man.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785200000000,
+    "modifiedTime": 1785200000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dodeYkrigpaladin"
+}
