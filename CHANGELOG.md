@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- **Damage bonus and movement were wrong for every character.** `DODE.damageBonusTable` and `DODE.movementTable` held values that appear in no source book — both carried their own "needs verifying" flag and turned out to be extrapolations. Corrected against Rollpersonen s.25, verified from the PDF and identical to Spelledarboken s.32. Movement also used `(SMI+FYS+STO)/3` where the rule sums the three attributes, and the race modifiers (Anka −2, Alv +1, Dvärg −2, Halvlängdsman −2) were missing entirely — now a `movementMod` field on `ras`. ⚠ This changes existing characters: 12/12/12 goes from 9 to 10 squares, and STY+STO 24 loses a phantom +1T4 damage bonus
+
 ### Added
 - **Compendium organisation** (§8) — `packFolders` groups the ten packs into four sidebar folders (Rollpersoner · Utrustning & magi · Regler & tabeller · Spelledare), and the four large Item packs gained in-pack folders: races by origin, professions by base profession, equipment by category (14) and spells by magic school (12). All 544 entries placed
 - **Three new packs**: `regler` (JournalEntry, players) with Bärförmåga, Värdshuspriser and the Animera död grade tables; `tabeller` (RollTable, players) with the Skräcktabell, Hjältedådstabellen and Särskilda förmågor; `sl-regler` (JournalEntry, GM) with the tavern generation table. Tables are now rollable from chat and `@UUID`-linkable

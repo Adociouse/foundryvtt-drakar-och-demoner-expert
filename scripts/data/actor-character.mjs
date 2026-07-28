@@ -269,9 +269,13 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // Skadebonus från STY + STO — RP s.25 (⚠ verifiera exakta gränsvärden)
     this.damageBonus = DODE.damageBonus(a.sty.total + a.sto.total);
 
-    // Förflyttning: (SMI+FYS+STO)/3 avrundat nedåt, sedan tabell — RP s.24-25 (⚠ verifiera)
-    const movementSum = Math.floor((a.smi.total + a.fys.total + a.sto.total) / 3);
-    this.movement = DODE.movement(movementSum);
+    // Förflyttning — RP s.25: slå upp SUMMAN STO+FYS+SMI i tabellen, plus rasmodifikation.
+    // ⚠ Rättad 2026-07-28: koden delade tidigare summan med 3 och slog upp i en tabell
+    // som inte fanns i någon bok. Se DESIGN_DECISIONS.md §3 31C.
+    const movementSum = a.sto.total + a.fys.total + a.smi.total;
+    const raceName = (rasItem?.name ?? "").toLowerCase();
+    const movementMod = rasItem?.system?.movementMod ?? DODE.movementRaceMod[raceName] ?? 0;
+    this.movement = Math.max(1, DODE.movement(movementSum) + movementMod);
 
     // Bärförmåga = STY kg utan att bli nämnvärt uttröttad — REGLER_EGENSKAPER.md
     this.carryCapacity = a.sty.total;

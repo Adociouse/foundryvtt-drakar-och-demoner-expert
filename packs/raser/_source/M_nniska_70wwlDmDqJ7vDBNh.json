@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>Inget specifikt. Passar alla yrken. Vanligaste spelbara rasen.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-kvinna.png",
+    "movementMod": 0
   },
   "_id": "70wwlDmDqJ7vDBNh",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska.png",

@@ -10,6 +10,10 @@ export default class DoDERasData extends foundry.abstract.TypeDataModel {
     const mod = () => new fields.NumberField({ required: true, integer: true, initial: 0 });
 
     return {
+      // Rasmodifikation på förflyttning — RP s.25 (Anka −2, Alv +1, Dvärg −2,
+      // Halvlängdsman −2, övriga ±0). Lämnas 0 så faller actor-character.mjs
+      // tillbaka på DODE.movementRaceMod, som matchar på rasnamn.
+      movementMod: new fields.NumberField({ required: false, integer: true, initial: 0 }),
       bpCost: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       attributeMods: new fields.SchemaField({
         sty: mod(), fys: mod(), smi: mod(), int: mod(), psy: mod(), kar: mod()

@@ -612,15 +612,28 @@ DODE.attributeToGroup = function (value) {
   return last.group + Math.ceil((value - last.max) / 10);
 };
 
-// Skadebonus från STY+STO — REGLER_EGENSKAPER.md, RP s.25. ⚠ Exakta gränsvärden bör verifieras mot original.
+/**
+ * Skadebonus från STY+STO — **Rollpersonen s.25**, verifierad ordagrant mot PDF-sidan
+ * 2026-07-28 och identisk med Spelledarboken s.32 (samma tabell i båda böckerna).
+ *
+ * ⚠ RÄTTAD 2026-07-28. De tidigare värdena (≤12 −1T4 · ≤16 +0 · ≤24 +1T4 · ≤32 +1T6 ·
+ * ≤40 +2T4 · ≤48 +2T6 · +3T6) fanns INTE i någon bok — de bar en egen
+ * "bör verifieras"-flagga och visade sig vara fria extrapolationer. De hade både fel
+ * brytpunkter och fel formler: ett −1T4-straff som regeln saknar, inga +1T2/+1T10, och
+ * ett tak vid 48 trots att tabellen går till 180 (jättar). Se DESIGN_DECISIONS.md §3 31C.
+ */
 DODE.damageBonusTable = [
-  { max: 12, formula: "-1d4" },
-  { max: 16, formula: "+0" },
-  { max: 24, formula: "+1d4" },
-  { max: 32, formula: "+1d6" },
-  { max: 40, formula: "+2d4" },
-  { max: 48, formula: "+2d6" },
-  { max: Infinity, formula: "+3d6" }
+  { max: 26, formula: "+0" },
+  { max: 29, formula: "+1" },
+  { max: 32, formula: "+1d2" },
+  { max: 40, formula: "+1d4" },
+  { max: 50, formula: "+1d6" },
+  { max: 60, formula: "+1d10" },
+  { max: 80, formula: "+2d6" },
+  { max: 100, formula: "+3d6" },
+  { max: 140, formula: "+4d6" },
+  { max: 180, formula: "+5d6" },
+  { max: Infinity, formula: "+5d6" }
 ];
 
 DODE.damageBonus = function (styPlusSto) {
@@ -630,17 +643,32 @@ DODE.damageBonus = function (styPlusSto) {
   return "+3d6";
 };
 
-// Förflyttning: (SMI+FYS+STO)/3 avrundat nedåt, sedan denna tabell — RP s.24-25. ⚠ Exakta tabellvärden bör verifieras.
+/**
+ * Förflyttning i rutor per stridsrunda — **Rollpersonen s.25**, verifierad mot PDF-sidan
+ * 2026-07-28, identisk med Spelledarboken s.32. Uppslaget sker på **SUMMAN** STO+FYS+SMI.
+ *
+ * ⚠ RÄTTAD 2026-07-28. Koden slog tidigare upp (SMI+FYS+STO)/3 i en helt annan tabell
+ * (≤4→5 … ≤24→15) som inte heller stod i någon bok. Både formeln och värdena var fel:
+ * en rollperson med 12/12/12 fick 9 rutor i stället för 10, och skalorna divergerade
+ * kraftigt i botten (medel 4 gav 5 rutor mot bokens 8). Se DESIGN_DECISIONS.md §3 31C.
+ */
 DODE.movementTable = [
-  { max: 4, squares: 5 }, { max: 6, squares: 6 }, { max: 8, squares: 7 }, { max: 10, squares: 8 },
-  { max: 12, squares: 9 }, { max: 14, squares: 10 }, { max: 16, squares: 11 }, { max: 18, squares: 12 },
-  { max: 20, squares: 13 }, { max: 22, squares: 14 }, { max: 24, squares: 15 }
+  { max: 11, squares: 7 }, { max: 20, squares: 8 }, { max: 29, squares: 9 },
+  { max: 38, squares: 10 }, { max: 47, squares: 11 }, { max: 56, squares: 12 },
+  { max: 65, squares: 13 }, { max: 74, squares: 14 }, { max: 83, squares: 15 },
+  { max: 92, squares: 16 }
 ];
 
-DODE.movement = function (sum) {
+/**
+ * Rasmodifikationer på förflyttning — Rollpersonen s.25. Låg tidigare inte i koden alls.
+ * Nyckeln är rasens namn i gemener; övriga raser ger ±0.
+ */
+DODE.movementRaceMod = { anka: -2, alv: 1, "dvärg": -2, "halvlängdsman": -2 };
+
+DODE.movement = function (stoPlusFysPlusSmi) {
   for (const row of DODE.movementTable) {
-    if (sum <= row.max) return row.squares;
+    if (stoPlusFysPlusSmi <= row.max) return row.squares;
   }
-  const last = DODE.movementTable[DODE.movementTable.length - 1];
-  return last.squares + Math.ceil((sum - last.max) / 2);
+  // "för varje ytterligare +8: +1" — Rollpersonen s.25
+  return 16 + Math.ceil((stoPlusFysPlusSmi - 92) / 8);
 };

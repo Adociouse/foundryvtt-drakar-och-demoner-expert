@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>Perfekt mörkersyn. +5 FV i Geologi (räknas som primärfärdighet). Kan normalt inte bära helrustning utan specialtillverkning.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-kvinna.png",
+    "movementMod": -2
   },
   "_id": "24kN2TQ2NgkH753S",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg.png",

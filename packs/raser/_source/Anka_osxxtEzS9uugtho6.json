@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>+20 FV (B5) i Simma — naturlig simförmåga. +4 FV i Smyga. KAR −5 är en stark social nackdel.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/anka-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/anka-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/anka-kvinna.png",
+    "movementMod": -2
   },
   "_id": "osxxtEzS9uugtho6",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/anka.png",

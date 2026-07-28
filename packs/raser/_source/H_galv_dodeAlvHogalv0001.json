@@ -19,7 +19,8 @@
     "automaticAbilities": "<p><strong>⚠ Kräver spelledarens godkännande.</strong> Alver s.22 säger uttryckligen: <em>&quot;Högalver är egentligen inte avsedda att användas av spelare som rollpersoner, men om SL tillåter det kan de fungera.&quot;</em></p><p>De extrema INT- och PSY-modifikationerna (+10/+10) och den höga bakgrundspoängskostnaden (65 BP) är bokens egna värden, inte en balansering från detta system.</p>",
     "description": "<p>Det äldsta och mäktigaste alvsläktet — maktlystna, och de mest onda av alvraserna. Skickliga magiker.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-kvinna.png",
+    "movementMod": 0
   },
   "_id": "dodeAlvHogalv000",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-man.png",

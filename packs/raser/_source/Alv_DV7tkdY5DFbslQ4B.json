@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>+4 FV Upptäcka fara, +4 FV Lyssna. Mycket bättre syn och hörsel. Odödlig — åldras inte, startar alltid som Ung. Immun mot sjukdomar. Sover bara 4 timmar/natt.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-kvinna.png",
+    "movementMod": 1
   },
   "_id": "DV7tkdY5DFbslQ4B",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv.png",

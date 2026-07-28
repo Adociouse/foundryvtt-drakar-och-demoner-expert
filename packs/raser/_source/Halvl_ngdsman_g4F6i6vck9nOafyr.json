@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>+4 FV i Gömma sig. +1T3 BC i Provsmaka. Svåra att se när de vill gömma sig.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-kvinna.png",
+    "movementMod": -2
   },
   "_id": "g4F6i6vck9nOafyr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman.png",

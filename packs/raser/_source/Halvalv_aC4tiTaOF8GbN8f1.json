@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>+2 FV Upptäcka fara, +2 FV Lyssna. Dubbelt bättre hörsel och syn jämfört med människa. Lever längre än människor (dock inte odödliga). Passar alla yrken.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-kvinna.png",
+    "movementMod": 0
   },
   "_id": "aC4tiTaOF8GbN8f1",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv.png",

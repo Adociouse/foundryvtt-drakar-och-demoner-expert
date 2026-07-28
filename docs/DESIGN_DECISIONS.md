@@ -211,7 +211,20 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
     - **Laddningstider** (s.32) — stavslunga 1 SR, lätt armborst 3, tungt 6, arbalest 12.
     - **Stridsdiagram** (s.31) — flödesschema över anfall→parering→skada. Blir bäst som en journalsida med bilden, inte som text.
 
-    **C. ⚠ TVÅ TABELLER KROCKAR MED REDAN IMPLEMENTERAD KOD — porta dem INTE rakt av.**
+    **C. ✅ LÖST 2026-07-28 — det var ingen editionskonflikt, koden var helt enkelt fel.** Johans hypotes var att gamla `D&DE_Regler` och nya Spelarboken/Spelledarboken kunde stå i konflikt. Det gick att testa: koden citerade **RP s.25**, och Rollpersonens eget register listar "Skadebonus 25". **Rollpersonen s.25 lästes ur PDF:en och visade sig innehålla EXAKT samma två tabeller som Spelledarboken s.32** — samma brytpunkter, samma formler, samma rasmodifikationer. Det finns alltså ingen konflikt mellan böckerna; båda säger samma sak, och det var `config.mjs` som avvek från båda. De gamla värdena bar redan en egen `⚠ bör verifieras mot original`-flagga och var fria extrapolationer som aldrig stått i någon bok. **Rättat i tre steg:**
+
+    | Vad | Före | Efter (RP s.25 / SL s.32) |
+    |---|---|---|
+    | `damageBonusTable` | ≤12 −1T4 · ≤16 +0 · ≤24 +1T4 · ≤32 +1T6 · ≤40 +2T4 · ≤48 +2T6 · +3T6 | 1–26 +0 · 27–29 +1 · 30–32 +1T2 · 33–40 +1T4 · 41–50 +1T6 · 51–60 +1T10 · 61–80 +2T6 · 81–100 +3T6 · 101–140 +4T6 · 141–180 +5T6 |
+    | Förflyttningsformel | `(SMI+FYS+STO)/3` → tabell | **summan** STO+FYS+SMI → tabell |
+    | `movementTable` | ≤4→5 … ≤24→15 | 0–11→7 … 84–92→16, därefter +1 per ytterligare +8 |
+    | Rasmod förflyttning | fanns inte | Anka −2 · Alv +1 · Dvärg −2 · Halvlängdsman −2 (nytt `movementMod`-fält på `ras`, satt explicit i `_source` med namnfallback som skydd) |
+
+    ⚠ **Detta ÄNDRAR befintliga rollpersoner.** En rollperson med 12/12/12 gick från 9 till 10 rutors förflyttning, och STY+STO 24 gick från +1T4 skadebonus till ingen alls. Det är en rättning mot boken, inte ett balansbeslut — men värt att nämna för spelare med befintliga rollpersoner. Liveverifierat: Människa 36→10, Dvärg 38→8, Alv 39→12, Anka 34→8; SB 24→+0, 27→+1.
+
+    **Lärdomen är generell:** när två källor verkar krocka, kontrollera först om koden faktiskt matchar NÅGON av dem. Här matchade den ingen, och "vilken bok gäller?" var därför fel fråga från början.
+
+    **C-arkiv (ursprunglig formulering): ⚠ TVÅ TABELLER KROCKAR MED REDAN IMPLEMENTERAD KOD — porta dem INTE rakt av.**
 
     | Bokens tabell (SL s.32) | Vår kod | Krock |
     |---|---|---|

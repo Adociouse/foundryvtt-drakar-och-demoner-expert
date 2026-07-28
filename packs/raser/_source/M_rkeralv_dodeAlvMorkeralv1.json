@@ -19,7 +19,8 @@
     "automaticAbilities": "<p>Djupunderjordiskt alvsläkte med stark magisk affinitet. Enligt Alver s.24 kan en mörkeralv slå fram den släktesegna särskilda förmågan <em>Blodtörst</em> (+3 CL i strid efter den första KP:n i skada på motståndaren).</p>",
     "description": "<p>Mörkeralverna är långa och smala, fruktade av ytvärldens folk och ofta ensamma.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/morkeralv-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/morkeralv-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/morkeralv-kvinna.png",
+    "movementMod": 0
   },
   "_id": "dodeAlvMorkeral0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/morkeralv-man.png",
