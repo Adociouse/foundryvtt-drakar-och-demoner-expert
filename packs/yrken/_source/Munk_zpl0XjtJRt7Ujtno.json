@@ -10,52 +10,202 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-kvinna.png",
     "professionSkills": [
       {
-        "name": "Astrologi",
-        "attribute": "int"
+        "name": "Tala max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/Skriva max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Djurhelning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Drogkunskap",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Heraldik",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kulturkännedom",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om demoner",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om odöda",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Läkekonst",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Orientering",
-        "attribute": "int"
+        "name": "Massage",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Schack & Brädspel",
-        "attribute": "int"
+        "name": "Målning",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Zoologi",
-        "attribute": "int"
-      },
-      {
-        "name": "Judo",
-        "attribute": "smi"
-      },
-      {
-        "name": "Karate",
-        "attribute": "smi"
-      },
-      {
-        "name": "Trästav",
-        "attribute": "smi"
-      },
-      {
-        "name": "Teckenspråk",
-        "attribute": "int"
+        "name": "Räkning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spela max 2 instrument",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Språkkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Astrologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Schack & Brädspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Judo",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Karate",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Teckenspråk",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

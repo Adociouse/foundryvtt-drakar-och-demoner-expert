@@ -10,40 +10,88 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare-kvinna.png",
     "professionSkills": [
       {
+        "name": "Alla vapenfärdigheter",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Tala 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
         "name": "Avväpna",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Bärsärkagång",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dra vapen",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dolk",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Geografi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hasardspel",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kulturkännedom",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Trästav",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Två vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

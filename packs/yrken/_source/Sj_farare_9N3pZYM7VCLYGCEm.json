@@ -10,32 +10,148 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare-kvinna.png",
     "professionSkills": [
       {
+        "name": "Max 3 vapenfärdigheter",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Tala max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/Skriva 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Akrobatik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dans",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
         "name": "Geografi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Gycklekonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hasardspel",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Undre världen",
-        "attribute": "int"
+        "name": "Knopar",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Änterhake",
-        "attribute": "smi"
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Navigation",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Schack & brädspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Sjökunnighet",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spela max 2 instrument",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spå väder",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stavhopp",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Undre världen",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Änterhake",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

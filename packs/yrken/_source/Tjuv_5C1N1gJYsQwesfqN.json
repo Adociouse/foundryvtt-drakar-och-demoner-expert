@@ -10,20 +10,178 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-kvinna.png",
     "professionSkills": [
       {
-        "name": "Judo",
-        "attribute": "smi"
+        "name": "Max 2 vapenfärdigheter",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Slagsmål",
-        "attribute": "sty"
+        "name": "Tala 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
       },
       {
-        "name": "Dolk",
-        "attribute": "smi"
+        "name": "Administration",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Akrobatik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Buktala",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dra vapen",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förfalskning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Gyckelkonster",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hypnotisera",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Låsdyrkning",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Läppläsning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Räkning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Skådespeleri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spela max 2 instrument",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stavhopp",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Teckenspråk",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Undre världen",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Änterhake",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Judo",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slagsmål",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Anfall bakifrån",

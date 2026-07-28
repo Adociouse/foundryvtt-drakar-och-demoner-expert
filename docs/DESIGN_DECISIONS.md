@@ -196,7 +196,9 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
     Liveverifierat end-to-end: Barbar med 2 fyllda platser (Långbåge, Alviska) + 10 chips gav **exakt 12** yrkesfärdigheter på arket och 16 primära — inget annat. Försök att välja en 13:e avvisas, Magiker visar 0/3 (`min(9, 3)`), Bard 0/12 av 33 möjliga.
 
-    **Kvar:** sex grundyrken är fortfarande tunna mot boken (Magiker 3, Utbygdsjägare 6, Sjöfarare 7, Krigare 9, Munk 12, Riddare 12 efter tillägget) — Magiker sticker ut mest, eftersom taket då blir 3 i stället för 9.
+    **✅ Grundyrkena kompletterade 2026-07-28.** Johan tog upp att en sjöfarare eller utbygdsjägare med för få yrkesfärdigheter borde få lägga EP någon annanstans. **Premissen visade sig vila på ett datafel, inte en regellucka:** YRKEN.md hade hela tiden de fullständiga listorna (RP s.11-22) — vårt pack hade bara fått trunkerade. Portade: Magiker 3→21, Utbygdsjägare 6→21, Sjöfarare 7→24, Krigare 9→14, Munk 12→33, Riddare 12→35, Tjuv 19→44, Helare 19→22, Lärd man 22→25, Bard 38, Lönnmördare 39→43. **Alla elva grundyrken når nu sitt tak** (Magiker 9, övriga 12) — ingen fallback-regel behövs. Supplementens tillägg bevarades vid sammanslagningen.
+
+    ⚠ Detta bekräftar också YRKEN.md:s egen formulering "**(välj 12)**" respektive "**Magiker (välj 9)**" — samma tal som RP s.11 och som `#professionSkillTarget` använder.
 
     **13b. ⚠ Sekundära färdigheter ska INTE gå att välja i guiden — verifierat mot RP s.28-29 (2026-07-28).** Johans fråga var om sekundära borde vara en tredje valnivå i guiden. Boken säger uttryckligen nej, på tre ställen:
 

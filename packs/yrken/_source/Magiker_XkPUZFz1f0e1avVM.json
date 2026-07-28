@@ -10,16 +10,130 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker-kvinna.png",
     "professionSkills": [
       {
+        "name": "Tala max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/Skriva max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
         "name": "Alkemi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Astrologi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Djurhelning",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Djurträning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om demoner",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om odöda",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Magisk kanalisering",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "En valfri magiskola",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "En valfri magiskola"
+      },
+      {
+        "name": "Räkning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Språkkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

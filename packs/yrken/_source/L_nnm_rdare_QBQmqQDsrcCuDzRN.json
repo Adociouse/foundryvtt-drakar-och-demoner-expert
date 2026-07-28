@@ -10,84 +10,148 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lonnmordare-kvinna.png",
     "professionSkills": [
       {
+        "name": "En valfri vapenfärdighet",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Administration",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
         "name": "Akrobatik",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dra vapen",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dolk",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Förfalskning",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Geografi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Giftkunskap",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hantera fällor",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hasardspel",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hypnotisera",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Knopar",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kulturkännedom",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Låsdyrkning",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Muta",
-        "attribute": "kar"
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Skådespeleri",
-        "attribute": "kar"
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Stavhopp",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Teckenspråk",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Trästav",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Undre världen",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Änterhake",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Anfall bakifrån",

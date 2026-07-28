@@ -10,80 +10,136 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare-kvinna.png",
     "professionSkills": [
       {
+        "name": "Tala max 2 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/Skriva 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
         "name": "Alkemi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Djurhelning",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dolk",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Drogkunskap",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Geografi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Giftkunskap",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hypnotisera",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kulturkännedom",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kunskap om demoner",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kunskap om magi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kunskap om odöda",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Läkekonst",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Massage",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Orientering",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Trästav",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Zoologi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Örtkunskap",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Överlevnad",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

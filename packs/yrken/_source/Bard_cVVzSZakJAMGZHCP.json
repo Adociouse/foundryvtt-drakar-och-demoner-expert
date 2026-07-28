@@ -10,100 +10,178 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-kvinna.png",
     "professionSkills": [
       {
+        "name": "En valfri vapenfärdighet",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala max 2 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/Skriva 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Administration",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
         "name": "Akrobatik",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Buktala",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dans",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Djurträning",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dolk",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Förfalskning",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Geografi",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Gycklekonster",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hasardspel",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Heraldik",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Historia",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Hypnotisera",
-        "attribute": "psy"
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Knopar",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Kulturkännedom",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Låsdyrkning",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Läppläsning",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Muta",
-        "attribute": "kar"
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Målning",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Schack & Brädspel",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Skådespeleri",
-        "attribute": "kar"
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Spela instrument",
-        "attribute": "kar"
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Språkkunskap",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Trästav",
-        "attribute": "smi"
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Dölja",

@@ -10,28 +10,130 @@
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare-kvinna.png",
     "professionSkills": [
       {
-        "name": "Örtkunskap",
-        "attribute": "int"
+        "name": "Max 3 vapenfärdigheter",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
-        "name": "Zoologi",
-        "attribute": "int"
+        "name": "Tala 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
       },
       {
-        "name": "Smyga",
-        "attribute": "smi"
+        "name": "Animism",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Djurhelning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Djurträning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantera fällor",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Orientering",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Simma",
-        "attribute": "fys"
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spå väder",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       },
       {
         "name": "Överlevnad",
-        "attribute": "int"
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Smyga",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

@@ -5,10 +5,148 @@
     "requirements": "STY 14, FYS 12, PSY 12",
     "professionAbility": "<p>Spendera 5 PSY för att antingen träffa valfri kroppsdel utan CL-avdrag, eller göra maximal vapenskada inkl. max skadebonus.</p>",
     "skillList": "<p>Max 5 vapenfärdigheter, språk, Administration, Avväpna, Dans, Djurträning, Dra vapen, Dolk, Geografi, Heraldik, Historia, Kulturkännedom, Kunskap om magi/odöda, Målning, Räkning, Schack & brädspel, Simma, Spela instrument, Språkkunskap, Trästav, Två vapen.</p>",
-    "description": "<p><em>Krigarens Handbok s.7 anger ett TILLÄGG till grundreglernas riddarlista (\"Se Grundreglerna, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p>",
+    "description": "<p><em>Krigarens Handbok s.7 anger ett TILLÄGG till grundreglernas riddarlista (\"Se Grundreglerna, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-kvinna.png",
     "professionSkills": [
+      {
+        "name": "Max 5 vapenfärdigheter",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Tala 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/Skriva 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Administration",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dans",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Djurträning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Heraldik",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om odöda",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Målning",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Räkning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Schack & brädspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spela max 2 instrument",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Språkkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Två vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
       {
         "name": "Bryta grepp",
         "attribute": "sty",
