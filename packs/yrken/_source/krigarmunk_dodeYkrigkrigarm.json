@@ -6,7 +6,158 @@
     "baseProfession": "krigare",
     "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Köper stridskonsttekniker (se REGLER_STRID.md) för <strong>halva grundkostnaden</strong>.</p><p><em>Källa: KH s.5</em></p>",
     "skillList": "",
-    "professionSkills": [],
+    "professionSkills": [
+      {
+        "name": "Maximalt en valfri vapenfärdighet",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala maximalt två valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 2,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/skriva maximalt ett valfritt främmande språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Akrobatik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Anfall bakifrån",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bryta grepp",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Duellera",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "maximalt ett valfritt Hantverk",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "hantverk"
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Härskri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kamouflage",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Läkekonst",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Massage",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Överlevnad",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.5).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigarmunk-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigarmunk-kvinna.png",

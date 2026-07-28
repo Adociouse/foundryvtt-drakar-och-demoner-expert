@@ -6,7 +6,164 @@
     "baseProfession": "krigare",
     "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Heroisk och dramatisk — SL kan låta sprätthöken lyckas med nästan vad som helst om det är tillräckligt spektakulärt.</p><p><em>Källa: KH s.8</em></p>",
     "skillList": "",
-    "professionSkills": [],
+    "professionSkills": [
+      {
+        "name": "Maximalt tre valfria vapenfärdigheter",
+        "attribute": "smi",
+        "choiceCount": 3,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala maximalt tre valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 3,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/skriva maximalt två valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 2,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bryta grepp",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Buktala",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dans",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Duellera",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förfalskning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Härskri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Låsdyrkning",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Skådespeleri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Två vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Undre världen",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.8).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-kvinna.png",

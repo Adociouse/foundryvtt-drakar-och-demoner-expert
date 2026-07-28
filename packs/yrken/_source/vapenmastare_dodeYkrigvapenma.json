@@ -6,8 +6,159 @@
     "baseProfession": "krigare",
     "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Spendera <strong>5 PSY</strong> för en extra parering <em>eller</em> en extra attack per stridsrunda.</p><p><em>Källa: KH s.8-9</em></p>",
     "skillList": "",
-    "professionSkills": [],
-    "description": "<p>Specialisering av grundyrket Krigare (KH s.8-9).</p>",
+    "professionSkills": [
+      {
+        "name": "Maximalt en valfri vapenfärdighet",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala maximalt tre valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 3,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/skriva maximalt tre valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 3,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Anfall bakifrån",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bryta grepp",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dans",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Duellera",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Härskri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slåss till häst",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strategi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i luften",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Taktik",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Vapentekniker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
+    "description": "<p>Specialisering av grundyrket Krigare (KH s.8-9).</p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-kvinna.png",
     "source": {

@@ -172,6 +172,16 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
     - **6 yrken har färre än 12** (3, 4, 6, 7, 9, 9) — underspecificerade mot boken.
     - **Sekundära färdigheter skapas aldrig vid rollpersonsskapandet** — de går bara att lägga till efteråt via arkets färdighetsväljare. Det är förmodligen rätt (RP:s EP-budget går till primära och yrkesfärdigheter), men bör bekräftas.
 
+    **Delvis åtgärdat 2026-07-28 — Krigarens Handbok klar (8 av 25).** Lästa ur PDF:en (KH tryckt s.4-8), inte ur textextraktet: tvåspaltslayouten flätar ihop varje yrkes lista med grannens ("Maximalt fem valfria vapen- **det de får för grundegenskapen.** färdigheter …"), så extraktet är obrukbart här. Barbar 26, Gladiator 26, Krigarmunk 25, Paladin 31, Prisjägare 30, Soldat 33, Sprätthök 26, Vapenmästare 25 poster.
+
+    ⚠ **Specialiseringar ÄRVER INTE grundyrkets lista** — KH s.4 ger var och en en egen komplett "Möjliga yrkesfärdigheter". Undantaget är **Riddare**, som är ett grundyrke där KH s.7 bara skriver "Se Grundreglerna, med följande tillägg" — där lades de 12 posterna TILL RP-listan (9 → 21). Ett första försök skrev över RP-listan i stället, vilket upptäcktes och rättades.
+
+    ⚠ **Listorna innehåller platser, inte bara namn.** "Maximalt fem valfria vapenfärdigheter", "Tala maximalt två valfria främmande språk", "maximalt ett valfritt Hantverk", "en valfri Stridskonst" går varken att uttrycka som namn+grundegenskap eller att dela ut automatiskt. `professionSkills` fick därför **`choiceCount` + `choicePool`** (0 = vanlig namngiven färdighet). Barbar blir t.ex. 24 namngivna + "5× vapenfärdighet" + "1× främmande språk". **Guidens UI hanterar dem inte än** — den delar fortfarande ut alla poster rakt av, så valplatserna syns som rader utan att gå att fylla. Det hör ihop med "välj 12"-mekaniken.
+
+    ⚠ **Två listor bryts av en sidbrytning** (Paladin efter "Vagnsförare", Prisjägare efter "Undre världen") — de eventuellt saknade svansarna är noterade i respektive items beskrivning i stället för att gissas.
+
+    **Kvar: 17 specialiseringar ur Tjuvar och Lönnmördare** (4 bard, 5 lönnmördare, 8 tjuv) — samma metod, T&L tryckt s.7-16.
+
     ⚠ **Besvärjelser har en HELT ANNAN kostnadsbas** som inte är implementerad: RP s.30 ger grundkostnad efter besvärjelsens **skolvärde** (1-3:2 · 4-6:4 · 7-9:6 · 10-12:8 · 13-15:10 · 16-18:12 · 19-21:14 · +3:+2), inte efter kostnadskategori. Magiskolesteget skapar i dag skolan som en `fardighet` med `yrkesfardighet`-nivå, vilket är rätt för själva SKOLAN men det finns ingen mekanik för att köpa enskilda besvärjelser.
 14. **Expand compendium coverage.** **Partially done (2026-07-27)** — races and professions are no longer the gap: 6 elf lineages (Alver s.22) brought races 7→13, and 25 specialisations (KH/T&L, via the Roll20 project's `docs/wiki/YRKEN.md`) brought professions 11→36. Still thin: **weapons ~50%**, **spells <5%** (8 of the full MAG list), **monsters** (14 sample entries). ⚠ Every future addition must also ship art in the same pass — see `CLAUDE.md`s "Bildpipeline" (pipeline step 2b); the current 106 documents are 100% covered and that state should not be allowed to regress. Note the spell gap is the awkward one: 13 magic schools are pickable in the wizard but only 8 spells exist across all of them.
 

@@ -44,6 +44,19 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
       // — resten läggs till manuellt via arkets "Ny färdighet"-knapp (fas 2/3).
       // Detta är den dokumenterade forskningsluckan i PLAN_WIZARD_V2.md:s
       // öppna-luckor-tabell ("Strukturerade yrkesfärdighetslistor... Fas 6").
+      /**
+       * Möjliga yrkesfärdigheter. Spelaren väljer 12 av dessa (magiker 9) — RP s.11.
+       *
+       * ⚠ Alla poster är INTE namngivna färdigheter. Böckernas listor innehåller
+       * också valfria platser: "Maximalt fem valfria vapenfärdigheter",
+       * "Tala maximalt två valfria främmande språk", "maximalt ett valfritt
+       * Hantverk", "en valfri Stridskonst". De kan inte uttryckas som ett namn +
+       * grundegenskap, och de kan heller inte delas ut automatiskt — spelaren
+       * måste fylla dem. Därför `choiceCount`/`choicePool`:
+       *
+       *   choiceCount 0  → vanlig namngiven färdighet (som förut)
+       *   choiceCount >0 → N valfria ur `choicePool`, `name` är etiketten som visas
+       */
       professionSkills: new fields.ArrayField(
         new fields.SchemaField({
           name: new fields.StringField({ required: true, initial: "" }),
@@ -51,7 +64,9 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
             required: true,
             initial: "int",
             choices: ["sty", "sto", "fys", "smi", "int", "psy", "kar"]
-          })
+          }),
+          choiceCount: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+          choicePool: new fields.StringField({ required: false, initial: "", blank: true })
         })
       ),
       // Bok + sida — se fields-source.mjs.

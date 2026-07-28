@@ -5,7 +5,7 @@
     "requirements": "STY 14, FYS 12, PSY 12",
     "professionAbility": "<p>Spendera 5 PSY för att antingen träffa valfri kroppsdel utan CL-avdrag, eller göra maximal vapenskada inkl. max skadebonus.</p>",
     "skillList": "<p>Max 5 vapenfärdigheter, språk, Administration, Avväpna, Dans, Djurträning, Dra vapen, Dolk, Geografi, Heraldik, Historia, Kulturkännedom, Kunskap om magi/odöda, Målning, Räkning, Schack & brädspel, Simma, Spela instrument, Språkkunskap, Trästav, Två vapen.</p>",
-    "description": "",
+    "description": "<p><em>Krigarens Handbok s.7 anger ett TILLÄGG till grundreglernas riddarlista (\"Se Grundreglerna, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-kvinna.png",
     "professionSkills": [
@@ -44,6 +44,78 @@
       {
         "name": "Orientering",
         "attribute": "int"
+      },
+      {
+        "name": "Bryta grepp",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Duellera",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Härskri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slåss till häst",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strategi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i luften",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Taktik",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Vagnsförare",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Vapentekniker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

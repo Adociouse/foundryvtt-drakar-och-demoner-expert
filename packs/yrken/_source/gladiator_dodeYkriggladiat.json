@@ -6,7 +6,164 @@
     "baseProfession": "krigare",
     "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Arenakrigare. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4-5.</p><p><em>Källa: KH s.4-5</em></p>",
     "skillList": "",
-    "professionSkills": [],
+    "professionSkills": [
+      {
+        "name": "Maximalt sex valfria vapenfärdigheter",
+        "attribute": "smi",
+        "choiceCount": 6,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala maximalt två valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 2,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Anfall bakifrån",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Brottas med djur",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bryta grepp",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bärsärkagång",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Djurträning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Duellera",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Härskri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Läkekonst",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Skådespeleri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Två vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Vagnsförare",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.4-5).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gladiator-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gladiator-kvinna.png",

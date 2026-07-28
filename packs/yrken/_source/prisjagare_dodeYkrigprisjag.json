@@ -6,8 +6,189 @@
     "baseProfession": "krigare",
     "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Har automatiskt minst <strong>CL 17</strong> i Upptäcka fara — ett sjätte sinne för all fysisk fara.</p><p><em>Källa: KH s.6-7</em></p>",
     "skillList": "",
-    "professionSkills": [],
-    "description": "<p>Specialisering av grundyrket Krigare (KH s.6-7).</p>",
+    "professionSkills": [
+      {
+        "name": "Maximalt fyra valfria vapenfärdigheter",
+        "attribute": "smi",
+        "choiceCount": 4,
+        "choicePool": "vapenfärdighet"
+      },
+      {
+        "name": "Tala maximalt två valfria främmande språk",
+        "attribute": "int",
+        "choiceCount": 2,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/skriva maximalt ett valfritt främmande språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Anfall bakifrån",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bryta grepp",
+        "attribute": "sty",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förfalskning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hypnos",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Härskri",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kamouflage",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Låsdyrkning",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Marschera",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Muta",
+        "attribute": "kar",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slåss till häst",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i luften",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Undre världen",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
+    "description": "<p>Specialisering av grundyrket Krigare (KH s.6-7).</p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.7 — eventuella poster efter \"Undre världen\" är inte inlästa och kan saknas.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/prisjagare-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/prisjagare-kvinna.png",
     "source": {
