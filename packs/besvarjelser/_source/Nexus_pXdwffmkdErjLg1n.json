@@ -1,0 +1,34 @@
+{
+  "name": "Nexus",
+  "type": "besvarjelse",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 20,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>Kopplar samman besvärjelser; båda aktiveras simultant; krävs för magiska föremål <em>(Allmän besvärjelse — kan läras av magiker oavsett skola, MAGI.md/Formelboken s.1-3.)</em></p>",
+    "ritual": true
+  },
+  "_id": "pXdwffmkdErjLg1n",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!pXdwffmkdErjLg1n"
+}

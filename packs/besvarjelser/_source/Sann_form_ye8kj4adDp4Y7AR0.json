@@ -1,0 +1,34 @@
+{
+  "name": "Sann form",
+  "type": "besvarjelse",
+  "system": {
+    "school": "harmonism",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Tvingar allt förvanskat att återta sin sanna form (E vs magiens E)</p>",
+    "ritual": false
+  },
+  "_id": "ye8kj4adDp4Y7AR0",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ye8kj4adDp4Y7AR0"
+}

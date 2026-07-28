@@ -1,0 +1,34 @@
+{
+  "name": "Blodregn",
+  "type": "besvarjelse",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "1 minut",
+    "range": "Sx50 rutor",
+    "description": "<p>Blodregn i (3×E)² rutor kvadrat; PSY vs 15+E eller slå på Skräcktabellen</p>",
+    "ritual": false
+  },
+  "_id": "umsOx6O9yoAWmGIO",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!umsOx6O9yoAWmGIO"
+}

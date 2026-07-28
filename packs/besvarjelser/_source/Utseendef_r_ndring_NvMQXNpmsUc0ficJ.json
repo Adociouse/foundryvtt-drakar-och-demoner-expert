@@ -1,0 +1,34 @@
+{
+  "name": "Utseendeförändring",
+  "type": "besvarjelse",
+  "system": {
+    "school": "illusionism",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Personlig",
+    "description": "<p>Förändrar magikerns utseende (hudfärg, anletsdrag, röst) valfritt; ej grundegenskaper</p>",
+    "ritual": false
+  },
+  "_id": "NvMQXNpmsUc0ficJ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NvMQXNpmsUc0ficJ"
+}

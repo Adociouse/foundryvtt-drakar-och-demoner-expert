@@ -1,0 +1,34 @@
+{
+  "name": "Återvändo",
+  "type": "besvarjelse",
+  "system": {
+    "school": "mentalism",
+    "sValue": 16,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Personlig",
+    "description": "<p>Teleporterar till förinvigd hemplats (1 dag invigning); räckvidd E1=10km, E2=100km osv; S15→1 plats, S≥16→2+</p>",
+    "ritual": true
+  },
+  "_id": "betv5lELPs2Bx7Xr",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!betv5lELPs2Bx7Xr"
+}

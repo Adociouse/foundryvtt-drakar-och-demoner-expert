@@ -1,0 +1,34 @@
+{
+  "name": "Åldra",
+  "type": "besvarjelse",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Sx10 rutor",
+    "description": "<p>Offret åldras 3 år/E; tidsbegränsade besvärjelser på offret slutar verka</p>",
+    "ritual": false
+  },
+  "_id": "6qsFYzseN3IibzD2",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6qsFYzseN3IibzD2"
+}

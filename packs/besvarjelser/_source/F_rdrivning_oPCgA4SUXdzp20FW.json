@@ -1,0 +1,34 @@
+{
+  "name": "Fördrivning",
+  "type": "besvarjelse",
+  "system": {
+    "school": "spiritism",
+    "sValue": 16,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Sx2 rutor",
+    "description": "<p>Exorcism av spöke/lyktgubbe/ande; dansar runt platsen; vid lyckat PSY-slag: permanent exorcism</p>",
+    "ritual": true
+  },
+  "_id": "oPCgA4SUXdzp20FW",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!oPCgA4SUXdzp20FW"
+}

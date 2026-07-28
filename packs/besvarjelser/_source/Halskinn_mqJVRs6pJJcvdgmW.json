@@ -1,0 +1,34 @@
+{
+  "name": "Halskinn",
+  "type": "besvarjelse",
+  "system": {
+    "school": "mentalism",
+    "sValue": 4,
+    "kvick": true,
+    "duration": "¼ minut",
+    "range": "Personlig",
+    "description": "<p>Extremt halt skinn; halverar chansen för någon att hålla fast mentalisten</p>",
+    "ritual": false
+  },
+  "_id": "mqJVRs6pJJcvdgmW",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mqJVRs6pJJcvdgmW"
+}

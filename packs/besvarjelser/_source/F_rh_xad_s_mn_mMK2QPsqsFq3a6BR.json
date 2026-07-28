@@ -1,0 +1,34 @@
+{
+  "name": "Förhäxad sömn",
+  "type": "besvarjelse",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 4,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Sx2 rutor",
+    "description": "<p>Försätter offret i djup sömn; vaknar ej förrän man försöker väcka/skada</p>",
+    "ritual": false
+  },
+  "_id": "mMK2QPsqsFq3a6BR",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mMK2QPsqsFq3a6BR"
+}

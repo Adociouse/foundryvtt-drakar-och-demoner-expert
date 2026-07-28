@@ -1,0 +1,34 @@
+{
+  "name": "Stridsrop",
+  "type": "besvarjelse",
+  "system": {
+    "school": "rostmagi",
+    "sValue": 6,
+    "kvick": true,
+    "duration": "Sx1 SR",
+    "range": "Sx2 rutor",
+    "description": "<p>Allierade: +5 CL i strid, behöver ej slå moralslag under varaktigheten</p>",
+    "ritual": false
+  },
+  "_id": "qG4ZBOHcMbTUJVb7",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!qG4ZBOHcMbTUJVb7"
+}

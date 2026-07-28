@@ -1,0 +1,34 @@
+{
+  "name": "Spindelväv",
+  "type": "besvarjelse",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Sx1 rutor",
+    "description": "<p>Konformad klibbig spindelväv; fastnar om ej STY>14+E (nytt slag varje minut)</p>",
+    "ritual": false
+  },
+  "_id": "yZQHNASENr3c5Tlr",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!yZQHNASENr3c5Tlr"
+}

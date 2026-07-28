@@ -1,0 +1,34 @@
+{
+  "name": "Stålslag",
+  "type": "besvarjelse",
+  "system": {
+    "school": "mentalism",
+    "sValue": 12,
+    "kvick": false,
+    "duration": "S1 SR",
+    "range": "Personlig",
+    "description": "<p>Naturliga vapen: skada =(E+1)T (tärning), CL +1/E; vapnen är hårda (skadar ej vid träff på rustning)</p>",
+    "ritual": false
+  },
+  "_id": "ZZw5Gy1HmwMk1RWD",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZZw5Gy1HmwMk1RWD"
+}

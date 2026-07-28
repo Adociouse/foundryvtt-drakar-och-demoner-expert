@@ -1,0 +1,34 @@
+{
+  "name": "Tryckvåg",
+  "type": "besvarjelse",
+  "system": {
+    "school": "rostmagi",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Tryckvåg med 10×E STY slagkraft knockar bakåt/omkull allt inom räckvidden</p>",
+    "ritual": false
+  },
+  "_id": "unpp4QAN6OrMWxBd",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!unpp4QAN6OrMWxBd"
+}

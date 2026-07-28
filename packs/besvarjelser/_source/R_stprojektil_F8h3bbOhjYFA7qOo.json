@@ -1,0 +1,34 @@
+{
+  "name": "Röstprojektil",
+  "type": "besvarjelse",
+  "system": {
+    "school": "rostmagi",
+    "sValue": 10,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Auto-träff; 1T6+E KP skada (sound-baserad attack)</p>",
+    "ritual": false
+  },
+  "_id": "F8h3bbOhjYFA7qOo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!F8h3bbOhjYFA7qOo"
+}

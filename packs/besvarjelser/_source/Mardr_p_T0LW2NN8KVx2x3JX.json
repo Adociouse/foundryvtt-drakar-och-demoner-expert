@@ -1,0 +1,34 @@
+{
+  "name": "Mardråp",
+  "type": "besvarjelse",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 26,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>Tvingas en just avliden kvinna att bli en mara; ett uppfyllbart villkor ger maran möjlighet att lämna världen</p>",
+    "ritual": false
+  },
+  "_id": "T0LW2NN8KVx2x3JX",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!T0LW2NN8KVx2x3JX"
+}

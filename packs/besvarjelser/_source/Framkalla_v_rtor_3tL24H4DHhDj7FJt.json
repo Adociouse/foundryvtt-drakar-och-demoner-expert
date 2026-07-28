@@ -1,0 +1,34 @@
+{
+  "name": "Framkalla vårtor",
+  "type": "besvarjelse",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 1,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Sx2 rutor",
+    "description": "<p>Ex5 vårtor växer ut på vald kroppsdel hos offret</p>",
+    "ritual": false
+  },
+  "_id": "3tL24H4DHhDj7FJt",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785227484388,
+    "modifiedTime": 1785227484388,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!3tL24H4DHhDj7FJt"
+}
