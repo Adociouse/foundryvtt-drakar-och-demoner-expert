@@ -8,7 +8,11 @@
     "range": "Personlig",
     "description": "<p>Förutspår vädret E×24 timmar framåt med hög precision.</p>",
     "ritual": false,
-    "kvick": false
+    "kvick": false,
+    "source": {
+      "book": "formelboken",
+      "page": "3-16"
+    }
   },
   "_id": "8AztA1r5v7e6GTQT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/besvarjelser/vaderforutsagelse.png",

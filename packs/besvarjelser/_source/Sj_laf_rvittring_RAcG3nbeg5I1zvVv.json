@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Beröring",
     "description": "<p>Offrets PSY minskar permanent med 1T3+E; vid PSY=0 inträder döden</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "RAcG3nbeg5I1zvVv",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

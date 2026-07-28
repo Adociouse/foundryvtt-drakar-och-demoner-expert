@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -48,6 +50,8 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
         initial: "sekundar",
         choices: ["primar", "yrkesfardighet", "sekundar"]
       }),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
   }

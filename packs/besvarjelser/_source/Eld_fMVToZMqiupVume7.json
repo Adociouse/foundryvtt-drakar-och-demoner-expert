@@ -8,7 +8,11 @@
     "description": "<p>Temperaturhöjning i 1 m sfär vid målet; 1T6 skada per effektgrad (alternativt E sfärer med lägre skada).</p>",
     "duration": "",
     "ritual": false,
-    "kvick": false
+    "kvick": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "fMVToZMqiupVume7",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/besvarjelser/eld.png",

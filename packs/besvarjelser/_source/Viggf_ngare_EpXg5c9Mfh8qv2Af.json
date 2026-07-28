@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Personlig",
     "description": "<p>Under åskoväder: E×höjd% träffs av blixt; 5T6 skada men 8+4/E om till PSY</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "EpXg5c9Mfh8qv2Af",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

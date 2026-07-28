@@ -8,7 +8,11 @@
     "duration": "¼ veckor",
     "range": "½ rutor",
     "description": "<p>Offret finner magikern fascinerande och vill bli vän; vid extra E: förälskelse/fler mål</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26-34"
+    }
   },
   "_id": "5N1ZbAmCOZL2qzRR",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",

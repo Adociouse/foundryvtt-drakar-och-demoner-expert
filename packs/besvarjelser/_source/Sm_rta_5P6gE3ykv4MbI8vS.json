@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx10 rutor",
     "description": "<p>Svåra smärtor; STY, SMI och förflyttning halveras; misslyckat FYS-slag → handlingsförlamad</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "5P6gE3ykv4MbI8vS",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

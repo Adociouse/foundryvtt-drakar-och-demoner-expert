@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Tjuv (T&L s.15).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/stratrovare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/stratrovare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/stratrovare-kvinna.png",
+    "source": {
+      "book": "tl",
+      "page": "15"
+    }
   },
   "_id": "dodeYtjuvstratro",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/stratrovare-man.png",

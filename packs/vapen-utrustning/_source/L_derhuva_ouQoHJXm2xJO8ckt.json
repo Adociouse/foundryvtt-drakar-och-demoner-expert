@@ -7,7 +7,11 @@
     "abs": 2,
     "price": 15,
     "weight": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "ouQoHJXm2xJO8ckt",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/laderhuva.png",

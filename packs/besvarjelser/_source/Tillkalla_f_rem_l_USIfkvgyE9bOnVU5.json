@@ -8,7 +8,11 @@
     "duration": "Omedelbar + special",
     "range": "Beröring",
     "description": "<p>Rör föremål + person; kommandoord kallar sedan föremålet till personens hand automatiskt</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "USIfkvgyE9bOnVU5",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

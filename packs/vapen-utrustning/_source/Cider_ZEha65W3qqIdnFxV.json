@@ -9,7 +9,10 @@
     "priceUnit": "sm",
     "priceNote": "10 per kagge",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><em>Källa: Magi-regelboken s.43-48 (Mat & dryck).</em></p>"
   },
   "_id": "ZEha65W3qqIdnFxV",

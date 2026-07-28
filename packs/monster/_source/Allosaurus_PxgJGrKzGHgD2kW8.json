@@ -58,7 +58,11 @@
       "max": 0
     },
     "skills": "",
-    "biography": ""
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": ""
+    }
   },
   "_id": "PxgJGrKzGHgD2kW8",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/allosaurus.png",

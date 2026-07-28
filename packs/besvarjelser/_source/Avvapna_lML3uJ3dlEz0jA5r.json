@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Staven i marken attraherar 5×E metallvapen (BEP×4 vs stavmagikers färdighet)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "lML3uJ3dlEz0jA5r",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

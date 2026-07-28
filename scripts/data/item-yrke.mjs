@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -52,6 +54,8 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
           })
         })
       ),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" }),
       // Könsvarianter av porträttbilden — visas i rollpersonsskaparens yrkesval
       // beroende på tidigare valt kön (character-wizard.mjs). Tomt = ingen

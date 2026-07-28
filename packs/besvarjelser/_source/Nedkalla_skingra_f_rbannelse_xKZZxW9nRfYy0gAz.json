@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "10 mil",
     "description": "<p>Nedkallar förbannelse över känd person; häxan måste känna personens namn och varsebli denne</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "xKZZxW9nRfYy0gAz",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

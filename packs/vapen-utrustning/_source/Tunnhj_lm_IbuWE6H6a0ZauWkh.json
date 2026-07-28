@@ -7,7 +7,11 @@
     "abs": 8,
     "price": 300,
     "description": "<p>Halverar alla uppmärksamhetsfärdigheter (Lyssna, Spana etc.).</p>",
-    "weight": 0
+    "weight": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "IbuWE6H6a0ZauWkh",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/tunnhjalm.png",

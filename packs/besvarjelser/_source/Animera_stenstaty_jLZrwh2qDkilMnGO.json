@@ -8,7 +8,11 @@
     "duration": "Sx2 SR (aktiv)",
     "range": "Sx2 rutor",
     "description": "<p>Animerar stenskulptur med KRAFTsymbol: 5 STO/E; STY 4/E, STO 5/E, FYS 7/E, SMI 2/E, INT 2, abs 1/E; kräver Stenskulptering B2+</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "61-65"
+    }
   },
   "_id": "jLZrwh2qDkilMnGO",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",

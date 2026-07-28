@@ -8,7 +8,11 @@
     "duration": "¼ minut",
     "range": "Sx10 rutor",
     "description": "<p>Offret förlorar förmågan att tänka klart; står still; försvarar sig om det angrips</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "iP5sepiVnl5ZLUHY",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "2 rutor",
     "description": "<p>Avläser exakt hur många PSY-poäng offret har just nu</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "6jHjhqYSe5xxLIrT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

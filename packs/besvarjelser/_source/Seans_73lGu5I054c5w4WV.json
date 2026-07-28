@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Obegränsad",
     "description": "<p>Kommunicerar med döda var som helst (PSY vs dödes PSY×3); assistenter lägger till PSY/2</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "73lGu5I054c5w4WV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Sx2 rutor",
     "description": "<p>Offret glömmer allt under E² timmar bakåt i tid; permanent minnesförlust</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "UiHOPI02oYlUVGLF",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

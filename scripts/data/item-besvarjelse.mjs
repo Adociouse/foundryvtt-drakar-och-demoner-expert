@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -35,6 +37,8 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
           value: new fields.StringField({ required: true, initial: "" })
         })
       ),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
   }

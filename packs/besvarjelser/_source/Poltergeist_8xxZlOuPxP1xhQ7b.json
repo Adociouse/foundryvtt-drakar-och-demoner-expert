@@ -8,7 +8,11 @@
     "duration": "¼ minuter",
     "range": "Sx2 rutor",
     "description": "<p>Vild ande orsakar kaos: alla föremål flyger, alla ljud ökar i styrka</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "8xxZlOuPxP1xhQ7b",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

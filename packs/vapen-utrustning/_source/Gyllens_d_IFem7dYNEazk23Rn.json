@@ -9,7 +9,10 @@
     "priceUnit": "sm",
     "priceNote": "80 sm/hg",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><strong>Chans hos örthandlare:</strong> 15% ¹</p><p><em>Källa: Magi-regelboken s.43-48 (Droger).</em></p>"
   },
   "_id": "IFem7dYNEazk23Rn",

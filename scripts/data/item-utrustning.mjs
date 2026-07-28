@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -47,7 +49,9 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
       // föremålets ev. ActiveEffects appliceras (DoDeActiveEffect.isGateOpen).
       // Vanlig utrustning bär sällan effekter, men en magisk ryggsäck kan.
       equipped: new fields.BooleanField({ required: false, initial: false }),
-      source: new fields.StringField({ required: false, initial: "" }),
+      // Bok + sida — se fields-source.mjs. Var tidigare en fri sträng
+      // ("Magi-regelboken s.43-48"); migrerad till strukturerad form 2026-07-28.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
   }

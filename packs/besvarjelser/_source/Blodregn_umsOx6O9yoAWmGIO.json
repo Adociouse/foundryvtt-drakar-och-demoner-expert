@@ -8,7 +8,11 @@
     "duration": "1 minut",
     "range": "Sx50 rutor",
     "description": "<p>Blodregn i (3×E)² rutor kvadrat; PSY vs 15+E eller slå på Skräcktabellen</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "umsOx6O9yoAWmGIO",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

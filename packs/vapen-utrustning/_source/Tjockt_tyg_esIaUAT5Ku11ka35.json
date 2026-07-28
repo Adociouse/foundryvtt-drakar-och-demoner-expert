@@ -7,7 +7,11 @@
     "abs": 1,
     "price": 20,
     "description": "<p>Vikt beror på bärarens STO — se UTRUSTNING.md vikttabell (viktkod A).</p>",
-    "weight": 0
+    "weight": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "esIaUAT5Ku11ka35",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/tjockt-tyg.png",

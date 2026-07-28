@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Vidrigt skrik; alla inom räckvidden slår på Skräcktabellen; TYSTNAD motverkar (E vs E)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53-56"
+    }
   },
   "_id": "9NpS2kSdham0vNUV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

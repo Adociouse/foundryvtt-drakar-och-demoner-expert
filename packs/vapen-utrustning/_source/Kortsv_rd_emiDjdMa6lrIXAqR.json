@@ -13,7 +13,11 @@
     "category": "narstrid",
     "price": 190,
     "range": "",
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "emiDjdMa6lrIXAqR",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/kortsvard.png",

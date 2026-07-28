@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Personlig",
     "description": "<p>Höjer STY till rasens naturliga max (människa: 18); kombinerbar med OKA etc.</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "DnO5DVH93trecvgY",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

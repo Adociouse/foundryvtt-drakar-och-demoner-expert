@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Personlig",
     "description": "<p>Snurrande stav skapar sfär: besvärjelser måste övervinna E; projektiler −3 CL/E; 1 nä.stridsvapen/E pareras auto</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "d61iHlfD7cUA52kr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

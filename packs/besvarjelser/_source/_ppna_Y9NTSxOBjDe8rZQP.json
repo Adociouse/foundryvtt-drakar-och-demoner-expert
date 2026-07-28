@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Beröring",
     "description": "<p>Öppnar låsta dörrar/kistor; häver magisk Försegling (E vs E)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "Y9NTSxOBjDe8rZQP",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

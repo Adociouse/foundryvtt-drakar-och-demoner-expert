@@ -20,7 +20,11 @@
     "description": "<p>Skogsalverna lever i trädkronorna och är det vanligaste alvsläktet bland äventyrare.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/skogsalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/skogsalv-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "alver",
+      "page": "22"
+    }
   },
   "_id": "dodeAlvSkogsalv1",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/skogsalv-man.png",

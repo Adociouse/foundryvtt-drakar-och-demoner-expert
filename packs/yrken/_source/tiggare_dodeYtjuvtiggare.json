@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Tjuv (T&L s.15-16).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tiggare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tiggare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tiggare-kvinna.png",
+    "source": {
+      "book": "tl",
+      "page": "15-16"
+    }
   },
   "_id": "dodeYtjuvtiggare",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tiggare-man.png",

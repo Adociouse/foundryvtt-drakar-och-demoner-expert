@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Tjuv (T&L s.13).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fixare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fixare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fixare-kvinna.png",
+    "source": {
+      "book": "tl",
+      "page": "13"
+    }
   },
   "_id": "dodeYtjuvfixare0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fixare-man.png",

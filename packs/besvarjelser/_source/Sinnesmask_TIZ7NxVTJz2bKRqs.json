@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Sx2 rutor",
     "description": "<p>Maskerar sinnet; verkar tillhöra annan varelsetyp vid VARSEBLIVNING/TANKEÖVERFÖRING</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "TIZ7NxVTJz2bKRqs",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

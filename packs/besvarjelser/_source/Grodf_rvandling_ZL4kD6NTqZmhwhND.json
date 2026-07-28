@@ -8,7 +8,11 @@
     "duration": "¼ veckor",
     "range": "Sx2 rutor",
     "description": "<p>Förvandlar människa till groda; häver ej med PERMANENS; häver om kvinna kysser grodan</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "ZL4kD6NTqZmhwhND",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

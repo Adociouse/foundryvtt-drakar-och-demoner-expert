@@ -20,7 +20,11 @@
     "description": "<p>Det äldsta och mäktigaste alvsläktet — maktlystna, och de mest onda av alvraserna. Skickliga magiker.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "alver",
+      "page": "22"
+    }
   },
   "_id": "dodeAlvHogalv000",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/hogalv-man.png",

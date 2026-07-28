@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Personlig",
     "description": "<p>Identifierar alla döda material (metaller, ädelstenar) i ett vidrört föremål</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "dtbJetglu4v4BH0j",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

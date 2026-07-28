@@ -8,7 +8,11 @@
     "duration": "4 min (+5 min/E)",
     "range": "Sx10 rutor",
     "description": "<p>Avlägsnar allt ljus i 6m sfär (+3m/E); LJUS måste övervinna</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "UlvgLg02pZqzDhn1",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

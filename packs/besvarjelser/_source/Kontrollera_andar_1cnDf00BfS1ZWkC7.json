@@ -8,7 +8,11 @@
     "duration": "Konc.",
     "range": "Sx2 rutor",
     "description": "<p>Ger kontroll över osaliga andar (spöken, gastar, vålnader). Fungerar som Kontrollera lägre odöd.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "1cnDf00BfS1ZWkC7",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

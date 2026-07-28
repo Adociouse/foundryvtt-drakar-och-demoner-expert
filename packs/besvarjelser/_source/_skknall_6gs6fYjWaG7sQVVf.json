@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Personlig",
     "description": "<p>Blixtknall; varelser 0–2 rutor bort immuna; varelser upp till 10 rutor bort tar 2T6 KP</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "6gs6fYjWaG7sQVVf",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

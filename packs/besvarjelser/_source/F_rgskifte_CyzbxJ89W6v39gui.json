@@ -8,7 +8,11 @@
     "duration": "¼ veckor",
     "range": "Sx2 rutor",
     "description": "<p>E döda föremål byter färg enligt önskemål</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "CyzbxJ89W6v39gui",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

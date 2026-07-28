@@ -20,7 +20,11 @@
     "description": "<p>Injirerna är nomadiska ryttare som klarar temperaturer från −40 °C till +40 °C.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/injir-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/injir-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "alver",
+      "page": "22"
+    }
   },
   "_id": "dodeAlvInjir0000",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/injir-man.png",

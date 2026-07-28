@@ -21,7 +21,11 @@
         "name": "Djurhelning",
         "attribute": "psy"
       }
-    ]
+    ],
+    "source": {
+      "book": "rp",
+      "page": "11-22"
+    }
   },
   "_id": "XkPUZFz1f0e1avVM",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker.png",

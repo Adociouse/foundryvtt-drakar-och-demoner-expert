@@ -52,7 +52,11 @@
       "max": 0
     },
     "skills": "",
-    "biography": ""
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": ""
+    }
   },
   "_id": "YPL9MVq2sYDj8TdX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/backahast.png",

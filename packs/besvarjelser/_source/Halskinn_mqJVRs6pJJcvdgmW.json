@@ -8,7 +8,11 @@
     "duration": "¼ minut",
     "range": "Personlig",
     "description": "<p>Extremt halt skinn; halverar chansen för någon att hålla fast mentalisten</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "mqJVRs6pJJcvdgmW",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

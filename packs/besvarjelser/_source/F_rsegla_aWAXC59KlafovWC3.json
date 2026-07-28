@@ -8,7 +8,11 @@
     "duration": "¼ min (+15 min/E)",
     "range": "Beröring",
     "description": "<p>Binder ihop kanter på två passande icke-levande föremål; +20 KP var</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "aWAXC59KlafovWC3",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Personlig",
     "description": "<p>Kan ej tappa orienteringen; känner alltid världsstreckarna exakt</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "EMXt9bvV737j98YW",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

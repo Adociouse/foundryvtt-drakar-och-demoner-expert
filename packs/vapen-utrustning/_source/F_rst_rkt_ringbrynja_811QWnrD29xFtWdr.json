@@ -7,7 +7,11 @@
     "abs": 7,
     "price": 175,
     "description": "<p>Viktkod J — vikt beror på bärarens STO. Klirrar: Smyga halveras.</p>",
-    "weight": 0
+    "weight": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "811QWnrD29xFtWdr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/forstarkt-ringbrynja.png",

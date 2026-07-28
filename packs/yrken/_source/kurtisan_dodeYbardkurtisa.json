@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Bard (T&L s.9).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kurtisan-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kurtisan-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kurtisan-kvinna.png",
+    "source": {
+      "book": "tl",
+      "page": "9"
+    }
   },
   "_id": "dodeYbardkurtisa",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kurtisan-man.png",

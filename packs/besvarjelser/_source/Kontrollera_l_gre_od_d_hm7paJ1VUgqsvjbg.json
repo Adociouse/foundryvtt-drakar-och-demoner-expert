@@ -8,7 +8,11 @@
     "duration": "Konc.",
     "range": "Sx2 rutor",
     "description": "<p>Ger kontroll över en skelett, zombie eller likätare; varje extra effektgrad ger ytterligare en odöd. Varar så länge trollkarlen koncentrerar sig. Kan också användas för att bryta en annan trollkarls kontroll — då måste den egna PSY först övervinna den kontrollerande magikerns PSY. Genom att först ta kontroll och sedan förhäxa den odöde en gång till kommenderas denne till gravens vila, fullständigt och för all framtid.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "hm7paJ1VUgqsvjbg",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

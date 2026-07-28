@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Beröring",
     "description": "<p>Tvingas en just avliden kvinna att bli en mara; ett uppfyllbart villkor ger maran möjlighet att lämna världen</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "T0LW2NN8KVx2x3JX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

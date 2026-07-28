@@ -20,7 +20,11 @@
     "description": "<p>Grottalverna lever i naturliga grottsystem under jorden och är skickliga konsthantverkare med ett ofelbart orienteringssinne under jord.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/grottalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/grottalv-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "alver",
+      "page": "22"
+    }
   },
   "_id": "dodeAlvGrottalv0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/grottalv-man.png",

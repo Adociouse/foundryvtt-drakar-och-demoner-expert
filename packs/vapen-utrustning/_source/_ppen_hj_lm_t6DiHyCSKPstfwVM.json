@@ -7,7 +7,11 @@
     "abs": 4,
     "price": 100,
     "weight": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "t6DiHyCSKPstfwVM",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/oppen-hjalm.png",

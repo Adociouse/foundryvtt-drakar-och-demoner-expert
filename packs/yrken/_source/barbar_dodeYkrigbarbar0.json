@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.4).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/barbar-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/barbar-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/barbar-kvinna.png",
+    "source": {
+      "book": "kh",
+      "page": "4"
+    }
   },
   "_id": "dodeYkrigbarbar0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/barbar-man.png",

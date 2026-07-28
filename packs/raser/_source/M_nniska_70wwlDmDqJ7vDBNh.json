@@ -20,7 +20,11 @@
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "rp",
+      "page": "9-10"
+    }
   },
   "_id": "70wwlDmDqJ7vDBNh",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska.png",

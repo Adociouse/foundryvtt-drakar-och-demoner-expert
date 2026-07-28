@@ -8,7 +8,11 @@
     "range": "Beröring",
     "description": "<p>Helar E KP hos offret.</p>",
     "ritual": false,
-    "kvick": false
+    "kvick": false,
+    "source": {
+      "book": "formelboken",
+      "page": "3-16"
+    }
   },
   "_id": "GUt7uFFwbms6DnCg",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/besvarjelser/hela.png",

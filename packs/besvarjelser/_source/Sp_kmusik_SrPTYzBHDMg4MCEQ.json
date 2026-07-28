@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
     "description": "<p>Frammanar musik från valfritt instrument; kan låta den ljuda var som helst inom räckvidden</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "SrPTYzBHDMg4MCEQ",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

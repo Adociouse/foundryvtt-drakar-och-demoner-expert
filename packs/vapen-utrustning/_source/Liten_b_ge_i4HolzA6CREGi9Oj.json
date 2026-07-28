@@ -13,7 +13,11 @@
     "price": 125,
     "length": 0,
     "baseValue": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "i4HolzA6CREGi9Oj",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/liten-bage.png",

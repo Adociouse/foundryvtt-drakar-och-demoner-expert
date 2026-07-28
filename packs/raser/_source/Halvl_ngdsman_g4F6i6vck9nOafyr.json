@@ -20,7 +20,11 @@
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-kvinna.png",
-    "movementMod": -2
+    "movementMod": -2,
+    "source": {
+      "book": "rp",
+      "page": "9-10"
+    }
   },
   "_id": "g4F6i6vck9nOafyr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman.png",

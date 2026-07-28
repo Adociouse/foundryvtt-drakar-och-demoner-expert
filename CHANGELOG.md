@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+- **Source references on all content** — every race, profession, skill, weapon, armour, equipment item, spell, ability and NPC now carries `system.source = { book, page }`, shown and editable on its sheet. Book keys resolve through `CONFIG.DODE.books` to real titles ("Krigarens Handbok", "Drakar och Demoner Expert I — Rollpersonen"), never PDF filenames. 560 documents backfilled from the curated docs' own citations; unknown pages are left blank rather than guessed
+- ⚠ `formaga.system.source` (which meant "bas"/"ras"/"yrke") was renamed to `system.origin` so that `source` means the book everywhere
+
 ### Fixed
 - **Damage bonus and movement were wrong for every character.** `DODE.damageBonusTable` and `DODE.movementTable` held values that appear in no source book — both carried their own "needs verifying" flag and turned out to be extrapolations. Corrected against Rollpersonen s.25, verified from the PDF and identical to Spelledarboken s.32. Movement also used `(SMI+FYS+STO)/3` where the rule sums the three attributes, and the race modifiers (Anka −2, Alv +1, Dvärg −2, Halvlängdsman −2) were missing entirely — now a `movementMod` field on `ras`. ⚠ This changes existing characters: 12/12/12 goes from 9 to 10 squares, and STY+STO 24 loses a phantom +1T4 damage bonus
 

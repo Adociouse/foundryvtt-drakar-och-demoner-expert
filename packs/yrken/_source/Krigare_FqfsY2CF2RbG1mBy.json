@@ -45,7 +45,11 @@
         "name": "Trästav",
         "attribute": "smi"
       }
-    ]
+    ],
+    "source": {
+      "book": "rp",
+      "page": "11-22"
+    }
   },
   "_id": "FqfsY2CF2RbG1mBy",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare.png",

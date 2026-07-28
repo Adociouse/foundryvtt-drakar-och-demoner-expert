@@ -8,7 +8,11 @@
     "duration": "S/4 SR",
     "range": "Beröring",
     "description": "<p>Jättesprång utan ansats: 4m vågrätt/2m lodrätt per E; SMI-kast för landning</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "nr85Meu0JtDfihLX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

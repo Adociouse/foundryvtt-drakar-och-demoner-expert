@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
     "description": "<p>E effektgrader anger riktningen till en ande var inom räckvidden (slumpmässig ande)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "AWJqUkXu7RxMzDJX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

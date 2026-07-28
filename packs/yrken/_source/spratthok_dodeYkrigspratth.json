@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.8).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-kvinna.png",
+    "source": {
+      "book": "kh",
+      "page": "8"
+    }
   },
   "_id": "dodeYkrigspratth",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-man.png",

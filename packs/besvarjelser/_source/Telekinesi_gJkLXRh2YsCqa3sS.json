@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "¼ km",
     "description": "<p>Rör 1 BEP med tankekraft vid 10 rutor/SR, 1m höjd; extra E = +BEP, +hastighet eller +höjd</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "gJkLXRh2YsCqa3sS",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Personlig",
     "description": "<p>Clairvoyance: ser/hör i känt område (120m); obekant: 30m; +1 dag bakåt/extra E; vidrör föremål: se historia</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "ubzFGzSJfMd1SJJv",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

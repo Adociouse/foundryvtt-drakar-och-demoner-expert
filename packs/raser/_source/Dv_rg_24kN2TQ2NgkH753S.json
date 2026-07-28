@@ -20,7 +20,11 @@
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-kvinna.png",
-    "movementMod": -2
+    "movementMod": -2,
+    "source": {
+      "book": "rp",
+      "page": "9-10"
+    }
   },
   "_id": "24kN2TQ2NgkH753S",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg.png",

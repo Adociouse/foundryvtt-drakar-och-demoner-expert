@@ -9,7 +9,10 @@
     "priceUnit": "sm",
     "priceNote": "",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><strong>Lastförmåga:</strong> 500 BEP · <strong>Minsta dragdjur:</strong> –</p><p><em>Källa: Magi-regelboken s.43-48 (Fordon).</em></p>"
   },
   "_id": "MLf40GWVCVkPn1ri",

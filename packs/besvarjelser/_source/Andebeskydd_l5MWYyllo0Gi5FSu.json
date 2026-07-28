@@ -8,7 +8,11 @@
     "duration": "¼ minut",
     "range": "Personlig",
     "description": "<p>Skydd mot andar/gasters attacker (PSY vs andens PSY); −(5+E) på Skräcktabellen; −E on grundegenskapsminskning</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "l5MWYyllo0Gi5FSu",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

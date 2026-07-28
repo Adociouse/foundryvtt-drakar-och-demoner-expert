@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Special",
     "description": "<p>Telepatisk kontakt med känd person (obegränsat avstånd); +1 person/extra E</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "1ByFt4lbzronzuVR",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

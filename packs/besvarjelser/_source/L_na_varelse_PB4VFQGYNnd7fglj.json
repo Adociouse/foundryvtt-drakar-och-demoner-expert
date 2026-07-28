@@ -8,7 +8,11 @@
     "duration": "¼ timmar",
     "range": "Sx2 km",
     "description": "<p>Häxans gjäl tar plats i en varelse och upplever världen genom dess sinnen</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "PB4VFQGYNnd7fglj",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

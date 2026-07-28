@@ -9,7 +9,10 @@
     "priceUnit": "sm",
     "priceNote": "",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><em>Källa: Magi-regelboken s.43-48 (Diverse verktyg).</em></p>"
   },
   "_id": "4j9ECg1O2jL8QDVK",

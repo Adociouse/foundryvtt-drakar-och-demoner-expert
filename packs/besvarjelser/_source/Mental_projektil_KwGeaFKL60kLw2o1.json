@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Som Mental attack men längre räckvidd</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "KwGeaFKL60kLw2o1",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

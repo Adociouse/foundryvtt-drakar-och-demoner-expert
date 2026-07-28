@@ -7,7 +7,11 @@
     "abs": 0,
     "description": "<p>Ger sköldarm + bröst-parering (alternativa systemet). Se Liten sköld för status.</p>",
     "weight": 0,
-    "price": 0
+    "price": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "JPF6K6fY3QN2zfFm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/medelstor-skold.png",

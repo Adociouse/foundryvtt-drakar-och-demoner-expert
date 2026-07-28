@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Sx1 rutor",
     "description": "<p>Konformad klibbig spindelväv; fastnar om ej STY>14+E (nytt slag varje minut)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "yZQHNASENr3c5Tlr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

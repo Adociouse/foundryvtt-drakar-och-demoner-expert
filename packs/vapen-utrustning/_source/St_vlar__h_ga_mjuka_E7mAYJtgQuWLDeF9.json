@@ -9,7 +9,10 @@
     "priceUnit": "km",
     "priceNote": "",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kläder).</em></p>"
   },
   "_id": "E7mAYJtgQuWLDeF9",

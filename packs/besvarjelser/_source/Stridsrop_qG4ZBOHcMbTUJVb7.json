@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
     "description": "<p>Allierade: +5 CL i strid, behöver ej slå moralslag under varaktigheten</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53-56"
+    }
   },
   "_id": "qG4ZBOHcMbTUJVb7",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

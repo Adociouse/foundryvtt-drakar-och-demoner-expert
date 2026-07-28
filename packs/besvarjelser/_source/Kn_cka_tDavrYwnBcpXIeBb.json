@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "½ rutor",
     "description": "<p>Skadar föremål; −10 BV (E1), +2 BV per extra E; magiska föremål gör motstånd</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "tDavrYwnBcpXIeBb",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

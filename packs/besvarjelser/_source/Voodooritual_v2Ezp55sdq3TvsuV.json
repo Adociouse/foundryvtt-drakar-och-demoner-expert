@@ -8,7 +8,11 @@
     "duration": "Konc.",
     "range": "special",
     "description": "<p>Magikern skapar i ritualen en docka av vax som föreställer en bestämd person. Dockan måste innehålla något som kommer från offrets kropp, t.ex. en hårlock. Dockan torteras sedan av magikern. Lyckas ritualen drabbas offret av våldsamma smärtor som gör det fullständigt omöjligt att utföra några som helst handlingar — offret ligger bara och vrider sig — men smärtan ger inga skador, och när ritualen upphör är personen oskadd. Räckvidden är E1 10 m, E2 100 m, E3 1 000 m, E4 10 000 m, E5 100 000 m osv. Magikern behöver inte veta var offret finns; det räcker att offret är inom räckvidden. <em>[Ritual (R), Formel (F)]</em></p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "v2Ezp55sdq3TvsuV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

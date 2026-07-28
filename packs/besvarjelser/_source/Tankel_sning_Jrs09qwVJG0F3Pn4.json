@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Sx2 rutor",
     "description": "<p>Läser offrets tankar; offret märker inget; fungerar ej mot HJÄRNBLANK</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "Jrs09qwVJG0F3Pn4",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

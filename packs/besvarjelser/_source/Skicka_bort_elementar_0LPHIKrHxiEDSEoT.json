@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
     "description": "<p>Återsänder en elementar till dess hemplan; E vs elementarens E</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "12-18"
+    }
   },
   "_id": "0LPHIKrHxiEDSEoT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",

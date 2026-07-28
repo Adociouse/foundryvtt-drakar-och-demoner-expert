@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Sx10 rutor",
     "description": "<p>Elementarmantel runt mål; +1 abs/E; visuell avskräckningseffekt (ej verklig)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "yHNkBuDFQqlzFbt0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

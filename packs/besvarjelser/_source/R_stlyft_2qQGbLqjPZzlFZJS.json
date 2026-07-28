@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
     "description": "<p>Lyfter föremål upp till E×1 BEP via röstens kraft</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53-56"
+    }
   },
   "_id": "2qQGbLqjPZzlFZJS",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

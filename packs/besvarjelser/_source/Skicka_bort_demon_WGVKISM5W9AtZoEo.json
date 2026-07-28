@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Sx10 rutor",
     "description": "<p>Förvisar en demon permanent till demonplanet; ritual</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "12-18"
+    }
   },
   "_id": "WGVKISM5W9AtZoEo",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",

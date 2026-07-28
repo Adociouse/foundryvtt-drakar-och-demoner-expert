@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Sx2 rutor",
     "description": "<p>Alla intelligenta slår på Skräcktabellen (max en gång per varaktighet)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26-34"
+    }
   },
   "_id": "bQNIaQigQ1CCg4Do",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",

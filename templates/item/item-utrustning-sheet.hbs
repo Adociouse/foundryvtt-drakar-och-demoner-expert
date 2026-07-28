@@ -22,12 +22,19 @@
     <input type="text" name="system.priceNote" value="{{system.priceNote}}" placeholder="t.ex. 4 per kagge — lämna tomt för ett vanligt styckpris" />
   </label>
   <label class="checkbox-field"><input type="checkbox" name="system.equipped" {{checked system.equipped}} /> {{localize "DODE.Equipment.Equipped"}}</label>
-  <label class="wide">{{localize "DODE.Equipment.Source"}} <input type="text" name="system.source" value="{{system.source}}" placeholder="t.ex. Magi-regelboken s.43" /></label>
 </section>
 
 <section class="item-derived">
   <span title="{{localize 'DODE.Equipment.PriceSmHint'}}">{{localize "DODE.Equipment.PriceSm"}}: <strong>{{system.priceSm}}</strong> sm</span>
   <span>{{localize "DODE.Equipment.TotalWeight"}}: <strong>{{system.totalWeight}}</strong> BEP</span>
+</section>
+
+<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+  <label>{{localize "DODE.Source.Book"}}
+    <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
+  </label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 
 <section class="item-description">

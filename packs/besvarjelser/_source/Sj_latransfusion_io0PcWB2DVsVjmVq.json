@@ -8,7 +8,11 @@
     "duration": "¼ dygn",
     "range": "Beröring",
     "description": "<p>Flyttar gjäl till kropp utan gjäl (5–10 min död/SJÄALAFALLA); sjäalen tar INT/PSY/KAR/fäardigheter</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "io0PcWB2DVsVjmVq",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

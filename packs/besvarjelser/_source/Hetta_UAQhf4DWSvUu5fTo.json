@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Sx2 rutor",
     "description": "<p>Värmer vatteninnehållande mål; 1 KP/SR (eskaler.); 5°/1°/SR i vatten; rustningar hjälper ej</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26-34"
+    }
   },
   "_id": "UAQhf4DWSvUu5fTo",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",

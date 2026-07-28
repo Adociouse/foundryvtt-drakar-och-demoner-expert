@@ -8,7 +8,11 @@
     "duration": "¼ dygn",
     "range": "Sx2 rutor",
     "description": "<p>Offret får alla yttre symptom på pest; hälsan påverkas ej; INT-slag för att inse</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "gpG8foE5C5jwxatz",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

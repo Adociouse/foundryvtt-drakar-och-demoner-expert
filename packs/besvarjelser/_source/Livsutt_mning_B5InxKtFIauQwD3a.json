@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Beröring",
     "description": "<p>Om en intelligent varelse blir förhäxad kan magikern suga ut livsenergi ur den. Offrets PSY minskas med 2 poäng per effektgrad och poängen överförs till magikern. Offrets PSY kan inte reduceras till lägre än noll — då dör det. Överlever offret återvinner det de förlorade PSY-poängen på vanligt sätt. Magikern förlorar de erövrade poängen i en takt av 1 per timme om han inte förbrukat dem tidigare. Bland ondskefulla nekromantiker används besvärjelsen för att suga ut psykisk energi som sedan genast används för att kasta andra besvärjelser.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "B5InxKtFIauQwD3a",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

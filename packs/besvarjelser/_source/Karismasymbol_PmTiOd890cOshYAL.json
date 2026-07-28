@@ -8,7 +8,11 @@
     "duration": "Permanent (bärs)",
     "range": "Special",
     "description": "<p>Symbolen görs i metall/ben/trä/sten som synligt smycke; ger KAR-ökning; verkar ej mot symbolister</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "61-65"
+    }
   },
   "_id": "PmTiOd890cOshYAL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",

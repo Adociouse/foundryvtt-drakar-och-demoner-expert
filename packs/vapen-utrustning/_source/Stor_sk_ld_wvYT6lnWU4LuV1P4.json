@@ -7,7 +7,11 @@
     "abs": 0,
     "description": "<p>1/20 chans att parerade projektiler fastnar i skölden. Ger sköldarm+mage+bröst-parering (alternativa systemet). Se Liten sköld för status.</p>",
     "weight": 0,
-    "price": 0
+    "price": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "wvYT6lnWU4LuV1P4",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/stor-skold.png",

@@ -1,4 +1,5 @@
 import { DODE } from "../helpers/config.mjs";
+import { sourceField } from "./fields-source.mjs";
 
 const fields = foundry.data.fields;
 
@@ -42,6 +43,8 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
       })),
       skills: new fields.StringField({ required: false, initial: "" }),
       special: new fields.HTMLField({ required: false, initial: "" }),
+      // Bok + sida - se fields-source.mjs.
+      source: sourceField(),
       biography: new fields.HTMLField({ required: false, initial: "" })
     };
   }

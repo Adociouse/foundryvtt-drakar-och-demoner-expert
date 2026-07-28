@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Sx2 rutor",
     "description": "<p>Laggs på kvast; lyfter upp till 20 STO; styrs med tanken</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "YED5TJvQJZPRzfox",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

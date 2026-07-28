@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /** Vapen — UTRUSTNING.md (REG s.58-59). */
@@ -22,6 +24,8 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
       }),
       range: new fields.StringField({ required: false, initial: "" }),
       price: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
   }

@@ -33,6 +33,43 @@ DODE.contentPacks = {
   spells: ["drakar-och-demoner-expert.besvarjelser"]
 };
 
+/**
+ * Källböcker — RIKTIGA boktitlar, aldrig PDF-filnamn.
+ *
+ * Johans önskemål 2026-07-28: "Kan inte komma ihåg hur många gånger vi har letat
+ * efter var en sak stod i böckerna." Varje innehållsdokument bär därför ett
+ * `system.source = { book, page }` där `book` är en nyckel härifrån.
+ *
+ * Nycklarna är korta av praktiska skäl (de lagras på varje dokument), men det som
+ * VISAS är alltid `label`. `short` är förkortningen som används i de kurerade
+ * regeldokumenten i Roll20-projektet, så att en citering går att slå upp åt båda hållen.
+ */
+DODE.books = {
+  rp:          { label: "Drakar och Demoner Expert I — Rollpersonen", short: "RP" },
+  sl:          { label: "Drakar och Demoner Expert II — Spelledarboken", short: "SL" },
+  sb:          { label: "Drakar och Demoner Expert III — Spelarboken", short: "SB" },
+  regler:      { label: "Drakar och Demoner Expert — Regler", short: "REG" },
+  magi:        { label: "Drakar och Demoner Expert — Magi: Regelboken", short: "MAG" },
+  formelboken: { label: "Drakar och Demoner Expert — Magi: Formelboken", short: "FB" },
+  kh:          { label: "Krigarens Handbok", short: "KH" },
+  hh:          { label: "Hjältarnas Handbok", short: "HH" },
+  mh:          { label: "Magikerns Handbok", short: "MH" },
+  alver:       { label: "Alver", short: "Alver" },
+  svartfolk:   { label: "Svartfolk", short: "SF" },
+  tl:          { label: "Tjuvar och Lönnmördare", short: "T&L" },
+  mb1:         { label: "Monsterboken 1", short: "MB1" },
+  mb2:         { label: "Monsterboxen II — De humanoida raserna", short: "MB2" },
+  eget:        { label: "Eget innehåll (ingen bokkälla)", short: "—" }
+};
+
+/** "Alver s.22" — tom sträng om ingen källa är satt. Används av arken. */
+DODE.formatSource = function (source) {
+  if (!source?.book) return "";
+  const book = DODE.books[source.book];
+  if (!book) return source.book + (source.page ? ` s.${source.page}` : "");
+  return book.label + (source.page ? ` s.${source.page}` : "");
+};
+
 DODE.attributes = {
   sty: "DODE.Attribute.STY",
   sto: "DODE.Attribute.STO",

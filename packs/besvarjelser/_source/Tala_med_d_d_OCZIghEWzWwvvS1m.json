@@ -8,7 +8,11 @@
     "duration": "särskild",
     "range": "S/2 rutor",
     "description": "<p>Gör det möjligt att kommunicera med de döda. Trollkarlen måste befinna sig där varelsen dog eller ligger begraven, känna till den dödes namn och tala det språk varelsen gjorde för att kunna kalla på själen. Själen uppenbarar sig som en svagt skimrande gestalt. Per effektgrad får trollkarlen ställa en fråga; varje fråga besvaras med ja eller nej, eller med en gåta eller ett rim. Man kan inte kommunicera med odöda genom denna besvärjelse.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "OCZIghEWzWwvvS1m",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

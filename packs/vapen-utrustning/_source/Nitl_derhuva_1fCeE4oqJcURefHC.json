@@ -7,7 +7,11 @@
     "abs": 3,
     "price": 35,
     "weight": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "1fCeE4oqJcURefHC",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/nitladerhuva.png",

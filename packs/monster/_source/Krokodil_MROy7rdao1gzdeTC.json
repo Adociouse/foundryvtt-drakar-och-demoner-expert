@@ -52,7 +52,11 @@
       "max": 0
     },
     "skills": "",
-    "biography": ""
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": ""
+    }
   },
   "_id": "MROy7rdao1gzdeTC",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/krokodil.png",

@@ -8,7 +8,11 @@
     "duration": "¼ veckor",
     "range": "Sx1 km",
     "description": "<p>Skapar svart moln som ständigt svävar ½ km ovanför en vald person; synbart på 1 mils avstånd</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "sVptbFX1p8AaDkTm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

@@ -9,7 +9,10 @@
     "priceUnit": "sm",
     "priceNote": "×10",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><em>Källa: Magi-regelboken s.43-48 (Drag- och riddjur).</em></p>"
   },
   "_id": "y7Os2c1gKcX8T6HS",

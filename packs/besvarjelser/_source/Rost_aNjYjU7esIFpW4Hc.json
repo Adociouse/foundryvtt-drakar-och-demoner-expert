@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "½ rutor",
     "description": "<p>Omvandlar E² dm³ järn till rost vid pekat mål</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "aNjYjU7esIFpW4Hc",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

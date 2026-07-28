@@ -52,7 +52,11 @@
       "max": 0
     },
     "skills": "",
-    "biography": ""
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": ""
+    }
   },
   "_id": "3HKzDDEuno6UXtED",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/grottlejon.png",

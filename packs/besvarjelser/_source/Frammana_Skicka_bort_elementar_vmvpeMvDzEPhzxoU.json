@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx10 rutor",
     "description": "<p>Frammanar en elementar (Sylf/Salamander/Gnom/Undin/Umbra/Luminal/Glacial/Värmal); PSY 3T6, SMI 3T6, STO 1T6+1T6/E; eller skickar bort samma typ</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "vmvpeMvDzEPhzxoU",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

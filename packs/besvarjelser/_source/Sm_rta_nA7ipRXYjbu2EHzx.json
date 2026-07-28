@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx10 rutor",
     "description": "<p>Ger den förhäxade svåra smärtor i hela kroppen. Offrets STY och SMI (och alla färdigheter baserade på dessa två egenskaper) samt förflyttningsförmåga halveras. Varje SR måste den förhäxade också slå ett FYS-slag; misslyckas slaget en gång blir offret oförmöget att göra något överhuvud taget så länge besvärjelsen varar.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "nA7ipRXYjbu2EHzx",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

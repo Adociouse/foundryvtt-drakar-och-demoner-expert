@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Den förhäxade måste slå på Skräcktabellen om han misslyckas med ett svårt stridsmoralslag. Lyckas slaget är personen nervös under 1T6 SR (se Rädsla). Ingen effekt på högre odöda eller varelser som saknar INT. En lägre odöd måste slå ett normalt PSY-slag för att undvika att fly från magikern i 1T6/effektgrad SR. Även en spelarrollperson måste slå moralslag.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "sIIzleVwQc1RK9xp",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

@@ -13,7 +13,11 @@
     "price": 250,
     "length": 0,
     "baseValue": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "jGLXZOtbDn34Xqhi",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/langbage.png",

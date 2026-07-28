@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Personlig",
     "description": "<p>100L vattenstråle 5+E meter; STY 5/E; kan slå omkull (STY vs STY)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "LyoPMRoDISCf0W7z",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

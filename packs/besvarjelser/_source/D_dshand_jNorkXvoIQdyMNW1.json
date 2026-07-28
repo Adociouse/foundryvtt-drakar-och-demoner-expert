@@ -8,7 +8,11 @@
     "duration": "särskild",
     "range": "Sx10 rutor",
     "description": "<p>Trollkarlen försöker på avstånd klösa sig in till sitt offers hjärta. Besvärjelsen gör 1T6 i skada varje SR och varar 1 SR/effektgrad. Rustningar utgör inget skydd; skyddande besvärjelser fungerar däremot utan inskränkningar. <em>[Formel (F)]</em></p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "jNorkXvoIQdyMNW1",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Auto-träff; 1T6+E KP skada (sound-baserad attack)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53-56"
+    }
   },
   "_id": "F8h3bbOhjYFA7qOo",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

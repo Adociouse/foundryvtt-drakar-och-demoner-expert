@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Sx2 rutor",
     "description": "<p>Förskönar ett fult/skadat föremål eller varelse, eller tvärtom</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "k8Jtw1uCjITScZ6Q",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

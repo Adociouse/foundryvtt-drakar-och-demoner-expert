@@ -8,7 +8,11 @@
     "duration": "¼ minuter",
     "range": "Personlig",
     "description": "<p>Astralkropp kan röra sig fritt (+5 CL Kamouflage); kan ej skadas men kan förhäxas av andbesvärjelser</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "4OQDaRglmAZM3flb",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

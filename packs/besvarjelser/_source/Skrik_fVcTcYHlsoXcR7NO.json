@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Fruktansvärt skrik; medelsvårt PSY-slag eller förlora 1 PSY/E + handlingsförlamad (E−PSY-grupp) SR</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "fVcTcYHlsoXcR7NO",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

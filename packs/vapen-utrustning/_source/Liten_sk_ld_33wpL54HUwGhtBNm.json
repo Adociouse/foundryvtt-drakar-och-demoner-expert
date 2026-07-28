@@ -7,7 +7,11 @@
     "abs": 0,
     "description": "<p>Ger sköldarms parering (alternativa systemet). Mekaniken (extra parering, 1/20 sönderchans) är stridsintegration — ej modellerad ännu, se PLAN.md fas 6.</p>",
     "weight": 0,
-    "price": 0
+    "price": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "33wpL54HUwGhtBNm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/liten-skold.png",

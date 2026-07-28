@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Dövar alla inom räckvidden (inkl. magikern ej) i 1T4 timmar</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53-56"
+    }
   },
   "_id": "0qNQYoI58BpPEhGA",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

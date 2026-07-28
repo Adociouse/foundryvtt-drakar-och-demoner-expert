@@ -26,6 +26,14 @@
   </div>
 </section>
 
+<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+  <label>{{localize "DODE.Source.Book"}}
+    <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
+  </label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
+</section>
+
 <section class="item-description">
   <h3>Automatiska förmågor</h3>
   {{editor system.automaticAbilities target="system.automaticAbilities" button=true engine="prosemirror"}}

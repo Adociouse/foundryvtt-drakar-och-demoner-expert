@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Special",
     "description": "<p>Batterisymbol kopplad till annan symbol; aktiverar den vid exakt definierat fysiskt villkor; urladdas sen</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "61-65"
+    }
   },
   "_id": "hTJM4pOR6V2xzJiN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",

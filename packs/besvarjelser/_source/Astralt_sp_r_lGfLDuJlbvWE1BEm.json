@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "10 mil",
     "description": "<p>Lokaliserar intelligent varelse man en gång vidrört och känner till namnet; lurad av VARSEBLINDNING</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "lGfLDuJlbvWE1BEm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

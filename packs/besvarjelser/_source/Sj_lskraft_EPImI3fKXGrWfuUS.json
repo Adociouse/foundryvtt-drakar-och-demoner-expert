@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Personlig",
     "description": "<p>Fokuserar krafter: +3 CL/E på alla egenskapskast (ej Självskraft)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "EPImI3fKXGrWfuUS",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

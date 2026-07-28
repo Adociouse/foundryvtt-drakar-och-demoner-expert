@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Sx2 rutor",
     "description": "<p>Försätter offret i djup sömn; vaknar ej förrän man försöker väcka/skada</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "mMK2QPsqsFq3a6BR",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

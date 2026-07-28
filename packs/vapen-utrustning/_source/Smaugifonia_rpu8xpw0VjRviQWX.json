@@ -9,7 +9,10 @@
     "priceUnit": "sm",
     "priceNote": "280 gm/dos",
     "equipped": false,
-    "source": "Magi-regelboken s.43-48",
+    "source": {
+      "book": "magi",
+      "page": "43-48"
+    },
     "description": "<p><strong>Chans hos örthandlare:</strong> 1%</p><p><em>Källa: Magi-regelboken s.43-48 (Droger).</em></p>"
   },
   "_id": "rpu8xpw0VjRviQWX",

@@ -13,7 +13,11 @@
     "range": "150 m",
     "price": 310,
     "description": "<p>Laddningstid: 3 SR.</p>",
-    "length": 0
+    "length": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "P2sRsTVefYfueXej",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/latt-armborst.png",

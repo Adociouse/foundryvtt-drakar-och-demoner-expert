@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx1 rutor",
     "description": "<p>Staven kastas mot mål; utlöser SPLITTRA/FÖRINTELSE (organiskt/oorganiskt); annars 1T6/E; staven återvänder</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "6u1E7m9Sc2DHm0Zq",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

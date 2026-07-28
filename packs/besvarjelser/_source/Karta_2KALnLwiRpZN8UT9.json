@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
     "description": "<p>\"Karta\" av omgivningen; E3+ avslöjar position och storlek på alla föremål/varelser (STO ≥ 1)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "2KALnLwiRpZN8UT9",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

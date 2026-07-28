@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Beröring",
     "description": "<p>1T4/E elskada vid beröring; metallrustningar absorberar bara hälften</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "AIpujGUF7KVb3YdV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Beröring",
     "description": "<p>Fördubblar ett föremåls (ej levande varelse) KP, BEP, STY, svårighetsgrad</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "vPJ2sGjApugB39hD",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

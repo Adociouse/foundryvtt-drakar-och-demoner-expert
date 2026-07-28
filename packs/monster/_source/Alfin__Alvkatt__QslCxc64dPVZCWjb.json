@@ -46,7 +46,11 @@
       "max": 0
     },
     "skills": "",
-    "biography": ""
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": ""
+    }
   },
   "_id": "QslCxc64dPVZCWjb",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/alfin-alvkatt.png",

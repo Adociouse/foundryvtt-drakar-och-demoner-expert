@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Personlig",
     "description": "<p>Ena handen lyser med gult sken; lyser upp Ex10 meter</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "qZFdzhxF3yTW4LH4",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

@@ -131,6 +131,11 @@
       "PriceSm": "Pris i silver",
       "PriceSmHint": "Normaliserat till silvermynt. ⚠ Växelkursen km/sm/gm är inte belagd i källmaterialet — se CONFIG.DODE.coinToSilver.",
       "TotalWeight": "Total vikt"
+    },
+    "Source": {
+      "Book": "Källbok",
+      "Page": "Sida",
+      "Label": "Källa"
     }
   },
   "TYPES": {

@@ -8,7 +8,11 @@
     "range": "Sx10 rutor",
     "description": "<p>Vapnet får +1 CL per effektgrad och +1 skada per effektgrad. Kan skada varelser som kräver magiska vapen.</p>",
     "ritual": false,
-    "kvick": false
+    "kvick": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "FlovS7fXb269m8BN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/besvarjelser/fortrolla-vapen.png",

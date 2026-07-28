@@ -8,7 +8,11 @@
     "duration": "¼ minut",
     "range": "Sx2 rutor",
     "description": "<p>1 ruta/E fullständigt tyst; omöjliggör röstbaserade besvärjelser och kommunikation</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "0tLU3L309nghUhQT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

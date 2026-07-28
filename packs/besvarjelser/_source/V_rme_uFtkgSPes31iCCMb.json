@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "½ rutor",
     "description": "<p>Höjer temperaturen med 5° (dubbel varaktighet i isolerat rum)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "uFtkgSPes31iCCMb",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

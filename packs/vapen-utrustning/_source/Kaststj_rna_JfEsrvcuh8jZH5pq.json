@@ -13,7 +13,11 @@
     "price": 30,
     "length": 0,
     "baseValue": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "JfEsrvcuh8jZH5pq",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/kaststjarna.png",

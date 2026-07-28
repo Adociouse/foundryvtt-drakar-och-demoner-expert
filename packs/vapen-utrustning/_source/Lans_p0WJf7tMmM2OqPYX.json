@@ -13,7 +13,11 @@
     "category": "narstrid",
     "price": 125,
     "range": "",
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "p0WJf7tMmM2OqPYX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/lans.png",

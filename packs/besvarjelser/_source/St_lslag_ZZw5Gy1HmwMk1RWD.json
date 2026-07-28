@@ -8,7 +8,11 @@
     "duration": "S1 SR",
     "range": "Personlig",
     "description": "<p>Naturliga vapen: skada =(E+1)T (tärning), CL +1/E; vapnen är hårda (skadar ej vid träff på rustning)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "ZZw5Gy1HmwMk1RWD",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

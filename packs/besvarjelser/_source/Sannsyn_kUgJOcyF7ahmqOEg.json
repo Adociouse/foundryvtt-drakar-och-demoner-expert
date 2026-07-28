@@ -8,7 +8,11 @@
     "duration": "¼ minuter",
     "range": "Sx10 rutor",
     "description": "<p>Genomskådar alla illusioner och avbilder som rör synen</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "kUgJOcyF7ahmqOEg",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

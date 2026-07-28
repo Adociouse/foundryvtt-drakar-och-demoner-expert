@@ -8,7 +8,11 @@
     "duration": "1T3+2 min",
     "range": "Sx2 rutor",
     "description": "<p>1m bred korridor genom vatten (max 5m djup); +längd eller ×2 djup/E</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "44ISNAm3KceJFseL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

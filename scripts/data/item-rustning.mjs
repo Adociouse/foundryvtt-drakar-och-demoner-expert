@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -18,6 +20,8 @@ export default class DoDERustningData extends foundry.abstract.TypeDataModel {
       abs: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       weight: new fields.NumberField({ required: false, initial: 0 }),
       price: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
   }

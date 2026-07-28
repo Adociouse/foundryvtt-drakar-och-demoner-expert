@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Obegränsad",
     "description": "<p>Skickar platsinformation (position, riktning) till en känd persons sinne</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53-56"
+    }
   },
   "_id": "DeOrUYgHgTUnUgdF",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

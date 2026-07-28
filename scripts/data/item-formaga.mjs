@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -11,7 +13,8 @@ const fields = foundry.data.fields;
  * `system.specialAbilities` (actor-character.mjs). Fritext-arrayen finns kvar för
  * ren anteckning; `formaga`-Item är för förmågor som faktiskt ska MODIFIERA värden
  * via AE (t.ex. Skogsalv "+10 CL Gömma sig", en medfödd resistens som höjer ett
- * attribut). Källfältet speglar specialAbilities.source ("bas"/"ras"/"yrke"/"hjalte").
+ * attribut). `origin` speglar specialAbilities.source ("bas"/"ras"/"yrke"/"hjalte");
+ * `source` är bok+sida som på alla andra innehållstyper.
  *
  * Källa/backlog: docs/DESIGN_DECISIONS.md — "Förmågor 4-source aggregation" /
  * "structured ability table". Effekterna authoras som vanliga ActiveEffects på
@@ -20,7 +23,14 @@ const fields = foundry.data.fields;
 export default class DoDEFormagaData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
-      source: new fields.StringField({ required: false, initial: "" }),
+      // Härkomst ("bas"/"ras"/"yrke"/"hjalte") — INTE bokkälla. Hette `source`
+      // fram till 2026-07-28 men döptes om när `source` blev bok+sida på alla
+      // innehållstyper; två olika betydelser på samma nyckel gav en tyst
+      // duplicerad schemanyckel. Inget kompendieinnehåll fanns ännu, så
+      // omdöpningen kostade ingen migrering.
+      origin: new fields.StringField({ required: false, initial: "" }),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
   }

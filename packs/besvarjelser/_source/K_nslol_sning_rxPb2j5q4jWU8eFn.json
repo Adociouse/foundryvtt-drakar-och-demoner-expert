@@ -8,7 +8,11 @@
     "duration": "¼ SR",
     "range": "Sx2 rutor",
     "description": "<p>Avläser en varelses känslostämningar utan att varelsen märker det (ej mot HJÄRNBLANK)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "rxPb2j5q4jWU8eFn",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

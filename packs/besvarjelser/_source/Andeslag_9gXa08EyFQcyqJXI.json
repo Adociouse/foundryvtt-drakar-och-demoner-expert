@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Y2 rutor",
     "description": "<p>Skadar andar/gastar: −1 PSY permanent/E; vid PSY=0 förintas anden</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "9gXa08EyFQcyqJXI",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

@@ -85,7 +85,11 @@
         "name": "Överlevnad",
         "attribute": "int"
       }
-    ]
+    ],
+    "source": {
+      "book": "rp",
+      "page": "11-22"
+    }
   },
   "_id": "viLRzlEEhczFdWAt",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare.png",

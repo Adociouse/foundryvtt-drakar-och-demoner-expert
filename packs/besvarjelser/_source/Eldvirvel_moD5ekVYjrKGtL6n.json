@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
     "description": "<p>Eldvirvel i 3m radie ger 1 KP/SR skada på allt; brännbart förbränns</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "moD5ekVYjrKGtL6n",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

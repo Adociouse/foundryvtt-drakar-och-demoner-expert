@@ -8,7 +8,11 @@
     "duration": "1–2 sek",
     "range": "½ rutor",
     "description": "<p>Vindstorm åt alla håll; blåser bort varelser med STO ≤ 2×E (base STO ≤ 6)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "BaXr2sUrhYFctzrX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

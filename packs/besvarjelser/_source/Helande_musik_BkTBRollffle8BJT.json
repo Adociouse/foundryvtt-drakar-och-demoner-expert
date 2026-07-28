@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Sx10 rutor",
     "description": "<p>Helar 1 KP/E per hel minut för varje koncentrerad lyssnare; helar även harmonisten</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26-34"
+    }
   },
   "_id": "BkTBRollffle8BJT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",

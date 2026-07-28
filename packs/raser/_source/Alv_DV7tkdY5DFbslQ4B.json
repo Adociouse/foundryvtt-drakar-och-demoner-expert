@@ -20,7 +20,11 @@
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-kvinna.png",
-    "movementMod": 1
+    "movementMod": 1,
+    "source": {
+      "book": "rp",
+      "page": "9-10"
+    }
   },
   "_id": "DV7tkdY5DFbslQ4B",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv.png",

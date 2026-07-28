@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Personlig",
     "description": "<p>Stiger rakt upp 5m/E (kan ej flyga fritt); tar med sig upp till 20 BEP</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "r5Z2S4nNEKUpjiDG",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

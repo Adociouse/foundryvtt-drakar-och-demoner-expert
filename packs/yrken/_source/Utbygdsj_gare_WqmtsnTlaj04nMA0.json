@@ -33,7 +33,11 @@
         "name": "Överlevnad",
         "attribute": "int"
       }
-    ]
+    ],
+    "source": {
+      "book": "rp",
+      "page": "11-22"
+    }
   },
   "_id": "WqmtsnTlaj04nMA0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare.png",

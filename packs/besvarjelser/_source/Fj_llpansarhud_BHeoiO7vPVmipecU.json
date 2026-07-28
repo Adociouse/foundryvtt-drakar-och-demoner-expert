@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Personlig",
     "description": "<p>Huden blir hård och fjällig (silveraktig); +4 abs; KAR −4 under varaktigheten</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "BHeoiO7vPVmipecU",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

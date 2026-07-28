@@ -7,7 +7,11 @@
     "abs": 5,
     "price": 150,
     "description": "<p>Viktkod G — vikt beror på bärarens STO. Klirrar: Smyga halveras.</p>",
-    "weight": 0
+    "weight": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "Qta1uSsHUVD1L6fh",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/fjallpansar.png",

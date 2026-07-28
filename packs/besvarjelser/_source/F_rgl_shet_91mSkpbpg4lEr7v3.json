@@ -8,7 +8,11 @@
     "duration": "¼ minut",
     "range": "Sx2 rutor",
     "description": "<p>Alla i räckvidden förlorar sin färg; medelsvårt INT-slag eller −5 CL på alla synskärdighetr</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "91mSkpbpg4lEr7v3",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

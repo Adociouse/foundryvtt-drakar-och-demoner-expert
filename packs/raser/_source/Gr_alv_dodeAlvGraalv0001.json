@@ -20,7 +20,11 @@
     "description": "<p>Gråalverna lever sitt liv på och vid havet. En gråalv kan inte bli sjösjuk och söker sig ständigt mot nya upplevelser.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/graalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/graalv-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "alver",
+      "page": "22"
+    }
   },
   "_id": "dodeAlvGraalv000",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/graalv-man.png",

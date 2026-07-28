@@ -8,7 +8,11 @@
     "duration": "Konc",
     "range": "Sx2 rutor",
     "description": "<p>Levande intelligent varelse fylls av stridslust; attackerar magikerns mål till sista</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26-34"
+    }
   },
   "_id": "bqQDFtl65y9oCW1E",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",

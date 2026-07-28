@@ -13,7 +13,11 @@
     "category": "narstrid",
     "price": 340,
     "range": "",
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "uJtHrTMtg8tTeepU",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/stridshammare.png",

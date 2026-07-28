@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "Personlig",
     "description": "<p>Visar rätt vägval (korsningar, dörrar etc.); en fråga/casting</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "VgX5mrtnen5lBBGF",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

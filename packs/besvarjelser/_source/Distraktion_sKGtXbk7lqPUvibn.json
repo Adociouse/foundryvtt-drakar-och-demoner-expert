@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Alla inom räckvidden riktar ovillkorligt uppmärksamheten mot en bestämd punkt</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "sKGtXbk7lqPUvibn",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

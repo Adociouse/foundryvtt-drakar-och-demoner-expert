@@ -568,3 +568,17 @@
 .dode .currency-row input { width: 4em; }
 .dode .currency-label { font-weight: 600; }
 .dode .currency-total { opacity: 0.75; }
+
+/* Källhänvisning på item-ark — bok + sida, se fields-source.mjs */
+.dode .item-source {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+  font-size: 0.85em;
+  opacity: 0.9;
+  padding: 0.25em 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.dode .item-source .source-label { font-style: italic; opacity: 0.75; }
+.dode .item-source input { width: 7em; }

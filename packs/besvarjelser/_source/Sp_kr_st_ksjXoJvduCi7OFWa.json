@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
     "description": "<p>Förändrar rösten till oigenkännlighet; kan låta rösten ljuda från valfri punkt</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "35-40"
+    }
   },
   "_id": "ksjXoJvduCi7OFWa",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

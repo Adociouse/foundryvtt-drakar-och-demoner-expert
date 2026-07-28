@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Beröring",
     "description": "<p>Botar E fobier</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "3-16"
+    }
   },
   "_id": "f42xXPkOXv08rQD0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",

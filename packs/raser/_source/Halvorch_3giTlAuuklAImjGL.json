@@ -20,7 +20,11 @@
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvorch-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvorch-kvinna.png",
-    "movementMod": 0
+    "movementMod": 0,
+    "source": {
+      "book": "rp",
+      "page": "9-10"
+    }
   },
   "_id": "3giTlAuuklAImjGL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvorch.png",

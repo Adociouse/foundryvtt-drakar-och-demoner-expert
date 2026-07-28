@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Beröring",
     "description": "<p>Klyvar/förstör föremål med STO ≤ E²×3; magiska föremål påverkas ej</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "Cei68OUOSoIKNQoa",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

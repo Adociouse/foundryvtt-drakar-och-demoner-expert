@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Sx4 rutor",
     "description": "<p>Kontrollerar E humanoider (PSY vs PSY); styr kroppsrörelser; ej magi/självständigt tänkande; konc</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "SCbjXWSDIugBKdCa",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

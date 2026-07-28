@@ -9,7 +9,11 @@
     "markup": 0,
     "buybackRate": 50,
     "limitedStock": false,
-    "description": "<p>En bred, godmodig värdshusvärd med handduken evigt över axeln. Lasslo har hört varje historia två gånger och tror på ungefär hälften. Priserna följer Magi-regelbokens värdshustabell (s.48) rakt av — höj <em>Påslag %</em> på arket om värdshuset ligger avsides.</p><p><em>Generisk handlare att kopiera: byt namn, porträtt och lager så har du vilken krögare, smed eller örthandlare som helst.</em></p>"
+    "description": "<p>En bred, godmodig värdshusvärd med handduken evigt över axeln. Lasslo har hört varje historia två gånger och tror på ungefär hälften. Priserna följer Magi-regelbokens värdshustabell (s.48) rakt av — höj <em>Påslag %</em> på arket om värdshuset ligger avsides.</p><p><em>Generisk handlare att kopiera: byt namn, porträtt och lager så har du vilken krögare, smed eller örthandlare som helst.</em></p>",
+    "source": {
+      "book": "eget",
+      "page": ""
+    }
   },
   "prototypeToken": {
     "name": "Lasslo Värdshusvärden",
@@ -47,7 +51,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -83,7 +90,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -119,7 +129,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -155,7 +168,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -191,7 +207,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -227,7 +246,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -263,7 +285,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -299,7 +324,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -335,7 +363,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -371,7 +402,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -407,7 +441,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -443,7 +480,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -479,7 +519,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -515,7 +558,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -551,7 +597,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -587,7 +636,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -623,7 +675,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -659,7 +714,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -695,7 +753,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -731,7 +792,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -767,7 +831,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -803,7 +870,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -839,7 +909,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
       },
       "effects": [],
@@ -873,7 +946,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
       },
       "_id": "Sypg4pOqURA215rv",
@@ -909,7 +985,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
       },
       "_id": "O0MoieMZUl1OXOUD",
@@ -945,7 +1024,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
       },
       "_id": "VAABIUa8k7QpcKpC",
@@ -981,7 +1063,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
       },
       "_id": "uXYHPEneGG9ktJ5K",
@@ -1017,7 +1102,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Behållare).</em></p>"
       },
       "_id": "JVWMRTpPfpN4AlnG",
@@ -1053,7 +1141,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Tält, sängar & fältutrustning).</em></p>"
       },
       "_id": "JtuIVjaQvp6xhude",
@@ -1089,7 +1180,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Tält, sängar & fältutrustning).</em></p>"
       },
       "_id": "UrjgQpZ59XLBOzwX",
@@ -1125,7 +1219,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Tält, sängar & fältutrustning).</em></p>"
       },
       "_id": "U2in8482cxvnHSNp",
@@ -1161,7 +1258,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Diverse).</em></p>"
       },
       "_id": "tXrV5UCzc0zpO7h2",
@@ -1197,7 +1297,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
       },
       "_id": "UPO3OLKjzAnuDbHE",
@@ -1233,7 +1336,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
       },
       "_id": "2t2RoBOQjf4b1xi8",
@@ -1269,7 +1375,10 @@
         "priceUnit": "km",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
       },
       "_id": "NpouXIuqM1bijwYX",
@@ -1305,7 +1414,10 @@
         "priceUnit": "sm",
         "priceNote": "",
         "equipped": false,
-        "source": "Magi-regelboken s.43-48",
+        "source": {
+          "book": "magi",
+          "page": "48"
+        },
         "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
       },
       "_id": "3c9yhLxg5sIYT63x",

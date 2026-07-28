@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Lonnmordare (T&L s.11).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spion-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spion-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spion-kvinna.png",
+    "source": {
+      "book": "tl",
+      "page": "11"
+    }
   },
   "_id": "dodeYlonnspion00",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spion-man.png",

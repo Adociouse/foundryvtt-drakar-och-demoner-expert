@@ -13,7 +13,11 @@
     "category": "narstrid",
     "price": 0,
     "range": "",
-    "description": "<p>Ett bredsvärd smitt av tempelväktarna i en glömd alvstad, med runor invävda längs klingans rygg. Så länge svärdet bärs stärks bärarens arm av en gammal besvärjelse. Kan skada varelser som kräver magiska vapen (jfr. besvärjelsen Förtrolla vapen).</p>"
+    "description": "<p>Ett bredsvärd smitt av tempelväktarna i en glömd alvstad, med runor invävda längs klingans rygg. Så länge svärdet bärs stärks bärarens arm av en gammal besvärjelse. Kan skada varelser som kräver magiska vapen (jfr. besvärjelsen Förtrolla vapen).</p>",
+    "source": {
+      "book": "eget",
+      "page": ""
+    }
   },
   "_id": "NbrnTP3fAbnFbmOH",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/vaktarklingan.png",

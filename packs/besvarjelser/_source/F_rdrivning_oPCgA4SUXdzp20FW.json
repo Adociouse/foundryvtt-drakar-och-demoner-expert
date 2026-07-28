@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Sx2 rutor",
     "description": "<p>Exorcism av spöke/lyktgubbe/ande; dansar runt platsen; vid lyckat PSY-slag: permanent exorcism</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "55-59"
+    }
   },
   "_id": "oPCgA4SUXdzp20FW",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
     "description": "<p>Planterar en enkel tanke i offrets sinne; offret tror det tänkte tanken själv</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "bHF5zTRYWcnEhINU",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

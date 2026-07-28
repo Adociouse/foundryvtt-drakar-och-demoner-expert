@@ -13,7 +13,11 @@
     "range": "STY×1 rutor",
     "price": 90,
     "length": 0,
-    "description": ""
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "GuVsYWr31luIeGhn",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/kastyxa.png",

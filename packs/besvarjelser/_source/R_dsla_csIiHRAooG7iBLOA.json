@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
     "description": "<p>Den förhäxade måste slå på Skräcktabellen om han misslyckas med ett normalt stridsmoralslag. Lyckas slaget är personen nervös under 1T4 SR, vilket ger −1/effektgrad på CL. Ingen effekt på odöda varelser eller varelser som saknar INT. Även en spelarrollperson måste slå moralslag. <em>[Kvick (K)]</em></p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "magi",
+      "page": "22-25"
+    }
   },
   "_id": "csIiHRAooG7iBLOA",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

@@ -8,7 +8,11 @@
     "duration": "S/4 veckor",
     "range": "Sx1 km",
     "description": "<p>Känner alltid avstånd/riktning till en person (behöver hårlock etc.); E1=1000m exakt, E4=exakt position</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "JZy43WuF0VwE2QLd",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

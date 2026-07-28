@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
     "description": "<p>Köldsfär; 1T6/E skada (alt. E sfärer); rustning/Skydd absorberar</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "GVuMnv0PMpbIBqsz",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

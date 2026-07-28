@@ -8,7 +8,11 @@
     "duration": "Sx1 minuter",
     "range": "½ rutor",
     "description": "<p>Omformar ett icke-levande föremål till ny form (hantverkskvalitet FV B1/E)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "YepO0COyKSnVaA3P",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

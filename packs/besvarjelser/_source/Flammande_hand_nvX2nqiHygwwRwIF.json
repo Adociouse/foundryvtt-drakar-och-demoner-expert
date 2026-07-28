@@ -8,7 +8,11 @@
     "duration": "1T3 min",
     "range": "Personlig",
     "description": "<p>Handen flammar; +1T3/E extra skada på slag; antänder brännbart</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "nvX2nqiHygwwRwIF",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

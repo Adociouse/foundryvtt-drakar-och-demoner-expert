@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Personlig",
     "description": "<p>Teleporterar till förinvigd hemplats (1 dag invigning); räckvidd E1=10km, E2=100km osv; S15→1 plats, S≥16→2+</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "betv5lELPs2Bx7Xr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

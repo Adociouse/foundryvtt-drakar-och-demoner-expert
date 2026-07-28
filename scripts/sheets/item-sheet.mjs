@@ -28,6 +28,12 @@ class DoDEItemSheetBase extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.magicSchools = CONFIG.DODE.magicSchools;
     context.equipmentCategories = CONFIG.DODE.equipmentCategories;
     context.coinLabels = CONFIG.DODE.coinLabels;
+    // Källhänvisning — bokval + sida, plus en färdigformaterad etikett med den
+    // RIKTIGA boktiteln (aldrig ett PDF-filnamn). Se fields-source.mjs.
+    context.books = Object.fromEntries(
+      Object.entries(CONFIG.DODE.books).map(([k, v]) => [k, v.label])
+    );
+    context.sourceLabel = CONFIG.DODE.formatSource(this.item.system?.source);
     return context;
   }
 }

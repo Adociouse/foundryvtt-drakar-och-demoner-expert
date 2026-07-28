@@ -1,3 +1,5 @@
+import { sourceField } from "./fields-source.mjs";
+
 const fields = foundry.data.fields;
 
 /**
@@ -24,6 +26,8 @@ export default class DoDERasData extends foundry.abstract.TypeDataModel {
         normal: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true })
       }),
       automaticAbilities: new fields.HTMLField({ required: false, initial: "" }),
+      // Bok + sida — se fields-source.mjs.
+      source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" }),
       // Könsvarianter av porträttbilden — visas i rollpersonsskaparens rasval
       // beroende på tidigare valt kön (character-wizard.mjs). Tomt = ingen

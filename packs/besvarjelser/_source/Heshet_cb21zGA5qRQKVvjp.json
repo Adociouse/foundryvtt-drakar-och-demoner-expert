@@ -8,7 +8,11 @@
     "duration": "¼ timme",
     "range": "Sx2 rutor",
     "description": "<p>Offret förlorar förmågan att göra sig hörd på avstånd</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "cb21zGA5qRQKVvjp",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

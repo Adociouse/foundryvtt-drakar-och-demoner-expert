@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
     "description": "<p>Raserar E våningar hos en byggnad; magiska byggnader gör motstånd (E vs E)</p>",
-    "ritual": true
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "26-34"
+    }
   },
   "_id": "no47cgpbK3O1GtMe",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",

@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Personlig",
     "description": "<p>Kan exakt avgöra avstånd, areor och volymer med bara ögonen (kräver att man ser föremålet)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "uICmd06pXfIagI2k",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

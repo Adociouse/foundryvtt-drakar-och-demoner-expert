@@ -8,7 +8,11 @@
     "duration": "Sx1 SR",
     "range": "Beröring",
     "description": "<p>Paralyse vid beröring med staven (PSY vs PSY)</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "Hk0jL7jap0bvfn3F",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

@@ -7,7 +7,11 @@
     "abs": 8,
     "price": 200,
     "description": "<p>Viktkod K. Halverar uppmärksamhetsfärdigheter. Magiker kan INTE kasta besvärjelser i denna. Kräver dvärgsmed.</p>",
-    "weight": 0
+    "weight": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "DKPNaBkEcaZGXrws",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/helrustning-metall.png",

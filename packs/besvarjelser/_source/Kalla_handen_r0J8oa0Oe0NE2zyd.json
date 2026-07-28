@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "½ rutor",
     "description": "<p>Köldstråle; svårt FYS-slag eller frysningsanfall (förlorar SR); klarat slag: −4 CL i 1T6 SR</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18-26"
+    }
   },
   "_id": "r0J8oa0Oe0NE2zyd",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

@@ -8,7 +8,11 @@
     "duration": "Sx1 timmar",
     "range": "Personlig",
     "description": "<p>Huden blank och grafitgrå; +8 abs; KAR −6 under varaktigheten</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39-46"
+    }
   },
   "_id": "b6EKoD96tJmn3zTY",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

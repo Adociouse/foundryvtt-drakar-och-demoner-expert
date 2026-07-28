@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Tjuv (T&L s.15).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/hantlangare-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/hantlangare-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/hantlangare-kvinna.png",
+    "source": {
+      "book": "tl",
+      "page": "15"
+    }
   },
   "_id": "dodeYtjuvhantlan",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/hantlangare-man.png",

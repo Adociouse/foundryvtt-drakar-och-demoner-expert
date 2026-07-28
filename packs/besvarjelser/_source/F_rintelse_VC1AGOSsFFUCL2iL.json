@@ -8,7 +8,11 @@
     "duration": "Omedelbar",
     "range": "Beröring",
     "description": "<p>Förtorkar 4 STO/E i varelse/växt; delpåverkan ger KP-skada = STO som torkar ut</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59-61"
+    }
   },
   "_id": "VC1AGOSsFFUCL2iL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

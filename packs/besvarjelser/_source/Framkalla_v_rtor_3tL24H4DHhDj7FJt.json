@@ -8,7 +8,11 @@
     "duration": "Permanent",
     "range": "Sx2 rutor",
     "description": "<p>Ex5 vårtor växer ut på vald kroppsdel hos offret</p>",
-    "ritual": false
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32-37"
+    }
   },
   "_id": "3tL24H4DHhDj7FJt",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

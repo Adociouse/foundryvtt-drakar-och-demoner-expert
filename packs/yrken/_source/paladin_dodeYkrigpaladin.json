@@ -9,7 +9,11 @@
     "professionSkills": [],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.5-6).</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/paladin-man.png",
-    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/paladin-kvinna.png"
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/paladin-kvinna.png",
+    "source": {
+      "book": "kh",
+      "page": "5-6"
+    }
   },
   "_id": "dodeYkrigpaladin",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/paladin-man.png",

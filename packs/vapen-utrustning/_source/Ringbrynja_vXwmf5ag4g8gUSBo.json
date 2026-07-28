@@ -7,7 +7,11 @@
     "abs": 6,
     "price": 175,
     "description": "<p>Viktkod H — vikt beror på bärarens STO. Klirrar: Smyga halveras.</p>",
-    "weight": 0
+    "weight": 0,
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    }
   },
   "_id": "vXwmf5ag4g8gUSBo",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/ringbrynja.png",
