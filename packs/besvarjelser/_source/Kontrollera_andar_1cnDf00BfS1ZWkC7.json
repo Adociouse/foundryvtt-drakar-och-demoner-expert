@@ -1,0 +1,34 @@
+{
+  "name": "Kontrollera andar",
+  "type": "besvarjelse",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Konc.",
+    "range": "Sx2 rutor",
+    "description": "<p>Ger kontroll över osaliga andar (spöken, gastar, vålnader). Fungerar som Kontrollera lägre odöd.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "ritual": false
+  },
+  "_id": "1cnDf00BfS1ZWkC7",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233027259,
+    "modifiedTime": 1785233027259,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!1cnDf00BfS1ZWkC7"
+}

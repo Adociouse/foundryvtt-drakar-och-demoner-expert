@@ -1,0 +1,34 @@
+{
+  "name": "Terror",
+  "type": "besvarjelse",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Liknar de övriga skräckbesvärjelserna men är mycket kraftfullare. Alla varelser inom räckvidden kan bli förhäxade. De som misslyckas med ett svårt stridsmoralslag slår på Skräcktabellen med +10 på tärningen. De som klarar slaget är nervösa i 1T20 SR. Gäller även spelarrollpersoner. Ingen effekt på varelser som saknar INT. Lägre odöda måste slå ett svårt PSY-slag för att undvika att fly, högre odöda ett normalt. Andar är immuna.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "ritual": false
+  },
+  "_id": "nfmkt5tmT8wIjIG8",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233027259,
+    "modifiedTime": 1785233027259,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!nfmkt5tmT8wIjIG8"
+}

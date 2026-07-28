@@ -1,0 +1,34 @@
+{
+  "name": "Voodooritual",
+  "type": "besvarjelse",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Konc.",
+    "range": "special",
+    "description": "<p>Magikern skapar i ritualen en docka av vax som föreställer en bestämd person. Dockan måste innehålla något som kommer från offrets kropp, t.ex. en hårlock. Dockan torteras sedan av magikern. Lyckas ritualen drabbas offret av våldsamma smärtor som gör det fullständigt omöjligt att utföra några som helst handlingar — offret ligger bara och vrider sig — men smärtan ger inga skador, och när ritualen upphör är personen oskadd. Räckvidden är E1 10 m, E2 100 m, E3 1 000 m, E4 10 000 m, E5 100 000 m osv. Magikern behöver inte veta var offret finns; det räcker att offret är inom räckvidden. <em>[Ritual (R), Formel (F)]</em></p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "ritual": true
+  },
+  "_id": "v2Ezp55sdq3TvsuV",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233027259,
+    "modifiedTime": 1785233027259,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!v2Ezp55sdq3TvsuV"
+}
