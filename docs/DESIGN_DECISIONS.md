@@ -198,6 +198,26 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
     **Kvar:** sex grundyrken är fortfarande tunna mot boken (Magiker 3, Utbygdsjägare 6, Sjöfarare 7, Krigare 9, Munk 12, Riddare 12 efter tillägget) — Magiker sticker ut mest, eftersom taket då blir 3 i stället för 9.
 
+    **13b. ⚠ Sekundära färdigheter ska INTE gå att välja i guiden — verifierat mot RP s.28-29 (2026-07-28).** Johans fråga var om sekundära borde vara en tredje valnivå i guiden. Boken säger uttryckligen nej, på tre ställen:
+
+    - **RP s.28, STARTFÄRDIGHETER:** *"Dina startfärdigheter är lika med de primära färdigheterna … samt dina yrkesfärdigheter (de 12 som du redan valt). **Du kan aldrig lära dig en sekundär färdighet från början, utom ifall du fått det som särskild förmåga.** Magiker kan lära sig besvärjelser från början, men inte utbygdsjägare."*
+    - **RP s.29, SPENDERA ERFARENHETSPOÄNGEN:** *"Du kan heller aldrig köpa FV i en sekundär färdighet från början, om du inte fått en Särskild förmåga som säger annat."*
+    - **Bokens eget räkneexempel (s.29)** understryker det: Andreas har Låsdyrkning FV 3 via en särskild förmåga och *"skulle väldigt gärna vilja köpa några FV i Låsdyrkning, men det får han inte eftersom det fortfarande räknas som en sekundär färdighet."*
+
+    Guiden gör alltså **rätt** som inte erbjuder dem — men av en slump snarare än av design, och hjälptexten i färdighetssteget nämner sekundärkostnaden 5 EP utan att förklara att den inte gäller vid skapandet. Kostnadsnivån `sekundar` är fortfarande korrekt och behövs — den används när färdigheter läggs till **efter** skapandet via arkets färdighetsväljare, och av `DODE.skillCost`.
+
+    **Det verkliga gapet ligger i särskilda förmågor.** Enda lagliga vägen till en sekundär färdighet vid skapandet är en särskild förmåga som ger den — och **15 av de 49 posterna i `DODE.specialAbilitiesTable` ger färdighetsvärde**, varav flera uttryckligen sekundära:
+
+    | Slag | Förmåga | Effekt |
+    |---|---|---|
+    | 3-4 | *(namnlös)* | +1 FV på valfri sekundär färdighet |
+    | 11-12 | Hantverkarbakgrund | +3 FV i valfri hantverksfärdighet |
+    | 19-20 | Hobbyist | **FV 3 i valfri sekundär färdighet** |
+    | 37-38 | Stort kunskapsområde | Två valfria sekundära färdigheter **som yrkesfärdigheter** |
+    | 64 | Lättlärd | Sekundärkostnaden sänks från 5 till 4 EP |
+
+    I dag är förmågesteget ren fritext — det slår fram namn och beskrivning men **skapar inga färdigheter och ändrar inga kostnader**. Att bygga det innebär (a) en maskinläsbar effekt per tabellrad, (b) ett val-UI för "valfri sekundär färdighet" (samma mönster som `choiceCount`-platserna i yrkesfärdighetssteget), och (c) att `Lättlärd` och `Stort kunskapsområde` kan ändra `costTier`/grundkostnad för enskilda färdigheter. **Ny backlogpost 36.**
+
     ⚠ **Besvärjelser har en HELT ANNAN kostnadsbas** som inte är implementerad: RP s.30 ger grundkostnad efter besvärjelsens **skolvärde** (1-3:2 · 4-6:4 · 7-9:6 · 10-12:8 · 13-15:10 · 16-18:12 · 19-21:14 · +3:+2), inte efter kostnadskategori. Magiskolesteget skapar i dag skolan som en `fardighet` med `yrkesfardighet`-nivå, vilket är rätt för själva SKOLAN men det finns ingen mekanik för att köpa enskilda besvärjelser.
 14. **Expand compendium coverage.** **Partially done (2026-07-27)** — races and professions are no longer the gap: 6 elf lineages (Alver s.22) brought races 7→13, and 25 specialisations (KH/T&L, via the Roll20 project's `docs/wiki/YRKEN.md`) brought professions 11→36. Still thin: **weapons ~50%**, **spells <5%** (8 of the full MAG list), **monsters** (14 sample entries). ⚠ Every future addition must also ship art in the same pass — see `CLAUDE.md`s "Bildpipeline" (pipeline step 2b); the current 106 documents are 100% covered and that state should not be allowed to regress. Note the spell gap is the awkward one: 13 magic schools are pickable in the wizard but only 8 spells exist across all of them.
 
@@ -228,6 +248,8 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 15c. **Verify popular optional modules work with this system.** Johan 2026-07-27 (Carousel Combat Tracker looks especially desirable). Community modules commonly assume dnd5e/PF2e data paths, so each needs checking against ours — most relevant are the token/combat ones (Carousel Combat Tracker, Monk's Combat Marker, Dice So Nice, Dice Tray, Torch, Tokenizer, PopOut!). The `primaryTokenAttribute`/`secondaryTokenAttribute` work in 15 helps here: several combat/HUD modules read the token bar attributes rather than system-specific fields.
 16. **English localization.** Low priority per project scope.
+
+36. **Särskilda förmågor med mekanisk effekt (15 av 49).** Förmågesteget slår fram namn och beskrivning som fritext; ingen förmåga gör något. 15 tabellrader ger färdighetsvärde och är den **enda** lagliga vägen till en sekundär färdighet vid rollpersonsskapandet (se 13b). Kräver tre saker: en maskinläsbar effekt per rad (`{ type: "skillBonus", skill, value }` eller `{ type: "grantSecondary", count }`), ett val-UI för "valfri sekundär/hantverksfärdighet" — samma mönster som `choiceCount` i yrkesfärdighetssteget — och stöd för de två som ändrar ekonomin snarare än ett värde (`Lättlärd` sänker sekundärkostnaden 5→4, `Stort kunskapsområde` flyttar två sekundära till yrkesnivå). Hänger ihop med backlogpost 7 (färdighetsmodifikatorsystemet), som har samma problem: en förmåga kan inte nå in i ett enskilt embeddat `fardighet`-Item via ActiveEffects.
 
 32. **Apotekare/alkemist-handlaren "Mirac"** (Johan 2026-07-28). Ny `handlare` som Lasslo, med gifter, läkedroger och allmänna droger i lagret. **Beroende:** de 21 `droger`-posterna har i dag bara namn, tillgänglighetschans och pris — effekterna finns i Spelledarboken s.49–56 (se post 31) och bör portas FÖRST, annars säljer Mirac namn utan verkan. Både Lasslo och Mirac ska stå i Utkanten-scenen (post 33).
 
