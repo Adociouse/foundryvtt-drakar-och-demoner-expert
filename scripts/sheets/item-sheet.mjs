@@ -83,6 +83,13 @@ export class DoDEBesvarjelseSheet extends DoDEItemSheetBase {
   };
 }
 
+export class DoDEMinibesvarjelseSheet extends DoDEItemSheetBase {
+  static DEFAULT_OPTIONS = { position: { width: 460, height: 420 } };
+  static PARTS = {
+    form: { template: "systems/drakar-och-demoner-expert/templates/item/item-minibesvarjelse-sheet.hbs" }
+  };
+}
+
 export class DoDEFormagaSheet extends DoDEItemSheetBase {
   static DEFAULT_OPTIONS = { position: { width: 480, height: 500 } };
   static PARTS = {

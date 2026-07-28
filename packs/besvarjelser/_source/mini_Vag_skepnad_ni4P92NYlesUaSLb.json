@@ -1,0 +1,34 @@
+{
+  "name": "Vag skepnad",
+  "type": "minibesvarjelse",
+  "_id": "ni4P92NYlesUaSLb",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
+  "system": {
+    "school": "illusionism",
+    "psyCost": 1,
+    "source": {
+      "book": "magi",
+      "page": "23"
+    },
+    "description": "<p>Magikerns ansikte uppfattas olika av varje person (1 PSY per person, var och en förhäxas separat)</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785274292417,
+    "modifiedTime": 1785274292417,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ni4P92NYlesUaSLb"
+}

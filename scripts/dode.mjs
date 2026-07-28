@@ -8,6 +8,7 @@ import DoDEVapenData from "./data/item-vapen.mjs";
 import DoDERustningData from "./data/item-rustning.mjs";
 import DoDEUtrustningData from "./data/item-utrustning.mjs";
 import DoDEBesvarjelseData from "./data/item-besvarjelse.mjs";
+import DoDEMinibesvarjelseData from "./data/item-minibesvarjelse.mjs";
 import DoDEFormagaData from "./data/item-formaga.mjs";
 import DoDEActor from "./documents/actor.mjs";
 import DoDeActiveEffect from "./documents/dode-active-effect.mjs";
@@ -23,6 +24,7 @@ import {
   DoDERustningSheet,
   DoDEUtrustningSheet,
   DoDEBesvarjelseSheet,
+  DoDEMinibesvarjelseSheet,
   DoDEFormagaSheet
 } from "./sheets/item-sheet.mjs";
 import DoDECharacterWizard from "./apps/character-wizard.mjs";
@@ -50,6 +52,7 @@ Hooks.once("init", () => {
     rustning: DoDERustningData,
     utrustning: DoDEUtrustningData,
     besvarjelse: DoDEBesvarjelseData,
+    minibesvarjelse: DoDEMinibesvarjelseData,
     formaga: DoDEFormagaData
   });
 
@@ -79,6 +82,7 @@ Hooks.once("init", () => {
     ["rustning", DoDERustningSheet],
     ["utrustning", DoDEUtrustningSheet],
     ["besvarjelse", DoDEBesvarjelseSheet],
+    ["minibesvarjelse", DoDEMinibesvarjelseSheet],
     ["formaga", DoDEFormagaSheet]
   ];
   for (const [type, sheetClass] of itemSheets) {

@@ -1,0 +1,29 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<p class="hint">Minibesvärjelser kräver <strong>ingen CL-kontroll — de lyckas alltid</strong>,
+kostar 1 PSY och verkar samma stridsrunda (alltid Kvick). Under FV 15 i skolan krävs normala
+åthävor, vid 15+ inga, vid 25+ aktiveras de nästan omedvetet. <em>MAG s.23.</em></p>
+
+<section class="item-fields">
+  <label>{{localize "DODE.Item.Skola"}}
+    <select name="system.school">{{selectOptions magicSchools selected=system.school localize=true}}</select>
+  </label>
+  <label>PSY-kostnad <input type="number" name="system.psyCost" value="{{system.psyCost}}" min="0" /></label>
+</section>
+
+<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+  <label>{{localize "DODE.Source.Book"}}
+    <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
+  </label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" /></label>
+  {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>
