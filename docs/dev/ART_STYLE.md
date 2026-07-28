@@ -72,6 +72,23 @@ detailed
 
 ⚠ `no text and no lettering` — bildmodeller lägger annars gärna in pseudo-runor som ser ut som obegriplig text.
 
+### Skolbakgrund (bakgrundsplatta per magiskola)
+
+Färdiga plattor finns i `assets/backgrounds/magiskolor/<skolnyckel>.png` (13 st, 1024×1024). **Tanken:** när distinkta besvärjelseikoner en dag genereras (backlogpost 24) ska varje skolas besvärjelser dela samma miljö, så att en Nekromanti-formel känns igen som nekromanti redan innan man läst namnet. Motivet i mitten byts, bakgrunden står kvar.
+
+```
+Empty background plate for a fantasy RPG spell icon: <MILJÖ som säger vad skolan
+handlar om>, seen slightly out of focus, the centre of the image left uncluttered
+and open, painterly digital fantasy art in the style of a moody atmospheric oil
+painting, muted earthy color palette with warm amber highlights, dramatic side
+lighting, dark shadowed edges, no text and no lettering, no characters, square
+composition
+```
+
+⚠ `the centre of the image left uncluttered and open` + `seen slightly out of focus` är det som gör plattan användbar — utan dem blir det en färdig scen som konkurrerar med sigillen i mitten i stället för att bära den. `no characters` behövs också; modellen sätter annars gärna dit en magiker.
+
+Miljöerna som användes (2026-07-27): alkemi = alkemistbänk med retorter · animism = urskogsglänta · demonologi = kryptagolv med besvärjelsecirkel · elementarmagi = klippkant där hav, storm, glöd och sten möts · harmonism = tempelsal med spegelblank damm · häxkonster = häxstuga med kittel och örtknippen · illusionism = spegelsal i dis · mentalism = nattlig studerkammare med orrery · nekromanti = dimhöljd kyrkogård · röstmagi = valvsal byggd för eko, med luta och horn · spiritism = seansrum med rökelse · stavmagi = träsnidarverkstad med stavar · symbolism = runristad stenvägg.
+
 ## Filkonvention
 
 - 1024×1024 PNG, RGB.
