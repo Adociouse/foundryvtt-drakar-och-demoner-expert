@@ -7,5 +7,10 @@ export const PACKS = [
   // SL-only, se system.json's ownership + DESIGN_DECISIONS.md §7.4.
   { name: "magiska-foremal", type: "Item" },
   { name: "monster", type: "Actor" },
-  { name: "handlare", type: "Actor" }
+  { name: "handlare", type: "Actor" },
+  // Regeltabeller — ett pack per dokumenttyp OCH per publik, se §8.3:
+  // `type` är ett enda värde per pack, och ownership sitter på pack-nivå.
+  { name: "regler", type: "JournalEntry" },
+  { name: "tabeller", type: "RollTable" },
+  { name: "sl-regler", type: "JournalEntry" }
 ];

@@ -1,0 +1,62 @@
+{
+  "name": "Animera död — den odödes värden",
+  "_id": "W7K4T7wpkVXUEDku",
+  "pages": [
+    {
+      "_id": "D2Eq5xbTZ2bHLr0Z",
+      "name": "Gradtabeller",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>Multipeln i skärningspunkten mellan effektgrad och grundegenskap multipliceras med det värde den odöde hade i livet. Produkten är den odödes nya värde — avrunda bråkdelar uppåt. Högre effektgrader än 5 använder kolumn 5.</p><h2>Skelett</h2><table style=\"width:100%\"><thead><tr><th>Egenskap</th><th>Grad 1</th><th>Grad 2</th><th>Grad 3</th><th>Grad 4</th><th>Grad 5</th></tr></thead><tbody><tr><td>STY</td><td>0,4</td><td>0,8</td><td>1,2</td><td>1,6</td><td>2,0</td></tr><tr><td>SMI</td><td>0,2</td><td>0,4</td><td>0,6</td><td>0,8</td><td>1,0</td></tr><tr><td>INT</td><td>0,05</td><td>0,10</td><td>0,15</td><td>0,20</td><td>0,25</td></tr></tbody></table><h2>Zombie</h2><table style=\"width:100%\"><thead><tr><th>Egenskap</th><th>Grad 1</th><th>Grad 2</th><th>Grad 3</th><th>Grad 4</th><th>Grad 5</th></tr></thead><tbody><tr><td>STY</td><td>0,6</td><td>1,2</td><td>1,8</td><td>2,4</td><td>3,0</td></tr><tr><td>SMI</td><td>0,1</td><td>0,2</td><td>0,3</td><td>0,4</td><td>0,5</td></tr><tr><td>INT</td><td>0,05</td><td>0,10</td><td>0,15</td><td>0,20</td><td>0,25</td></tr></tbody></table><h2>Mumie</h2><table style=\"width:100%\"><thead><tr><th>Egenskap</th><th>Grad 1 <sup>1</sup></th><th>Grad 2 <sup>1</sup></th><th>Grad 3 <sup>2</sup></th><th>Grad 4 <sup>2</sup></th><th>Grad 5 <sup>3</sup></th></tr></thead><tbody><tr><td>STY</td><td>1,2</td><td>2,4</td><td>3,6</td><td>4,8</td><td>6,0</td></tr><tr><td>SMI</td><td>0,1</td><td>0,2</td><td>0,3</td><td>0,4</td><td>0,5</td></tr><tr><td>INT</td><td>0,2</td><td>0,4</td><td>0,6</td><td>0,8</td><td>1,0</td></tr></tbody></table><p><sup>1</sup> Balsameraren måste ha FV 3 i sitt hantverk. <sup>2</sup> FV 4. <sup>3</sup> FV 5.</p><p>Att aktivera en magisk odöd kostar, förutom allt annat, <strong>1 grad per 20 STO</strong> hos offret. Den odödes PSY är lika med antalet PSY-poäng magikern lade ned i besvärjelsen. Den odöde behåller alla färdigheter utom de som har INT som grundegenskap; de som baseras på SMI och STY multipliceras också med multipeln ovan.</p><p><em>Källa: Magi-regelboken s.23 (besvärjelsen Animera död).</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!W7K4T7wpkVXUEDku.D2Eq5xbTZ2bHLr0Z"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!W7K4T7wpkVXUEDku"
+}

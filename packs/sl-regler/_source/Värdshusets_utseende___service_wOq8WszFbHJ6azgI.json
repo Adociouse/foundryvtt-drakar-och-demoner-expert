@@ -1,0 +1,62 @@
+{
+  "name": "Värdshusets utseende & service",
+  "_id": "wOq8WszFbHJ6azgI",
+  "pages": [
+    {
+      "_id": "1XAPGJoU5H1NBg4H",
+      "name": "Framslagning",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>⚠ <strong>Spelledarmaterial.</strong> Slå fram ett värdshus utseende och bemanning. Fyra typer: fint, normalt, fattigt och slum.</p><table style=\"width:100%\"><thead><tr><th>Ting</th><th>Slum</th><th>Fattigt</th><th>Normalt</th><th>Fint</th></tr></thead><tbody><tr><td>Antal småbord <sup>1</sup></td><td>–</td><td>1T4</td><td>1T8</td><td>3T6</td></tr><tr><td>Antal långbord <sup>2</sup></td><td>3T4</td><td>2T3</td><td>2T4</td><td>1T6</td></tr><tr><td>Antal bås <sup>3</sup></td><td>–</td><td>1T4</td><td>2T4</td><td>2T4</td></tr><tr><td>Chans att få bås</td><td>0%</td><td>15%</td><td>95%</td><td>95%</td></tr><tr><td>Antal sovsalar</td><td>1</td><td>2</td><td>2</td><td>–</td></tr><tr><td>Antal bäddar/sovsal</td><td>4T4+4</td><td>4T4+2</td><td>3T4+2</td><td>–</td></tr><tr><td>Antal dubbelrum</td><td>1</td><td>1T3+1</td><td>1T3+4</td><td>1T3+5</td></tr><tr><td>Antal enkelrum</td><td>1</td><td>1T3</td><td>1T3+3</td><td>1T3+5</td></tr><tr><td>Chans att få sovplats — sovsal <sup>4</sup></td><td>50%</td><td>55%</td><td>55%</td><td>–</td></tr><tr><td>Chans att få sovplats — dubbelrum <sup>4</sup></td><td>20%</td><td>35%</td><td>45%</td><td>75%</td></tr><tr><td>Chans att få sovplats — enkelrum <sup>4</sup></td><td>30%</td><td>25%</td><td>25%</td><td>65%</td></tr><tr><td>Bad</td><td>nej</td><td>ja</td><td>ja</td><td>ja</td></tr><tr><td>Krögare</td><td>värden</td><td>värden</td><td>värden</td><td>värden+1</td></tr><tr><td>Utkastare</td><td>värden</td><td>värden</td><td>1</td><td>1T3</td></tr><tr><td>Kock</td><td>1</td><td>1</td><td>1</td><td>1T3</td></tr><tr><td>Extra kökspersonal</td><td>nej</td><td>nej</td><td>1</td><td>1T4+1</td></tr><tr><td>Chans för underhållning <sup>5</sup></td><td>35%</td><td>45%</td><td>65%</td><td>50%</td></tr><tr><td>Chans för stall</td><td>15%</td><td>25%</td><td>80% <sup>6</sup></td><td>100%</td></tr><tr><td>Chans för vagnhus</td><td>nej</td><td>nej</td><td>15% <sup>6</sup></td><td>50%</td></tr></tbody></table><p><sup>1</sup> 6 platser. <sup>2</sup> 15 platser. <sup>3</sup> 4 platser.<br><sup>4</sup> Får man rum får man också stallplats eller vagnplats om sådant finns.<br><sup>5</sup> Slå 1T20: 1–10 Trubadur, 11–15 Dansflickor, 16–19 Gycklare, 20 SLs special.<br><sup>6</sup> Vid landsväg 100%.</p><p><em>Källa: Magi-regelboken s.48.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!wOq8WszFbHJ6azgI.1XAPGJoU5H1NBg4H"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!wOq8WszFbHJ6azgI"
+}

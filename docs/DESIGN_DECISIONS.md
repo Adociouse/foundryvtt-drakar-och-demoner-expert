@@ -455,7 +455,9 @@ Surveyed from the dnd5e and PF2e repositories 2026-07-27, to distinguish "we hav
 
 ## 8. Pack Layout, Folders & Adventure Structure — design proposal (2026-07-28)
 
-> **Status: PROPOSAL, not implemented.** Written on Johan's request to settle backlog 27 (rules tables into compendiums) and 29 (folders + adventure structure) together, since both are the same decision about package structure. Every capability below was verified against the **installed Foundry v14 source** and against **dnd5e as a shipped reference implementation** — not recalled from training data.
+> **Status: STEG 1-3 IMPLEMENTERADE 2026-07-28 och liveverifierade** (steg 4 hör hemma i kampanjmodulens eget repo). Se §8.6 för utfall och den enda avvikelsen från förslaget. Ursprungligen skriven som:
+>
+> **PROPOSAL, not implemented.** Written on Johan's request to settle backlog 27 (rules tables into compendiums) and 29 (folders + adventure structure) together, since both are the same decision about package structure. Every capability below was verified against the **installed Foundry v14 source** and against **dnd5e as a shipped reference implementation** — not recalled from training data.
 
 ### 8.1 What Foundry actually gives us (verified, not assumed)
 
@@ -563,3 +565,29 @@ Three distinctions worth keeping straight:
 4. Campaign module: `Adventure` pack, move Dimön's content in, and document the overwrite-on-reimport hazard in its README.
 
 Steps 1–2 touch no game logic. Step 3 needs `RollTable`/`JournalEntry` handling in `packs.config.mjs`. Step 4 happens in the module's own repo.
+
+
+### 8.6 Utfall — implementerat 2026-07-28
+
+**Steg 1–3 klara och liveverifierade.** Steg 4 (Dimön som `Adventure`) hör hemma i kampanjmodulens repo; noterat att `dode-test`-världen redan har temporära världspacks `dimon-actors` och `dimon-adventure`, vilket är precis det material som ska flyttas dit.
+
+| Vad | Utfall |
+|---|---|
+| `packFolders` | 4 mappar i sidopanelen. **Verifierat i en NYSKAPAD värld** — det är enda sättet att testa, eftersom de bara genereras vid en världs första laddning. Alla 10 packs hamnade i rätt mapp med rätt färg, 0 utanför. Testvärlden raderades efteråt. |
+| Mappar i packs | `raser` 2 · `yrken` 5 · `vapen-utrustning` 14 · `besvarjelser` 12 mappar. **Samtliga 544 poster placerade, 0 föräldralösa.** |
+| Nya packs | `regler` (3 journaler), `tabeller` (3 RollTables), `sl-regler` (1 journal). |
+| RollTables | Skräcktabell 1T20 (9 rader), Hjältedåd 1T20 (13), Särskilda förmågor 2T20 (49). Slagning verifierad: 8→Flykt, 19→Hysteri, 11→Flykt. `@UUID`-länkbar. |
+
+**⚠ Avvikelse från §8.3: `sl-tabeller` byggdes inte.** Det skulle ha blivit ett tomt pack — vi har inga SL-*slagbara* tabeller ännu (Värdshusets utseende är en uppslagstabell, inte en tärningstabell). Den hamnade i stället i `sl-regler` (JournalEntry, SL). Skapa `sl-tabeller` när första påhitts-/lootabellen finns; publikprincipen i §8.3 gäller fortfarande.
+
+**⚠ Två upptäckter om `_key` för embeddade dokument.** Samma fälla som handlarens föremål, nu bekräftad för alla tre typerna — `fvtt package pack` failar med "Key cannot be null or undefined" utan dem:
+
+| Embeddat | Nyckelform |
+|---|---|
+| Items på en aktör | `!actors.items!<actorId>.<itemId>` |
+| Resultat i en RollTable | `!tables.results!<tableId>.<resultId>` |
+| Sidor i en JournalEntry | `!journal.pages!<journalId>.<pageId>` |
+
+Mappdokument använder `!folders!<id>` och posterna pekar på dem via sitt `folder`-fält. Alla former lästes ur dnd5e:s kompilerade packs, inte gissade.
+
+**Kvar av backlog 27:** Snedtändningstabellen (ingen data i `config.mjs` ännu, se backlog 21) och de rent härledda tabellerna (socialt stånd, startkapital, grupp/skadebonus/förflyttning) som redan är automatiserade i koden och inte behöver journaler.

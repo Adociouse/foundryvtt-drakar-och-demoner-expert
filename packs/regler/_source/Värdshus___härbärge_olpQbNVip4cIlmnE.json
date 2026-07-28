@@ -1,0 +1,62 @@
+{
+  "name": "Värdshus & härbärge",
+  "_id": "olpQbNVip4cIlmnE",
+  "pages": [
+    {
+      "_id": "ubToROifnwrRJgkL",
+      "name": "Priser, rum och stallplats",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Mat &amp; dryck</h2><table style=\"width:100%\"><thead><tr><th>Rätt</th><th>Pris</th></tr></thead><tbody><tr><td>Enkel grönsaksstuvning</td><td>5 km</td></tr><tr><td>Köttstuvning</td><td>10 km</td></tr><tr><td>Köttstycke och rovor</td><td>30 km</td></tr><tr><td>God måltid (ej slum)</td><td>50 km</td></tr><tr><td>Lyxmåltid (ej slum/fattigt)</td><td>10 sm</td></tr><tr><td>Bankett</td><td>20 sm</td></tr><tr><td>Öl (stånka)</td><td>2 km</td></tr><tr><td>Mjöd (stånka)</td><td>2 km</td></tr><tr><td>Cider (mugg)</td><td>1 km</td></tr><tr><td>Vin (mugg)</td><td>3 km</td></tr></tbody></table><h2>Inkvartering (per natt)</h2><table style=\"width:100%\"><thead><tr><th>Rum</th><th>Pris</th></tr></thead><tbody><tr><td>Sovsal</td><td>3 sm</td></tr><tr><td>Dubbelrum</td><td>5 sm</td></tr><tr><td>Enkelrum</td><td>7 sm</td></tr></tbody></table><h2>Stallplats (per dygn)</h2><table style=\"width:100%\"><thead><tr><th>Djur</th><th>Pris</th></tr></thead><tbody><tr><td>Åsna/Mula</td><td>7 km</td></tr><tr><td>Ponny</td><td>6 km</td></tr><tr><td>Lätt + medelstor häst</td><td>10 km</td></tr><tr><td>Stor häst</td><td>15 km</td></tr><tr><td>Oxe</td><td>9 km</td></tr><tr><td>Elefant (ej tillåten i städer)</td><td>10 sm</td></tr><tr><td>Legenddjur (hippogriff, pegas m.m.)</td><td>5 sm</td></tr></tbody></table><h2>Underhållning</h2><p>Rollpersonerna kastar mynt till underhållarna som betalning. Äger rollpersonen mindre än 30 km behöver han inte betala.</p><table style=\"width:100%\"><thead><tr><th>Underhållare</th><th>Betalning</th></tr></thead><tbody><tr><td>Musiker</td><td>1T6 km</td></tr><tr><td>Dansflickor (manliga rollpersoner)</td><td>1T10 km</td></tr><tr><td>Dansflickor (kvinnliga rollpersoner)</td><td>1T3−1 km</td></tr><tr><td>Gycklare</td><td>1T8 km</td></tr></tbody></table><p><em>Källa: Magi-regelboken s.48. Fyra typer av värdshus: fint, normalt, fattigt och slum. Ett värdshus utan övernattningsmöjligheter kallas taverna.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!olpQbNVip4cIlmnE.ubToROifnwrRJgkL"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!olpQbNVip4cIlmnE"
+}

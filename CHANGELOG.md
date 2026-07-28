@@ -3,6 +3,11 @@
 ## [Unreleased]
 
 ### Added
+- **Compendium organisation** (§8) — `packFolders` groups the ten packs into four sidebar folders (Rollpersoner · Utrustning & magi · Regler & tabeller · Spelledare), and the four large Item packs gained in-pack folders: races by origin, professions by base profession, equipment by category (14) and spells by magic school (12). All 544 entries placed
+- **Three new packs**: `regler` (JournalEntry, players) with Bärförmåga, Värdshuspriser and the Animera död grade tables; `tabeller` (RollTable, players) with the Skräcktabell, Hjältedådstabellen and Särskilda förmågor; `sl-regler` (JournalEntry, GM) with the tavern generation table. Tables are now rollable from chat and `@UUID`-linkable
+- ⚠ Note for anyone upgrading: `packFolders` only takes effect on a world's **first** load. Existing worlds keep their current sidebar and must be reorganised by hand
+
+### Added
 - **New `handlare` Actor type with a working shop sheet** — a merchant NPC whose sheet is a shop counter. Players double-click the token, see stock grouped by category with prices in the merchant's own coin, and click Köp; the cost is deducted and the item created on their own character. Note Foundry core has no built-in Loot/Merchant sheet type — that is a dnd5e-plus-module concept, so it is implemented in-system here
 - **`system.currency` purse on characters** (`gm`/`sm`/`km`, with derived total and label) — the character previously had only a creation-time `startCapital` that never decreased, so there was nothing for a purchase to subtract from. The wizard seeds it from whatever start capital survives the equipment step
 - `Lasslo Värdshusvärden` ("Den Trötta Draken") in a new GM-only `handlare` compendium, stocked with Magi-regelbokens tavern price list (s.48) plus general goods — a generic merchant to copy for any innkeeper, smith or herbalist

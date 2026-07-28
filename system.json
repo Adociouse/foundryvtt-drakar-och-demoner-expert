@@ -116,6 +116,39 @@
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "regler",
+      "label": "Regler & referens",
+      "path": "packs/regler",
+      "type": "JournalEntry",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "tabeller",
+      "label": "Tabeller (slagbara)",
+      "path": "packs/tabeller",
+      "type": "RollTable",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "sl-regler",
+      "label": "Regler & tabeller (SL)",
+      "path": "packs/sl-regler",
+      "type": "JournalEntry",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "socket": false,
@@ -131,5 +164,45 @@
   "bugs": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/issues",
   "license": "MIT",
   "readme": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/blob/master/README.md",
-  "changelog": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/blob/master/CHANGELOG.md"
+  "changelog": "https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert/blob/master/CHANGELOG.md",
+  "packFolders": [
+    {
+      "name": "Rollpersoner",
+      "sorting": "m",
+      "color": "#6b4a2f",
+      "packs": [
+        "raser",
+        "yrken"
+      ]
+    },
+    {
+      "name": "Utrustning & magi",
+      "sorting": "m",
+      "color": "#7a5c3a",
+      "packs": [
+        "vapen-utrustning",
+        "besvarjelser"
+      ]
+    },
+    {
+      "name": "Regler & tabeller",
+      "sorting": "m",
+      "color": "#4a5c6b",
+      "packs": [
+        "regler",
+        "tabeller"
+      ]
+    },
+    {
+      "name": "Spelledare",
+      "sorting": "m",
+      "color": "#5c2f2f",
+      "packs": [
+        "magiska-foremal",
+        "monster",
+        "handlare",
+        "sl-regler"
+      ]
+    }
+  ]
 }

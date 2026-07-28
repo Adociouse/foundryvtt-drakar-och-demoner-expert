@@ -1,0 +1,367 @@
+{
+  "name": "Hjältedådstabell",
+  "_id": "2VzHG2GBvSmyQIKM",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "description": "<p>Hjältedåd ur rollpersonens förflutna — slås vid skapandet av hjältar. Varje dåd ger bakgrundspoäng och/eller hjältepoäng.</p><p><em>Källa: Hjältarnas Handbok. Systemets egen kopia ligger i <code>CONFIG.DODE.hjaltedadTable</code>.</em></p>",
+  "results": [
+    {
+      "_id": "6GMl4XuYESvIzNM8",
+      "type": "text",
+      "name": "Torneringsseger",
+      "img": null,
+      "description": "<p>+15 BP · 5 hjältepoäng</p>",
+      "weight": 1,
+      "range": [
+        1,
+        3
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.6GMl4XuYESvIzNM8"
+    },
+    {
+      "_id": "ih0MU3VoXvmYrYdX",
+      "type": "text",
+      "name": "Duell",
+      "img": null,
+      "description": "<p>+1T10+10 BP · +1T10 HP</p>",
+      "weight": 1,
+      "range": [
+        4,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.ih0MU3VoXvmYrYdX"
+    },
+    {
+      "_id": "2OtDr6CVwDNyMCNS",
+      "type": "text",
+      "name": "Monsterbane",
+      "img": null,
+      "description": "<p>+1T10+10 BP · +1T10 HP</p>",
+      "weight": 1,
+      "range": [
+        6,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.2OtDr6CVwDNyMCNS"
+    },
+    {
+      "_id": "p5L0kHTXlbW5Sy4W",
+      "type": "text",
+      "name": "Korsfarare",
+      "img": null,
+      "description": "<p>+20 BP · +10 HP</p>",
+      "weight": 1,
+      "range": [
+        8,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.p5L0kHTXlbW5Sy4W"
+    },
+    {
+      "_id": "z9KyFtzn8SdtG91N",
+      "type": "text",
+      "name": "Upptäcktsresande",
+      "img": null,
+      "description": "<p>+20 BP · +10 HP</p>",
+      "weight": 1,
+      "range": [
+        10,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.z9KyFtzn8SdtG91N"
+    },
+    {
+      "_id": "lO0nyFR5YAPZT5Wf",
+      "type": "text",
+      "name": "Monsterbane (stor)",
+      "img": null,
+      "description": "<p>+1T20+10 BP · +1T10+5 HP</p>",
+      "weight": 1,
+      "range": [
+        12,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.lO0nyFR5YAPZT5Wf"
+    },
+    {
+      "_id": "BBQ9pDyiRWfP4i10",
+      "type": "text",
+      "name": "Gravplundrare",
+      "img": null,
+      "description": "<p>+20 BP · +10 HP · +10 Startkapital</p>",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.BBQ9pDyiRWfP4i10"
+    },
+    {
+      "_id": "1atxUVXSxGZMQHaX",
+      "type": "text",
+      "name": "Vapenbärare",
+      "img": null,
+      "description": "<p>+25 BP · Magiskt vapen</p>",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.1atxUVXSxGZMQHaX"
+    },
+    {
+      "_id": "uuAuafEPH5XBLGC5",
+      "type": "text",
+      "name": "Rövare",
+      "img": null,
+      "description": "<p>+20 BP · +10 HP · +10 Startkapital</p>",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.uuAuafEPH5XBLGC5"
+    },
+    {
+      "_id": "LhF2JOED5EsZ1WMY",
+      "type": "text",
+      "name": "Segerherre",
+      "img": null,
+      "description": "<p>+30 BP · 15 hjältepoäng</p>",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.LhF2JOED5EsZ1WMY"
+    },
+    {
+      "_id": "dwa4UdPcS3AYtLV8",
+      "type": "text",
+      "name": "Drakdödare",
+      "img": null,
+      "description": "<p>+35 BP · +20 HP</p>",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.dwa4UdPcS3AYtLV8"
+    },
+    {
+      "_id": "CY1utIARbAKTasn3",
+      "type": "text",
+      "name": "Räddaren i nöden",
+      "img": null,
+      "description": "<p>+30 BP · +10 HP</p>",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.CY1utIARbAKTasn3"
+    },
+    {
+      "_id": "oSotTTpRN7uT6dAT",
+      "type": "text",
+      "name": "SL Special",
+      "img": null,
+      "description": "<p>+50 BP · +35 HP · SL bestämmer</p>",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!2VzHG2GBvSmyQIKM.oSotTTpRN7uT6dAT"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!2VzHG2GBvSmyQIKM"
+}

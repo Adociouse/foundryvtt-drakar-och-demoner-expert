@@ -1,0 +1,1303 @@
+{
+  "name": "Särskilda förmågor",
+  "_id": "xV2OqmaPfFzG5xFf",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "description": "<p>Slå <strong>2T20 + spenderade BP</strong> och läs av resultatet. Guiden och rollpersonsarket har en knapp som gör detta åt dig; tabellen finns här för att kunna slås direkt eller länkas från en journal.</p><p><em>Källa: Rollpersonen s.25-27. Systemets egen kopia ligger i <code>CONFIG.DODE.specialAbilitiesTable</code>.</em></p>",
+  "results": [
+    {
+      "_id": "Qdg1sSieaEDesX7I",
+      "type": "text",
+      "name": "Förmåga",
+      "img": null,
+      "description": "<p>+1 på FV på valfri sekundär färdighet (utom förbjudna)</p>",
+      "weight": 1,
+      "range": [
+        3,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.Qdg1sSieaEDesX7I"
+    },
+    {
+      "_id": "8DQkDsowtNRdf4Pt",
+      "type": "text",
+      "name": "Sjöfararbakgrund",
+      "img": null,
+      "description": "<p>+2 FV i Sjökunnighet och Navigera</p>",
+      "weight": 1,
+      "range": [
+        5,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.8DQkDsowtNRdf4Pt"
+    },
+    {
+      "_id": "Ck1biYRDJ1Xn2RvK",
+      "type": "text",
+      "name": "Starka vrister",
+      "img": null,
+      "description": "<p>+3 på FV i Hoppa</p>",
+      "weight": 1,
+      "range": [
+        7,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.Ck1biYRDJ1Xn2RvK"
+    },
+    {
+      "_id": "TuPusdE18mG4yUsL",
+      "type": "text",
+      "name": "Bråkig uppväxt",
+      "img": null,
+      "description": "<p>+3 på FV i Slagsmål</p>",
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.TuPusdE18mG4yUsL"
+    },
+    {
+      "_id": "RjQt4pXfCJTTmTVu",
+      "type": "text",
+      "name": "Hantverkarbakgrund",
+      "img": null,
+      "description": "<p>+3 FV i valfri hantverksfärdighet</p>",
+      "weight": 1,
+      "range": [
+        11,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.RjQt4pXfCJTTmTVu"
+    },
+    {
+      "_id": "U8hw795NzXbjNJKA",
+      "type": "text",
+      "name": "Smidig kropp",
+      "img": null,
+      "description": "<p>+3 FV i Akrobatik</p>",
+      "weight": 1,
+      "range": [
+        13,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.U8hw795NzXbjNJKA"
+    },
+    {
+      "_id": "6KICdSYI4VLm50Cu",
+      "type": "text",
+      "name": "Köpmannabakgrund",
+      "img": null,
+      "description": "<p>+3 FV i Värdera</p>",
+      "weight": 1,
+      "range": [
+        15,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.6KICdSYI4VLm50Cu"
+    },
+    {
+      "_id": "EEVEs0iP3NuuunoD",
+      "type": "text",
+      "name": "God koordinationsförmåga",
+      "img": null,
+      "description": "<p>+3 FV i Två vapen</p>",
+      "weight": 1,
+      "range": [
+        17,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.EEVEs0iP3NuuunoD"
+    },
+    {
+      "_id": "XPTZF17YmKhbke8z",
+      "type": "text",
+      "name": "Hobbyist",
+      "img": null,
+      "description": "<p>FV 3 i valfri sekundär färdighet du kan lära från början</p>",
+      "weight": 1,
+      "range": [
+        19,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.XPTZF17YmKhbke8z"
+    },
+    {
+      "_id": "qV36opH2kxpK6r3m",
+      "type": "text",
+      "name": "Starka nypor",
+      "img": null,
+      "description": "<p>Alltid +3 på CL i Klättra</p>",
+      "weight": 1,
+      "range": [
+        21,
+        22
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.qV36opH2kxpK6r3m"
+    },
+    {
+      "_id": "he0cWYHCawsLIlIW",
+      "type": "text",
+      "name": "Mottagligt medium",
+      "img": null,
+      "description": "<p>Alltid +5 CL i Magisk kanalisering (passiv)</p>",
+      "weight": 1,
+      "range": [
+        23,
+        24
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.he0cWYHCawsLIlIW"
+    },
+    {
+      "_id": "fRicsNkU5WBaIiVM",
+      "type": "text",
+      "name": "Hängiven student",
+      "img": null,
+      "description": "<p>+2 på valfritt FV; om FV-begränsning finns höjs den med 2</p>",
+      "weight": 1,
+      "range": [
+        25,
+        26
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.fRicsNkU5WBaIiVM"
+    },
+    {
+      "_id": "M6TaSoVepBM5NWWZ",
+      "type": "text",
+      "name": "Övertygande tonfall",
+      "img": null,
+      "description": "<p>Alltid +3 CL i Övertala och Muta</p>",
+      "weight": 1,
+      "range": [
+        27,
+        28
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.M6TaSoVepBM5NWWZ"
+    },
+    {
+      "_id": "KVudFLQtJxY9qLkp",
+      "type": "text",
+      "name": "Sjätte sinne",
+      "img": null,
+      "description": "<p>+1 på dina FV i Upptäcka fara och Finna dolda ting</p>",
+      "weight": 1,
+      "range": [
+        29,
+        30
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.KVudFLQtJxY9qLkp"
+    },
+    {
+      "_id": "9cxVDJSGqE1vGfzA",
+      "type": "text",
+      "name": "Stirrande blick",
+      "img": null,
+      "description": "<p>Alltid +5 CL i Hypnotisera</p>",
+      "weight": 1,
+      "range": [
+        31,
+        32
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.9cxVDJSGqE1vGfzA"
+    },
+    {
+      "_id": "qKAaa3ozTaIiCskU",
+      "type": "text",
+      "name": "Magikänsla",
+      "img": null,
+      "description": "<p>Alltid +5 CL i Känna magi</p>",
+      "weight": 1,
+      "range": [
+        33,
+        34
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.qKAaa3ozTaIiCskU"
+    },
+    {
+      "_id": "1EA6dnMbqULUsMUs",
+      "type": "text",
+      "name": "Gott språksinne",
+      "img": null,
+      "description": "<p>Automatiskt FV 20 (B5) i Tala och Läsa/Skriva ett valfritt språk</p>",
+      "weight": 1,
+      "range": [
+        35,
+        36
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.1EA6dnMbqULUsMUs"
+    },
+    {
+      "_id": "s5RUZNdhot9s9ryU",
+      "type": "text",
+      "name": "Stort kunskapsområde",
+      "img": null,
+      "description": "<p>Två ytterligare valfria sekundära färdigheter som yrkesfärdigheter</p>",
+      "weight": 1,
+      "range": [
+        37,
+        38
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.s5RUZNdhot9s9ryU"
+    },
+    {
+      "_id": "pD0dQZY1MP5lOOlc",
+      "type": "text",
+      "name": "God bågskytt",
+      "img": null,
+      "description": "<p>Alla räckvidder för projektilvapen ökas med 25%</p>",
+      "weight": 1,
+      "range": [
+        39,
+        40
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.pD0dQZY1MP5lOOlc"
+    },
+    {
+      "_id": "x5gVpLg2W6mEcRBO",
+      "type": "text",
+      "name": "Absolut gehör",
+      "img": null,
+      "description": "<p>Grundkostnaden för Spela instrument och Sjunga är alltid 1</p>",
+      "weight": 1,
+      "range": [
+        41,
+        42
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.x5gVpLg2W6mEcRBO"
+    },
+    {
+      "_id": "rL3zYU75eLbDXATj",
+      "type": "text",
+      "name": "Precisionssinne",
+      "img": null,
+      "description": "<p>+1 CL på alla vapenfärdigheter</p>",
+      "weight": 1,
+      "range": [
+        43,
+        44
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.rL3zYU75eLbDXATj"
+    },
+    {
+      "_id": "iXpgsa1npnnGOqpq",
+      "type": "text",
+      "name": "Dubbelhänt",
+      "img": null,
+      "description": "<p>Se rubriken \"Svärdshand\"</p>",
+      "weight": 1,
+      "range": [
+        45,
+        46
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.iXpgsa1npnnGOqpq"
+    },
+    {
+      "_id": "CxLZzj5kpiHzTGWo",
+      "type": "text",
+      "name": "God tidskänsla",
+      "img": null,
+      "description": "<p>Mycket god känsla för tidens gång; vet alltid på 10 min när</p>",
+      "weight": 1,
+      "range": [
+        47,
+        48
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.CxLZzj5kpiHzTGWo"
+    },
+    {
+      "_id": "DvSz8CJaBhEKIecH",
+      "type": "text",
+      "name": "Absolut ögonmått",
+      "img": null,
+      "description": "<p>Bedöma avstånd med 5% felmarginal</p>",
+      "weight": 1,
+      "range": [
+        49,
+        51
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.DvSz8CJaBhEKIecH"
+    },
+    {
+      "_id": "slymmJFHkXnzALsI",
+      "type": "text",
+      "name": "Mycket uppmärksam",
+      "img": null,
+      "description": "<p>Alltid +2 CL i Finna dolda ting och Upptäcka fara</p>",
+      "weight": 1,
+      "range": [
+        52,
+        54
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.slymmJFHkXnzALsI"
+    },
+    {
+      "_id": "GfP0Yjq93JkxDLmP",
+      "type": "text",
+      "name": "Blixtsnabba reflexer",
+      "img": null,
+      "description": "<p>+3 på alla initiativslag</p>",
+      "weight": 1,
+      "range": [
+        55,
+        55
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.GfP0Yjq93JkxDLmP"
+    },
+    {
+      "_id": "GLHpiNxRB2WgQSYN",
+      "type": "text",
+      "name": "Bärsärk",
+      "img": null,
+      "description": "<p>+5 på ditt FV i Bärsärkagång</p>",
+      "weight": 1,
+      "range": [
+        56,
+        56
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.GLHpiNxRB2WgQSYN"
+    },
+    {
+      "_id": "b4YWY80nSL4DeRaq",
+      "type": "text",
+      "name": "Gott balanssinne",
+      "img": null,
+      "description": "<p>+5 på SMI vid balansakter och landning efter fall</p>",
+      "weight": 1,
+      "range": [
+        57,
+        57
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.b4YWY80nSL4DeRaq"
+    },
+    {
+      "_id": "QfWIF9BE0gt1iuor",
+      "type": "text",
+      "name": "Hästarnas herre",
+      "img": null,
+      "description": "<p>+10 på FV i Rida; kan aldrig bli avkastad (men kan trilla av)</p>",
+      "weight": 1,
+      "range": [
+        58,
+        58
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.QfWIF9BE0gt1iuor"
+    },
+    {
+      "_id": "9SlrwxipnTJ7aRSH",
+      "type": "text",
+      "name": "Ambidextriös",
+      "img": null,
+      "description": "<p>Se rubriken \"Svärdshand\"</p>",
+      "weight": 1,
+      "range": [
+        59,
+        59
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.9SlrwxipnTJ7aRSH"
+    },
+    {
+      "_id": "P1N09zJ6gL0akRrl",
+      "type": "text",
+      "name": "Djurvän",
+      "img": null,
+      "description": "<p>Blir aldrig angripen av vanliga djur</p>",
+      "weight": 1,
+      "range": [
+        60,
+        60
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.P1N09zJ6gL0akRrl"
+    },
+    {
+      "_id": "fi7lQciP34P7DWJK",
+      "type": "text",
+      "name": "Turgubbe",
+      "img": null,
+      "description": "<p>Kan alltid modifiera CL med +1 genom att spendera 1 PSY-poäng</p>",
+      "weight": 1,
+      "range": [
+        61,
+        61
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.fi7lQciP34P7DWJK"
+    },
+    {
+      "_id": "G4VeP0VX3z4ReZ5d",
+      "type": "text",
+      "name": "Magisk empati",
+      "img": null,
+      "description": "<p>Med PSY kan du övervinna effektgrader lagrade i magiska föremål och identifiera besvärjelser</p>",
+      "weight": 1,
+      "range": [
+        62,
+        62
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.G4VeP0VX3z4ReZ5d"
+    },
+    {
+      "_id": "NYkZfFZ0UfgUrjtC",
+      "type": "text",
+      "name": "Gudarnas gunstling",
+      "img": null,
+      "description": "<p>Varje gång dina KP når noll: 25% chans att en gud griper in och återställer alla KP. Kritiska skador kan ej läkas på detta sätt</p>",
+      "weight": 1,
+      "range": [
+        63,
+        63
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.NYkZfFZ0UfgUrjtC"
+    },
+    {
+      "_id": "k4Chg2QxjjdHZscI",
+      "type": "text",
+      "name": "Lättlärd",
+      "img": null,
+      "description": "<p>Grundkostnaden för sekundära färdigheter minskas till 4</p>",
+      "weight": 1,
+      "range": [
+        64,
+        64
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.k4Chg2QxjjdHZscI"
+    },
+    {
+      "_id": "zQPrGOYTFW034v45",
+      "type": "text",
+      "name": "Extremt smärttålig",
+      "img": null,
+      "description": "<p>Totala KP multipliceras med 1,5 (ändrar även träffområdenas KP)</p>",
+      "weight": 1,
+      "range": [
+        65,
+        65
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.zQPrGOYTFW034v45"
+    },
+    {
+      "_id": "lwIVFVRpamHjpPG4",
+      "type": "text",
+      "name": "Snabbslående",
+      "img": null,
+      "description": "<p>Slår alltid först i varje SR. Vid möte med annan med denna förmåga: normalt initiativslag</p>",
+      "weight": 1,
+      "range": [
+        66,
+        66
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.lwIVFVRpamHjpPG4"
+    },
+    {
+      "_id": "PWHCoah7omfKZekR",
+      "type": "text",
+      "name": "Baneman",
+      "img": null,
+      "description": "<p>Svurit att bekämpa en speciell ras/folkslag; +5 CL vid alla attacker mot denna</p>",
+      "weight": 1,
+      "range": [
+        67,
+        67
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.PWHCoah7omfKZekR"
+    },
+    {
+      "_id": "cs1VGoCTtWJsfMGX",
+      "type": "text",
+      "name": "God kroppskontroll",
+      "img": null,
+      "description": "<p>Kontrollera adrenalin med normalt FYS-slag; höj STY och alla STY-baserade färdigheter med +5 under 3 SR. Max 2 gånger per dag</p>",
+      "weight": 1,
+      "range": [
+        68,
+        68
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.cs1VGoCTtWJsfMGX"
+    },
+    {
+      "_id": "7lvntmXrbHaEaycY",
+      "type": "text",
+      "name": "Järnnäve",
+      "img": null,
+      "description": "<p>Alltid maximal skada i obeväpnad strid</p>",
+      "weight": 1,
+      "range": [
+        69,
+        69
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.7lvntmXrbHaEaycY"
+    },
+    {
+      "_id": "gCRhHgDSbucP8Ejc",
+      "type": "text",
+      "name": "Extremt orädd",
+      "img": null,
+      "description": "<p>−5 på alla slag på Skräcktabellen</p>",
+      "weight": 1,
+      "range": [
+        70,
+        70
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.gCRhHgDSbucP8Ejc"
+    },
+    {
+      "_id": "DncCTXCVzn1qFgTH",
+      "type": "text",
+      "name": "Orubblig vilja",
+      "img": null,
+      "description": "<p>+5 på PSY på alla slag PSY mot PSY på Motståndstabellen</p>",
+      "weight": 1,
+      "range": [
+        71,
+        71
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.DncCTXCVzn1qFgTH"
+    },
+    {
+      "_id": "73NlOZTqhM0ThMVb",
+      "type": "text",
+      "name": "Härdig mot element",
+      "img": null,
+      "description": "<p>+5 på FYS på alla Motståndslag mot eld, köld, vatten, vind, etc.</p>",
+      "weight": 1,
+      "range": [
+        72,
+        72
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.73NlOZTqhM0ThMVb"
+    },
+    {
+      "_id": "Or3zENikPaaKJBNf",
+      "type": "text",
+      "name": "Gott läkekött",
+      "img": null,
+      "description": "<p>KP-förluster av fysiskt våld eller elementarbesvärjelser läker dubbelt så fort</p>",
+      "weight": 1,
+      "range": [
+        73,
+        73
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.Or3zENikPaaKJBNf"
+    },
+    {
+      "_id": "OGuywR7Uwrre1qDw",
+      "type": "text",
+      "name": "God mental kontroll",
+      "img": null,
+      "description": "<p>Återfår PSY-poäng förbrukade av besvärjelser på halva tiden. Ej för icke-magiker (räknas som resultat 73)</p>",
+      "weight": 1,
+      "range": [
+        74,
+        74
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.OGuywR7Uwrre1qDw"
+    },
+    {
+      "_id": "QF5JaJoENr5ZA8jX",
+      "type": "text",
+      "name": "Naturlig färdighet med vapen",
+      "img": null,
+      "description": "<p>+5 FV på en valfri vapenfärdighet</p>",
+      "weight": 1,
+      "range": [
+        75,
+        75
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.QF5JaJoENr5ZA8jX"
+    },
+    {
+      "_id": "w45vnQEsBPHDZLuI",
+      "type": "text",
+      "name": "Kluven personlighet",
+      "img": null,
+      "description": "<p>Förutom egen yrkesförmåga: välj även yrkesförmågan från valfritt annat yrke</p>",
+      "weight": 1,
+      "range": [
+        76,
+        76
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.w45vnQEsBPHDZLuI"
+    },
+    {
+      "_id": "FAJ7NruTJrzi6ZRo",
+      "type": "text",
+      "name": "God känsla för yrket",
+      "img": null,
+      "description": "<p>Kostnaden för att lära sig en besvärjelse eller en yrkesfärdighet halveras alltid (avrunda uppåt). Halvera efter multiplikation</p>",
+      "weight": 1,
+      "range": [
+        77,
+        77
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.FAJ7NruTJrzi6ZRo"
+    },
+    {
+      "_id": "4sPg5lBRCeQQj7Z9",
+      "type": "text",
+      "name": "Hamnbytare",
+      "img": null,
+      "description": "<p>Kan förvandla sig till ett djur (slå 1T6): 1 — varg, 2 — björn, 3 — hök, 4 — hjort, 5 — svan, 6 — katt. Verklig förvandling; övertar djurets egenskaper utom INT och INT-baserade färdigheter</p>",
+      "weight": 1,
+      "range": [
+        78,
+        999
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!xV2OqmaPfFzG5xFf.4sPg5lBRCeQQj7Z9"
+    }
+  ],
+  "formula": "2d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!xV2OqmaPfFzG5xFf"
+}

@@ -1,0 +1,263 @@
+{
+  "name": "Skräcktabell",
+  "_id": "5oZG62tJImdAKrLJ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "description": "<p>Slås när en varelse utsätts för skräck — bl.a. av besvärjelserna <strong>Rädsla</strong>, <strong>Panik</strong> och <strong>Terror</strong>. Modifikationer läggs på tärningen; har en varelse flera samtidiga modifikationer används bara den högsta, och slås flera slag samma SR gäller endast det hårdaste resultatet.</p><p>⚠ Varelser som själva förorsakar skräck (t.ex. drakar) eller saknar känslor (t.ex. insektoider) slår aldrig på tabellen. Odöda slår aldrig heller.</p><p><em>Källa: Magi-regelboken s.25.</em></p>",
+  "results": [
+    {
+      "_id": "qbbCi1bymC1s79XM",
+      "type": "text",
+      "name": "Försiktig",
+      "img": null,
+      "description": "Offret blir försiktigt och har −2 på alla attacker och parieringar under 1T4 SR.",
+      "weight": 1,
+      "range": [
+        1,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.qbbCi1bymC1s79XM"
+    },
+    {
+      "_id": "cUhzFFP1BVjx7YpL",
+      "type": "text",
+      "name": "Bärsärkagång",
+      "img": null,
+      "description": "Offret går bärsärkagång och rusar rakt emot orsaken till hans utbrott.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.cUhzFFP1BVjx7YpL"
+    },
+    {
+      "_id": "6DuT63Nly8InUWGP",
+      "type": "text",
+      "name": "Flykt",
+      "img": null,
+      "description": "Offret flyr så fort som möjligt från skräckkällan under 3T6 SR.",
+      "weight": 1,
+      "range": [
+        6,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.6DuT63Nly8InUWGP"
+    },
+    {
+      "_id": "od43EF5r2WjkQiec",
+      "type": "text",
+      "name": "Skakningar",
+      "img": null,
+      "description": "Offret faller till marken med kroppen skakande tills skräckkällan försvinner. Därefter är han darrig i 1T4 timmar, vilket innebär att SMI och alla SMI-baserade färdigheter är halverade.",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.od43EF5r2WjkQiec"
+    },
+    {
+      "_id": "njE11L3IS91jJphz",
+      "type": "text",
+      "name": "Paralyserad",
+      "img": null,
+      "description": "Offret står helt still som om han vore paralyserad. Dessutom blir det +1 på alla efterföljande slag på denna tabell under resten av samma dag.",
+      "weight": 1,
+      "range": [
+        16,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.njE11L3IS91jJphz"
+    },
+    {
+      "_id": "Tq4smGP6s46kISpR",
+      "type": "text",
+      "name": "Hysteri",
+      "img": null,
+      "description": "Offret blir hysteriskt och står kvar på platsen, skrikande av skräck tills skräckkällan försvinner och offret blir lugnat. Dessutom +3 på alla efterföljande slag på denna tabell under resten av samma dag.",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.Tq4smGP6s46kISpR"
+    },
+    {
+      "_id": "IJqQmDRepb4X1RlM",
+      "type": "text",
+      "name": "Svimning",
+      "img": null,
+      "description": "Offret svimmar och förblir medvetslöst i 2T8 minuter. Risk för bestående men (se 23+). Dessutom +3 på alla efterföljande slag under de närmaste 1T3 dagarna.",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.IJqQmDRepb4X1RlM"
+    },
+    {
+      "_id": "WpsByyrWL9HanNUq",
+      "type": "text",
+      "name": "Långvarig paralys",
+      "img": null,
+      "description": "Offret står helt paralyserat i 1T4 timmar. Risk för bestående men (se 23+). Dessutom +3 på alla efterföljande slag under de närmaste 1T4 dagarna.",
+      "weight": 1,
+      "range": [
+        21,
+        22
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.WpsByyrWL9HanNUq"
+    },
+    {
+      "_id": "qBJlO7lj3FPOQwPY",
+      "type": "text",
+      "name": "Hjärtattack",
+      "img": null,
+      "description": "Offret drabbas av en hjärtattack. Slå ett normalt FYS-slag — misslyckas det dör offret. Lyckas det svimmar offret i 1T8 timmar. Bestående men: slå 1T20 per grundegenskap, 19–20 sänker den permanent med 1. Dessutom +5 på alla efterföljande slag under de närmaste 2T4 dagarna.",
+      "weight": 1,
+      "range": [
+        23,
+        30
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!5oZG62tJImdAKrLJ.qBJlO7lj3FPOQwPY"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!5oZG62tJImdAKrLJ"
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Bärförmåga & belastning",
+  "_id": "PK5SoPEjLMPPDAAJ",
+  "pages": [
+    {
+      "_id": "OIYggeT6M6LEHROn",
+      "name": "Bärförmåga & belastning",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>En rollpersons normala bärförmåga är lika med <strong>STY antal BEP</strong>. Bär han mer tvingas han gå långsammare. Bördor påverkar förflyttningsförmågan, SMI och SMI-baserade färdigheter. Vanliga kläder räknas inte in i bördan.</p><table style=\"width:100%\"><thead><tr><th>Börda</th><th>Förflyttningsminskning</th><th>CL- & SMI-minskning</th></tr></thead><tbody><tr><td>0,0–0,5 ×STY</td><td>±0</td><td>±0</td></tr><tr><td>0,5–1,0 ×STY <sup>1</sup></td><td>−20%</td><td>−1</td></tr><tr><td>1,0–1,5 ×STY <sup>1</sup></td><td>−40%</td><td>−3</td></tr><tr><td>1,5–2,0 ×STY <sup>1</sup></td><td>−60%</td><td>−7 <sup>2</sup></td></tr></tbody></table><p><sup>1</sup> Med denna börda kan rollpersonen inte simma.<br><sup>2</sup> Inga SMI-baserade färdigheter kan användas.</p><p><em>Källa: Magi-regelboken s.43. 1 BEP ≈ 3 kg.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!PK5SoPEjLMPPDAAJ.OIYggeT6M6LEHROn"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!PK5SoPEjLMPPDAAJ"
+}

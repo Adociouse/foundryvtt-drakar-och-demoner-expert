@@ -30,15 +30,29 @@
       "transfer": true,
       "disabled": false,
       "changes": [
-        { "key": "system.attributes.smi.bonus", "mode": 2, "value": "2", "priority": 20 },
-        { "key": "system.attributes.kar.bonus", "mode": 2, "value": "1", "priority": 20 }
+        {
+          "key": "system.attributes.smi.bonus",
+          "mode": 2,
+          "value": "2",
+          "priority": 20
+        },
+        {
+          "key": "system.attributes.kar.bonus",
+          "mode": 2,
+          "value": "1",
+          "priority": 20
+        }
       ],
-      "flags": { "drakar-och-demoner-expert": { "source": "race" } },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "source": "race"
+        }
+      },
       "_id": "ae0halvracemods1",
       "_key": "!items.effects!aC4tiTaOF8GbN8f1.ae0halvracemods1"
     }
   ],
-  "folder": null,
+  "folder": "2wvzFCgFbDoPstDu",
   "sort": 0,
   "ownership": {
     "default": 0
