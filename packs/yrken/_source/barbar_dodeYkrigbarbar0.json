@@ -170,6 +170,14 @@
     "source": {
       "book": "kh",
       "page": "4"
+    },
+    "magic": {
+      "access": "none",
+      "schools": [],
+      "maxSchoolValue": 0,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": true,
+      "epShareMax": 0
     }
   },
   "_id": "dodeYkrigbarbar0",

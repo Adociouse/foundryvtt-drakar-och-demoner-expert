@@ -314,6 +314,14 @@
     "source": {
       "book": "tl",
       "page": "11"
+    },
+    "magic": {
+      "access": "none",
+      "schools": [],
+      "maxSchoolValue": 0,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": true,
+      "epShareMax": 0
     }
   },
   "_id": "dodeYlonnspion00",

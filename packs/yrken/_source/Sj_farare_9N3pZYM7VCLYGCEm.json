@@ -157,6 +157,14 @@
     "source": {
       "book": "rp",
       "page": "11-22"
+    },
+    "magic": {
+      "access": "none",
+      "schools": [],
+      "maxSchoolValue": 0,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": true,
+      "epShareMax": 0
     }
   },
   "_id": "9N3pZYM7VCLYGCEm",

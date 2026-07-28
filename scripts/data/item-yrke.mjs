@@ -69,6 +69,34 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
           choicePool: new fields.StringField({ required: false, initial: "", blank: true })
         })
       ),
+      /**
+       * Magibehörighet. Ersätter namnregexen `/magiker/i` som guiden använde
+       * för att avgöra om magiskolesteget skulle visas (backlogpost 12e) —
+       * den missade både paladin och utbygdsjägare, som också har magi.
+       *
+       * Böckerna ger tre olika nivåer:
+       *  - **Magiker** (RP): lär och kastar från dag ett, valfri skola.
+       *  - **Paladin** (KH s.6): bara Mentalism, skolvärde ≤12, INGA allmänna
+       *    besvärjelser, och högst 1/3 av EP på besvärjelser från start.
+       *  - **Utbygdsjägare** (RP): Animism som yrkesfärdighet, skolvärde ≤12,
+       *    men får INTE lära besvärjelser vid skapandet — RP s.28 säger det
+       *    uttryckligen ("Magiker kan lära sig besvärjelser från början, men
+       *    inte utbygdsjägare"). Skolan finns, besvärjelserna måste tränas fram.
+       */
+      magic: new fields.SchemaField({
+        access: new fields.StringField({
+          required: false, initial: "none", choices: ["none", "full", "limited"]
+        }),
+        // Tomt = alla skolor tillåtna. Annars nycklar ur DODE.magicSchools.
+        schools: new fields.ArrayField(new fields.StringField(), { required: false }),
+        // 0 = inget tak.
+        maxSchoolValue: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        allowGeneralSpells: new fields.BooleanField({ required: false, initial: true }),
+        // Utbygdsjägaren är false här — skolan ja, besvärjelserna nej.
+        canLearnAtCreation: new fields.BooleanField({ required: false, initial: true }),
+        // Andel av EP som får läggas på besvärjelser vid skapandet. 0 = inget tak.
+        epShareMax: new fields.NumberField({ required: false, initial: 0, min: 0, max: 1 })
+      }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" }),

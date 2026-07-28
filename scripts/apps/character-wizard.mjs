@@ -193,8 +193,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * beskriver — men här är namnet det enda vi har tills `yrke` får ett eget
    * fält. Noterat i backloggen.
    */
+  /**
+   * ⚠ Läser yrkets `system.magic.access`, INTE namnet. Fram till 2026-07-28
+   * matchade detta på /magiker/i, vilket missade både **paladin** (Mentalism,
+   * KH s.6) och **utbygdsjägare** (Animism, RP) — båda har magi. Se
+   * backlogpost 12e och item-yrke.mjs för de tre behörighetsnivåerna.
+   */
+  get #magicAccess() {
+    return this.#selectedProfessionDoc?.system?.magic ?? null;
+  }
+
   get #isMagicUser() {
-    return /magiker/i.test(this.#selectedProfessionName ?? "");
+    return (this.#magicAccess?.access ?? "none") !== "none";
+  }
+
+  /** Bara "full" räknas som magiker i RP:s mening — 9 yrkesfärdigheter i stället för 12. */
+  get #isFullMagician() {
+    return (this.#magicAccess?.access ?? "none") === "full";
   }
 
   #selectedProfessionName = "";
@@ -352,7 +367,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.showGranska = stepId === "granska";
     context.showMagiskola = stepId === "magiskola";
     context.showYrkesfardigheter = stepId === "yrkesfardigheter";
-    context.magicSchools = CONFIG.DODE.magicSchoolSkills.map((s) => ({
+    // Begränsa skolvalet till yrkets tillåtna skolor — paladinen får bara
+    // Mentalism, utbygdsjägaren bara Animism. Tom lista = alla.
+    const allowedSchools = this.#magicAccess?.schools ?? [];
+    context.magicAccess = this.#magicAccess;
+    context.magicSchools = CONFIG.DODE.magicSchoolSkills
+      .filter((s) => !allowedSchools.length || allowedSchools.includes(s.school))
+      .map((s) => ({
       key: s.key,
       label: game.i18n.localize(s.labelKey),
       img: s.img,
@@ -1087,7 +1108,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     if (!doc) return 0;
     const list = doc.system.professionSkills ?? [];
     const available = list.reduce((n, s) => n + (s.choiceCount || 1), 0);
-    return Math.min(this.#isMagicUser ? 9 : 12, available);
+    return Math.min(this.#isFullMagician ? 9 : 12, available);
   }
 
   /** Byggd vy över yrkets lista + spelarens val. */

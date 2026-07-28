@@ -226,6 +226,18 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (!game.user.isGM) return;
     const actor = this.actor;
     const have = new Set(actor.items.filter((i) => i.type === "besvarjelse").map((i) => i.name));
+    // Yrkets magibehörighet (item-yrke.mjs `system.magic`). Paladinen får bara
+    // Mentalism upp till skolvärde 12 och inga allmänna besvärjelser;
+    // utbygdsjägaren bara Animism. Listan MARKERAR vad som ligger utanför
+    // behörigheten i stället för att dölja det — SL ska kunna ge en välsignelse
+    // som bryter mot yrkets normala gränser, det är hela poängen med en boon.
+    const magic = actor.system.profession?.system?.magic ?? null;
+    const allowed = (d) => {
+      if (!magic || magic.access === "none") return false;
+      if (magic.schools?.length && !magic.schools.includes(d.system.school)) return false;
+      if (magic.maxSchoolValue && d.system.sValue > magic.maxSchoolValue) return false;
+      return true;
+    };
     const bySchool = {};
     for (const packId of CONFIG.DODE.contentPacks.spells ?? []) {
       const pack = game.packs.get(packId);
@@ -240,7 +252,11 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       const label = game.i18n.localize(CONFIG.DODE.magicSchools[school] ?? school);
       opts += `<optgroup label="${label}">` + list
         .sort((a, b) => a.system.sValue - b.system.sValue)
-        .map((d) => `<option value="${d.uuid}">${d.name} (S${d.system.sValue})</option>`)
+        .map((d) => {
+          const ok = allowed(d);
+          return `<option value="${d.uuid}">${ok ? "" : "⚠ "}${d.name} (S${d.system.sValue})`
+            + `${ok ? "" : " — utanför yrkets behörighet"}</option>`;
+        })
         .join("") + "</optgroup>";
     }
     if (!opts) return void ui.notifications.info("Rollpersonen kan redan alla besvärjelser i kompendiet.");
@@ -250,6 +266,14 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       content: `
         <p class="hint">Fungerar även för icke-magiker — en välsignelse från SL är
         mekaniskt samma dokument som en besvärjelse.</p>
+        <p class="hint">${magic && magic.access !== "none"
+          ? `<strong>${actor.system.profession?.name ?? "Yrket"}</strong>: `
+            + (magic.access === "full" ? "full magibehörighet."
+              : `${(magic.schools ?? []).map((x) => game.i18n.localize(CONFIG.DODE.magicSchools[x] ?? x)).join(", ") || "alla skolor"}`
+                + (magic.maxSchoolValue ? `, skolvärde ≤ ${magic.maxSchoolValue}` : "")
+                + (magic.allowGeneralSpells ? "" : ", inga allmänna besvärjelser")
+                + (magic.canLearnAtCreation ? "" : ", får inte lära vid skapandet — bara genom träning"))
+          : `<strong>${actor.system.profession?.name ?? "Yrket"}</strong> har ingen magibehörighet — allt nedan är utanför normala regler. Det är tillåtet som SL-välsignelse, men värt att vara medveten om.`}</p>
         <div class="form-group"><label>Besvärjelse</label><select name="uuid">${opts}</select></div>
         <div class="form-group"><label>Anledning</label>
           <input type="text" name="reason" placeholder="t.ex. Välsignelse från Vinterns tempel" /></div>`

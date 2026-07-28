@@ -200,6 +200,16 @@
     "source": {
       "book": "kh",
       "page": "5-6"
+    },
+    "magic": {
+      "access": "limited",
+      "schools": [
+        "mentalism"
+      ],
+      "maxSchoolValue": 12,
+      "allowGeneralSpells": false,
+      "canLearnAtCreation": true,
+      "epShareMax": 0.3333
     }
   },
   "_id": "dodeYkrigpaladin",

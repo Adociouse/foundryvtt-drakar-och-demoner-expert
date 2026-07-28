@@ -188,6 +188,14 @@
     "source": {
       "book": "tl",
       "page": "14"
+    },
+    "magic": {
+      "access": "none",
+      "schools": [],
+      "maxSchoolValue": 0,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": true,
+      "epShareMax": 0
     }
   },
   "_id": "dodeYtjuvgillrar",
