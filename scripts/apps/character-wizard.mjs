@@ -1043,6 +1043,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const bpLedger = this.#bpLedger(socialResult, capitalResult);
     const epBudget = this.#epResult(bpLedger);
     const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
+    // Samma filtrerade lista som utrustningssteget använder (poster med
+    // ActiveEffects är uteslutna där) — annars kan restkapitalet skilja sig
+    // från det spelaren såg i steget.
+    const shopDocs = (await DoDECharacterWizard.#resolveContentPacks("startingEquipment"))
+      .filter((doc) => doc.effects.size === 0);
+    const leftoverSm = this.#equipmentResult(shopDocs, capitalResult).remaining;
 
     await actor.update({
       name: this.state.name || actor.name,
@@ -1052,6 +1058,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         bp: this.state.bp,
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,
+        // Kapitalet som blev över i utrustningssteget blir rollpersonens
+        // faktiska börs. `startCapital` står kvar som skapandehistorik och
+        // minskar aldrig; `currency` är det som spenderas i spel.
+        currency: CONFIG.DODE.kmToPurse(CONFIG.DODE.silverToKm(Math.max(0, leftoverSm))),
         ep: { spent: skillPreview.epSpent },
         specialAbilities: this.state.specialAbilities
           .filter((a) => a.name.trim().length > 0)

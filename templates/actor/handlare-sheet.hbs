@@ -1,0 +1,69 @@
+<div class="dode-handlare-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" />
+  <div class="header-fields">
+    {{#if isGM}}
+      <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+      <label class="shop-field">Skylt <input type="text" name="system.shopName" value="{{system.shopName}}" placeholder="t.ex. Den Trötta Draken" /></label>
+      <div class="shop-row">
+        <label>Påslag % <input type="number" name="system.markup" value="{{system.markup}}" /></label>
+        <label>Återköp % <input type="number" name="system.buybackRate" value="{{system.buybackRate}}" min="0" /></label>
+      </div>
+      <label class="shop-field">Hälsning <input type="text" name="system.greeting" value="{{system.greeting}}" placeholder="Vad säger handlaren när gästerna kliver in?" /></label>
+    {{else}}
+      <h2 class="actor-name-static">{{actor.name}}</h2>
+      {{#if system.shopName}}<p class="shop-sign">{{system.shopName}}</p>{{/if}}
+    {{/if}}
+  </div>
+</header>
+
+{{#if system.greeting}}
+  <p class="shop-greeting">”{{system.greeting}}”</p>
+{{/if}}
+
+<div class="shop-status">
+  {{#if buyer}}
+    <span>Handlar som <strong>{{buyer.name}}</strong></span>
+    <span class="shop-purse">Börs: <strong>{{buyerPurse}}</strong></span>
+  {{else}}
+    <span class="shop-warning">Ingen rollperson vald — tilldela en rollperson till ditt konto eller markera en token för att kunna handla.</span>
+  {{/if}}
+  {{#if system.markup}}<span class="shop-markup" title="Påslag på katalogpriset">Påslag {{system.markup}}%</span>{{/if}}
+</div>
+
+{{#each stockGroups as |group|}}
+  <section class="shop-group">
+    <h4 class="wizard-group-heading">{{group.label}} <span class="wizard-group-count">{{group.entries.length}}</span></h4>
+    <ol class="stock-list">
+      {{#each group.entries as |entry|}}
+        <li class="stock-row {{#unless entry.purchasable}}is-reference{{/unless}}" data-item-id="{{entry.item.id}}">
+          <img class="stock-img" src="{{entry.item.img}}" alt="" />
+          <a class="stock-name" data-action="inspectStock" title="Visa egenskaper">{{entry.item.name}}</a>
+          <span class="stock-price" title="{{#if entry.purchasable}}Styckpris{{else}}Priset går inte att automatisera — hanteras vid bordet{{/if}}">{{entry.priceLabel}}</span>
+          {{#if entry.purchasable}}
+            <input type="number" class="stock-qty" data-buy-qty value="1" min="1" title="Antal" />
+            <button type="button" data-action="buyStock"
+              {{#unless entry.affordable}}disabled{{/unless}}
+              title="{{#if entry.affordable}}Köp{{else}}Har inte råd{{/if}}">
+              <i class="fa-solid fa-coins"></i> Köp
+            </button>
+          {{else}}
+            <span class="stock-note-tag" title="Fritextpris — SL får avgöra">Fråga värden</span>
+          {{/if}}
+          {{#if ../../isGM}}
+            <button type="button" data-action="deleteStock" title="Ta bort ur lagret"><i class="fa-solid fa-trash"></i></button>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ol>
+  </section>
+{{else}}
+  <p class="shop-empty">Lagret är tomt. {{#if isGM}}Dra hit föremål från ett kompendium för att fylla på disken.{{/if}}</p>
+{{/each}}
+
+{{#if isGM}}
+  <section class="shop-description">
+    {{editor system.description target="system.description" button=true engine="prosemirror"}}
+  </section>
+{{/if}}
+</div>

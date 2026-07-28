@@ -25,7 +25,8 @@
   "documentTypes": {
     "Actor": {
       "character": {},
-      "npc": {}
+      "npc": {},
+      "handlare": {}
     },
     "Item": {
       "fardighet": {},
@@ -98,6 +99,17 @@
       "name": "monster",
       "label": "Monster & Varelser (SL)",
       "path": "packs/monster",
+      "type": "Actor",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "handlare",
+      "label": "Handlare & butiker (SL)",
+      "path": "packs/handlare",
       "type": "Actor",
       "system": "drakar-och-demoner-expert",
       "ownership": {

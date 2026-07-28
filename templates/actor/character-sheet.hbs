@@ -48,6 +48,15 @@
       <span>{{localize "DODE.Derived.Movement"}}: {{system.movement}}</span>
       <span>{{localize "DODE.Derived.CarryCapacity"}}: {{system.carryCapacity}} kg</span>
     </div>
+    {{!-- Börsen — vad rollpersonen faktiskt bär. Skild från startCapital, som
+          är skapandeögonblickets siffra och aldrig minskar. --}}
+    <div class="currency-row" title="{{localize 'DODE.Actor.Currency'}} — totalt {{system.currency.totalSm}} sm">
+      <span class="currency-label">{{localize "DODE.Actor.Currency"}}</span>
+      <label>gm <input type="number" name="system.currency.gm" value="{{system.currency.gm}}" min="0" /></label>
+      <label>sm <input type="number" name="system.currency.sm" value="{{system.currency.sm}}" min="0" /></label>
+      <label>km <input type="number" name="system.currency.km" value="{{system.currency.km}}" min="0" /></label>
+      <span class="currency-total">= {{system.currency.totalSm}} sm</span>
+    </div>
   </div>
 </header>
 

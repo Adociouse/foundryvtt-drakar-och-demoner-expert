@@ -60,7 +60,8 @@
       "Yrke": "Yrke",
       "Vapen": "Vapen",
       "Rustning": "Rustning",
-      "Besvarjelse": "Besvärjelse"
+      "Besvarjelse": "Besvärjelse",
+      "Handlare": "Handlare (butik)"
     },
     "Skill": {
       "New": "Ny färdighet",
@@ -95,7 +96,8 @@
       "Utrustning": "Utrustning",
       "Base": "Bas",
       "Mod": "Mod",
-      "Total": "Totalt"
+      "Total": "Totalt",
+      "Currency": "Börs"
     },
     "Coin": {
       "Km": "Kopparmynt (km)",
@@ -114,6 +116,7 @@
       "Mat": "Mat & dryck",
       "Riddjur": "Drag- & riddjur",
       "Fordon": "Fordon",
+      "Vardesaker": "Värdesaker",
       "Diverse": "Diverse"
     },
     "Equipment": {
@@ -133,7 +136,8 @@
   "TYPES": {
     "Actor": {
       "character": "Rollperson",
-      "npc": "Monster/NPC"
+      "npc": "Monster/NPC",
+      "handlare": "Handlare"
     },
     "Item": {
       "fardighet": "Färdighet",

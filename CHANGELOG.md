@@ -3,6 +3,13 @@
 ## [Unreleased]
 
 ### Added
+- **New `handlare` Actor type with a working shop sheet** — a merchant NPC whose sheet is a shop counter. Players double-click the token, see stock grouped by category with prices in the merchant's own coin, and click Köp; the cost is deducted and the item created on their own character. Note Foundry core has no built-in Loot/Merchant sheet type — that is a dnd5e-plus-module concept, so it is implemented in-system here
+- **`system.currency` purse on characters** (`gm`/`sm`/`km`, with derived total and label) — the character previously had only a creation-time `startCapital` that never decreased, so there was nothing for a purchase to subtract from. The wizard seeds it from whatever start capital survives the equipment step
+- `Lasslo Värdshusvärden` ("Den Trötta Draken") in a new GM-only `handlare` compendium, stocked with Magi-regelbokens tavern price list (s.48) plus general goods — a generic merchant to copy for any innkeeper, smith or herbalist
+- `vardesaker` equipment category for gems, jewellery and exotic coins — treasure carries its value as an item price rather than being a spendable purse denomination
+- Currency helpers on `CONFIG.DODE` (`purseToKm`, `kmToPurse`, `silverToKm`, `formatPurse`) that iterate the denomination table rather than hardcoding coins, so adding a denomination is a one-line config change
+
+### Added
 - **New `utrustning` Item type** — a generic gear type. Every Item type was previously specialised (`vapen`/`rustning`/`besvarjelse`/…), so ordinary equipment had nowhere to live. Carries category, quantity, weight (BEP), price + coin denomination, a free-text price note, equipped flag and source, and derives a silver-normalised price and total weight
 - 271 equipment items ported from Magi-regelboken s.43–48 (tools, clothing, containers, cookware, camp gear, thieves' tools, instruments, drugs, food, mounts, vehicles, sundries), taking the `vapen-utrustning` pack from 33 to 304 entries
 - `CONFIG.DODE.equipmentCategories` (12 categories) and `CONFIG.DODE.coinToSilver` / `DODE.toSilver()` for km/sm/gm conversion — note the exchange rate is an unsourced interpretation, see backlog 26

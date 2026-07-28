@@ -74,6 +74,16 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         baseSm: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         finalSm: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
+      // Börs — de mynt rollpersonen FAKTISKT bär, till skillnad från
+      // `startCapital` ovan som bara är skapandeögonblickets siffra och aldrig
+      // minskar. Utan det här fältet fanns inget att dra pengar ifrån vid ett
+      // köp (upptäckt 2026-07-28 när handlararket byggdes). Guiden såddar
+      // `sm` med kapitalet som blev över i utrustningssteget.
+      currency: new fields.SchemaField({
+        gm: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        sm: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        km: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+      }),
       // EP-pool för färdighetsköp vid rollpersonsskapande — RP s.28/KH s.3.
       // `spent` är den enda verkliga inmatningen (skrivs av Fas 6/7:s
       // färdighetsköp, inte av något ännu); `max`/`remaining` är helt härledda
@@ -125,6 +135,12 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
 
   prepareDerivedData() {
     const a = this.attributes;
+
+    // Börsens totalvärde — härlett, aldrig lagrat. Räknas i kopparmynt som atom
+    // (se DODE.purseToKm) så att jämförelser mot ett pris alltid är exakta.
+    this.currency.totalKm = DODE.purseToKm(this.currency);
+    this.currency.totalSm = Math.round(this.currency.totalKm) / 10;
+    this.currency.label = DODE.formatPurse(this.currency);
 
     const rasItem = this.parent?.items?.find((i) => i.type === "ras") ?? null;
 

@@ -1,0 +1,1353 @@
+{
+  "name": "Lasslo Värdshusvärden",
+  "type": "handlare",
+  "_id": "dodeLassloVard10",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+  "system": {
+    "shopName": "Den Trötta Draken",
+    "greeting": "Stig på, stig på! Elden brinner, ölet är kallt och rummen är rena — mestadels.",
+    "markup": 0,
+    "buybackRate": 50,
+    "limitedStock": false,
+    "description": "<p>En bred, godmodig värdshusvärd med handduken evigt över axeln. Lasslo har hört varje historia två gånger och tror på ungefär hälften. Priserna följer Magi-regelbokens värdshustabell (s.48) rakt av — höj <em>Påslag %</em> på arket om värdshuset ligger avsides.</p><p><em>Generisk handlare att kopiera: byt namn, porträtt och lager så har du vilken krögare, smed eller örthandlare som helst.</em></p>"
+  },
+  "prototypeToken": {
+    "name": "Lasslo Värdshusvärden",
+    "displayName": 30,
+    "actorLink": true,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "sight": {
+      "enabled": false
+    },
+    "disposition": 1,
+    "displayBars": 0
+  },
+  "items": [
+    {
+      "name": "Enkel grönsaksstuvning",
+      "type": "utrustning",
+      "_id": "PRm0952GpphIuYAd",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 5,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.PRm0952GpphIuYAd"
+    },
+    {
+      "name": "Köttstuvning",
+      "type": "utrustning",
+      "_id": "HNXF2oFkP41Xefui",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 10,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.HNXF2oFkP41Xefui"
+    },
+    {
+      "name": "Köttstycke och rovor",
+      "type": "utrustning",
+      "_id": "w3n5MmgZWk4dIULn",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 30,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.w3n5MmgZWk4dIULn"
+    },
+    {
+      "name": "God måltid",
+      "type": "utrustning",
+      "_id": "sq0w3C9cdjNZxB6C",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 50,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.sq0w3C9cdjNZxB6C"
+    },
+    {
+      "name": "Lyxmåltid",
+      "type": "utrustning",
+      "_id": "SnALNamAeEfLWFyO",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 10,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.SnALNamAeEfLWFyO"
+    },
+    {
+      "name": "Bankett",
+      "type": "utrustning",
+      "_id": "HIcTwuinSlzeS9uA",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 20,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.HIcTwuinSlzeS9uA"
+    },
+    {
+      "name": "Öl (stånka)",
+      "type": "utrustning",
+      "_id": "xFo71gMZi6ILxqin",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 2,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.xFo71gMZi6ILxqin"
+    },
+    {
+      "name": "Mjöd (stånka)",
+      "type": "utrustning",
+      "_id": "Cy4fcGPOuUziRAWX",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 2,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.Cy4fcGPOuUziRAWX"
+    },
+    {
+      "name": "Cider (mugg)",
+      "type": "utrustning",
+      "_id": "p952DCt07Iuwl1oJ",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 1,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.p952DCt07Iuwl1oJ"
+    },
+    {
+      "name": "Vin (mugg)",
+      "type": "utrustning",
+      "_id": "ALQGD2b1hHiQiOX0",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/mat.png",
+      "system": {
+        "category": "mat",
+        "quantity": 1,
+        "weight": 0,
+        "price": 3,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.ALQGD2b1hHiQiOX0"
+    },
+    {
+      "name": "Sovsal (per natt)",
+      "type": "utrustning",
+      "_id": "5kodXdMSc5rWOiO2",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 3,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.5kodXdMSc5rWOiO2"
+    },
+    {
+      "name": "Dubbelrum (per natt)",
+      "type": "utrustning",
+      "_id": "g6fNBn8Ii4HStiOw",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 5,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.g6fNBn8Ii4HStiOw"
+    },
+    {
+      "name": "Enkelrum (per natt)",
+      "type": "utrustning",
+      "_id": "xXrRgJNIfSwU6an0",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 7,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.xXrRgJNIfSwU6an0"
+    },
+    {
+      "name": "Stallplats: åsna/mula (per dygn)",
+      "type": "utrustning",
+      "_id": "LOZF5uAG2IB2TAPV",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 7,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.LOZF5uAG2IB2TAPV"
+    },
+    {
+      "name": "Stallplats: ponny (per dygn)",
+      "type": "utrustning",
+      "_id": "wDH20IRsZAk8IWvo",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 6,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.wDH20IRsZAk8IWvo"
+    },
+    {
+      "name": "Stallplats: lätt/medelstor häst (per dygn)",
+      "type": "utrustning",
+      "_id": "r6NMCpmCpBe9DSI3",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 10,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.r6NMCpmCpBe9DSI3"
+    },
+    {
+      "name": "Stallplats: stor häst (per dygn)",
+      "type": "utrustning",
+      "_id": "o12XTliiBknXuB6j",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 15,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.o12XTliiBknXuB6j"
+    },
+    {
+      "name": "Stallplats: oxe (per dygn)",
+      "type": "utrustning",
+      "_id": "gOwiauiUOJGbu2MB",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 9,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.gOwiauiUOJGbu2MB"
+    },
+    {
+      "name": "Stallplats: elefant (per dygn)",
+      "type": "utrustning",
+      "_id": "c6DNXljVz3qyZ7US",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 10,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.c6DNXljVz3qyZ7US"
+    },
+    {
+      "name": "Stallplats: legenddjur (per dygn)",
+      "type": "utrustning",
+      "_id": "d73g52psnuAFqTo3",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/riddjur.png",
+      "system": {
+        "category": "riddjur",
+        "quantity": 1,
+        "weight": 0,
+        "price": 5,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.d73g52psnuAFqTo3"
+    },
+    {
+      "name": "Tärningar i trä (par)",
+      "type": "utrustning",
+      "_id": "kOoQ1IvalOVCDrMK",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 2,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.kOoQ1IvalOVCDrMK"
+    },
+    {
+      "name": "Tärningar i tenn (par)",
+      "type": "utrustning",
+      "_id": "fUBOgCMAXRCX6GhI",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 20,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.fUBOgCMAXRCX6GhI"
+    },
+    {
+      "name": "Kortlek (52 kort)",
+      "type": "utrustning",
+      "_id": "mZ0OD0ZuYPt49wFk",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 30,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.48",
+        "description": "<p><em>Värdshuspris — Magi-regelboken s.48.</em></p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785244973980,
+        "modifiedTime": 1785244973980,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.mZ0OD0ZuYPt49wFk"
+    },
+    {
+      "name": "Fackla",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 0.5,
+        "price": 1,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
+      },
+      "_id": "Sypg4pOqURA215rv",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.Sypg4pOqURA215rv"
+    },
+    {
+      "name": "Oljelampa",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 0.5,
+        "price": 7,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
+      },
+      "_id": "O0MoieMZUl1OXOUD",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.O0MoieMZUl1OXOUD"
+    },
+    {
+      "name": "Lampolja (1/2 liter)",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 0.5,
+        "price": 25,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
+      },
+      "_id": "VAABIUa8k7QpcKpC",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.VAABIUa8k7QpcKpC"
+    },
+    {
+      "name": "Flinta & stål",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 0.25,
+        "price": 25,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
+      },
+      "_id": "uXYHPEneGG9ktJ5K",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.uXYHPEneGG9ktJ5K"
+    },
+    {
+      "name": "Fältflaska (1 liter)",
+      "type": "utrustning",
+      "system": {
+        "category": "behallare",
+        "quantity": 1,
+        "weight": 0.25,
+        "price": 7,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Behållare).</em></p>"
+      },
+      "_id": "JVWMRTpPfpN4AlnG",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/behallare.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.JVWMRTpPfpN4AlnG"
+    },
+    {
+      "name": "Tunn filt",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 1.0,
+        "price": 60,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Tält, sängar & fältutrustning).</em></p>"
+      },
+      "_id": "JtuIVjaQvp6xhude",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.JtuIVjaQvp6xhude"
+    },
+    {
+      "name": "Tjock filt",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 1.0,
+        "price": 125,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Tält, sängar & fältutrustning).</em></p>"
+      },
+      "_id": "UrjgQpZ59XLBOzwX",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.UrjgQpZ59XLBOzwX"
+    },
+    {
+      "name": "Halmmadrass",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 0.5,
+        "price": 25,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Tält, sängar & fältutrustning).</em></p>"
+      },
+      "_id": "U2in8482cxvnHSNp",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.U2in8482cxvnHSNp"
+    },
+    {
+      "name": "Vaxljus",
+      "type": "utrustning",
+      "system": {
+        "category": "diverse",
+        "quantity": 1,
+        "weight": 0,
+        "price": 1,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Diverse).</em></p>"
+      },
+      "_id": "tXrV5UCzc0zpO7h2",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.tXrV5UCzc0zpO7h2"
+    },
+    {
+      "name": "Träsked",
+      "type": "utrustning",
+      "system": {
+        "category": "koksutrustning",
+        "quantity": 1,
+        "weight": 0,
+        "price": 1,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
+      },
+      "_id": "UPO3OLKjzAnuDbHE",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/koksutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.UPO3OLKjzAnuDbHE"
+    },
+    {
+      "name": "Trämugg",
+      "type": "utrustning",
+      "system": {
+        "category": "koksutrustning",
+        "quantity": 1,
+        "weight": 0.25,
+        "price": 12,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
+      },
+      "_id": "2t2RoBOQjf4b1xi8",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/koksutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.2t2RoBOQjf4b1xi8"
+    },
+    {
+      "name": "Tallrik i trä",
+      "type": "utrustning",
+      "system": {
+        "category": "koksutrustning",
+        "quantity": 1,
+        "weight": 0.25,
+        "price": 12,
+        "priceUnit": "km",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
+      },
+      "_id": "NpouXIuqM1bijwYX",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/koksutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.NpouXIuqM1bijwYX"
+    },
+    {
+      "name": "Liten säck (1 BEP)",
+      "type": "utrustning",
+      "system": {
+        "category": "lagerutrustning",
+        "quantity": 1,
+        "weight": 0.25,
+        "price": 1,
+        "priceUnit": "sm",
+        "priceNote": "",
+        "equipped": false,
+        "source": "Magi-regelboken s.43-48",
+        "description": "<p><em>Källa: Magi-regelboken s.43-48 (Lägerutrustning).</em></p>"
+      },
+      "_id": "3c9yhLxg5sIYT63x",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/lagerutrustning.png",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785233947498,
+        "modifiedTime": 1785233947498,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!dodeLassloVard10.3c9yhLxg5sIYT63x"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785244973980,
+    "modifiedTime": 1785244973980,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!dodeLassloVard10"
+}

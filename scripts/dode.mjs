@@ -1,5 +1,6 @@
 import DoDECharacterData from "./data/actor-character.mjs";
 import DoDENpcData from "./data/actor-npc.mjs";
+import DoDEHandlareData from "./data/actor-handlare.mjs";
 import DoDEFardighetData from "./data/item-fardighet.mjs";
 import DoDERasData from "./data/item-ras.mjs";
 import DoDEYrkeData from "./data/item-yrke.mjs";
@@ -13,6 +14,7 @@ import DoDeActiveEffect from "./documents/dode-active-effect.mjs";
 import SceneEffects from "./utils/scene-effects.mjs";
 import DoDECharacterSheet from "./sheets/actor-character-sheet.mjs";
 import DoDENpcSheet from "./sheets/actor-npc-sheet.mjs";
+import DoDEHandlareSheet from "./sheets/actor-handlare-sheet.mjs";
 import {
   DoDEFardighetSheet,
   DoDERasSheet,
@@ -35,7 +37,8 @@ Hooks.once("init", () => {
 
   Object.assign(CONFIG.Actor.dataModels, {
     character: DoDECharacterData,
-    npc: DoDENpcData
+    npc: DoDENpcData,
+    handlare: DoDEHandlareData
   });
   Object.assign(CONFIG.Item.dataModels, {
     fardighet: DoDEFardighetData,
@@ -58,6 +61,11 @@ Hooks.once("init", () => {
     types: ["npc"],
     makeDefault: true,
     label: "DODE.Sheet.Npc"
+  });
+  Actors.registerSheet("drakar-och-demoner-expert", DoDEHandlareSheet, {
+    types: ["handlare"],
+    makeDefault: true,
+    label: "DODE.Sheet.Handlare"
   });
 
   Items.unregisterSheet("core", ItemSheet);

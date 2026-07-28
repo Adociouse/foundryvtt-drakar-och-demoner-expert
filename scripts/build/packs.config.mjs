@@ -6,5 +6,6 @@ export const PACKS = [
   { name: "besvarjelser", type: "Item" },
   // SL-only, se system.json's ownership + DESIGN_DECISIONS.md §7.4.
   { name: "magiska-foremal", type: "Item" },
-  { name: "monster", type: "Actor" }
+  { name: "monster", type: "Actor" },
+  { name: "handlare", type: "Actor" }
 ];

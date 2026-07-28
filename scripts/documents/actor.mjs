@@ -106,4 +106,74 @@ export default class DoDEActor extends Actor {
       [`flags.${game.system.id}.spellName`]: item.name
     }]);
   }
+
+  /**
+   * Köp en vara från en handlare. Anropas från handlararket.
+   *
+   * Ägarskapsmodellen är hela poängen med hur det här är skrivet: metoden körs
+   * på KÖPARENS aktör, aldrig på handlarens. En spelare äger sin rollperson och
+   * får därför skriva till den, men äger normalt inte handlaren — och med
+   * `"socket": false` i system.json finns inget relä via SL:s klient. Därför
+   * rör ett köp aldrig handlardokumentet; lagret är en katalog (se
+   * actor-handlare.mjs för varför det är ett medvetet val).
+   *
+   * @param {Item} stockItem  Varan hos handlaren (embeddad på handlaraktören).
+   * @param {Actor} merchant  Handlaren — används för påslag och chattkortet.
+   * @param {number} quantity Antal att köpa.
+   * @returns {Promise<boolean>} true om köpet gick igenom.
+   */
+  async buyFromMerchant(stockItem, merchant, quantity = 1) {
+    if (this.type !== "character") {
+      ui.notifications.warn("Bara rollpersoner kan handla.");
+      return false;
+    }
+    const qty = Math.max(1, Math.round(quantity));
+    const unitSm = DoDEActor.merchantPriceSm(stockItem, merchant);
+    if (unitSm === null) {
+      ui.notifications.warn(`${stockItem.name} har inget styckpris — priset måste hanteras vid bordet.`);
+      return false;
+    }
+    // All aritmetik i kopparmynt som heltal, aldrig i silver som flyttal.
+    const costKm = CONFIG.DODE.silverToKm(unitSm) * qty;
+    const purseKm = CONFIG.DODE.purseToKm(this.system.currency);
+    if (costKm > purseKm) {
+      const short = CONFIG.DODE.formatPurse(CONFIG.DODE.kmToPurse(costKm - purseKm));
+      ui.notifications.warn(`${this.name} har inte råd med ${stockItem.name} — saknar ${short}.`);
+      return false;
+    }
+
+    const newPurse = CONFIG.DODE.kmToPurse(purseKm - costKm);
+    // Kopian nollställs medvetet på `equipped` — man går inte ut ur butiken
+    // med rustningen redan på sig.
+    const bought = stockItem.toObject();
+    delete bought._id;
+    if (bought.system && "equipped" in bought.system) bought.system.equipped = false;
+    if (bought.system && "quantity" in bought.system) bought.system.quantity = qty;
+
+    await this.update({ "system.currency": newPurse });
+    await this.createEmbeddedDocuments("Item", [bought]);
+
+    const priceLabel = CONFIG.DODE.formatPurse(CONFIG.DODE.kmToPurse(costKm));
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      content: `<div class="dode-chat-card"><h3>Köp hos ${merchant?.name ?? "handlaren"}</h3>`
+        + `<p><strong>${this.name}</strong> köpte ${qty}× <strong>${stockItem.name}</strong> för ${priceLabel}.</p>`
+        + `<p class="dode-chat-note">Kvar i börsen: ${CONFIG.DODE.formatPurse(newPurse)}</p></div>`
+    });
+    return true;
+  }
+
+  /**
+   * Styckpris i silver hos en given handlare, påslag inräknat.
+   * @returns {number|null} null när varan saknar styckpris (fritext-pris som
+   *   "4 per kagge" eller "5 sm/g") — sådant går inte att automatisera.
+   */
+  static merchantPriceSm(item, merchant) {
+    const sys = item.system ?? {};
+    if (sys.priceNote) return null;
+    const base = item.type === "utrustning" ? (sys.priceSm ?? 0) : (sys.price ?? 0);
+    if (!base) return null;
+    const markup = merchant?.system?.markup ?? 0;
+    return Math.round(base * (1 + markup / 100) * 100) / 100;
+  }
 }

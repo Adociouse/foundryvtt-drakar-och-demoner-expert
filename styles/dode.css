@@ -519,3 +519,52 @@
   opacity: 0.65;
   margin-left: 0.4em;
 }
+
+/* --- Handlararket (butiksdisk) — 2026-07-28 ------------------------------- */
+.dode.handlare .shop-greeting {
+  font-style: italic;
+  opacity: 0.85;
+  margin: 0.4em 0 0.6em;
+}
+.dode.handlare .shop-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+  align-items: center;
+  padding: 0.35em 0.6em;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  margin-bottom: 0.6em;
+  font-size: 0.9em;
+}
+.dode.handlare .shop-warning { color: #8a2b2b; font-weight: 600; }
+.dode.handlare .shop-purse { margin-left: auto; }
+.dode.handlare .stock-list { list-style: none; margin: 0; padding: 0; }
+.dode.handlare .stock-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 2px 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.dode.handlare .stock-img { width: 28px; height: 28px; object-fit: cover; border: none; border-radius: 3px; }
+.dode.handlare .stock-name { flex: 1; }
+.dode.handlare .stock-price { min-width: 7em; text-align: right; font-variant-numeric: tabular-nums; }
+.dode.handlare .stock-qty { width: 3.2em; text-align: center; }
+/* Referensrader (fritextpris) är inte köpbara — tonas ned så att disken visar
+   direkt vad som går att klicka på. */
+.dode.handlare .stock-row.is-reference { opacity: 0.72; }
+.dode.handlare .stock-note-tag { font-size: 0.8em; font-style: italic; opacity: 0.8; }
+.dode.handlare .shop-empty { font-style: italic; opacity: 0.75; }
+
+/* Börsraden på rollpersonsarket */
+.dode .currency-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+  font-size: 0.9em;
+}
+.dode .currency-row input { width: 4em; }
+.dode .currency-label { font-weight: 600; }
+.dode .currency-total { opacity: 0.75; }

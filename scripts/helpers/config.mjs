@@ -84,6 +84,52 @@ DODE.toSilver = function (value, unit = "sm") {
   return Math.round((Number(value) || 0) * rate * 100) / 100;
 };
 
+/**
+ * Börsaritmetik räknas i KOPPARMYNT som atom, aldrig i silver som flyttal.
+ * Ett köp på 12,5 sm som dras från 3 gm + 2 sm får inte bli 0.30000000000000004
+ * silver — heltalskoppar gör varje summa exakt och jämförbar.
+ */
+DODE.purseToKm = function (purse = {}) {
+  let total = 0;
+  for (const [unit, rate] of Object.entries(DODE.coinToSilver)) {
+    total += (purse[unit] ?? 0) * rate * 10;
+  }
+  return Math.round(total);
+};
+
+/**
+ * Kopparmynt → börsobjekt, största valör först.
+ *
+ * Itererar DODE.coinToSilver i stället för att hårdkoda gm/sm/km, så att en ny
+ * valör bara kräver en rad i den tabellen (plus ett fält i `currency`-schemat på
+ * actor-character.mjs om den ska kunna bäras). Se backlogpost 28 om mithrilmynt.
+ */
+DODE.kmToPurse = function (totalKm) {
+  let rest = Math.max(0, Math.round(totalKm));
+  const units = Object.entries(DODE.coinToSilver).sort((a, b) => b[1] - a[1]);
+  const purse = {};
+  for (const [unit, rate] of units) {
+    const worth = Math.round(rate * 10);
+    purse[unit] = Math.floor(rest / worth);
+    rest -= purse[unit] * worth;
+  }
+  return purse;
+};
+
+/** Silverpris (kan vara brutet, t.ex. 12,5) → kopparmynt som heltal. */
+DODE.silverToKm = function (sm) {
+  return Math.round((Number(sm) || 0) * 10);
+};
+
+/** "3 gm 2 sm 5 km" — tomma valörer utelämnas. Visar "0 km" för en tom börs. */
+DODE.formatPurse = function (purse = {}) {
+  const parts = Object.entries(DODE.coinToSilver)
+    .sort((a, b) => b[1] - a[1])
+    .filter(([unit]) => purse[unit])
+    .map(([unit]) => `${purse[unit]} ${unit}`);
+  return parts.length ? parts.join(" ") : "0 km";
+};
+
 // Kategorier för `utrustning`-Items — följer rubrikerna i Magi-regelbokens
 // utrustningslistor (s.43-48), se docs/extracts/DODE_Magi_TABELLER.md i
 // Roll20-projektet.
@@ -99,6 +145,11 @@ DODE.equipmentCategories = {
   mat: "DODE.EquipmentCategory.Mat",
   riddjur: "DODE.EquipmentCategory.Riddjur",
   fordon: "DODE.EquipmentCategory.Fordon",
+  // Värdesaker — ädelstenar, smycken, tackor och exotiska mynt. Bärs som
+  // föremål med ett pris, INTE som en valör i börsen: de är skatt att värdera
+  // och sälja, inte något man betalar öl med. Johans observation 2026-07-28 om
+  // mithrilmynt, se backlogpost 28.
+  vardesaker: "DODE.EquipmentCategory.Vardesaker",
   diverse: "DODE.EquipmentCategory.Diverse"
 };
 

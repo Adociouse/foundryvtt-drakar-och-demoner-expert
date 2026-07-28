@@ -25,7 +25,7 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
         blank: true,
         choices: [
           "verktyg", "kladsel", "behallare", "koksutrustning", "lagerutrustning",
-          "tjuvverktyg", "instrument", "droger", "mat", "riddjur", "fordon", "diverse"
+          "tjuvverktyg", "instrument", "droger", "mat", "riddjur", "fordon", "vardesaker", "diverse"
         ]
       }),
       quantity: new fields.NumberField({ required: false, integer: true, initial: 1, min: 0 }),
