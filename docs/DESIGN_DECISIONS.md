@@ -111,7 +111,7 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 1. ~~**Fix `system.json` placeholder URLs.**~~ **Done (2026-07-26).** `url` had already been fixed to the real repo in an earlier session, but `authors[0].url`, `manifest`, and `download` were still `https://github.com/TODO/...` — found during a backlog review and corrected to `github.com/Adociouse` / `github.com/Adociouse/foundryvtt-drakar-och-demoner-expert`.
 2. ~~**Create `CHANGELOG.md`.**~~ **Done.** File exists and is kept current (see `[Unreleased]` section).
 3. **Niva schema migration (3→4 tier).** Actors created under the old `vanlig`/`extraordinar`/`hjalte` choices now hold a value not in the current 4-choice list. Needs a migration script or at minimum a documented manual fix. **Broader framing added 2026-07-27:** both dnd5e and PF2e ship a dedicated `migration/` subsystem (PF2e additionally has `migration-summary` and `compendium-migration-status` UIs) because Foundry migrates *schema* but never your *world data* — see §7.6. This item is really "adopt a minimal migration framework", with `niva` as its first case; there will be more once `system.identified`, skill modifiers, etc. land.
-4. **Verify/accept BP/EP/maxFV placeholder numbers.** **Source found 2026-07-27 — the numbers were right, the attribution was wrong.** The **Alver** supplement p.22 (*"Hur du skapar en alv"*) carries an explicit level table: BP **125 / 150 / 175**, ability rolls **1 / 2 / 3**, EP **150 / 200 / 250**, Max FV from start **15 / 17 / 19** for Vanlig / Extraordinär / Hjälte. That sources the 150/175 previously flagged as unsourced extrapolations, and confirms `abilityRollsByNiva`'s existing 1/2/3. Two things still block closing this:
+4. **Verify/accept BP/EP/maxFV placeholder numbers.** *(Se även backlogpost 31C — Spelledarbokens skadebonus- och förflyttningstabeller krockar med `config.mjs`, samma sorts källkonflikt.)* **Source found 2026-07-27 — the numbers were right, the attribution was wrong.** The **Alver** supplement p.22 (*"Hur du skapar en alv"*) carries an explicit level table: BP **125 / 150 / 175**, ability rolls **1 / 2 / 3**, EP **150 / 200 / 250**, Max FV from start **15 / 17 / 19** for Vanlig / Extraordinär / Hjälte. That sources the 150/175 previously flagged as unsourced extrapolations, and confirms `abilityRollsByNiva`'s existing 1/2/3. Two things still block closing this:
    - `DODE.bpByNiva` currently hardcodes **125 for every tier** — directly contradicting the table. The misleading code comment ("no per-type BP differentiation exists in HH") has been corrected, but the values are deliberately unchanged: the book frames these as *regelförslag* for elf creation specifically, and changing them retroactively shifts every existing character's budget. **Needs a rules decision.**
    - Our `epBudgetTable`/`maxStartFvTable` have an **age dimension** the book's flat per-level numbers lack, so they can't simply be overwritten — the two models need reconciling first.
    - `gudafodd` (the 4th tier) remains an extrapolation either way; the book has only three levels.
@@ -185,6 +185,52 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 15c. **Verify popular optional modules work with this system.** Johan 2026-07-27 (Carousel Combat Tracker looks especially desirable). Community modules commonly assume dnd5e/PF2e data paths, so each needs checking against ours — most relevant are the token/combat ones (Carousel Combat Tracker, Monk's Combat Marker, Dice So Nice, Dice Tray, Torch, Tokenizer, PopOut!). The `primaryTokenAttribute`/`secondaryTokenAttribute` work in 15 helps here: several combat/HUD modules read the token bar attributes rather than system-specific fields.
 16. **English localization.** Low priority per project scope.
+31. **Utvärdering: Spelledarbokens tabeller (2026-07-28, på Johans begäran).** Genomgången gjordes mot **PDF-sidorna** (`D&DE II_-_Spelledarboken_HQJonas.pdf`, 66 sidor, **sidoffset +1** — tryckt sida N = fysisk N+1), inte mot textextraktet, som är svårt sammanslaget (`SLavgörasjälv,kanskegenom`). Bokens egen innehållsförteckning pekar ut ett samlat **TABELLER-avsnitt på tryckta s.31–34**.
+
+    ⚠ **Huvudslutsatsen är att avsnittet till största delen INTE är SL-tabeller.** Det är fyra olika sorters innehåll, och bara en liten del hör hemma i `sl-regler`/`sl-tabeller`:
+
+    **A. Föremålsdata förklädd till tabeller — den överlägset största vinsten.** Det här är inte tabeller att slå på utan vapen- och rustningskataloger, och de är **betydligt större än vad vi har**:
+
+    | Tabell | Sida | Poster | Vi har i dag |
+    |---|---|---|---|
+    | Närstridsvapen | 33 | ~40 | 18 `vapen` totalt |
+    | Projektilvapen | 32 | 10 | (ingår i de 18) |
+    | Kastvapen | 32 | 3 | (ingår i de 18) |
+    | Obeväpnade stridskonster | 32 | 7 | 0 |
+    | Rustningstabell (per kroppsdel) | 34 | ~40 | 15 `rustning` totalt |
+    | Hela rustningar | 33 | 9 | (ingår i de 15) |
+    | Sköldtabell | 33 | 9 | (ingår i de 15) |
+
+    Bokens tabeller har dessutom fält vi saknar helt: **BV (brytvärde)**, **STY-krav**, **längd** och **kroppsdel** per rustningsdel. Det här stänger backlogpost 14:s "vapen ~50%" på ett svep — men kräver först ett schemabeslut om `vapen`/`rustning` ska få `bv`/`styKrav`, och en avstämning mot de 33 föremål som redan finns (Magi-regelbokens lista) så att inget dubbleras.
+
+    **B. Uppslagstabeller → `regler` (JournalEntry) — och de flesta är SPELARVÄNDA, inte SL-only.** Motståndstabellen är en kärnmekanik spelarna slår mot hela tiden; den hör inte hemma bakom SL-lås.
+
+    - **Motståndstabellen** (s.34) — 21×21-rutnät, SG × grundegenskapsvärde → målvärde, plus `Problem→SG` (Mycket lätt 1 · Lätt 5 · Normalt 10 · Svårt 15 · Mycket svårt 20 · Extremt svårt 25). Klart störst pedagogiskt värde av allt i avsnittet.
+    - **Kroppspoängstabell** (s.32) — träffområde × totala KP → KP per kroppsdel.
+    - **Rustningsvikter** (s.33) — STO+STY+FYS → viktmodifikation −70% … +50%.
+    - **Laddningstider** (s.32) — stavslunga 1 SR, lätt armborst 3, tungt 6, arbalest 12.
+    - **Stridsdiagram** (s.31) — flödesschema över anfall→parering→skada. Blir bäst som en journalsida med bilden, inte som text.
+
+    **C. ⚠ TVÅ TABELLER KROCKAR MED REDAN IMPLEMENTERAD KOD — porta dem INTE rakt av.**
+
+    | Bokens tabell (SL s.32) | Vår kod | Krock |
+    |---|---|---|
+    | **Skadebonus** STY+STO: 1–26 ingen · 27–29 +1 · 30–32 +1T2 · 33–40 +1T4 · 41–50 +1T6 · 51–60 +1T10 · 61–80 +2T6 · 81–100 +3T6 · 101–140 +4T6 · 141–180 +5T6 | `DODE.damageBonusTable`: ≤12 −1T4 · ≤16 +0 · ≤24 +1T4 · ≤32 +1T6 · ≤40 +2T4 · ≤48 +2T6 · däröver +3T6 | Helt olika brytpunkter OCH formler. Koden har ett **−1T4-straff** som boken saknar; boken har **+1T2/+1T10** som koden saknar och sträcker sig till 180 (jättar). |
+    | **Förflyttning** STO+FYS+SMI (summa): 0–11→7 … 84–92→16, +8→+1, med rasmod (Anka −2, Alv +1, Dvärg −2, Halvlängdsman −2) | `DODE.movementTable`: (SMI+FYS+STO)/3 (medel) → 4→5 … 24→15 | Summa mot medelvärde, olika skalor. Ex. medel 4: koden ger 5 rutor, boken 8. |
+
+    Båda kodtabellerna bär redan en `⚠ bör verifieras`-flagga och är källhänvisade till **RP (Rollpersonen)** — grundreglerna — medan Spelledarboken beskriver det **detaljerade** stridssystemet (bokens eget avsnitt heter "Vanlig och detaljerad strid", s.15). Det här är alltså med all sannolikhet två avsedda regelnivåer, inte ett fel — precis det "medvetet modulära blandsystem" `REGLER_README.md` beskriver. **Att byta tabell tyst skulle ändra skadebonus och förflyttning för varje befintlig rollperson.** Kräver ett regelbeslut från Johan: kör vi grundreglernas eller den detaljerade bokens tabeller, eller ska nivån bli en `game.settings`-inställning (backlog 5)?
+
+    **D. De faktiska tärningstabellerna ligger i en ANNAN bok.** Bokens korsregister (s.60–61) skriver `Fummeltabeller III-39`, `Träffområdestabell III-23`, `Rustningstabell III-37` — romerska **III = Spelarboken**. Bekräftat: `FUMMELTABELL` ger 4 träffar i Spelarbokens extrakt och 0 i Spelledarbokens. **De bästa RollTable-kandidaterna (fummel vid anfall/parering, träffområde) finns alltså inte i den här boken** utan i `D&DE III_-_Spelarboken`. Det är dit man ska gå för att fylla `tabeller`-packet vidare.
+
+    **Vad boken DÄREMOT har som är stort och SL-relevant** (utanför TABELLER-avsnittet):
+
+    - **VARELSER, s.23–47** — ~45 varelser med fullständiga statblock (djur: björnar, fladdermus, hov-/hund-/kattdjur, orm, skorpion, spindel, jättebläckfisk; legendariska: Demon, Enhörning, Harpya, Hydra, Jätte, Jättespindel, Kentaur, Mantikora, Minotaur, Mumie, Orch, Pegas, Reptilman, Rese, Sfinx, Skelett, Spöke, Svartalf, Troll, Vätte, Zombie). Vi har **14** monster. Statblocken har samma form som Dvärgs på s.35 (Hemvist, Vanlighet, Antal, grundegenskapsformler, KP, färdighets-FV, naturligt skydd) — direkt portabelt till `npc`-aktörer. **Detta är den enskilt största innehållsvinsten i boken.**
+    - **ÖRTER OCH VÄXTER + gifter och droger, s.49–56** — effekter och beskrivningar för läkedroger, allmänna droger och gifter. Kopplar direkt till de **21 `droger`-poster** vi redan har från Magi-regelboken, som i dag bara har namn, tillgänglighetschans och pris men **ingen effekt**.
+    - **Skador och läkning, s.18–22** — infektioner, amputation, läkning, stridsmoral, skada av fall/vatten/eld. Journalmaterial, och delvis mekanik som inte är byggd.
+
+    **Rekommenderad ordning** (störst nytta först): (1) varelserna s.23–47 till `monster`, (2) vapen/rustning s.32–34 till `vapen-utrustning` efter schemabeslut om `bv`/`styKrav`, (3) Motståndstabellen + kroppspoäng/rustningsvikter till `regler`, (4) gift-/drogeffekterna s.49–56 på de befintliga drogposterna, (5) fummel-/träffområdestabellerna från **Spelarboken** till `tabeller`. Punkt C behöver ett regelbeslut innan något rörs.
+
+    ⚠ **`sl-tabeller` blir fortfarande inte aktuellt av detta.** Ingenting i Spelledarbokens tabellavsnitt är en SL-hemlig tärningstabell — det närmaste är värdshusgenereringen som redan ligger i `sl-regler`. Packet skapas när första påhitts- eller lootabellen finns, precis som §8.6 sa.
 
 30. **Räknat lager + återköp hos handlare.** Butiken är i dag en katalog: köp drar bara från köparens börs, handlarens lager är oändligt (se §2-raden för varför — `socket: false` plus att spelare inte äger handlaraktören). Två saker saknas: (a) **räknat lager**, som kräver ett socket-relä där spelarens köp skickas till SL:s klient som utför avdraget på handlaren, och (b) **återköp** — `system.buybackRate` finns på handlaren (default 50% av katalogpris) men är rent informativ, inget UI säljer tillbaka. Båda är samma mekanism: en skrivning mot ett dokument spelaren inte äger. Bygg dem tillsammans och sätt `"socket": true` i `system.json` när det görs.
 
