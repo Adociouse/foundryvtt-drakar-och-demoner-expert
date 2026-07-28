@@ -925,42 +925,67 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * ⚠ Ett rent `new Roll(...).evaluate()` syns INTE någonstans — varken chattkort
    * eller 3D-tärningar. Fram till 2026-07-28 gjorde guiden precis det, så siffran
    * bara dök upp. `ChatMessage.create({ rolls: [roll] })` är husmönstret (samma som
-   * fv-roll.mjs) och är dessutom det Dice So Nice kopplar in sig på — så samma rad
-   * ger både kärnans tärningskort nu och 3D-animation om modulen installeras sedan.
+   * fv-roll.mjs) och är dessutom det Dice So Nice kopplar in sig på — verifierat
+   * mot DSN 6.2.9: guidens slag når `game.dice3d.showForRoll` med formeln "3d6".
+   *
+   * I tre-kandidatläget slås alla tre i EN pool-formel (`{3d6, 3d6, 3d6}`) i
+   * stället för tre separata slag. Då ramlar alla nio tärningarna ner samtidigt
+   * som en hink, vilket är både snabbare och det spelaren vill se — tre slag i
+   * rad hade gett tre animationer efter varandra.
    */
-  async #rollAttributeDie(formula, label) {
-    const roll = await new Roll(formula).evaluate();
-    if (game.settings.get(game.system.id, "showAttributeRollsInChat")) {
-      await ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
-        flavor: label,
-        content: `<p><strong>${label}</strong>: ${roll.total}</p>`,
-        rolls: [roll],
-        sound: CONFIG.sounds.dice
-      });
-    }
-    return roll.total;
+  async #rollAttributeValues(key) {
+    const die = key === "sto" ? "2d6+6" : "3d6";
+    const best = this.#rollModeSetting() === "bestOfThree";
+    const roll = await new Roll(best ? `{${die}, ${die}, ${die}}` : die).evaluate();
+    const values = best
+      ? roll.terms[0].rolls.map((r) => r.total)
+      : [roll.total];
+    return { values, roll };
   }
 
   #rollModeSetting() {
     return game.settings.get(game.system.id, "attributeRollMode");
   }
 
+  /**
+   * Ett samlat chattkort för en omgång slag, i stället för ett kort per
+   * grundegenskap. "Slå alla" i tre-kandidatläget hade annars postat 21 kort.
+   * `rolls` bär med alla Roll-objekt så att Dice So Nice animerar hela omgången.
+   */
+  async #postRollSummary(rows, rolls) {
+    if (!game.settings.get(game.system.id, "showAttributeRollsInChat")) return;
+    const best = this.#rollModeSetting() === "bestOfThree";
+    const head = best
+      ? "<tr><th>Egenskap</th><th>1</th><th>2</th><th>3</th><th>Vald</th></tr>"
+      : "<tr><th>Egenskap</th><th>Slag</th></tr>";
+    const body = rows.map((r) => {
+      if (!best) return `<tr><td>${r.label}</td><td><strong>${r.values[0]}</strong></td></tr>`;
+      const cells = r.values.map((v) => `<td>${v}</td>`).join("");
+      return `<tr><td>${r.label}</td>${cells}<td>${r.chosen ?? "—"}</td></tr>`;
+    }).join("");
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
+      flavor: best ? "Grundegenskaper — tre kandidater per egenskap" : "Grundegenskaper",
+      content: `<div class="dode-chat-card"><table class="dode-roll-table">${head}${body}</table></div>`,
+      rolls,
+      sound: CONFIG.sounds.dice
+    });
+  }
+
   static async #onRollAttribute(event, target) {
     const key = target.closest("[data-attr]")?.dataset.attr;
     if (!key) return;
-    const formula = key === "sto" ? "2d6+6" : "3d6";
-    const label = key.toUpperCase();
-    if (this.#rollModeSetting() === "bestOfThree") {
-      // Tre kandidater att välja mellan — värdet sätts först när spelaren klickar.
-      const cands = [];
-      for (let i = 0; i < 3; i++) cands.push(await this.#rollAttributeDie(formula, `${label} (kandidat ${i + 1})`));
-      this.state.attributeCandidates[key] = cands;
+    const { values, roll } = await this.#rollAttributeValues(key);
+    if (values.length > 1) {
+      // Värdet sätts först när spelaren klickat en kandidat — annars hade det
+      // första slaget smugit in som ett val spelaren aldrig gjorde.
+      this.state.attributeCandidates[key] = values;
       this.state.attributes[key] = null;
     } else {
-      this.state.attributes[key] = await this.#rollAttributeDie(formula, label);
+      this.state.attributes[key] = values[0];
       this.state.attributeCandidates[key] = [];
     }
+    await this.#postRollSummary([{ label: key.toUpperCase(), values, chosen: null }], [roll]);
     this.render();
   }
 
@@ -974,28 +999,24 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   static async #onRollAllAttributes() {
+    const rows = [];
+    const rolls = [];
     for (const key of [...ROLLABLE_ATTRIBUTES, "sto"]) {
-      const formula = key === "sto" ? "2d6+6" : "3d6";
-      const label = key.toUpperCase();
-      if (this.#rollModeSetting() === "bestOfThree") {
-        const cands = [];
-        for (let i = 0; i < 3; i++) cands.push(await this.#rollAttributeDie(formula, `${label} (kandidat ${i + 1})`));
-        this.state.attributeCandidates[key] = cands;
+      const { values, roll } = await this.#rollAttributeValues(key);
+      rolls.push(roll);
+      if (values.length > 1) {
+        this.state.attributeCandidates[key] = values;
         this.state.attributes[key] = null;
       } else {
-        this.state.attributes[key] = await this.#rollAttributeDie(formula, label);
+        this.state.attributes[key] = values[0];
         this.state.attributeCandidates[key] = [];
       }
+      rows.push({ label: key.toUpperCase(), values, chosen: null });
     }
+    await this.#postRollSummary(rows, rolls);
     this.render();
   }
 
-  /**
-   * Nollställer alla grundegenskaper så spelaren kan börja om.
-   * Erbjuds bara när INGET av de 36 yrkena går att kvalificera sig för — se
-   * `noProfessionQualifies` i _prepareContext och inställningen
-   * `allowRestartIfUnqualified`.
-   */
   static async #onRestartAttributes() {
     const ok = await foundry.applications.api.DialogV2.confirm({
       window: { title: "Slå om alla grundegenskaper?" },

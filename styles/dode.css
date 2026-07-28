@@ -619,3 +619,10 @@
   padding: 0.6em 0.8em; border-radius: 3px; margin-bottom: 0.8em;
 }
 .character-wizard .wizard-blocked p { margin: 0 0 0.5em; }
+
+/* Sammanfattningstabell för grundegenskapsslag i chatten */
+.dode-roll-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.dode-roll-table th,
+.dode-roll-table td { padding: 1px 5px; text-align: center; border-bottom: 1px solid rgba(0,0,0,.1); }
+.dode-roll-table th:first-child,
+.dode-roll-table td:first-child { text-align: left; font-weight: 600; }
