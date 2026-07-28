@@ -654,3 +654,6 @@
 .character-wizard .wizard-slot .slot-rows { display: flex; flex-wrap: wrap; gap: 0.25em; flex: 1; }
 .character-wizard .wizard-slot input { width: 10em; }
 .character-wizard .wizard-roll-result.is-complete { border-left: 3px solid #2f6b3a; padding-left: 0.5em; }
+
+/* Märke för färdighet utdelad av SL efter träning i spel */
+.dode .granted-mark { opacity: 0.55; font-size: 0.85em; margin-left: 0.2em; cursor: help; }

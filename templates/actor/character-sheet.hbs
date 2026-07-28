@@ -75,12 +75,18 @@
 <section class="skills">
   <header class="skills-header">
     <h3>Färdigheter</h3>
-    <button type="button" data-action="addSkill"><i class="fa-solid fa-plus"></i> Ny färdighet</button>
+    {{!-- SL-låst: färdigheter lärs in genom träning i spel, inte genom att
+          spelaren lägger till dem själv. Se #onAddSkill. --}}
+    {{#if isGM}}
+      <button type="button" data-action="addSkill" title="Dela ut en färdighet efter träning"><i class="fa-solid fa-plus"></i> Dela ut färdighet</button>
+      <button type="button" data-action="grantSpell" title="Dela ut en besvärjelse eller välsignelse"><i class="fa-solid fa-wand-sparkles"></i> Dela ut besvärjelse</button>
+    {{/if}}
   </header>
   <ol class="skill-list">
     {{#each skills as |skill|}}
       <li class="skill-row" data-item-id="{{skill.id}}">
         <a data-action="editSkill" class="skill-name">{{skill.name}}</a>
+        {{#if skill.grantedReason}}<i class="fa-solid fa-graduation-cap granted-mark" title="Utdelad av {{skill.grantedBy}}: {{skill.grantedReason}}"></i>{{/if}}
         {{#if skill.system.bonus}}
           <span class="skill-fv" title="{{localize 'DODE.Actor.Base'}}">FV {{skill.system.fv}}</span>
           <span class="attr-bonus" title="{{localize 'DODE.Actor.Mod'}}">{{skill.system.bonusDisplay}}</span>

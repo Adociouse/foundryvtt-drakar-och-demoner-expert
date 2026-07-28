@@ -13,6 +13,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     actions: {
       rollSkill: DoDECharacterSheet.#onRollSkill,
       addSkill: DoDECharacterSheet.#onAddSkill,
+      grantSpell: DoDECharacterSheet.#onGrantSpell,
       editSkill: DoDECharacterSheet.#onEditSkill,
       deleteSkill: DoDECharacterSheet.#onDeleteSkill,
       editItem: DoDECharacterSheet.#onEditItem,
@@ -44,7 +45,19 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     context.actor = this.actor;
     context.system = this.actor.system;
     context.attributes = CONFIG.DODE.attributes;
-    context.skills = this.actor.items.filter((i) => i.type === "fardighet");
+    // Härkomst syns på raden — en färdighet som SL delat ut efter träning ska
+    // gå att skilja från en som fanns från skapandet.
+    // Härkomst syns på raden — en färdighet som SL delat ut efter träning ska
+    // gå att skilja från en som fanns från skapandet. Vanliga vyobjekt, inte
+    // klonade Documents: att kopiera ett Document med Object.assign tappar
+    // getters och är svårt att lita på.
+    context.skills = this.actor.items
+      .filter((i) => i.type === "fardighet")
+      .map((i) => ({
+        id: i.id, name: i.name, system: i.system,
+        grantedBy: i.getFlag(game.system.id, "grantedBy"),
+        grantedReason: i.getFlag(game.system.id, "grantedReason")
+      }));
     context.gear = this.actor.items
       .filter((i) => GEAR_TYPES.includes(i.type))
       .map((item) => ({
@@ -95,55 +108,82 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * läggs till. Se CLAUDE.md/DESIGN_DECISIONS.md §3 (Förmågor/färdighetskatalog,
    * session 2026-07-27).
    */
+  /**
+   * SL:s "boon" — dela ut en färdighet, magiskola eller besvärjelse till en
+   * rollperson mitt i kampanjen, typiskt efter träning.
+   *
+   * ⚠ **SL-låst.** Guiden täcker skapandet; det HÄR är vägen in för allt en
+   * rollperson lär sig i spel. Att låta spelaren själv lägga till färdigheter
+   * (som knappen gjorde fram till 2026-07-28) gör varje kostnadsnivå
+   * meningslös — man tar bara det man vill ha. Se DESIGN_DECISIONS.md §3 23.
+   *
+   * ⚠ Startvärdet är **baschansen** ur grundegenskapen, inte 1. En färdighet
+   * man precis lärt sig börjar på BC (RP s.29: "Baschansen är det FV du får
+   * automatiskt"), och det gamla `fv: 1` gav fel värde för varje färdighet
+   * vars grundegenskap låg över 3.
+   *
+   * Besvärjelser hamnar här av ett skäl Johan tog upp: en icke-magiker kan få
+   * en välsignelse av SL under äventyret. Mekaniskt är det samma sak — SL
+   * lägger ett `besvarjelse`-Item på rollpersonen.
+   */
   static async #onAddSkill() {
-    // ⚠ Nyckel, inte namn (backlogpost 6a) — se DODE.skillKey i config.mjs.
+    if (!game.user.isGM) {
+      ui.notifications.warn("Bara SL kan dela ut nya färdigheter — de lärs in genom träning i spel.");
+      return;
+    }
+    const actor = this.actor;
     const existingKeys = new Set(
-      this.actor.items
-        .filter((i) => i.type === "fardighet")
+      actor.items.filter((i) => i.type === "fardighet")
         .map((i) => i.system.skillKey || CONFIG.DODE.skillKey(i.name))
     );
-    // Yrkets egna färdigheter som redan täcks av primärlistan ska inte listas
-    // dubbelt under "Yrkesfärdighet" (matchar hur rollpersonsskaparen redan
-    // hanterar primär/yrkesfärdighet-överlapp, se #skillPreview i character-wizard.mjs).
-    const professionSkills = (this.actor.system.profession?.system?.professionSkills ?? [])
+    const professionSkills = (actor.system.profession?.system?.professionSkills ?? [])
+      .filter((s) => !s.choiceCount)
       .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
       .filter((s) => !CONFIG.DODE.primarySkills.some((p) => p.key === s.key));
 
-    const groups = [
-      { tier: "primar", label: game.i18n.localize("DODE.CostTier.Primar"), skills: CONFIG.DODE.primarySkills },
-      { tier: "yrkesfardighet", label: game.i18n.localize("DODE.CostTier.Yrkesfardighet"), skills: professionSkills },
-      { tier: "sekundar", label: game.i18n.localize("DODE.CostTier.Sekundar"), skills: CONFIG.DODE.secondarySkills }
-    ];
-
-    let optionsHtml = "";
-    for (const group of groups) {
-      const available = group.skills
-        .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
-        .filter((s) => !existingKeys.has(s.key));
-      if (!available.length) continue;
-      const opts = available
-        .map((s) => `<option value="${group.tier}|${s.key}|${s.attribute}|${s.name}">${s.name}</option>`)
-        .join("");
-      optionsHtml += `<optgroup label="${group.label}">${opts}</optgroup>`;
+    // Vapenfärdigheter har ingen egen katalog — de namnges efter vapnet, så
+    // vapnen i kompendiet är den bästa listan vi har. Samma resonemang som
+    // yrkesfärdighetsstegets datalist i guiden.
+    let weaponSkills = [];
+    for (const packId of CONFIG.DODE.contentPacks.startingEquipment ?? []) {
+      const pack = game.packs.get(packId);
+      if (!pack) continue;
+      weaponSkills.push(...(await pack.getDocuments())
+        .filter((d) => d.type === "vapen")
+        .map((d) => ({ key: CONFIG.DODE.skillKey(d.name), name: d.name, attribute: "smi" })));
     }
 
-    const content = `
-      <div class="form-group">
-        <label>${game.i18n.localize("DODE.Skill.Pick")}</label>
-        <select name="skillKey">
-          ${optionsHtml}
-          <option value="custom">${game.i18n.localize("DODE.Skill.Custom")}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>${game.i18n.localize("DODE.Skill.CustomName")}</label>
-        <input type="text" name="customName" />
-      </div>
-    `;
+    const groups = [
+      ["primar", game.i18n.localize("DODE.CostTier.Primar"), CONFIG.DODE.primarySkills],
+      ["yrkesfardighet", game.i18n.localize("DODE.CostTier.Yrkesfardighet"), professionSkills],
+      ["yrkesfardighet", "Vapenfärdigheter", weaponSkills],
+      ["yrkesfardighet", "Magiskolor", CONFIG.DODE.magicSchoolSkills.map((m) => ({
+        key: m.key, name: game.i18n.localize(m.labelKey), attribute: m.attribute
+      }))],
+      ["sekundar", game.i18n.localize("DODE.CostTier.Sekundar"), CONFIG.DODE.secondarySkills]
+    ];
+    let optionsHtml = "";
+    for (const [tier, label, skills] of groups) {
+      const available = (skills ?? [])
+        .map((x) => ({ ...x, key: x.key || CONFIG.DODE.skillKey(x.name) }))
+        .filter((x) => !existingKeys.has(x.key));
+      if (!available.length) continue;
+      optionsHtml += `<optgroup label="${label}">` + available
+        .map((x) => `<option value="${tier}|${x.key}|${x.attribute}|${x.name}">${x.name}</option>`)
+        .join("") + "</optgroup>";
+    }
 
     const result = await foundry.applications.api.DialogV2.input({
-      window: { title: game.i18n.localize("DODE.Skill.New") },
-      content
+      window: { title: `Dela ut färdighet till ${actor.name}` },
+      content: `
+        <p class="hint">Färdigheten läggs till på baschansen (BC) ur grundegenskapen.
+        Anteckna gärna varför — det visas i chatten och på färdigheten.</p>
+        <div class="form-group"><label>Färdighet</label>
+          <select name="skillKey">${optionsHtml}<option value="custom">Annat (fritext)…</option></select>
+        </div>
+        <div class="form-group"><label>Eget namn</label><input type="text" name="customName" /></div>
+        <div class="form-group"><label>Anledning</label>
+          <input type="text" name="reason" placeholder="t.ex. Fyra veckors träning hos vapenmästaren" /></div>`
     });
     if (!result) return;
 
@@ -151,24 +191,85 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (result.skillKey === "custom") {
       name = (result.customName ?? "").trim();
       if (!name) return;
-      attribute = "smi";
-      costTier = "sekundar";
-      // Egendefinierade färdigheter får en härledd nyckel — den är då lika
-      // stabil som namnet den skrevs in med, vilket är det bästa som går att
-      // göra för fritext.
-      key = CONFIG.DODE.skillKey(name);
+      attribute = "smi"; costTier = "sekundar"; key = CONFIG.DODE.skillKey(name);
     } else {
-      const [tier, skillKey, attr, skillName] = String(result.skillKey).split("|");
-      key = skillKey;
-      name = skillName;
-      attribute = attr;
-      costTier = tier;
+      [costTier, key, attribute, name] = String(result.skillKey).split("|");
     }
     if (!name || existingKeys.has(key)) return;
 
-    await this.actor.createEmbeddedDocuments("Item", [
-      { name, type: "fardighet", system: { skillKey: key, attribute, costTier, fv: 1 } }
-    ]);
+    const total = actor.system.attributes?.[attribute]?.total ?? 0;
+    const fv = CONFIG.DODE.attributeToGroup(total);
+    const reason = (result.reason ?? "").trim();
+    await actor.createEmbeddedDocuments("Item", [{
+      name, type: "fardighet",
+      system: { skillKey: key, attribute, costTier, fv },
+      flags: { [game.system.id]: { grantedBy: game.user.name, grantedReason: reason } }
+    }]);
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      content: `<div class="dode-chat-card"><h3>Ny färdighet</h3>`
+        + `<p><strong>${actor.name}</strong> lärde sig <strong>${name}</strong> (FV ${fv}, ${game.i18n.localize(CONFIG.DODE.costTiers[costTier])}).</p>`
+        + (reason ? `<p class="dode-chat-note">${reason}</p>` : "") + `</div>`
+    });
+  }
+
+  /**
+   * SL delar ut en besvärjelse eller välsignelse. Samma väg som färdigheter
+   * ovan, men för `besvarjelse`-Items.
+   *
+   * ⚠ Kräver INTE att rollpersonen är magiker. Johans exempel: en icke-magiker
+   * får en gudomlig välsignelse av SL mitt i kampanjen. Mekaniskt är en
+   * välsignelse och en besvärjelse samma dokument — skillnaden är hur den
+   * kom dit, vilket `grantedReason` fångar.
+   */
+  static async #onGrantSpell() {
+    if (!game.user.isGM) return;
+    const actor = this.actor;
+    const have = new Set(actor.items.filter((i) => i.type === "besvarjelse").map((i) => i.name));
+    const bySchool = {};
+    for (const packId of CONFIG.DODE.contentPacks.spells ?? []) {
+      const pack = game.packs.get(packId);
+      if (!pack) continue;
+      for (const d of await pack.getDocuments()) {
+        if (have.has(d.name)) continue;
+        (bySchool[d.system.school] ||= []).push(d);
+      }
+    }
+    let opts = "";
+    for (const [school, list] of Object.entries(bySchool)) {
+      const label = game.i18n.localize(CONFIG.DODE.magicSchools[school] ?? school);
+      opts += `<optgroup label="${label}">` + list
+        .sort((a, b) => a.system.sValue - b.system.sValue)
+        .map((d) => `<option value="${d.uuid}">${d.name} (S${d.system.sValue})</option>`)
+        .join("") + "</optgroup>";
+    }
+    if (!opts) return void ui.notifications.info("Rollpersonen kan redan alla besvärjelser i kompendiet.");
+
+    const result = await foundry.applications.api.DialogV2.input({
+      window: { title: `Dela ut besvärjelse till ${actor.name}` },
+      content: `
+        <p class="hint">Fungerar även för icke-magiker — en välsignelse från SL är
+        mekaniskt samma dokument som en besvärjelse.</p>
+        <div class="form-group"><label>Besvärjelse</label><select name="uuid">${opts}</select></div>
+        <div class="form-group"><label>Anledning</label>
+          <input type="text" name="reason" placeholder="t.ex. Välsignelse från Vinterns tempel" /></div>`
+    });
+    if (!result?.uuid) return;
+    const doc = await fromUuid(result.uuid);
+    if (!doc) return;
+    const obj = doc.toObject();
+    delete obj._id;
+    const reason = (result.reason ?? "").trim();
+    obj.flags = { ...(obj.flags ?? {}),
+      [game.system.id]: { grantedBy: game.user.name, grantedReason: reason } };
+    await actor.createEmbeddedDocuments("Item", [obj]);
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      content: `<div class="dode-chat-card"><h3>Ny besvärjelse</h3>`
+        + `<p><strong>${actor.name}</strong> lärde sig <strong>${doc.name}</strong> `
+        + `(${game.i18n.localize(CONFIG.DODE.magicSchools[doc.system.school] ?? doc.system.school)}, S${doc.system.sValue}).</p>`
+        + (reason ? `<p class="dode-chat-note">${reason}</p>` : "") + `</div>`
+    });
   }
 
   static async #onDeleteSkill(event, target) {
