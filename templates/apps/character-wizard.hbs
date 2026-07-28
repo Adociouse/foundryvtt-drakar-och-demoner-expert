@@ -137,20 +137,31 @@
 
   {{#if showAttribut}}
   <section class="wizard-step">
+    <p class="hint">
+      Slå varje grundegenskap själv med tärningsknappen — eller <em>Slå alla</em> på en gång.
+      {{#if isBestOfThree}}<strong>SL har satt "tre kandidater":</strong> varje slag ger tre värden och du väljer ett.
+      {{else if canReroll}}<strong>SL tillåter omslag</strong> — klicka tärningen igen för att slå om en grundegenskap.
+      {{else}}Ett slag per grundegenskap gäller (SL kan öppna för omslag i systeminställningarna).{{/if}}
+    </p>
     <button type="button" data-action="rollAllAttributes"><i class="fa-solid fa-dice"></i> Slå alla</button>
     <div class="wizard-attribute-grid">
-      {{#each rollableAttributes as |key|}}
-        <div class="wizard-attribute" data-attr="{{key}}">
-          <label>{{key}}</label>
-          <div class="wizard-attribute-value">{{lookup (lookup ../effectiveAttributes key) "base"}}</div>
-          <button type="button" data-action="rollAttribute" title="Slå 3T6"><i class="fa-solid fa-dice-d6"></i></button>
+      {{#each attributeRows as |row|}}
+        <div class="wizard-attribute {{#unless row.rolled}}not-rolled{{/unless}}" data-attr="{{row.key}}">
+          <label>{{row.label}}</label>
+          <div class="wizard-attribute-value">{{#if row.rolled}}{{lookup (lookup ../effectiveAttributes row.key) "base"}}{{else}}–{{/if}}</div>
+          <button type="button" data-action="rollAttribute" title="Slå {{row.formula}}{{#if row.rolled}} igen{{/if}}">
+            <i class="fa-solid fa-dice-d6"></i>
+          </button>
+          {{#if row.candidates.length}}
+            <div class="wizard-candidates" title="Välj ett av de tre slagna värdena">
+              {{#each row.candidates as |c|}}
+                <button type="button" class="candidate {{#if c.chosen}}is-chosen{{/if}}"
+                  data-action="pickAttributeCandidate" data-value="{{c.value}}">{{c.value}}</button>
+              {{/each}}
+            </div>
+          {{/if}}
         </div>
       {{/each}}
-      <div class="wizard-attribute" data-attr="sto">
-        <label>sto</label>
-        <div class="wizard-attribute-value">{{effectiveAttributes.sto.base}}</div>
-        <span class="hint">2T6+6 (sätts av "Slå alla")</span>
-      </div>
     </div>
     {{#if selectedRace}}
       <p class="hint">Totalt inkl. rasmod från {{selectedRace.name}} visas i nästa steg.</p>
@@ -185,6 +196,21 @@
       <p class="hint">Yrket kan inte bytas i redigeringsläge — det styr vilka yrkesfärdigheter rollpersonen har. Behöver det ändå bytas: be SL dra ett nytt yrke till arket.</p>
     {{else}}
       <p class="hint">Välj ett yrke. Varje yrke har <strong>grundegenskapskrav</strong> (RP s.11) — de visas på korten och färgas efter om dina framslagna värden räcker. Ett omött krav spärrar inte valet: med 3T6 hamnar man ofta på 10–11 i allt, och då kvalificerar man för inget av de 36 yrkena. Stäm av med SL.</p>
+    {{/if}}
+    {{#if noProfessionQualifies}}
+      <div class="wizard-blocked">
+        <p><i class="fa-solid fa-triangle-exclamation"></i> <strong>Inga yrkeskrav är uppfyllda.</strong>
+        Med de framslagna grundegenskaperna kvalificerar rollpersonen sig inte för något av de {{professions.length}} yrkena
+        — lägsta kravet i hela listan är 12.</p>
+        {{#if allowRestart}}
+          <p>Du kan slå om alla grundegenskaper och försöka igen, eller välja ett yrke ändå och stämma av med SL.</p>
+          <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Slå om alla grundegenskaper</button>
+        {{else}}
+          <p>SL har stängt av omslag. Välj ett yrke ändå och stäm av vid bordet.</p>
+        {{/if}}
+      </div>
+    {{else if attributesRolled}}
+      <p class="hint">{{qualifiedCount}} av {{professions.length}} yrken har uppfyllda krav.</p>
     {{/if}}
     {{#each professionGroups as |group|}}
       <h4 class="wizard-group-heading">{{group.label}}</h4>

@@ -129,6 +129,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       nextStep: DoDECharacterWizard.#onNextStep,
       prevStep: DoDECharacterWizard.#onPrevStep,
       rollAttribute: DoDECharacterWizard.#onRollAttribute,
+      pickAttributeCandidate: DoDECharacterWizard.#onPickAttributeCandidate,
+      restartAttributes: DoDECharacterWizard.#onRestartAttributes,
       rollAllAttributes: DoDECharacterWizard.#onRollAllAttributes,
       selectKon: DoDECharacterWizard.#onSelectKon,
       selectNiva: DoDECharacterWizard.#onSelectNiva,
@@ -206,6 +208,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     name: "",
     ageCategory: "Mogen",
     attributes: { sty: null, sto: null, fys: null, smi: null, int: null, psy: null, kar: null },
+    // Tre framslagna kandidatvärden per grundegenskap när SL kört inställningen
+    // "bestOfThree". Tomt i övriga lägen. Värdet i `attributes` sätts först när
+    // spelaren klickat på en kandidat.
+    attributeCandidates: { sty: [], sto: [], fys: [], smi: [], int: [], psy: [], kar: [] },
     raceUuid: null,
     professionUuid: null,
     // Vald magiskola (nyckel ur DODE.magicSchoolSkills) — materialiseras som en
@@ -303,6 +309,20 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // och DESIGN_DECISIONS.md backlog 4c) — byte sker via drag-släpp på arket.
     context.isEditMode = this.isEditMode;
     context.showStart = stepId === "start";
+    // Slagläge + kandidater till attributsteget.
+    context.rollMode = this.#rollModeSetting();
+    context.isBestOfThree = context.rollMode === "bestOfThree";
+    context.canReroll = context.rollMode !== "standard";
+    context.attributeRows = [...ROLLABLE_ATTRIBUTES, "sto"].map((key) => ({
+      key,
+      label: key.toUpperCase(),
+      formula: key === "sto" ? "2T6+6" : "3T6",
+      value: this.state.attributes[key],
+      rolled: this.state.attributes[key] !== null,
+      candidates: (this.state.attributeCandidates?.[key] ?? []).map((v) => ({
+        value: v, chosen: v === this.state.attributes[key]
+      }))
+    }));
     context.showKon = stepId === "kon";
     context.showNiva = stepId === "niva";
     context.showGrunder = stepId === "grunder";
@@ -389,6 +409,16 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
           })
       }))
       .filter((g) => g.professions.length);
+    // Kan spelaren över huvud taget kvalificera sig för NÅGOT yrke? Med 3T6 och
+    // lägsta krav 12 är svaret ibland nej — då erbjuds omslag i stället för
+    // att spelaren kör fast (SL-inställning `allowRestartIfUnqualified`).
+    const allProfessions = context.professionGroups.flatMap((g) => g.professions);
+    context.attributesRolled = Object.values(this.state.attributes).every((v) => v !== null);
+    context.noProfessionQualifies = context.attributesRolled
+      && allProfessions.length > 0
+      && !allProfessions.some((p) => p.reqMet);
+    context.allowRestart = game.settings.get(game.system.id, "allowRestartIfUnqualified");
+    context.qualifiedCount = allProfessions.filter((p) => p.reqMet).length;
     // Speglas till ett fält eftersom `steps` (som avgör om magiskolesteget
     // visas) är en synkron getter utan tillgång till de async-uppslagna yrkena.
     this.#selectedProfessionName = selectedProfession?.name ?? "";
@@ -889,21 +919,95 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
+  /**
+   * Slår en grundegenskap och visar tärningarna.
+   *
+   * ⚠ Ett rent `new Roll(...).evaluate()` syns INTE någonstans — varken chattkort
+   * eller 3D-tärningar. Fram till 2026-07-28 gjorde guiden precis det, så siffran
+   * bara dök upp. `ChatMessage.create({ rolls: [roll] })` är husmönstret (samma som
+   * fv-roll.mjs) och är dessutom det Dice So Nice kopplar in sig på — så samma rad
+   * ger både kärnans tärningskort nu och 3D-animation om modulen installeras sedan.
+   */
+  async #rollAttributeDie(formula, label) {
+    const roll = await new Roll(formula).evaluate();
+    if (game.settings.get(game.system.id, "showAttributeRollsInChat")) {
+      await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
+        flavor: label,
+        content: `<p><strong>${label}</strong>: ${roll.total}</p>`,
+        rolls: [roll],
+        sound: CONFIG.sounds.dice
+      });
+    }
+    return roll.total;
+  }
+
+  #rollModeSetting() {
+    return game.settings.get(game.system.id, "attributeRollMode");
+  }
+
   static async #onRollAttribute(event, target) {
     const key = target.closest("[data-attr]")?.dataset.attr;
     if (!key) return;
-    const roll = await new Roll("3d6").evaluate();
-    this.state.attributes[key] = roll.total;
+    const formula = key === "sto" ? "2d6+6" : "3d6";
+    const label = key.toUpperCase();
+    if (this.#rollModeSetting() === "bestOfThree") {
+      // Tre kandidater att välja mellan — värdet sätts först när spelaren klickar.
+      const cands = [];
+      for (let i = 0; i < 3; i++) cands.push(await this.#rollAttributeDie(formula, `${label} (kandidat ${i + 1})`));
+      this.state.attributeCandidates[key] = cands;
+      this.state.attributes[key] = null;
+    } else {
+      this.state.attributes[key] = await this.#rollAttributeDie(formula, label);
+      this.state.attributeCandidates[key] = [];
+    }
+    this.render();
+  }
+
+  /** Väljer ett av de tre framslagna kandidatvärdena. */
+  static #onPickAttributeCandidate(event, target) {
+    const key = target.closest("[data-attr]")?.dataset.attr;
+    const value = Number(target.dataset.value);
+    if (!key || Number.isNaN(value)) return;
+    this.state.attributes[key] = value;
     this.render();
   }
 
   static async #onRollAllAttributes() {
-    for (const key of ROLLABLE_ATTRIBUTES) {
-      const roll = await new Roll("3d6").evaluate();
-      this.state.attributes[key] = roll.total;
+    for (const key of [...ROLLABLE_ATTRIBUTES, "sto"]) {
+      const formula = key === "sto" ? "2d6+6" : "3d6";
+      const label = key.toUpperCase();
+      if (this.#rollModeSetting() === "bestOfThree") {
+        const cands = [];
+        for (let i = 0; i < 3; i++) cands.push(await this.#rollAttributeDie(formula, `${label} (kandidat ${i + 1})`));
+        this.state.attributeCandidates[key] = cands;
+        this.state.attributes[key] = null;
+      } else {
+        this.state.attributes[key] = await this.#rollAttributeDie(formula, label);
+        this.state.attributeCandidates[key] = [];
+      }
     }
-    const sto = await new Roll("2d6+6").evaluate();
-    this.state.attributes.sto = sto.total;
+    this.render();
+  }
+
+  /**
+   * Nollställer alla grundegenskaper så spelaren kan börja om.
+   * Erbjuds bara när INGET av de 36 yrkena går att kvalificera sig för — se
+   * `noProfessionQualifies` i _prepareContext och inställningen
+   * `allowRestartIfUnqualified`.
+   */
+  static async #onRestartAttributes() {
+    const ok = await foundry.applications.api.DialogV2.confirm({
+      window: { title: "Slå om alla grundegenskaper?" },
+      content: "<p>Alla framslagna grundegenskaper nollställs och du slår om från början. "
+        + "Övriga val (kön, nivå, namn, ras) behålls.</p>"
+    });
+    if (!ok) return;
+    for (const key of [...ROLLABLE_ATTRIBUTES, "sto"]) {
+      this.state.attributes[key] = null;
+      this.state.attributeCandidates[key] = [];
+    }
+    this.stepIndex = this.steps.map((s) => s.id ?? s).indexOf("attribut");
     this.render();
   }
 
