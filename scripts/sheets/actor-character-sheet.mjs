@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
-const GEAR_TYPES = ["vapen", "rustning", "besvarjelse"];
+const GEAR_TYPES = ["vapen", "rustning", "utrustning", "besvarjelse"];
 
 export default class DoDECharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   static DEFAULT_OPTIONS = {
@@ -52,9 +52,10 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
         isVapen: item.type === "vapen",
         isRustning: item.type === "rustning",
         isBesvarjelse: item.type === "besvarjelse",
-        // Utrustningsbara typer (vapen/rustning) visar en av/på-växel som styr
-        // om föremålets ActiveEffects appliceras — se DoDeActiveEffect.apply().
-        canEquip: item.type === "vapen" || item.type === "rustning"
+        isUtrustning: item.type === "utrustning",
+        // Utrustningsbara typer visar en av/på-växel som styr om föremålets
+        // ActiveEffects appliceras — se DoDeActiveEffect.isGateOpen().
+        canEquip: item.type === "vapen" || item.type === "rustning" || item.type === "utrustning"
       }));
     // Förmåga-Item (bär transfer-AE:er, alltid aktiva). Separat från fritext-
     // arrayen system.specialAbilities.

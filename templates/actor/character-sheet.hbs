@@ -136,6 +136,10 @@
         {{else if entry.isBesvarjelse}}
           <span class="fv-input">E <input type="number" class="effektgrad-input" data-effektgrad value="1" min="1" /></span>
           <button type="button" data-action="castSpell" title="Kasta"><i class="fa-solid fa-hand-sparkles"></i></button>
+        {{else if entry.isUtrustning}}
+          {{#if entry.item.system.quantity}}<span class="skill-fv">{{entry.item.system.quantity}} st</span>{{/if}}
+          <span class="skill-fv" title="{{localize 'DODE.Equipment.TotalWeight'}}">{{entry.item.system.totalWeight}} BEP</span>
+          <span class="skill-fv" title="{{localize 'DODE.Equipment.PriceSmHint'}}">{{entry.item.system.priceDisplay}}</span>
         {{/if}}
         {{#if entry.canEquip}}
           <button type="button" data-action="toggleEquipped"

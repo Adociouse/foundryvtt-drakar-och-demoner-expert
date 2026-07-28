@@ -33,6 +33,7 @@
       "yrke": {},
       "vapen": {},
       "rustning": {},
+      "utrustning": {},
       "besvarjelse": {},
       "formaga": {}
     }
@@ -44,7 +45,10 @@
       "path": "packs/raser",
       "type": "Item",
       "system": "drakar-och-demoner-expert",
-      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "yrken",
@@ -52,7 +56,10 @@
       "path": "packs/yrken",
       "type": "Item",
       "system": "drakar-och-demoner-expert",
-      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "vapen-utrustning",
@@ -60,7 +67,10 @@
       "path": "packs/vapen-utrustning",
       "type": "Item",
       "system": "drakar-och-demoner-expert",
-      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "besvarjelser",
@@ -68,7 +78,10 @@
       "path": "packs/besvarjelser",
       "type": "Item",
       "system": "drakar-och-demoner-expert",
-      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "magiska-foremal",
@@ -76,7 +89,10 @@
       "path": "packs/magiska-foremal",
       "type": "Item",
       "system": "drakar-och-demoner-expert",
-      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "monster",
@@ -84,7 +100,10 @@
       "path": "packs/monster",
       "type": "Actor",
       "system": "drakar-och-demoner-expert",
-      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "socket": false,

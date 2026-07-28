@@ -26,6 +26,8 @@ class DoDEItemSheetBase extends HandlebarsApplicationMixin(ItemSheetV2) {
     context.weaponCategories = CONFIG.DODE.weaponCategories;
     context.armorSlots = CONFIG.DODE.armorSlots;
     context.magicSchools = CONFIG.DODE.magicSchools;
+    context.equipmentCategories = CONFIG.DODE.equipmentCategories;
+    context.coinLabels = CONFIG.DODE.coinLabels;
     return context;
   }
 }
@@ -59,6 +61,12 @@ export class DoDEVapenSheet extends DoDEItemSheetBase {
 export class DoDERustningSheet extends DoDEItemSheetBase {
   static PARTS = {
     form: { template: "systems/drakar-och-demoner-expert/templates/item/item-rustning-sheet.hbs" }
+  };
+}
+
+export class DoDEUtrustningSheet extends DoDEItemSheetBase {
+  static PARTS = {
+    form: { template: "systems/drakar-och-demoner-expert/templates/item/item-utrustning-sheet.hbs" }
   };
 }
 

@@ -1,0 +1,36 @@
+{
+  "name": "Kniv i guld",
+  "type": "utrustning",
+  "system": {
+    "category": "koksutrustning",
+    "quantity": 1,
+    "weight": 0,
+    "price": 750,
+    "priceUnit": "sm",
+    "priceNote": "",
+    "equipped": false,
+    "source": "Magi-regelboken s.43-48",
+    "description": "<p><em>Källa: Magi-regelboken s.43-48 (Kokutrustning).</em></p>"
+  },
+  "_id": "vtYkzrqY07y4fuex",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/koksutrustning.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233947498,
+    "modifiedTime": 1785233947498,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!vtYkzrqY07y4fuex"
+}

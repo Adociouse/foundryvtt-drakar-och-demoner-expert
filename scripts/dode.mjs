@@ -5,6 +5,7 @@ import DoDERasData from "./data/item-ras.mjs";
 import DoDEYrkeData from "./data/item-yrke.mjs";
 import DoDEVapenData from "./data/item-vapen.mjs";
 import DoDERustningData from "./data/item-rustning.mjs";
+import DoDEUtrustningData from "./data/item-utrustning.mjs";
 import DoDEBesvarjelseData from "./data/item-besvarjelse.mjs";
 import DoDEFormagaData from "./data/item-formaga.mjs";
 import DoDEActor from "./documents/actor.mjs";
@@ -18,6 +19,7 @@ import {
   DoDEYrkeSheet,
   DoDEVapenSheet,
   DoDERustningSheet,
+  DoDEUtrustningSheet,
   DoDEBesvarjelseSheet,
   DoDEFormagaSheet
 } from "./sheets/item-sheet.mjs";
@@ -41,6 +43,7 @@ Hooks.once("init", () => {
     yrke: DoDEYrkeData,
     vapen: DoDEVapenData,
     rustning: DoDERustningData,
+    utrustning: DoDEUtrustningData,
     besvarjelse: DoDEBesvarjelseData,
     formaga: DoDEFormagaData
   });
@@ -64,6 +67,7 @@ Hooks.once("init", () => {
     ["yrke", DoDEYrkeSheet],
     ["vapen", DoDEVapenSheet],
     ["rustning", DoDERustningSheet],
+    ["utrustning", DoDEUtrustningSheet],
     ["besvarjelse", DoDEBesvarjelseSheet],
     ["formaga", DoDEFormagaSheet]
   ];

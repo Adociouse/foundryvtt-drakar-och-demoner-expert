@@ -96,6 +96,38 @@
       "Base": "Bas",
       "Mod": "Mod",
       "Total": "Totalt"
+    },
+    "Coin": {
+      "Km": "Kopparmynt (km)",
+      "Sm": "Silvermynt (sm)",
+      "Gm": "Guldmynt (gm)"
+    },
+    "EquipmentCategory": {
+      "Verktyg": "Verktyg",
+      "Kladsel": "Kläder",
+      "Behallare": "Behållare",
+      "Koksutrustning": "Köksutrustning",
+      "Lagerutrustning": "Lägerutrustning",
+      "Tjuvverktyg": "Tjuvverktyg",
+      "Instrument": "Instrument & färdmedel",
+      "Droger": "Droger",
+      "Mat": "Mat & dryck",
+      "Riddjur": "Drag- & riddjur",
+      "Fordon": "Fordon",
+      "Diverse": "Diverse"
+    },
+    "Equipment": {
+      "Category": "Kategori",
+      "Quantity": "Antal",
+      "Weight": "Vikt (BEP)",
+      "Price": "Pris",
+      "PriceUnit": "Myntslag",
+      "PriceNote": "Prisnotering (fritext)",
+      "Equipped": "Utrustad (aktiverar ev. ActiveEffects)",
+      "Source": "Källa",
+      "PriceSm": "Pris i silver",
+      "PriceSmHint": "Normaliserat till silvermynt. ⚠ Växelkursen km/sm/gm är inte belagd i källmaterialet — se CONFIG.DODE.coinToSilver.",
+      "TotalWeight": "Total vikt"
     }
   },
   "TYPES": {
@@ -110,7 +142,8 @@
       "vapen": "Vapen",
       "rustning": "Rustning",
       "besvarjelse": "Besvärjelse",
-      "formaga": "Förmåga"
+      "formaga": "Förmåga",
+      "utrustning": "Utrustning"
     }
   }
 }

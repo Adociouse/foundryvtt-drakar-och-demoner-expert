@@ -1,0 +1,36 @@
+<div class="dode-item-sheet-body">
+<header class="sheet-header">
+  <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+</header>
+
+<section class="item-fields">
+  <label>{{localize "DODE.Equipment.Category"}}
+    <select name="system.category">{{selectOptions equipmentCategories selected=system.category localize=true}}</select>
+  </label>
+  <label>{{localize "DODE.Equipment.Quantity"}} <input type="number" name="system.quantity" value="{{system.quantity}}" min="0" /></label>
+  <label>{{localize "DODE.Equipment.Weight"}} <input type="number" name="system.weight" value="{{system.weight}}" step="0.25" min="0" /></label>
+  <div class="price-row">
+    <label>{{localize "DODE.Equipment.Price"}} <input type="number" name="system.price" value="{{system.price}}" min="0" /></label>
+    <label>{{localize "DODE.Equipment.PriceUnit"}}
+      <select name="system.priceUnit">{{selectOptions coinLabels selected=system.priceUnit localize=true}}</select>
+    </label>
+  </div>
+  {{!-- Priser som inte är ett rent tal ("4 per kagge", "5 sm/g", "×0,5") lagras
+        som fritext. Är fältet ifyllt är posten referensdata, inte köpbar. --}}
+  <label class="wide">{{localize "DODE.Equipment.PriceNote"}}
+    <input type="text" name="system.priceNote" value="{{system.priceNote}}" placeholder="t.ex. 4 per kagge — lämna tomt för ett vanligt styckpris" />
+  </label>
+  <label class="checkbox-field"><input type="checkbox" name="system.equipped" {{checked system.equipped}} /> {{localize "DODE.Equipment.Equipped"}}</label>
+  <label class="wide">{{localize "DODE.Equipment.Source"}} <input type="text" name="system.source" value="{{system.source}}" placeholder="t.ex. Magi-regelboken s.43" /></label>
+</section>
+
+<section class="item-derived">
+  <span title="{{localize 'DODE.Equipment.PriceSmHint'}}">{{localize "DODE.Equipment.PriceSm"}}: <strong>{{system.priceSm}}</strong> sm</span>
+  <span>{{localize "DODE.Equipment.TotalWeight"}}: <strong>{{system.totalWeight}}</strong> BEP</span>
+</section>
+
+<section class="item-description">
+  {{editor system.description target="system.description" button=true engine="prosemirror"}}
+</section>
+</div>

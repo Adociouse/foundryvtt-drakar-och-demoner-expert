@@ -1,0 +1,36 @@
+{
+  "name": "Silver",
+  "type": "utrustning",
+  "system": {
+    "category": "diverse",
+    "quantity": 1,
+    "weight": 0,
+    "price": 100,
+    "priceUnit": "sm",
+    "priceNote": "",
+    "equipped": false,
+    "source": "Magi-regelboken s.43-48",
+    "description": "<p><em>Källa: Magi-regelboken s.43-48 (Hasardspelsutrustning).</em></p>"
+  },
+  "_id": "bhYr57lytpVQ3s1E",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/diverse.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233947498,
+    "modifiedTime": 1785233947498,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bhYr57lytpVQ3s1E"
+}

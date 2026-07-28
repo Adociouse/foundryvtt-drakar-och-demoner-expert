@@ -311,19 +311,22 @@
   <section class="wizard-step">
     <p class="hint">Köp utrustning för startkapitalet. Kort grånas när priset överstiger kvarvarande kapital.</p>
     <p class="wizard-roll-result">Kapital kvar: <strong>{{equipmentResult.remaining}}</strong> / {{equipmentResult.budget}} sm</p>
-    <div class="wizard-card-grid wizard-equipment-grid">
-      {{#each equipmentResult.items as |entry|}}
-        <div class="wizard-card wizard-equipment-card" data-uuid="{{entry.uuid}}">
-          <img src="{{entry.img}}" />
-          <div class="wizard-card-name">{{entry.name}}</div>
-          <div class="wizard-card-meta">{{entry.price}} sm{{#if entry.qty}} · {{entry.qty}} st{{/if}}</div>
-          <div class="wizard-skill-buy">
-            <button type="button" data-action="sellEquipment" data-uuid="{{entry.uuid}}" {{#unless entry.canSell}}disabled{{/unless}}>−</button>
-            <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>Köp</button>
+    {{#each equipmentResult.groups as |group|}}
+      <h4 class="wizard-group-heading">{{group.label}} <span class="wizard-group-count">{{group.items.length}}</span></h4>
+      <div class="wizard-card-grid wizard-equipment-grid">
+        {{#each group.items as |entry|}}
+          <div class="wizard-card wizard-equipment-card" data-uuid="{{entry.uuid}}">
+            <img src="{{entry.img}}" />
+            <div class="wizard-card-name">{{entry.name}}</div>
+            <div class="wizard-card-meta">{{entry.priceLabel}}{{#if entry.qty}} · {{entry.qty}} st{{/if}}</div>
+            <div class="wizard-skill-buy">
+              <button type="button" data-action="sellEquipment" data-uuid="{{entry.uuid}}" {{#unless entry.canSell}}disabled{{/unless}}>−</button>
+              <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>Köp</button>
+            </div>
           </div>
-        </div>
-      {{/each}}
-    </div>
+        {{/each}}
+      </div>
+    {{/each}}
   </section>
   {{/if}}
 

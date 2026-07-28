@@ -724,17 +724,46 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #equipmentResult(equipmentDocs, capitalResult) {
     const items = equipmentDocs.map((doc) => {
       const qty = this.state.equipment[doc.uuid] ?? 0;
-      const price = doc.system.price ?? 0;
-      return { uuid: doc.uuid, name: doc.name, img: doc.img, type: doc.type, price, qty };
+      // `utrustning` prissätts i bokens eget myntslag och normaliseras till
+      // silver i prepareDerivedData; vapen/rustning har ett rent sm-pris.
+      // Startkapitalet är i silver, så allt jämförs i silver här.
+      const price = doc.type === "utrustning" ? (doc.system.priceSm ?? 0) : (doc.system.price ?? 0);
+      return {
+        uuid: doc.uuid, name: doc.name, img: doc.img, type: doc.type, price, qty,
+        category: doc.system.category ?? "",
+        // Poster med fritextpris ("4 per kagge", "5 sm/g") har inget styckpris
+        // och är referensdata — de får inte kunna köpas för 0 silver.
+        priceLabel: doc.system.priceNote || `${price} sm`,
+        purchasable: !doc.system.priceNote && price > 0
+      };
     });
     const spent = items.reduce((sum, entry) => sum + entry.price * entry.qty, 0);
     const budget = capitalResult?.finalSm ?? 0;
     const remaining = budget - spent;
     for (const entry of items) {
-      entry.canBuy = entry.price <= remaining;
+      entry.canBuy = entry.purchasable !== false && entry.price <= remaining;
       entry.canSell = entry.qty > 0;
     }
-    return { items, budget, spent, remaining };
+    // Gruppering per kategori — utrustningssteget gick från 33 till 304 kort när
+    // Magi-regelbokens listor portades (2026-07-28), och ett platt rutnät i den
+    // storleken är obrukbart. Samma skäl som ras-/yrkesgrupperingen infördes för.
+    // Vapen och rustning saknar `category` och samlas under egna rubriker först.
+    const ORDER = ["vapen", "rustning", ...Object.keys(CONFIG.DODE.equipmentCategories)];
+    const labelFor = (key) => {
+      if (key === "vapen") return "Vapen";
+      if (key === "rustning") return "Rustning";
+      return game.i18n.localize(CONFIG.DODE.equipmentCategories[key] ?? key);
+    };
+    const buckets = new Map();
+    for (const entry of items) {
+      const key = entry.type === "utrustning" ? (entry.category || "diverse") : entry.type;
+      if (!buckets.has(key)) buckets.set(key, []);
+      buckets.get(key).push(entry);
+    }
+    const groups = ORDER
+      .filter((key) => buckets.has(key))
+      .map((key) => ({ key, label: labelFor(key), items: buckets.get(key) }));
+    return { items, groups, budget, spent, remaining };
   }
 
   /**

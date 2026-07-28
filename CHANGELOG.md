@@ -3,6 +3,13 @@
 ## [Unreleased]
 
 ### Added
+- **New `utrustning` Item type** — a generic gear type. Every Item type was previously specialised (`vapen`/`rustning`/`besvarjelse`/…), so ordinary equipment had nowhere to live. Carries category, quantity, weight (BEP), price + coin denomination, a free-text price note, equipped flag and source, and derives a silver-normalised price and total weight
+- 271 equipment items ported from Magi-regelboken s.43–48 (tools, clothing, containers, cookware, camp gear, thieves' tools, instruments, drugs, food, mounts, vehicles, sundries), taking the `vapen-utrustning` pack from 33 to 304 entries
+- `CONFIG.DODE.equipmentCategories` (12 categories) and `CONFIG.DODE.coinToSilver` / `DODE.toSilver()` for km/sm/gm conversion — note the exchange rate is an unsourced interpretation, see backlog 26
+- Category grouping in the wizard's equipment step, with per-group counts — 304 cards in one flat grid was unusable
+- The 15 Nekromanti spells from Magi-regelboken s.22–25
+
+### Added
 - Artwork for all remaining game content — 33 equipment items, 2 magic items, 14 monsters (both `img` and `prototypeToken.texture.src`), 8 spells and 13 magic school symbols. Together with the race and profession portraits this brings coverage to 100%: no compendium document ships with a `icons/svg/*` placeholder any more
 - `img` on `CONFIG.DODE.magicSchoolSkills`, threaded through to the wizard's `magiskola` cards and onto the `fardighet` item the step creates — magic schools are config rows rather than compendium documents, so they had nowhere to hang art before
 - `docs/dev/ART_STYLE.md`: three new prompt templates (inventory object, bestiary creature, spell/arcane symbol) alongside the existing portrait one, plus a per-category asset path table

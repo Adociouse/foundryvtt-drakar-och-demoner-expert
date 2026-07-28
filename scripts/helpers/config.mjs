@@ -61,6 +61,47 @@ DODE.armorSlots = {
   skold: "DODE.ArmorSlot.Skold"
 };
 
+/**
+ * Myntslag. `km` = kopparmynt, `sm` = silvermynt, `gm` = guldmynt — förkortningarna
+ * är belagda i Spelledarbokens förkortningsindex (SL s.62).
+ *
+ * ⚠ VÄXELKURSEN ÄR INTE BELAGD. Ingen av källböckerna eller de kurerade
+ * regeldokumenten anger vad ett kopparmynt eller guldmynt är värt i silver —
+ * UTRUSTNING.md säger bara "silvermynt är basvalutan". 1:10:100 nedan är alltså
+ * en TOLKNING, vald för att den är intern konsistent med Magi-regelbokens egna
+ * värdshuspriser (s.48): en god måltid 50 km mot en lyxmåltid 10 sm ger 2× med
+ * den här kursen men 20× med 1:100:10000, och en sovsal 3 sm mot stallplats för
+ * stor häst 15 km ger 2× respektive 20×. De lägre multiplarna är rimligare.
+ *
+ * Ändra här om en källa dyker upp — allt pris i silver går via toSilver().
+ */
+DODE.coinToSilver = { km: 0.1, sm: 1, gm: 10 };
+DODE.coinLabels = { km: "DODE.Coin.Km", sm: "DODE.Coin.Sm", gm: "DODE.Coin.Gm" };
+
+/** Pris i valfritt myntslag → silvermynt. Se ⚠-noten på DODE.coinToSilver. */
+DODE.toSilver = function (value, unit = "sm") {
+  const rate = DODE.coinToSilver[unit] ?? 1;
+  return Math.round((Number(value) || 0) * rate * 100) / 100;
+};
+
+// Kategorier för `utrustning`-Items — följer rubrikerna i Magi-regelbokens
+// utrustningslistor (s.43-48), se docs/extracts/DODE_Magi_TABELLER.md i
+// Roll20-projektet.
+DODE.equipmentCategories = {
+  verktyg: "DODE.EquipmentCategory.Verktyg",
+  kladsel: "DODE.EquipmentCategory.Kladsel",
+  behallare: "DODE.EquipmentCategory.Behallare",
+  koksutrustning: "DODE.EquipmentCategory.Koksutrustning",
+  lagerutrustning: "DODE.EquipmentCategory.Lagerutrustning",
+  tjuvverktyg: "DODE.EquipmentCategory.Tjuvverktyg",
+  instrument: "DODE.EquipmentCategory.Instrument",
+  droger: "DODE.EquipmentCategory.Droger",
+  mat: "DODE.EquipmentCategory.Mat",
+  riddjur: "DODE.EquipmentCategory.Riddjur",
+  fordon: "DODE.EquipmentCategory.Fordon",
+  diverse: "DODE.EquipmentCategory.Diverse"
+};
+
 // De 13 magiskolorna — MAGI.md (MAG s.8-10)
 DODE.magicSchools = {
   alkemi: "DODE.MagicSchool.Alkemi",

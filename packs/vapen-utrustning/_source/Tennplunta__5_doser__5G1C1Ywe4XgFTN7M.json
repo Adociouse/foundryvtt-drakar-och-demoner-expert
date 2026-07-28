@@ -1,0 +1,36 @@
+{
+  "name": "Tennplunta (5 doser)",
+  "type": "utrustning",
+  "system": {
+    "category": "behallare",
+    "quantity": 1,
+    "weight": 0.25,
+    "price": 60,
+    "priceUnit": "sm",
+    "priceNote": "",
+    "equipped": false,
+    "source": "Magi-regelboken s.43-48",
+    "description": "<p><em>Källa: Magi-regelboken s.43-48 (Behållare).</em></p>"
+  },
+  "_id": "5G1C1Ywe4XgFTN7M",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/behallare.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233947498,
+    "modifiedTime": 1785233947498,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5G1C1Ywe4XgFTN7M"
+}

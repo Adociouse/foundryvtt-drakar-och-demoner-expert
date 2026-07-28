@@ -1,0 +1,36 @@
+{
+  "name": "Trälim (1/2 liter)",
+  "type": "utrustning",
+  "system": {
+    "category": "verktyg",
+    "quantity": 1,
+    "weight": 0.5,
+    "price": 4,
+    "priceUnit": "sm",
+    "priceNote": "",
+    "equipped": false,
+    "source": "Magi-regelboken s.43-48",
+    "description": "<p><em>Källa: Magi-regelboken s.43-48 (Diverse verktyg).</em></p>"
+  },
+  "_id": "Hfk8Rsni51088RZB",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning-kategori/verktyg.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785233947498,
+    "modifiedTime": 1785233947498,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Hfk8Rsni51088RZB"
+}
