@@ -637,3 +637,20 @@
   padding: 0.4em 0.7em;
   border-radius: 3px;
 }
+
+/* Yrkesfärdighetsval (RP s.11 "välj 12 av N") — 2026-07-28 */
+.character-wizard .wizard-skill-chips { display: flex; flex-wrap: wrap; gap: 0.3em; }
+.character-wizard .skill-chip {
+  border: 1px solid rgba(0,0,0,.3); border-radius: 3px;
+  padding: 0.15em 0.5em; font-size: 0.9em; background: rgba(0,0,0,.05);
+  width: auto; line-height: 1.5;
+}
+.character-wizard .skill-chip.is-picked {
+  background: rgba(47,107,58,.22); border-color: #2f6b3a; font-weight: 600;
+}
+.character-wizard .skill-chip .chip-attr { opacity: .55; font-size: .85em; text-transform: uppercase; }
+.character-wizard .wizard-slot { display: flex; align-items: baseline; gap: 0.6em; margin-bottom: 0.35em; }
+.character-wizard .wizard-slot .slot-label { flex: 0 0 40%; font-size: 0.9em; }
+.character-wizard .wizard-slot .slot-rows { display: flex; flex-wrap: wrap; gap: 0.25em; flex: 1; }
+.character-wizard .wizard-slot input { width: 10em; }
+.character-wizard .wizard-roll-result.is-complete { border-left: 3px solid #2f6b3a; padding-left: 0.5em; }

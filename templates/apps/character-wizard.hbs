@@ -298,6 +298,55 @@
   </section>
   {{/if}}
 
+  {{#if showYrkesfardigheter}}
+  <section class="wizard-step">
+    {{#with professionSkillState}}
+      <p class="hint">
+        Välj <strong>{{target}}</strong> yrkesfärdigheter ur {{../selectedProfession.name}}s lista (RP s.11{{#if isMagicUser}} — magiker väljer 9{{/if}}).
+        Övriga färdigheter i listan går att lära som sekundära senare, men kostar mer EP.
+      </p>
+      <p class="wizard-roll-result {{#if complete}}is-complete{{/if}}">
+        Valda: <strong>{{chosen}}</strong> / {{target}}
+        {{#if remaining}}<span class="hint"> — {{remaining}} kvar</span>{{/if}}
+        <button type="button" data-action="clearProfessionSkills"><i class="fa-solid fa-rotate-left"></i> Nollställ</button>
+      </p>
+
+      {{#if slots.length}}
+        <h4 class="wizard-group-heading">Valfria platser</h4>
+        {{#each slots as |slot|}}
+          <div class="wizard-slot">
+            <label class="slot-label">{{slot.label}}</label>
+            <div class="slot-rows">
+              {{#each slot.rows as |row|}}
+                <input type="text" list="dode-weapon-suggestions"
+                  data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
+                  data-slot-attribute="{{slot.attribute}}"
+                  value="{{row.value}}" placeholder="{{slot.pool}}…" />
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+        <datalist id="dode-weapon-suggestions">
+          {{#each ../weaponSuggestions as |w|}}<option value="{{w}}"></option>{{/each}}
+        </datalist>
+      {{/if}}
+
+      <h4 class="wizard-group-heading">Namngivna färdigheter <span class="wizard-group-count">{{named.length}}</span></h4>
+      <div class="wizard-skill-chips">
+        {{#each named as |sk|}}
+          <button type="button" class="skill-chip {{#if sk.picked}}is-picked{{/if}}"
+            data-action="toggleProfessionSkill"
+            data-key="{{sk.key}}" data-name="{{sk.name}}" data-attribute="{{sk.attribute}}">
+            {{sk.name}} <span class="chip-attr">{{sk.attribute}}</span>
+          </button>
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="hint">Välj ett yrke först.</p>
+    {{/with}}
+  </section>
+  {{/if}}
+
   {{#if showSocialt}}
   <section class="wizard-step">
     <p class="hint">Slå fram socialt stånd. Varje spenderad BP ger +1 på slaget (RP s.27).</p>

@@ -3,6 +3,10 @@
 ## [Unreleased]
 
 ### Added
+- **"Choose 12 of N" profession-skill step** (RP s.11) — a new wizard step where the player picks 12 of the profession's possible skills, 9 for a magiker. Named skills are toggleable chips; the books' optional slots ("Maximalt fem valfria vapenfärdigheter") render as free-text fields with weapon-name suggestions. Previously every listed skill was granted, so a bard received 24 profession skills instead of 12
+- Profession skills for all 25 specialisations from Krigarens Handbok and Tjuvar och Lönnmördare — no profession ships with an empty list any more
+
+### Added
 - **Source references on all content** — every race, profession, skill, weapon, armour, equipment item, spell, ability and NPC now carries `system.source = { book, page }`, shown and editable on its sheet. Book keys resolve through `CONFIG.DODE.books` to real titles ("Krigarens Handbok", "Drakar och Demoner Expert I — Rollpersonen"), never PDF filenames. 560 documents backfilled from the curated docs' own citations; unknown pages are left blank rather than guessed
 - ⚠ `formaga.system.source` (which meant "bas"/"ras"/"yrke") was renamed to `system.origin` so that `source` means the book everywhere
 

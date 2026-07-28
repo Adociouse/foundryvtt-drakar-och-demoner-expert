@@ -4,7 +4,7 @@ const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 // (YRKEN.md "Grundegenskapskrav", RP s.11) går annars inte att kontrollera vid
 // valet — alla värden är null då, varje krav blir "overifierat" och kravkollen
 // blir dekoration. Se DESIGN_DECISIONS.md §2-raden om yrkeskrav.
-const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "attribut", "yrke", "magiskola", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
+const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "attribut", "yrke", "magiskola", "yrkesfardigheter", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
 // Steg som hoppas över i redigeringsläge (befintlig rollperson). Utrustning är
 // spelläge så fort rollpersonen finns — guiden kan inte skilja ett köp vid
 // skapandet från ett fynd i en grotta, så att köra butiken igen skulle antingen
@@ -20,6 +20,7 @@ const STEP_LABELS = {
   ras: "Ras",
   yrke: "Yrke",
   magiskola: "Magiskola",
+  yrkesfardigheter: "Yrkesfärdigheter",
   attribut: "Grundegenskaper",
   formagor: "Särskilda förmågor",
   socialt: "Socialt stånd",
@@ -130,6 +131,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       prevStep: DoDECharacterWizard.#onPrevStep,
       rollAttribute: DoDECharacterWizard.#onRollAttribute,
       pickAttributeCandidate: DoDECharacterWizard.#onPickAttributeCandidate,
+      toggleProfessionSkill: DoDECharacterWizard.#onToggleProfessionSkill,
+      clearProfessionSkills: DoDECharacterWizard.#onClearProfessionSkills,
       restartAttributes: DoDECharacterWizard.#onRestartAttributes,
       rollAllAttributes: DoDECharacterWizard.#onRollAllAttributes,
       selectKon: DoDECharacterWizard.#onSelectKon,
@@ -195,6 +198,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   #selectedProfessionName = "";
+  // Speglat av samma skäl som namnet ovan: yrkesfärdighetssteget behöver hela
+  // dokumentet (professionSkills), men actions körs utanför _prepareContext.
+  #selectedProfessionDoc = null;
 
   get title() {
     return this.isEditMode ? `Redigera: ${this.actor.name}` : "Ny rollperson";
@@ -217,6 +223,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Vald magiskola (nyckel ur DODE.magicSchoolSkills) — materialiseras som en
     // vanlig `fardighet` vid skapandet, inte som ett eget fält på rollpersonen.
     magicSchoolKey: null,
+    // Valda yrkesfärdigheter — RP s.11: spelaren väljer 12 av yrkets lista
+    // (magiker 9). Varje post är { name, attribute, key, slotIndex }.
+    // `slotIndex` !== null betyder att posten fyller en valfri plats
+    // ("Maximalt fem valfria vapenfärdigheter"), annars är den en namngiven
+    // färdighet ur listan.
+    professionSkillPicks: [],
     // BP-ledger — se klassdokblocket. spentSocialt/spentKapital lever INTE här —
     // de härleds från socialStanding.bpSpent/startCapital.bpSpent nedan (samma
     // enda-källa-princip som DataModellens prepareDerivedData använder).
@@ -339,6 +351,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.showKapital = stepId === "kapital";
     context.showGranska = stepId === "granska";
     context.showMagiskola = stepId === "magiskola";
+    context.showYrkesfardigheter = stepId === "yrkesfardigheter";
     context.magicSchools = CONFIG.DODE.magicSchoolSkills.map((s) => ({
       key: s.key,
       label: game.i18n.localize(s.labelKey),
@@ -423,6 +436,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Speglas till ett fält eftersom `steps` (som avgör om magiskolesteget
     // visas) är en synkron getter utan tillgång till de async-uppslagna yrkena.
     this.#selectedProfessionName = selectedProfession?.name ?? "";
+    this.#selectedProfessionDoc = selectedProfession ?? null;
+    context.professionSkillState = selectedProfession ? this.#professionSkillState() : null;
+    // Förslagslista till de valfria platserna. Vapenfärdigheter har ingen egen
+    // katalog i systemet — vapnen är Items — så vapennamnen ur kompendiet är
+    // det närmaste en lista vi har. Fritext är tillåtet, listan är bara hjälp.
+    context.weaponSuggestions = equipmentDocs
+      .filter((d) => d.type === "vapen").map((d) => d.name).sort();
     context.selectedRace = selectedRace;
     context.selectedProfession = selectedProfession;
     context.ageCategories = AGE_CATEGORIES.map((c) => ({ value: c, selected: c === this.state.ageCategory }));
@@ -555,6 +575,21 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       // `skillKey` — härled den ur namnet så att de fortfarande matchar.
       const key = item.system.skillKey || CONFIG.DODE.skillKey(item.name);
       this.state.fardigheter[key] = Math.max(0, (item.system.fv ?? 0) - baseFv);
+      // Redigeringsläge: återskapa yrkesfärdighetsvalen ur rollpersonens
+      // befintliga färdigheter. Utan detta skulle steget öppnas tomt och
+      // #skillPreview räkna om rollpersonen UTAN sina yrkesfärdigheter.
+      // `slotIndex` sätts från yrkets lista när namnet inte är en namngiven
+      // post — då fyllde färdigheten en valfri plats.
+      if (item.system.costTier === "yrkesfardighet") {
+        const list = this.#selectedProfessionDoc?.system?.professionSkills ?? [];
+        const namedHit = list.findIndex(
+          (e) => !e.choiceCount && (e.key || CONFIG.DODE.skillKey(e.name)) === key);
+        const slot = namedHit >= 0 ? null : list.findIndex((e) => e.choiceCount);
+        this.state.professionSkillPicks.push({
+          key, name: item.name, attribute: item.system.attribute,
+          slotIndex: namedHit >= 0 ? null : (slot >= 0 ? slot : null)
+        });
+      }
     }
     this.#pendingSkillLoad = false;
   }
@@ -728,9 +763,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     };
     const primaryKeys = new Set(CONFIG.DODE.primarySkills.map((s) => s.key));
     const primary = CONFIG.DODE.primarySkills.map((s) => buildEntry(s.key, s.name, s.attribute, "primar"));
-    const professionSkills = (selectedProfession?.system?.professionSkills ?? [])
+    // ⚠ Bara de yrkesfärdigheter spelaren FAKTISKT valt (RP s.11: 12 av listan,
+    // magiker 9) — inte hela yrkets lista. Före 2026-07-28 delades allt ut, vilket
+    // gav en bard 24 yrkesfärdigheter i stället för 12 och sprängde EP-budgeten.
+    // Valfria platser ("5× vapenfärdighet") bär spelarens inskrivna namn.
+    const professionSkills = this.state.professionSkillPicks
       .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
-      .filter((s) => !primaryKeys.has(s.key))
+      .filter((s) => s.name && !primaryKeys.has(s.key))
       .map((s) => buildEntry(s.key, s.name, s.attribute, "yrkesfardighet"));
     const all = [...primary, ...professionSkills];
     const epSpent = all.reduce((sum, entry) => sum + entry.cost, 0);
@@ -853,6 +892,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       case "attribut": return Object.values(this.state.attributes).every((v) => v !== null);
       case "yrke": return !!this.state.professionUuid;
       case "magiskola": return !!this.state.magicSchoolKey;
+      // Exakt så många som RP s.11 ger — annars går EP-budgeten inte ihop och
+      // rollpersonen får fel antal yrkesfärdigheter.
+      case "yrkesfardigheter": return this.state.professionSkillPicks.length >= this.#professionSkillTarget;
       case "socialt": return this.state.socialStanding.roll > 0;
       case "kapital": return this.state.startCapital.roll > 0;
       default: return true;
@@ -867,6 +909,37 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       const nextBtn = this.element.querySelector('[data-action="nextStep"]');
       if (nextBtn) nextBtn.disabled = !this.#canAdvance("grunder");
     });
+    // Valfria platser i yrkesfärdighetssteget. Bindningen sker på `change`
+    // (inte `input`) så att ett halvskrivet namn inte triggar en omrendering
+    // mitt i skrivandet — samma skäl som färdighetsstegets fält.
+    for (const field of this.element.querySelectorAll("[data-slot-index]")) {
+      field.addEventListener("change", (ev) => {
+        const slotIndex = Number(ev.target.dataset.slotIndex);
+        const row = Number(ev.target.dataset.slotRow);
+        const value = ev.target.value.trim();
+        const picks = this.state.professionSkillPicks;
+        const mine = picks.filter((p) => p.slotIndex === slotIndex);
+        const existing = mine[row];
+        if (!value) {
+          if (existing) picks.splice(picks.indexOf(existing), 1);
+        } else if (existing) {
+          existing.name = value;
+          existing.key = CONFIG.DODE.skillKey(value);
+        } else {
+          if (picks.length >= this.#professionSkillTarget) {
+            ui.notifications.warn(`Du har redan valt ${this.#professionSkillTarget} yrkesfärdigheter.`);
+            ev.target.value = "";
+            return;
+          }
+          picks.push({
+            key: CONFIG.DODE.skillKey(value), name: value,
+            attribute: ev.target.dataset.slotAttribute || "int", slotIndex
+          });
+        }
+        this.render();
+      });
+    }
+
     const ageSelect = this.element.querySelector('[name="state.ageCategory"]');
     ageSelect?.addEventListener("change", (ev) => {
       this.state.ageCategory = ev.target.value;
@@ -1001,6 +1074,80 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       this.state.attributeCandidates[key] = [];
     }
     await this.#postRollSummary([{ label: key.toUpperCase(), values, chosen: null }], [roll]);
+    this.render();
+  }
+
+  /**
+   * RP s.11: spelaren väljer **12** av yrkets möjliga yrkesfärdigheter — magiker
+   * väljer **9**. Listar yrket färre än så tar man alla, så taket är
+   * min(12, tillgängliga).
+   */
+  get #professionSkillTarget() {
+    const doc = this.#selectedProfessionDoc;
+    if (!doc) return 0;
+    const list = doc.system.professionSkills ?? [];
+    const available = list.reduce((n, s) => n + (s.choiceCount || 1), 0);
+    return Math.min(this.#isMagicUser ? 9 : 12, available);
+  }
+
+  /** Byggd vy över yrkets lista + spelarens val. */
+  #professionSkillState() {
+    const doc = this.#selectedProfessionDoc;
+    const list = doc?.system?.professionSkills ?? [];
+    const picks = this.state.professionSkillPicks;
+    const target = this.#professionSkillTarget;
+    const named = [];
+    const slots = [];
+    list.forEach((entry, i) => {
+      if (entry.choiceCount) {
+        const filled = picks.filter((p) => p.slotIndex === i);
+        slots.push({
+          index: i, label: entry.name, pool: entry.choicePool,
+          count: entry.choiceCount, attribute: entry.attribute,
+          // En rad per plats: ifylld eller tom.
+          rows: Array.from({ length: entry.choiceCount }, (_, n) => ({
+            slotIndex: i, row: n, value: filled[n]?.name ?? ""
+          }))
+        });
+      } else {
+        const key = entry.key || CONFIG.DODE.skillKey(entry.name);
+        named.push({
+          key, name: entry.name, attribute: entry.attribute, index: i,
+          picked: picks.some((p) => p.slotIndex === null && p.key === key)
+        });
+      }
+    });
+    return {
+      named, slots, target,
+      chosen: picks.length,
+      remaining: Math.max(0, target - picks.length),
+      complete: picks.length >= target,
+      over: picks.length > target,
+      isMagicUser: this.#isMagicUser
+    };
+  }
+
+  static #onToggleProfessionSkill(event, target) {
+    const key = target.dataset.key;
+    if (!key) return;
+    const picks = this.state.professionSkillPicks;
+    const at = picks.findIndex((p) => p.slotIndex === null && p.key === key);
+    if (at >= 0) {
+      picks.splice(at, 1);
+    } else {
+      if (picks.length >= this.#professionSkillTarget) {
+        ui.notifications.warn(`Du har redan valt ${this.#professionSkillTarget} yrkesfärdigheter — avmarkera en först.`);
+        return;
+      }
+      picks.push({
+        key, name: target.dataset.name, attribute: target.dataset.attribute, slotIndex: null
+      });
+    }
+    this.render();
+  }
+
+  static #onClearProfessionSkills() {
+    this.state.professionSkillPicks = [];
     this.render();
   }
 
