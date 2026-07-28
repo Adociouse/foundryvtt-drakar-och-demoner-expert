@@ -319,9 +319,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       formula: key === "sto" ? "2T6+6" : "3T6",
       value: this.state.attributes[key],
       rolled: this.state.attributes[key] !== null,
-      candidates: (this.state.attributeCandidates?.[key] ?? []).map((v) => ({
-        value: v, chosen: v === this.state.attributes[key]
-      }))
+      candidates: (this.state.attributeCandidates?.[key] ?? []).map((v, i) => {
+        const cs = CONFIG.DODE.candidateColorsets[i % CONFIG.DODE.candidateColorsets.length];
+        return { value: v, chosen: v === this.state.attributes[key], color: cs.css, colorLabel: cs.label };
+      })
     }));
     context.showKon = stepId === "kon";
     context.showNiva = stepId === "niva";
@@ -937,6 +938,15 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const die = key === "sto" ? "2d6+6" : "3d6";
     const best = this.#rollModeSetting() === "bestOfThree";
     const roll = await new Roll(best ? `{${die}, ${die}, ${die}}` : die).evaluate();
+    if (best) {
+      // Ett färgset per kandidat, så spelaren SER vilka tärningar som gav vilket
+      // värde. Dice So Nice läser `options.colorset` per tärningsterm (verifierat
+      // mot DSN 6.2.9); utan modulen ignoreras fältet helt.
+      roll.terms[0].rolls.forEach((r, i) => {
+        const cs = CONFIG.DODE.candidateColorsets[i % CONFIG.DODE.candidateColorsets.length];
+        r.dice.forEach((d) => { d.options.colorset = cs.colorset; });
+      });
+    }
     const values = best
       ? roll.terms[0].rolls.map((r) => r.total)
       : [roll.total];
@@ -955,12 +965,17 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   async #postRollSummary(rows, rolls) {
     if (!game.settings.get(game.system.id, "showAttributeRollsInChat")) return;
     const best = this.#rollModeSetting() === "bestOfThree";
+    const cols = CONFIG.DODE.candidateColorsets
+      .map((c) => `<th style="color:${c.css}">${c.label}</th>`).join("");
     const head = best
-      ? "<tr><th>Egenskap</th><th>1</th><th>2</th><th>3</th><th>Vald</th></tr>"
+      ? `<tr><th>Egenskap</th>${cols}<th>Vald</th></tr>`
       : "<tr><th>Egenskap</th><th>Slag</th></tr>";
     const body = rows.map((r) => {
       if (!best) return `<tr><td>${r.label}</td><td><strong>${r.values[0]}</strong></td></tr>`;
-      const cells = r.values.map((v) => `<td>${v}</td>`).join("");
+      const cells = r.values.map((v, i) => {
+        const cs = CONFIG.DODE.candidateColorsets[i % CONFIG.DODE.candidateColorsets.length];
+        return `<td style="color:${cs.css};font-weight:600">${v}</td>`;
+      }).join("");
       return `<tr><td>${r.label}</td>${cells}<td>${r.chosen ?? "—"}</td></tr>`;
     }).join("");
     await ChatMessage.create({

@@ -608,6 +608,9 @@
 .character-wizard .wizard-candidates { display: flex; gap: 0.25em; justify-content: center; margin-top: 0.3em; }
 .character-wizard .wizard-candidates .candidate {
   min-width: 2.4em; padding: 0.1em 0.35em; font-variant-numeric: tabular-nums;
+  /* Kantfärgen sätts inline per kandidat och matchar tärningsfärgen i
+     Dice So Nice, så spelaren ser vilka tärningar som gav vilket värde. */
+  border: 2px solid transparent;
 }
 .character-wizard .wizard-candidates .candidate.is-chosen {
   outline: 2px solid rgba(140, 90, 40, 0.9); font-weight: 700;

@@ -167,6 +167,26 @@ DODE.formatPurse = function (purse = {}) {
   return parts.length ? parts.join(" ") : "0 km";
 };
 
+/**
+ * Färguppsättningar för de tre kandidatslagen i guidens "tre kandidater"-läge.
+ *
+ * Namnen är Dice So Nice-colorsets ur modulens egen [Colors]-kategori (verifierat
+ * mot DSN 6.2.9:s `main.js` — den läser `DiceTerm.options.colorset` per tärningsterm,
+ * så en poolformel kan ha olika färg per delslag). Utan modulen installerad är
+ * fältet bara ignorerat, så koden fungerar oförändrat i båda fallen.
+ *
+ * `css` används för att färga motsvarande knapp i guiden, så att spelaren kan se
+ * VILKA tärningar som gav vilket kandidatvärde. Utan den kopplingen är tre
+ * färgade tärningsset bara dekoration.
+ */
+DODE.candidateColorsets = [
+  // `label` står i plural eftersom den läses som "Röda tärningar" i knapparnas
+  // titel — singularformen gav "Röd tärningar".
+  { colorset: "red", label: "Röda", css: "#a8322d" },
+  { colorset: "green", label: "Gröna", css: "#2f6b3a" },
+  { colorset: "blue", label: "Blå", css: "#2d5a8a" }
+];
+
 // Kategorier för `utrustning`-Items — följer rubrikerna i Magi-regelbokens
 // utrustningslistor (s.43-48), se docs/extracts/DODE_Magi_TABELLER.md i
 // Roll20-projektet.

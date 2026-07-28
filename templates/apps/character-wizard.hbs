@@ -156,6 +156,8 @@
             <div class="wizard-candidates" title="Välj ett av de tre slagna värdena">
               {{#each row.candidates as |c|}}
                 <button type="button" class="candidate {{#if c.chosen}}is-chosen{{/if}}"
+                  style="border-color:{{c.color}}"
+                  title="{{c.colorLabel}} tärningar"
                   data-action="pickAttributeCandidate" data-value="{{c.value}}">{{c.value}}</button>
               {{/each}}
             </div>
