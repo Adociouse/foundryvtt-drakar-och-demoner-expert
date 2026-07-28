@@ -194,7 +194,7 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
     **(b) Mappar inuti kompendier.** Foundry stödjer folders i packs, så även systemets egna packs kan struktureras (`vapen-utrustning` har nu 304 poster i en enda platt lista — värt att dela i Vapen / Rustning / Verktyg / Kläder /… med samma kategorier som `DODE.equipmentCategories`). Mappar är `Folder`-dokument i `_source/` med `type: "Item"` och `folder`-fältet satt på posterna.
 
-    Att göra: (1) dela systemets stora packs i mappar per kategori, (2) flytta/hålla allt äventyrsspecifikt i kampanjmodulen som `Adventure`-dokument, (3) skriv ned regeln i §7 så nästa session inte lägger äventyrsföremål i systemet av slentrian. Hänger ihop med backlog 27 (tabeller till kompendium) — båda handlar om paketstruktur, och bör beslutas i samma pass.
+    **Utrett och designat i §8 (förslag, 2026-07-28)** tillsammans med backlog 27, eftersom båda är samma paketstrukturbeslut. Se §8.1 för vad Foundry faktiskt stöder (verifierat mot v14-källan och dnd5e), §8.2 för tre fällor — bl.a. att `packFolders` bara gäller vid en världs FÖRSTA laddning — och §8.5 för arbetsordning.
 
 28. **Mithrilmynt (och andra valörer utöver km/sm/gm).** Johan (2026-07-28) minns en kampanj med ett mithrilmynt värt ~500 gm. **Inte belagt i någon D&DE-källa jag hittat** — sannolikt en kampanj- eller modulspecifik valör, inte kärnregler, så den är medvetet INTE tillagd i grundsystemet. Infrastrukturen finns dock: `DODE.kmToPurse`/`formatPurse`/`purseToKm` itererar `DODE.coinToSilver` i stället för att hårdkoda valörerna, så prissättning och visning av en ny valör kräver **bara en rad** (`DODE.coinToSilver.mm = 5000` för 500 gm). Verifierat: `{mm:1, gm:3, sm:2, km:5}` formateras korrekt som "1 mm 3 gm 2 sm 5 km". Ska myntet dessutom kunna **bäras som valör** krävs ett fält till i `currency`-schemat i `actor-character.mjs` plus en kolumn i arkets börsrad — och då även en migrering för befintliga rollpersoner (se backlog 3). En kampanjmodul kan registrera valören i sin `init`-hook utan att röra systemet.
 
@@ -206,7 +206,7 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
     *JournalEntry:* Animera död-gradtabellen (skelett/zombie/mumie multipliers, s.23 — referenced by the Animera död spell), Bärförmåga (s.43), Värdshuspriser + stallplats + underhållning (s.48), Effektgrader/CL-tabellen, EP-kostnader för magi, minnesgräns, the drug availability table's `Chans` column.
 
-    All of the above are already transcribed — the Magi ones in `docs/extracts/DODE_Magi_TABELLER.md` (Roll20-projektet), the rest in `config.mjs` or `MAGI.md` — so this is packaging, not research. Needs a decision on pack layout first (one `tabeller` pack, or split by audience like §7 does for items — the Skräcktabell is player-facing, the Värdshus service table is GM-only).
+    All of the above are already transcribed — the Magi ones in `docs/extracts/DODE_Magi_TABELLER.md` (Roll20-projektet), the rest in `config.mjs` or `MAGI.md` — so this is packaging, not research. **Pack layout beslutad i §8 (förslag, 2026-07-28):** tre nya packs — `regler` (JournalEntry, spelare), `tabeller` (RollTable, spelare) och `sl-tabeller` (RollTable, SL). Splitten går efter *publik*, inte efter dokumenttyp, eftersom ownership sitter på pack-nivå. Se §8.3 för vilken tabell som hamnar var.
 
 26. **⚠ Coin exchange rate is unsourced.** `CONFIG.DODE.coinToSilver` uses **1 gm = 10 sm = 100 km**, and *no source states this*. The abbreviations themselves are sourced (SL s.62's index gives `km` = kopparmynt) and `UTRUSTNING.md` says silver is the base currency, but no book found so far gives a rate. The 1:10:100 reading was chosen because it is internally consistent with Magi-regelbokens own tavern prices (s.48): a good meal at 50 km against a luxury meal at 10 sm is 2× at this rate but 20× at 1:100:10000, and a dorm bed at 3 sm against stabling a large horse at 15 km likewise. The lower multiples are the plausible ones. **Everything routes through `DODE.toSilver()`**, so correcting this is a one-line change if a source turns up — worth a look in Spelarboken or Rollpersonen's economy section.
 
@@ -450,3 +450,116 @@ Surveyed from the dnd5e and PF2e repositories 2026-07-27, to distinguish "we hav
 | PF2e `treasure/`, `container/`, `physical/` | no loot/container primitives | §7.2's handoff workflows |
 | dnd5e advancement | no character-progression lifecycle | the wizard re-entry feature |
 | PF2e `pick-a-thing-prompt.ts` | no generic "choose one" prompt | we built one ad-hoc in the skill picker; worth generalising if a third use appears |
+
+---
+
+## 8. Pack Layout, Folders & Adventure Structure — design proposal (2026-07-28)
+
+> **Status: PROPOSAL, not implemented.** Written on Johan's request to settle backlog 27 (rules tables into compendiums) and 29 (folders + adventure structure) together, since both are the same decision about package structure. Every capability below was verified against the **installed Foundry v14 source** and against **dnd5e as a shipped reference implementation** — not recalled from training data.
+
+### 8.1 What Foundry actually gives us (verified, not assumed)
+
+| Mechanism | Verified how | What it does |
+|---|---|---|
+| **One document type per pack** | `common/packages/base-package.mjs` — a pack's `type` is a single `StringField` constrained to `CONST.COMPENDIUM_DOCUMENT_TYPES` | RollTables and JournalEntries **cannot** share a pack with Items. New content types force new packs. Not a style choice — a schema constraint. |
+| **`packFolders`** in the manifest | `base-package.mjs`: `packFolders: new fields.SetField(new PackageCompendiumFolder())`, where `PackageCompendiumFolder = {name, sorting, color, packs, folders}` nesting to **depth 4** | Groups *packs* into folders in the compendium sidebar. dnd5e ships two top-level folders ("D&D Modern Content", "D&D Legacy Content") with nested sub-folders inside. |
+| **Folders *inside* a pack** | Read out of dnd5e's compiled `spells` pack: 10 `!folders!` keys alongside 319 `!items!` keys | A pack can carry `Folder` documents; each entry joins one via its `folder` field. dnd5e organises 319 spells by spell level this way. |
+| **`Adventure` document** | `common/documents/adventure.mjs` — sets of `actors, combats, items, journal, scenes, tables, macros, cards, playlists`, **plus its own `folders` set** | The canonical bundle for adventure content. The GM double-clicks it inside a pack and gets an import dialog; folder structure is preserved on import. |
+
+**Folder document shape** — taken from dnd5e, so this is a working example rather than a guess:
+
+```json
+{ "name": "6th Level", "type": "Item", "_id": "0pdesvXqKd55VOh2",
+  "folder": null, "sorting": "a", "sort": 700000, "color": "#58366f",
+  "flags": {}, "_stats": { } }
+```
+
+LevelDB key is `!folders!<id>`, and an entry joins it with `"folder": "<folderId>"`. In `_source/` that means one extra JSON file per folder — the same `_key` discipline that bit us with the merchant's embedded items (§2).
+
+### 8.2 Three gotchas that shape the design
+
+1. ⚠ **`packFolders` applies only on a world's FIRST load.** Foundry's own documentation: it generates the folders on first load, "and updates to this will NOT affect existing worlds." The sidebar layout therefore has to be right *before* the system is distributed — later changes silently do nothing for anyone who already has a world. This is the strongest argument for settling the layout now rather than after a release.
+2. ⚠ **Adventure re-import overwrites by ID.** "Documents keep their unique IDs, so when they are imported later they will overwrite any existing copies with the same ID." Excellent for shipping fixes, dangerous for a GM who has customised an NPC — a re-import clobbers their edits. Must be called out in the campaign module's README.
+3. ⚠ **Adventures do not bundle media.** Images and audio stay as paths into the package folder, so adventure art has to live in the *module's* folder, exactly as system art lives in the system's.
+
+### 8.3 Proposed layout
+
+**Principle 1 — audience is the primary split, because ownership is pack-level.** §7 already establishes this and nothing here changes it: a pack is the smallest unit that can be hidden from players, so anything GM-only needs its own pack even when its document type matches a player-facing one.
+
+**Principle 2 — folders inside packs, not more packs.** dnd5e keeps 319 spells in one foldered pack. Our `vapen-utrustning` (304) and `besvarjelser` (191) are the same order of magnitude, so they stay single packs and gain folders. Splitting them would churn `DODE.contentPacks`, every `_source` path, and the wizard/merchant resolvers for no browsing benefit.
+
+**Principle 3 — the system holds only what every campaign shares.** Adventure content never enters the system, regardless of how generally useful it looks.
+
+#### System packs (6 player-facing, 4 GM-only)
+
+| Pack | Type | Audience | In-pack folders |
+|---|---|---|---|
+| `raser` | Item | player | Grundraser · Alvsläkten |
+| `yrken` | Item | player | Grundyrken · Krigar- · Tjuv- · Lönnmördar- · Bardspecialiseringar |
+| `vapen-utrustning` | Item | player | Vapen · Rustning + the 13 `DODE.equipmentCategories` |
+| `besvarjelser` | Item | player | one per magic school (13) |
+| **`regler`** *(new)* | JournalEntry | player | Grundregler · Magi · Utrustning |
+| **`tabeller`** *(new)* | RollTable | player | — |
+| `magiska-foremal` | Item | **GM** | — |
+| `monster` | Actor | **GM** | by type/habitat once it grows past ~30 |
+| `handlare` | Actor | **GM** | — |
+| **`sl-tabeller`** *(new)* | RollTable | **GM** | — |
+
+Backlog 27's tables land like this. Note the split is by *audience*, which is exactly why one RollTable pack is not enough:
+
+- **`tabeller`** (player-rollable): Skräcktabell — Rädsla/Panik/Terror can then `@UUID`-link straight to it — plus Snedtändningstabellen, Särskilda förmågor (2T20+BP), Hjältedådstabellen, HP-based hjälteförmågor.
+- **`sl-tabeller`** (GM-only): Värdshusets utseende och service, and future encounter/loot tables — things that spoil a surprise if a player can roll them.
+- **`regler`** (JournalEntry — read, not rolled): Bärförmåga, Animera död-gradtabellen, Värdshuspriser/stallplats/underhållning, Effektgrader & CL, EP-kostnader för magi, minnesgräns, drogtillgänglighet.
+
+#### `packFolders` for the sidebar
+
+```jsonc
+"packFolders": [
+  { "name": "Rollpersoner",      "sorting": "m", "color": "#6b4a2f",
+    "packs": ["raser", "yrken"] },
+  { "name": "Utrustning & magi", "sorting": "m", "color": "#7a5c3a",
+    "packs": ["vapen-utrustning", "besvarjelser"] },
+  { "name": "Regler & tabeller", "sorting": "m", "color": "#4a5c6b",
+    "packs": ["regler", "tabeller"] },
+  { "name": "Spelledare",        "sorting": "m", "color": "#5c2f2f",
+    "packs": ["magiska-foremal", "monster", "handlare", "sl-tabeller"] }
+]
+```
+
+The "Spelledare" folder is cosmetic grouping only — the real hiding is the per-pack `ownership` from §7. Both are wanted: ownership for access control, the folder so a GM's sidebar reads clearly.
+
+#### Adventures — in the campaign module, never in the system
+
+Dimön and every future adventure becomes **one `Adventure` document** in the campaign module's own `Adventure`-type pack, holding that adventure's scenes, NPCs, items, journals and tables. It stays invisible until the GM imports it, which directly answers the concern that "items from future adventures will confuse GM and players" — an unimported adventure contributes nothing to any sidebar.
+
+```
+de-brutna-sigillens-kronika/
+  packs/aventyr/            <- type: "Adventure", GM-only ownership
+    _source/dimon.json      <- scenes + actors + items + journal + tables
+  assets/dimon/             <- media MUST live here (adventures do not bundle it)
+```
+
+Rule to carry forward: **if content is only meaningful inside one adventure, it belongs to that adventure, not to the system.** A tavern that appears only in Dimön is adventure content; the generic `Lasslo Värdshusvärden` that a GM copies for any inn is system content. That is the same line §7.1 already draws between system and module.
+
+### 8.4 On copying dnd5e as a reference (Johan's question, 2026-07-28)
+
+Checked rather than assumed: `Data/systems/dnd5e/LICENSE.txt` is the **MIT licence** verbatim, "Copyright 2021 Andrew Clayton" — permission to use, copy, modify, merge, publish, distribute, sublicense and sell, on the single condition that the copyright and permission notice travel with copies or substantial portions. Our own `system.json` already declares `"license": "MIT"`, so the licences are compatible.
+
+Three distinctions worth keeping straight:
+
+- **Reading it for structure and conventions carries no obligation at all.** API shapes, manifest fields and folder conventions are functional interfaces, not creative expression — and `packFolders`, `Folder` documents and `Adventure` are *Foundry core* features that dnd5e merely uses, as we now do.
+- **Copying literal dnd5e code** is permitted by MIT but triggers the attribution condition: ship the notice alongside it. Worth avoiding casually, not because it is risky but because their code is shaped by D&D 5e mechanics we do not share.
+- ⚠ **"We have a Foundry licence so it must be fine" is not the reason it is fine.** A Foundry licence grants use of Foundry, not rights over third-party packages — those come from each package's own licence. Here dnd5e's MIT is what makes it fine. The distinction matters for any package that turns out to be more restrictively licensed.
+
+⚠ Also note that dnd5e's *game content* (SRD text in its packs) sits under separate terms (OGL/Creative Commons), not MIT. Irrelevant to us — we ship Swedish DoD content — but do not assume a package's code licence covers its content.
+
+**On module compatibility, Johan's instinct is right but the mechanism is worth being precise about.** What makes third-party modules work is conformance to **Foundry core** APIs and document types, not resemblance to dnd5e. A module that manipulates RollTables, JournalEntries, Folders or Adventures works with us if we use those core documents — which is precisely what §8.3 proposes. Modules that reach into `actor.system.abilities.str.mod` are dnd5e-specific and will not work regardless of how we structure packs, because our data model is DoD's. So: adopt core documents and standard conventions (that is the real compatibility win, and it is free), but do not contort the data model toward 5e in the hope of inheriting its module ecosystem — see also §7.6 on what dnd5e and PF2e each had to invent.
+
+### 8.5 Suggested order of work
+
+1. `packFolders` in `system.json` — **first**, because it is inert for existing worlds (gotcha 1); the sooner it lands, the fewer worlds miss it.
+2. In-pack folders for the four large Item packs: folder `_source` files plus a `folder` field on each entry, via the same script pattern as the existing `port_*.py` runs.
+3. New `regler`, `tabeller` and `sl-tabeller` packs, then port backlog 27's content — all of it is already transcribed, so this is packaging rather than research.
+4. Campaign module: `Adventure` pack, move Dimön's content in, and document the overwrite-on-reimport hazard in its README.
+
+Steps 1–2 touch no game logic. Step 3 needs `RollTable`/`JournalEntry` handling in `packs.config.mjs`. Step 4 happens in the module's own repo.
