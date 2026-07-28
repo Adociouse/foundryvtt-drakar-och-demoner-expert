@@ -629,3 +629,11 @@
 .dode-roll-table td { padding: 1px 5px; text-align: center; border-bottom: 1px solid rgba(0,0,0,.1); }
 .dode-roll-table th:first-child,
 .dode-roll-table td:first-child { text-align: left; font-weight: 600; }
+
+/* Yrkestäckning på attributsteget — visar konsekvensen medan man väljer */
+.character-wizard .wizard-qualified {
+  border-left: 3px solid rgba(47, 107, 58, 0.7);
+  background: rgba(47, 107, 58, 0.08);
+  padding: 0.4em 0.7em;
+  border-radius: 3px;
+}

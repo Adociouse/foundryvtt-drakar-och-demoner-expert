@@ -168,6 +168,26 @@
     {{#if selectedRace}}
       <p class="hint">Totalt inkl. rasmod från {{selectedRace.name}} visas i nästa steg.</p>
     {{/if}}
+    {{!-- Yrkestäckning direkt här, inte bara på yrkessteget. Det är NU spelaren
+          väljer kandidater, så det är nu siffran är användbar — den uppdateras
+          för varje val och visar konsekvensen innan man går vidare. --}}
+    {{#if attributesRolled}}
+      {{#if noProfessionQualifies}}
+        <div class="wizard-blocked">
+          <p><i class="fa-solid fa-triangle-exclamation"></i> <strong>Inga yrkeskrav uppfyllda.</strong>
+          Med de här värdena går inget av de {{professions.length}} yrkena att välja — lägsta kravet i listan är 12.
+          {{#if allowRestart}}Slå om, eller gå vidare och stäm av med SL.{{/if}}</p>
+          {{#if allowRestart}}
+            <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Slå om alla grundegenskaper</button>
+          {{/if}}
+        </div>
+      {{else}}
+        <p class="hint wizard-qualified"><i class="fa-solid fa-user-check"></i>
+        <strong>{{qualifiedCount}} av {{professions.length}}</strong> yrken har uppfyllda grundegenskapskrav med de här värdena.</p>
+      {{/if}}
+    {{else}}
+      <p class="hint">Slå alla grundegenskaper för att se hur många yrken du kan kvalificera dig för.</p>
+    {{/if}}
   </section>
   {{/if}}
 
