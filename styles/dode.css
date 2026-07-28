@@ -582,3 +582,24 @@
 }
 .dode .item-source .source-label { font-style: italic; opacity: 0.75; }
 .dode .item-source input { width: 7em; }
+
+/* Guidens översiktssida + kravmärkning på yrkeskort — 2026-07-28 */
+.character-wizard .wizard-start-title { margin: 0 0 0.4em; }
+/* 1.2em räckte inte — tvåsiffriga nummer ("10.") klipptes till "0.". */
+.character-wizard .wizard-flow { margin: 0.5em 0 0.9em 0; padding-left: 2.2em; line-height: 1.6; }
+.character-wizard .wizard-flow li { margin-bottom: 0.15em; }
+.character-wizard .wizard-start-note {
+  border-left: 3px solid rgba(140, 90, 40, 0.6);
+  padding: 0.5em 0.8em;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 3px;
+}
+.character-wizard .wizard-start-note p { margin: 0 0 0.5em; }
+.character-wizard .wizard-start-note p:last-child { margin-bottom: 0; }
+
+.character-wizard .wizard-req { display: flex; flex-wrap: wrap; gap: 0.25em; justify-content: center; }
+.character-wizard .req-entry { font-size: 0.9em; white-space: nowrap; }
+.character-wizard .req-entry.is-met { color: #2f6b3a; }
+.character-wizard .req-entry.is-unmet { color: #8a2b2b; font-weight: 600; }
+/* Omött krav tonas ned men går fortfarande att välja — se mallens kommentar. */
+.character-wizard .wizard-card:has(.req-unmet) { opacity: 0.82; }

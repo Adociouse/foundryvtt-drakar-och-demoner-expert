@@ -1,6 +1,10 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
-const ALL_STEPS = ["kon", "niva", "grunder", "ras", "yrke", "magiskola", "attribut", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
+// ⚠ `attribut` ligger FÖRE `yrke` sedan 2026-07-28. Yrkenas grundegenskapskrav
+// (YRKEN.md "Grundegenskapskrav", RP s.11) går annars inte att kontrollera vid
+// valet — alla värden är null då, varje krav blir "overifierat" och kravkollen
+// blir dekoration. Se DESIGN_DECISIONS.md §2-raden om yrkeskrav.
+const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "attribut", "yrke", "magiskola", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
 // Steg som hoppas över i redigeringsläge (befintlig rollperson). Utrustning är
 // spelläge så fort rollpersonen finns — guiden kan inte skilja ett köp vid
 // skapandet från ett fynd i en grotta, så att köra butiken igen skulle antingen
@@ -9,6 +13,7 @@ const ALL_STEPS = ["kon", "niva", "grunder", "ras", "yrke", "magiskola", "attrib
 // butiksarkitektur.
 const EDIT_MODE_SKIPPED_STEPS = ["utrustning"];
 const STEP_LABELS = {
+  start: "Översikt",
   kon: "Kön",
   niva: "Nivå",
   grunder: "Namn",
@@ -286,7 +291,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       : null;
 
     context.stepId = stepId;
+    // 1-baserat i UI:t. Låg tidigare rått (0-baserat), vilket gav "Steg 0/15"
+    // så fort översiktssidan lades till och var av-med-ett även innan dess.
     context.stepIndex = this.stepIndex;
+    context.stepNumber = this.stepIndex + 1;
     context.stepCount = steps.length;
     context.stepLabel = STEP_LABELS[stepId];
     context.isFirstStep = this.stepIndex === 0;
@@ -294,6 +302,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Redigeringsläge: ras/yrke visas men går inte att byta (se klassdokblocket
     // och DESIGN_DECISIONS.md backlog 4c) — byte sker via drag-släpp på arket.
     context.isEditMode = this.isEditMode;
+    context.showStart = stepId === "start";
     context.showKon = stepId === "kon";
     context.showNiva = stepId === "niva";
     context.showGrunder = stepId === "grunder";
@@ -361,10 +370,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       ["lonnmordare", "Lönnmördarspecialiseringar (T&L s.9-12)"],
       ["bard", "Bardspecialiseringar (T&L s.7-9)"]
     ];
+    // Kravstatus per yrkeskort. Grundegenskaperna är slagna vid det här laget
+    // (attribut-steget ligger före), så kontrollen är meningsfull.
+    // ⚠ Ett omött krav SPÄRRAR inte valet, det märks bara upp. Med 3T6 landar en
+    // rollperson ofta på 10-11 i allt, och då kvalificerar den för NOLL av de 36
+    // yrkena — hård spärr hade låst spelaren ute helt. Boken låter SL avgöra;
+    // guiden visar tydligt vad som inte är uppfyllt och låter bordet bestämma.
+    const reqFor = (p) => DoDECharacterWizard.#checkRequirements(
+      p.system.requirements, effectiveAttributes);
     context.professionGroups = PROFESSION_GROUPS
       .map(([base, label]) => ({
         label,
-        professions: context.professions.filter((p) => (p.system.baseProfession ?? "") === base)
+        professions: context.professions
+          .filter((p) => (p.system.baseProfession ?? "") === base)
+          .map((p) => {
+            const check = reqFor(p);
+            return { ...p, reqCheck: check, reqMet: check.allMet };
+          })
       }))
       .filter((g) => g.professions.length);
     // Speglas till ett fält eftersom `steps` (som avgör om magiskolesteget

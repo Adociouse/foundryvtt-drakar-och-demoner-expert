@@ -1,11 +1,45 @@
 <div class="dode-wizard-body">
   <header class="wizard-progress">
-    <strong>Steg {{stepIndex}}/{{stepCount}}: {{stepLabel}}</strong>
+    <strong>Steg {{stepNumber}}/{{stepCount}}: {{stepLabel}}</strong>
     <span class="wizard-bp-ledger">BP kvar: <strong>{{bp.remaining}}</strong> / {{bp.start}}</span>
     <span class="wizard-bp-ledger">EP kvar: <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
   </header>
 
   <div class="wizard-step-container">
+  {{#if showStart}}
+  <section class="wizard-step wizard-start">
+    <h3 class="wizard-start-title">Skapa en rollperson</h3>
+    <p class="hint">Guiden går igenom {{stepCount}} steg. Du kan gå fram och tillbaka med knapparna nedan — inget sparas förrän du trycker <strong>Skapa rollperson</strong> i sista steget.</p>
+
+    <ol class="wizard-flow">
+      <li><strong>Grunderna</strong> — kön, nivå och namn.</li>
+      <li><strong>Ras</strong> — kostar BP och ger egenskapsmodifikationer.</li>
+      <li><strong>Grundegenskaper</strong> — slås med 3T6 (STO 2T6+6).</li>
+      <li><strong>Yrke</strong> — kräver vissa grundegenskapsvärden, därför slås de först.</li>
+      <li><strong>Magiskola</strong> — bara för magiker.</li>
+      <li><strong>Särskilda förmågor, socialt stånd och startkapital</strong> — slås fram, kostar BP.</li>
+      <li><strong>Ålder</strong> — modifierar grundegenskaper och startkapital.</li>
+      <li><strong>Färdigheter</strong> — köps med EP.</li>
+      <li><strong>Livsmål och utrustning</strong> — handla för startkapitalet.</li>
+      <li><strong>Granska</strong> — kontrollera allt och skapa rollpersonen.</li>
+    </ol>
+
+    <div class="wizard-start-note">
+      <p><i class="fa-solid fa-lock"></i> <strong>Kön, ras och yrke går inte att ändra i efterhand.</strong>
+      De styr egenskapsmodifikationer, porträtt och yrkesfärdigheter, och en ändring i efterhand
+      skulle räkna om saker rollpersonen redan har använt i spel. Välj dem med omsorg.</p>
+      <p><i class="fa-solid fa-hat-wizard"></i> Allt annat — förmågor, färdigheter, ålder, livsmål —
+      kan <strong>SL låsa upp för redigering</strong> i efterhand: SL klickar på hänglåset uppe på
+      rollpersonsarket, och då dyker knappen <em>Redigera i guiden</em> upp. Utrustningssteget
+      hoppas över då; köp efter skapandet sker hos en handlare.</p>
+    </div>
+
+    {{#if isEditMode}}
+      <p class="hint"><i class="fa-solid fa-pen"></i> Du är i <strong>redigeringsläge</strong> på en befintlig rollperson. Ras och yrke visas men är låsta, och utrustningssteget hoppas över.</p>
+    {{/if}}
+  </section>
+  {{/if}}
+
   {{#if showKon}}
   <section class="wizard-step">
     <p class="hint">Välj kön. Styr vilka porträttbilder som visas för ras och yrke i nästa steg.</p>
@@ -150,7 +184,7 @@
     {{#if isEditMode}}
       <p class="hint">Yrket kan inte bytas i redigeringsläge — det styr vilka yrkesfärdigheter rollpersonen har. Behöver det ändå bytas: be SL dra ett nytt yrke till arket.</p>
     {{else}}
-      <p class="hint">Välj ett yrke. Du slår grundegenskaper i nästa steg — kravkontrollen fylls i då.</p>
+      <p class="hint">Välj ett yrke. Varje yrke har <strong>grundegenskapskrav</strong> (RP s.11) — de visas på korten och färgas efter om dina framslagna värden räcker. Ett omött krav spärrar inte valet: med 3T6 hamnar man ofta på 10–11 i allt, och då kvalificerar man för inget av de 36 yrkena. Stäm av med SL.</p>
     {{/if}}
     {{#each professionGroups as |group|}}
       <h4 class="wizard-group-heading">{{group.label}}</h4>
@@ -159,7 +193,13 @@
           <div class="wizard-card {{#if profession.selected}}selected{{/if}} {{#if ../../isEditMode}}is-locked{{/if}}" data-uuid="{{profession.uuid}}" {{#unless ../../isEditMode}}data-action="selectProfession"{{/unless}}>
             <img src="{{profession.img}}" />
             <div class="wizard-card-name">{{profession.name}}</div>
-            <div class="wizard-card-meta">{{profession.system.requirements}}</div>
+            {{!-- Kravstatus. Omött krav spärrar INTE valet — se #_prepareContext
+                  för varför (3T6 ger ofta noll kvalificerade yrken). --}}
+            <div class="wizard-card-meta wizard-req {{#unless profession.reqMet}}req-unmet{{/unless}}"
+                 title="{{#if profession.reqMet}}Grundegenskapskraven är uppfyllda{{else}}Kraven är inte uppfyllda — går att välja ändå, men stäm av med SL{{/if}}">
+              {{#each profession.reqCheck.entries as |e|}}<span class="req-entry {{#if e.met}}is-met{{else}}is-unmet{{/if}}">{{e.key}} {{e.required}}{{#unless e.unverified}} ({{e.total}}){{/unless}}</span>{{/each}}
+              {{#unless profession.reqCheck.entries.length}}{{profession.system.requirements}}{{/unless}}
+            </div>
           </div>
         {{/each}}
       </div>
