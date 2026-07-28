@@ -180,7 +180,15 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
     ⚠ **Två listor bryts av en sidbrytning** (Paladin efter "Vagnsförare", Prisjägare efter "Undre världen") — de eventuellt saknade svansarna är noterade i respektive items beskrivning i stället för att gissas.
 
-    **Kvar: 17 specialiseringar ur Tjuvar och Lönnmördare** (4 bard, 5 lönnmördare, 8 tjuv) — samma metod, T&L tryckt s.7-16.
+    **✅ KLART 2026-07-28 — alla 36 yrken har nu yrkesfärdigheter, 0 tomma.** T&L-delen (tryckt s.6-14) gav 17 nya listor plus tillägg till tre grundyrken. Största listorna: Kunskapare 53, Spion 50, Gentlemannatjuv 43, Kultist 40.
+
+    ⚠ **Felklassificering hittad och rättad: `Spelaren` låg som `lonnmordare`** men T&L s.8 listar **Spelare** under **BARDYRKEN** (bokens fem nya bardyrken är Bedragare, Gycklare, Kurtisan, Fingerkonstnär, Spelare). `baseProfession` ändrad till `bard`, vilket också flyttar kortet till rätt grupp i guiden. ⚠ Vårt item heter fortfarande `Spelaren`; boken skriver `Spelare` — ej omdöpt, eftersom namnbyte påverkar befintliga rollpersoners kompendiekoppling.
+
+    ⚠ **Tre grundyrken fick TILLÄGG, inte ersättning** — Bard, Lönnmördare och Tjuv står som "Se Drakar och Demoners regelböcker, med följande tillägg" (Bard 24→33, Lönnmördare 20→39, Tjuv 4→19). Samma mönster som Riddare i KH.
+
+    **Extraktet är skrivet tillbaka** som `docs/extracts/DODE_Yrkesfardigheter_KH_TL.md` i Roll20-projektet (403 rader, alla 25 specialiseringar + 4 tillägg, med sidoffset och valplatser dokumenterade) — enligt den nya extraktpipeline-regeln i `CLAUDE.md`, så nästa session slipper läsa om samma sidor.
+
+    **Kvar av backlog 13:** guidens UI konsumerar fortfarande inte `choiceCount` — den delar ut alla poster rakt av, så valplatserna syns som rader man inte kan fylla. Det är samma arbete som "välj 12 av N" och bör göras i ett svep. Dessutom är sex grundyrken fortfarande tunna mot boken (Magiker 3, Sjöfarare 7, Utbygdsjägare 6, Krigare 9, Munk 12, Riddare 12 efter tillägget).
 
     ⚠ **Besvärjelser har en HELT ANNAN kostnadsbas** som inte är implementerad: RP s.30 ger grundkostnad efter besvärjelsens **skolvärde** (1-3:2 · 4-6:4 · 7-9:6 · 10-12:8 · 13-15:10 · 16-18:12 · 19-21:14 · +3:+2), inte efter kostnadskategori. Magiskolesteget skapar i dag skolan som en `fardighet` med `yrkesfardighet`-nivå, vilket är rätt för själva SKOLAN men det finns ingen mekanik för att köpa enskilda besvärjelser.
 14. **Expand compendium coverage.** **Partially done (2026-07-27)** — races and professions are no longer the gap: 6 elf lineages (Alver s.22) brought races 7→13, and 25 specialisations (KH/T&L, via the Roll20 project's `docs/wiki/YRKEN.md`) brought professions 11→36. Still thin: **weapons ~50%**, **spells <5%** (8 of the full MAG list), **monsters** (14 sample entries). ⚠ Every future addition must also ship art in the same pass — see `CLAUDE.md`s "Bildpipeline" (pipeline step 2b); the current 106 documents are 100% covered and that state should not be allowed to regress. Note the spell gap is the awkward one: 13 magic schools are pickable in the wizard but only 8 spells exist across all of them.

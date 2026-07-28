@@ -5,7 +5,7 @@
     "requirements": "SMI 12, KAR 14",
     "professionAbility": "<p>Sjunger eller spelar minst 1 minut och klarar ett färdighetsslag → åhörare uppfattar barden som KAR +5 högre; KAR-baserade färdigheter (Övertala, Muta, Bluffa, Skådespeleri) får +5 CL i en timme.</p>",
     "skillList": "<p>En valfri vapenfärdighet, språk, Administration, Akrobatik, Buktala, Dans, Djurträning, Dolk, Förfalskning, Geografi, Gycklekonster, Hantverk, Hasardspel, Heraldik, Historia, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Målning, Schack & brädspel, Simma, Skådespeleri, Spela instrument, Språkkunskap, Trästav.</p>",
-    "description": "",
+    "description": "<p><em>Tjuvar och Lönnmördare anger ett TILLÄGG till grundreglernas lista (\"Se Drakar och Demoners regelböcker, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bard-kvinna.png",
     "professionSkills": [
@@ -104,6 +104,60 @@
       {
         "name": "Trästav",
         "attribute": "smi"
+      },
+      {
+        "name": "Dölja",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Spåkonst",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Provsmaka",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förföra",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förklädnad",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Ljuga",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Utbrytarkonst",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Allmänkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Imitera röster",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {

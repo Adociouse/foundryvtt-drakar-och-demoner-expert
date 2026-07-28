@@ -5,7 +5,7 @@
     "requirements": "SMI 16",
     "professionAbility": "<p>Spendera 1 PSY = +1 CL på valfri färdighet, max +3 (3 PSY). Max 2 gånger per sovperiod (8 tim, alver 4 tim).</p>",
     "skillList": "<p>Max 2 vapenfärdigheter, språk, Administration, Akrobatik, Buktala, Dra vapen, Dolk, Drogkunskap, Förfalskning, Geografi, Giftkunskap, Gyckelkonster, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Simma, Skådespeleri, Spela instrument, Stavhopp, Teckenspråk, Trästav, Undre världen, Änterhake.</p>",
-    "description": "",
+    "description": "<p><em>Tjuvar och Lönnmördare anger ett TILLÄGG till grundreglernas lista (\"Se Drakar och Demoners regelböcker, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-kvinna.png",
     "professionSkills": [
@@ -24,6 +24,96 @@
       {
         "name": "Dra vapen",
         "attribute": "smi"
+      },
+      {
+        "name": "Anfall bakifrån",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fallteknik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kamouflage",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Slå medvetslös",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Strid i mörker",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dölja",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förhöra",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Ljuga",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Provsmaka",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fly",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om takvägar",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Skugga",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Förklädnad",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Fingerfärdighet",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Häleri",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
       }
     ],
     "source": {
