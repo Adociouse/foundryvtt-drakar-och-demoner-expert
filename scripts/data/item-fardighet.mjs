@@ -36,6 +36,16 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
       // EP-köp) ska gå på `skillKey`. Tomt på äldre färdigheter skapade före
       // 2026-07-27 — då härleds nyckeln ur namnet som fallback.
       skillKey: new fields.StringField({ required: false, initial: "" }),
+      // EP-pott intjänad i spel — REG s.45-46. ⚠ EP från äventyr är BUNDET till
+      // den färdighet som tjänade in det ("noteras ett streck vid färdigheten"),
+      // till skillnad från SL:s bonuspoäng som är fria (actor.system.ep.bonus).
+      // Därför bor potten på itemet, inte på rollpersonen.
+      // `earned` räknas upp av strecket, `spent` av köp i träningsfönstret —
+      // båda ackumulerar, så historiken finns kvar när potten är tömd.
+      ep: new fields.SchemaField({
+        earned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+      }),
       fv: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       bonus: new fields.NumberField({ required: true, integer: true, initial: 0 }),
       // Ersätter den tidigare `yrkesfardighet`-booleanen (PLAN_WIZARD_V2.md Fas 6)
@@ -57,6 +67,8 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
   }
 
   prepareDerivedData() {
+    // Vad som faktiskt går att lägga på ett köp just nu.
+    this.ep.available = Math.max(0, this.ep.earned - this.ep.spent);
     this.total = this.fv + this.bonus;
     this.bonusDisplay = this.bonus > 0 ? `+${this.bonus}` : `${this.bonus}`;
   }

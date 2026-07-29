@@ -28,7 +28,9 @@ import {
   DoDEFormagaSheet
 } from "./sheets/item-sheet.mjs";
 import DoDECharacterWizard from "./apps/character-wizard.mjs";
+import DoDETrainingApp from "./apps/training.mjs";
 import { DODE } from "./helpers/config.mjs";
+import { rollEpAward, awardItemEp, spellCanEarn, EP_FLAG_SCOPE } from "./helpers/ep.mjs";
 
 const SYSTEM_ID = "drakar-och-demoner-expert";
 
@@ -144,6 +146,8 @@ Hooks.once("init", () => {
     // rollpersonen och sparar tillbaka utan att dubblera något) — se
     // character-wizard.mjs och DESIGN_DECISIONS.md backlog 4c.
     openCharacterWizard: (actor = null) => new DoDECharacterWizard(actor ? { actor } : {}).render(true),
+    // Träningsfönstret — omsättning av EP till FV efter viloperiod (REG s.46).
+    openTraining: (actor) => new DoDETrainingApp(actor).render(true),
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects
@@ -166,6 +170,70 @@ Hooks.on("renderActorDirectory", (app, html) => {
   button.addEventListener("click", () => game.dode.openCharacterWizard());
   header.appendChild(button);
 });
+
+/**
+ * EP-strecket på slagkortet — REG s.45. Bara SL ser knappen: reglerna ger EP
+ * endast "i ett stressigt läge (SL bedömer)", vilket systemet omöjligt kan
+ * avgöra själv.
+ *
+ * ⚠ Utdelningen skrivs till ett FLAGGFÄLT på meddelandet, inte bara till DOM:en.
+ * Chattkortet renderas om (nytt meddelande i loggen, popout, omladdning) och
+ * återskapar då sitt ursprungliga innehåll — en knapp som bara byttes ut i DOM:en
+ * kommer tillbaka och kan klickas igen. Hittades i livetest 2026-07-29: ett
+ * perfekt slag gav två utdelningar.
+ *
+ * ⚠ Två hooknamn med flit: `renderChatMessageHTML` (v13+, HTMLElement) och
+ * `renderChatMessage` (v12, jQuery). Systemet stödjer minst v12. I v14 fyrar
+ * BÅDA — därför markeras knappen med `dataset.dodeBound` så lyssnaren inte
+ * registreras två gånger på samma element. Samma livetest: ett klick blev två
+ * 1T3+1-slag som race:ade om samma `earned`-fält.
+ */
+function bindEpAward(message, html) {
+  const root = html instanceof HTMLElement ? html : html?.[0];
+  const button = root?.querySelector("[data-dode-award-ep]");
+  if (!button) return;
+
+  const data = message.getFlag(EP_FLAG_SCOPE, "epAward");
+  const receipt = (text) => button.replaceWith(Object.assign(document.createElement("span"), {
+    className: "ep-awarded",
+    textContent: text
+  }));
+
+  // Redan utdelat — visa kvittot i stället för knappen, oavsett hur ofta kortet
+  // renderas om.
+  if (data?.awarded) return receipt(`+${data.awarded} EP → ${data.awardedTo ?? "färdigheten"}`);
+  if (!game.user.isGM) return void button.remove();
+  if (button.dataset.dodeBound) return;
+  button.dataset.dodeBound = "1";
+
+  button.addEventListener("click", async () => {
+    if (button.disabled) return;
+    button.disabled = true;
+
+    const actor = game.actors.get(data?.actorId);
+    const item = actor?.items.get(data?.itemId);
+    if (!item) {
+      button.disabled = false;
+      return ui.notifications.warn("Färdigheten finns inte längre.");
+    }
+
+    // Besvärjelser tjänar EP på en sömnklocka, inte per kastning (MAG s.23).
+    if (item.type === "besvarjelse" && !spellCanEarn(item)) {
+      button.disabled = false;
+      return ui.notifications.info(`${item.name} har redan gett EP sedan förra vilan.`);
+    }
+
+    const { amount, roll } = await rollEpAward(data?.outcome);
+    await awardItemEp(item, amount);
+    if (roll) await roll.toMessage({ speaker: ChatMessage.getSpeaker({ actor }), flavor: `EP för ${item.name}` });
+    // Skrivs till meddelandet så att omrendering inte återuppväcker knappen.
+    await message.setFlag(EP_FLAG_SCOPE, "epAward", { ...data, awarded: amount, awardedTo: item.name });
+    receipt(`+${amount} EP → ${item.name}`);
+  });
+}
+
+Hooks.on("renderChatMessageHTML", bindEpAward);
+Hooks.on("renderChatMessage", bindEpAward);
 
 Hooks.on("updateActor", async (actor, changes) => {
   if (actor.type !== "character") return;

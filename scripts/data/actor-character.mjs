@@ -90,7 +90,28 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       // (nivå×ålder-tabell + kvarvarande BP×5) och sätts i prepareDerivedData,
       // samma mönster som `bp.start`/`spent`/`remaining` ovan.
       ep: new fields.SchemaField({
-        spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+        spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        // SL:s bonuspoäng efter äventyr — REG s.45-46: 1-4 för uppdragsframgång,
+        // 1-2 för svåra gärningar, 1-4 för god rollspelning, max 10 per äventyr.
+        // ⚠ Dessa är INTE bundna till någon färdighet ("kan användas fritt") och
+        // därför den enda EP-potten som ligger på rollpersonen. Färdigheternas
+        // egna potter bor på respektive Item (item-fardighet.mjs `system.ep`).
+        //
+        // ⚠ Skild från `spent` ovan med flit: `max` är HÄRLEDD ur nivå + ålder +
+        // kvarvarande BP och räknas om vid varje prepareDerivedData. Låg intjänad
+        // EP i samma pott skulle en åldersändring i efterhand radera spelad
+        // erfarenhet. Skapandebudget och spelintjänad EP är alltså två skilda
+        // ekonomier som råkar dela namn.
+        bonus: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        bonusSpent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+      }),
+      // Viloperiodsgrinden — REG s.45-46 / MAG s.23: EP kan inte omsättas förrän
+      // efter minst 7 dagars sammanhängande vila, och aldrig under ett pågående
+      // äventyr. SL öppnar grinden; träningsfönstret är stängt tills dess.
+      // Per rollperson, inte per värld — vila är individuell (en spelare kan
+      // ligga skadad i en stad medan resten fortsätter).
+      rest: new fields.SchemaField({
+        trainingUnlocked: new fields.BooleanField({ required: false, initial: false })
       }),
       alder: new fields.StringField({ required: false, initial: "" }),
       // Särskilda förmågor — MVP, PLAN_WIZARD_V2.md Fas 8. ⚠ FORSKNINGSLUCKA:
@@ -258,6 +279,8 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     const epBudget = DODE.epBudgetTable[this.niva]?.[this.alder] ?? 0;
     ep.max = epBudget + Math.max(0, bp.remaining) * 5;
     ep.remaining = ep.max - ep.spent;
+    // Fri pott, spelintjänad — helt skild från skapandebudgeten ovan.
+    ep.bonusAvailable = Math.max(0, ep.bonus - ep.bonusSpent);
     this.maxStartFv = DODE.maxStartFvTable[this.niva]?.[this.alder] ?? null;
 
     // KP = (STO + FYS) / 2, avrundat till närmaste heltal — REGLER_EGENSKAPER.md / REGLER_STRID.md

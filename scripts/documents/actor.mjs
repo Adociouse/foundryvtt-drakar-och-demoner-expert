@@ -5,7 +5,9 @@ export default class DoDEActor extends Actor {
   /** @param {Item} item En "fardighet"-item ägd av denna actor. */
   async rollSkill(item) {
     if (!item) return;
-    return rollFV({ actor: this, label: item.name, fv: item.system.total });
+    // `item` följer med så slagkortet kan erbjuda SL ett EP-streck vid lyckat
+    // slag — REG s.45, se helpers/ep.mjs.
+    return rollFV({ actor: this, label: item.name, fv: item.system.total, item });
   }
 
   /** @param {number} index Index i NPC:ns system.attacks-array. */

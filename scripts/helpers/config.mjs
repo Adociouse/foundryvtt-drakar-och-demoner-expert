@@ -638,6 +638,93 @@ DODE.skillCost = function (costTier, fromFv, toFv) {
   return base * (to - from);
 };
 
+// EP-kostnad för magi — MAG s.13. Skiljer sig från DODE.skillCost på tre sätt
+// och kan därför inte uttryckas med den:
+//   1. Grundkostnaden kommer från MAGISKOLANS FV, inte från en kostnadskategori
+//      (primär/yrkes/sekundär) — och gäller BÅDE när man höjer skolans eget FV
+//      och när man höjer en enskild besvärjelses S-värde.
+//   2. Skalningen är en trappa av multiplikatorer på FV-intervall, inte en
+//      kumulativ C-tabell.
+//   3. Skolan själv har en egen fast grundkostnad (5 EP/steg) som INTE följer
+//      besvärjelsetabellen.
+//
+// ⚠ KÄLLKONFLIKT (hittad 2026-07-29, ej åtgärdad i Roll20-projektet): den
+// kurerade `REGLER_FARDIGHETER.md` återger besvärjelsetabellen som
+// 1-3:4, 4-6:6, 7-9:6 — med en dubblerad 6:a och utan 2:an. `MAGI.md` (MAG s.13)
+// ger 2/4/6/8/10/12/14/16, en monoton följd som dessutom matchar RP s.30.
+// Vi följer MAG s.13; REGLER_FARDIGHETER.md-tabellen bedöms vara en
+// transkriberingsmiss (en rad har fallit bort och nästa dubblerats).
+DODE.spellBaseCostBySchoolFv = [
+  { max: 3, cost: 2 }, { max: 6, cost: 4 }, { max: 9, cost: 6 }, { max: 12, cost: 8 },
+  { max: 15, cost: 10 }, { max: 18, cost: 12 }, { max: 21, cost: 14 }, { max: 24, cost: 16 }
+];
+
+// Multiplikatortrappa — MAG s.13. Gäller både skolans FV och besvärjelsers S.
+// Över 20 ökar multipeln med +1 var tredje nivå ("Ytterligare +1 multiplikator
+// var 3:e nivå").
+DODE.magicCostMultiplier = function (schoolFv) {
+  if (schoolFv <= 10) return 1;
+  if (schoolFv <= 14) return 2;
+  if (schoolFv <= 17) return 3;
+  if (schoolFv <= 20) return 4;
+  return 4 + Math.ceil((schoolFv - 20) / 3);
+};
+
+/** Grundkostnad per S-steg för en besvärjelse, given magikerns FV i skolan (MAG s.13). */
+DODE.spellBaseCost = function (schoolFv) {
+  for (const row of DODE.spellBaseCostBySchoolFv) if (schoolFv <= row.max) return row.cost;
+  // Tabellen slutar vid 24; följden ökar med 2 per intervall om tre.
+  const last = DODE.spellBaseCostBySchoolFv.at(-1);
+  return last.cost + 2 * Math.ceil((schoolFv - last.max) / 3);
+};
+
+/**
+ * EP för att höja en besvärjelses S-värde från `fromS` till `toS` (MAG s.13).
+ *
+ * ⚠ TVÅ OLIKA INDATA — lätt att blanda ihop, och bokens exempel avslöjar vilken
+ * som är vilken:
+ *   - **Grundkostnaden** kommer från magikerns FV i SKOLAN.
+ *   - **Multipeln** kommer från BESVÄRJELSENS eget S-värde, steg för steg.
+ *
+ * Bokens exempel (MAG s.13), skolvärde 6 → grundkostnad 4:
+ *   "S1 till S10 kostar 4 EP/steg = 40 EP"  — hela spannet ligger på S ≤ 10, ×1 → 4/steg
+ *   "S10 till S14 kostar 8 EP/steg = 32 EP" — stegen till S11-14 ligger i ×2-bandet → 8/steg
+ * Den andra halvan går bara ihop om multipeln följer S och inte skolans FV: skolans
+ * FV är 6 i hela exemplet och skulle gett ×1 (4 EP/steg) rakt igenom.
+ *
+ * ⚠ Första halvan går ihop med 10 steg, inte 9 — boken skriver "från S1 till S10"
+ * men räknar tio steg, alltså köpet av nivåerna 1-10 från noll. Vi räknar
+ * differensen (`toS - fromS`): spellCost(6, 0, 10) = 40 stämmer med boken,
+ * spellCost(6, 1, 10) = 36. Den andra halvan (10→14 = 32) stämmer exakt med
+ * differensräkning, så det är formuleringen som är slarvig, inte regeln.
+ */
+DODE.spellCost = function (schoolFv, fromS, toS) {
+  const base = DODE.spellBaseCost(schoolFv);
+  let total = 0;
+  for (let s = fromS; s < toS; s++) total += base * DODE.magicCostMultiplier(s + 1);
+  return total;
+};
+
+/**
+ * EP för att höja FV i en magiskola (MAG s.13). Fast grundkostnad 5 EP/steg,
+ * samma multiplikatortrappa. Priset per steg ändras när man passerar en
+ * intervallgräns, så vi summerar steg för steg i stället för att multiplicera.
+ *
+ * ⚠ Skolans FV kan ENDAST höjas genom TRÄNING (MAG s.23) — aldrig av EP intjänat
+ * under äventyr. Den regeln lever i träningsfönstret, inte här.
+ */
+DODE.magicSchoolCost = function (fromFv, toFv) {
+  let total = 0;
+  for (let fv = fromFv; fv < toFv; fv++) total += 5 * DODE.magicCostMultiplier(fv + 1);
+  return total;
+};
+
+// Är färdigheten en magiskola? Skolorna bor som vanliga `fardighet`-Items
+// (se DODE.magicSchoolSkills ovan), så det är nyckelprefixet som skiljer dem.
+DODE.isMagicSchoolKey = function (skillKey) {
+  return typeof skillKey === "string" && skillKey.startsWith("magiskola-");
+};
+
 // Åldersmodifikationer på grundegenskaper.
 // Source: D&DE Grundreglerboken s.8 (verified from physical book 2026-07-21)
 // STO är 0 i alla åldersgrupper (ingen modifiering). KON förekommer inte i denna

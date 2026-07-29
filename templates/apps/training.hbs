@@ -1,0 +1,70 @@
+<div class="dode-training-body">
+  {{#unless unlocked}}
+    <div class="training-locked">
+      <i class="fa-solid fa-lock"></i>
+      <div>
+        <strong>Viloperioden är inte öppnad.</strong>
+        <p>EP kan bara omsättas efter minst 7 dagars sammanhängande vila, och aldrig
+           under ett pågående äventyr (REG s.46). Spelledaren öppnar grinden från
+           rollpersonsarket.</p>
+      </div>
+    </div>
+  {{/unless}}
+
+  <header class="training-header">
+    <span class="bonus-pool" title="Spelledarens bonuspoäng — fria, inte bundna till någon färdighet (REG s.46)">
+      <i class="fa-solid fa-star"></i> Fria EP: <strong>{{bonusAvailable}}</strong>
+    </span>
+  </header>
+
+  {{#*inline "trainingRows"}}
+    <ol class="training-list">
+      {{#each rows as |row|}}
+        <li class="training-row {{#unless row.affordable}}is-blocked{{/unless}}" data-item-id="{{row.id}}">
+          <img src="{{row.img}}" alt="" />
+          <div class="training-label">
+            <span class="name">{{row.label}}</span>
+            {{#if row.note}}<span class="note">{{row.note}}</span>{{/if}}
+          </div>
+          <span class="training-step">{{row.current}} &rarr; {{row.next}}</span>
+          <span class="training-cost" title="EP-kostnad för steget">{{row.cost}} EP</span>
+          <span class="training-funding">
+            {{#if row.canUseOwn}}
+              <span title="Färdighetens egen pott — intjänad i spel">⬥{{row.own}}</span>
+            {{/if}}
+            {{#if row.bonusNeeded}}<span title="Tas ur de fria bonuspoängen">+{{row.bonusNeeded}} fria</span>{{/if}}
+          </span>
+          <button type="button" data-action="buy" {{#unless row.affordable}}disabled{{/unless}}>Träna</button>
+        </li>
+      {{else}}
+        <li class="skill-row-empty">{{emptyText}}</li>
+      {{/each}}
+    </ol>
+  {{/inline}}
+
+  <section class="training-section">
+    <h3>Färdigheter</h3>
+    {{> trainingRows rows=skills emptyText="Inga färdigheter."}}
+  </section>
+
+  {{#if schools.length}}
+    <section class="training-section">
+      <h3>Magiskolor</h3>
+      {{!-- MAG s.23: skolans FV höjs BARA genom träning, aldrig av äventyrs-EP.
+            Raderna kan därför bara betalas med fria bonuspoäng. --}}
+      <p class="section-hint">Skolans FV kan bara höjas genom träning och betalas
+         därför enbart med fria EP. En helt ny skola kräver lärare och delas ut av
+         spelledaren (MAG s.23).</p>
+      {{> trainingRows rows=schools emptyText="Inga magiskolor."}}
+    </section>
+  {{/if}}
+
+  {{#if spells.length}}
+    <section class="training-section">
+      <h3>Besvärjelser</h3>
+      <p class="section-hint">Kostnaden per S-steg följer magikerns FV i
+         besvärjelsens skola, inte besvärjelsens egen nivå (MAG s.13).</p>
+      {{> trainingRows rows=spells emptyText="Inga besvärjelser."}}
+    </section>
+  {{/if}}
+</div>

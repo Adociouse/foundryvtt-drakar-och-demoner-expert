@@ -10,6 +10,21 @@
           <i class="fa-solid {{#if wizardUnlocked}}fa-lock-open{{else}}fa-lock{{/if}}"></i>
         </button>
       {{/if}}
+      {{!-- Viloperiodsgrinden — REG s.46. EP kan inte omsättas under ett äventyr. --}}
+      {{#if isGM}}
+        <button type="button" class="rest-toggle {{#if trainingUnlocked}}is-unlocked{{/if}}" data-action="toggleRest"
+          title="{{#if trainingUnlocked}}Viloperiod öppen — träning möjlig. Klicka för att stänga{{else}}Öppna viloperiod (7 dagars vila) så rollpersonen kan träna{{/if}}">
+          <i class="fa-solid {{#if trainingUnlocked}}fa-bed{{else}}fa-person-hiking{{/if}}"></i>
+        </button>
+        <button type="button" data-action="awardBonusEp" title="Dela ut fria bonuspoäng efter äventyret">
+          <i class="fa-solid fa-star"></i>
+        </button>
+      {{/if}}
+      {{#if trainingUnlocked}}
+        <button type="button" data-action="openTraining" title="Omsätt EP till FV">
+          <i class="fa-solid fa-dumbbell"></i> Träna
+        </button>
+      {{/if}}
       {{#if canEditInWizard}}
         <button type="button" data-action="openWizardEdit" title="Öppna rollpersonen i guiden">
           <i class="fa-solid fa-hat-wizard"></i> Redigera i guiden
@@ -47,6 +62,9 @@
       <span>{{localize "DODE.Derived.Abs"}}: {{system.abs}}</span>
       <span>{{localize "DODE.Derived.Movement"}}: {{system.movement}}</span>
       <span>{{localize "DODE.Derived.CarryCapacity"}}: {{system.carryCapacity}} kg</span>
+      {{#if system.ep.bonusAvailable}}
+        <span title="Fria bonuspoäng från spelledaren — inte bundna till någon färdighet">Fria EP: {{system.ep.bonusAvailable}}</span>
+      {{/if}}
     </div>
     {{!-- Börsen — vad rollpersonen faktiskt bär. Skild från startCapital, som
           är skapandeögonblickets siffra och aldrig minskar. --}}
@@ -93,6 +111,10 @@
           <span class="skill-fv skill-total" title="{{localize 'DODE.Actor.Total'}}">= {{skill.system.total}}</span>
         {{else}}
           <span class="skill-fv">FV {{skill.system.fv}}</span>
+        {{/if}}
+        {{#if skill.system.ep.available}}
+          {{!-- Färdighetens egen EP-pott — bunden hit, kan inte flyttas (REG s.45). --}}
+          <span class="skill-ep" title="Intjänad EP, bunden till denna färdighet">&#11045;{{skill.system.ep.available}}</span>
         {{/if}}
         <button type="button" data-action="rollSkill" title="Slå"><i class="fa-solid fa-dice-d20"></i></button>
         <button type="button" data-action="deleteSkill" title="Ta bort"><i class="fa-solid fa-trash"></i></button>

@@ -17,6 +17,21 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
           "illusionism", "mentalism", "nekromanti", "rostmagi", "spiritism", "stavmagi", "symbolism"
         ]
       }),
+      // EP-pott intjänad i spel — REG s.45-46. ⚠ EP från äventyr är BUNDET till
+      // den färdighet som tjänade in det ("noteras ett streck vid färdigheten"),
+      // till skillnad från SL:s bonuspoäng som är fria (actor.system.ep.bonus).
+      // Därför bor potten på itemet, inte på rollpersonen.
+      // `earned` räknas upp av strecket, `spent` av köp i träningsfönstret —
+      // båda ackumulerar, så historiken finns kvar när potten är tömd.
+      // ⚠ Besvärjelser tjänar in EP på en SÖMNKLOCKA, inte per kastning: 1 EP
+      // första gången besvärjelsen används framgångsrikt efter förra sömnen
+      // (MAG s.23), perfekt ger 1T3+1. `awardedSince` sätts vid utdelning och
+      // nollas vid vila, så samma besvärjelse inte kan ge EP två gånger.
+      ep: new fields.SchemaField({
+        awardedSinceRest: new fields.BooleanField({ required: false, initial: false }),
+        earned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+      }),
       sValue: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
       duration: new fields.StringField({ required: false, initial: "" }),
       range: new fields.StringField({ required: false, initial: "" }),
@@ -41,5 +56,10 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
+  }
+
+  prepareDerivedData() {
+    // Vad som faktiskt går att lägga på ett köp just nu.
+    this.ep.available = Math.max(0, this.ep.earned - this.ep.spent);
   }
 }

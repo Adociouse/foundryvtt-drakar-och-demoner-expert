@@ -657,3 +657,29 @@
 
 /* Märke för färdighet utdelad av SL efter träning i spel */
 .dode .granted-mark { opacity: 0.55; font-size: 0.85em; margin-left: 0.2em; cursor: help; }
+
+/* ---- Erfarenhetspoäng i spel (REG s.45-46) ---- */
+.dode-roll-card .roll-card-ep { margin-top: 6px; text-align: center; }
+.dode-roll-card .roll-card-ep button { width: 100%; font-size: 0.85em; }
+.dode-roll-card .ep-awarded { display: block; text-align: center; font-size: 0.85em; opacity: 0.8; }
+.skill-ep { color: #8a6d1f; font-weight: 600; font-size: 0.85em; }
+.rest-toggle.is-unlocked { color: #2f6d3a; }
+
+.dode-training-body { padding: 8px; overflow-y: auto; }
+.training-locked { display: flex; gap: 10px; align-items: flex-start; padding: 10px;
+  border: 1px solid #a33; border-radius: 4px; background: rgba(170, 51, 51, 0.08); margin-bottom: 10px; }
+.training-locked p { margin: 4px 0 0; font-size: 0.85em; }
+.training-header { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.training-section h3 { margin-bottom: 2px; }
+.training-section .section-hint { font-size: 0.8em; opacity: 0.75; margin: 0 0 6px; }
+.training-list { list-style: none; margin: 0; padding: 0; }
+.training-row { display: flex; align-items: center; gap: 8px; padding: 4px 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+.training-row.is-blocked { opacity: 0.55; }
+.training-row img { width: 28px; height: 28px; object-fit: cover; border: none; flex: 0 0 auto; }
+.training-label { flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; }
+.training-label .name { font-weight: 600; }
+.training-label .note { font-size: 0.75em; opacity: 0.7; }
+.training-step, .training-cost, .training-funding { flex: 0 0 auto; font-size: 0.85em; white-space: nowrap; }
+.training-cost { font-weight: 600; }
+.training-funding { display: flex; gap: 6px; color: #8a6d1f; }

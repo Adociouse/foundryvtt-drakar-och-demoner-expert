@@ -1,4 +1,5 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
+const { DialogV2 } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 const GEAR_TYPES = ["vapen", "rustning", "utrustning", "besvarjelse"];
@@ -27,7 +28,10 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       toggleWizardUnlock: DoDECharacterSheet.#onToggleWizardUnlock,
       openWizardEdit: DoDECharacterSheet.#onOpenWizardEdit,
       rollDamage: DoDECharacterSheet.#onRollDamage,
-      castSpell: DoDECharacterSheet.#onCastSpell
+      castSpell: DoDECharacterSheet.#onCastSpell,
+      openTraining: DoDECharacterSheet.#onOpenTraining,
+      toggleRest: DoDECharacterSheet.#onToggleRest,
+      awardBonusEp: DoDECharacterSheet.#onAwardBonusEp
     },
     form: { submitOnChange: true, closeOnSubmit: false }
   };
@@ -82,7 +86,53 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     context.isGM = game.user.isGM;
     context.wizardUnlocked = !!this.actor.getFlag(game.system.id, "wizardUnlocked");
     context.canEditInWizard = context.isGM || context.wizardUnlocked;
+    // Viloperiodsgrinden — REG s.46. SL öppnar, spelaren tränar. Träningsknappen
+    // visas bara när grinden är öppen; SL ser växeln alltid.
+    context.trainingUnlocked = !!this.actor.system.rest?.trainingUnlocked;
     return context;
+  }
+
+  static async #onOpenTraining() {
+    const { default: DoDETrainingApp } = await import("../apps/training.mjs");
+    new DoDETrainingApp(this.actor).render(true);
+  }
+
+  /**
+   * Öppnar/stänger viloperiodsgrinden (REG s.46). Att öppna nollar samtidigt
+   * besvärjelsernas sömnklocka, eftersom vilan i praktiken innehåller en sömn.
+   */
+  static async #onToggleRest() {
+    const { setTrainingUnlocked } = await import("../helpers/ep.mjs");
+    const next = !this.actor.system.rest?.trainingUnlocked;
+    await setTrainingUnlocked(this.actor, next);
+    ui.notifications.info(next
+      ? `Viloperiod öppnad för ${this.actor.name} — träning möjlig.`
+      : `Viloperiod stängd för ${this.actor.name}.`);
+  }
+
+  /**
+   * SL:s bonuspoäng efter äventyr — REG s.46: 1-4 uppdragsframgång, 1-2 svåra
+   * gärningar, 1-4 god rollspelning, max 10 per äventyr. ⚠ Taket är rådgivande
+   * här: systemet vet inte var ett äventyr börjar och slutar, så det står som en
+   * påminnelse i dialogen i stället för som en spärr.
+   */
+  static async #onAwardBonusEp() {
+    const amount = await DialogV2.prompt({
+      window: { title: "Dela ut bonuspoäng" },
+      content: `<p>Fria EP till <strong>${this.actor.name}</strong>. Ej bundna till någon färdighet.</p>
+        <p class="hint">REG s.46: 1-4 uppdragsframgång · 1-2 svåra gärningar · 1-4 god rollspelning.
+        Högst 10 per äventyr.</p>
+        <input type="number" name="amount" value="1" min="1" max="10" autofocus />`,
+      ok: { label: "Dela ut", callback: (event, button) => Number(button.form.elements.amount.value) }
+    });
+    if (!amount || amount <= 0) return;
+    const { awardBonusEp } = await import("../helpers/ep.mjs");
+    await awardBonusEp(this.actor, amount);
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: `<div class="dode-chat-card"><h3>Bonuspoäng</h3>
+        <p>${this.actor.name} får <strong>${amount} fria EP</strong>.</p></div>`
+    });
   }
 
   static #itemFromEvent(actor, target) {
