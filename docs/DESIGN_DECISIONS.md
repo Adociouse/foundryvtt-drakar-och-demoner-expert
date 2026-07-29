@@ -348,7 +348,9 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 54. **Sköldar som `rustning` är fel typ på sikt.** De har `abs: 0` och bärs bara för att pareras med — SB s.38 ger dem STY-krav, BV, vikt och pris, precis som vapentabellen. Mekaniskt är en sköld ett **pareringsvapen** (SLB s.16: den köper en extra handling), inte en rustning. `vapen`-typen passar bättre; `rustning` fick nu `baseValue`/`styGroup` som en övergångslösning. Byte kräver migrering av befintliga rollpersoners utrustning.
 
-55. **⚠ Naturlig lakningstakt saknas i kallan.** `REGLER_STRID.md` anger *"Total vila: Normal takt per dag (⚠ exakt varde — verifiera mot REG)"* — antalet KP per dygn ar aldrig transkriberat, bara att latt aktivitet halverar det. Maste lasas i **REG s.50-52** innan lakning kan automatiseras mot varldsklockan (§10.3d). Lakekonst ar daremot komplett: ett fardighetsslag per patient per hel vecka, lyckat slag ger dubbel lakning.
+55. ✅ ~~**Naturlig lakningstakt saknas i kallan.**~~ **LOST 2026-07-29** — Johan hanvisade till **SLB s.19-20**: **1 KP per vecka** per skadad kroppsdel vid liggande vila, **halften sa fort** annars. `REGLER_STRID.md`s platshallare ("normal takt per dag") var alltsa fel bade i skala och sida. Se §10.3d. Ursprunglig post: `REGLER_STRID.md` anger *"Total vila: Normal takt per dag (⚠ exakt varde — verifiera mot REG)"* — antalet KP per dygn ar aldrig transkriberat, bara att latt aktivitet halverar det. Maste lasas i **REG s.50-52** innan lakning kan automatiseras mot varldsklockan (§10.3d). Lakekonst ar daremot komplett: ett fardighetsslag per patient per hel vecka, lyckat slag ger dubbel lakning.
+
+56. **Infektion, kallbrand och amputation (SLB s.20).** Fullstandig regeltext finns kurerad i §10.3d men ingen mekanik ar byggd. 1 % infektionsrisk per skadepoang (3 % for smutsiga eller djurs vapen), 5 % att en infektion ger kallbrand inom 1T4 veckor, kallbrand i huvud/mage/bal ar dodlig, infekterad kroppsdel laker inga KP, HELA E4 botar infektion men inte kallbrand. Amputation ger fyra veckors oformaga och **permanent FYS-sankning** med kroppsdelens KP. ⚠ Bygg efter tidsmodellen (§10) — utan klocka blir det handraknade veckor per sar.
 
 16. **English localization.** Low priority per project scope.
 
@@ -1150,11 +1152,22 @@ hur mycket av veckan som rakade tillbringas i strid — vilket ar uppenbart fel.
 **Det gor ocksa `kind`-flaggan (10.3b) till mer an bokforing** — den ar
 lakningstakten:
 
-| Tidsslag | Naturlig lakning (REGLER_STRID.md, REG s.50-52) |
+| Tidsslag | Naturlig lakning (**SLB s.20**) |
 |---|---|
-| **Vila** (sangliggande) | normal takt per dygn |
-| **Resa / aventyr** (latt aktivitet) | ⚠ **halverad takt** |
+| **Vila** (liggande) | **1 KP per VECKA** |
+| **Resa / aventyr** | ⚠ **halften sa fort** (1 KP per tva veckor) |
 | **Strid** | ingen |
+
+⚠ **Takten ar VECKOVIS, inte per dygn** — SLB s.20 ordagrant: *"Genom kroppens
+naturliga lakningsprocesser aterfar en varelse normalt **en (1) forlorad KP per
+vecka** i alla kroppsdelar som ar skadade, samt till totala KP... Detta forutsatter
+att varelsen enbart tar det lugnt och vilar liggande. I annat fall laks skadorna
+halften sa fort."*
+
+⚠ Tva detaljer som annars gar forlorade: lakningen sker **per skadad kroppsdel
+parallellt** (varje omrade far sin KP per vecka), och **nar alla kroppsdelar lakt
+ihop aterstalls totala KP automatiskt** till ursprungsvardet — man behover alltsa
+inte laka de tva spparen var for sig ner till noll.
 
 ⚠ Samma flagga styr alltsa tre saker samtidigt: vilosviten, provianten och
 lakningstakten. Det ar ett gott tecken pa att modellen ar ratt skuren — en
@@ -1167,7 +1180,24 @@ automatiseras. **Lakekonst** ar daremot tydlig: ett fardighetsslag per patient p
 **hel vecka** av vard, och ett lyckat slag ger **dubbel** lakning den veckan —
 vilket ocksa ar en veckoskala som bara fungerar med en gemensam klocka.
 
-**Sjukdom och gift** har ingen mekanik alls an (se backlogpost 32 om Mirac och
+⭐ **Infektion ar den sjukdomsmekanik Johan efterlyste — och den finns redan i
+boken (SLB s.20).** Ett sar infekteras med **1 % per skadepoang** fran ett vanligt
+eggvapen och **3 % per skadepoang** fran smutsiga vapen eller djurs naturliga vapen.
+En adragen infektion har **5 % chans att utveckla kallbrand** inom **1T4 veckor**,
+vilket leder till amputation; ⚠ **kallbrand i huvud, mage eller bal leder till
+doden**. Medan infektionen varar kan kroppsdelen **inte laka nagra KP alls**, och
+personen ar matt och febrig och kan inte gora nagot aktivt under de 1T4 veckorna.
+**HELA E4** botar infektionen — men **kallbrand paverkas inte av HELA**.
+
+**Amputation** (SLB s.20): oformogen att gora nagot aktivt i **fyra veckor**, och
+**FYS minskar permanent** med det antal KP den amputerade kroppsdelen hade, vilket
+i sin tur sanker totala KP.
+
+⚠ Allt detta ar vecko-skala och passar `duration.seconds` perfekt. Det ar ocksa
+argument for att bygga tidsmodellen fore infektioner — utan en klocka blir de
+handraknade veckor per sar.
+
+**Ovrig sjukdom och gift** har ingen mekanik an (se backlogpost 32 om Mirac och
 Spelledarbokens drogregler). Nar de byggs bor de vara **ActiveEffects med
 `duration.seconds`** — da kryper de framat av samma klocka och behover ingen egen
 bokforing, precis som besvarjelser redan gor.
