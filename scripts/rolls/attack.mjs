@@ -1,0 +1,168 @@
+import { ensureHitLocations, applyLocationDamage, armourFor } from "../helpers/anatomy.mjs";
+import { combineDamageFormula } from "./damage-roll.mjs";
+
+/**
+ * Stridsupplösning — **Spelledarboken s.16-18**.
+ *
+ * ⚠ **Träffområde slås ALLTID**, även i vanlig strid. Johans beslut 2026-07-29:
+ * *"think of a generic attack always has a hidden riktad attack or if you switch
+ * mid fight"*. Slaget är gratis, och genom att alltid ha det kan SL slå om till
+ * detaljerad strid mitt i en strid utan att något behöver rekonstrueras — det
+ * som skiljer lägena är om området **visas och får effekt**, inte om det finns.
+ */
+
+/** CL-modifikationer för närstrid — SLB s.17. */
+export const MELEE_MODS = {
+  liggande: 5, fransidan: 3, bakifran: 7, ororlig: 10,
+  skymning: -5, morker: -15, riktat: -5, skoldhand: -10
+};
+
+/** CL-modifikationer för avståndsstrid — SLB s.17. */
+export const RANGED_MODS = {
+  ororlig: 10, skymning: -5, morker: -15, riktat: -5
+};
+
+/**
+ * Slår ett FV-slag och klassar utfallet enligt samma perfekt/fummel-bekräftelse
+ * som `rollFV` — men utan chattkort, eftersom anfall och parering redovisas
+ * tillsammans i ett kort.
+ */
+async function classifiedRoll(fv) {
+  const roll = await new Roll("1d20").evaluate();
+  let outcome = roll.total <= fv ? "lyckat" : "misslyckat";
+  if (roll.total === 1) {
+    const c = await new Roll("1d20").evaluate();
+    outcome = c.total <= fv ? "perfekt" : "lyckat";
+  } else if (roll.total === 20) {
+    const c = await new Roll("1d20").evaluate();
+    outcome = c.total > fv ? "fummel" : "misslyckat";
+  }
+  return { roll, outcome };
+}
+
+/**
+ * SLB s.17:s resultatmatris. Returnerar vad som ska hända, inte vad som hände.
+ *
+ * ⚠ **BV är en slitagemätare, inte en absorbering.** Överstiger skadan
+ * brytvärdet sjunker BV med 1; vid BV 0 går den överskjutande skadan igenom.
+ * ⚠ På **misslyckat anfall + lyckad parering** slits ANFALLARENS vapen — ett
+ * vapen kan alltså gå sönder av att bli parerat.
+ */
+export function resolveMatrix(attack, parry) {
+  if (attack === "fummel") return { result: "fummeltabell-anfall" };
+  if (attack === "perfekt") return { result: "traff", maxDamage: true, ignoreArmour: true };
+  if (attack === "misslyckat") {
+    if (parry === "fummel") return { result: "fummeltabell-parering" };
+    if (parry === "lyckat" || parry === "perfekt") return { result: "vapenslitage", wearOn: "attacker" };
+    return { result: "ingenting" };
+  }
+  // Lyckat anfall
+  if (parry === "fummel") return { result: "traff", alsoFumbleTable: "parering" };
+  if (parry === "misslyckat" || parry === null) return { result: "traff" };
+  if (parry === "perfekt") return { result: "ingenting" };
+  return { result: "parerat", wearOn: "defender" };
+}
+
+/**
+ * Full stridsupplösning mellan två aktörer.
+ *
+ * @param {object} o
+ * @param {Actor}  o.attacker
+ * @param {Item}   o.weapon        `vapen`-item
+ * @param {Actor}  o.target
+ * @param {Item}   [o.skill]       Vapenfärdigheten (bär FV — vapnet gör INTE det)
+ * @param {number} [o.fv]          Uttryckligt FV, för SLP utan färdighets-Item
+ * @param {Item}   [o.parryItem]   Vapen/sköld försvararen parerar med
+ * @param {string} [o.aimedAt]     Träffområdesnyckel — gör anfallet RIKTAT (−5 CL)
+ * @param {string} [o.intent]      "skada" | "bedova"
+ * @param {object} [o.mods]        Fria CL-modifikationer, t.ex. { bakifran: 7 }
+ * @param {boolean}[o.ranged]      Avståndsanfall — ⚠ kan aldrig pareras utom kastvapen
+ * @param {boolean}[o.defending]   Försvarar sig målet? Styr träfftabellens kolumn
+ * @param {boolean}[o.detailed]    Visa/tillämpa träffområdeseffekter
+ */
+export async function resolveAttack({
+  attacker, weapon, target, skill = null, fv: fvOverride = null, parryItem = null,
+  parrySkill = null, parryFv = null, aimedAt = null,
+  intent = "skada", mods = {}, ranged = false, defending = true, detailed = true
+}) {
+  // ⚠ **Vapnet bär inte FV** — färdigheten gör det (`item-vapen.mjs` har damage,
+  // styGroup, baseValue m.m. men inget fv). Den som anropar måste skicka
+  // färdigheten eller ett uttryckligt `fv`; annars finns ingen chans att träffa.
+  const baseFv = skill?.system.total ?? fvOverride ?? 0;
+  if (!baseFv) throw new Error("resolveAttack: skicka `skill` (fardighet-Item) eller `fv` — vapnet bär inget FV.");
+  const modTotal = Object.values(mods).reduce((a, b) => a + b, 0) + (aimedAt ? -5 : 0);
+  const fv = Math.max(1, baseFv + modTotal);
+
+  const atk = await classifiedRoll(fv);
+
+  // ⚠ Parering: aldrig mot projektilvapen, och aldrig med ett avståndsvapen i
+  // handen (SLB s.17). Kastvapen får pareras om försvararen har sköld.
+  const canParry = !!parryItem && !ranged;
+  const par = canParry
+    ? await classifiedRoll(parrySkill?.system.total ?? parryFv ?? baseFv)
+    : { roll: null, outcome: null };
+
+  const verdict = resolveMatrix(atk.outcome, par.outcome);
+  const out = {
+    fv, modTotal, attack: atk, parry: par, verdict,
+    aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null
+  };
+
+  // ⚠ Träffområdet slås ALLTID — se modulkommentaren. Även när `detailed` är
+  // false; då används det bara inte.
+  const plan = target?.system.bodyPlan ?? "humanoid";
+  const rolled = await CONFIG.DODE.rollHitLocation(plan, { defending, fromBehind: !!mods.bakifran });
+  out.location = aimedAt
+    ? { location: aimedAt, label: CONFIG.DODE.hitLocations[aimedAt] ?? aimedAt, aimed: true }
+    : { ...rolled, aimed: false };
+
+  if (verdict.result === "vapenslitage" || verdict.result === "parerat") {
+    const item = verdict.wearOn === "attacker" ? weapon : parryItem;
+    const dmg = await new Roll(weapon?.system.damage || "1d6").evaluate();
+    // ⚠ Brytvärdet heter `baseValue` på vapenmodellen (BV = brytvärde) — det
+    // fanns redan, oanvänt. SLB s.17: överstiger skadan BV sjunker BV med 1;
+    // vid BV 0 går den överskjutande skadan igenom till försvararen.
+    const bv = item?.system.baseValue ?? null;
+    const worn = bv !== null && dmg.total > bv;
+    if (worn) await item.update({ "system.baseValue": Math.max(0, bv - 1) });
+    const broke = worn && bv - 1 <= 0;
+    out.wear = {
+      item: item?.name ?? "—", damage: dmg.total, bv, bvAfter: worn ? Math.max(0, bv - 1) : bv,
+      worn, broke, wearOn: verdict.wearOn,
+      overflow: broke ? Math.max(0, dmg.total - 0) : 0,
+      note: bv === null ? "⚠ Föremålet saknar brytvärde (baseValue)" : ""
+    };
+    // Vid BV 0 tar försvararen den överskjutande skadan (SLB s.17).
+    if (broke && verdict.wearOn === "defender") {
+      const applied = await applyLocationDamage(target, out.location.location, dmg.total, { intent });
+      out.damage = { roll: dmg, formula: weapon?.system.damage, abs: 0, applied: dmg.total, viaBrokenParry: true };
+      out.effect = applied.effect;
+      out.totalAfter = applied.totalAfter;
+    }
+    return out;
+  }
+
+  if (verdict.result !== "traff") return out;
+
+  // --- Träff: skada → rustning → träffområde + Totala KP -------------------
+  const formula = combineDamageFormula(weapon?.system.damage || "1d6",
+    ranged ? "" : (attacker.system.damageBonus ?? ""));
+  const dmgRoll = await new Roll(formula).evaluate();
+  let damage = verdict.maxDamage
+    // Perfekt: automatiskt maximal skada med maximal skadebonus (SLB s.18).
+    ? dmgRoll.terms.filter((t) => t.faces).reduce((a, t) => a + t.number * t.faces, 0)
+      + dmgRoll.terms.filter((t) => typeof t.number === "number" && !t.faces).reduce((a, t) => a + t.number, 0)
+    : dmgRoll.total;
+
+  // ⚠ Perfekt anfall: försvararens rustningsabsorbering dras INTE bort (SLB s.17).
+  const abs = verdict.ignoreArmour ? 0 : armourFor(target);
+  damage = Math.max(0, damage - abs);
+  out.damage = { roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage };
+
+  if (detailed) await ensureHitLocations(target);
+  const applied = await applyLocationDamage(target, out.location.location, damage, { intent });
+  out.effect = applied.effect;
+  out.totalAfter = applied.totalAfter;
+  out.pulled = applied.pulled;
+  return out;
+}

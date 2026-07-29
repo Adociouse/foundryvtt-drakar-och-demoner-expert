@@ -33,7 +33,7 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
       // ska slå rätt träffområde. Default humanoid, vilket täcker de flesta.
       bodyPlan: new fields.StringField({
         required: false, initial: "humanoid",
-        choices: ["humanoid", "bevingad-humanoid", "kentaur", "svanmo"]
+        choices: ["humanoid", "fyrfota", "bevingad-humanoid", "kentaur", "svanmo"]
       }),
       // Träffområdenas KP — ⚠ TOMT tills någon riktar ett anfall mot varelsen.
       // KP per område HÄRLEDS ur Totala KP (DODE.hitLocationKp), så ingenting

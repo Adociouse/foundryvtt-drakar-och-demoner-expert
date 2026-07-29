@@ -31,6 +31,7 @@ import DoDECharacterWizard from "./apps/character-wizard.mjs";
 import DoDETrainingApp from "./apps/training.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import { DODE } from "./helpers/config.mjs";
+import { resolveAttack } from "./rolls/attack.mjs";
 
 const SYSTEM_ID = "drakar-och-demoner-expert";
 
@@ -206,6 +207,8 @@ Hooks.once("init", () => {
     // Magi har ett eget fönster — EP-källorna skiljer sig från vanliga
     // färdigheters (SB s.7), se apps/magic-training.mjs.
     openMagicTraining: (actor) => new DoDEMagicTrainingApp(actor).render(true),
+    // Stridsupplösning — SLB s.16-18. GM: game.dode.resolveAttack({attacker, weapon, target, ...})
+    resolveAttack,
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects

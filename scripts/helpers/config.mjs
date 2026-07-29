@@ -831,7 +831,12 @@ DODE.movement = function (stoPlusFysPlusSmi) {
  * KP är 1-4 delar man inte in kroppen i olika träffområden" (RP s.48). Riktade
  * anfall är alltså meningslösa mot mycket små varelser.
  *
- * ⚠ **Över 30 Totala KP: +1 på varje träffområde per 5 poäng** (RP s.48).
+ * ⚠ **Över 30 Totala KP: +1 på varje träffområde per 5 poäng.** RP s.24:s
+ * `Kroppspoängstabell` skriver ut banden ända till 31-35 och 36-40 och anger
+ * sedan "+5 → +1", vilket är samma sak. Verifierat: våra sex band plus regeln
+ * ger identiska värden med bokens åtta utskrivna kolumner.
+ *
+ * ⚠ Totala KP självt är **(FYS+STO)/2, alltid uppåt** (RP s.24).
  */
 DODE.hitLocationKpBands = [
   { max: 7, i: 0 }, { max: 11, i: 1 }, { max: 15, i: 2 },
@@ -877,6 +882,35 @@ DODE.bodyPlans = {
       { max: 1, loc: "hoger-ben" }, { max: 2, loc: "vanster-ben" }, { max: 3, loc: "mage" },
       { max: 4, loc: "brostkorg" }, { max: 6, loc: "hoger-arm" }, { max: 8, loc: "vanster-arm" },
       { max: 10, loc: "huvud" }
+    ] }
+  },
+
+  // ⚠ **KONSTRUERAD KROPPSBYGGNAD — creator decision, Johan 2026-07-29.**
+  // Böckerna har ingen fyrfotatabell. Johan: *"Kroppspoängtabell RP page 24 can
+  // be used for quad pedals as well"* — KP-värdena är alltså bokens (samma
+  // Kroppspoängstabell som humanoiden), medan **träfftabellen är påhittad**:
+  // humanoidens två armar byts mot två extra ben, och bröstkorg+mage slås ihop
+  // till en bål. Fördelningen speglar humanoidens (bålen störst, huvudet
+  // minst). Ändra gärna — det här är en tolkning, inte en regel.
+  fyrfota: {
+    label: "Fyrfotadjur",
+    kp: {
+      "hoger-framben":  [2, 3, 4, 5, 6, 7],
+      "vanster-framben":[2, 3, 4, 5, 6, 7],
+      "hoger-bakben":   [3, 4, 5, 6, 7, 8],
+      "vanster-bakben": [3, 4, 5, 6, 7, 8],
+      kropp:            [4, 5, 6, 7, 8, 9],
+      huvud:            [3, 4, 5, 6, 7, 8]
+    },
+    hitA: { die: "1d10", rows: [
+      { max: 1, loc: "hoger-framben" }, { max: 2, loc: "vanster-framben" },
+      { max: 3, loc: "hoger-bakben" }, { max: 4, loc: "vanster-bakben" },
+      { max: 8, loc: "kropp" }, { max: 10, loc: "huvud" }
+    ] },
+    hitB: { die: "1d10", rows: [
+      { max: 2, loc: "hoger-framben" }, { max: 4, loc: "vanster-framben" },
+      { max: 5, loc: "hoger-bakben" }, { max: 6, loc: "vanster-bakben" },
+      { max: 9, loc: "kropp" }, { max: 10, loc: "huvud" }
     ] }
   },
 
