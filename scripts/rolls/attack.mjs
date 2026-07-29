@@ -1,4 +1,4 @@
-import { ensureHitLocations, applyLocationDamage, armourFor } from "../helpers/anatomy.mjs";
+import { ensureHitLocations, applyLocationDamage, armourFor, tokenDistance, meleeReach } from "../helpers/anatomy.mjs";
 import { combineDamageFormula } from "./damage-roll.mjs";
 
 /**
@@ -79,12 +79,33 @@ export function resolveMatrix(attack, parry) {
  * @param {boolean}[o.ranged]      Avståndsanfall — ⚠ kan aldrig pareras utom kastvapen
  * @param {boolean}[o.defending]   Försvarar sig målet? Styr träfftabellens kolumn
  * @param {boolean}[o.detailed]    Visa/tillämpa träffområdeseffekter
+ * @param {TokenDocument} [o.attackerToken] Tillsammans med targetToken ger detta
+ *   en RÄCKVIDDSKONTROLL via Foundrys egen `canvas.grid.measurePath` — respekterar
+ *   rutnätstyp och diagonalregel. Utelämnas de görs ingen kontroll alls.
+ * @param {TokenDocument} [o.targetToken]
  */
 export async function resolveAttack({
   attacker, weapon, target, skill = null, fv: fvOverride = null, parryItem = null,
   parrySkill = null, parryFv = null, aimedAt = null,
-  intent = "skada", mods = {}, ranged = false, defending = true, detailed = true
+  intent = "skada", mods = {}, ranged = false, defending = true, detailed = true,
+  attackerToken = null, targetToken = null
 }) {
+  // ⚠ Räckvidd mäts med Foundrys egen funktion, inte egen geometri — se
+  // tokenDistance(). Kontrollen görs bara när båda tokens skickas med, så
+  // anrop utan karta (tester, SL-fiat) fungerar som förut.
+  if (attackerToken && targetToken) {
+    const d = tokenDistance(attackerToken, targetToken);
+    const reach = ranged ? Infinity : meleeReach(weapon);
+    // ⚠ SLB s.16: avståndsvapen kräver MINST en ruta emellan — man kan inte
+    // skjuta någon som står intill sig.
+    if (ranged && d.spaces < 1) {
+      return { outOfRange: true, distance: d, reason: "Avståndsvapen kräver minst en ruta mellan skytt och mål (SLB s.16)" };
+    }
+    if (!ranged && d.spaces > reach) {
+      return { outOfRange: true, distance: d, reason: `Utom räckhåll — ${d.spaces} rutor, vapnet når ${reach}` };
+    }
+  }
+
   // ⚠ **Vapnet bär inte FV** — färdigheten gör det (`item-vapen.mjs` har damage,
   // styGroup, baseValue m.m. men inget fv). Den som anropar måste skicka
   // färdigheten eller ett uttryckligt `fv`; annars finns ingen chans att träffa.
@@ -124,11 +145,17 @@ export async function resolveAttack({
     // vid BV 0 går den överskjutande skadan igenom till försvararen.
     const bv = item?.system.baseValue ?? null;
     const worn = bv !== null && dmg.total > bv;
-    if (worn) await item.update({ "system.baseValue": Math.max(0, bv - 1) });
+    // ⚠ SLP:ers attacker är fritext i `system.attacks`, inte Item-dokument
+    // (MONSTER.md: källorna anger dem så). Slitaget kan då bara rapporteras,
+    // inte bokföras — därför en guard i stället för ett antagande om Document.
+    if (worn && typeof item?.update === "function") {
+      await item.update({ "system.baseValue": Math.max(0, bv - 1) });
+    }
     const broke = worn && bv - 1 <= 0;
     out.wear = {
       item: item?.name ?? "—", damage: dmg.total, bv, bvAfter: worn ? Math.max(0, bv - 1) : bv,
       worn, broke, wearOn: verdict.wearOn,
+      persisted: typeof item?.update === "function",
       overflow: broke ? Math.max(0, dmg.total - 0) : 0,
       note: bv === null ? "⚠ Föremålet saknar brytvärde (baseValue)" : ""
     };

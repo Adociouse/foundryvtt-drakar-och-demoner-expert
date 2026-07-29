@@ -113,3 +113,39 @@ export async function applyLocationDamage(actor, locationKey, damage, { intent =
 
   return { totalAfter, locationState: state, effect, pulled };
 }
+
+/**
+ * Avstånd mellan två tokens — **Foundrys egen mätning**, inte egen geometri.
+ *
+ * ⚠ Johan 2026-07-29: *"But foundry has distance function, right?"* Ja, och den
+ * ska användas. `canvas.grid.measurePath()` respekterar rutnätstypen (fyrkant,
+ * hex, rutnätslöst) och den diagonalregel världen är inställd på. Ett handskrivet
+ * Chebyshev-avstånd (som stridssimuleringen använde) ger fel så fort någon byter
+ * till hex eller till en annan diagonalregel.
+ *
+ * Returnerar BÅDE `spaces` (rutor — det DoDE:s regler räknar i, SLB s.15) och
+ * `distance` (scenens enheter, hos oss meter). ⚠ På ett rutnätslöst underlag är
+ * `spaces` 0 och bara `distance` är meningsfull.
+ */
+export function tokenDistance(a, b) {
+  const from = a?.object?.center ?? { x: a.x, y: a.y };
+  const to = b?.object?.center ?? { x: b.x, y: b.y };
+  const path = canvas.grid.measurePath([from, to]);
+  return { spaces: path.spaces, distance: path.distance, units: canvas.grid.units };
+}
+
+/**
+ * Är målet inom räckhåll för närstrid?
+ *
+ * ⚠ SLB s.16: "Normalt måste din motståndare stå i rutan intill dig" — alltså
+ * **1 ruta**. Men "med vissa vapen, t.ex. spjut och hillebarder, kan du dock
+ * anfalla motståndare som befinner sig en eller flera rutor bort", och med dem
+ * får man dessutom anfalla **genom rutor med andra stridande i**.
+ *
+ * `vapen.system.length` bär vapenlängden (RP s.58:s "Beräkning av vapenlängd",
+ * 0-5). Vi tolkar räckvidden som `max(1, length)` rutor — ⚠ ett antagande:
+ * boken ger ingen explicit tabell från vapenlängd till antal rutor.
+ */
+export function meleeReach(weapon) {
+  return Math.max(1, Number(weapon?.system?.length) || 1);
+}
