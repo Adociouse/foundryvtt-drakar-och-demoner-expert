@@ -168,6 +168,20 @@ Hooks.once("init", () => {
     default: 300
   });
 
+  // Varaktighet för "det rena utslaget" — se resolveAttack i rolls/attack.mjs.
+  // ⚠ AVSTEG utan bokstöd (Johan 2026-07-29); därför en inställning och inte en
+  // konstant, så varje bord kan sätta hur brutal tjuvfantasin får vara.
+  game.settings.register(SYSTEM_ID, "cleanKnockoutDuration", {
+    name: "Rent utslag — varaktighet (dygn)",
+    hint: "Tärningsformel för hur länge ett perfekt, riktat och bedövande huvudslag "
+      + "håller offret medvetslöst. Slaget gör ingen skada alls och lämnar inga spår.",
+    scope: "world",
+    config: true,
+    restricted: true,
+    type: String,
+    default: "1d3"
+  });
+
   // Initiativ — **Spelledarboken s.16**: "Först i stridsrundan ska alla
   // stridsdeltagare slå ett initiativslag, 1T10+SMI (plus eventuella övriga
   // modifikationer). De som får ett högt resultat får agera före de som får ett

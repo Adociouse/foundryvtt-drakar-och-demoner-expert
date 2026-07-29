@@ -148,6 +148,33 @@ export async function resolveAttack({
     return out;
   }
 
+  // ⚠ **AVSTEG — "det rena utslaget". Creator decision, Johan 2026-07-29.**
+  // Ingen bok har någon motsvarighet. Ett PERFEKT anfallsslag med bedövande
+  // avsikt mot ett RIKTAT huvudslag slår ut offret fullständigt: **noll skada**,
+  // medvetslös i dagar, och inget spår av hur det gick till.
+  //
+  // Elegansen ligger i nollan: eftersom inga KP dras finns det heller ingen
+  // sårskada att hitta, varken mekaniskt eller i fiktionen. Offret vaknar
+  // oskadat och vet inte vad som hände.
+  //
+  // ⚠ Priset är inbyggt: man måste RIKTA mot huvudet (−5 CL), vilket gör det
+  // perfekta slaget svårare att bekräfta. Man betalar alltså i träffchans för
+  // chansen till ett rent utslag.
+  //
+  // ⚠ Kräver medvetet både riktat huvudslag OCH bedövande avsikt — annars hade
+  // ett perfekt rapiestick "slagit ut" någon, vilket vore orimligt.
+  if (atk.outcome === "perfekt" && intent === "bedova" && aimedAt === "huvud") {
+    const formula = game.settings.get("drakar-och-demoner-expert", "cleanKnockoutDuration");
+    const dur = await new Roll(formula).evaluate();
+    out.cleanKnockout = {
+      days: dur.total, roll: dur,
+      text: `Rent utslag — medvetslös i ${dur.total} dygn. Ingen skada, inget spår av hur det gick till.`
+    };
+    out.damage = { roll: null, formula: null, abs: 0, applied: 0, cleanKnockout: true };
+    out.totalAfter = target.system.hp?.value ?? target.system.hp?.max ?? 0;
+    return out;
+  }
+
   if (verdict.result !== "traff") return out;
 
   // --- Träff: skada → rustning → träffområde + Totala KP -------------------
