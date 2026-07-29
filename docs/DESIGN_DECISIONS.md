@@ -349,7 +349,17 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 41. **Utrustningstabeller ur Magi-regelboken och Spelarboken.** Johan 2026-07-29: `02-102_-_D&DE_Magi_HQJonas.pdf` **s.43-49** och `D&DE III_-_Spelarboken` **s.42-44** innehåller utrustningstabeller som ännu inte är importerade. `utrustning`-typen och `vapen-utrustning`-packet finns redan, så det är en extraherings- och porteringsuppgift, inte en modelleringsuppgift. ⚠ Följ extraktpipelinen — skriv tillbaka ett kurerat extrakt om råtexten är trasig.
 
-42. **⚠ Källförvirring: två olika Magi-böcker i filmappen.** Johan 2026-07-29: `02-102_-_D&DE_Magi_HQJonas.pdf` (äldre) säger på s.5 att man vid rollpersonsskapande lär sig besvärjelser som vanliga färdigheter, och har in-game-träning på s.37; `D&DE 0_Magi_text.txt` är det extrakt kod och dokument hittills utgått från, utan att någon avgjort vilken utgåva som gäller. Flera av dagens rättelser kommer ur just den förvirringen. **Att göra:** slå fast vilken Magi-utgåva som är kanon för systemet, dokumentera det i REGLER_README.md, och gå igenom `MAGI.md` mot den valda utgåvan. Tills dess gäller **SB s.7** för träning, eftersom den är Expert-seriens egen spelarbok.
+42. ⭐ **UTGÅVEPRECEDENS — BESLUTAD 2026-07-29: Expertböckerna slår grundregelboken.** Johan: *"RP should win."* Uppstod kring rutstorlek men gäller generellt, och löser den återkommande frågan en gång för alla:
+
+    **Rangordning när källor säger olika:** **RP / SB / SLB / MAG** (Expert-serien) **>** **REG** (grundregelboken) **>** kurerade `docs/wiki/`-dokument.
+
+    ⚠ De kurerade wiki-dokumenten hamnar SIST med flit — de har visat sig fel fyra gånger på en dag (besvärjelsers ensamträning, INT-modifikationens tecken, besvärjelsetabellens dubblerade rad, "stressigt läge" som inte står i någon bok).
+
+    **Redan avgjorda enligt den här ordningen:** magiträning (SB s.7 över det äldre Magi-häftet), initiativ (SLB 1T10+SMI över REG:s statiska SMI), sköldars tålighet (SLB:s BV-slitage över REG:s 1/20-chans), sömnklockan (RP s.63 + REG s.45 mot wiki-dokumentets "stressigt läge"). **Kvar att välja:** prisskalan (REG:s eller SB:s ~6× högre — se post 4d) och rustningstabellen (RP s.52:s korta lista mot SB s.27:s längre, som har Lamellerad och Laminerad upp till Abs 8).
+
+    ⚠ **Rutstorleken var INGEN konflikt.** Johan misstänkte en avvikelse mellan REG och Foundry; kontrollerat och avfärdat — REG skriver *"1 ruta (1,5 m)"*, RP s.25 *"en ruta är 1,5 meter"*, SLB s.15 "rutor om 150 cm". Alla tre överens, och vårt scenrutnät (64 px = 1,5 m) stämmer. Det som faktiskt skavde var REG s.58:s **längdKOD**, som aldrig var ett rutmått.
+
+43b. **⚠ Källförvirring: två olika Magi-böcker i filmappen.** Johan 2026-07-29: `02-102_-_D&DE_Magi_HQJonas.pdf` (äldre) säger på s.5 att man vid rollpersonsskapande lär sig besvärjelser som vanliga färdigheter, och har in-game-träning på s.37; `D&DE 0_Magi_text.txt` är det extrakt kod och dokument hittills utgått från, utan att någon avgjort vilken utgåva som gäller. Flera av dagens rättelser kommer ur just den förvirringen. **Att göra:** slå fast vilken Magi-utgåva som är kanon för systemet, dokumentera det i REGLER_README.md, och gå igenom `MAGI.md` mot den valda utgåvan. Tills dess gäller **SB s.7** för träning, eftersom den är Expert-seriens egen spelarbok.
 
 43. **Referens­tabeller ur RP som saknas i kompendiet.** Johan 2026-07-29, tre stycken: **Färdighetstabellen** ("en gem"), **Svårighetstabellen** och **Motståndstabellen** (RP s.38). Hör hemma i `tabeller`/`regler`-packen tillsammans med backlogpost 27:s övriga tabeller.
 
