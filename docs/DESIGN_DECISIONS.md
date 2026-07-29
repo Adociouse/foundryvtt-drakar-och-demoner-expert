@@ -348,6 +348,8 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 54. **Sköldar som `rustning` är fel typ på sikt.** De har `abs: 0` och bärs bara för att pareras med — SB s.38 ger dem STY-krav, BV, vikt och pris, precis som vapentabellen. Mekaniskt är en sköld ett **pareringsvapen** (SLB s.16: den köper en extra handling), inte en rustning. `vapen`-typen passar bättre; `rustning` fick nu `baseValue`/`styGroup` som en övergångslösning. Byte kräver migrering av befintliga rollpersoners utrustning.
 
+55. **⚠ Naturlig lakningstakt saknas i kallan.** `REGLER_STRID.md` anger *"Total vila: Normal takt per dag (⚠ exakt varde — verifiera mot REG)"* — antalet KP per dygn ar aldrig transkriberat, bara att latt aktivitet halverar det. Maste lasas i **REG s.50-52** innan lakning kan automatiseras mot varldsklockan (§10.3d). Lakekonst ar daremot komplett: ett fardighetsslag per patient per hel vecka, lyckat slag ger dubbel lakning.
+
 16. **English localization.** Low priority per project scope.
 
 40. **Magisk kodex som riktigt föremål.** `besvarjelse.system.hasCodex` är i dag en boolean på besvärjelsen. En kodex är i fiktionen ett fysiskt band (SB s.7: 20-30 sidor handskriven text per besvärjelse) som ska gå att **köpa, hitta i en skattkammare och bli av med**. Bör bli ett `utrustning`-föremål med en referens till vilken besvärjelse det beskriver, och magiträningsfönstret slå upp ägandet i stället för att läsa en bock. Hänger ihop med handlarna (Mirac/Lasslo) och med backlogpost 30.
@@ -1135,6 +1137,40 @@ EN worldTime
 `kind` avgor vilka raknare som ror sig (se tabellen i 10.3b) — **inte vilken klocka
 som gar**. Det ger Johans tvadelning i praktiken, utan att skapa tva sanningar om
 vad klockan ar.
+
+### 10.3d Lakning och sjukdom — dygnsskalan som binder ihop det
+
+Johan: *"some effects like sickness and healing happens over days."*
+
+⭐ **Det ar det starkaste argumentet hittills for EN klocka.** Lakning ar
+per-dygn, strid ar per-sekund, och en sarad rollperson gar genom bada utan att
+lakningen far pausa. Med tva axlar skulle en skada lakas olika fort beroende pa
+hur mycket av veckan som rakade tillbringas i strid — vilket ar uppenbart fel.
+
+**Det gor ocksa `kind`-flaggan (10.3b) till mer an bokforing** — den ar
+lakningstakten:
+
+| Tidsslag | Naturlig lakning (REGLER_STRID.md, REG s.50-52) |
+|---|---|
+| **Vila** (sangliggande) | normal takt per dygn |
+| **Resa / aventyr** (latt aktivitet) | ⚠ **halverad takt** |
+| **Strid** | ingen |
+
+⚠ Samma flagga styr alltsa tre saker samtidigt: vilosviten, provianten och
+lakningstakten. Det ar ett gott tecken pa att modellen ar ratt skuren — en
+markning, tre foljder.
+
+⚠ **LUCKA I KALLAN:** `REGLER_STRID.md` skriver *"Normal takt per dag (⚠ exakt
+varde — verifiera mot REG)"* — sjalva antalet KP per dygn ar alltsa **inte
+transkriberat**. Det maste letas upp i REG s.50-52 innan lakning kan
+automatiseras. **Lakekonst** ar daremot tydlig: ett fardighetsslag per patient per
+**hel vecka** av vard, och ett lyckat slag ger **dubbel** lakning den veckan —
+vilket ocksa ar en veckoskala som bara fungerar med en gemensam klocka.
+
+**Sjukdom och gift** har ingen mekanik alls an (se backlogpost 32 om Mirac och
+Spelledarbokens drogregler). Nar de byggs bor de vara **ActiveEffects med
+`duration.seconds`** — da kryper de framat av samma klocka och behover ingen egen
+bokforing, precis som besvarjelser redan gor.
 
 ### 10.4 Foreslagen byggordning
 
