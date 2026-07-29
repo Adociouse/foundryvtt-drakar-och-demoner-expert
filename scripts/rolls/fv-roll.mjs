@@ -1,4 +1,4 @@
-import { epAwardFlag } from "../helpers/ep.mjs";
+import { canEarnFromUse, rollEpAward, awardItemEp } from "../helpers/ep.mjs";
 
 /**
  * FV-slaget: 1T20 ≤ FV lyckas. Perfekt/fummel-bekräftelse enligt REGLER_STRID.md
@@ -23,6 +23,19 @@ export async function rollFV({ actor, label, fv, item = null }) {
     outcome = confirm.total > fv ? "fummel" : "misslyckat";
   }
 
+  // Erfarenhetspoäng — RP s.63. ⚠ AUTOMATISKT, inte ett SL-beslut: regeln ger EP
+  // "första gången färdigheten används framgångsrikt efter en sovperiod", och det
+  // kan systemet avgöra självt via sömnklockan (`item.system.ep.awardedSinceRest`).
+  // Här låg tidigare en SL-knapp för "stressigt läge" — den formuleringen kommer
+  // från ett kurerat dokument och står inte i vare sig RP s.63 eller REG s.45.
+  // Bytt efter Johans beslut 2026-07-29, se DESIGN_DECISIONS.md backlogpost 39.
+  let epAward = null;
+  if (success && item && actor?.type === "character" && canEarnFromUse(item)) {
+    const { amount, roll: epRoll } = await rollEpAward(outcome);
+    await awardItemEp(item, amount);
+    epAward = { amount, roll: epRoll };
+  }
+
   const outcomeLabels = {
     perfekt: "DODE.RollCard.Perfekt",
     fummel: "DODE.RollCard.Fummel",
@@ -38,23 +51,22 @@ export async function rollFV({ actor, label, fv, item = null }) {
       result,
       cssClass: outcome,
       outcomeLabel: game.i18n.localize(outcomeLabels[outcome]),
-      // EP-utdelningsknapp — bara vid lyckade slag från en färdighet/besvärjelse
-      // som ägs av en rollperson. ⚠ Knappen är ett SL-beslut, inte en automatik:
-      // REG s.45 ger EP bara "i ett stressigt läge (SL bedömer)", och systemet
-      // kan inte veta det. Se helpers/ep.mjs.
-      canAwardEp: !!item && !!actor && success && actor.type === "character",
+      epAmount: epAward?.amount ?? 0,
       epItemName: item?.name ?? "",
       epIsPerfekt: outcome === "perfekt"
     }
   );
 
+  // 1T3+1-slaget för perfekt läggs med så att Dice So Nice animerar det.
+  const rolls = [roll];
+  if (epAward?.roll) rolls.push(epAward.roll);
+
   const message = await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content,
-    rolls: [roll],
-    sound: CONFIG.sounds.dice,
-    flags: epAwardFlag(actor, item, outcome)
+    rolls,
+    sound: CONFIG.sounds.dice
   });
 
-  return { outcome, result, message };
+  return { outcome, result, message, epAward };
 }

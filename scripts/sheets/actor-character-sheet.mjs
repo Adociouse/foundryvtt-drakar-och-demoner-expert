@@ -32,6 +32,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       openTraining: DoDECharacterSheet.#onOpenTraining,
       openMagicTraining: DoDECharacterSheet.#onOpenMagicTraining,
       toggleRest: DoDECharacterSheet.#onToggleRest,
+      sleep: DoDECharacterSheet.#onSleep,
       awardBonusEp: DoDECharacterSheet.#onAwardBonusEp
     },
     form: { submitOnChange: true, closeOnSubmit: false }
@@ -90,6 +91,9 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // Viloperiodsgrinden — REG s.46. SL öppnar, spelaren tränar. Träningsknappen
     // visas bara när grinden är öppen; SL ser växeln alltid.
     context.trainingUnlocked = !!this.actor.system.rest?.trainingUnlocked;
+    // Hur många färdigheter som redan gett EP sedan senaste sovperioden — visas
+    // på sovknappen så SL ser om den behöver tryckas.
+    context.usedSinceRest = this.actor.items.filter((i) => i.system.ep?.awardedSinceRest).length;
     context.minimagi = await this.#prepareMinimagi();
     // Magiträningsknappen visas bara för den som faktiskt har magi att träna.
     context.hasMagic = this.actor.items.some(
@@ -125,6 +129,19 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     ui.notifications.info(next
       ? `Viloperiod öppnad för ${this.actor.name} — träning möjlig.`
       : `Viloperiod stängd för ${this.actor.name}.`);
+  }
+
+  /**
+   * Sovperiod — nollar sömnklockan så att varje färdighet kan tjäna EP igen
+   * (RP s.63: minst sex timmar, ⚠ två timmar för alver). Systemet spårar ingen
+   * speltid, så längden är SL:s bedömning; knappen kvitterar att den ägt rum.
+   */
+  static async #onSleep() {
+    const { clearAwardMarks } = await import("../helpers/ep.mjs");
+    const count = await clearAwardMarks(this.actor);
+    ui.notifications.info(count
+      ? `${this.actor.name} har sovit — ${count} färdigheter kan tjäna EP igen.`
+      : `${this.actor.name} har sovit. Inga färdigheter hade använts sedan sist.`);
   }
 
   /**

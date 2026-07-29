@@ -703,3 +703,5 @@
 .training-wallet .purse.is-short { color: #a33; }
 .training-attr { flex: 0 0 auto; font-size: 0.8em; opacity: 0.8; white-space: nowrap; }
 .training-label .note.warn { color: #a3701f; }
+.dode-roll-card .roll-card-ep { margin-top: 6px; text-align: center; font-size: 0.85em; color: #8a6d1f; }
+.skill-row .used-mark { opacity: 0.4; font-size: 0.75em; }

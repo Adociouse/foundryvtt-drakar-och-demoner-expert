@@ -43,6 +43,17 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
       // `earned` räknas upp av strecket, `spent` av köp i träningsfönstret —
       // båda ackumulerar, så historiken finns kvar när potten är tömd.
       ep: new fields.SchemaField({
+        // ⚠ SÖMNKLOCKA, inte stressbedömning. RP s.63 (ordagrant samma i REG
+        // s.45): EP ges "varje gång som en rollperson använder en färdighet
+        // framgångsrikt FÖRSTA GÅNGEN EFTER EN SOVPERIOD om minst sex timmar
+        // (två timmar för alver)". Sedan kan färdigheten inte ge mer EP förrän
+        // rollpersonen sovit igen. Flaggan nollas av clearAwardMarks().
+        //
+        // ⚠ Systemet gjorde tidigare "1 EP per lyckat slag i ett stressigt läge
+        // (SL bedömer)" efter den kurerade REGLER_FARDIGHETER.md. Den regeln står
+        // inte i NÅGON av böckerna — bytt till sömnklockan efter Johans beslut
+        // 2026-07-29. Se DESIGN_DECISIONS.md backlogpost 39.
+        awardedSinceRest: new fields.BooleanField({ required: false, initial: false }),
         earned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),

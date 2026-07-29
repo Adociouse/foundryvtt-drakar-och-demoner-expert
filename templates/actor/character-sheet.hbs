@@ -19,6 +19,12 @@
         <button type="button" data-action="awardBonusEp" title="Dela ut fria bonuspoäng efter äventyret">
           <i class="fa-solid fa-star"></i>
         </button>
+        {{!-- Sömnklockan — RP s.63: en färdighet ger EP första gången den lyckas
+              efter en sovperiod om minst sex timmar (två för alver). --}}
+        <button type="button" data-action="sleep"
+          title="Sovperiod — nollställer sömnklockan så färdigheterna kan tjäna EP igen (RP s.63: minst 6 timmar, 2 för alver){{#if usedSinceRest}}. {{usedSinceRest}} färdigheter har gett EP sedan sist{{/if}}">
+          <i class="fa-solid fa-moon"></i>{{#if usedSinceRest}} {{usedSinceRest}}{{/if}}
+        </button>
       {{/if}}
       {{#if trainingUnlocked}}
         <button type="button" data-action="openTraining" title="Träna färdigheter — tjäna och omsätt EP">
@@ -118,6 +124,10 @@
           <span class="skill-fv skill-total" title="{{localize 'DODE.Actor.Total'}}">= {{skill.system.total}}</span>
         {{else}}
           <span class="skill-fv">FV {{skill.system.fv}}</span>
+        {{/if}}
+        {{#if skill.system.ep.awardedSinceRest}}
+          {{!-- Har redan gett EP sedan senaste sovperioden (RP s.63). --}}
+          <i class="fa-solid fa-moon used-mark" title="Har redan gett EP sedan senaste sovperioden"></i>
         {{/if}}
         {{#if skill.system.ep.available}}
           {{!-- Färdighetens egen EP-pott — bunden hit, kan inte flyttas (REG s.45). --}}

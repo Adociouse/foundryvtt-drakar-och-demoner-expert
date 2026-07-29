@@ -6,15 +6,13 @@
     <span class="d20-result">{{result}}</span>
     <span class="outcome-label">{{outcomeLabel}}</span>
   </div>
-  {{!-- EP-streck. Visas bara för SL: REG s.45 ger EP endast "i ett stressigt
-        läge (SL bedömer)", så utdelningen måste vara ett beslut, inte en
-        automatisk följd av att slaget lyckades. --}}
-  {{#if canAwardEp}}
+  {{!-- EP tilldelas AUTOMATISKT vid första lyckade användningen efter en
+        sovperiod (RP s.63). Ingen knapp och ingen SL-bedömning — sömnklockan
+        avgör, och nollas när rollpersonen sovit. --}}
+  {{#if epAmount}}
     <footer class="roll-card-ep">
-      <button type="button" data-dode-award-ep>
-        <i class="fa-solid fa-star"></i>
-        {{#if epIsPerfekt}}Perfekt — dela ut 1T3+1 EP{{else}}Stressigt läge — dela ut 1 EP{{/if}}
-      </button>
+      <i class="fa-solid fa-star"></i>
+      +{{epAmount}} EP → {{epItemName}}{{#if epIsPerfekt}} <em>(perfekt: 1T3+1)</em>{{/if}}
     </footer>
   {{/if}}
 </div>
