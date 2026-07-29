@@ -50,6 +50,13 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
   }
 
   prepareDerivedData() {
+    // ⚠ `total` speglar bara `value` här. Rollpersonen har mönstret
+    // value/bonus/total (se actor-character.mjs); NPC:er har inget bonuslager
+    // ännu. Fältet finns ändå så att EN initiativformel fungerar för båda
+    // aktörstyperna — se CONFIG.Combat.initiative i dode.mjs. Får NPC:er
+    // bonusar senare räknas de in här utan att formeln behöver ändras.
+    for (const attr of Object.values(this.attributes)) attr.total = attr.value;
+
     const a = this.attributes;
     for (const data of Object.values(a)) {
       data.group = DODE.attributeToGroup(data.value);

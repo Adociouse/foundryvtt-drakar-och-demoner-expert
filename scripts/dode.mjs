@@ -167,6 +167,29 @@ Hooks.once("init", () => {
     default: 300
   });
 
+  // Initiativ — **Spelledarboken s.16**: "Först i stridsrundan ska alla
+  // stridsdeltagare slå ett initiativslag, 1T10+SMI (plus eventuella övriga
+  // modifikationer). De som får ett högt resultat får agera före de som får ett
+  // lågt. Om två deltagare får samma resultat låter man dem slå om."
+  //
+  // ⚠ Utan detta faller Foundry tillbaka på sitt eget `1d20`, helt frikopplat
+  // från rollpersonen — det gällde fram till 2026-07-29, och drabbade även
+  // moduler som Combat Carousel som bara läser systemets formel.
+  //
+  // ⚠ KÄLLKONFLIKT: grundregelboken (REG s.56, via REGLER_STRID.md) har en HELT
+  // annan turordning — statisk SMI-jämförelse där högst SMI agerar först, med
+  // 1T6 enbart som skiljeslag, plus att vapenlängd alltid går först i stridens
+  // första SR. Vi följer SLB eftersom det är den enda av de två som går att
+  // uttrycka som en Foundry-initiativformel. Se DESIGN_DECISIONS.md post 47/48.
+  //
+  // ⚠ Modifikationerna (Krigare +5, Karate +5, Hoppspark/Rundspark −2,
+  // stridskonsttekniken Initiativbonus +5) ligger INTE i formeln — de är
+  // situationsberoende och hör till stridslogiken.
+  CONFIG.Combat.initiative = {
+    formula: "1d10 + @attributes.smi.total",
+    decimals: 0
+  };
+
   // Delade delmallar måste laddas innan {{> "path"}} kan användas.
   foundry.applications.handlebars.loadTemplates([
     "systems/drakar-och-demoner-expert/templates/apps/training-header.hbs",
