@@ -1,0 +1,71 @@
+{{!-- Stridskort — SLB s.31:s flöde, uppifrån och ned i samma ordning som
+      diagrammet: CL → anfallsslag → pareringsslag → träffområde → skada. --}}
+<div class="dode-attack-card {{cssClass}}">
+  <header class="attack-header">
+    <img src="{{weaponImg}}" alt="" />
+    <div>
+      <strong>{{attackerName}}</strong>
+      <span class="weapon">{{weaponName}}{{#if aimed}} — riktat mot {{locationLabel}}{{/if}}</span>
+    </div>
+    {{#if intentBedova}}<i class="fa-solid fa-hand-fist" title="Bedövande avsikt"></i>{{/if}}
+  </header>
+
+  {{!-- CL-uppdelningen: bas + varje modifikation, så bordet ser varför. --}}
+  <div class="cl-line" title="Chans att lyckas">
+    CL <strong>{{fv}}</strong>
+    {{#if clParts.length}}
+      <span class="cl-parts">
+        ({{base}}{{#each clParts}} {{#if this.positive}}+{{/if}}{{this.value}} {{this.label}}{{/each}})
+      </span>
+    {{/if}}
+  </div>
+
+  <div class="roll-line">
+    <span class="label">Anfall</span>
+    <span class="d20 {{attackOutcome}}">{{attackRoll}}</span>
+    <span class="outcome {{attackOutcome}}">{{attackOutcomeLabel}}</span>
+  </div>
+
+  {{#if hasParry}}
+    <div class="roll-line">
+      <span class="label">Parering</span>
+      <span class="d20 {{parryOutcome}}">{{parryRoll}}</span>
+      <span class="outcome {{parryOutcome}}">{{parryOutcomeLabel}}</span>
+      <span class="via">{{parryItemName}}</span>
+    </div>
+  {{else if ranged}}
+    <div class="roll-line muted">Projektilvapen kan inte pareras (SLB s.16)</div>
+  {{/if}}
+
+  {{#if cleanKnockout}}
+    {{!-- Avsteg: perfekt + bedövande + riktat huvudslag. Noll skada, inget spår. --}}
+    <div class="clean-knockout">
+      <i class="fa-solid fa-moon"></i> {{cleanKnockout.text}}
+    </div>
+  {{else if wear}}
+    <div class="wear-line">
+      <i class="fa-solid fa-shield-halved"></i>
+      {{wear.item}}: skada {{wear.damage}} mot BV {{wear.bv}}
+      {{#if wear.worn}}→ BV {{wear.bvAfter}}{{else}}— håller{{/if}}
+      {{#if wear.broke}}<strong>genombruten!</strong>{{/if}}
+    </div>
+  {{/if}}
+
+  {{#if damage}}
+    <div class="damage-line">
+      <span class="location">{{locationLabel}}</span>
+      <span class="dmg">{{damage.rolled}}{{#if damage.maximised}} (max){{/if}}</span>
+      {{#if damage.abs}}<span class="abs">− {{damage.abs}} abs</span>{{/if}}
+      <strong class="applied">{{damage.applied}} KP</strong>
+    </div>
+    <div class="total-line">Totala KP kvar: <strong>{{totalAfter}}</strong>{{#if pulled}} <em>(slaget hölls tillbaka)</em>{{/if}}</div>
+  {{/if}}
+
+  {{#if effect}}
+    <div class="effect-line {{effect.level}}">
+      <i class="fa-solid fa-triangle-exclamation"></i> {{effect.text}}
+    </div>
+  {{/if}}
+
+  {{#if verdictNote}}<div class="verdict-note">{{verdictNote}}</div>{{/if}}
+</div>

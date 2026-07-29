@@ -104,7 +104,7 @@ export async function resolveAttack({
 
   const verdict = resolveMatrix(atk.outcome, par.outcome);
   const out = {
-    fv, modTotal, attack: atk, parry: par, verdict,
+    fv, modTotal, mods, attack: atk, parry: par, verdict,
     aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null
   };
 
@@ -207,4 +207,64 @@ export async function resolveAttack({
   out.totalAfter = applied.totalAfter;
   out.pulled = applied.pulled;
   return out;
+}
+
+const OUTCOME_LABEL = { perfekt: "Perfekt!", lyckat: "Lyckat", misslyckat: "Misslyckat", fummel: "Fummel!" };
+const VERDICT_NOTE = {
+  "fummeltabell-anfall": "⚠ Slå på fummeltabellen för anfall (ej byggd än)",
+  "fummeltabell-parering": "⚠ Slå på fummeltabellen för pareringar (ej byggd än)",
+  ingenting: "Ingenting händer — fortsätt med nästa attack",
+  parerat: "Pareringen höll — anfallet är slut (SLB s.31)",
+  vapenslitage: "Pareringen tog emot ett misslyckat hugg — anfallarens vapen slits"
+};
+
+/**
+ * Postar stridskortet. Följer stridsdiagrammets ordning (SLB s.31) uppifrån och
+ * ned, så att bordet kan följa med i samma sekvens som boken.
+ *
+ * ⚠ Alla tärningar bifogas `rolls` så att Dice So Nice animerar dem.
+ */
+export async function postAttackCard(result, { attacker, weapon, parryItem, ranged }) {
+  const parts = Object.entries(result.mods ?? {}).map(([k, v]) => ({
+    label: k, value: v, positive: v > 0
+  }));
+  if (result.aimed) parts.push({ label: "riktat", value: -5, positive: false });
+
+  const content = await renderTemplate(
+    "systems/drakar-och-demoner-expert/templates/chat/attack-card.hbs", {
+      attackerName: attacker.name,
+      weaponName: weapon?.name ?? "Obeväpnad",
+      weaponImg: weapon?.img ?? attacker.img,
+      aimed: result.aimed,
+      intentBedova: result.intent === "bedova",
+      fv: result.fv, base: result.fv - result.modTotal, clParts: parts,
+      attackRoll: result.attack.roll.total,
+      attackOutcome: result.attack.outcome,
+      attackOutcomeLabel: OUTCOME_LABEL[result.attack.outcome],
+      hasParry: !!result.parry.roll,
+      parryRoll: result.parry.roll?.total,
+      parryOutcome: result.parry.outcome,
+      parryOutcomeLabel: OUTCOME_LABEL[result.parry.outcome],
+      parryItemName: parryItem?.name ?? "",
+      ranged,
+      locationLabel: result.location?.label,
+      damage: result.damage?.roll ? {
+        rolled: result.damage.roll.total, abs: result.damage.abs,
+        applied: result.damage.applied, maximised: result.damage.maximised
+      } : null,
+      totalAfter: result.totalAfter, pulled: result.pulled,
+      effect: result.effect, wear: result.wear, cleanKnockout: result.cleanKnockout,
+      verdictNote: VERDICT_NOTE[result.verdict.result] ?? "",
+      cssClass: result.attack.outcome
+    });
+
+  const rolls = [result.attack.roll];
+  if (result.parry.roll) rolls.push(result.parry.roll);
+  if (result.damage?.roll) rolls.push(result.damage.roll);
+  if (result.cleanKnockout?.roll) rolls.push(result.cleanKnockout.roll);
+
+  return ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor: attacker }),
+    content, rolls, sound: CONFIG.sounds.dice
+  });
 }

@@ -705,3 +705,30 @@
 .training-label .note.warn { color: #a3701f; }
 .dode-roll-card .roll-card-ep { margin-top: 6px; text-align: center; font-size: 0.85em; color: #8a6d1f; }
 .skill-row .used-mark { opacity: 0.4; font-size: 0.75em; }
+
+/* ---- Stridskort (SLB s.31) ---- */
+.dode-attack-card { font-size: 0.9em; }
+.dode-attack-card .attack-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.dode-attack-card .attack-header img { width: 32px; height: 32px; border: none; object-fit: cover; }
+.dode-attack-card .attack-header .weapon { display: block; font-size: 0.85em; opacity: 0.8; }
+.dode-attack-card .cl-line { font-size: 0.85em; margin-bottom: 4px; }
+.dode-attack-card .cl-parts { opacity: 0.7; }
+.dode-attack-card .roll-line { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+.dode-attack-card .roll-line .label { flex: 0 0 60px; opacity: 0.8; }
+.dode-attack-card .roll-line .via { font-size: 0.8em; opacity: 0.6; }
+.dode-attack-card .roll-line.muted { opacity: 0.6; font-style: italic; font-size: 0.85em; }
+.dode-attack-card .d20 { font-weight: 700; min-width: 1.8em; text-align: center; }
+.dode-attack-card .outcome.perfekt, .dode-attack-card .d20.perfekt { color: #2f6d3a; }
+.dode-attack-card .outcome.fummel, .dode-attack-card .d20.fummel { color: #a33; }
+.dode-attack-card .damage-line { display: flex; gap: 8px; align-items: baseline; margin-top: 4px;
+  padding-top: 4px; border-top: 1px solid rgba(0,0,0,0.1); }
+.dode-attack-card .damage-line .location { font-weight: 600; }
+.dode-attack-card .damage-line .abs { opacity: 0.7; font-size: 0.85em; }
+.dode-attack-card .total-line { font-size: 0.85em; opacity: 0.85; }
+.dode-attack-card .effect-line { margin-top: 4px; padding: 4px 6px; border-radius: 3px;
+  background: rgba(170,51,51,0.12); font-size: 0.85em; }
+.dode-attack-card .effect-line.kritisk { background: rgba(170,51,51,0.28); font-weight: 600; }
+.dode-attack-card .clean-knockout { margin-top: 4px; padding: 5px 6px; border-radius: 3px;
+  background: rgba(60,60,120,0.18); font-size: 0.85em; }
+.dode-attack-card .wear-line { font-size: 0.85em; opacity: 0.85; margin-top: 3px; }
+.dode-attack-card .verdict-note { font-size: 0.8em; opacity: 0.7; font-style: italic; margin-top: 3px; }
