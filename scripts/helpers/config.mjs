@@ -1050,3 +1050,56 @@ DODE.rollHitLocation = async function (bodyPlanKey, { defending = true, fromBehi
   const location = (fromBehind && row.fromBehind?.[roll.total]) || row.loc;
   return { roll, location, label: DODE.hitLocations[location] ?? location, column: defending ? "B" : "A" };
 };
+
+/* -------------------------------------------------------------------------- */
+/*  Svärdshand — Rollpersonen s.27                                             */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * ⚠ **Egen rollpersonsegenskap som saknades helt i systemet** (upptäckt via
+ * Johans fotografi av RP s.27, 2026-07-29).
+ *
+ * "Den hand som du normalt använder (högerhanden för en högerhänt person) kommer
+ * hädanefter alltid att kallas för **svärdshand**, medan den aviga handen kallas
+ * **sköldhand**."
+ *
+ * ⚠ **Detta är förklaringen till sköldhandens −10 CL** (SLB s.17):
+ * "Sköldhanden är genomgående sämre än svärdshanden, **utom för färdigheterna
+ * Två vapen och Sköld**." Straffet gäller alltså all avig-handsanvändning — och
+ * upphävs inte av att man håller två vapen i sig, utan av att man använder just
+ * färdigheterna *Två vapen* eller *Sköld*.
+ *
+ * Slås med **2T6 + antalet BP man väljer att lägga på det** (+1 per BP).
+ */
+DODE.swordHandTable = [
+  { max: 11, key: "hoger", label: "Höger" },
+  { max: 14, key: "vanster", label: "Vänster" },
+  { max: 18, key: "dubbelhant", label: "Dubbelhänt" },
+  { max: Infinity, key: "ambidextrios", label: "Ambidextriös" }
+];
+
+/**
+ * ⚠ **Dubbelhänt och ambidextriös är INTE samma sak** — RP s.27:
+ *  - **Dubbelhänt:** "kan använda högerhanden och vänsterhanden lika bra,
+ *    **dock inte samtidigt**."
+ *  - **Ambidextriös:** kan använda "bägge händerna **samtidigt** till olika saker
+ *    utan att ha några som helst problem. Du kan t.ex. skriva två olika saker
+ *    samtidigt."
+ *
+ * Ambidextriös är alltså inte en stridsförmåga utan en generell samtidighet —
+ * stridsvinsten är en följd, inte definitionen.
+ */
+DODE.swordHands = {
+  hoger: "Höger", vanster: "Vänster",
+  dubbelhant: "Dubbelhänt", ambidextrios: "Ambidextriös"
+};
+
+/** Har rollpersonen ingen sämre hand alls? Gäller dubbelhänt och ambidextriös. */
+DODE.hasNoOffHandPenalty = function (swordHand) {
+  return swordHand === "dubbelhant" || swordHand === "ambidextrios";
+};
+
+/** 2T6+BP → svärdshand (RP s.27). ⚠ Behövs inte om förmågan fåtts som särskild förmåga. */
+DODE.swordHandFromRoll = function (total) {
+  return DODE.swordHandTable.find((r) => total <= r.max);
+};

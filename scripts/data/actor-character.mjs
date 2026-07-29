@@ -126,6 +126,13 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       // kropp i samma ögonblick som någon siktar på den. Det är mekaniken som
       // gör det möjligt att blanda vanlig och detaljerad strid utan bokföring.
       hitLocations: new fields.ObjectField({ required: false, initial: () => ({}) }),
+      // Svärdshand — RP s.27. Slås med 2T6 + spenderade BP vid skapandet.
+      // ⚠ Styr sköldhandens −10 CL (SLB s.17): dubbelhänt och ambidextriös har
+      // ingen sämre hand alls. Se DODE.swordHandTable.
+      swordHand: new fields.StringField({
+        required: false, initial: "hoger",
+        choices: ["hoger", "vanster", "dubbelhant", "ambidextrios"]
+      }),
       alder: new fields.StringField({ required: false, initial: "" }),
       // Särskilda förmågor — MVP, PLAN_WIZARD_V2.md Fas 8. ⚠ FORSKNINGSLUCKA:
       // ingen komplett källtabell för VILKA förmågor som finns/vad de gör är
