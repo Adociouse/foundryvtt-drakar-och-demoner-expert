@@ -1068,12 +1068,49 @@ klockan**, och grindarna oppnas av att tiden passerat.
 ⚠ **Migrering kravs** — befintliga rollpersoner har booleans, inte tidsstamplar.
 Bada kan defaulta till 0 (= "lange sedan"), vilket ar ett ofarligt startlage.
 
+### 10.3b ⭐ Tid har ett SLAG, inte bara en langd (Johan 2026-07-29)
+
+Johan: *"time window probably also should have traveltime? Dont think that is
+really rest time for training, but on the other hand I guess you sleep when
+travelling for a week... and consume rations and water."*
+
+⚠ **Det haller, och det andrar modellen i 10.3.** Traningsgrinden kan INTE vara
+`worldTime - lastLongRest >= 7 dygn`, for RP s.63 kraver en *"sammanhangande
+viloperiod om minst sju dagar"* — **sammanhangande VILA**. En vecka pa vagen ar
+sju dygn av tid men noll dygn av vila.
+
+**Grinden ar alltsa en SVIT, inte en tidsstampel.** Den ackumuleras av vilodygn
+och **nollstalls** av allt annat.
+
+| Tidsslag | Klockan gar | Somnklockan nollas | Vilosviten | Proviant |
+|---|---|---|---|---|
+| **Vila** | ja | ja | **+1 per dygn** | ja |
+| **Resa** | ja | ja | ⚠ **nollstalls** | ja |
+| **Aventyr / aktivitet** | ja | ja | ⚠ **nollstalls** | ja |
+| **Strid** (5 s per SR) | ja | nej | orord | nej |
+
+⚠ Johans andra iakttagelse ar lika viktig: **man sover aven nar man reser**. Resa
+nollar alltsa somnklockan (EP kan tjanas igen nasta dag) men bygger ingen vilosvit.
+Det ar precis skillnaden mellan de tva grindarna i 10.3 — och den forklarar varfor
+de matte skiljas at fran borjan.
+
+**Foljd for provianten:** varje dygn som passerar utanfor strid bor dra en
+dagsranson mat och vatten. ⚠ **Ingen regel hittad an** — `docs/wiki/UTRUSTNING.md`
+namner varken dagsranson eller marschtakt, sa forbrukningstakten behover antingen
+letas upp i bockerna eller bli ett uttalat skaparbeslut. Tills dess: rakna dygnen,
+dra ingenting automatiskt.
+
+⚠ Detta gor ocksa `system.rest.trainingUnlocked` till fel form pa faltet. Det bor
+bli `rest: { streakDays, lastAdvance }` — en raknare, inte en boolean.
+
 ### 10.4 Foreslagen byggordning
 
 1. **`game.time.advance(5)` per stridsrunda** — en hook, ingen migrering, och den
-   gor genast att besvarjelser med rundvaraktighet expirerar ratt.
-2. **Tidsfonstret** med snabbknappar. Ersatter Viloperiod-dialogen.
-3. **Grindarna till tidsstamplar** — den enda biten som kraver migrering.
+   gor genast att besvarjelser med rundvaraktighet expirerar ratt. ✅ **Byggt.**
+2. **Tidsfonstret** med snabbknappar **och ett tidsSLAG** (vila / resa / aventyr)
+   — se 10.3b. Ersatter Viloperiod-dialogen.
+3. **Grindarna till en vilosvit** — `rest.streakDays` som vaxer av vilodygn och
+   nollstalls av resa/aventyr. Den enda biten som kraver migrering.
 4. **Blodning och medvetsloshet** som riktiga timers, nar 1-3 finns.
 
 ⚠ Steg 1-2 ar rent additiva. Steg 3 ar det som gor tiden till sanningskalla.
