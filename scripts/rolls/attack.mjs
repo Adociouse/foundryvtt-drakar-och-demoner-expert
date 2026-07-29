@@ -165,7 +165,7 @@ export async function resolveAttack({
     // avdraget; diagrammet är det mer precisa av de två och följs här.
     // Håller skölden (BV > 0) är anfallet slut — ingen skada alls går igenom.
     if (broke && verdict.wearOn === "defender") {
-      const abs = armourFor(target);
+      const abs = armourFor(target, out.location.location);
       const applied = Math.max(0, dmg.total - 1 - abs);
       const res = await applyLocationDamage(target, out.location.location, applied, { intent });
       out.damage = { roll: dmg, formula: weapon?.system.damage, abs, applied, viaBrokenParry: true, minusOne: true };
@@ -224,7 +224,7 @@ export async function resolveAttack({
   // uttryckligt påstående medan diagrammet kan vara en förenkling. Skillnaden
   // är stor i praktiken: mot Abs 8 är ett perfekt hugg antingen förödande eller
   // nästan verkningslöst. ⚠ Behöver Johans beslut — se DESIGN_DECISIONS.md.
-  const abs = verdict.ignoreArmour ? 0 : armourFor(target);
+  const abs = verdict.ignoreArmour ? 0 : armourFor(target, out.location.location);
   damage = Math.max(0, damage - abs);
   out.damage = { roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage };
 

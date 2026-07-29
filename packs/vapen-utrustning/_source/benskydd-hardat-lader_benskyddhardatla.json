@@ -1,0 +1,30 @@
+{
+  "_id": "benskyddhardatla",
+  "_key": "!items!benskyddhardatla",
+  "name": "Benskydd, härdat läder",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-hardat-lader.png",
+  "system": {
+    "abs": 4,
+    "weight": 5,
+    "price": 1150,
+    "equipped": false,
+    "coverage": [
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "benskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

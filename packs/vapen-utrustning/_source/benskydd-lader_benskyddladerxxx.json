@@ -1,0 +1,30 @@
+{
+  "_id": "benskyddladerxxx",
+  "_key": "!items!benskyddladerxxx",
+  "name": "Benskydd, läder",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-lader.png",
+  "system": {
+    "abs": 2,
+    "weight": 4,
+    "price": 400,
+    "equipped": false,
+    "coverage": [
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "benskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

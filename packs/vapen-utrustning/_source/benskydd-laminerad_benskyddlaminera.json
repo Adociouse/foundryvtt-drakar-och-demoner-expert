@@ -1,0 +1,30 @@
+{
+  "_id": "benskyddlaminera",
+  "_key": "!items!benskyddlaminera",
+  "name": "Benskydd, laminerad",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-laminerad.png",
+  "system": {
+    "abs": 8,
+    "weight": 9,
+    "price": 1600,
+    "equipped": false,
+    "coverage": [
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "benskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

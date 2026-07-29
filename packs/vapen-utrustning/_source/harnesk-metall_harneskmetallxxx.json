@@ -1,0 +1,30 @@
+{
+  "_id": "harneskmetallxxx",
+  "_key": "!items!harneskmetallxxx",
+  "name": "Harnesk, metall",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/harnesk-metall.png",
+  "system": {
+    "abs": 7,
+    "weight": 12,
+    "price": 1900,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage"
+    ],
+    "armourGroup": "harnesk",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

@@ -1,0 +1,30 @@
+{
+  "_id": "ringbrynjeskjort",
+  "_key": "!items!ringbrynjeskjort",
+  "name": "Ringbrynjeskjorta",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/ringbrynjeskjorta.png",
+  "system": {
+    "abs": 5,
+    "weight": 10,
+    "price": 1500,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage"
+    ],
+    "armourGroup": "harnesk",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>Sår kan inte bli infekterade.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

@@ -1,0 +1,29 @@
+{
+  "_id": "skoldtargbucklar",
+  "_key": "!items!skoldtargbucklar",
+  "name": "Targ (bucklare)",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/targ-bucklare.png",
+  "system": {
+    "abs": 0,
+    "weight": 1,
+    "price": 500,
+    "equipped": false,
+    "coverage": [],
+    "armourGroup": "skold",
+    "baseValue": 9,
+    "styGroup": 1,
+    "source": {
+      "book": "spelarboken",
+      "page": "38"
+    },
+    "description": "<p>⚠ Sköldar ABSORBERAR inte — de pareras med och har ett <strong>brytvärde</strong> (SB s.38: sköldtabellen saknar Absorbering-kolumn). En sköld ger dessutom en EXTRA handling per SR: anfall med vapnet OCH parering med skölden (SLB s.16).</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

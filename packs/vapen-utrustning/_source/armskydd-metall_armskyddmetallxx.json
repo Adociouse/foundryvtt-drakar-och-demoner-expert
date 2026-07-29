@@ -1,0 +1,30 @@
+{
+  "_id": "armskyddmetallxx",
+  "_key": "!items!armskyddmetallxx",
+  "name": "Armskydd, metall",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armskydd-metall.png",
+  "system": {
+    "abs": 7,
+    "weight": 6,
+    "price": 1350,
+    "equipped": false,
+    "coverage": [
+      "hoger-arm",
+      "vanster-arm"
+    ],
+    "armourGroup": "armskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

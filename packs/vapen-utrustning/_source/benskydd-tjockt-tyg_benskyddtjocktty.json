@@ -1,0 +1,30 @@
+{
+  "_id": "benskyddtjocktty",
+  "_key": "!items!benskyddtjocktty",
+  "name": "Benskydd, tjockt tyg",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-tjockt-tyg.png",
+  "system": {
+    "abs": 1,
+    "weight": 3,
+    "price": 80,
+    "equipped": false,
+    "coverage": [
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "benskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

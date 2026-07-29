@@ -1,0 +1,29 @@
+{
+  "_id": "skoldvanligskold",
+  "_key": "!items!skoldvanligskold",
+  "name": "Vanlig sköld (trekantig)",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/vanlig-skold-trekantig.png",
+  "system": {
+    "abs": 0,
+    "weight": 6,
+    "price": 850,
+    "equipped": false,
+    "coverage": [],
+    "armourGroup": "skold",
+    "baseValue": 11,
+    "styGroup": 7,
+    "source": {
+      "book": "spelarboken",
+      "page": "38"
+    },
+    "description": "<p>⚠ Sköldar ABSORBERAR inte — de pareras med och har ett <strong>brytvärde</strong> (SB s.38: sköldtabellen saknar Absorbering-kolumn). En sköld ger dessutom en EXTRA handling per SR: anfall med vapnet OCH parering med skölden (SLB s.16).</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

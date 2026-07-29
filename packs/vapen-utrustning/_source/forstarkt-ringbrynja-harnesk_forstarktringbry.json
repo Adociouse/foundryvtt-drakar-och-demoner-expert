@@ -1,0 +1,30 @@
+{
+  "_id": "forstarktringbry",
+  "_key": "!items!forstarktringbry",
+  "name": "Förstärkt ringbrynja (harnesk)",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/forstarkt-ringbrynja-harnesk.png",
+  "system": {
+    "abs": 6,
+    "weight": 15,
+    "price": 1150,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage"
+    ],
+    "armourGroup": "harnesk",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>Sår kan inte bli infekterade.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

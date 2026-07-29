@@ -1,0 +1,34 @@
+{
+  "_id": "helrustningmetal",
+  "_key": "!items!helrustningmetal",
+  "name": "Helrustning, metall",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/helrustning-metall.png",
+  "system": {
+    "abs": 8,
+    "weight": 25,
+    "price": 5100,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage",
+      "hoger-arm",
+      "vanster-arm",
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "helrustning",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

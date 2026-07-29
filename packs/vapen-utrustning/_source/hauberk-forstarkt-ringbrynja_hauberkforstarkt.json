@@ -1,0 +1,34 @@
+{
+  "_id": "hauberkforstarkt",
+  "_key": "!items!hauberkforstarkt",
+  "name": "Hauberk, förstärkt ringbrynja",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/hauberk-forstarkt-ringbrynja.png",
+  "system": {
+    "abs": 6,
+    "weight": 48,
+    "price": 4500,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage",
+      "hoger-arm",
+      "vanster-arm",
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "hauberk",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>Sår kan inte bli infekterade.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

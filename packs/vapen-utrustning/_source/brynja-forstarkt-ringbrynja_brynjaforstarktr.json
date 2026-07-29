@@ -1,0 +1,32 @@
+{
+  "_id": "brynjaforstarktr",
+  "_key": "!items!brynjaforstarktr",
+  "name": "Brynja, förstärkt ringbrynja",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/brynja-forstarkt-ringbrynja.png",
+  "system": {
+    "abs": 6,
+    "weight": 24,
+    "price": 2500,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage",
+      "hoger-arm",
+      "vanster-arm"
+    ],
+    "armourGroup": "brynja",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>Sår kan inte bli infekterade. Ringbrynjehuva kan ingå — lägg i så fall till 3 kg till vikten och 200 sm till priset.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

@@ -1,0 +1,30 @@
+{
+  "_id": "harneskhardatlad",
+  "_key": "!items!harneskhardatlad",
+  "name": "Harnesk, härdat läder",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/harnesk-hardat-lader.png",
+  "system": {
+    "abs": 4,
+    "weight": 4,
+    "price": 1500,
+    "equipped": false,
+    "coverage": [
+      "brostkorg",
+      "mage"
+    ],
+    "armourGroup": "harnesk",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

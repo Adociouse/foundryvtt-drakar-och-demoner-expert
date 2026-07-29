@@ -39,8 +39,22 @@ export async function ensureHitLocations(actor) {
  * utan kroppsdelsangivelse. Tills rustningsmodellen delas upp per kroppsdel
  * används aktörens samlade `abs` för alla områden. Se DESIGN_DECISIONS.md.
  */
-export function armourFor(actor) {
-  return actor.system.abs ?? 0;
+export function armourFor(actor, locationKey = null) {
+  // ⚠ Utan träffområde (vanlig strid) används aktörens samlade abs som förut.
+  if (!locationKey) return actor.system.abs ?? 0;
+
+  // ⚠ SB s.27: rustning är namngivna DELAR med var sin täckning. Den bästa
+  // buret plåten över just det träffområdet gäller — de staplas inte.
+  let best = 0;
+  for (const item of actor.items ?? []) {
+    if (item.type !== "rustning" || !item.system.equipped) continue;
+    const cov = item.system.coverage ?? [];
+    // Tom täckning = äldre post utan uppdelning; räknas som heltäckande.
+    if (cov.length && !cov.includes(locationKey)) continue;
+    best = Math.max(best, item.system.abs ?? 0);
+  }
+  // SLP:er har inga rustnings-Item — de bär sitt abs direkt på aktören.
+  return best || (actor.items?.size ? 0 : (actor.system.abs ?? 0));
 }
 
 /**

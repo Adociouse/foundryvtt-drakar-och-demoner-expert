@@ -1,0 +1,29 @@
+{
+  "_id": "nitladerhuvaxxxx",
+  "_key": "!items!nitladerhuvaxxxx",
+  "name": "Nitläderhuva",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/nitladerhuva.png",
+  "system": {
+    "abs": 3,
+    "weight": 1,
+    "price": 180,
+    "equipped": false,
+    "coverage": [
+      "huvud"
+    ],
+    "armourGroup": "hjalm",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": ""
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

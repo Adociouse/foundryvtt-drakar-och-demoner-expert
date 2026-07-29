@@ -1,0 +1,30 @@
+{
+  "_id": "benskyddnitlader",
+  "_key": "!items!benskyddnitlader",
+  "name": "Benskydd, nitläder",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-nitlader.png",
+  "system": {
+    "abs": 3,
+    "weight": 6,
+    "price": 750,
+    "equipped": false,
+    "coverage": [
+      "hoger-ben",
+      "vanster-ben"
+    ],
+    "armourGroup": "benskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}

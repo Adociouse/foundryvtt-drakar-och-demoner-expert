@@ -1,0 +1,30 @@
+{
+  "_id": "armskyddnitlader",
+  "_key": "!items!armskyddnitlader",
+  "name": "Armskydd, nitläder",
+  "type": "rustning",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armskydd-nitlader.png",
+  "system": {
+    "abs": 3,
+    "weight": 5,
+    "price": 500,
+    "equipped": false,
+    "coverage": [
+      "hoger-arm",
+      "vanster-arm"
+    ],
+    "armourGroup": "armskydd",
+    "source": {
+      "book": "spelarboken",
+      "page": "27"
+    },
+    "description": "<p>⚠ Pris och vikt gäller per PAR.</p>"
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {}
+}
