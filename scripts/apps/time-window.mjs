@@ -58,8 +58,11 @@ export default class DoDETimeWindow extends HandlebarsApplicationMixin(Applicati
     const lines = res.report.map((r) =>
       `<li>${r.name}: vila ${Math.floor(r.streak)}/7${r.unlocked ? " — <strong>träning öppen</strong>" : ""}`
       + (r.healed ? ` · läkte ${r.healed} KP` : "") + (r.restored ? " · <em>helt återställd</em>" : "") + "</li>").join("");
+    // ⚠ Påminnelse i stället för automatik — se DODE.supplyReminder.
+    const supplies = res.days >= 1 ? `<p class="hint">${CONFIG.DODE.supplyReminder}</p>` : "";
     await ChatMessage.create({
-      content: `<div class="dode-chat-card"><h3>${res.kind} — ${res.days} dygn</h3><ul>${lines}</ul></div>`
+      content: `<div class="dode-chat-card"><h3>${res.kind} — ${res.days} dygn</h3>`
+        + `<ul>${lines}</ul>${supplies}</div>`
     });
     this.render();
   }

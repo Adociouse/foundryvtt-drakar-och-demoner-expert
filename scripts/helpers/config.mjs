@@ -1108,12 +1108,29 @@ DODE.swordHandFromRoll = function (total) {
 DODE.SECONDS_PER_ROUND = 5;
 
 /** Vanliga tidssteg för SL:s tidsfönster, i sekunder. Se DESIGN_DECISIONS.md §10. */
+//
+// ⚠ Johan 2026-07-29: *"Day/week/month button will likely suffice."* Kortare steg
+// finns i fritextfältet, men behövs sällan — **äventyrstid mäts i stridsrundor**
+// (5 s styck) och nedtid i dygn eller mer. Mellanskalan hade mest varit brus.
 DODE.timeSteps = [
-  { label: "10 minuter", seconds: 600 },
-  { label: "1 timme", seconds: 3600 },
-  // ⚠ Sovperiod — RP s.63: minst 6 timmar (2 för alver) nollar EP-klockan.
-  { label: "8 timmar (sovperiod)", seconds: 28800 },
   { label: "1 dygn", seconds: 86400 },
-  // ⚠ Viloperiod — RP s.63: 7 sammanhängande dygn öppnar träningen.
-  { label: "7 dygn (viloperiod)", seconds: 604800 }
+  // ⚠ En vecka är den enhet som faktiskt betyder något: viloperioden öppnar
+  // träningen (RP s.63) och naturlig läkning ger 1 KP per vecka (SLB s.20).
+  { label: "1 vecka", seconds: 604800 },
+  { label: "1 månad", seconds: 2592000 }
 ];
+
+/**
+ * Förbrukning som SL bör påminnas om när tid passerar.
+ *
+ * ⚠ **Ingen automatik — medvetet.** Johan 2026-07-29: *"Over days I think a note
+ * to GM to request removal of supplies will suffice."* Böckerna ger ingen
+ * dagsranson eller förbrukningstakt (letat i UTRUSTNING.md), så att dra föremål
+ * automatiskt vore att hitta på en regel. Påminnelsen står i chattkortet i
+ * stället, och SL drar det som faktiskt förbrukats.
+ *
+ * ⚠ **Facklor och lampolja är den verkliga bokföringen**, och de brinner i
+ * ÄVENTYRSTID (minuter), inte i dygn — de hör alltså till stridsrundeklockan och
+ * inte till det här fönstret. Se backlogposten om ljuskällor.
+ */
+DODE.supplyReminder = "⚠ Dra av förbrukning: proviant, vatten, facklor och lampolja.";
