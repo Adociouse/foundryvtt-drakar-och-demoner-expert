@@ -683,3 +683,23 @@
 .training-step, .training-cost, .training-funding { flex: 0 0 auto; font-size: 0.85em; white-space: nowrap; }
 .training-cost { font-weight: 600; }
 .training-funding { display: flex; gap: 6px; color: #8a6d1f; }
+
+/* ---- Minibesvärjelser (härledda ur magiskolorna, MAG s.23) ---- */
+.minimagi .minimagi-source { font-size: 0.8em; opacity: 0.75; }
+.minimagi .section-hint { font-size: 0.8em; opacity: 0.75; margin: 0 0 4px; }
+.minimagi-row { gap: 6px; }
+.minimagi-img { width: 22px; height: 22px; object-fit: cover; border: none; flex: 0 0 auto; }
+.minimagi-school { font-size: 0.8em; opacity: 0.8; }
+.minimagi-gestures { font-size: 0.75em; opacity: 0.65; margin-left: auto; }
+
+/* ---- Träningsfönstrets lägesväxel ---- */
+.training-header { display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+.training-mode { display: flex; align-items: center; gap: 4px; }
+.training-mode button { font-size: 0.85em; opacity: 0.6; }
+.training-mode button.is-active { opacity: 1; font-weight: 600; }
+.training-mode .mode-summary { font-size: 0.8em; opacity: 0.75; margin-left: 4px; }
+.training-wallet { display: flex; gap: 12px; font-size: 0.85em; }
+.training-wallet .purse.is-short { color: #a33; }
+.training-attr { flex: 0 0 auto; font-size: 0.8em; opacity: 0.8; white-space: nowrap; }
+.training-label .note.warn { color: #a3701f; }

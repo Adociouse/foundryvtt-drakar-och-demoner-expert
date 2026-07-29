@@ -157,6 +157,34 @@
   {{/if}}
 </section>
 
+{{#if minimagi}}
+{{!-- Minibesvärjelser — HÄRLEDDA ur rollpersonens magiskolor, inte ägda poster.
+      MAG s.23: minimagin följer med skolan, behöver inte stå i formelsamlingen
+      och lyckas alltid. En magiker med flera skolor har alla skolornas minimagi. --}}
+<section class="minimagi">
+  <header class="skills-header">
+    <h3>Minibesvärjelser</h3>
+    <span class="minimagi-source" title="Följer automatiskt med magiskolorna — inga poster att äga">
+      {{minimagi.schoolNames}}
+    </span>
+  </header>
+  <p class="section-hint">Lyckas alltid — ingen CL-kontroll. Kostar 1 PSY och är
+     alltid Kvick (MAG s.23).</p>
+  <ol class="skill-list">
+    {{#each minimagi.entries as |mini|}}
+      <li class="skill-row minimagi-row">
+        <img class="minimagi-img" src="{{mini.img}}" alt="" />
+        <span class="skill-name">{{mini.name}}</span>
+        <span class="minimagi-school">{{mini.schoolLabel}}</span>
+        <span class="minimagi-gestures" title="Åthävor vid FV {{mini.fv}} i skolan (MAG s.23)">{{mini.gestures}}</span>
+        {{#if mini.isGranted}}<i class="fa-solid fa-gift granted-mark" title="Utdelad av spelledaren"></i>{{/if}}
+        <span class="skill-fv">{{mini.psyCost}} PSY</span>
+      </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}
+
 <section class="gear">
   <header class="skills-header">
     <h3>{{localize "DODE.Actor.Utrustning"}}</h3>

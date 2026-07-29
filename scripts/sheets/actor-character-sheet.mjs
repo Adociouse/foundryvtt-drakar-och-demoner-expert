@@ -89,6 +89,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // Viloperiodsgrinden — REG s.46. SL öppnar, spelaren tränar. Träningsknappen
     // visas bara när grinden är öppen; SL ser växeln alltid.
     context.trainingUnlocked = !!this.actor.system.rest?.trainingUnlocked;
+    context.minimagi = await this.#prepareMinimagi();
     return context;
   }
 
@@ -133,6 +134,79 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       content: `<div class="dode-chat-card"><h3>Bonuspoäng</h3>
         <p>${this.actor.name} får <strong>${amount} fria EP</strong>.</p></div>`
     });
+  }
+
+  /**
+   * Minibesvärjelser som rollpersonen har tillgång till.
+   *
+   * ⚠ HÄRLEDDA, inte ägda. MAG s.23 ger minimagin med skolan: man behöver inte
+   * äga någon post för att kunna använda den, och listan ska ändras av sig själv
+   * när magikern lär sig en ny skola. Därför läses de ur kompendiet utifrån
+   * rollpersonens skolfärdigheter i stället för att kopieras in på aktören.
+   *
+   * ⚠ EN SKOLA → MÅNGA MINIBESVÄRJELSER, OCH FLERA SKOLOR SAMTIDIGT. Johans
+   * beslut 2026-07-29: en magiker som lär sig ytterligare en skola får också den
+   * skolans minimagi. MAG s.23:s formulering "den tillhör automatiskt den skola
+   * där magikern har högst FV" handlar om magiker som inte tillhör NÅGON skola —
+   * direkt före står att "varje magiskola har sina egna minibesvärjelser". Den
+   * tidigare implementationen läste bara högsta-FV-skolan och hade tystnat en
+   * skola så fort magikern lärde sig en till.
+   *
+   * SL:s ad hoc-utdelningar ligger som riktiga Items på aktören och läggs till
+   * ovanpå — de är just undantagen från skolhärledningen.
+   */
+  async #prepareMinimagi() {
+    const schools = new Map();
+    for (const item of this.actor.items) {
+      if (item.type !== "fardighet") continue;
+      if (!CONFIG.DODE.isMagicSchoolKey(item.system.skillKey)) continue;
+      schools.set(item.system.skillKey.replace(/^magiskola-/, ""), item.system.total);
+    }
+
+    const granted = this.actor.items.filter((i) => i.type === "minibesvarjelse");
+    if (!schools.size && !granted.length) return null;
+
+    const entries = [];
+    for (const packId of CONFIG.DODE.contentPacks.spells) {
+      const pack = game.packs.get(packId);
+      if (!pack) continue;
+      const docs = await pack.getDocuments({ type: "minibesvarjelse" });
+      for (const doc of docs) {
+        if (!schools.has(doc.system.school)) continue;
+        entries.push({
+          name: doc.name, img: doc.img, school: doc.system.school,
+          schoolLabel: game.i18n.localize(CONFIG.DODE.magicSchools[doc.system.school]),
+          psyCost: doc.system.psyCost,
+          fv: schools.get(doc.system.school),
+          // MAG s.23:s åthävotrappa — samma minibesvärjelse kräver olika mycket
+          // av magikern beroende på FV i skolan.
+          gestures: schools.get(doc.system.school) >= 25
+            ? "Omedvetet — kräver ingen uppmärksamhet"
+            : schools.get(doc.system.school) >= 15
+              ? "Inga yttre åthävor"
+              : "Kräver gester och ord"
+        });
+      }
+    }
+    for (const item of granted) {
+      entries.push({
+        name: item.name, img: item.img, school: item.system.school,
+        schoolLabel: game.i18n.localize(CONFIG.DODE.magicSchools[item.system.school]),
+        psyCost: item.system.psyCost, id: item.id, isGranted: true,
+        gestures: "Utdelad av spelledaren"
+      });
+    }
+    if (!entries.length) return null;
+
+    entries.sort((a, b) => a.schoolLabel.localeCompare(b.schoolLabel, "sv") || a.name.localeCompare(b.name, "sv"));
+    return {
+      entries,
+      schoolCount: schools.size,
+      schoolNames: [...schools.keys()]
+        .map((k) => game.i18n.localize(CONFIG.DODE.magicSchools[k]))
+        .sort((a, b) => a.localeCompare(b, "sv"))
+        .join(", ")
+    };
   }
 
   static #itemFromEvent(actor, target) {

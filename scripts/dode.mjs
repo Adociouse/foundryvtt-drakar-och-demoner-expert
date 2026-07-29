@@ -141,6 +141,32 @@ Hooks.once("init", () => {
     default: true
   });
 
+  // Träningsavgift per veckopass med lärare.
+  //
+  // ⚠ AVSTEG FRÅN GRUNDREGLERNA — beslutat av Johan 2026-07-29.
+  // REG s.45 anger 150 sm/vecka som grundkostnad och 300 sm/vecka för en
+  // magikerlärare, med multiplikatorer ovanpå (×1,5 för elev av annan ras, ×2 för
+  // liten klass, × lärarens INT för ensam elev). MAG lägger dessutom på dubbel
+  // taxa för besvärjelseträning. Vi tar i stället en FAST avgift per pass, som
+  // standard 300 sm, och sätter ingen gräns för hur många färdigheter som kan
+  // tränas samma vecka. Johans motivering: reglerna säger inte att man inte får
+  // träna flera färdigheter under samma vecka, och vad pengarna går till —
+  // lärare, material, lokal — är SL:s beskrivning, inte en mekanik. En siffra
+  // som SL kan ändra slår en trappa av multiplikatorer som ingen slår upp vid
+  // bordet. Bokens riktiga tabell finns i det kurerade extraktet
+  // DODE_Regler_TRANING_EP.md för den som vill räkna exakt.
+  game.settings.register(SYSTEM_ID, "trainingFeePerWeek", {
+    name: "Träningsavgift per pass (sm)",
+    hint: "Dras ur rollpersonens börs vid träning med lärare. Bokens grundkostnad är "
+      + "150 sm/vecka (magiker 300 sm) plus multiplikatorer; 300 är en fast förenkling "
+      + "av det. Ensamträning är alltid gratis.",
+    scope: "world",
+    config: true,
+    restricted: true,
+    type: Number,
+    default: 300
+  });
+
   game.dode = {
     // Utan argument: skapaläge. Med en aktör: redigeringsläge (guiden laddar
     // rollpersonen och sparar tillbaka utan att dubblera något) — se
