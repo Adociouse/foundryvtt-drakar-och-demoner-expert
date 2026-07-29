@@ -21,6 +21,11 @@
         </button>
         {{!-- Sömnklockan — RP s.63: en färdighet ger EP första gången den lyckas
               efter en sovperiod om minst sex timmar (två för alver). --}}
+        {{!-- Två tidsgrindar i en knapp: sömn nollar EP-klockan, 7 dygn öppnar
+              träningen. Se #onRestPeriod. --}}
+        <button type="button" data-action="restPeriod" title="Viloperiod — ange antal dygn">
+          <i class="fa-solid fa-campground"></i>
+        </button>
         <button type="button" data-action="sleep"
           title="Sovperiod — nollställer sömnklockan så färdigheterna kan tjäna EP igen (RP s.63: minst 6 timmar, 2 för alver){{#if usedSinceRest}}. {{usedSinceRest}} färdigheter har gett EP sedan sist{{/if}}">
           <i class="fa-solid fa-moon"></i>{{#if usedSinceRest}} {{usedSinceRest}}{{/if}}

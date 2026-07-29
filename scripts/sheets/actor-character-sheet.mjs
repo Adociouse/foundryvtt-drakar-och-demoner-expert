@@ -33,6 +33,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       openMagicTraining: DoDECharacterSheet.#onOpenMagicTraining,
       toggleRest: DoDECharacterSheet.#onToggleRest,
       sleep: DoDECharacterSheet.#onSleep,
+      restPeriod: DoDECharacterSheet.#onRestPeriod,
       awardBonusEp: DoDECharacterSheet.#onAwardBonusEp
     },
     form: { submitOnChange: true, closeOnSubmit: false }
@@ -129,6 +130,46 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     ui.notifications.info(next
       ? `Viloperiod öppnad för ${this.actor.name} — träning möjlig.`
       : `Viloperiod stängd för ${this.actor.name}.`);
+  }
+
+  /**
+   * Viloperiod — SL anger hur många dygn rollpersonen faktiskt fick vila, och
+   * systemet tillämpar BÅDA tidsgrindarna på en gång.
+   *
+   * ⚠ **Det är två skilda grindar, med väldigt olika längd:**
+   *  - **Sömn (≥6 timmar, 2 för alver)** nollar varje färdighets EP-klocka så att
+   *    den kan tjäna sitt streck igen. Händer efter i stort sett varje äventyrsdag.
+   *  - **Sammanhängande vila i ≥7 dygn** öppnar träningsfönstret så att intjänad
+   *    EP kan växlas in mot FV (RP s.63). Händer sällan.
+   *
+   * Att skilja dem åt är hela poängen: man tjänar EP hela äventyret men kan inte
+   * omsätta det förrän man kommer hem.
+   */
+  static async #onRestPeriod() {
+    const days = await DialogV2.prompt({
+      window: { title: "Viloperiod" },
+      content: `<p>Hur många dygn får ${this.actor.name} vila?</p>
+        <p class="hint">Minst <strong>1 dygn</strong> nollställer sömnklockan så att varje
+        färdighet kan tjäna EP igen. Minst <strong>7 dygn</strong> öppnar dessutom
+        träningen, så att intjänad EP kan växlas in mot FV (RP s.63).</p>
+        <input type="number" name="days" value="7" min="0" autofocus />`,
+      ok: { label: "Vila", callback: (e, b) => Number(b.form.elements.days.value) }
+    });
+    if (!Number.isFinite(days) || days < 1) return;
+
+    const { clearAwardMarks, setTrainingUnlocked } = await import("../helpers/ep.mjs");
+    const cleared = await clearAwardMarks(this.actor);
+    const training = days >= 7;
+    if (training) await setTrainingUnlocked(this.actor, true);
+
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: `<div class="dode-chat-card"><h3>Viloperiod — ${days} dygn</h3>
+        <p>${cleared} färdigheter kan tjäna EP igen.</p>
+        <p>${training
+          ? "<strong>Träningen är öppen</strong> — EP kan växlas in mot FV."
+          : "⚠ Under 7 dygn — EP kan <strong>inte</strong> omsättas ännu (RP s.63)."}</p></div>`
+    });
   }
 
   /**
