@@ -364,7 +364,7 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
     ⚠ **Rutstorleken var INGEN konflikt.** Johan misstänkte en avvikelse mellan REG och Foundry; kontrollerat och avfärdat — REG skriver *"1 ruta (1,5 m)"*, RP s.25 *"en ruta är 1,5 meter"*, SLB s.15 "rutor om 150 cm". Alla tre överens, och vårt scenrutnät (64 px = 1,5 m) stämmer. Det som faktiskt skavde var REG s.58:s **längdKOD**, som aldrig var ett rutmått.
 
-43b. **⚠ Källförvirring: två olika Magi-böcker i filmappen.** Johan 2026-07-29: `02-102_-_D&DE_Magi_HQJonas.pdf` (äldre) säger på s.5 att man vid rollpersonsskapande lär sig besvärjelser som vanliga färdigheter, och har in-game-träning på s.37; `D&DE 0_Magi_text.txt` är det extrakt kod och dokument hittills utgått från, utan att någon avgjort vilken utgåva som gäller. Flera av dagens rättelser kommer ur just den förvirringen. **Att göra:** slå fast vilken Magi-utgåva som är kanon för systemet, dokumentera det i REGLER_README.md, och gå igenom `MAGI.md` mot den valda utgåvan. Tills dess gäller **SB s.7** för träning, eftersom den är Expert-seriens egen spelarbok.
+42b. **⚠ Källförvirring: två olika Magi-böcker i filmappen.** Johan 2026-07-29: `02-102_-_D&DE_Magi_HQJonas.pdf` (äldre) säger på s.5 att man vid rollpersonsskapande lär sig besvärjelser som vanliga färdigheter, och har in-game-träning på s.37; `D&DE 0_Magi_text.txt` är det extrakt kod och dokument hittills utgått från, utan att någon avgjort vilken utgåva som gäller. Flera av dagens rättelser kommer ur just den förvirringen. **Att göra:** slå fast vilken Magi-utgåva som är kanon för systemet, dokumentera det i REGLER_README.md, och gå igenom `MAGI.md` mot den valda utgåvan. Tills dess gäller **SB s.7** för träning, eftersom den är Expert-seriens egen spelarbok.
 
 43. **Referens­tabeller ur RP som saknas i kompendiet.** Johan 2026-07-29, tre stycken: **Färdighetstabellen** ("en gem"), **Svårighetstabellen** och **Motståndstabellen** (RP s.38). Hör hemma i `tabeller`/`regler`-packen tillsammans med backlogpost 27:s övriga tabeller.
 
@@ -1009,3 +1009,71 @@ aktoren. ⚠ Oppna fragor innan bygget:
 7. **Rustning per kroppsdel** - storsta kvarvarande regelavvikelsen (en hjalm skyddar i dag benen).
 
 ⚠ Steg 1-3 gor systemet spelbart. Steg 4-5 gor det korrekt. Steg 6-7 komplett.
+
+---
+
+## 10. Tidshantering — designforslag (2026-07-29)
+
+Johan: *"Lets align so our time management aligns with foundry. This one feels
+important to get right. Maybe some kind of time management window outside battle?
+In battle use the foundry time?"*
+
+### 10.1 Varfor det spelar roll
+
+Fyra system i DoDE ar redan tidsberoende, och alla fyra bokfor tiden separat i dag:
+
+| System | Tidsenhet | Var det bor i dag |
+|---|---|---|
+| Somnklockan (EP) | >= 6 timmar (2 for alver) | En boolean per Item |
+| Traningsgrinden | >= 7 dygn | En boolean pa aktoren |
+| Blodning vid 0 KP i traffomrade | 1 KP per 6:e SR (30 s) | Inte implementerat |
+| Medvetsloshet | 1T100-FYS minuter | Bara text i chattkortet |
+| Besvarjelsers varaktighet | SR / minuter / timmar | ActiveEffect `duration` |
+
+⚠ **Bara det sista hanger redan ihop med Foundrys klocka.** ActiveEffects lagrar
+`duration.seconds` plus en `startTime` fran `game.time.worldTime` och slutar galla
+av sig sjalva nar klockan gar framat. De ovriga tre ar handbokforda flaggor som
+inte vet nagot om tid alls.
+
+### 10.2 Vad Foundry ger gratis
+
+`game.time.worldTime` ar sekunder; `game.time.advance(sekunder)` flyttar den och
+fyrar `updateWorldTime`. dnd5e 5.3.3 halter ingen egen kalender — den anropar
+`advanceTime` pa nio stallen och later karnan aga klockan. **Vi bor gora likadant.**
+
+⭐ **Foljden ar att en enda tidsaxel loser alla fem raderna ovan.** Flyttar vi
+klockan i stallet for att vanda flaggor, sa expirerar besvarjelser, vaknar
+medvetslosa och oppnas traningsgrinden av sig sjalva.
+
+### 10.3 Foreslagen modell
+
+**I strid: Foundry driver tiden.** En stridsrunda ar **5 sekunder** (SLB s.15).
+Systemet hakar pa `Combat`s rundbyte och gor `game.time.advance(5)`. Da racknas
+besvarjelser med `duration.rounds` ned av karnan, och blodningsregeln (1 KP per
+6:e SR) blir en jamforelse mot `worldTime` i stallet for en egen raknare.
+
+**Utanfor strid: ett tidsfonster for SL.** Knappar for *10 minuter · 1 timme ·
+8 timmar (sovperiod) · 1 dygn · 7 dygn (viloperiod)*, plus ett fritt falt.
+Fonstret ar det enda stallet dar tid flyttas manuellt, och det ersatter dagens
+Viloperiod-dialog: i stallet for att fraga hur manga dygn man vilat **flyttar man
+klockan**, och grindarna oppnas av att tiden passerat.
+
+**Grindarna blir darmed harledda, inte satta:**
+
+| Grind | Fran flagga till |
+|---|---|
+| Somnklockan | `worldTime - item.system.ep.lastAwardTime >= 6h` |
+| Traningen | `worldTime - actor.system.rest.lastLongRest >= 7 dygn` |
+
+⚠ **Migrering kravs** — befintliga rollpersoner har booleans, inte tidsstamplar.
+Bada kan defaulta till 0 (= "lange sedan"), vilket ar ett ofarligt startlage.
+
+### 10.4 Foreslagen byggordning
+
+1. **`game.time.advance(5)` per stridsrunda** — en hook, ingen migrering, och den
+   gor genast att besvarjelser med rundvaraktighet expirerar ratt.
+2. **Tidsfonstret** med snabbknappar. Ersatter Viloperiod-dialogen.
+3. **Grindarna till tidsstamplar** — den enda biten som kraver migrering.
+4. **Blodning och medvetsloshet** som riktiga timers, nar 1-3 finns.
+
+⚠ Steg 1-2 ar rent additiva. Steg 3 ar det som gor tiden till sanningskalla.

@@ -1103,3 +1103,17 @@ DODE.hasNoOffHandPenalty = function (swordHand) {
 DODE.swordHandFromRoll = function (total) {
   return DODE.swordHandTable.find((r) => total <= r.max);
 };
+
+/** Stridsrundans längd i sekunder — SLB s.15: "ungefär fem sekunder". */
+DODE.SECONDS_PER_ROUND = 5;
+
+/** Vanliga tidssteg för SL:s tidsfönster, i sekunder. Se DESIGN_DECISIONS.md §10. */
+DODE.timeSteps = [
+  { label: "10 minuter", seconds: 600 },
+  { label: "1 timme", seconds: 3600 },
+  // ⚠ Sovperiod — RP s.63: minst 6 timmar (2 för alver) nollar EP-klockan.
+  { label: "8 timmar (sovperiod)", seconds: 28800 },
+  { label: "1 dygn", seconds: 86400 },
+  // ⚠ Viloperiod — RP s.63: 7 sammanhängande dygn öppnar träningen.
+  { label: "7 dygn (viloperiod)", seconds: 604800 }
+];

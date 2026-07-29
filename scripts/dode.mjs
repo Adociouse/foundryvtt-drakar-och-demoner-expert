@@ -246,6 +246,25 @@ Hooks.on("renderActorDirectory", (app, html) => {
   header.appendChild(button);
 });
 
+/**
+ * En stridsrunda är **5 sekunder** (SLB s.15) — flytta världsklockan i takt med
+ * striden.
+ *
+ * ⚠ Poängen är inte klockan i sig utan att Foundrys egna varaktigheter då räknas
+ * ned av kärnan: en ActiveEffect med `duration.rounds` eller `duration.seconds`
+ * upphör av sig själv i stället för att någon måste minnas den. Se
+ * DESIGN_DECISIONS.md §10 — samma modell som dnd5e, som aldrig håller en egen
+ * kalender utan bara anropar `game.time.advance`.
+ *
+ * ⚠ Bara SL flyttar tiden, och bara framåt i rundan — annars skulle varje klient
+ * försöka avancera samma runda.
+ */
+Hooks.on("combatRound", async (combat, updateData, updateOptions) => {
+  if (!game.user.isGM) return;
+  if ((updateOptions?.direction ?? 1) < 0) return;
+  await game.time.advance(CONFIG.DODE.SECONDS_PER_ROUND);
+});
+
 Hooks.on("updateActor", async (actor, changes) => {
   if (actor.type !== "character") return;
   const flat = foundry.utils.flattenObject(changes);
