@@ -1103,6 +1103,39 @@ dra ingenting automatiskt.
 ⚠ Detta gor ocksa `system.rest.trainingUnlocked` till fel form pa faltet. Det bor
 bli `rest: { streakDays, lastAdvance }` — en raknare, inte en boolean.
 
+### 10.3c ⚠ EN klocka, tva drivare — inte tva tidsaxlar
+
+Johan: *"Seems like there is two time axis... in combat and out of combat."*
+
+**Halva iakttagelsen ar ratt och viktig, men slutsatsen bor inte bli tva klockor.**
+
+Det som verkligen ar tvadelat ar **bokforingen**, inte tiden: stridstid rakans i
+sekunder och ror varken vilosvit, somnklocka eller proviant, medan nedtid rakans i
+timmar och dygn och ror alla tre. Det ar tva *granulariteter* och tva uppsattningar
+*foljder* — men samma tidslinje.
+
+⭐ **Avgorande motexempel: besvarjelser som spanner over gransen.** En besvarjelse
+med varaktighet "1 timme" kastas i strid och maste fortfarande ga nar striden ar
+slut och sallskapet gatt tjugo minuter. Med tva separata axlar finns inget entydigt
+svar pa hur mycket som aterstar — man skulle behova oversatta mellan dem vid varje
+overgang, och den oversattningen ar exakt den bokforing vi vill bli av med.
+
+⚠ Dessutom: Foundry HAR bara en `worldTime`. En andra axel skulle betyda en egen
+kalender vid sidan om karnans — precis det dnd5e undviker (§9.1: noll egen
+kalender, nio anrop till `advanceTime`).
+
+**Ratt form pa modellen:**
+
+```
+EN worldTime
+ ├─ drivare 1: stridsrundan   → +5 s      · kind = "strid"
+ └─ drivare 2: tidsfonstret   → +min/dygn · kind = vila | resa | aventyr
+```
+
+`kind` avgor vilka raknare som ror sig (se tabellen i 10.3b) — **inte vilken klocka
+som gar**. Det ger Johans tvadelning i praktiken, utan att skapa tva sanningar om
+vad klockan ar.
+
 ### 10.4 Foreslagen byggordning
 
 1. **`game.time.advance(5)` per stridsrunda** — en hook, ingen migrering, och den
