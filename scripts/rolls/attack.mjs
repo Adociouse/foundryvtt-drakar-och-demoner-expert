@@ -132,12 +132,18 @@ export async function resolveAttack({
       overflow: broke ? Math.max(0, dmg.total - 0) : 0,
       note: bv === null ? "⚠ Föremålet saknar brytvärde (baseValue)" : ""
     };
-    // Vid BV 0 tar försvararen den överskjutande skadan (SLB s.17).
+    // ⚠ Går BV till 0 fortsätter anfallet — men **stridsdiagrammet (SLB s.31)**
+    // skickar den grenen genom rutan "−1 på skadan" innan rustningen dras.
+    // Textmatrisen på s.17 säger bara "den överskjutande skadan" utan att nämna
+    // avdraget; diagrammet är det mer precisa av de två och följs här.
+    // Håller skölden (BV > 0) är anfallet slut — ingen skada alls går igenom.
     if (broke && verdict.wearOn === "defender") {
-      const applied = await applyLocationDamage(target, out.location.location, dmg.total, { intent });
-      out.damage = { roll: dmg, formula: weapon?.system.damage, abs: 0, applied: dmg.total, viaBrokenParry: true };
-      out.effect = applied.effect;
-      out.totalAfter = applied.totalAfter;
+      const abs = armourFor(target);
+      const applied = Math.max(0, dmg.total - 1 - abs);
+      const res = await applyLocationDamage(target, out.location.location, applied, { intent });
+      out.damage = { roll: dmg, formula: weapon?.system.damage, abs, applied, viaBrokenParry: true, minusOne: true };
+      out.effect = res.effect;
+      out.totalAfter = res.totalAfter;
     }
     return out;
   }
@@ -154,7 +160,16 @@ export async function resolveAttack({
       + dmgRoll.terms.filter((t) => typeof t.number === "number" && !t.faces).reduce((a, t) => a + t.number, 0)
     : dmgRoll.total;
 
-  // ⚠ Perfekt anfall: försvararens rustningsabsorbering dras INTE bort (SLB s.17).
+  // ⚠ **KONFLIKT INOM SAMMA BOK — SLB s.17 mot s.31.**
+  //   s.17 (textmatrisen): "Perfekt ... Attacken gör automatiskt maximal skada.
+  //     Försvararens rustningsabsorbering dras ej bort."
+  //   s.31 (stridsdiagrammet): rutan "Maximal skada" flödar in i "Dra bort
+  //     rustningens absorbering och/eller naturligt skydd" precis som de andra
+  //     två skadegrenarna — alltså dras rustningen även vid perfekt.
+  // Vi följer TEXTEN (ingen absorbering vid perfekt), eftersom den är ett
+  // uttryckligt påstående medan diagrammet kan vara en förenkling. Skillnaden
+  // är stor i praktiken: mot Abs 8 är ett perfekt hugg antingen förödande eller
+  // nästan verkningslöst. ⚠ Behöver Johans beslut — se DESIGN_DECISIONS.md.
   const abs = verdict.ignoreArmour ? 0 : armourFor(target);
   damage = Math.max(0, damage - abs);
   out.damage = { roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage };
