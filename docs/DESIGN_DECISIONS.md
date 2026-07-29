@@ -829,3 +829,126 @@ Steps 1–2 touch no game logic. Step 3 needs `RollTable`/`JournalEntry` handlin
 Mappdokument använder `!folders!<id>` och posterna pekar på dem via sitt `folder`-fält. Alla former lästes ur dnd5e:s kompilerade packs, inte gissade.
 
 **Kvar av backlog 27:** Snedtändningstabellen (ingen data i `config.mjs` ännu, se backlog 21) och de rent härledda tabellerna (socialt stånd, startkapital, grupp/skadebonus/förflyttning) som redan är automatiserade i koden och inte behöver journaler.
+
+---
+
+## 9. Stridssystemets arkitektur - designforslag (2026-07-29)
+
+Johans fraga: *"check our complete battle system flow architecture and how we
+build it to the desktop. How did d&d5 do it?"* Last ur **den faktiskt installerade
+dnd5e 5.3.3** (`Data/systems/dnd5e/dnd5e.mjs`), inte ur minnet.
+
+### 9.1 Vad dnd5e faktiskt gor
+
+| Monster | Vad det ar | Kopiera? |
+|---|---|---|
+| **`RollProcessConfiguration`-trippeln** | Varje slag gar genom `(rollConfig, dialogConfig, messageConfig)` - *vad* som slas, *om anvandaren ska tillfragas*, *hur det rapporteras*. Forekommer **54 ganger** i koden. | ⭐ **Ja.** Enskilt viktigaste iden, och loser Johans punkt 3 direkt. |
+| **`parts.push()` + `situational`** | Modifikationer samlas som en array formeldelar; dialogen har ett fritt situational-falt; aktorens `globalBonuses` vavs in. | ⭐ **Ja**, men se ⚠ om multiplikatorer nedan. |
+| **pre/post-hooks per slagtyp** | `dnd5e.preRollAttack` / `postRollAttack`, `preConfigureInitiative` m.fl. | ⭐ **Ja.** Gor systemet modulvanligt utan monkey-patchning. |
+| **Egna Roll-subklasser** | `D20Roll extends BasicRoll`, `DamageRoll extends BasicRoll` - slaget bar sin egen semantik (`isCritical`, `isFumble`). | **Ja, i liten form.** Var motsvarighet bar perfekt/lyckat/misslyckat/fummel. |
+| **`Combat5e` / `Combatant5e`** via `CONFIG.Combat.documentClass` | Dokumentsubklasser for turordning och rundlogik. | ⭐ **Ja** - kravs for SLB:s omslag vid lika och for handlingsekonomin. |
+| **Activity-systemet** (`AttackActivity extends ActivityMixin`) | Foremal har *aktiviteter* i stallet for inbyggda attacker. | ❌ **Nej.** Byggt for 5e:s enorma foremalsvariation. Vara `vapen` gor en sak. Overarkitektur har. |
+
+### 9.2 Tre saker som INTE oversatts
+
+⚠ **1. DoDE har multiplikativa modifikationer; dnd5e har bara additiva.**
+`parts.push()` summerar. Men DoDE har *"CL halverad"* (KP <= 2, Smyga i
+fjallpansar, parera kattingvapen) och *"CL x 1/3"* (otranad skoldhand). En ren
+additiv array kan inte uttrycka det. **CL-motorn behover tva faser:** forst
+additiva delar, sedan ordnade multiplikatorer. ⚠ REG antyder att ordningen ar
+specificerad ("...modifikation efter addition och subtraktion") - maste belaggas.
+
+⚠ **2. Ingen AC - allt ar opponerade slag.** 5e:s attack ar ett slag mot ett
+statiskt tal. Var ar **tva slag** (anfall + parering) som mots i en 9-radersmatris.
+Chattkortet maste alltsa kunna **vanta pa forsvararen**, vilket 5e aldrig behover.
+Det ar den storsta UI-skillnaden.
+
+⚠ **3. Traffomraden och BV har ingen 5e-motsvarighet alls.** Ingen forlaga att
+kopiera - se `rolls/attack.mjs`, redan byggt.
+
+### 9.3 Foreslagen arkitektur
+
+```
+scripts/
+  documents/
+    combat.mjs        <- Combat-subklass: initiativlage, omslag vid lika (SLB s.16)
+    combatant.mjs     <- handlingsekonomi per SR (SLB s.16)
+  rolls/
+    cl.mjs            <- CL-motorn: additiva delar + multiplikatorer
+    attack.mjs        <- finns; ska ta emot en CL-konfiguration i stallet for `mods`
+  apps/
+    attack-dialog.mjs <- maldialog: traffomrade, avsikt, situationsmodifikationer
+  helpers/
+    anatomy.mjs       <- finns
+```
+
+**CL-motorns form** (Johans punkt 3), medvetet lik dnd5e:s men med tva faser:
+
+```js
+DODE.buildCl({ actor, skill, weapon, target, situation }) -> {
+  base: 18,
+  parts: [ {label:"Anfall bakifran", value:+7, source:"situation"},
+           {label:"Riktat mot huvud", value:-5, source:"aim"},
+           {label:"Valsignelse", value:+2, source:"effect"} ],
+  multipliers: [ {label:"KP <= 2", factor:0.5, source:"wounds"} ],
+  situational: 0,
+  total: 10
+}
+```
+
+Kallor som matar in i `parts`: SLB s.17:s tva tabeller, ActiveEffects fran
+foremal/besvarjelser/scener (finns redan), sarstatus, rustningens Smyga-avdrag,
+och det riktade anfallets -5.
+
+### 9.4 Initiativ (Johans punkt 1)
+
+Johan: *"Each user should be option to roll their own initiative roll. Will
+likely be removed quite quickly as it will be an insane amount of rolls."*
+
+Han har ratt - och det ar varre an han tror: **SLB slar initiativ varje SR**, inte
+en gang per strid. Sex ronder med atta deltagare = **48 slag**. Darfor en
+varldsinstallning:
+
+| Lage | Beteende |
+|---|---|
+| `spelare` | Varje spelare slar sjalv. Stamningsfullt, langsamt. |
+| `sl-slar-alla` | SL trycker en knapp. ⭐ **Foreslagen standard.** |
+| `automatiskt` | Slas nar en deltagare laggs till, utan prompt. |
+
+⚠ **Tva DoDE-specifika krav pa `Combat`-subklassen:** SLB sager att lika resultat
+ska **slas om mellan de inblandade** (Foundry sorterar i stallet pa namn/DEX), och
+att turordningen slas **om varje SR** (Foundrys standard ar en gang per strid).
+
+⚠ Combat Carousel laser bara systemets initiativformel och behover ingen
+anpassning - den fungerar redan sedan formeln sattes (post 47).
+
+### 9.5 Handlingsekonomi och tva vapen (Johans punkt 2)
+
+SLB s.16:s regel ar en **budget per SR som beror pa vad man haller i handerna**:
+
+| Utrustning | Handlingar |
+|---|---|
+| Ett vapen | attack **ELLER** parering |
+| Vapen + skold | attack **OCH** parering |
+| Vapen i varje hand | 2 attacker, 2 pareringar, eller en av varje |
+
+Det hor hemma pa en **`Combatant`-subklass** (nollstalls vid rundbyte), inte pa
+aktoren. ⚠ Oppna fragor innan bygget:
+- **Skoldhandsanfall ar -10 CL** (SLB s.17). Finns en *ambidexterity*-formaga som
+  tar bort det? RP s.25 har "God koordinationsformaga: +3 FV i Tva vapen", vilket
+  inte ar samma sak. **Behover belaggas.**
+- **`Tva vapen` som fardighet kraver ett vapenPAR vid kopet** (Johan 2026-07-29)
+  och far inte overstiga nagon av de tva ingaende vapenfardigheterna - hor ihop
+  med backlogpost 44 om vapengrupper. Ska in i guiden.
+
+### 9.6 Foreslagen byggordning
+
+1. **`rolls/cl.mjs`** - CL-motorn. Allt annat matar in i den, och den ar testbar utan UI.
+2. **Chattkort for `resolveAttack`** - gor motorn synlig vid bordet. Storst nytta per rad kod.
+3. **`apps/attack-dialog.mjs`** - maldialog med situationskryssrutor och situational-falt.
+4. **`documents/combat.mjs`** - initiativlagen, omslag vid lika, omslag per SR.
+5. **`documents/combatant.mjs`** - handlingsekonomin.
+6. **Fummeltabeller** - matrisen pekar redan pa dem.
+7. **Rustning per kroppsdel** - storsta kvarvarande regelavvikelsen (en hjalm skyddar i dag benen).
+
+⚠ Steg 1-3 gor systemet spelbart. Steg 4-5 gor det korrekt. Steg 6-7 komplett.
