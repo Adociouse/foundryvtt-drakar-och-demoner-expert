@@ -135,17 +135,31 @@ export function tokenDistance(a, b) {
 }
 
 /**
- * Är målet inom räckhåll för närstrid?
+ * Räckvidd i RUTOR för ett närstridsvapen.
  *
- * ⚠ SLB s.16: "Normalt måste din motståndare stå i rutan intill dig" — alltså
- * **1 ruta**. Men "med vissa vapen, t.ex. spjut och hillebarder, kan du dock
- * anfalla motståndare som befinner sig en eller flera rutor bort", och med dem
- * får man dessutom anfalla **genom rutor med andra stridande i**.
+ * ⚠ SLB s.16: "Normalt måste din motståndare stå i rutan intill dig" — 1 ruta.
+ * "Med vissa vapen, t.ex. spjut och hillebarder, kan du dock anfalla motståndare
+ * som befinner sig en eller flera rutor bort", och med dem får man dessutom
+ * anfalla **genom rutor med andra stridande i**.
  *
- * `vapen.system.length` bär vapenlängden (RP s.58:s "Beräkning av vapenlängd",
- * 0-5). Vi tolkar räckvidden som `max(1, length)` rutor — ⚠ ett antagande:
- * boken ger ingen explicit tabell från vapenlängd till antal rutor.
+ * ⚠ **Härledd, inte tabellerad.** Boken ger ingen kolumn "räckvidd i rutor".
+ * Johan 2026-07-29 läste ut den ur **Spelarboken s.47-48**, som ritar upp varje
+ * vapen mot en centimeterskala: en ruta är 150 cm (SLB s.15), så ett vapen som
+ * sticker ut förbi 150 cm når två rutor och ett förbi 300 cm når tre. Det ger
+ * tvåhandssvärd och tvåhandsyxa räckvidd 2, hillebard/partisan/glav/korpspjut 2,
+ * och långspjut 3 — precis vad diagrammet visar.
+ *
+ * `vapen.system.length` är RP s.58:s **längdKOD 0-5**, inte meter:
+ *
+ * | Kod | Verklig längd | Räckvidd |
+ * |-----|---------------|----------|
+ * | 0-2 | 0 - 1,4 m     | 1 ruta   |
+ * | 3-4 | 1,5 - 2,9 m   | 2 rutor  |
+ * | 5   | 3,0 m +       | 3 rutor  |
  */
 export function meleeReach(weapon) {
-  return Math.max(1, Number(weapon?.system?.length) || 1);
+  const code = Number(weapon?.system?.length) || 0;
+  if (code >= 5) return 3;
+  if (code >= 3) return 2;
+  return 1;
 }
