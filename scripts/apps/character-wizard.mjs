@@ -4,7 +4,7 @@ const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 // (YRKEN.md "Grundegenskapskrav", RP s.11) går annars inte att kontrollera vid
 // valet — alla värden är null då, varje krav blir "overifierat" och kravkollen
 // blir dekoration. Se DESIGN_DECISIONS.md §2-raden om yrkeskrav.
-const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "attribut", "yrke", "magiskola", "yrkesfardigheter", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
+const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "hand", "attribut", "yrke", "magiskola", "yrkesfardigheter", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
 // Steg som hoppas över i redigeringsläge (befintlig rollperson). Utrustning är
 // spelläge så fort rollpersonen finns — guiden kan inte skilja ett köp vid
 // skapandet från ett fynd i en grotta, så att köra butiken igen skulle antingen
@@ -18,6 +18,7 @@ const STEP_LABELS = {
   niva: "Nivå",
   grunder: "Namn",
   ras: "Ras",
+  hand: "Svärdshand",
   yrke: "Yrke",
   magiskola: "Magiskola",
   yrkesfardigheter: "Yrkesfärdigheter",
@@ -140,6 +141,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       selectRace: DoDECharacterWizard.#onSelectRace,
       selectProfession: DoDECharacterWizard.#onSelectProfession,
       selectMagicSchool: DoDECharacterWizard.#onSelectMagicSchool,
+      rollSwordHand: DoDECharacterWizard.#onRollSwordHand,
+      toggleHandGranted: DoDECharacterWizard.#onToggleHandGranted,
       rollSocialStanding: DoDECharacterWizard.#onRollSocialStanding,
       rollStartCapital: DoDECharacterWizard.#onRollStartCapital,
       buySkillFv: DoDECharacterWizard.#onBuySkillFv,
@@ -248,6 +251,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // de härleds från socialStanding.bpSpent/startCapital.bpSpent nedan (samma
     // enda-källa-princip som DataModellens prepareDerivedData använder).
     bp: { spentRas: 0, spentFormagor: 0, spentFardigheter: 0 },
+    // Svärdshand — RP s.27, samma 2T6+BP-mekanik som socialt stånd på samma sida.
+    swordHand: { roll: 0, bpSpent: 0, granted: false },
     socialStanding: { roll: 0, bpSpent: 0 },
     startCapital: { roll: 0, bpSpent: 0 },
     // EP-köp (Fas 7) — namn på färdighet → antal FV köpta UTÖVER baschansen (BC).
@@ -362,6 +367,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.showUtrustning = stepId === "utrustning";
     context.showAttribut = stepId === "attribut";
     context.showYrke = stepId === "yrke";
+    context.showHand = stepId === "hand";
     context.showSocialt = stepId === "socialt";
     context.showKapital = stepId === "kapital";
     context.showGranska = stepId === "granska";
@@ -393,6 +399,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const socialResult = this.#socialStandingResult();
     const capitalResult = this.#startCapitalResult(socialResult);
     context.socialStanding = socialResult;
+    context.swordHand = this.#swordHandResult();
+    context.swordHandOptions = CONFIG.DODE.swordHands;
     context.startCapital = capitalResult;
     context.bp = this.#bpLedger(socialResult, capitalResult);
     const epBudget = this.#epResult(context.bp);
@@ -526,6 +534,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       // baka in bonusen i basen och dubbla den vid varje sparning.
       this.state.attributes[key] = sys.attributes?.[key]?.value ?? null;
     }
+    // Svärdshanden lagras bara som resultatet på aktören, inte som slag+insats —
+    // vid redigering läses den därför tillbaka som en "given" hand, så guiden
+    // inte ber om ett omslag av något som redan är bestämt.
+    this.state.swordHand = { roll: 0, bpSpent: 0, granted: sys.swordHand ?? "hoger" };
     this.state.socialStanding = { roll: sys.socialStanding?.roll ?? 0, bpSpent: sys.socialStanding?.bpSpent ?? 0 };
     this.state.startCapital = { roll: sys.startCapital?.roll ?? 0, bpSpent: sys.startCapital?.bpSpent ?? 0 };
     this.state.bp = {
@@ -679,7 +691,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #bpLedger(socialResult, capitalResult) {
     const spent = this.state.bp;
     const start = CONFIG.DODE.bpByNiva[this.state.niva] ?? CONFIG.DODE.bpByNiva.vanlig;
-    const total = spent.spentRas + spent.spentFormagor + socialResult.bpSpent + capitalResult.bpSpent + spent.spentFardigheter;
+    // ⚠ Svärdshandens insats är också BP (RP s.27) och måste räknas med, annars
+    // kan spelaren satsa 15 BP på handen och ändå ha kvar dem till startkapital.
+    const handBp = this.state.swordHand.granted ? 0 : (Number(this.state.swordHand.bpSpent) || 0);
+    const total = spent.spentRas + spent.spentFormagor + socialResult.bpSpent + capitalResult.bpSpent + spent.spentFardigheter + handBp;
     return { start, spent: total, remaining: start - total };
   }
 
@@ -693,6 +708,25 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const max = budget + Math.max(0, bpLedger.remaining) * 5;
     const maxStartFv = CONFIG.DODE.maxStartFvTable[this.state.niva]?.[this.state.ageCategory] ?? null;
     return { max, maxStartFv };
+  }
+
+  /**
+   * Svärdshand — RP s.27: 2T6 + spenderade BP → Höger/Vänster/Dubbelhänt/Ambidextriös.
+   * ⚠ Fåtts handen som särskild förmåga slås inget alls.
+   */
+  #swordHandResult() {
+    const { roll, bpSpent, granted } = this.state.swordHand;
+    if (granted) {
+      return { granted, key: granted, label: CONFIG.DODE.swordHands[granted],
+        total: null, roll: 0, bpSpent: 0, noOffHandPenalty: CONFIG.DODE.hasNoOffHandPenalty(granted) };
+    }
+    const total = roll > 0 ? roll + (Number(bpSpent) || 0) : 0;
+    const row = total > 0 ? CONFIG.DODE.swordHandFromRoll(total) : null;
+    return {
+      granted: false, roll, bpSpent: Number(bpSpent) || 0, total,
+      key: row?.key ?? null, label: row?.label ?? null,
+      noOffHandPenalty: row ? CONFIG.DODE.hasNoOffHandPenalty(row.key) : false
+    };
   }
 
   /** Socialt stånd — RP s.27: 2T6 + spenderade BP. Speglar actor-character.mjs. */
@@ -909,6 +943,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     switch (stepId) {
       case "grunder": return this.state.name.trim().length > 0;
       case "ras": return !!this.state.raceUuid;
+      case "hand": return !!this.state.swordHand.granted || this.state.swordHand.roll > 0;
       case "alder": return !!this.state.ageCategory;
       case "attribut": return Object.values(this.state.attributes).every((v) => v !== null);
       case "yrke": return !!this.state.professionUuid;
@@ -1242,6 +1277,35 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
+  /**
+   * Svärdshand — RP s.27: 2T6 modifierat med antalet BP man väljer att spendera,
+   * +1 per BP.
+   *
+   * ⚠ **Den dolda pärlan i regelverket** (Johan 2026-07-29): 15 BP ger 2T6+15 =
+   * lägst 17, vilket garanterar minst **Dubbelhänt** och ger **Ambidextriös på
+   * 33/36 ≈ 92 %**. Att köpa bort sin sämre hand tidigt sparar enormt mycket
+   * senare, eftersom sköldhanden annars är genomgående sämre (SLB s.17: −10 CL).
+   */
+  static async #onRollSwordHand() {
+    const bp = Math.max(0, Number(this.state.swordHand.bpSpent) || 0);
+    const roll = await new Roll("2d6").evaluate();
+    this.state.swordHand.roll = roll.total;
+    if (game.settings.get(game.system.id, "showAttributeRollsInChat")) {
+      await roll.toMessage({ flavor: `Svärdshand — 2T6 + ${bp} BP` });
+    }
+    this.render();
+  }
+
+  /**
+   * ⚠ RP s.27: "Har du fått dubbelhänt eller ambidextriös som särskild förmåga
+   * så behöver du inte slå på den här tabellen." Växeln hoppar över slaget helt.
+   */
+  static async #onToggleHandGranted(event, target) {
+    this.state.swordHand.granted = target.dataset.value || false;
+    this.state.swordHand.roll = 0;
+    this.render();
+  }
+
   static async #onRollSocialStanding() {
     const roll = await new Roll("2d6").evaluate();
     this.state.socialStanding.roll = roll.total;
@@ -1386,6 +1450,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         kon: this.state.kon,
         niva: this.state.niva,
         bp: this.state.bp,
+        swordHand: this.#swordHandResult().key ?? "hoger",
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,
         // Kapitalet som blev över i utrustningssteget blir rollpersonens
@@ -1474,6 +1539,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         kon: this.state.kon,
         niva: this.state.niva,
         bp: this.state.bp,
+        swordHand: this.#swordHandResult().key ?? "hoger",
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,
         ep: { spent: skillPreview.epSpent },

@@ -347,6 +347,60 @@
   </section>
   {{/if}}
 
+  {{#if showHand}}
+  <section class="wizard-step">
+    {{!-- RP s.27. Samma 2T6+BP-mekanik som socialt stånd, på samma boksida. --}}
+    <p class="hint">Den hand du normalt använder kallas <strong>svärdshand</strong>;
+       den aviga kallas <strong>sköldhand</strong>. Sköldhanden är genomgående sämre
+       — utom för färdigheterna <em>Två vapen</em> och <em>Sköld</em> (RP s.27).</p>
+
+    <label class="hand-granted">
+      Fick du handen som särskild förmåga? Då slår du inte.
+      <select data-action="toggleHandGranted" name="grantedHand">
+        <option value="" {{#unless swordHand.granted}}selected{{/unless}}>Nej — slå fram</option>
+        <option value="dubbelhant" {{#if (eq swordHand.granted "dubbelhant")}}selected{{/if}}>Dubbelhänt (förmåga)</option>
+        <option value="ambidextrios" {{#if (eq swordHand.granted "ambidextrios")}}selected{{/if}}>Ambidextriös (förmåga)</option>
+      </select>
+    </label>
+
+    {{#unless swordHand.granted}}
+      <label>BP att spendera på svärdshanden
+        <input type="number" min="0" name="state.swordHand.bpSpent" value="{{swordHand.bpSpent}}" />
+      </label>
+      {{!-- Regelverkets dolda pärla: 15 BP garanterar minst Dubbelhänt och ger
+            Ambidextriös i 33 fall av 36. --}}
+      <p class="hint hand-tip">
+        <i class="fa-solid fa-lightbulb"></i>
+        2T6+15 blir lägst 17 — alltså <strong>garanterat minst Dubbelhänt</strong>,
+        och <strong>Ambidextriös i 92 % av fallen</strong>. Att köpa bort sin sämre
+        hand tidigt sparar mycket senare.
+      </p>
+      <button type="button" data-action="rollSwordHand"><i class="fa-solid fa-dice"></i> Slå 2T6</button>
+    {{/unless}}
+
+    <div class="wizard-roll-result">
+      {{#if swordHand.granted}}
+        <p>Given som särskild förmåga: <strong>{{swordHand.label}}</strong></p>
+      {{else if swordHand.total}}
+        <p>Slag {{swordHand.roll}} + {{swordHand.bpSpent}} BP = <strong>{{swordHand.total}}</strong> → {{swordHand.label}}</p>
+      {{else}}
+        <p class="hint">Inget slag gjort än.</p>
+      {{/if}}
+      {{#if swordHand.noOffHandPenalty}}
+        <p class="hand-perk"><i class="fa-solid fa-star"></i> Ingen sämre hand — sköldhandens −10 CL gäller inte dig.</p>
+      {{/if}}
+    </div>
+
+    <table class="dode-roll-table hand-table">
+      <tr><th>2T6+BP</th><th>Svärdshand</th></tr>
+      <tr><td>2–11</td><td>Höger</td></tr>
+      <tr><td>12–14</td><td>Vänster</td></tr>
+      <tr><td>15–18</td><td>Dubbelhänt <em>— båda händerna lika bra, dock ej samtidigt</em></td></tr>
+      <tr><td>≥19</td><td>Ambidextriös <em>— båda händerna samtidigt, till olika saker</em></td></tr>
+    </table>
+  </section>
+  {{/if}}
+
   {{#if showSocialt}}
   <section class="wizard-step">
     <p class="hint">Slå fram socialt stånd. Varje spenderad BP ger +1 på slaget (RP s.27).</p>
