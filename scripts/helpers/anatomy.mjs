@@ -143,7 +143,7 @@ export function tokenDistance(a, b) {
  * anfalla **genom rutor med andra stridande i**.
  *
  * ⚠ **RÄTTAD 2026-07-29 (andra försöket).** `Längd`-kolumnen i Spelarbokens
- * närstridsvapentabell (SB s.35) är **inte** RP s.58:s längdkod 0-5 — den är ett
+ * närstridsvapentabell (SB s.35) är **inte** REG s.58:s längdkod 0-5 — den är ett
  * eget litet 0-3-tal som anger hur många rutor bortom den intilliggande vapnet
  * når. Tvåhandssvärd har `Längd 1`, inte 3. Räckvidden är alltså rakt av
  * **1 + Längd**:
@@ -155,7 +155,15 @@ export function tokenDistance(a, b) {
  * | 2 | långspjut, lans | 3 rutor |
  * | 3 | pik | 4 rutor |
  *
- * Mitt första försök läste kolumnen som RP:s längdkod och gav tvåhandssvärdet
+ * ⚠ **TVÅ OLIKA LÄNGDSYSTEM I TVÅ BÖCKER, samma ordval.** Grundregelboken har på
+ * s.58 en ruta *"Beräkning av vapenlängd"* som översätter **verklig längd i meter
+ * till en kod 0-5** (0,0-0,4 → 0 · 0,5-0,9 → 1 · 1,0-1,4 → 2 · 1,5-1,9 → 3 ·
+ * 2,0-2,9 → 4 · 3,0+ → 5). Spelarbokens `Längd`-kolumn är något helt annat: ett
+ * 0-3-tal som direkt anger räckvidd bortom den intilliggande rutan. Samma ord,
+ * olika skalor — och `item-vapen.mjs` `length` bär SB:s variant, eftersom det är
+ * den som står i vapentabellen vi portat.
+ *
+ * Mitt första försök läste kolumnen som REG:s längdkod och gav tvåhandssvärdet
  * räckvidd 2 av fel skäl — och långspjutet (`Längd 2`) bara 1 ruta, vilket är
  * uppenbart fel för ett spjut.
  */
