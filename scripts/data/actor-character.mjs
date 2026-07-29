@@ -111,6 +111,9 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       // Per rollperson, inte per värld — vila är individuell (en spelare kan
       // ligga skadad i en stad medan resten fortsätter).
       rest: new fields.SchemaField({
+        // ⚠ SVIT, inte tidsstampel — RP s.63 kraver en SAMMANHANGANDE viloperiod
+        // om minst 7 dygn. Resa och aventyr nollstaller den; se helpers/time.mjs.
+        streakDays: new fields.NumberField({ required: false, initial: 0, min: 0 }),
         trainingUnlocked: new fields.BooleanField({ required: false, initial: false })
       }),
       // Kroppsbyggnad — styr träffområdestabellen (RP s.48-50). ⚠ Dolt värde:

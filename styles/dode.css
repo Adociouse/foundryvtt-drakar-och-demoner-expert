@@ -732,3 +732,20 @@
   background: rgba(60,60,120,0.18); font-size: 0.85em; }
 .dode-attack-card .wear-line { font-size: 0.85em; opacity: 0.85; margin-top: 3px; }
 .dode-attack-card .verdict-note { font-size: 0.8em; opacity: 0.7; font-style: italic; margin-top: 3px; }
+
+/* ---- Tidsfönstret (§10) ---- */
+.dode-time-body { padding: 8px; }
+.dode-time-body .time-now { font-size: 0.9em; opacity: 0.85; margin-bottom: 8px; }
+.dode-time-body .time-kinds { display: flex; gap: 4px; }
+.dode-time-body .time-kinds button { flex: 1; opacity: 0.55; }
+.dode-time-body .time-kinds button.is-active { opacity: 1; font-weight: 600; }
+.dode-time-body .kind-hint { font-size: 0.78em; margin: 4px 0 8px; }
+.dode-time-body .time-steps { display: flex; flex-wrap: wrap; gap: 4px; }
+.dode-time-body .time-steps button { font-size: 0.85em; }
+.dode-time-body .time-custom { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 0.85em; }
+.dode-time-body .time-targets { margin-top: 10px; }
+.dode-time-body .time-targets ul { list-style: none; margin: 0; padding: 0; }
+.dode-time-body .time-targets li { display: flex; align-items: center; gap: 8px; font-size: 0.85em; padding: 2px 0; }
+.dode-time-body .time-targets label { flex: 1 1 auto; }
+.dode-time-body .streak { opacity: 0.75; white-space: nowrap; }
+.dode-time-body .kp { opacity: 0.75; white-space: nowrap; }

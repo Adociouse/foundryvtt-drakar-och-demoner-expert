@@ -29,6 +29,7 @@ import {
 } from "./sheets/item-sheet.mjs";
 import DoDECharacterWizard from "./apps/character-wizard.mjs";
 import DoDETrainingApp from "./apps/training.mjs";
+import DoDETimeWindow from "./apps/time-window.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import { DODE } from "./helpers/config.mjs";
 import { resolveAttack, postAttackCard } from "./rolls/attack.mjs";
@@ -217,6 +218,8 @@ Hooks.once("init", () => {
     // character-wizard.mjs och DESIGN_DECISIONS.md backlog 4c.
     openCharacterWizard: (actor = null) => new DoDECharacterWizard(actor ? { actor } : {}).render(true),
     // Träningsfönstret — omsättning av EP till FV efter viloperiod (REG s.46).
+    // Tidsfonstret — SL:s enda stalle for att flytta klockan utanfor strid (§10).
+    openTimeWindow: () => new DoDETimeWindow().render(true),
     openTraining: (actor) => new DoDETrainingApp(actor).render(true),
     // Magi har ett eget fönster — EP-källorna skiljer sig från vanliga
     // färdigheters (SB s.7), se apps/magic-training.mjs.

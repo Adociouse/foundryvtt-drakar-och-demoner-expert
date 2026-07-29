@@ -1,0 +1,46 @@
+<div class="dode-time-body">
+  <header class="time-now">
+    <i class="fa-solid fa-hourglass-half"></i>
+    <span>{{worldTime}}</span>
+  </header>
+
+  {{!-- ⚠ Slaget avgor foljderna, inte langden: vila bygger vilosvit och laker
+        full takt, resa/aventyr nollar sviten och laker halva. Se §10.3b/d. --}}
+  <div class="time-kinds">
+    {{#each kinds as |k key|}}
+      <button type="button" data-action="setKind" data-kind="{{key}}"
+        class="{{#if k.active}}is-active{{/if}}" title="{{k.hint}}">{{k.label}}</button>
+    {{/each}}
+  </div>
+  <p class="hint kind-hint">{{kindHint}}</p>
+
+  <div class="time-steps">
+    {{#each steps as |s|}}
+      <button type="button" data-action="advance" data-seconds="{{s.seconds}}">{{s.label}}</button>
+    {{/each}}
+  </div>
+
+  <label class="time-custom">Eget antal dygn
+    <input type="number" name="days" value="1" min="0" step="0.5" />
+    <button type="button" data-action="advanceCustom">Flytta fram</button>
+  </label>
+
+  <section class="time-targets">
+    <h4>Berörs</h4>
+    {{#if actors.length}}
+      <ul>
+        {{#each actors as |a|}}
+          <li>
+            <label><input type="checkbox" data-actor-id="{{a.id}}" {{#if a.checked}}checked{{/if}} /> {{a.name}}</label>
+            <span class="streak" title="Sammanhängande vilodygn — 7 krävs för träning (RP s.63)">
+              vila {{a.streak}}/7{{#if a.unlocked}} ✓{{/if}}
+            </span>
+            <span class="kp">{{a.kp}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    {{else}}
+      <p class="hint">Inga rollpersoner i världen.</p>
+    {{/if}}
+  </section>
+</div>
