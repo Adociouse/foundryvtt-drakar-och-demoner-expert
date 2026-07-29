@@ -147,7 +147,35 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 4c. ~~**Wizard re-entry / character edit mode.**~~ **Done (2026-07-27)** — see §2. Two scope calls made during design and worth remembering: **race/yrke are read-only in edit mode** (Johan: *"most games don't allow changing these but require you to setup a new character"*) which conveniently eliminates the entire profession-swap skill-reconciliation minefield — no skill ever needs deleting, so edit mode structurally cannot destroy one; and **the equipment step is skipped** because once a character exists, inventory is play state and the wizard cannot tell a chargen purchase from dungeon loot. A GM who genuinely must change race/yrke still drags a replacement onto the sheet, which already swaps correctly.
 
-4d. **Sköldar: `price: 0`, och `abs: 0` som ⚠ INTE går att sourca.** Utrett 2026-07-29 mot REG s.52-55 (PDF, kurerat i `DODE_Regler_SKOLDAR.md`). Utredningen vände två gånger och slutar i en fråga till Johan:
+4d. **Sköldar — utrett färdigt 2026-07-29, men blockerat på ett prisbeslut.**
+
+   **`abs: 0` är RÄTT och ska inte ändras.** Sköldtabellen finns i **Spelarboken s.38** och har kolumnerna **STY-krav · BV · Vikt · Pris** — **ingen Absorbering-kolumn**. SB s.38 säger uttryckligen *"Sköldar har brytvärden precis som vapen. Brytvärdet sjunker också på samma sätt."* REG s.55:s formulering *"sköldens absorptionsförmåga"* är alltså lös ordning för samma sak som SB kallar **BV**. En sköld absorberar inte — den parerar, och går sönder när den tar för mycket.
+
+   ⚠ **Vår `rustning`-modell saknar `bv` helt.** Det är det verkliga schemagapet, inte `abs`.
+
+   **Sköldtabell (SB s.38):**
+
+   | Sköldtyp | STY-krav | BV | Vikt (kg) | Pris (sm) |
+   |---|---|---|---|---|
+   | Targ (bucklare) | 1 | 9 | 1 | 500 |
+   | Rundsköld, liten | 3 | 9 | 2 | 650 |
+   | Vanlig sköld (trekantig) | 7 | 11 | 6 | 850 |
+   | Långsköld (normandisk) | 7 | 11 | 6 | 900 |
+   | Pavise (bågskyttesköld) | 18 | 11 | 16 | 900 |
+   | Rundsköld, stor | 11 | 11 | 7 | 1 000 |
+   | Scutata (romersk sköld) | 7 | 13 | 8 | 1 100 |
+   | *Läderöverdrag* | +2 | +2 | +2 | +250 |
+   | *Metallskoning* | +3 | +3 | +3 | +500 |
+
+   ⚠ **PRISSKALORNA I REG OCH SB ÄR OFÖRENLIGA — hit går det inte att bara kopiera.** Vårt `vapen-utrustning`-pack ligger på **REG:s skala** (Kortsvärd 190, Bredsvärd 200, Tvåhandssvärd 560 = REG s.57 exakt). SB:s rustningstabell på s.37 prissätter samma sorts utrustning **ungefär 15-20× högre** (SB: läderrustning hela kroppen **1 300 sm**; REG: läder **25 sm/BEP** × ~3 BEP ≈ **75 sm**). Att importera SB:s sköldpriser rakt av skulle göra en liten rundsköld (650 sm) dyrare än ett tvåhandssvärd (560 sm). **Behöver Johans beslut:** skala om SB:s sköldpriser till REG-nivå, eller byta hela utrustningspacket till SB:s skala?
+
+   **Två kurerade sköldregler är FEL** och rättade i `DODE_Regler_SKOLDAR.md`:
+   - Projektilchansen (grundsystemet, REG s.55) är **1-6 / 1-4 / 1-2 på 1T20** för stor/medelstor/liten. `UTRUSTNING.md` anger 1/20 för stor och **"—" för de andra två**, alltså att medelstor och liten sköld inte skyddar mot pilar alls.
+   - Förstörelsechansen gäller **per skadepoäng över sköldens tålighet**, inte 1/20 per lyckad parering som både `UTRUSTNING.md` och `REGLER_STRID.md` påstår — och slår inte alls om skölden klarar hela skadan.
+
+   ⚠ **Sidofynd med samma rot:** rustningsraderna i packet har materialens **sm/BEP-taxa** inskriven som om den vore ett fast pris (Läder `price: 25`, Ringbrynja `175`, Metall `200`). REG s.53 säger *"Priset för en rustningsdel beräknas utifrån vikt och material"* — en lädderrustning kostar alltså 25 × sin BEP-vikt, inte 25 sm. Hjälmarna är rätt (de har egna fasta priser i boken). Egen post värd att lyfta när utrustningen görs om.
+
+   Ursprunglig post: **`price: 0` on three shields.** Utrett 2026-07-29 mot REG s.52-55 (PDF, kurerat i `DODE_Regler_SKOLDAR.md`). Utredningen vände två gånger och slutar i en fråga till Johan:
 
    - **Först trodde jag `abs: 0` var en bugg.** Sedan visade `REGLER_STRID.md` att en sköld ger *"separat parering utöver vapnets"* — den absorberar inte som en rustning, så 0 såg riktigt ut.
    - **Men REG s.55 motsäger även det:** sköldförstörelseregeln lyder *"för varje skadepoäng som överstiger **sköldens absorptionsförmåga** ... 1/20 chans att skölden blir totalförstörd"*. En sköld HAR alltså en absorptionsförmåga.
@@ -279,6 +307,11 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 15d. ~~**Test fixtures / test-case catalogue.**~~ **Done (2026-07-27).** `docs/TEST_CASES.md` (catalogue + module-compatibility checklist + manual edge cases) and `docs/dev/seed-test-party.js` (console-pasteable seeder). Seven fixtures: a four-character party covering the mechanical range (race bonus, no-race-modifier baseline, negative race mod, caster) plus three edge cases (no race/profession, highest niva × worst age, negative attribute). Fixtures are created **through the wizard's own create path**, so seeding doubles as a wizard regression test, and are tagged `flags.<sysid>.testFixture` for exact teardown. Verified: all 7 seed cleanly, and the negative-attribute case (`Anka` KAR −1) renders without error at Grupp 0. Both files live under `docs/`, which is excluded from the runtime distribution zip.
 
 15c. **Verify popular optional modules work with this system.** Johan 2026-07-27 (Carousel Combat Tracker looks especially desirable). Community modules commonly assume dnd5e/PF2e data paths, so each needs checking against ours — most relevant are the token/combat ones (Carousel Combat Tracker, Monk's Combat Marker, Dice So Nice, Dice Tray, Torch, Tokenizer, PopOut!). The `primaryTokenAttribute`/`secondaryTokenAttribute` work in 15 helps here: several combat/HUD modules read the token bar attributes rather than system-specific fields.
+47. **⚠ Initiativ är inte konfigurerat alls — och DoDE:s regel är inget tärningsslag.** Upptäckt 2026-07-29 när Johan frågade om Combat Carousel. **Två fynd:**
+   - Systemet rör aldrig `CONFIG.Combat.initiative`. Det finns noll referenser till `initiative` i `dode.mjs` och `system.json`. Foundry faller därför tillbaka på sin egen standard (`1d20`), vilket betyder att Combat Carousel — eller Foundrys egen stridsspårare — slår **ett rent 1T20 utan koppling till rollpersonen**. Johans antagande att formeln redan skulle vara förkonfigurerad till `@attributes.smi.bonus + 1d10` stämmer alltså inte för det här systemet; ingenting är satt.
+   - ⚠ **DoDE:s turordning är ingen tärning.** REGLER_STRID.md (REG s.56): *"Turordningen baseras på **SMI** — högst SMI agerar först. Lika SMI: slå 1T6, högst slår först."* Alltså en **statisk SMI-jämförelse** med 1T6 enbart som skiljeslag. Ovanpå det: **vapenlängd slår ALLTID först i stridens första SR**, och sedan gäller normal turordning från SR 2. Initiativmodifikationer finns också — Krigare +5 (yrkesförmåga), Karate +5 på SMI, Hoppspark/Rundspark −2, stridskonsttekniken Initiativbonus +5.
+   - **Rimlig Foundry-mappning:** `CONFIG.Combat.initiative = { formula: "@attributes.smi.total + (1d6)/10", decimals: 1 }` — SMI dominerar, tiondelen bryter lika utan att kunna kasta om ordningen. Vapenlängdsregeln för SR 1 går inte att uttrycka i en formel och behöver egen kod. Hör ihop med backlogposten om stridssystemet.
+
 16. **English localization.** Low priority per project scope.
 
 40. **Magisk kodex som riktigt föremål.** `besvarjelse.system.hasCodex` är i dag en boolean på besvärjelsen. En kodex är i fiktionen ett fysiskt band (SB s.7: 20-30 sidor handskriven text per besvärjelse) som ska gå att **köpa, hitta i en skattkammare och bli av med**. Bör bli ett `utrustning`-föremål med en referens till vilken besvärjelse det beskriver, och magiträningsfönstret slå upp ägandet i stället för att läsa en bock. Hänger ihop med handlarna (Mirac/Lasslo) och med backlogpost 30.
