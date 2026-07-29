@@ -150,6 +150,17 @@
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "scener",
+      "label": "Platser",
+      "path": "packs/scener",
+      "type": "Scene",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "socket": false,

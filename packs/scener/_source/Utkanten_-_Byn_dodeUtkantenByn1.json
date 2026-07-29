@@ -1,0 +1,47 @@
+{
+  "_id": "dodeUtkantenByn1",
+  "_key": "!scenes!dodeUtkantenByn1",
+  "name": "Utkanten — Byn",
+  "navigation": true,
+  "navName": "Utkanten",
+  "navOrder": 0,
+  "active": false,
+  "width": 1024,
+  "height": 1024,
+  "padding": 0.25,
+  "background": {
+    "src": "systems/drakar-och-demoner-expert/assets/scener/utkanten-byn.png"
+  },
+  "grid": {
+    "type": 1,
+    "size": 64,
+    "distance": 1.5,
+    "units": "m",
+    "alpha": 0.2,
+    "color": "#000000"
+  },
+  "initial": {
+    "x": 512,
+    "y": 512,
+    "scale": 0.8
+  },
+  "backgroundColor": "#999999",
+  "tokenVision": false,
+  "fog": {
+    "exploration": false
+  },
+  "environment": {
+    "globalLight": {
+      "enabled": true
+    }
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "generic": true
+    }
+  },
+  "ownership": {
+    "default": 0
+  },
+  "description": "<p>Vägskälet i Utkanten. Värdshuset ligger i nordväst, marknadsstånden kring brunnen. En generisk by att använda som utgångspunkt — den hör inte till något äventyr och innehåller inga hemligheter.</p>"
+}

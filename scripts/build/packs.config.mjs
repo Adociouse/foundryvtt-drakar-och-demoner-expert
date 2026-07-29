@@ -12,5 +12,8 @@ export const PACKS = [
   // `type` är ett enda värde per pack, och ownership sitter på pack-nivå.
   { name: "regler", type: "JournalEntry" },
   { name: "tabeller", type: "RollTable" },
-  { name: "sl-regler", type: "JournalEntry" }
+  { name: "sl-regler", type: "JournalEntry" },
+  // Generiska platser — se DESIGN_DECISIONS.md §7.3: systemnivå betyder
+  // spoilerfritt och äventyrsoberoende. Äventyrsscener hör hemma i modulen.
+  { name: "scener", type: "Scene" }
 ];

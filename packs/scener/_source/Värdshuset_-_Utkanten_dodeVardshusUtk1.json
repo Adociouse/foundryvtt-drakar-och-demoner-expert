@@ -1,0 +1,47 @@
+{
+  "_id": "dodeVardshusUtk1",
+  "_key": "!scenes!dodeVardshusUtk1",
+  "name": "Värdshuset — Utkanten",
+  "navigation": true,
+  "navName": "Värdshuset",
+  "navOrder": 0,
+  "active": false,
+  "width": 1024,
+  "height": 1024,
+  "padding": 0.25,
+  "background": {
+    "src": "systems/drakar-och-demoner-expert/assets/scener/utkanten-vardshuset.png"
+  },
+  "grid": {
+    "type": 1,
+    "size": 64,
+    "distance": 1.5,
+    "units": "m",
+    "alpha": 0.2,
+    "color": "#000000"
+  },
+  "initial": {
+    "x": 512,
+    "y": 512,
+    "scale": 0.8
+  },
+  "backgroundColor": "#999999",
+  "tokenVision": false,
+  "fog": {
+    "exploration": false
+  },
+  "environment": {
+    "globalLight": {
+      "enabled": true
+    }
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "generic": true
+    }
+  },
+  "ownership": {
+    "default": 0
+  },
+  "description": "<p>Värdshusets skänkrum. Disken i norr, eldstaden mitt på norrväggen, trappan upp i sydväst och förrådet i öster. Byggt för att kunna slåss i: borden ger skydd och trappan en flykt.</p>"
+}
