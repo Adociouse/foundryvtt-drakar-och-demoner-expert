@@ -142,24 +142,23 @@ export function tokenDistance(a, b) {
  * som befinner sig en eller flera rutor bort", och med dem får man dessutom
  * anfalla **genom rutor med andra stridande i**.
  *
- * ⚠ **Härledd, inte tabellerad.** Boken ger ingen kolumn "räckvidd i rutor".
- * Johan 2026-07-29 läste ut den ur **Spelarboken s.47-48**, som ritar upp varje
- * vapen mot en centimeterskala: en ruta är 150 cm (SLB s.15), så ett vapen som
- * sticker ut förbi 150 cm når två rutor och ett förbi 300 cm når tre. Det ger
- * tvåhandssvärd och tvåhandsyxa räckvidd 2, hillebard/partisan/glav/korpspjut 2,
- * och långspjut 3 — precis vad diagrammet visar.
+ * ⚠ **RÄTTAD 2026-07-29 (andra försöket).** `Längd`-kolumnen i Spelarbokens
+ * närstridsvapentabell (SB s.35) är **inte** RP s.58:s längdkod 0-5 — den är ett
+ * eget litet 0-3-tal som anger hur många rutor bortom den intilliggande vapnet
+ * når. Tvåhandssvärd har `Längd 1`, inte 3. Räckvidden är alltså rakt av
+ * **1 + Längd**:
  *
- * `vapen.system.length` är RP s.58:s **längdKOD 0-5**, inte meter:
+ * | Längd | Vapen (SB s.35) | Räckvidd |
+ * |-------|-----------------|----------|
+ * | 0 | dolk, svärd, yxor, klubbor … | 1 ruta |
+ * | 1 | tvåhandssvärd, tvåhandsyxa, hillebard, partisan, glav, spetum, pålyxa, kortspjut, piska, treudd | 2 rutor |
+ * | 2 | långspjut, lans | 3 rutor |
+ * | 3 | pik | 4 rutor |
  *
- * | Kod | Verklig längd | Räckvidd |
- * |-----|---------------|----------|
- * | 0-2 | 0 - 1,4 m     | 1 ruta   |
- * | 3-4 | 1,5 - 2,9 m   | 2 rutor  |
- * | 5   | 3,0 m +       | 3 rutor  |
+ * Mitt första försök läste kolumnen som RP:s längdkod och gav tvåhandssvärdet
+ * räckvidd 2 av fel skäl — och långspjutet (`Längd 2`) bara 1 ruta, vilket är
+ * uppenbart fel för ett spjut.
  */
 export function meleeReach(weapon) {
-  const code = Number(weapon?.system?.length) || 0;
-  if (code >= 5) return 3;
-  if (code >= 3) return 2;
-  return 1;
+  return 1 + (Number(weapon?.system?.length) || 0);
 }

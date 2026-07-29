@@ -179,6 +179,8 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
    | *Läderöverdrag* | +2 | +2 | +2 | +250 |
    | *Metallskoning* | +3 | +3 | +3 | +500 |
 
+   ✅ **LÖST 2026-07-29 — SB är internt konsekvent, jag jämförde över utgåvor.** Johan visade SB:s närstridsvapentabell (s.35): **tvåhandssvärd 3 500 sm**, bredsvärd 1 000, kortsvärd 400. En liten rundsköld på 650 sm är alltså fullt rimlig *inom SB* — den kostar en bråkdel av ett tvåhandssvärd. Min invändning nedan jämförde SB:s sköld mot **REG:s** tvåhandssvärd (560) och skapade en motsägelse som inte finns. **Kvar är bara ett rent utgåveval:** REG:s prisskala eller SB:s (~6× högre, men konsekvent i sig). Ingen brådska — se post 42. Ursprunglig oro:
+
    ⚠ **PRISSKALORNA I REG OCH SB ÄR OFÖRENLIGA — hit går det inte att bara kopiera.** Vårt `vapen-utrustning`-pack ligger på **REG:s skala** (Kortsvärd 190, Bredsvärd 200, Tvåhandssvärd 560 = REG s.57 exakt). SB:s rustningstabell på s.37 prissätter samma sorts utrustning **ungefär 15-20× högre** (SB: läderrustning hela kroppen **1 300 sm**; REG: läder **25 sm/BEP** × ~3 BEP ≈ **75 sm**). Att importera SB:s sköldpriser rakt av skulle göra en liten rundsköld (650 sm) dyrare än ett tvåhandssvärd (560 sm). **Behöver Johans beslut:** skala om SB:s sköldpriser till REG-nivå, eller byta hela utrustningspacket till SB:s skala?
 
    **Två kurerade sköldregler är FEL** och rättade i `DODE_Regler_SKOLDAR.md`:
