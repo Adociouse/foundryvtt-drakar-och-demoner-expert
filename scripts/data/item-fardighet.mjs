@@ -43,17 +43,19 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
       // `earned` räknas upp av strecket, `spent` av köp i träningsfönstret —
       // båda ackumulerar, så historiken finns kvar när potten är tömd.
       ep: new fields.SchemaField({
-        // ⚠ SÖMNKLOCKA, inte stressbedömning. RP s.63 (ordagrant samma i REG
-        // s.45): EP ges "varje gång som en rollperson använder en färdighet
-        // framgångsrikt FÖRSTA GÅNGEN EFTER EN SOVPERIOD om minst sex timmar
-        // (två timmar för alver)". Sedan kan färdigheten inte ge mer EP förrän
-        // rollpersonen sovit igen. Flaggan nollas av clearAwardMarks().
+        // ⚠ EP-STRECKET — RP s.63:s egen term, inte en "klocka". Ordagrant
+        // (samma regel i REG s.45): "noteras ett streck vid färdigheten" när
+        // rollpersonen använder den framgångsrikt FÖRSTA GÅNGEN EFTER EN
+        // SOVPERIOD om minst sex timmar (två för alver). Det är den lilla
+        // rutan bredvid varje färdighet på det fysiska rollformuläret — kryssas
+        // i vid ett lyckat slag, kryssas ur av clearEpTicks() när man sovit.
+        // `ticked` ÄR den rutan.
         //
         // ⚠ Systemet gjorde tidigare "1 EP per lyckat slag i ett stressigt läge
         // (SL bedömer)" efter den kurerade REGLER_FARDIGHETER.md. Den regeln står
-        // inte i NÅGON av böckerna — bytt till sömnklockan efter Johans beslut
+        // inte i NÅGON av böckerna — bytt till strecket efter Johans beslut
         // 2026-07-29. Se DESIGN_DECISIONS.md backlogpost 39.
-        awardedSinceRest: new fields.BooleanField({ required: false, initial: false }),
+        ticked: new fields.BooleanField({ required: false, initial: false }),
         earned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),

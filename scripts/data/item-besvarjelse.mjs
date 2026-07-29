@@ -23,12 +23,13 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // Därför bor potten på itemet, inte på rollpersonen.
       // `earned` räknas upp av strecket, `spent` av köp i träningsfönstret —
       // båda ackumulerar, så historiken finns kvar när potten är tömd.
-      // ⚠ Besvärjelser tjänar in EP på en SÖMNKLOCKA, inte per kastning: 1 EP
-      // första gången besvärjelsen används framgångsrikt efter förra sömnen
-      // (MAG s.23), perfekt ger 1T3+1. `awardedSince` sätts vid utdelning och
-      // nollas vid vila, så samma besvärjelse inte kan ge EP två gånger.
+      // ⚠ Besvärjelser tjänar in EP på samma EP-STRECK som färdigheter, inte per
+      // kastning: 1 EP första gången besvärjelsen används framgångsrikt efter
+      // förra sömnen (MAG s.23), perfekt ger 1T3+1. `ticked` kryssas i vid
+      // utdelning och kryssas ur vid vila, så samma besvärjelse inte kan ge EP
+      // två gånger innan nästa sovperiod.
       ep: new fields.SchemaField({
-        awardedSinceRest: new fields.BooleanField({ required: false, initial: false }),
+        ticked: new fields.BooleanField({ required: false, initial: false }),
         earned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),

@@ -25,7 +25,8 @@ export async function rollFV({ actor, label, fv, item = null }) {
 
   // Erfarenhetspoäng — RP s.63. ⚠ AUTOMATISKT, inte ett SL-beslut: regeln ger EP
   // "första gången färdigheten används framgångsrikt efter en sovperiod", och det
-  // kan systemet avgöra självt via sömnklockan (`item.system.ep.awardedSinceRest`).
+  // kan systemet avgöra självt via EP-strecket (`item.system.ep.ticked`) — samma
+  // ruta som på det fysiska rollformuläret, se helpers/ep.mjs.
   // Här låg tidigare en SL-knapp för "stressigt läge" — den formuleringen kommer
   // från ett kurerat dokument och står inte i vare sig RP s.63 eller REG s.45.
   // Bytt efter Johans beslut 2026-07-29, se DESIGN_DECISIONS.md backlogpost 39.

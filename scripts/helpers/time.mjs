@@ -1,4 +1,4 @@
-import { clearAwardMarks } from "./ep.mjs";
+import { clearEpTicks } from "./ep.mjs";
 
 /**
  * Tidsmodellen — se DESIGN_DECISIONS.md §10.
@@ -90,7 +90,7 @@ export async function advanceTime({ seconds, kind = "aventyr", actors = [] }) {
       "system.rest.trainingUnlocked": unlocked
     });
     // Sovperiod intraffar i alla slag utom strid.
-    const cleared = await clearAwardMarks(actor);
+    const cleared = await clearEpTicks(actor);
     const heal = await applyHealing(actor, seconds, kind);
     report.push({ name: actor.name, streak, unlocked, cleared, ...heal });
   }

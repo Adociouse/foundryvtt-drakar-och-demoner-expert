@@ -29,16 +29,19 @@ export const MAX_BONUS_PER_ADVENTURE = 10;
 /**
  * Kan posten tjäna EP av ett lyckat slag just nu?
  *
- * ⚠ **Sömnklocka, ingen SL-bedömning.** RP s.63: EP ges första gången
- * färdigheten används framgångsrikt efter en sovperiod om minst sex timmar (två
- * timmar för alver), och sedan inte igen förrän rollpersonen sovit.
+ * ⚠ **Det är en STRECKMARKERING, inte ett SL-beslut — och inte en "klocka".**
+ * RP s.63, ordagrant: *"noteras ett streck vid färdigheten"* när den används
+ * framgångsrikt första gången efter en sovperiod om minst sex timmar (två för
+ * alver). Det är precis samma sak som den lilla rutan bredvid varje färdighet
+ * på det fysiska rollformuläret — man kryssar i den vid ett lyckat slag, och den
+ * kryssas ur igen först när man sovit. `system.ep.ticked` ÄR den rutan.
  *
  * ⚠ **Kategori B kan inte tjäna EP genom äventyr alls** — "Detta gäller inte
  * färdigheter kategori B, som endast kan förbättras genom träning" (RP s.63).
  */
 export function canEarnFromUse(item) {
   if (!item) return false;
-  if (item.system.ep?.awardedSinceRest) return false;
+  if (item.system.ep?.ticked) return false;
   if (item.type === "fardighet" && item.system.category === "b") return false;
   return item.type === "fardighet" || item.type === "besvarjelse";
 }
@@ -55,27 +58,27 @@ export async function rollEpAward(outcome) {
   return { amount: 1, roll: null };
 }
 
-/** Lägg EP i en posts egen pott och stäng dess sömnklocka. */
+/** Lägger EP i en posts egen pott och sätter dess EP-streck (kryssar i rutan). */
 export async function awardItemEp(item, amount) {
   if (!item || amount <= 0) return null;
   await item.update({
     "system.ep.earned": (item.system.ep?.earned ?? 0) + amount,
-    "system.ep.awardedSinceRest": true
+    "system.ep.ticked": true
   });
   return item;
 }
 
 /**
- * Nollar sömnklockan på allt rollpersonen äger — anropas när hen sovit.
+ * Kryssar ur EP-strecken på allt rollpersonen äger — anropas när hen sovit.
  *
  * ⚠ Sovperioden är **minst sex timmar, två för alver** (RP s.63). Systemet
  * spårar ingen speltid, så längden är SL:s bedömning; knappen är själva
  * kvitteringen på att den ägt rum.
  */
-export async function clearAwardMarks(actor) {
+export async function clearEpTicks(actor) {
   const updates = actor.items
-    .filter((i) => i.system.ep?.awardedSinceRest)
-    .map((i) => ({ _id: i.id, "system.ep.awardedSinceRest": false }));
+    .filter((i) => i.system.ep?.ticked)
+    .map((i) => ({ _id: i.id, "system.ep.ticked": false }));
   if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);
   return updates.length;
 }
@@ -90,12 +93,12 @@ export async function awardBonusEp(actor, amount) {
 /**
  * Öppnar eller stänger viloperiodsgrinden — RP s.63: EP kan bara omsättas efter
  * minst 7 dagars sammanhängande vila, och aldrig under ett pågående äventyr.
- * Att öppna grinden nollar samtidigt sömnklockorna; en viloperiod innehåller
- * med nödvändighet en sovperiod.
+ * Att öppna grinden kryssar samtidigt ur alla EP-streck; en viloperiod
+ * innehåller med nödvändighet en sovperiod.
  */
 export async function setTrainingUnlocked(actor, unlocked) {
   await actor.update({ "system.rest.trainingUnlocked": !!unlocked });
-  if (unlocked) await clearAwardMarks(actor);
+  if (unlocked) await clearEpTicks(actor);
   return actor;
 }
 

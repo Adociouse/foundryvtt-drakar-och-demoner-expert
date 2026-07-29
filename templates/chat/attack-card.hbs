@@ -25,6 +25,11 @@
     <span class="d20 {{attackOutcome}}">{{attackRoll}}</span>
     <span class="outcome {{attackOutcome}}">{{attackOutcomeLabel}}</span>
   </div>
+  {{!-- EP-streck för anfallsslaget — RP s.63: en lyckad användning av
+        färdigheten ger EP oavsett vad striden sedan blir av det. --}}
+  {{#if attackEp}}
+    <div class="ep-tick-line"><i class="fa-solid fa-check"></i> +{{attackEp.amount}} EP → {{attackEp.skillName}}</div>
+  {{/if}}
 
   {{#if hasParry}}
     <div class="roll-line">
@@ -33,6 +38,9 @@
       <span class="outcome {{parryOutcome}}">{{parryOutcomeLabel}}</span>
       <span class="via">{{parryItemName}}</span>
     </div>
+    {{#if parryEp}}
+      <div class="ep-tick-line"><i class="fa-solid fa-check"></i> +{{parryEp.amount}} EP → {{parryEp.skillName}}</div>
+    {{/if}}
   {{else if ranged}}
     <div class="roll-line muted">Projektilvapen kan inte pareras (SLB s.16)</div>
   {{/if}}

@@ -704,7 +704,7 @@
 .training-attr { flex: 0 0 auto; font-size: 0.8em; opacity: 0.8; white-space: nowrap; }
 .training-label .note.warn { color: #a3701f; }
 .dode-roll-card .roll-card-ep { margin-top: 6px; text-align: center; font-size: 0.85em; color: #8a6d1f; }
-.skill-row .used-mark { opacity: 0.4; font-size: 0.75em; }
+.skill-row .ep-tick-mark { opacity: 0.6; font-size: 0.75em; color: #2f6d3a; }
 
 /* ---- Stridskort (SLB s.31) ---- */
 .dode-attack-card { font-size: 0.9em; }
@@ -720,6 +720,7 @@
 .dode-attack-card .d20 { font-weight: 700; min-width: 1.8em; text-align: center; }
 .dode-attack-card .outcome.perfekt, .dode-attack-card .d20.perfekt { color: #2f6d3a; }
 .dode-attack-card .outcome.fummel, .dode-attack-card .d20.fummel { color: #a33; }
+.dode-attack-card .ep-tick-line { font-size: 0.8em; color: #8a6d1f; margin: 0 0 2px 66px; }
 .dode-attack-card .damage-line { display: flex; gap: 8px; align-items: baseline; margin-top: 4px;
   padding-top: 4px; border-top: 1px solid rgba(0,0,0,0.1); }
 .dode-attack-card .damage-line .location { font-weight: 600; }

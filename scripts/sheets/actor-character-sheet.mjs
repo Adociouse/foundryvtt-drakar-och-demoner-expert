@@ -92,9 +92,9 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // Viloperiodsgrinden — REG s.46. SL öppnar, spelaren tränar. Träningsknappen
     // visas bara när grinden är öppen; SL ser växeln alltid.
     context.trainingUnlocked = !!this.actor.system.rest?.trainingUnlocked;
-    // Hur många färdigheter som redan gett EP sedan senaste sovperioden — visas
-    // på sovknappen så SL ser om den behöver tryckas.
-    context.usedSinceRest = this.actor.items.filter((i) => i.system.ep?.awardedSinceRest).length;
+    // Hur många färdigheter som redan har sitt EP-streck ikryssat sedan senaste
+    // sovperioden — visas på sovknappen så SL ser om den behöver tryckas.
+    context.tickedCount = this.actor.items.filter((i) => i.system.ep?.ticked).length;
     context.minimagi = await this.#prepareMinimagi();
     // Magiträningsknappen visas bara för den som faktiskt har magi att träna.
     context.hasMagic = this.actor.items.some(
@@ -120,8 +120,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   }
 
   /**
-   * Öppnar/stänger viloperiodsgrinden (REG s.46). Att öppna nollar samtidigt
-   * besvärjelsernas sömnklocka, eftersom vilan i praktiken innehåller en sömn.
+   * Öppnar/stänger viloperiodsgrinden (REG s.46). Att öppna kryssar samtidigt ur
+   * besvärjelsernas EP-streck, eftersom vilan i praktiken innehåller en sömn.
    */
   static async #onToggleRest() {
     const { setTrainingUnlocked } = await import("../helpers/ep.mjs");
@@ -137,8 +137,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * systemet tillämpar BÅDA tidsgrindarna på en gång.
    *
    * ⚠ **Det är två skilda grindar, med väldigt olika längd:**
-   *  - **Sömn (≥6 timmar, 2 för alver)** nollar varje färdighets EP-klocka så att
-   *    den kan tjäna sitt streck igen. Händer efter i stort sett varje äventyrsdag.
+   *  - **Sömn (≥6 timmar, 2 för alver)** kryssar ur varje färdighets EP-streck så
+   *    att den kan kryssas i igen. Händer efter i stort sett varje äventyrsdag.
    *  - **Sammanhängande vila i ≥7 dygn** öppnar träningsfönstret så att intjänad
    *    EP kan växlas in mot FV (RP s.63). Händer sällan.
    *
@@ -149,23 +149,23 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     const days = await DialogV2.prompt({
       window: { title: "Viloperiod" },
       content: `<p>Hur många dygn får ${this.actor.name} vila?</p>
-        <p class="hint">Minst <strong>1 dygn</strong> nollställer sömnklockan så att varje
-        färdighet kan tjäna EP igen. Minst <strong>7 dygn</strong> öppnar dessutom
+        <p class="hint">Minst <strong>1 dygn</strong> kryssar ur EP-strecken så att varje
+        färdighet kan kryssas i igen. Minst <strong>7 dygn</strong> öppnar dessutom
         träningen, så att intjänad EP kan växlas in mot FV (RP s.63).</p>
         <input type="number" name="days" value="7" min="0" autofocus />`,
       ok: { label: "Vila", callback: (e, b) => Number(b.form.elements.days.value) }
     });
     if (!Number.isFinite(days) || days < 1) return;
 
-    const { clearAwardMarks, setTrainingUnlocked } = await import("../helpers/ep.mjs");
-    const cleared = await clearAwardMarks(this.actor);
+    const { clearEpTicks, setTrainingUnlocked } = await import("../helpers/ep.mjs");
+    const cleared = await clearEpTicks(this.actor);
     const training = days >= 7;
     if (training) await setTrainingUnlocked(this.actor, true);
 
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: `<div class="dode-chat-card"><h3>Viloperiod — ${days} dygn</h3>
-        <p>${cleared} färdigheter kan tjäna EP igen.</p>
+        <p>${cleared} färdigheter kan kryssa i sitt EP-streck igen.</p>
         <p>${training
           ? "<strong>Träningen är öppen</strong> — EP kan växlas in mot FV."
           : "⚠ Under 7 dygn — EP kan <strong>inte</strong> omsättas ännu (RP s.63)."}</p></div>`
@@ -173,15 +173,15 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   }
 
   /**
-   * Sovperiod — nollar sömnklockan så att varje färdighet kan tjäna EP igen
+   * Sovperiod — kryssar ur EP-strecken så att varje färdighet kan kryssas i igen
    * (RP s.63: minst sex timmar, ⚠ två timmar för alver). Systemet spårar ingen
    * speltid, så längden är SL:s bedömning; knappen kvitterar att den ägt rum.
    */
   static async #onSleep() {
-    const { clearAwardMarks } = await import("../helpers/ep.mjs");
-    const count = await clearAwardMarks(this.actor);
+    const { clearEpTicks } = await import("../helpers/ep.mjs");
+    const count = await clearEpTicks(this.actor);
     ui.notifications.info(count
-      ? `${this.actor.name} har sovit — ${count} färdigheter kan tjäna EP igen.`
+      ? `${this.actor.name} har sovit — ${count} färdigheter kan kryssa i sitt EP-streck igen.`
       : `${this.actor.name} har sovit. Inga färdigheter hade använts sedan sist.`);
   }
 

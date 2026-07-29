@@ -19,16 +19,18 @@
         <button type="button" data-action="awardBonusEp" title="Dela ut fria bonuspoäng efter äventyret">
           <i class="fa-solid fa-star"></i>
         </button>
-        {{!-- Sömnklockan — RP s.63: en färdighet ger EP första gången den lyckas
-              efter en sovperiod om minst sex timmar (två för alver). --}}
-        {{!-- Två tidsgrindar i en knapp: sömn nollar EP-klockan, 7 dygn öppnar
-              träningen. Se #onRestPeriod. --}}
+        {{!-- EP-strecket — RP s.63: en färdighet ger EP första gången den lyckas
+              efter en sovperiod om minst sex timmar (två för alver). Precis som
+              den lilla rutan bredvid varje färdighet på det fysiska
+              rollformuläret: kryssas i vid ett lyckat slag, kryssas ur av sömn. --}}
+        {{!-- Två tidsgrindar i en knapp: sömn kryssar ur EP-strecken, 7 dygn
+              öppnar träningen. Se #onRestPeriod. --}}
         <button type="button" data-action="restPeriod" title="Viloperiod — ange antal dygn">
           <i class="fa-solid fa-campground"></i>
         </button>
         <button type="button" data-action="sleep"
-          title="Sovperiod — nollställer sömnklockan så färdigheterna kan tjäna EP igen (RP s.63: minst 6 timmar, 2 för alver){{#if usedSinceRest}}. {{usedSinceRest}} färdigheter har gett EP sedan sist{{/if}}">
-          <i class="fa-solid fa-moon"></i>{{#if usedSinceRest}} {{usedSinceRest}}{{/if}}
+          title="Sovperiod — kryssar ur EP-strecken så färdigheterna kan kryssas i igen (RP s.63: minst 6 timmar, 2 för alver){{#if tickedCount}}. {{tickedCount}} färdigheter har sitt EP-streck ikryssat{{/if}}">
+          <i class="fa-solid fa-moon"></i>{{#if tickedCount}} {{tickedCount}}{{/if}}
         </button>
       {{/if}}
       {{#if trainingUnlocked}}
@@ -130,9 +132,10 @@
         {{else}}
           <span class="skill-fv">FV {{skill.system.fv}}</span>
         {{/if}}
-        {{#if skill.system.ep.awardedSinceRest}}
-          {{!-- Har redan gett EP sedan senaste sovperioden (RP s.63). --}}
-          <i class="fa-solid fa-moon used-mark" title="Har redan gett EP sedan senaste sovperioden"></i>
+        {{#if skill.system.ep.ticked}}
+          {{!-- EP-strecket är ikryssat — RP s.63:s "streck vid färdigheten",
+                samma ruta som på det fysiska rollformuläret. Kryssas ur vid sömn. --}}
+          <i class="fa-solid fa-check ep-tick-mark" title="EP-streck ikryssat sedan senaste sovperioden"></i>
         {{/if}}
         {{#if skill.system.ep.available}}
           {{!-- Färdighetens egen EP-pott — bunden hit, kan inte flyttas (REG s.45). --}}

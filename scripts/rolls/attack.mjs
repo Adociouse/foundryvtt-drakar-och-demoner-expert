@@ -1,5 +1,6 @@
 import { ensureHitLocations, applyLocationDamage, armourFor, tokenDistance, meleeReach } from "../helpers/anatomy.mjs";
 import { combineDamageFormula } from "./damage-roll.mjs";
+import { canEarnFromUse, rollEpAward, awardItemEp } from "../helpers/ep.mjs";
 
 /**
  * Stridsupplösning — **Spelledarboken s.16-18**.
@@ -38,6 +39,30 @@ async function classifiedRoll(fv) {
     outcome = c.total > fv ? "fummel" : "misslyckat";
   }
   return { roll, outcome };
+}
+
+/**
+ * Kryssar i EP-strecket för en färdighet som just användes framgångsrikt —
+ * RP s.63, samma regel `rollFV` redan tillämpar på vanliga färdighetsslag.
+ *
+ * ⚠ **Detta saknades helt för strid.** `resolveAttack` slår sina egna tärningar
+ * via `classifiedRoll` i stället för `rollFV`, så anfalls- och pareringsslag gav
+ * inget EP-streck alls tidigare — en rollperson kunde slåss en hel dag och
+ * kryssa i noll rutor. Ett lyckat ANFALL är en lyckad användning av
+ * vapenfärdigheten; en lyckad PARERING är en lyckad användning av
+ * pareringsfärdigheten (t.ex. Sköld). Båda ska ge EP oavsett vad som händer
+ * sedan i utfallsmatrisen — det är själva slaget som räknas, inte träffen.
+ *
+ * ⚠ Bara rollpersoner (inte SLP) tjänar EP — SLP:er saknar de EP-bärande
+ * färdighets-Item helt (se doc-kommentaren på `skill`/`parrySkill` nedan).
+ */
+async function awardSkillEp(actorType, skill, outcome) {
+  if (actorType !== "character") return null;
+  if (!["lyckat", "perfekt"].includes(outcome)) return null;
+  if (!canEarnFromUse(skill)) return null;
+  const { amount, roll } = await rollEpAward(outcome);
+  await awardItemEp(skill, amount);
+  return { amount, roll, skillName: skill.name };
 }
 
 /**
@@ -123,9 +148,16 @@ export async function resolveAttack({
     ? await classifiedRoll(parrySkill?.system.total ?? parryFv ?? baseFv)
     : { roll: null, outcome: null };
 
+  // ⚠ EP-streck för BÅDA slagen — se awardSkillEp(). Sker oavsett vad
+  // utfallsmatrisen sedan gör med anfallet; det är det lyckade SLAGET som ger
+  // EP (RP s.63), inte att hugget faktiskt gick igenom.
+  const attackEp = skill ? await awardSkillEp(attacker?.type, skill, atk.outcome) : null;
+  const parryEp = canParry && parrySkill ? await awardSkillEp(target?.type, parrySkill, par.outcome) : null;
+
   const verdict = resolveMatrix(atk.outcome, par.outcome);
   const out = {
     fv, modTotal, mods, attack: atk, parry: par, verdict,
+    attackEp, parryEp,
     aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null
   };
 
@@ -282,13 +314,18 @@ export async function postAttackCard(result, { attacker, weapon, parryItem, rang
       totalAfter: result.totalAfter, pulled: result.pulled,
       effect: result.effect, wear: result.wear, cleanKnockout: result.cleanKnockout,
       verdictNote: VERDICT_NOTE[result.verdict.result] ?? "",
-      cssClass: result.attack.outcome
+      cssClass: result.attack.outcome,
+      // ⚠ EP-streck för anfalls- och pareringsslaget var för sig — se
+      // awardSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
+      attackEp: result.attackEp, parryEp: result.parryEp
     });
 
   const rolls = [result.attack.roll];
   if (result.parry.roll) rolls.push(result.parry.roll);
   if (result.damage?.roll) rolls.push(result.damage.roll);
   if (result.cleanKnockout?.roll) rolls.push(result.cleanKnockout.roll);
+  if (result.attackEp?.roll) rolls.push(result.attackEp.roll);
+  if (result.parryEp?.roll) rolls.push(result.parryEp.roll);
 
   return ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: attacker }),
