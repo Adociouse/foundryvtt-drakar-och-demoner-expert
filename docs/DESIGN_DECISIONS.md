@@ -586,6 +586,36 @@ Verified against the installed v14 build 2026-07-27 (`foundry.mjs` line refs bel
 
 **Security caveat (design accordingly, and say so in the UI/docs):** role checks, `disabled` attributes, and `preUpdate*` hooks are **UX guardrails, not a security boundary**. The Foundry server validates ownership and schema but never executes system JS, so field-level rules cannot be enforced server-side — a player holding `OWNER` on their actor can set any field from the console. Layer defences by decreasing cost (template `disabled`/hidden → action-handler guard clause → optional `preUpdate*` hook returning `false`), and accept that a determined owner can bypass all three. The only true enforcement would be demoting players to `OBSERVER` and proxying every change through the GM — rejected as disproportionate for this project's home-game use case.
 
+### Rule: document IDs must be EXACTLY 16 alphanumeric characters
+
+⚠ **Snubblat på två gånger** (embeddade `_key`-former 2026-07-28, scen-`_id` 2026-07-29).
+Foundry accepterar `_id` som är kortare eller längre utan att klaga vid packning —
+`fvtt package pack` rapporterar "Packed" som vanligt — men dokumentet kommer
+tillbaka **med `id: null` och alla fält tomma** när det läses.
+
+```js
+"dodeVardshus01"    // 14 tecken → tyst trasigt
+"dodeUtkanten01x"   // 15 tecken → tyst trasigt
+"dodeVardshusUtk1"  // 16 tecken → fungerar
+```
+
+⚠ **Symptomet ser ut som något annat.** En scen med ogiltigt `_id` visar
+`background.src === null`, vilket läses som en trasig bildsökväg — man letar i
+`assets/` i stället för på nyckeln. Samma sak för items: tomma `system`-fält
+ser ut som ett schemafel.
+
+**Kontrollera alltid `_id.length === 16` innan packning.** För embeddade dokument
+gäller det både förälderns och barnets id i `_key`:
+
+| Embeddat | Nyckelform |
+|---|---|
+| Items på en aktör | `!actors.items!<actorId>.<itemId>` |
+| Resultat i en RollTable | `!tables.results!<tableId>.<resultId>` |
+| Sidor i en JournalEntry | `!journal.pages!<journalId>.<pageId>` |
+| Mappar | `!folders!<id>` |
+
+`foundry.utils.randomID()` ger rätt längd; handskrivna läsbara id:n gör det sällan.
+
 ### Rule: compendium visibility is per-PACK and role-based — there is no per-document hiding
 
 Verified 2026-07-27. `CompendiumCollection#getUserLevel` (`foundry.mjs:28012`) computes a user's access to a pack by iterating **only** the pack's own `ownership` map (a `USER_ROLES` → `DOCUMENT_OWNERSHIP_LEVELS` object) and taking the highest matching role's level; `CompendiumCollection#testUserPermission` (`:28032`) consults nothing else beyond a `user.isGM → OWNER` short-circuit. **Individual documents inside a compendium have no independent visibility.** If a player can see the pack, they can see and read every document in it, and can drag any Item from it straight onto their own character sheet.
