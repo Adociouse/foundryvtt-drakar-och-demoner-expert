@@ -21,9 +21,16 @@
         </button>
       {{/if}}
       {{#if trainingUnlocked}}
-        <button type="button" data-action="openTraining" title="Omsätt EP till FV">
+        <button type="button" data-action="openTraining" title="Träna färdigheter — tjäna och omsätt EP">
           <i class="fa-solid fa-dumbbell"></i> Träna
         </button>
+        {{#if hasMagic}}
+          {{!-- Eget fönster: SB s.7 ger magiskolor och besvärjelser andra
+                EP-källor än vanliga färdigheter. --}}
+          <button type="button" data-action="openMagicTraining" title="Träna magiskolor och besvärjelser">
+            <i class="fa-solid fa-wand-sparkles"></i> Magi
+          </button>
+        {{/if}}
       {{/if}}
       {{#if canEditInWizard}}
         <button type="button" data-action="openWizardEdit" title="Öppna rollpersonen i guiden">

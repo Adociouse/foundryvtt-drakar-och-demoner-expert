@@ -33,6 +33,13 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         spent: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
       sValue: new fields.NumberField({ required: true, integer: true, initial: 1, min: 0 }),
+      // Magisk kodex för just den här besvärjelsen — SB s.7. ⚠ Krävs för att
+      // kunna ENSAMTRÄNA besvärjelsen: "för att lära sig den själv måste han
+      // göra det ur en s.k. magisk kodex", 20-30 sidor handskriven text per
+      // besvärjelse. Träning med lärare kräver ingen kodex.
+      // ⚠ Bör på sikt vara ett ägt `utrustning`-föremål som går att köpa och
+      // stjäla, inte en bock på besvärjelsen — se backlogposten om kodexar.
+      hasCodex: new fields.BooleanField({ required: false, initial: false }),
       duration: new fields.StringField({ required: false, initial: "" }),
       range: new fields.StringField({ required: false, initial: "" }),
       ritual: new fields.BooleanField({ required: false, initial: false }),

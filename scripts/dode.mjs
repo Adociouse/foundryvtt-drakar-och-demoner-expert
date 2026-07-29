@@ -29,6 +29,7 @@ import {
 } from "./sheets/item-sheet.mjs";
 import DoDECharacterWizard from "./apps/character-wizard.mjs";
 import DoDETrainingApp from "./apps/training.mjs";
+import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import { DODE } from "./helpers/config.mjs";
 import { rollEpAward, awardItemEp, spellCanEarn, EP_FLAG_SCOPE } from "./helpers/ep.mjs";
 
@@ -167,6 +168,12 @@ Hooks.once("init", () => {
     default: 300
   });
 
+  // Delade delmallar måste laddas innan {{> "path"}} kan användas.
+  foundry.applications.handlebars.loadTemplates([
+    "systems/drakar-och-demoner-expert/templates/apps/training-header.hbs",
+    "systems/drakar-och-demoner-expert/templates/apps/training-rows.hbs"
+  ]);
+
   game.dode = {
     // Utan argument: skapaläge. Med en aktör: redigeringsläge (guiden laddar
     // rollpersonen och sparar tillbaka utan att dubblera något) — se
@@ -174,6 +181,9 @@ Hooks.once("init", () => {
     openCharacterWizard: (actor = null) => new DoDECharacterWizard(actor ? { actor } : {}).render(true),
     // Träningsfönstret — omsättning av EP till FV efter viloperiod (REG s.46).
     openTraining: (actor) => new DoDETrainingApp(actor).render(true),
+    // Magi har ett eget fönster — EP-källorna skiljer sig från vanliga
+    // färdigheters (SB s.7), se apps/magic-training.mjs.
+    openMagicTraining: (actor) => new DoDEMagicTrainingApp(actor).render(true),
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects

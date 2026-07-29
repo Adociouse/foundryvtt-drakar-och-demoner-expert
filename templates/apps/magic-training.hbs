@@ -1,0 +1,27 @@
+<div class="dode-training-body">
+  {{> "systems/drakar-och-demoner-expert/templates/apps/training-header.hbs"}}
+
+  {{!-- SB s.7: magins EP-källor skiljer sig från vanliga färdigheters, vilket är
+        varför magi har ett eget fönster. --}}
+  <p class="section-hint magic-sources">
+    <strong>Magiskolor</strong> får EP <em>endast</em> genom träning med lärare —
+    varken ensamträning eller äventyr räknas.
+    <strong>Besvärjelser</strong> kan tränas ensam (kräver magisk kodex), med
+    lärare, eller genom äventyr (SB s.7).
+  </p>
+
+  <section class="training-section">
+    <h3>Magiskolor</h3>
+    {{> "systems/drakar-och-demoner-expert/templates/apps/training-rows.hbs" rows=schools emptyText="Inga magiskolor."}}
+  </section>
+
+  <section class="training-section">
+    <h3>Besvärjelser</h3>
+    {{!-- Ensamträning slår mot INT med +1 på tärningen per poäng INT under 19 —
+          ett straff, inte en lättnad. Måltalet blir 2×INT−19. --}}
+    <p class="section-hint">Vid ensamträning slås INT med
+       <strong>+1 på tärningen per poäng INT under 19</strong>. Kostnaden per
+       S-steg följer FV i skolan, multipeln följer besvärjelsens eget S (MAG s.13).</p>
+    {{> "systems/drakar-och-demoner-expert/templates/apps/training-rows.hbs" rows=spells emptyText="Inga besvärjelser."}}
+  </section>
+</div>

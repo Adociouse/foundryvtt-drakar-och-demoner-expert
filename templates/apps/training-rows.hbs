@@ -1,0 +1,29 @@
+{{!-- Delad radmall för båda träningsfönstren. Träna = TJÄNAR EP (veckoslag),
+      Höj = SPENDERAR EP. Två helt skilda handlingar (RP s.63). --}}
+<ol class="training-list">
+  {{#each rows as |row|}}
+    <li class="training-row" data-item-id="{{row.id}}">
+      <img src="{{row.img}}" alt="" />
+      <div class="training-label">
+        <span class="name">{{row.label}}</span>
+        {{#if row.note}}<span class="note">{{row.note}}</span>{{/if}}
+        {{#if row.trainNote}}<span class="note warn">{{row.trainNote}}</span>{{/if}}
+      </div>
+      <span class="training-attr" title="Veckoslagets måltal">{{row.targetLabel}}</span>
+      <button type="button" data-action="train" {{#unless row.canTrain}}disabled{{/unless}}
+        title="Träna en vecka för att tjäna EP">
+        <i class="fa-solid fa-dice-d20"></i> Träna
+      </button>
+      <span class="training-step">{{row.current}} &rarr; {{row.next}}</span>
+      <span class="training-cost" title="EP-kostnad för steget">{{row.cost}} EP</span>
+      <span class="training-funding">
+        {{#if row.canUseOwn}}<span title="Postens egen pott">&#11045;{{row.own}}</span>{{/if}}
+        {{#if row.bonusNeeded}}<span title="Tas ur de fria bonuspoängen">+{{row.bonusNeeded}} fria</span>{{/if}}
+      </span>
+      <button type="button" data-action="buy" {{#unless row.affordable}}disabled{{/unless}}
+        title="Väx in EP mot ett steg">Höj</button>
+    </li>
+  {{else}}
+    <li class="skill-row-empty">{{emptyText}}</li>
+  {{/each}}
+</ol>

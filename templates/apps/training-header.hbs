@@ -1,0 +1,34 @@
+{{#unless unlocked}}
+  <div class="training-locked">
+    <i class="fa-solid fa-lock"></i>
+    <div>
+      <strong>Viloperioden är inte öppnad.</strong>
+      <p>Det går inte att träna under ett pågående äventyr, och EP kan bara
+         omsättas efter minst 7 dagars sammanhängande vila (RP s.63).
+         Spelledaren öppnar grinden från rollpersonsarket.</p>
+    </div>
+  </div>
+{{/unless}}
+
+<header class="training-header">
+  {{!-- RP s.63: ensamträning ger ett veckoslag, träning med lärare två. --}}
+  <div class="training-mode">
+    <button type="button" data-action="setMode" data-mode="ensam"
+      class="{{#unless isTeacher}}is-active{{/unless}}" title="Ett veckoslag, ingen avgift">
+      Ensamträning
+    </button>
+    <button type="button" data-action="setMode" data-mode="larare"
+      class="{{#if isTeacher}}is-active{{/if}}" title="Två veckoslag mot avgift">
+      Med lärare
+    </button>
+    <span class="mode-summary">{{rollsPerWeek}} slag/vecka{{#if fee}} · {{fee}} sm{{/if}}</span>
+  </div>
+  <div class="training-wallet">
+    <span title="Fria bonuspoäng — fördelas fritt med SL:s godkännande (RP s.63)">
+      <i class="fa-solid fa-star"></i> Fria EP: <strong>{{bonusAvailable}}</strong>
+    </span>
+    <span class="purse {{#unless canAffordFee}}is-short{{/unless}}" title="Börs">
+      <i class="fa-solid fa-coins"></i> {{purse}}
+    </span>
+  </div>
+</header>

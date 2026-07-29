@@ -30,6 +30,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       rollDamage: DoDECharacterSheet.#onRollDamage,
       castSpell: DoDECharacterSheet.#onCastSpell,
       openTraining: DoDECharacterSheet.#onOpenTraining,
+      openMagicTraining: DoDECharacterSheet.#onOpenMagicTraining,
       toggleRest: DoDECharacterSheet.#onToggleRest,
       awardBonusEp: DoDECharacterSheet.#onAwardBonusEp
     },
@@ -90,12 +91,27 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // visas bara när grinden är öppen; SL ser växeln alltid.
     context.trainingUnlocked = !!this.actor.system.rest?.trainingUnlocked;
     context.minimagi = await this.#prepareMinimagi();
+    // Magiträningsknappen visas bara för den som faktiskt har magi att träna.
+    context.hasMagic = this.actor.items.some(
+      (i) => i.type === "besvarjelse"
+        || (i.type === "fardighet" && CONFIG.DODE.isMagicSchoolKey(i.system.skillKey))
+    );
     return context;
   }
 
   static async #onOpenTraining() {
     const { default: DoDETrainingApp } = await import("../apps/training.mjs");
     new DoDETrainingApp(this.actor).render(true);
+  }
+
+  /**
+   * ⚠ Magi har ett EGET fönster — SB s.7 ger magiskolor och besvärjelser andra
+   * EP-källor än vanliga färdigheter (skolor: bara lärare; besvärjelser: kodex
+   * vid ensamträning), och en annan slagmekanik.
+   */
+  static async #onOpenMagicTraining() {
+    const { default: App } = await import("../apps/magic-training.mjs");
+    new App(this.actor).render(true);
   }
 
   /**
