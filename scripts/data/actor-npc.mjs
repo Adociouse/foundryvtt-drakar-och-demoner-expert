@@ -28,6 +28,19 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
         value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
         max: new fields.NumberField({ required: true, integer: true, initial: 0 })
       }),
+      // Kroppsbyggnad — styr träffområdestabellen (RP s.48-50). ⚠ Dolt värde:
+      // spelarna ska inte behöva veta att en varelse är bevingad för att systemet
+      // ska slå rätt träffområde. Default humanoid, vilket täcker de flesta.
+      bodyPlan: new fields.StringField({
+        required: false, initial: "humanoid",
+        choices: ["humanoid", "bevingad-humanoid", "kentaur", "svanmo"]
+      }),
+      // Träffområdenas KP — ⚠ TOMT tills någon riktar ett anfall mot varelsen.
+      // KP per område HÄRLEDS ur Totala KP (DODE.hitLocationKp), så ingenting
+      // behöver förberedas: en varelse som hittills varit en påse KP får en
+      // kropp i samma ögonblick som någon siktar på den. Det är mekaniken som
+      // gör det möjligt att blanda vanlig och detaljerad strid utan bokföring.
+      hitLocations: new fields.ObjectField({ required: false, initial: () => ({}) }),
       abs: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
       damageBonus: new fields.StringField({ required: false, initial: "" }),
       movement: new fields.StringField({ required: false, initial: "" }),

@@ -816,3 +816,203 @@ DODE.movement = function (stoPlusFysPlusSmi) {
   // "för varje ytterligare +8: +1" — Rollpersonen s.25
   return 16 + Math.ceil((stoPlusFysPlusSmi - 92) / 8);
 };
+
+/* -------------------------------------------------------------------------- */
+/*  Kroppsbyggnad och träffområden — Rollpersonen s.48-50                      */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * ⚠ **Träffområdenas KP HÄRLEDS ur Totala KP** (RP s.48, Tabell 1-3). Det är
+ * nyckeln till att kunna blanda vanlig och detaljerad strid: vilken varelse som
+ * helst kan få en kropp i samma ögonblick som någon siktar på den, utan att
+ * någonting behöver vara förberett i monsterposten.
+ *
+ * ⚠ **Under Totala KP 5 delas kroppen inte in i träffområden alls** — "Om Totala
+ * KP är 1-4 delar man inte in kroppen i olika träffområden" (RP s.48). Riktade
+ * anfall är alltså meningslösa mot mycket små varelser.
+ *
+ * ⚠ **Över 30 Totala KP: +1 på varje träffområde per 5 poäng** (RP s.48).
+ */
+DODE.hitLocationKpBands = [
+  { max: 7, i: 0 }, { max: 11, i: 1 }, { max: 15, i: 2 },
+  { max: 20, i: 3 }, { max: 25, i: 4 }, { max: 30, i: 5 }
+];
+
+/**
+ * Kroppsbyggnader. `kp` är KP per träffområde för de sex Totala KP-banden ovan.
+ * `hitA`/`hitB` är träfftabellerna (RP s.49-50, Tabell 4-7).
+ *
+ * ⚠ **KOLUMN A OCH B ÄR INTE SAMMA TÄRNING.** RP s.49: "Kolumn A används för
+ * projektilvapen och närstridsanfall mot en motståndare som **inte försvarar
+ * sig** (t.ex. vid anfall i ryggen). Kolumn B används mot motståndare som
+ * **försvarar sig** i närstrid." För humanoider är A en 1T8 och B en 1T10 — en
+ * försvarslös motståndare träffas alltså oftare i huvudet (1/8) än en som
+ * försvarar sig (2/10), vilket är hela poängen med att smyga sig på någon.
+ *
+ * ⚠ **Bara fyra kroppsbyggnader finns i boken.** Humanoid, bevingad humanoid,
+ * kentaur och svanmö. Fyrfotadjur, ormar och amorfa varelser saknas helt — se
+ * DESIGN_DECISIONS.md backlogposten om kroppsbyggnader; de får inte hittas på
+ * här utan ett uttalat beslut.
+ */
+DODE.bodyPlans = {
+  humanoid: {
+    label: "Humanoid",
+    // RP s.48 Tabell 1 (delas med bevingad humanoid).
+    kp: {
+      "hoger-ben":    [3, 4, 5, 6, 7, 8],
+      "vanster-ben":  [3, 4, 5, 6, 7, 8],
+      mage:           [3, 4, 5, 6, 7, 8],
+      brostkorg:      [4, 5, 6, 7, 8, 9],
+      "hoger-arm":    [2, 3, 4, 5, 6, 7],
+      "vanster-arm":  [2, 3, 4, 5, 6, 7],
+      huvud:          [3, 4, 5, 6, 7, 8]
+    },
+    // RP s.49 Tabell 4.
+    hitA: { die: "1d8", rows: [
+      { max: 1, loc: "hoger-ben" }, { max: 2, loc: "vanster-ben" }, { max: 3, loc: "mage" },
+      { max: 5, loc: "brostkorg" }, { max: 6, loc: "hoger-arm" }, { max: 7, loc: "vanster-arm" },
+      { max: 8, loc: "huvud" }
+    ] },
+    hitB: { die: "1d10", rows: [
+      { max: 1, loc: "hoger-ben" }, { max: 2, loc: "vanster-ben" }, { max: 3, loc: "mage" },
+      { max: 4, loc: "brostkorg" }, { max: 6, loc: "hoger-arm" }, { max: 8, loc: "vanster-arm" },
+      { max: 10, loc: "huvud" }
+    ] }
+  },
+
+  "bevingad-humanoid": {
+    label: "Bevingad humanoid",
+    kp: {
+      "hoger-ben":    [3, 4, 5, 6, 7, 8],
+      "vanster-ben":  [3, 4, 5, 6, 7, 8],
+      mage:           [3, 4, 5, 6, 7, 8],
+      brostkorg:      [4, 5, 6, 7, 8, 9],
+      "hoger-arm":    [2, 3, 4, 5, 6, 7],
+      "vanster-arm":  [2, 3, 4, 5, 6, 7],
+      huvud:          [3, 4, 5, 6, 7, 8],
+      "hoger-vinge":  [2, 3, 4, 5, 6, 7],
+      "vanster-vinge":[2, 3, 4, 5, 6, 7]
+    },
+    // RP s.49 Tabell 5. ⚠ Fotnot: "Om varelsen träffas i ryggen är 4 höger vinge
+    // och 5 vänster vinge" — bröstkorgsträffen blir alltså vingträff bakifrån.
+    hitA: { die: "1d10", rows: [
+      { max: 1, loc: "hoger-ben" }, { max: 2, loc: "vanster-ben" }, { max: 3, loc: "mage" },
+      { max: 5, loc: "brostkorg", fromBehind: { 4: "hoger-vinge", 5: "vanster-vinge" } },
+      { max: 6, loc: "hoger-arm" }, { max: 7, loc: "vanster-arm" }, { max: 8, loc: "huvud" },
+      { max: 9, loc: "hoger-vinge" }, { max: 10, loc: "vanster-vinge" }
+    ] },
+    hitB: { die: "1d10", rows: [
+      { max: 1, loc: "hoger-ben" }, { max: 2, loc: "vanster-ben" }, { max: 3, loc: "mage" },
+      { max: 4, loc: "brostkorg" }, { max: 6, loc: "hoger-arm" }, { max: 8, loc: "vanster-arm" },
+      { max: 10, loc: "huvud" }
+    ] }
+  },
+
+  kentaur: {
+    label: "Kentaur",
+    // RP s.48 Tabell 2. ⚠ Egna KP-band: 8-10, 11-15, 16-20, 21-25, 26-30 — fem
+    // steg, inte sex, och de börjar högre än humanoidernas.
+    kpBands: [{ max: 10, i: 0 }, { max: 15, i: 1 }, { max: 20, i: 2 }, { max: 25, i: 3 }, { max: 30, i: 4 }],
+    kp: {
+      "hoger-bakben":   [2, 3, 4, 5, 6],
+      "vanster-bakben": [2, 3, 4, 5, 6],
+      "hoger-framben":  [2, 3, 4, 5, 6],
+      "vanster-framben":[2, 3, 4, 5, 6],
+      hastkropp:        [8, 9, 10, 11, 12],
+      manniskokropp:    [6, 7, 8, 9, 10],
+      "hoger-arm":      [3, 4, 5, 6, 7],
+      "vanster-arm":    [3, 4, 5, 6, 7],
+      huvud:            [4, 5, 6, 7, 8]
+    },
+    // RP s.50 Tabell 6. ⚠ Fotnot: vilket ben som träffas beror på vilken sida
+    // angriparen står — "Man kan inte träffa benen på motsatt sida."
+    hitA: { die: "1d10", rows: [
+      { max: 2, loc: "benen" }, { max: 5, loc: "hastkropp" }, { max: 7, loc: "manniskokropp" },
+      { max: 8, loc: "hoger-arm" }, { max: 9, loc: "vanster-arm" }, { max: 10, loc: "huvud" }
+    ] },
+    hitB: { die: "1d10", rows: [
+      { max: 2, loc: "benen" }, { max: 3, loc: "hastkropp" }, { max: 5, loc: "manniskokropp" },
+      { max: 7, loc: "hoger-arm" }, { max: 9, loc: "vanster-arm" }, { max: 10, loc: "huvud" }
+    ] }
+  },
+
+  svanmo: {
+    label: "Svan(mö)",
+    // RP s.48 Tabell 3. ⚠ Bara TVÅ band, och tabellen slutar vid 15 Totala KP.
+    kpBands: [{ max: 10, i: 0 }, { max: 15, i: 1 }],
+    kp: {
+      kropp:          [5, 6],
+      "hoger-vinge":  [4, 5],
+      "vanster-vinge":[4, 5],
+      "huvud-hals":   [3, 4]
+    },
+    // RP s.50 Tabell 7. ⚠ En enda kolumn: "A+B" — försvar spelar ingen roll.
+    hitA: { die: "1d8", rows: [
+      { max: 3, loc: "kropp" }, { max: 5, loc: "hoger-vinge" },
+      { max: 7, loc: "vanster-vinge" }, { max: 8, loc: "huvud-hals" }
+    ] },
+    hitB: { die: "1d8", rows: [
+      { max: 3, loc: "kropp" }, { max: 5, loc: "hoger-vinge" },
+      { max: 7, loc: "vanster-vinge" }, { max: 8, loc: "huvud-hals" }
+    ] }
+  }
+};
+
+/** Visningsnamn per träffområdesnyckel. */
+DODE.hitLocations = {
+  "hoger-ben": "Höger ben", "vanster-ben": "Vänster ben", mage: "Mage",
+  brostkorg: "Bröstkorg", "hoger-arm": "Höger arm", "vanster-arm": "Vänster arm",
+  huvud: "Huvud", "hoger-vinge": "Höger vinge", "vanster-vinge": "Vänster vinge",
+  "hoger-bakben": "Höger bakben", "vanster-bakben": "Vänster bakben",
+  "hoger-framben": "Höger framben", "vanster-framben": "Vänster framben",
+  hastkropp: "Hästkropp", manniskokropp: "Människokropp", benen: "Benen",
+  kropp: "Kropp", "huvud-hals": "Huvud & hals"
+};
+
+/**
+ * Träffområdenas KP för en varelse med givna Totala KP (RP s.48).
+ *
+ * ⚠ Returnerar `null` under 5 Totala KP — boken delar då inte in kroppen alls.
+ * ⚠ Över tabellens sista band läggs **+1 per påbörjade 5 KP** på varje område.
+ */
+DODE.hitLocationKp = function (bodyPlanKey, totalKp) {
+  const plan = DODE.bodyPlans[bodyPlanKey];
+  if (!plan) return null;
+  const bands = plan.kpBands ?? DODE.hitLocationKpBands;
+  const first = bands[0];
+  // Under första bandets undre gräns finns ingen indelning (RP s.48).
+  if (totalKp < 5) return null;
+
+  const last = bands[bands.length - 1];
+  let index = bands.findIndex((b) => totalKp <= b.max);
+  let bonus = 0;
+  if (index === -1) {
+    index = bands.length - 1;
+    bonus = Math.ceil((totalKp - last.max) / 5);
+  }
+  // Under kentaur-/svantabellernas start används första bandet rakt av.
+  if (totalKp <= first.max) index = 0;
+
+  const out = {};
+  for (const [loc, values] of Object.entries(plan.kp)) {
+    out[loc] = values[index] + bonus;
+  }
+  return out;
+};
+
+/**
+ * Slår fram vilket träffområde som träffas.
+ *
+ * ⚠ `defending` styr VILKEN TÄRNING som slås, inte bara tabellen — RP s.49:
+ * kolumn A för projektilvapen och mot någon som inte försvarar sig, kolumn B mot
+ * någon som försvarar sig i närstrid. En försvarslös humanoid träffas i huvudet
+ * på 1/8, en försvarande på 2/10.
+ */
+DODE.rollHitLocation = async function (bodyPlanKey, { defending = true, fromBehind = false } = {}) {
+  const plan = DODE.bodyPlans[bodyPlanKey] ?? DODE.bodyPlans.humanoid;
+  const table = defending ? plan.hitB : plan.hitA;
+  const roll = await new Roll(table.die).evaluate();
+  const row = table.rows.find((r) => roll.total <= r.max) ?? table.rows[table.rows.length - 1];
+  const location = (fromBehind && row.fromBehind?.[roll.total]) || row.loc;
+  return { roll, location, label: DODE.hitLocations[location] ?? location, column: defending ? "B" : "A" };
+};

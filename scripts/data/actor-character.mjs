@@ -113,6 +113,19 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       rest: new fields.SchemaField({
         trainingUnlocked: new fields.BooleanField({ required: false, initial: false })
       }),
+      // Kroppsbyggnad — styr träffområdestabellen (RP s.48-50). ⚠ Dolt värde:
+      // spelarna ska inte behöva veta att en varelse är bevingad för att systemet
+      // ska slå rätt träffområde. Default humanoid, vilket täcker de flesta.
+      bodyPlan: new fields.StringField({
+        required: false, initial: "humanoid",
+        choices: ["humanoid", "bevingad-humanoid", "kentaur", "svanmo"]
+      }),
+      // Träffområdenas KP — ⚠ TOMT tills någon riktar ett anfall mot varelsen.
+      // KP per område HÄRLEDS ur Totala KP (DODE.hitLocationKp), så ingenting
+      // behöver förberedas: en varelse som hittills varit en påse KP får en
+      // kropp i samma ögonblick som någon siktar på den. Det är mekaniken som
+      // gör det möjligt att blanda vanlig och detaljerad strid utan bokföring.
+      hitLocations: new fields.ObjectField({ required: false, initial: () => ({}) }),
       alder: new fields.StringField({ required: false, initial: "" }),
       // Särskilda förmågor — MVP, PLAN_WIZARD_V2.md Fas 8. ⚠ FORSKNINGSLUCKA:
       // ingen komplett källtabell för VILKA förmågor som finns/vad de gör är
