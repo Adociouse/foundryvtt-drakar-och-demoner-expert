@@ -353,7 +353,7 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 56. **Infektion, kallbrand och amputation (SLB s.20).** Fullstandig regeltext finns kurerad i §10.3d men ingen mekanik ar byggd. 1 % infektionsrisk per skadepoang (3 % for smutsiga eller djurs vapen), 5 % att en infektion ger kallbrand inom 1T4 veckor, kallbrand i huvud/mage/bal ar dodlig, infekterad kroppsdel laker inga KP, HELA E4 botar infektion men inte kallbrand. Amputation ger fyra veckors oformaga och **permanent FYS-sankning** med kroppsdelens KP. ⚠ Bygg efter tidsmodellen (§10) — utan klocka blir det handraknade veckor per sar.
 
-57. **Ljuskällor som brinner i äventyrstid — facklor och lampolja.** Johan 2026-07-29: *"primary consumable is torches and lamp oil that needs to be tracked in adventure time."* ⚠ Till skillnad från proviant är detta **inte** dygnsskala — en fackla brinner i minuter, alltså på stridsrundeklockan (5 s per SR). Rätt form är sannolikt en **ActiveEffect med `duration.seconds`** på den tända faklan, precis som besvärjelser: då slocknar den av sig själv när klockan går, i strid såväl som vid korta framflyttningar. **Att göra:** brinntid per ljuskälla ur UTRUSTNING.md/REG, ett "tänd/släck"-läge på `utrustning`-typen, och synlig återstående tid. Proviant och vatten hanteras däremot som en **påminnelse** till SL (`DODE.supplyReminder`), eftersom böckerna inte ger någon förbrukningstakt.
+57. **Ljuskällor som brinner i äventyrstid — facklor och lampolja.** ⚠ **Verifierat 2026-07-29:** v14-kärnan slutar tillämpa en utgången AE av sig själv (se §6-regeln), så **ingen modul behövs för att facklan ska sluta gälla** — *Times Up* skulle bara städa bort dokumenten och *Simple Calendar* behövs inte alls eftersom vi redan flyttar `worldTime` direkt. **Den verkliga luckan är ljuset:** AE-ändringar träffar aktörens systemdata, inte TokenDocumentets `light`, så en fackla som faktiskt lyser kräver egen kod (eller Active Token Effects) som tänder/släcker tokenljuset när effekten börjar och slutar. Ursprunglig post: Johan 2026-07-29: *"primary consumable is torches and lamp oil that needs to be tracked in adventure time."* ⚠ Till skillnad från proviant är detta **inte** dygnsskala — en fackla brinner i minuter, alltså på stridsrundeklockan (5 s per SR). Rätt form är sannolikt en **ActiveEffect med `duration.seconds`** på den tända faklan, precis som besvärjelser: då slocknar den av sig själv när klockan går, i strid såväl som vid korta framflyttningar. **Att göra:** brinntid per ljuskälla ur UTRUSTNING.md/REG, ett "tänd/släck"-läge på `utrustning`-typen, och synlig återstående tid. Proviant och vatten hanteras däremot som en **påminnelse** till SL (`DODE.supplyReminder`), eftersom böckerna inte ger någon förbrukningstakt.
 
 16. **English localization.** Low priority per project scope.
 
@@ -611,6 +611,33 @@ Verified against the installed v14 build 2026-07-27 (`foundry.mjs` line refs bel
 - `ActorSheetV2#isEditable` (`:38070`) only consults ownership level and pack-locked state. **There is no built-in "GM vs. player-who-owns-this-actor" distinction anywhere in core** — if you need that split, `game.user.isGM` is the correct and only mechanism, not a reinvention of something Foundry already provides.
 
 **Security caveat (design accordingly, and say so in the UI/docs):** role checks, `disabled` attributes, and `preUpdate*` hooks are **UX guardrails, not a security boundary**. The Foundry server validates ownership and schema but never executes system JS, so field-level rules cannot be enforced server-side — a player holding `OWNER` on their actor can set any field from the console. Layer defences by decreasing cost (template `disabled`/hidden → action-handler guard clause → optional `preUpdate*` hook returning `false`), and accept that a determined owner can bypass all three. The only true enforcement would be demoting players to `OBSERVER` and proxying every change through the GM — rejected as disproportionate for this project's home-game use case.
+
+### Rule: v14-karnan slutar tillampa utgangna ActiveEffects sjalv — men raderar dem inte
+
+⚠ **Testat 2026-07-29**, foranlett av ett Gemini-rad om att installera *Times Up*.
+En AE med `duration.seconds: 3600` och `startTime`, efter `game.time.advance(7200)`:
+
+| Falt | Efter utgang |
+|---|---|
+| `duration.remaining` | **-3600** (karnan raknar) |
+| `effect.active` | **false** ⭐ |
+| `actor.appliedEffects` | **0** |
+| Andringen pa aktoren | **borta** (bonus tillbaka till 0) |
+| Dokumentet finns kvar | **ja** — `disabled` ar fortfarande `false` |
+
+**Slutsats:** for var del racker karnan. En tand fackla slutar verka nar tiden gar,
+utan modul. *Times Up* tillfor **stadning** (att faktiskt radera de utgangna
+dokumenten) och extra triggers — trevligt, inte nodvandigt.
+
+⚠ **Notera skillnaden mellan `active` och `disabled`.** En utgangen effekt har
+`active: false` men `disabled: false`. Kod som filtrerar pa `disabled` for att
+avgora om en effekt galler **far fel svar** — filtrera pa `active` eller anvand
+`actor.appliedEffects`.
+
+⚠ **Det Gemini-radet missar:** en AE kan inte andra en tokens ljusutstralning.
+AE-andringar traffar aktorens systemdata, medan ljus bor pa TokenDocument. En
+fackla som faktiskt LYSER kraver antingen *Active Token Effects* eller egen kod som
+slar pa/av tokenljuset nar effekten borjar och slutar. Se backlogpost 57.
 
 ### Rule: document IDs must be EXACTLY 16 alphanumeric characters
 
