@@ -117,3 +117,6 @@ MIT-licensen gäller **bara implementationen**, inte spelet den bygger på:
 
 - **Foundry Virtual Tabletop** är en separat mjukvara med sin egen licens från Foundry Gaming, LLC. Det här repot innehåller inte Foundry själv och kräver en egen giltig Foundry-licens för att användas.
 - **Drakar och Demoner Expert** — reglerna, namnen, ras-/yrkesbeskrivningarna och övrigt speldatainnehåll som återges i kompendierna (`packs/`) — tillhör sina respektive rättighetsinnehavare. Det här projektet är ett fan-/communityskapat kompatibilitetsverktyg och är inte officiellt anslutet till eller godkänt av rättighetsinnehavarna för Drakar och Demoner.
+- **`assets/audio/the-iron-crown.mp3`** är genererat med [Suno](https://suno.com) på ett gratiskonto och delas här för icke-kommersiellt bruk, i enlighet med Sunos användarvillkor för den nivån — attributionen nedan krävs av de villkoren, inte valfri.
+
+  > Musik: "The Iron Crown", genererad med Suno AI (gratis, icke-kommersiell nivå). Ej licensierad för kommersiellt bruk.

@@ -395,7 +395,13 @@ The architecture audit proposed a `ruleMeta` metadata sidecar on config tables t
 
 33. **Generisk Utkanten-by som systemscen** (Johan 2026-07-28). En by i utkanten med värdshus och apotek, **i systemet, utanför kampanjen** — "ger en grund för generiskt material" och en färdig plats att testa strider och effekter i. Klickbara ingångar till pub och apotek, med Lasslo respektive Mirac placerade. Underlag: `Äventyr/Dimön Bilder/Org_dimön_utkante.png` i Roll20-projektet (finns redan kopierad som `assets/dimon/utkante.png` i kampanjmodulen) — ska användas som **inspiration** för en egen VTT-karta, inte klippas in rakt av, eftersom Dimön är äventyrsinnehåll och scenen ska vara generisk. Kräver ett `Scene`-pack (`type: "Scene"`, ny post i `packs.config.mjs`). ⚠ Scener buntar inte media — kartbilden måste ligga i systemets `assets/`.
 
-34. **Rollpersonsskapar-scen med egen bakgrund och ambient musik** (Johan 2026-07-28). ✅ **Tekniskt verifierat mot Foundry v14-källan:** `Scene` har `playlist` + `playlistSound` (ForeignDocumentField mot `BasePlaylist`) samt en embeddad `sounds`-samling av `AmbientSound` med `path` (FilePathField för AUDIO). En scen kan alltså bära både bakgrund och egen mp3-ambiens. Guiden är ett fönster som öppnas ovanpå scenen — den kan inte ligga "inuti" den, men effekten blir densamma.
+34. ✅ **Rollpersonsskapar-scen med egen bakgrund och ambient musik — byggd och liveverifierad 2026-07-30.** Scenen **"Rollpersonsguiden"** finns nu i `dode-test`-världen: 1920×1080 (Foundrys 16:9-standardformat), rutnätslös, tom marmorgolv-och-molnbakgrund med öppet utrymme i mitten (`assets/backgrounds/rollpersonsguiden.png`, genererad och beskuren från Gemini-verktygets fasta 1024×1024-utdata — se bildpipelinenoten nedan), kopplad till en `Playlist` med spåret `assets/audio/the-iron-crown.mp3` (Suno, gratisnivå, icke-kommersiellt — attribution krävd och tillagd i README.md). Liveverifierat: bakgrunden renderar korrekt i full 1920×1080, `scene.activate()` sätter `playlist.playing`/`sound.playing` till `true` (det enda som hindrar faktiskt ljud i en Playwright-session är webbläsarens ljudlås innan en riktig användarklick skett — inget systemfel).
+
+    ⚠ **Byggandet avslöjade en Foundry v14-specifik fälla** — `Scene#background` är numera en läs-kompatibilitetsgetter, inte ett skrivbart fält; nya scener måste sätta bakgrunden via den embeddade `levels`-samlingen i stället. Se ny §6-regel.
+
+    ⚠ **Bildpipelinen höll inte löftet om 16:9** — Gemini-verktyget ignorerade aspect-ratio-instruktioner i prompten och gav 1024×1024 två gånger i rad (samma beteende som sågs för `scener`-packet 2026-07-29). Löst med centrerad beskärning + LANCZOS-uppskalning till 1920×1080 i efterhand snarare än fler bortkastade genereringsförsök.
+
+    ⚠ **Inte byggt än:** ingen kod kopplar guidens öppning till att faktiskt visa scenen för just den spelaren. Just nu är scenen och guide-fönstret två separata saker som råkar dela tema — att växla en enskild spelares vy till den här scenen när de öppnar `game.dode.openCharacterWizard()`, och växla tillbaka när guiden stängs, är nästa steg (kopplar an till "kan spelare vara i olika scener?"-frågan från 2026-07-28, samma bakgrund som denna post kom ur).
 
     ✅ **Och ja, spelare kan vara i olika scener samtidigt** (Johans följdfråga: en rollperson dör och spelaren ska skapa en ny mitt i äventyret). Verifierat i `client/documents/scene.mjs`: `Scene#view()` byter scen **bara för den egna klienten**, `Scene#activate({pullUsers})` sätter världens aktiva scen och drar valfritt med sig alla, och socket-eventet `pullToScene(sceneId, userId)` skickar **en enskild användare** till en scen. `user.viewedScene` spåras per användare. SL kan alltså skicka den drabbade spelaren till skaparscenen medan resten fortsätter äventyret.
 
@@ -640,6 +646,27 @@ avgora om en effekt galler **far fel svar** — filtrera pa `active` eller anvan
 AE-andringar traffar aktorens systemdata, medan ljus bor pa TokenDocument. En
 fackla som faktiskt LYSER kraver antingen *Active Token Effects* eller egen kod som
 slar pa/av tokenljuset nar effekten borjar och slutar. Se backlogpost 57.
+
+### Rule: Scene#background is deprecated — Foundry v14 moved to a `levels`-collection, and writing the old field name silently does nothing on NEW scenes
+
+⚠ **Upptäckt 2026-07-30**, byggandet av rollpersonsguidens scen. `Scene.create({ background: { src } })` skapade ett dokument där `background.src` var **`null`**, trots att alla andra fält i objektet (tint, anchorX, fit, …) fanns med sina defaultvärden — inget felmeddelande, inget kastat undantag.
+
+Orsaken: i den installerade Foundry-versionen (v14 build 365) har `Scene` fått ett **`levels`**-fält (en `EmbeddedCollectionField` av "Level"-dokument, vart och ett med egen `background`/`foreground`/`fog`/`textures`), och det gamla toppnivåfältet `background` är kvar bara som en **läs-kompatibilitetsgetter** — konsolen loggar uttryckligen *"Scene#background is deprecated. Use Level#background and Level#textures instead."* när man LÄSER det. Getter fungerar för **befintliga** scener (som redan har ett riktigt `_source.background.src` från när de packades under en äldre modell), men vid **skapande av en ny scen** initieras i stället en `levels`-array med ett `defaultLevel0000`-element vars `background.src` är `null` — och att skriva till det gamla fältnamnet, vare sig vid `Scene.create()` eller via `scene.update({"background.src": ...})` i efterhand, går rakt förbi utan att röra `levels[0]`.
+
+**Rätt sätt att sätta en ny scens bakgrund i den här Foundry-versionen:**
+
+```js
+const scene = await Scene.create({ name, width, height, grid: {...}, /* INTE background här */ });
+const levelId = scene._source.levels[0]._id;   // "defaultLevel0000"
+await scene.updateEmbeddedDocuments("Level", [{
+  _id: levelId,
+  "background.src": "systems/.../din-bild.png",
+  "background.color": "#c9c4bb"
+}]);
+// Den gamla gettern `scene.background.src` läser nu rätt värde igen.
+```
+
+⚠ **Kontrollera alltid `Scene.schema.fields` i den faktiskt installerade versionen** innan man antar ett fältnamn — se den allmänna metodiken i "General methodology for is this Foundry behavior actually what I think it is?" ovan. `packs/scener/_source/*.json` (Utkanten, Värdshuset) är opåverkade eftersom de redan var packade med det gamla flata `background`-fältet innan denna upptäckt; **nya scen-JSON-filer som skrivs för hand i framtiden behöver `levels`-formen** för att renderas korrekt i den här Foundry-versionen.
 
 ### Rule: document IDs must be EXACTLY 16 alphanumeric characters
 
