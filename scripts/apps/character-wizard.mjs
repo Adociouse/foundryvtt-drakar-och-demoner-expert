@@ -1,4 +1,10 @@
-const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
+const { HandlebarsApplicationMixin, ApplicationV2, DialogV2 } = foundry.applications.api;
+
+// Rollpersonsguidens bakgrund + ambiens — se DESIGN_DECISIONS.md backlog 34.
+// Scenen "Rollpersonsguiden" skapas manuellt i varje värld (inte kompendiepackad
+// än); saknas den hoppar #enterWizardScene bara över hela steget.
+const WIZARD_SCENE_NAME = "Rollpersonsguiden";
+const WIZARD_AMBIENCE_SRC = "systems/drakar-och-demoner-expert/assets/audio/the-iron-crown.mp3";
 
 // ⚠ `attribut` ligger FÖRE `yrke` sedan 2026-07-28. Yrkenas grundegenskapskrav
 // (YRKEN.md "Grundegenskapskrav", RP s.11) går annars inte att kontrollera vid
@@ -168,6 +174,111 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     super(options);
     this.actor = options.actor ?? null;
     if (this.actor) this.#loadStateFromActor(this.actor);
+  }
+
+  /**
+   * Väljardialog när en spelare äger fler än en rollperson och öppnar guiden
+   * utan att peka ut vilken (den generiska "Ny rollperson"-knappen) — se
+   * `game.dode.openCharacterWizard` i dode.mjs.
+   *
+   * @param {Actor[]} owned Rollpersoner spelaren äger.
+   * @returns {Promise<Actor|"new"|undefined>} Vald aktör, strängen `"new"` för
+   *   "skapa ny", eller `undefined` om dialogen stängdes utan val.
+   *
+   * ⚠ **INTE `null` för "skapa ny".** `DialogV2.wait()` (som `.prompt()` byggs
+   * på) använder `??`/`??=` internt på returvärdet från `ok.callback` — ett
+   * explicit `null` kan därför tyst bytas ut mot Foundrys eget defaultvärde i
+   * stället för att komma fram som `null`. Upptäckt i livetest 2026-07-30: en
+   * spelare som valde "skapa ny rollperson" fick i stället ett main-tråds-krasch
+   * i `#loadStateFromActor` eftersom `options.actor` blev något annat än `null`.
+   * Strängen `"new"` är varken `null` eller `undefined`, så den överlever `??`.
+   */
+  static async pickCharacter(owned) {
+    const rows = owned.map((a) => `
+      <label class="wizard-pick-row">
+        <input type="radio" name="actorId" value="${a.id}" />
+        <img src="${a.img}" alt="" />
+        <span>${a.name}</span>
+      </label>`).join("");
+
+    return DialogV2.prompt({
+      window: { title: "Välj rollperson" },
+      content: `<p>Du har flera rollpersoner. Vilken vill du öppna?</p>
+        <div class="wizard-pick-list">
+          ${rows}
+          <label class="wizard-pick-row">
+            <input type="radio" name="actorId" value="" checked />
+            <i class="fa-solid fa-plus"></i>
+            <span>Skapa en ny rollperson</span>
+          </label>
+        </div>`,
+      ok: {
+        label: "Öppna",
+        callback: (event, button) => {
+          const id = button.form.elements.actorId.value;
+          return id ? (owned.find((a) => a.id === id) ?? "new") : "new";
+        }
+      }
+    });
+  }
+
+  /**
+   * Byter DENNA ANVÄNDARES vy till rollpersonsguidens scen (marmorgolv + moln,
+   * se DESIGN_DECISIONS.md backlog 34) med lokal ambiensmusik, och lägger tillbaka
+   * spelaren där den var när guiden stängs.
+   *
+   * ⚠ **Bara för spelare, aldrig GM** — GM:s skärm styr vad hela bordet ser och
+   * ska inte ryckas undan av en spelares "Ny rollperson"-klick mitt i sessionen.
+   * `game.dode.openCharacterWizard` hoppar redan över hela guidevalsflödet för
+   * GM, men den kollen skyddar inte ett GM-anrop med explicit `actor` (arkets
+   * "Redigera i guiden"-knapp) — dubbelkollat här.
+   *
+   * ⚠ **`scene.view()` och `AudioHelper.play(..., false)` är båda KLIENTLOKALA**
+   * — de påverkar bara den anropande webbläsaren, inte resten av bordet. Det är
+   * det som gör "spelare X är i guiden medan resten spelar vidare" möjligt utan
+   * att röra `scene.active`/`Scene#activate()`, som är delat för alla.
+   *
+   * ⚠ Ljudet spelas EJ inväntat (`.then()`, inte `await`) — en webbläsare som
+   * inte hunnit lås upp ljud efter en användarklick kan låta `AudioHelper.play()`
+   * hänga i väntan på upplåsning; det får aldrig blockera att guiden öppnas.
+   */
+  async #enterWizardScene() {
+    if (game.user.isGM) return;
+    const scene = game.scenes.getName(WIZARD_SCENE_NAME);
+    if (!scene) return; // scenen är inte upplagd i den här världen — inget att göra
+    if (scene.id === canvas.scene?.id) return; // redan där, rör ingenting
+
+    this.#previousSceneId = canvas.scene?.id ?? null;
+    await scene.view();
+    foundry.audio.AudioHelper.play(
+      { src: WIZARD_AMBIENCE_SRC, volume: 0.4, loop: true, channel: "music" },
+      false // lokalt — pushas inte till andra klienter
+    ).then((sound) => { this.#ambience = sound; }).catch(() => {});
+  }
+
+  /** Motsatsen till #enterWizardScene — se den för resonemang. */
+  async #exitWizardScene() {
+    this.#ambience?.stop();
+    this.#ambience = null;
+    if (!this.#previousSceneId) return;
+    const previous = game.scenes.get(this.#previousSceneId);
+    this.#previousSceneId = null;
+    await previous?.view();
+  }
+
+  #previousSceneId = null;
+  #ambience = null;
+
+  /** @override Körs en gång vid guidens första rendering — se #enterWizardScene. */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender?.(context, options);
+    await this.#enterWizardScene();
+  }
+
+  /** @override Städar undan scen/ljud innan fönstret faktiskt stängs. */
+  async close(options) {
+    await this.#exitWizardScene();
+    return super.close(options);
   }
 
   get isEditMode() {

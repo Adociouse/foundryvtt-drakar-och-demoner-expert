@@ -213,10 +213,34 @@ Hooks.once("init", () => {
   ]);
 
   game.dode = {
-    // Utan argument: skapaläge. Med en aktör: redigeringsläge (guiden laddar
-    // rollpersonen och sparar tillbaka utan att dubblera något) — se
-    // character-wizard.mjs och DESIGN_DECISIONS.md backlog 4c.
-    openCharacterWizard: (actor = null) => new DoDECharacterWizard(actor ? { actor } : {}).render(true),
+    // Med en aktör: redigeringsläge, öppnar alltid direkt (används av arkets
+    // egna "Redigera i guiden"-knapp, som redan vet vilken rollperson).
+    //
+    // Utan argument (den generiska "Ny rollperson"-knappen): guiden avgör
+    // själv vad som ska hända, i stället för att alltid anta skapaläge.
+    // ⚠ **GM hoppar över allt det här** — en GM äger alla aktörer (bypassar
+    // behörighetskontrollen), så "vilken av dina rollpersoner" har inget
+    // meningsfullt svar för GM, och GM redigerar en specifik rollperson via
+    // arkets egen knapp. GM:s skärm ska heller inte ryckas till guidescenen
+    // mitt i en pågående session — se character-wizard.mjs #enterWizardScene.
+    //
+    // För en spelare: 0 ägda rollpersoner → skapaläge. 1 → rakt in i
+    // redigeringsläge, ingen anledning att fråga. 2+ → en väljare (eller
+    // "skapa en till"), eftersom en spelare KAN äga flera rollpersoner
+    // (t.ex. efter en död mitt i ett äventyr) och guiden annars gissar fel.
+    async openCharacterWizard(actor = null) {
+      if (actor || game.user.isGM) {
+        return new DoDECharacterWizard(actor ? { actor } : {}).render(true);
+      }
+      const owned = game.actors.filter((a) => a.type === "character" && a.isOwner);
+      if (owned.length <= 1) {
+        return new DoDECharacterWizard(owned[0] ? { actor: owned[0] } : {}).render(true);
+      }
+      const picked = await DoDECharacterWizard.pickCharacter(owned);
+      if (picked === undefined) return null; // avbrutet
+      // ⚠ Sentinelvärdet är strängen "new", inte null — se pickCharacter().
+      return new DoDECharacterWizard(picked !== "new" ? { actor: picked } : {}).render(true);
+    },
     // Träningsfönstret — omsättning av EP till FV efter viloperiod (REG s.46).
     // Tidsfonstret — SL:s enda stalle for att flytta klockan utanfor strid (§10).
     openTimeWindow: () => new DoDETimeWindow().render(true),

@@ -750,3 +750,11 @@
 .dode-time-body .time-targets label { flex: 1 1 auto; }
 .dode-time-body .streak { opacity: 0.75; white-space: nowrap; }
 .dode-time-body .kp { opacity: 0.75; white-space: nowrap; }
+
+/* ---- Rollpersonsväljare (flera ägda rollpersoner) ---- */
+.wizard-pick-list { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+.wizard-pick-row { display: flex; align-items: center; gap: 8px; padding: 4px 6px;
+  border-radius: 4px; cursor: pointer; }
+.wizard-pick-row:hover { background: rgba(0, 0, 0, 0.06); }
+.wizard-pick-row img { width: 32px; height: 32px; object-fit: cover; border: none; border-radius: 3px; }
+.wizard-pick-row i.fa-plus { width: 32px; text-align: center; opacity: 0.7; }
