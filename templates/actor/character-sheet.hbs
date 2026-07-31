@@ -125,10 +125,17 @@
       <li class="skill-row" data-item-id="{{skill.id}}">
         <a data-action="editSkill" class="skill-name">{{skill.name}}</a>
         {{#if skill.grantedReason}}<i class="fa-solid fa-graduation-cap granted-mark" title="Utdelad av {{skill.grantedBy}}: {{skill.grantedReason}}"></i>{{/if}}
-        {{#if skill.system.bonus}}
+        {{#if skill.hasBonusOrModifier}}
           <span class="skill-fv" title="{{localize 'DODE.Actor.Base'}}">FV {{skill.system.fv}}</span>
-          <span class="attr-bonus" title="{{localize 'DODE.Actor.Mod'}}">{{skill.system.bonusDisplay}}</span>
-          <span class="skill-fv skill-total" title="{{localize 'DODE.Actor.Total'}}">= {{skill.system.total}}</span>
+          {{#if skill.system.bonus}}
+            <span class="attr-bonus" title="{{localize 'DODE.Actor.Mod'}}">{{skill.system.bonusDisplay}}</span>
+          {{/if}}
+          {{#if skill.modifier}}
+            {{!-- Formaga-/utrustningsdriven modifierare (backlogpost 7/36) —
+                  separat lager från den manuella system.bonus ovan. --}}
+            <span class="attr-bonus skill-modifier" title="{{skill.modifierTooltip}}">+{{skill.modifier}}</span>
+          {{/if}}
+          <span class="skill-fv skill-total" title="{{localize 'DODE.Actor.Total'}}">= {{skill.effectiveTotal}}</span>
         {{else}}
           <span class="skill-fv">FV {{skill.system.fv}}</span>
         {{/if}}
@@ -236,6 +243,11 @@
             class="equip-toggle {{#if entry.item.system.equipped}}is-equipped{{/if}}"
             title="{{#if entry.item.system.equipped}}Utrustad — klicka för att ta av{{else}}Ej utrustad — klicka för att utrusta{{/if}}">
             <i class="fa-solid {{#if entry.item.system.equipped}}fa-shield{{else}}fa-shield-halved{{/if}}"></i>
+          </button>
+        {{/if}}
+        {{#if entry.isConsumable}}
+          <button type="button" data-action="consumeItem" title="Konsumera">
+            <i class="fa-solid fa-flask"></i>
           </button>
         {{/if}}
         <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>

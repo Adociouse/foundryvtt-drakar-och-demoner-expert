@@ -149,7 +149,13 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         new fields.SchemaField({
           name: new fields.StringField({ required: true, initial: "" }),
           source: new fields.StringField({ required: false, initial: "" }),
-          description: new fields.HTMLField({ required: false, initial: "" })
+          description: new fields.HTMLField({ required: false, initial: "" }),
+          // Stabil sloteidentitet — backlogpost 7/36. INTE samma sak som
+          // array-index: den här arrayen kan krympa (nivåsänkning, borttagen
+          // rad på arket) vilket förskjuter index men aldrig slotId. Används
+          // för att tagga det `formaga`-item (om något) som representerar
+          // radens mekaniska effekt, se special-ability-effects.mjs.
+          slotId: new fields.StringField({ required: false, initial: "" })
         })
       ),
       hp: new fields.SchemaField({
@@ -337,5 +343,61 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // (REGLER_STRID.md: "Abs gäller för HELA kroppen i grundsystemet") — därför max, inte summa.
     const bodyArmor = this.parent?.items?.filter((i) => i.type === "rustning" && i.system.slot === "kropp") ?? [];
     this.abs = bodyArmor.reduce((max, i) => Math.max(max, i.system.abs ?? 0), 0);
+  }
+
+  /**
+   * Färdighetsmodifierare — backlogpost 7/36, se doc-kommentaren i
+   * item-fardighet.mjs. RIKTIGA getters, INTE fält satta i prepareDerivedData
+   * — ett tidsbegränsat föremåls (`activationSeconds`) bonus måste sluta gälla
+   * så fort `game.time.worldTime` passerar `activeUntil`, men INGET rör
+   * aktören när tiden bara går (till skillnad från ett `actor.update()`).
+   * Ett cachat fält från senaste prepareDerivedData-körningen skulle då visa
+   * en föråldrad bonus tills något annat råkar trigga en omräkning.
+   * ⚠ Upptäckt i livetest 2026-07-31 (Runas Duntofflor): `game.time.advance()`
+   * fick inte bort +5-bonusen förrän `actor.prepareData()` tvingades fram för
+   * hand — exakt den fällan denna kommentar varnar för. Samma mönster som
+   * `ActiveEffect#duration`/`#active` (v14-kärnans egna live-getters, se
+   * DESIGN_DECISIONS.md §6 "v14-kärnan slutar tillämpa utgångna
+   * ActiveEffects själv") — beräkna vid LÄSNING, inte vid senaste skrivning.
+   *
+   * `formaga` är alltid aktiv medan den ligger på aktören (item-formaga.mjs).
+   * `utrustning`/`vapen`/`rustning` kräver `equipped === true`, och om
+   * `activationSeconds` är satt dessutom att `flags.<id>.activeUntil` inte
+   * gått ut — se scripts/documents/item.mjs.
+   */
+  #computeSkillModifiers() {
+    const worldTime = game.time?.worldTime ?? 0;
+    const totals = {};
+    const sources = {};
+    for (const item of this.parent?.items ?? []) {
+      const mods = item.system?.skillModifiers;
+      if (!mods?.length) continue;
+      if (item.type === "formaga") {
+        // alltid aktiv
+      } else if (["utrustning", "vapen", "rustning"].includes(item.type)) {
+        if (item.system.equipped !== true) continue;
+        const activationSeconds = item.system.activationSeconds;
+        if (activationSeconds) {
+          const activeUntil = item.getFlag(game.system.id, "activeUntil") ?? 0;
+          if (worldTime >= activeUntil) continue;
+        }
+      } else {
+        continue;
+      }
+      for (const mod of mods) {
+        if (!mod.skillKey || !mod.value) continue;
+        totals[mod.skillKey] = (totals[mod.skillKey] ?? 0) + mod.value;
+        (sources[mod.skillKey] ??= []).push({ label: item.name, value: mod.value });
+      }
+    }
+    return { totals, sources };
+  }
+
+  get skillModifierTotals() {
+    return this.#computeSkillModifiers().totals;
+  }
+
+  get skillModifierSources() {
+    return this.#computeSkillModifiers().sources;
   }
 }

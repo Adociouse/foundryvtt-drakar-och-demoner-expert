@@ -49,6 +49,48 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
       // föremålets ev. ActiveEffects appliceras (DoDeActiveEffect.isGateOpen).
       // Vanlig utrustning bär sällan effekter, men en magisk ryggsäck kan.
       equipped: new fields.BooleanField({ required: false, initial: false }),
+      // Färdighetsmodifierare (backlogpost 7) — samma form och samma LIVA
+      // summering som item-formaga.mjs `skillModifiers`, se
+      // actor-character.mjs#prepareDerivedData. Räknas bara medan `equipped`
+      // är sant, och (om `activationSeconds` är satt) bara medan
+      // `flags.<id>.activeUntil` inte gått ut — se `activationSeconds` nedan
+      // och scripts/documents/item.mjs.
+      skillModifiers: new fields.ArrayField(new fields.SchemaField({
+        skillKey: new fields.StringField({ required: true, initial: "" }),
+        value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+      })),
+      // Antal aktiveringar kvar innan föremålet är förbrukat/uttjänt. `null` =
+      // obegränsat (normalfallet för allt utom testade laddningsföremål).
+      // Dras av EN gång per aktivering (se item.mjs `_preUpdate`), inte per
+      // sekund föremålet bärs.
+      chargesRemaining: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true, min: 0 }),
+      // Hur många sekunder en aktivering (utrustning=true, eller konsumtion)
+      // håller i sig innan effekten klingar av — `null` = permanent så länge
+      // föremålet är utrustat (samma beteende som Väktarklingan/Alvskölden
+      // hade innan detta fält fanns, oförändrat för dem). Skiljer sig från
+      // ActiveEffect-baserad duration (se `effectChanges`/consumeItem nedan) —
+      // `skillModifiers` är INTE AE-driven, så tidsgränsen är en ren
+      // flagga-mot-worldTime-jämförelse i den live aggregeringen, ingen egen
+      // ActiveEffect behövs bara för att räkna ner tiden.
+      activationSeconds: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true, min: 0 }),
+      // Konsumtionsbart engångsföremål (t.ex. en drickbar drog/besvärjelse-i-
+      // flaska) — actor.mjs#consumeItem tar bort föremålet när chargesRemaining
+      // når 0, till skillnad från utrustning som bara blir en inert pryl.
+      consumable: new fields.BooleanField({ required: false, initial: false }),
+      // Generaliserar item-besvarjelse.mjs `spellEffect` till konsumtionsbar
+      // utrustning — samma {key, mode, value}-form, samma ActiveEffect-baserade
+      // applicering (actor.mjs#consumeItem, mönster från applySpellEffect). En
+      // `key` FÅR innehålla platshållaren "$CHOICE" (t.ex.
+      // "system.attributes.$CHOICE.bonus"), ersatt med spelarens val vid
+      // konsumtion — se consumeItem.
+      effectChanges: new fields.ArrayField(new fields.SchemaField({
+        key: new fields.StringField({ required: true, initial: "" }),
+        // mode 2 = ADD (CONST.ACTIVE_EFFECT_MODES.ADD) — samma konvention och
+        // samma skäl att inte referera CONST här som item-besvarjelse.mjs
+        // `spellEffect`.
+        mode: new fields.NumberField({ required: false, integer: true, initial: 2 }),
+        value: new fields.StringField({ required: false, initial: "" })
+      })),
       // Bok + sida — se fields-source.mjs. Var tidigare en fri sträng
       // ("Magi-regelboken s.43-48"); migrerad till strukturerad form 2026-07-28.
       source: sourceField(),

@@ -1,3 +1,5 @@
+import { needsChoice, choiceCount, resolveGrants, applyResolvedAbility, pruneOrphanedAbilityGrants } from "../helpers/special-ability-effects.mjs";
+
 const { HandlebarsApplicationMixin, ApplicationV2, DialogV2 } = foundry.applications.api;
 
 // Rollpersonsguidens bakgrund + ambiens — se DESIGN_DECISIONS.md backlog 34.
@@ -583,6 +585,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // det närmaste en lista vi har. Fritext är tillåtet, listan är bara hjälp.
     context.weaponSuggestions = equipmentDocs
       .filter((d) => d.type === "vapen").map((d) => d.name).sort();
+    // Förslagslista till förmågevalens "valfri sekundär färdighet"-inputs
+    // (backlogpost 7/36) — samma "fritext, listan är bara hjälp"-princip.
+    context.secondarySkillSuggestions = CONFIG.DODE.secondarySkills.map((s) => s.name).sort();
     context.selectedRace = selectedRace;
     context.selectedProfession = selectedProfession;
     context.ageCategories = AGE_CATEGORIES.map((c) => ({ value: c, selected: c === this.state.ageCategory }));
@@ -599,7 +604,17 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       remaining: skillPreview.epRemaining
     };
     context.abilitySlots = CONFIG.DODE.abilityRollsByNiva[this.state.niva] ?? 1;
-    context.specialAbilities = this.#specialAbilitySlots();
+    // needsChoiceCount/choiceRows läggs på ovanpå rå-sloten (index bevarad,
+    // så data-ability-*-index i mallen fortfarande pekar rätt i state) — se
+    // needsChoice/choiceCount i special-ability-effects.mjs.
+    context.specialAbilities = this.#specialAbilitySlots().map((slot) => ({
+      ...slot,
+      needsChoiceCount: needsChoice(slot.effect) ? choiceCount(slot.effect) : 0,
+      choiceRows: needsChoice(slot.effect)
+        ? Array.from({ length: choiceCount(slot.effect) }, (_, i) => ({ row: i, value: slot.effectChoices?.[i] ?? "" }))
+        : [],
+      choicePool: slot.effect?.pool === "hantverk" ? "hantverk" : (slot.effect?.pool ?? "")
+    }));
     context.specialAbilityNames = context.specialAbilities
       .map((a) => a.name.trim())
       .filter((name) => name.length > 0)
@@ -656,9 +671,16 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       spentFormagor: sys.bp?.spentFormagor ?? 0,
       spentFardigheter: sys.bp?.spentFardigheter ?? 0
     };
+    // ⚠ `slotId` läses tillbaka rakt av (aldrig ny) — se schemakommentaren i
+    // actor-character.mjs. Ett nytt id här skulle göra en befintlig formaga-
+    // post föräldralös och skapa en dubblett vid nästa #applyToActor.
+    // `effect` läses INTE tillbaka (den avgörs av namnet/tabellslaget, inte
+    // lagrad på specialAbilities) — ett omslag i redigeringsläge sätter det
+    // på nytt via #onRollFormaga; tills dess visas raden utan känd effekt.
     this.state.specialAbilities = (sys.specialAbilities ?? []).map((a) => ({
       name: a.name ?? "", source: a.source ?? "", description: a.description ?? "",
-      bpSpent: 1, rollResult: null
+      bpSpent: 1, rollResult: null, slotId: a.slotId || foundry.utils.randomID(),
+      effect: null, effectChoices: []
     }));
 
     // Ras/yrke: vi sätter en egen `flags.<sysid>.sourceUuid` när items skapas
@@ -963,11 +985,24 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #specialAbilitySlots() {
     const n = CONFIG.DODE.abilityRollsByNiva[this.state.niva] ?? 1;
     const slots = this.state.specialAbilities;
-    // bpSpent/rollResult är bara wizard-scratch för slå fram-knappen (se
-    // #onRollFormaga) — actor.system.specialAbilities schemat (SchemaField)
-    // har bara name/source/description, så extra nycklar rensas automatiskt
-    // bort av Foundry vid #onCreateCharacter, ingen manuell strippning behövs.
-    while (slots.length < n) slots.push({ name: "", source: "", description: "", bpSpent: 1, rollResult: null });
+    // bpSpent/rollResult/effect/effectChoices är bara wizard-scratch för
+    // slå fram-knappen (se #onRollFormaga) — actor.system.specialAbilities
+    // schemat (SchemaField) har bara name/source/description/slotId, så
+    // extra nycklar rensas automatiskt bort av Foundry vid #onCreateCharacter,
+    // ingen manuell strippning behövs. `slotId` är INTE scratch — se dess
+    // schemakommentar i actor-character.mjs — och krymps aldrig bort utan att
+    // #applyToActor/#onCreateCharacter först städar den formaga-post den äger
+    // (pruneOrphanedAbilityGrants).
+    while (slots.length < n) {
+      slots.push({
+        name: "", source: "", description: "", bpSpent: 1, rollResult: null,
+        slotId: foundry.utils.randomID(), effect: null, effectChoices: []
+      });
+    }
+    for (const slot of slots) {
+      if (!slot.slotId) slot.slotId = foundry.utils.randomID();
+      if (!("effectChoices" in slot)) slot.effectChoices = [];
+    }
     if (slots.length > n) slots.length = n;
     return slots;
   }
@@ -1131,6 +1166,19 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         const idx = Number(el.dataset.abilityIndex);
         const field = el.dataset.abilityField;
         if (this.state.specialAbilities[idx]) this.state.specialAbilities[idx][field] = ev.target.value;
+      });
+    });
+
+    // Val-input för effekter som kräver spelarval (backlogpost 7/36, t.ex.
+    // Hobbyist "valfri sekundär färdighet") — se needsChoice/choiceCount i
+    // special-ability-effects.mjs. `change`, inte `input`, av samma skäl som
+    // yrkesfärdighetsstegets valfria platser ovan.
+    this.element.querySelectorAll("[data-ability-choice-index]").forEach((el) => {
+      el.addEventListener("change", (ev) => {
+        const idx = Number(el.dataset.abilityChoiceIndex);
+        const choiceIdx = Number(el.dataset.abilityChoiceSlot);
+        const slot = this.state.specialAbilities[idx];
+        if (slot?.effectChoices) slot.effectChoices[choiceIdx] = ev.target.value;
       });
     });
 
@@ -1452,6 +1500,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       slot.name = result.name || `Förmåga (${roll.total})`;
       slot.description = result.description;
       slot.source = "bas"; // se schemakommentaren i actor-character.mjs — "bas" = grundboken (RP s.25-27)
+      // Backlogpost 7/36 — se special-ability-effects.mjs. `effectChoices`
+      // nollställs vid varje omslag: ett gammalt val för en annan rad ska
+      // aldrig läcka in i en ny rads effekt.
+      slot.effect = result.effect ?? null;
+      slot.effectChoices = new Array(needsChoice(result.effect) ? choiceCount(result.effect) : 0).fill("");
     }
 
     this.state.bp.spentFormagor = this.state.specialAbilities.reduce(
@@ -1459,6 +1512,24 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       0
     );
     this.render();
+  }
+
+  /**
+   * Applicerar samtliga förmågeslots mekaniska effekter på EN redan skapad
+   * aktör — backlogpost 7/36. Delad mellan #applyToActor (redigeringsläge) och
+   * #onCreateCharacter (nyskapande); körs EFTER att aktören/dess primära och
+   * yrkesfärdigheter redan finns, så `ensureSeeds` i special-ability-effects.mjs
+   * kan se om en förmågas färdighet redan är täckt av det.
+   */
+  async #applySpecialAbilityGrants(actor) {
+    const keepSlotIds = [];
+    for (const slot of this.state.specialAbilities) {
+      if (!slot.name?.trim() || !slot.slotId) continue;
+      keepSlotIds.push(slot.slotId);
+      const resolved = resolveGrants(slot.effect, slot.effectChoices ?? []);
+      await applyResolvedAbility(actor, slot.slotId, slot.name, slot.effect, resolved);
+    }
+    await pruneOrphanedAbilityGrants(actor, keepSlotIds);
   }
 
   /**
@@ -1624,6 +1695,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     if (toUpdate.length) await actor.updateEmbeddedDocuments("Item", toUpdate);
     if (toCreate.length) await actor.createEmbeddedDocuments("Item", toCreate);
 
+    await this.#applySpecialAbilityGrants(actor);
+
     ui.notifications.info(`${actor.name} uppdaterad via guiden.`);
     await this.close();
     actor.sheet.render(true);
@@ -1723,6 +1796,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       for (let i = 0; i < qty; i++) itemsToCreate.push({ ...doc.toObject(), _id: null });
     }
     if (itemsToCreate.length) await actor.createEmbeddedDocuments("Item", itemsToCreate);
+
+    await this.#applySpecialAbilityGrants(actor);
 
     const ageMods = CONFIG.DODE.ageAttributeModifiers[this.state.ageCategory] ?? {};
     const ageAeChanges = Object.entries(ageMods)

@@ -16,9 +16,10 @@ const fields = foundry.data.fields;
  * attribut). `origin` speglar specialAbilities.source ("bas"/"ras"/"yrke"/"hjalte");
  * `source` är bok+sida som på alla andra innehållstyper.
  *
- * Källa/backlog: docs/DESIGN_DECISIONS.md — "Förmågor 4-source aggregation" /
- * "structured ability table". Effekterna authoras som vanliga ActiveEffects på
- * itemet (transfer:true), inte som schemadata här.
+ * `skillModifiers` är den strukturerade motsvarigheten för FÄRDIGHETSbonusar
+ * (backlogpost 7/36, se item-fardighet.mjs) — se `special-ability-effects.mjs`
+ * för hur ett tabellslag (DODE.specialAbilitiesTable) blir ett `formaga`-item
+ * med rätt `skillModifiers`.
  */
 export default class DoDEFormagaData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
@@ -29,6 +30,15 @@ export default class DoDEFormagaData extends foundry.abstract.TypeDataModel {
       // duplicerad schemanyckel. Inget kompendieinnehåll fanns ännu, så
       // omdöpningen kostade ingen migrering.
       origin: new fields.StringField({ required: false, initial: "" }),
+      // Färdighetsbonusar — INTE en ActiveEffect, för AE-changes kan bara rikta
+      // in sig på aktörens EGNA schemafält, aldrig ett namngivet embeddat
+      // `fardighet`-Item (se item-fardighet.mjs). Summeras i stället LIVE av
+      // actor-character.mjs#prepareDerivedData (skillModifierTotals), samma
+      // mönster som equipped utrustning/vapen/rustning bidrar med.
+      skillModifiers: new fields.ArrayField(new fields.SchemaField({
+        skillKey: new fields.StringField({ required: true, initial: "" }),
+        value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+      })),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })

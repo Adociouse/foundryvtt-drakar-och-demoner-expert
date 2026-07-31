@@ -12,6 +12,7 @@ import DoDEMinibesvarjelseData from "./data/item-minibesvarjelse.mjs";
 import DoDEFormagaData from "./data/item-formaga.mjs";
 import DoDEActor from "./documents/actor.mjs";
 import DoDeActiveEffect from "./documents/dode-active-effect.mjs";
+import DoDeItem from "./documents/item.mjs";
 import SceneEffects from "./utils/scene-effects.mjs";
 import DoDECharacterSheet from "./sheets/actor-character-sheet.mjs";
 import DoDENpcSheet from "./sheets/actor-npc-sheet.mjs";
@@ -42,6 +43,7 @@ Hooks.once("init", () => {
   CONFIG.DODE = DODE;
   CONFIG.Actor.documentClass = DoDEActor;
   CONFIG.ActiveEffect.documentClass = DoDeActiveEffect;
+  CONFIG.Item.documentClass = DoDeItem;
 
   Object.assign(CONFIG.Actor.dataModels, {
     character: DoDECharacterData,

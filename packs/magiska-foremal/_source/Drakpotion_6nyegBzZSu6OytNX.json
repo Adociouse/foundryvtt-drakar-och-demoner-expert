@@ -1,0 +1,51 @@
+{
+  "name": "Drakpotion",
+  "type": "utrustning",
+  "system": {
+    "category": "droger",
+    "quantity": 1,
+    "weight": 0.25,
+    "price": 60,
+    "priceUnit": "gm",
+    "priceNote": "",
+    "equipped": false,
+    "skillModifiers": [],
+    "chargesRemaining": 1,
+    "activationSeconds": 3600,
+    "consumable": true,
+    "effectChanges": [
+      { "key": "system.attributes.$CHOICE.bonus", "mode": 2, "value": "10" }
+    ],
+    "description": "<p>Ett tjockt, blodrött brygg som luktar svavel och åska. Den som dricker känner en av sina grundegenskaper svälla av draköd kraft i ungefär en timme — men styrkan är lånad, inte lärd, och ebbar sedan lika snabbt ut som den kom.</p><p><em>Testföremål — backlogpost 7/36: bekräftar konsumtionsbara engångsföremål med spelarvalt mål (grundegenskap) och en riktig tidsbegränsad ActiveEffect, samt att en tillfällig attributhöjning INTE smittar av sig på redan satta färdighetsvärden. Ej bokkällat.</em></p>",
+    "source": {
+      "book": "eget",
+      "page": ""
+    }
+  },
+  "_id": "6nyegBzZSu6OytNX",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/drakpotion.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "item",
+      "magical": true
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785098589508,
+    "modifiedTime": 1785098589508,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6nyegBzZSu6OytNX"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Runas Duntofflor",
+  "type": "utrustning",
+  "system": {
+    "category": "kladsel",
+    "quantity": 1,
+    "weight": 0.5,
+    "price": 40,
+    "priceUnit": "gm",
+    "priceNote": "",
+    "equipped": false,
+    "skillModifiers": [
+      { "skillKey": "smyga", "value": 5 }
+    ],
+    "chargesRemaining": 10,
+    "activationSeconds": 1800,
+    "consumable": false,
+    "effectChanges": [],
+    "description": "<p>Ett par tovade fårskinnstofflor, sömmade med runtråd av en alvsk gycklare vid namn Runa. Så länge de bärs dämpas varje steg till nästan ingenting — men runtråden är tunn och sliten, och magin klingar av en liten stund efter att man dragit på sig dem.</p><p><em>Testföremål — backlogpost 7/36: bekräftar utrustningsburna färdighetsmodifierare, laddningsräkning och tidsbegränsad aktivering. Ej bokkällat.</em></p>",
+    "source": {
+      "book": "eget",
+      "page": ""
+    }
+  },
+  "_id": "lLRsFutHdHfHtWeE",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/runas-duntofflor.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "item",
+      "magical": true
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785098589508,
+    "modifiedTime": 1785098589508,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!lLRsFutHdHfHtWeE"
+}

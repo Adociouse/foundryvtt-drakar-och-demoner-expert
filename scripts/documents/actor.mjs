@@ -7,7 +7,11 @@ export default class DoDEActor extends Actor {
     if (!item) return;
     // `item` följer med så slagkortet kan erbjuda SL ett EP-streck vid lyckat
     // slag — REG s.45, se helpers/ep.mjs.
-    return rollFV({ actor: this, label: item.name, fv: item.system.total, item });
+    // Färdighetsmodifierare (backlogpost 7/36) läggs på HÄR, inte i
+    // item.system.total — de är en separat, live-summerad lager från
+    // formaga-/utrustningsitem, se actor-character.mjs#prepareDerivedData.
+    const modifier = this.system.skillModifierTotals?.[item.system.skillKey] ?? 0;
+    return rollFV({ actor: this, label: item.name, fv: item.system.total + modifier, item });
   }
 
   /** @param {number} index Index i NPC:ns system.attacks-array. */
@@ -107,6 +111,67 @@ export default class DoDEActor extends Actor {
       [`flags.${game.system.id}.source`]: "spell",
       [`flags.${game.system.id}.spellName`]: item.name
     }]);
+  }
+
+  /**
+   * Konsumerar ett engångsföremål (`system.consumable`, t.ex. en drickbar
+   * drog) — backlogpost 7, testat med "Drakpotion". Samma mönster som
+   * applySpellEffect ovan: en tillfällig, aktörsägd ActiveEffect med
+   * `duration.seconds`, som v14-kärnan redan självmant slutar tillämpa när
+   * tiden går (DESIGN_DECISIONS.md §6, "v14-kärnan slutar tillämpa utgångna
+   * ActiveEffects själv") — ingen egen nedräkningskod behövs.
+   *
+   * En `key` i `effectChanges` som innehåller platshållaren "$CHOICE" gör att
+   * spelaren får välja grundegenskap i en dialog innan effekten skapas (RP:s
+   * "valfri egenskap"-formulering, t.ex. Drakpotion +10 på valfri
+   * grundegenskap). ⚠ Detta är en RIKTIG ActiveEffect (till skillnad från
+   * skillModifiers, se item-fardighet.mjs) eftersom attribut ÄR aktörens egna
+   * schemafält — AE-blockeringen som backlogpost 7 löser gäller bara
+   * embeddade Items.
+   *
+   * @param {Item} item En "utrustning"-item med `system.consumable`.
+   */
+  async consumeItem(item) {
+    if (!item || item.system.consumable !== true) return;
+    let changes = (item.system.effectChanges ?? []).filter((c) => c.key);
+    if (!changes.length) {
+      ui.notifications.warn(`${item.name} har ingen konsumtionseffekt definierad.`);
+      return;
+    }
+
+    if (changes.some((c) => c.key.includes("$CHOICE"))) {
+      const options = Object.entries(CONFIG.DODE.attributes)
+        .map(([key, label]) => `<option value="${key}">${game.i18n.localize(label)}</option>`)
+        .join("");
+      const result = await foundry.applications.api.DialogV2.input({
+        window: { title: `Konsumera ${item.name}` },
+        content: `
+          <div class="form-group">
+            <label>Grundegenskap</label>
+            <select name="attribute">${options}</select>
+          </div>`
+      });
+      if (!result) return; // avbrutet — föremålet förbrukas inte
+      changes = changes.map((c) => ({ ...c, key: c.key.replaceAll("$CHOICE", result.attribute) }));
+    }
+
+    await this.createEmbeddedDocuments("ActiveEffect", [{
+      name: item.name,
+      img: item.img,
+      changes: changes.map((c) => ({ key: c.key, mode: c.mode ?? 2, value: String(c.value) })),
+      duration: item.system.activationSeconds ? { seconds: item.system.activationSeconds } : {},
+      origin: item.uuid,
+      transfer: false,
+      disabled: false,
+      [`flags.${game.system.id}.source`]: "consumable",
+      [`flags.${game.system.id}.itemName`]: item.name
+    }]);
+
+    const remaining = item.system.chargesRemaining;
+    if (typeof remaining === "number") {
+      if (remaining <= 1) await item.delete();
+      else await item.update({ "system.chargesRemaining": remaining - 1 });
+    }
   }
 
   /**

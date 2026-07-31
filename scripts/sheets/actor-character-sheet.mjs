@@ -1,3 +1,5 @@
+import { needsChoice, choiceCount, resolveGrants, applyResolvedAbility } from "../helpers/special-ability-effects.mjs";
+
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { DialogV2 } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -20,6 +22,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       editItem: DoDECharacterSheet.#onEditItem,
       deleteItem: DoDECharacterSheet.#onDeleteItem,
       toggleEquipped: DoDECharacterSheet.#onToggleEquipped,
+      consumeItem: DoDECharacterSheet.#onConsumeItem,
       addAbility: DoDECharacterSheet.#onAddAbility,
       rollAbility: DoDECharacterSheet.#onRollAbility,
       deleteAbility: DoDECharacterSheet.#onDeleteAbility,
@@ -60,11 +63,22 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // getters och är svårt att lita på.
     context.skills = this.actor.items
       .filter((i) => i.type === "fardighet")
-      .map((i) => ({
-        id: i.id, name: i.name, system: i.system,
-        grantedBy: i.getFlag(game.system.id, "grantedBy"),
-        grantedReason: i.getFlag(game.system.id, "grantedReason")
-      }));
+      .map((i) => {
+        // Färdighetsmodifierare (backlogpost 7/36) — live-summerad från
+        // formaga-/utrustningsitem, se actor-character.mjs#prepareDerivedData.
+        // Separat lager från item.system.total (fv+bonus), aldrig skrivet dit.
+        const modifierSources = this.actor.system.skillModifierSources?.[i.system.skillKey] ?? [];
+        const modifier = this.actor.system.skillModifierTotals?.[i.system.skillKey] ?? 0;
+        return {
+          id: i.id, name: i.name, system: i.system,
+          grantedBy: i.getFlag(game.system.id, "grantedBy"),
+          grantedReason: i.getFlag(game.system.id, "grantedReason"),
+          modifier,
+          effectiveTotal: i.system.total + modifier,
+          modifierTooltip: modifierSources.map((s) => `${s.label}: +${s.value}`).join("\n"),
+          hasBonusOrModifier: !!(i.system.bonus || modifier)
+        };
+      });
     context.gear = this.actor.items
       .filter((i) => GEAR_TYPES.includes(i.type))
       .map((item) => ({
@@ -75,7 +89,10 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
         isUtrustning: item.type === "utrustning",
         // Utrustningsbara typer visar en av/på-växel som styr om föremålets
         // ActiveEffects appliceras — se DoDeActiveEffect.isGateOpen().
-        canEquip: item.type === "vapen" || item.type === "rustning" || item.type === "utrustning"
+        canEquip: item.type === "vapen" || item.type === "rustning" || item.type === "utrustning",
+        // Konsumtionsbara engångsföremål (backlogpost 7, "Drakpotion") — se
+        // actor.mjs#consumeItem.
+        isConsumable: item.type === "utrustning" && item.system.consumable === true
       }));
     // Förmåga-Item (bär transfer-AE:er, alltid aktiva). Separat från fritext-
     // arrayen system.specialAbilities.
@@ -514,6 +531,12 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (item) await item.update({ "system.equipped": !item.system.equipped });
   }
 
+  /** Backlogpost 7 — se actor.mjs#consumeItem. */
+  static async #onConsumeItem(event, target) {
+    const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
+    if (item) await this.actor.consumeItem(item);
+  }
+
   /**
    * `specialAbilities` är ett vanligt ArrayField på rollpersonens egen data,
    * inte embeddade Items (till skillnad från färdigheter/utrustning) — lägg
@@ -522,7 +545,11 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    */
   static async #onAddAbility() {
     const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
-    current.push({ name: "", source: "", description: "" });
+    // slotId — se schemakommentaren i actor-character.mjs. En fritextrad utan
+    // känd effekt behöver ingen formaga-koppling, men id:t sätts ändå direkt
+    // så en efterhandsredigering (om detta någonsin matchas mot en effekt)
+    // aldrig kan kollidera med en annan rad.
+    current.push({ name: "", source: "", description: "", slotId: foundry.utils.randomID() });
     await this.actor.update({ "system.specialAbilities": current });
   }
 
@@ -532,6 +559,14 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * lägger till en HELT NY rad direkt istället för att fylla i en befintlig
    * tom slot (den här sheeten har inga fasta "slots" kopplade till nivå som
    * wizardens formagor-steg har). Fritextfälten förblir redigerbara efteråt.
+   *
+   * Backlogpost 7/36: om den framslagna raden har en mekanisk effekt som
+   * kräver spelarval (se needsChoice i special-ability-effects.mjs) frågas
+   * det i en andra dialog EFTER slaget — vi vet inte om ett val behövs förrän
+   * tärningen fallit. Effekten appliceras sedan direkt mot DEN RIKTIGA
+   * aktören (skapar/uppdaterar ett `formaga`-item), till skillnad från
+   * guidens motsvarighet som bara skriver till wizard-state tills spelaren
+   * sparar.
    */
   static async #onRollAbility() {
     const result = await foundry.applications.api.DialogV2.input({
@@ -552,22 +587,56 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       flavor: game.i18n.localize("DODE.Ability.Roll")
     });
     const entry = CONFIG.DODE.rollSpecialAbility(roll.total);
+    const effect = entry?.effect ?? null;
 
+    let choices = [];
+    if (needsChoice(effect)) {
+      const count = choiceCount(effect);
+      const fields = Array.from({ length: count }, (_, i) => `
+        <div class="form-group">
+          <label>${count > 1 ? `Val ${i + 1}` : "Val"}</label>
+          <input type="text" name="choice${i}" />
+        </div>`).join("");
+      const choiceResult = await foundry.applications.api.DialogV2.input({
+        window: { title: entry.name || "Välj" },
+        content: `<p>${entry.description}</p>${fields}`
+      });
+      if (!choiceResult) return; // avbrutet — förmågan läggs INTE till halvfärdig
+      choices = Array.from({ length: count }, (_, i) => choiceResult[`choice${i}`] ?? "");
+    }
+
+    const slotId = foundry.utils.randomID();
     const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
     current.push({
       name: entry?.name || `Förmåga (${roll.total})`,
       source: "bas", // se schemakommentaren i actor-character.mjs — "bas" = grundboken (RP s.25-27)
-      description: entry?.description ?? ""
+      description: entry?.description ?? "",
+      slotId
     });
     await this.actor.update({ "system.specialAbilities": current });
+
+    if (effect) {
+      const resolved = resolveGrants(effect, choices);
+      await applyResolvedAbility(this.actor, slotId, entry.name, effect, resolved);
+    }
   }
 
   static async #onDeleteAbility(event, target) {
     const index = Number(target.closest("[data-index]")?.dataset.index);
     if (Number.isNaN(index)) return;
     const current = this.actor.system.specialAbilities.map((a) => ({ ...a }));
-    current.splice(index, 1);
+    const [removed] = current.splice(index, 1);
     await this.actor.update({ "system.specialAbilities": current });
+
+    // Backlogpost 7/36 — en borttagen rad kan äga ett formaga-item (den
+    // mekaniska effekten). Utan städning blir det föräldralöst: den fortsätter
+    // ge sin skillModifiers-bonus trots att raden den kom från är borta.
+    if (removed?.slotId) {
+      const grant = this.actor.items.find(
+        (i) => i.type === "formaga" && i.getFlag(game.system.id, "specialAbilitySlot") === removed.slotId
+      );
+      await grant?.delete();
+    }
   }
 
   /**

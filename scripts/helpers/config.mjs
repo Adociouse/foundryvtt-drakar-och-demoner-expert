@@ -342,25 +342,49 @@ DODE.abilityRollsByNiva = {
 // tabellkonvention, inte en bekräftad regel.
 // OBS: detta är INTE hjälteförmågor (HH s.20/46-48, se kommentaren ovan) — den
 // mekaniken är en separat, ännu obyggd post-creation-funktion.
+// ⚠ `effect` (backlogpost 7/36, tillagd 2026-07-31) finns bara på de ~15 rader
+// som ger ett konkret färdighetsvärde — resten (CL-bonusar, attribut-/motstånds-
+// /stridsändringar, ren text) är medvetet oförändrade, se DESIGN_DECISIONS.md
+// backlog 36. Formerna: "skillBonus" lägger på ett värde (fast skill-lista via
+// `skills`, eller spelarval via `pool`: "sekundar"/"hantverk"), "grantSecondary"
+// SÄTTER ett absolut FV på en färdighet spelaren annars inte får ha (RP s.28-29,
+// 13b) — `pool:"sprak"` med `labels` fanar ut EN spelartyped choice till FLERA
+// färdigheter (Tala/Läsa-skriva). "yrkesUpgrade" skapar N valda sekundära som
+// yrkesfärdighetsnivå i stället för sekundärnivå. "costTierOverride" sänker
+// grundkostnaden i DODE.skillCost (se dess 4:e parameter). `count` (default 1)
+// är hur många spelarval effekten kräver. Nycklarna slås upp/skapas av
+// special-ability-effects.mjs, inte här.
 DODE.specialAbilitiesTable = [
-  { range: [3, 4], name: "", description: "+1 på FV på valfri sekundär färdighet (utom förbjudna)" },
-  { range: [5, 6], name: "Sjöfararbakgrund", description: "+2 FV i Sjökunnighet och Navigera" },
-  { range: [7, 8], name: "Starka vrister", description: "+3 på FV i Hoppa" },
-  { range: [9, 10], name: "Bråkig uppväxt", description: "+3 på FV i Slagsmål" },
-  { range: [11, 12], name: "Hantverkarbakgrund", description: "+3 FV i valfri hantverksfärdighet" },
-  { range: [13, 14], name: "Smidig kropp", description: "+3 FV i Akrobatik" },
-  { range: [15, 16], name: "Köpmannabakgrund", description: "+3 FV i Värdera" },
-  { range: [17, 18], name: "God koordinationsförmåga", description: "+3 FV i Två vapen" },
-  { range: [19, 20], name: "Hobbyist", description: "FV 3 i valfri sekundär färdighet du kan lära från början" },
+  { range: [3, 4], name: "", description: "+1 på FV på valfri sekundär färdighet (utom förbjudna)",
+    effect: { type: "skillBonus", pool: "sekundar", value: 1 } },
+  { range: [5, 6], name: "Sjöfararbakgrund", description: "+2 FV i Sjökunnighet och Navigera",
+    effect: { type: "skillBonus", skills: ["sjokunnighet", "navigation"], value: 2 } },
+  { range: [7, 8], name: "Starka vrister", description: "+3 på FV i Hoppa",
+    effect: { type: "skillBonus", skills: ["hoppa"], value: 3 } },
+  { range: [9, 10], name: "Bråkig uppväxt", description: "+3 på FV i Slagsmål",
+    effect: { type: "skillBonus", skills: ["slagsmal"], value: 3 } },
+  { range: [11, 12], name: "Hantverkarbakgrund", description: "+3 FV i valfri hantverksfärdighet",
+    effect: { type: "skillBonus", pool: "hantverk", value: 3, namePrefix: "Hantverk: " } },
+  { range: [13, 14], name: "Smidig kropp", description: "+3 FV i Akrobatik",
+    effect: { type: "skillBonus", skills: ["akrobatik"], value: 3 } },
+  { range: [15, 16], name: "Köpmannabakgrund", description: "+3 FV i Värdera",
+    effect: { type: "skillBonus", skills: ["vardera"], value: 3 } },
+  { range: [17, 18], name: "God koordinationsförmåga", description: "+3 FV i Två vapen",
+    effect: { type: "skillBonus", skills: ["tva-vapen"], value: 3 } },
+  { range: [19, 20], name: "Hobbyist", description: "FV 3 i valfri sekundär färdighet du kan lära från början",
+    effect: { type: "grantSecondary", pool: "sekundar", fv: 3 } },
   { range: [21, 22], name: "Starka nypor", description: "Alltid +3 på CL i Klättra" },
   { range: [23, 24], name: "Mottagligt medium", description: "Alltid +5 CL i Magisk kanalisering (passiv)" },
   { range: [25, 26], name: "Hängiven student", description: "+2 på valfritt FV; om FV-begränsning finns höjs den med 2" },
   { range: [27, 28], name: "Övertygande tonfall", description: "Alltid +3 CL i Övertala och Muta" },
-  { range: [29, 30], name: "Sjätte sinne", description: "+1 på dina FV i Upptäcka fara och Finna dolda ting" },
+  { range: [29, 30], name: "Sjätte sinne", description: "+1 på dina FV i Upptäcka fara och Finna dolda ting",
+    effect: { type: "skillBonus", skills: ["upptacka-fara", "finna-dolda-ting"], value: 1 } },
   { range: [31, 32], name: "Stirrande blick", description: "Alltid +5 CL i Hypnotisera" },
   { range: [33, 34], name: "Magikänsla", description: "Alltid +5 CL i Känna magi" },
-  { range: [35, 36], name: "Gott språksinne", description: "Automatiskt FV 20 (B5) i Tala och Läsa/Skriva ett valfritt språk" },
-  { range: [37, 38], name: "Stort kunskapsområde", description: "Två ytterligare valfria sekundära färdigheter som yrkesfärdigheter" },
+  { range: [35, 36], name: "Gott språksinne", description: "Automatiskt FV 20 (B5) i Tala och Läsa/Skriva ett valfritt språk",
+    effect: { type: "grantSecondary", pool: "sprak", fv: 20, labels: ["Tala", "Läsa/skriva"] } },
+  { range: [37, 38], name: "Stort kunskapsområde", description: "Två ytterligare valfria sekundära färdigheter som yrkesfärdigheter",
+    effect: { type: "yrkesUpgrade", count: 2, pool: "sekundar" } },
   { range: [39, 40], name: "God bågskytt", description: "Alla räckvidder för projektilvapen ökas med 25%" },
   { range: [41, 42], name: "Absolut gehör", description: "Grundkostnaden för Spela instrument och Sjunga är alltid 1" },
   { range: [43, 44], name: "Precisionssinne", description: "+1 CL på alla vapenfärdigheter" },
@@ -369,15 +393,18 @@ DODE.specialAbilitiesTable = [
   { range: [49, 51], name: "Absolut ögonmått", description: "Bedöma avstånd med 5% felmarginal" },
   { range: [52, 54], name: "Mycket uppmärksam", description: "Alltid +2 CL i Finna dolda ting och Upptäcka fara" },
   { range: [55, 55], name: "Blixtsnabba reflexer", description: "+3 på alla initiativslag" },
-  { range: [56, 56], name: "Bärsärk", description: "+5 på ditt FV i Bärsärkagång" },
+  { range: [56, 56], name: "Bärsärk", description: "+5 på ditt FV i Bärsärkagång",
+    effect: { type: "skillBonus", skills: ["barsarkagang"], value: 5 } },
   { range: [57, 57], name: "Gott balanssinne", description: "+5 på SMI vid balansakter och landning efter fall" },
-  { range: [58, 58], name: "Hästarnas herre", description: "+10 på FV i Rida; kan aldrig bli avkastad (men kan trilla av)" },
+  { range: [58, 58], name: "Hästarnas herre", description: "+10 på FV i Rida; kan aldrig bli avkastad (men kan trilla av)",
+    effect: { type: "skillBonus", skills: ["rida"], value: 10 } },
   { range: [59, 59], name: "Ambidextriös", description: "Se rubriken \"Svärdshand\"" },
   { range: [60, 60], name: "Djurvän", description: "Blir aldrig angripen av vanliga djur" },
   { range: [61, 61], name: "Turgubbe", description: "Kan alltid modifiera CL med +1 genom att spendera 1 PSY-poäng" },
   { range: [62, 62], name: "Magisk empati", description: "Med PSY kan du övervinna effektgrader lagrade i magiska föremål och identifiera besvärjelser" },
   { range: [63, 63], name: "Gudarnas gunstling", description: "Varje gång dina KP når noll: 25% chans att en gud griper in och återställer alla KP. Kritiska skador kan ej läkas på detta sätt" },
-  { range: [64, 64], name: "Lättlärd", description: "Grundkostnaden för sekundära färdigheter minskas till 4" },
+  { range: [64, 64], name: "Lättlärd", description: "Grundkostnaden för sekundära färdigheter minskas till 4",
+    effect: { type: "costTierOverride", tier: "sekundar", base: 4 } },
   { range: [65, 65], name: "Extremt smärttålig", description: "Totala KP multipliceras med 1,5 (ändrar även träffområdenas KP)" },
   { range: [66, 66], name: "Snabbslående", description: "Slår alltid först i varje SR. Vid möte med annan med denna förmåga: normalt initiativslag" },
   { range: [67, 67], name: "Baneman", description: "Svurit att bekämpa en speciell ras/folkslag; +5 CL vid alla attacker mot denna" },
@@ -631,11 +658,27 @@ DODE.costTiers = {
 // (primär) FV 4→10 ska ge 12 EP (PLAN_WIZARD_V2.md Fas 7, testat nedan).
 DODE.skillCostTierBase = { primar: 2, yrkesfardighet: 3, sekundar: 5 };
 DODE.skillCostCumulative = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 18, 21, 24, 27, 31, 35, 39, 44];
-DODE.skillCost = function (costTier, fromFv, toFv) {
-  const base = DODE.skillCostTierBase[costTier] ?? DODE.skillCostTierBase.sekundar;
+// `baseOverride` (backlogpost 36, förmågan "Lättlärd") ersätter grundkostnaden
+// för DEN HÄR aktören/beräkningen utan att röra DODE.skillCostTierBase globalt
+// — se special-ability-effects.mjs för hur en costTierOverride-effekt hittas
+// och skickas in här (training.mjs#describeRow, wizardens #skillPreview).
+DODE.skillCost = function (costTier, fromFv, toFv, baseOverride) {
+  const base = baseOverride ?? DODE.skillCostTierBase[costTier] ?? DODE.skillCostTierBase.sekundar;
   const from = DODE.skillCostCumulative[fromFv] ?? DODE.skillCostCumulative.at(-1);
   const to = DODE.skillCostCumulative[toFv] ?? DODE.skillCostCumulative.at(-1);
   return base * (to - from);
+};
+
+// Läser av en formaga-items costTierOverride-effekt (Lättlärd) för en given
+// costTier — DODE.skillCost's 4:e parameter. Delad helper så training.mjs och
+// wizardens kostnadsberäkning inte kan komma i otakt om logiken ändras.
+DODE.skillCostOverrideFor = function (actor, costTier) {
+  const formagor = actor?.items?.filter?.((i) => i.type === "formaga") ?? [];
+  for (const item of formagor) {
+    const eff = item.getFlag?.(game.system.id, "effect");
+    if (eff?.type === "costTierOverride" && eff.tier === costTier) return eff.base;
+  }
+  return undefined;
 };
 
 // EP-kostnad för magi — MAG s.13. Skiljer sig från DODE.skillCost på tre sätt

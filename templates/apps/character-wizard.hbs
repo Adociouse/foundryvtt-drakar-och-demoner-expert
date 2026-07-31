@@ -207,8 +207,34 @@
         <label>Beskrivning
           <input type="text" data-ability-index="{{i}}" data-ability-field="description" value="{{slot.description}}" placeholder="Valfritt" />
         </label>
+        {{#if slot.needsChoiceCount}}
+          {{!-- Effekten kräver spelarval (backlogpost 7/36) — t.ex. Hobbyists
+                "valfri sekundär färdighet". Fritext, listan är bara hjälp,
+                samma princip som yrkesfärdighetsstegets valfria platser. --}}
+          <div class="wizard-ability-choices">
+            {{#each slot.choiceRows as |choice|}}
+              {{!-- ⚠ `slot`/`i` är block-parametrar (`as |slot i|` två steg upp),
+                    INTE vanliga kontextfält — `../slot`/`../i` letar efter en
+                    egenskap på FÖRÄLDERKONTEXTEN och hittar ingenting (tomt
+                    attribut, upptäckt i liveverifiering 2026-07-31).
+                    Block-parametrar är lexikalt synliga rakt igenom nästlade
+                    block utan `../` — samma fälla gäller `slot.choicePool`. --}}
+              <label>Val {{#if (gt slot.needsChoiceCount 1)}}{{choice.row}}{{/if}}
+                <input type="text"
+                  {{#if (eq slot.choicePool "hantverk")}}placeholder="Hantverkstyp, t.ex. Smide"
+                  {{else if (eq slot.choicePool "sprak")}}placeholder="Språk, t.ex. Alvspråk"
+                  {{else}}list="dode-secondary-skill-suggestions" placeholder="Sekundär färdighet"{{/if}}
+                  data-ability-choice-index="{{i}}" data-ability-choice-slot="{{choice.row}}"
+                  value="{{choice.value}}" />
+              </label>
+            {{/each}}
+          </div>
+        {{/if}}
       </div>
     {{/each}}
+    <datalist id="dode-secondary-skill-suggestions">
+      {{#each secondarySkillSuggestions as |s|}}<option value="{{s}}"></option>{{/each}}
+    </datalist>
   </section>
   {{/if}}
 

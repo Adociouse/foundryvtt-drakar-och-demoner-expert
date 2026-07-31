@@ -9,13 +9,21 @@ const fields = foundry.data.fields;
  * Bas/bonus/total-mönster (samma som attributen, se actor-character.mjs) — `fv`
  * är det EP-köpta grundvärdet, `bonus` är ett manuellt GM/spelar-redigerbart
  * fritextfält (item-sheeten), `total` (= fv + bonus) är vad `rollSkill()`
- * faktiskt slår mot. ⚠ Detta är BARA det platta fältmönstret, inte det fulla
- * "Skill Modifier System" (automatiska ras-/yrkes-/förmågebaserade modifierare,
- * PLAN_WIZARD_V2.md rad 604+/§3-backlogpost 7) — den delen kräver ett separat
- * arkitekturbeslut (AE-changes kan inte rikta in sig på ett namngivet embeddat
- * Item hos aktören, bara på aktörens egna schemafält, så ras-/yrkesförmågor kan
- * inte idag applicera en färdighetsbonus via samma transfer-AE-mekanism som
- * attributen använder). `bonus` här är alltså manuell, inte AE-driven.
+ * faktiskt slår mot.
+ *
+ * ⚠ **Backlogpost 7/36 löst 2026-07-31 — men INTE genom ett nytt fält här.**
+ * "Skill Modifier System" (automatiska ras-/yrkes-/förmåge-/utrustningsbaserade
+ * bonusar) var blockerat eftersom en transfer-AE:s `key` bara kan rikta in sig
+ * på aktörens egna schemafält, aldrig ett namngivet embeddat Item. Lösningen är
+ * INTE att göra AE-changes kan träffa den här itemtypen — det går fortfarande
+ * inte. I stället bär KÄLLitemet (item-formaga.mjs `skillModifiers`, samma fält
+ * på item-utrustning.mjs för utrustning) en ren datalista, och
+ * actor-character.mjs#prepareDerivedData summerar den LIVE varje omräkning till
+ * `actor.system.skillModifierTotals[skillKey]` — helt utanför AE-pipelinen.
+ * `fardighet.total` (fv+bonus) rör sig ALDRIG av detta; konsumenter (rollSkill,
+ * arkets färdighetstabell) lägger på `skillModifierTotals` separat. Se
+ * `special-ability-effects.mjs` för hur ett förmågeslag blir ett `formaga`-item
+ * med rätt `skillModifiers`, och DESIGN_DECISIONS.md backlog 7/36.
  */
 export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
   static defineSchema() {

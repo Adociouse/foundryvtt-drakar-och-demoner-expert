@@ -32,13 +32,16 @@ export default class DoDETrainingApp extends DoDETrainingBase {
     const cappedOut = cap !== null && fv >= cap;
     const attrLabel = item.system.attribute.toUpperCase();
     const attrValue = this.actor.system.attributes?.[item.system.attribute]?.total ?? 0;
+    // Lättlärd (backlogpost 36) — sänker sekundär grundkostnad 5→4 för denna
+    // aktör. Se CONFIG.DODE.skillCostOverrideFor.
+    const baseOverride = CONFIG.DODE.skillCostOverrideFor(this.actor, item.system.costTier);
 
     return {
       ...this.buildRow({
         item,
         label: item.name,
         current: fv,
-        cost: CONFIG.DODE.skillCost(item.system.costTier, fv, fv + 1),
+        cost: CONFIG.DODE.skillCost(item.system.costTier, fv, fv + 1, baseOverride),
         own: item.system.ep?.available ?? 0,
         canUseOwn: true,
         valueField: "system.fv",
