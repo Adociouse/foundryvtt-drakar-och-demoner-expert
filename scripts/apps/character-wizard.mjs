@@ -1506,15 +1506,46 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    */
   static async #onRollHjaltedadCount() {
     const countRoll = await new Roll("1d6").evaluate();
-    await ChatMessage.create({
+    const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
       flavor: "Hjältedåd (HH s.6-7) — hur många gånger får du slå?",
       rolls: [countRoll],
       sound: CONFIG.sounds.dice
     });
+    // Johan 2026-08-02: Dice So Nice tar ~2s att landa, men resultatet syntes
+    // i guiden direkt när ChatMessage.create() löste ut — INTE när tärningen
+    // faktiskt slutat rulla, eftersom DSN:s animation körs asynkront vid sidan
+    // om chattkortets skapande, inte inuti det await:et. `this.render()` (som
+    // avslöjar "du fick N" och nästa knapp) väntar nu på
+    // `waitFor3DAnimationByMessageID` — se #waitForDiceAnimation.
+    await this.#waitForDiceAnimation(message);
     this.state.hjaltedad = { rollCount: countRoll.total, rolls: [], bonusBP: 0, bonusHP: 0 };
     this.state.hjaltedadAbilities = [];
     this.render();
+  }
+
+  /**
+   * Väntar in Dice So Nice-animationen för ett specifikt chattkort innan
+   * anroparen avslöjar resultatet i UI:t (se #onRollHjaltedadCount/
+   * #onRollHjaltedad) — annars känns det som att texten dyker upp FÖRE
+   * tärningen landat, eftersom `ChatMessage.create()` löser ut så fort
+   * meddelandet är skapat i databasen, inte när DSN:s ~2s-animation är klar.
+   * No-op om DSN inte är installerat (`game.dice3d` saknas då helt).
+   *
+   * ⚠ Kapslad i en 4s timeout (`Promise.race`) — bekräftat vid liveverifiering
+   * (2026-08-02) att `waitFor3DAnimationByMessageID` ALDRIG löser ut om fliken
+   * är dold (`document.hidden`), eftersom DSN:s Three.js-renderloop är
+   * bunden till `requestAnimationFrame`, som webbläsaren pausar helt för
+   * bakgrundsflikar. Utan timeouten hade guiden kunnat fastna permanent om
+   * spelaren bytte flik mitt i ett slag — en riktig risk, inte bara ett
+   * testartefakt.
+   */
+  async #waitForDiceAnimation(message) {
+    if (!game.dice3d || !message?.id) return;
+    await Promise.race([
+      game.dice3d.waitFor3DAnimationByMessageID(message.id),
+      new Promise((resolve) => setTimeout(resolve, 4000))
+    ]);
   }
 
   /**
@@ -1554,6 +1585,20 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       bonusHP += rowHP;
       rolls.push({ roll: result, name: row.name, description: row.description, bonusBP: rowBP, bonusHP: rowHP, notes: row.notes });
     }
+    const message = await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
+      flavor: `Hjältedåd — resultat (${count} slag)`,
+      content: `<div class="dode-chat-card"><ul>${rolls.map((r) =>
+        `<li><strong>${r.name}</strong> (${r.roll}): +${r.bonusBP} BP, +${r.bonusHP} KP${r.notes ? ` — ${r.notes}` : ""}</li>`
+      ).join("")}</ul></div>`,
+      rolls: [pool],
+      sound: CONFIG.sounds.dice
+    });
+    // Se #waitForDiceAnimation — pool-tärningarna (N stycken 1T20) tar sin
+    // tid att landa i DSN, och state sätts inte förrän animationen är klar
+    // så att resultatlistan (med sin fulla boktext) inte dyker upp innan
+    // spelaren sett vilka tal tärningarna faktiskt visar.
+    await this.#waitForDiceAnimation(message);
     this.state.hjaltedad = { rollCount: count, rolls, bonusBP, bonusHP };
     // Ren text, INGA HTML-taggar — den här beskrivningen visas och redigeras
     // som vanlig text i en <textarea> på rollformuläret (character-sheet.hbs),
@@ -1565,15 +1610,6 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       description: `${r.description}${r.notes ? ` (${r.notes})` : ""} +${r.bonusBP} BP, +${r.bonusHP} KP.`,
       slotId: foundry.utils.randomID()
     }));
-    await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
-      flavor: `Hjältedåd — resultat (${count} slag)`,
-      content: `<div class="dode-chat-card"><ul>${rolls.map((r) =>
-        `<li><strong>${r.name}</strong> (${r.roll}): +${r.bonusBP} BP, +${r.bonusHP} KP${r.notes ? ` — ${r.notes}` : ""}</li>`
-      ).join("")}</ul></div>`,
-      rolls: [pool],
-      sound: CONFIG.sounds.dice
-    });
     this.render();
   }
 
