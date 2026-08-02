@@ -579,12 +579,27 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Lönnmördare/Bard) — generellt på VÄRDET, inte hårdkodat mot "alv", så
     // ett framtida Svartfolk-baskön med `revealsRaceGroup: "svartfolk"`
     // slotar in utan kodändring här, bara nytt kompendieinnehåll.
-    const revealedRaceGroup = selectedRace?.getFlag(game.system.id, "revealsRaceGroup") ?? null;
+    // ⚠ RÄTTAT 2026-08-02 (Johan): gruppen försvann så fort spelaren klickade
+    // en SPECIFIK undergruppsmedlem (t.ex. Mörkeralv) i stället för bara
+    // föräldern (Alv) — `selectedRace` blev då lineage-itemet, som inte SJÄLVT
+    // bär `revealsRaceGroup`-flaggan (bara Alv gör det), så gruppen stängdes
+    // mitt under valet. Faller nu tillbaka på det valda itemets EGEN
+    // `raceGroup`-flagga (samma flagga som `isElfLineage` ovan läser) om det
+    // inte är en avslöjare självt — en gruppmedlem håller alltså sin egen
+    // grupp öppen, inte bara föräldern.
+    const revealedRaceGroup = selectedRace?.getFlag(game.system.id, "revealsRaceGroup")
+      ?? selectedRace?.getFlag(game.system.id, "raceGroup")
+      ?? null;
     context.raceGroups = [
       { label: "Grundraser", races: context.races.filter((r) => !isElfLineage(r)) },
       { label: "Alvsläkten (Alver s.22)", races: context.races.filter(isElfLineage), group: "alvslakte" }
     ].filter((g) => g.races.length && (!g.group || g.group === revealedRaceGroup));
-    const revealedProfessionGroup = selectedProfession?.getFlag(game.system.id, "revealsProfessionGroup") ?? null;
+    // Samma rättelse som ovan, för yrkesspecialiseringar: en vald specialisering
+    // (t.ex. Riddare) bär inte `revealsProfessionGroup` själv — bara basyrket
+    // (Krigare) gör det — men BÄR sitt eget `system.baseProfession` ("krigare"),
+    // som håller gruppen öppen på samma sätt.
+    const revealedProfessionGroup = selectedProfession?.getFlag(game.system.id, "revealsProfessionGroup")
+      ?? (selectedProfession?.system?.baseProfession || null);
     const PROFESSION_GROUPS = [
       ["", "Grundyrken"],
       ["krigare", "Krigarspecialiseringar (KH s.4-9)"],
