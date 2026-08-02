@@ -10,7 +10,11 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static DEFAULT_OPTIONS = {
     tag: "form",
     classes: ["dode", "sheet", "actor", "character"],
-    position: { width: 680, height: 800 },
+    // Johan 2026-08-02: 680×800 kändes för litet i praktiken (särskilt med
+    // förmågeradernas nya <textarea>, se character-sheet.hbs) — höjt till
+    // 900×1000. `resizable:true` gör detta bara till ett bekvämare default,
+    // inte en spärr.
+    position: { width: 900, height: 1000 },
     window: { resizable: true },
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: "form" }],
     actions: {

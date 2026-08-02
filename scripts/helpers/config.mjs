@@ -298,39 +298,52 @@ DODE.hjaltedadRollCount = "1T6";
 
 // Source: HH p.6-7, Hjältedådstabell (1T20)
 // Hero creation: roll 1T6 to determine how many times to roll on this table.
-// Each roll adds the listed bonus BP (and HP) to the hero's base 125 BP.
-// Player may choose freely instead of rolling (HH p.6: "eller välja det man tycker passar bäst").
-// `description` (tillagd 2026-08-02, Johans begäran) är radens fulla flavour-
-// text ur boken, transkriberad direkt ur PDF:en (s.7) — utan den avslutande
-// BP/HP-meningen, som visas separat via bonusBP/bonusHP. Syns i guidens
+// Each roll adds the listed bonus BP AND bonus hjältepoäng to the hero's base
+// 125 BP. Player may choose freely instead of rolling (HH p.6: "eller välja
+// det man tycker passar bäst").
+//
+// ⚠ RÄTTAT 2026-08-02 (Johan): tabellens andra tal är HJÄLTEPOÄNG (HH s.20/
+// 46-48 — spenderas post-creation på ett 1T20-slag mot en separat 18-radig
+// hjälteförmågetabell, inte byggd än, se DESIGN_DECISIONS.md), INTE kroppspoäng.
+// Boken skriver ut kolumnen som "HP" i de flesta raderna men som fulla ordet
+// "hjältepoäng" i två (Torneringsseger, Segerherre) — SAMMA storhet, bara
+// inkonsekvent förkortad i originaltexten (H·jälte-P·oäng, inte "hit points").
+// Fältet hette tidigare `bonusHP` och laddades felaktigt rakt in i
+// `system.hp.max` (kroppspoäng) — spelets EGEN förkortning för kroppspoäng är
+// `KP`, aldrig `HP`, vilket var den tydliga tråden till felet. Döpt om till
+// `bonusHjaltepoang` och kopplat till det nya `system.hjaltepoang`-fältet
+// (ackumulerad pool, se actor-character.mjs) i stället för `hp.max`.
+// `description` (tillagd 2026-08-02) är radens fulla flavour-text ur boken,
+// transkriberad direkt ur PDF:en (s.7) — utan den avslutande BP/hjältepoäng-
+// meningen, som visas separat via bonusBP/bonusHjaltepoang. Syns i guidens
 // resultatlista OCH på den skapade rollpersonens rollformulär (se
 // #onRollHjaltedad/state.hjaltedadAbilities i character-wizard.mjs).
 DODE.hjaltedadTable = [
-  { range: [1,3],   name: "Torneringsseger",    bonusBP: 15,        bonusHP: 0,   notes: "5 hjältepoäng",
+  { range: [1,3],   name: "Torneringsseger",    bonusBP: 15,        bonusHjaltepoang: 5,        notes: "",
     description: "Hjälten har vunnit minst en stor tornering (över 500 deltagare)." },
-  { range: [4,5],   name: "Duell",              bonusBP: "1T10+10", bonusHP: "1T10", notes: "",
+  { range: [4,5],   name: "Duell",              bonusBP: "1T10+10", bonusHjaltepoang: "1T10",   notes: "",
     description: "Hjälten har besegrat en annan hjälte i duell någon gång under sin karriär. Kanske var det fiendernas härförare som han utmanade på envig eller en mäktig mörkerhjälte eller någon annan känd hjälte." },
-  { range: [6,7],   name: "Monsterbane",        bonusBP: "1T10+10", bonusHP: "1T10", notes: "",
+  { range: [6,7],   name: "Monsterbane",        bonusBP: "1T10+10", bonusHjaltepoang: "1T10",   notes: "",
     description: "Hjälten har under sin bana som äventyrare mött och nedkämpat ett fruktansvärt monster, dock inte någon unik varelse. Kanske en vampyr, varulv, ganska kraftig demon eller något liknande, men som ändå blivit vida känt. Förmodligen har hans hjältedåd gett honom ett epitet som Varulvsbane, Demondräparen, el. dyl." },
-  { range: [8,9],   name: "Korsfarare",         bonusBP: 20,        bonusHP: 10,  notes: "",
+  { range: [8,9],   name: "Korsfarare",         bonusBP: 20,        bonusHjaltepoang: 10,       notes: "",
     description: "Hjälten har lett styrkor som, eller har ensam, nedkämpat och bränt städer, tempel och borgar i främmande riken. Han är en krigsveteran med ett stort rykte och kommer att omnämnas i historieböckerna." },
-  { range: [10,11], name: "Upptäcktsresande",   bonusBP: 20,        bonusHP: 10,  notes: "",
+  { range: [10,11], name: "Upptäcktsresande",   bonusBP: 20,        bonusHjaltepoang: 10,       notes: "",
     description: "Hjälten har vid ett otal tillfällen varit på platser okända för den vanliga befolkningen. Det är mycket möjligt att han har upptäckt en ny kontinent eller ett nytt land. Kanske har han varit den förste att bestiga ett mytomspunnet berg eller forcera de mörka skogarna i öster." },
-  { range: [12,13], name: "Monsterbane (stor)", bonusBP: "1T20+10", bonusHP: "1T10+5", notes: "",
+  { range: [12,13], name: "Monsterbane (stor)", bonusBP: "1T20+10", bonusHjaltepoang: "1T10+5", notes: "",
     description: "Hjälten har stått öga mot öga med en av de farligaste varelser som finns och gått segrande ur kraftmätningen. Kanske var det en svart hämnare eller en mycket kraftfull demon." },
-  { range: [14,14], name: "Gravplundrare",      bonusBP: 20,        bonusHP: 10,  notes: "+10 Startkapital",
+  { range: [14,14], name: "Gravplundrare",      bonusBP: 20,        bonusHjaltepoang: 10,       notes: "+10 Startkapital",
     description: "Hjälten var den som lyckades ta sig in i en uråldrig konungagrav som alla trodde existerade enbart i legenderna (jfr. Tutanchamon). Där hittade han gott om guldmynt och annat som gjorde att han har kunnat leva gott sedan dess." },
-  { range: [15,15], name: "Vapenbärare",        bonusBP: 25,        bonusHP: 0,   notes: "Magiskt vapen",
+  { range: [15,15], name: "Vapenbärare",        bonusBP: 25,        bonusHjaltepoang: 0,        notes: "Magiskt vapen",
     description: "Hjälten är ägaren till ett mycket känt magiskt vapen eller annat mäktigt föremål. Vapnets historia och exakta krafter avgörs av SL i samråd med spelaren. Hur hjälten fått tag i vapnet varierar kanske genom duell eller på äventyr." },
-  { range: [16,16], name: "Rövare",             bonusBP: 20,        bonusHP: 10,  notes: "+10 Startkapital",
+  { range: [16,16], name: "Rövare",             bonusBP: 20,        bonusHjaltepoang: 10,       notes: "+10 Startkapital",
     description: "Hjälten lyckades ensam eller tillsammans med några kumpaner stjäla ett farligt monsters (drake eller liknande) skatt utan att döda monstret. Visserligen har detta gett dem en farlig fiende, men också ganska gott om pengar." },
-  { range: [17,17], name: "Segerherre",         bonusBP: 30,        bonusHP: 0,   notes: "15 hjältepoäng",
+  { range: [17,17], name: "Segerherre",         bonusBP: 30,        bonusHjaltepoang: 15,       notes: "",
     description: "Hjälten var ansvarig för att ett stort hot mot fosterlandet avvärjdes. Kanske gjorde han det genom att i lönndom sänka fiendens invasionsflotta eller lockade deras huvudstyrka i ett bakhåll." },
-  { range: [18,18], name: "Drakdödare",         bonusBP: 35,        bonusHP: 20,  notes: "",
+  { range: [18,18], name: "Drakdödare",         bonusBP: 35,        bonusHjaltepoang: 20,       notes: "",
     description: "Hjälten är en av de få personer i Drakar och Demoners värld som kan titulera sig ”drakdödare”, eftersom han, troligtvis ensam, lyckades nedgöra en drake, en av skapelsens härskare och väktare." },
-  { range: [19,19], name: "Räddaren i nöden",   bonusBP: 30,        bonusHP: 10,  notes: "",
+  { range: [19,19], name: "Räddaren i nöden",   bonusBP: 30,        bonusHjaltepoang: 10,       notes: "",
     description: "Någon gång under sin hjältebana har hjälten räddat kungen i sitt hemland eller någon annan extremt mäktig person undan döden, kanske prinsessan eller drottningen. Den vars liv hjälten räddade står i evig tacksamhetsskuld till honom." },
-  { range: [20,20], name: "SL Special",         bonusBP: 50,        bonusHP: 35,  notes: "SL bestämmer",
+  { range: [20,20], name: "SL Special",         bonusBP: 50,        bonusHjaltepoang: 35,       notes: "SL bestämmer",
     description: "SL får göra sitt bästa för att hitta på något extra heroiskt värt att nedteckna i rullorna." },
 ];
 

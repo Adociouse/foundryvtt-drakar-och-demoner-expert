@@ -85,6 +85,12 @@
       {{#if system.ep.bonusAvailable}}
         <span title="Fria bonuspoäng från spelledaren — inte bundna till någon färdighet">Fria EP: {{system.ep.bonusAvailable}}</span>
       {{/if}}
+      {{#if system.hjaltepoang}}
+        {{!-- HH s.6-7 (källan)/s.20+46-48 (användningen) — en egen valuta,
+              INTE kroppspoäng. Bara visning tills vidare, ingen spenderingsvy
+              byggd än (se DESIGN_DECISIONS.md backlog). --}}
+        <span title="Hjältepoäng (HH s.6-7/s.20/46-48) — spenderas på hjälteförmågor, ingen spenderingsvy byggd än">Hjältepoäng: {{system.hjaltepoang}}</span>
+      {{/if}}
     </div>
     {{!-- Börsen — vad rollpersonen faktiskt bär. Skild från startCapital, som
           är skapandeögonblickets siffra och aldrig minskar. --}}

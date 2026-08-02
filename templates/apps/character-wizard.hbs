@@ -79,7 +79,7 @@
     {{/if}}
     {{#if selectedNivaOption.isHero}}
       <div class="wizard-hjaltedad">
-        <p class="hint">Hjältedåd (HH s.6-7) ger bonus-BP och extra KP ovanpå den vanliga poolen — en tvåstegsraket: först 1T6 för att avgöra HUR MÅNGA gånger du får slå, sedan just så många 1T20 mot tabellen.</p>
+        <p class="hint">Hjältedåd (HH s.6-7) ger bonus-BP och hjältepoäng (en egen valuta, inte kroppspoäng) ovanpå den vanliga poolen — en tvåstegsraket: först 1T6 för att avgöra HUR MÅNGA gånger du får slå, sedan just så många 1T20 mot tabellen.</p>
 
         {{#unless hjaltedad.rollCount}}
           <button type="button" data-action="rollHjaltedadCount"><i class="fa-solid fa-dice-d6"></i> 1. Slå 1T6 — hur många hjältedåd?</button>
@@ -93,13 +93,13 @@
         {{/if}}
 
         {{#if hjaltedad.rolls.length}}
-          <p class="hint">{{hjaltedad.rollCount}} slag — totalt <strong>+{{hjaltedad.bonusBP}} BP</strong>, <strong>+{{hjaltedad.bonusHP}} KP</strong>. Sparas automatiskt som särskilda förmågor på rollformuläret.</p>
+          <p class="hint">{{hjaltedad.rollCount}} slag — totalt <strong>+{{hjaltedad.bonusBP}} BP</strong>, <strong>+{{hjaltedad.bonusHjaltepoang}} hjältepoäng</strong>. Sparas automatiskt som särskilda förmågor på rollformuläret.</p>
           <ul class="wizard-hjaltedad-results">
             {{#each hjaltedad.rolls as |r|}}
               <li>
                 <div class="wizard-hjaltedad-result-head">
                   <strong>{{r.roll}}: {{r.name}}</strong>
-                  <span>+{{r.bonusBP}} BP, +{{r.bonusHP}} KP</span>
+                  <span>+{{r.bonusBP}} BP, +{{r.bonusHjaltepoang}} hjältepoäng</span>
                 </div>
                 <p class="hint">{{r.description}}</p>
                 {{#if r.notes}}<p class="hint"><em>{{r.notes}} — inte automatiskt tillämpat, se anteckning på rollpersonen.</em></p>{{/if}}

@@ -177,11 +177,19 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       ),
       hp: new fields.SchemaField({
         value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
-        max: new fields.NumberField({ required: true, integer: true, initial: 0 }),
-        // Hjältedåd (HH s.6-7) kan lägga extra KP ovanpå (STO+FYS)/2 — se
-        // bp.bonusHjaltedad ovan för samma mekanik på BP-sidan.
-        bonusHjaltedad: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+        max: new fields.NumberField({ required: true, integer: true, initial: 0 })
       }),
+      // Hjältepoäng (HH s.6-7 källan, s.20/46-48 användningen) — ⚠ RÄTTAT
+      // 2026-08-02 (Johan): fältet hette tidigare `hp.bonusHjaltedad` och
+      // lades felaktigt in i `hp.max` (kroppspoäng, spelets egen förkortning
+      // KP). Hjältedådstabellens andra kolumn ("HP" i boken) är HJÄLTEPOÄNG,
+      // inte kroppspoäng — en helt egen valuta, spenderas post-creation på
+      // ett 1T20-slag mot en separat 18-radig hjälteförmågetabell (HH s.20/
+      // 46-48). Den tabellen och en spenderingsvy är INTE byggda än (se
+      // DESIGN_DECISIONS.md backlog) — det här fältet är bara en ackumulerad
+      // pool tills vidare, satt vid #onRollHjaltedad (character-wizard.mjs)
+      // och oförändrad annars.
+      hjaltepoang: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
       resources: new fields.SchemaField({
         psy: new fields.SchemaField({
           value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
@@ -334,8 +342,10 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     this.maxStartFv = DODE.maxStartFvTable[this.niva]?.[this.alder] ?? null;
 
     // KP = (STO + FYS) / 2, avrundat till närmaste heltal — REGLER_EGENSKAPER.md / REGLER_STRID.md
-    // + ev. hjältedåd-bonus (HH s.6-7, se bp.bonusHjaltedad ovan för samma mekanik på BP-sidan).
-    this.hp.max = Math.round((a.sto.total + a.fys.total) / 2) + this.hp.bonusHjaltedad;
+    // ⚠ RÄTTAT 2026-08-02: hjältedåd lägger INTE på KP — se `hjaltepoang`-
+    // fältets docblock ovan för varför den tidigare `hp.bonusHjaltedad`-
+    // kopplingen var fel.
+    this.hp.max = Math.round((a.sto.total + a.fys.total) / 2);
     this.hp.value = this.hp.value === null || this.hp.value === undefined
       ? this.hp.max
       : Math.min(this.hp.value, this.hp.max);
