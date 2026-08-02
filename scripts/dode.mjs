@@ -103,47 +103,16 @@ Hooks.once("init", () => {
    * Systeminställningar. Först registrerade inställningarna i projektet
    * (stängde backlogpost 5:s "noll game.settings.register någonstans").
    *
-   * Alla tre är `scope: "world"` + `restricted: true` — de är SL:s bordsregler,
-   * inte spelarnas personliga preferenser, och måste gälla lika för alla vid
-   * samma bord annars blir rollpersonsskapandet orättvist.
+   * ⚠ RÄTTELSE 2026-08-02: tre inställningar som styrde grundegenskapernas
+   * SLAGsystem (`attributeRollMode`, `allowRestartIfUnqualified`,
+   * `showAttributeRollsInChat`) är borttagna härifrån. RP s.23 visade sig
+   * vara ett köpsystem, inte ett slagsystem (se config.mjs
+   * DODE.attributeBuyCumulative och DESIGN_DECISIONS.md backlog för hela
+   * utredningen) — alla tre inställningarna configurerade slagvarianter som
+   * inte längre existerar. Foundry tappar bort registrerade world-settings
+   * ur config-UI:t automatiskt när systemet slutar registrera dem; ingen
+   * migrering behövs.
    */
-  game.settings.register(SYSTEM_ID, "attributeRollMode", {
-    name: "Slagsätt för grundegenskaper",
-    hint: "Hur rollpersonens grundegenskaper slås fram i guiden. Gäller hela bordet.",
-    scope: "world",
-    config: true,
-    restricted: true,
-    type: String,
-    default: "standard",
-    choices: {
-      standard: "Standard — ett slag per grundegenskap",
-      reroll: "Omslag tillåtet — spelaren får slå om en grundegenskap fritt",
-      bestOfThree: "Tre kandidater — slå tre värden per grundegenskap, välj ett"
-    }
-  });
-
-  game.settings.register(SYSTEM_ID, "allowRestartIfUnqualified", {
-    name: "Tillåt omstart när inget yrke går att välja",
-    hint: "Med 3T6 hamnar en rollperson ofta på 10–11 i allt, och lägsta yrkeskravet är 12 — "
-      + "då kvalificerar den för noll av 36 yrken. Med detta påslaget erbjuder guiden att slå "
-      + "om alla grundegenskaper i stället för att spelaren kör fast.",
-    scope: "world",
-    config: true,
-    restricted: true,
-    type: Boolean,
-    default: true
-  });
-
-  game.settings.register(SYSTEM_ID, "showAttributeRollsInChat", {
-    name: "Visa grundegenskapsslag i chatten",
-    hint: "Postar varje slag som ett chattkort med tärningarna synliga — och animeras av "
-      + "Dice So Nice om modulen är installerad. Av om skapandet ska ske i det tysta.",
-    scope: "world",
-    config: true,
-    restricted: true,
-    type: Boolean,
-    default: true
-  });
 
   // Träningsavgift per veckopass med lärare.
   //

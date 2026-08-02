@@ -404,6 +404,13 @@
   margin-top: 0.5rem;
 }
 
+.character-wizard .wizard-hjaltedad {
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
 .character-wizard .wizard-attribute-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -426,6 +433,20 @@
 
 .character-wizard .wizard-attribute-value {
   font-size: 1.3rem;
+}
+
+.character-wizard .wizard-attribute .wizard-skill-buy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+.character-wizard .wizard-attribute-mod {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  margin-top: 0.15rem;
 }
 
 .character-wizard .wizard-requirements {
@@ -604,18 +625,6 @@
 /* Omött krav tonas ned men går fortfarande att välja — se mallens kommentar. */
 .character-wizard .wizard-card:has(.req-unmet) { opacity: 0.82; }
 
-/* Kandidatval och omslagsvarning i guiden — 2026-07-28 */
-.character-wizard .wizard-candidates { display: flex; gap: 0.25em; justify-content: center; margin-top: 0.3em; }
-.character-wizard .wizard-candidates .candidate {
-  min-width: 2.4em; padding: 0.1em 0.35em; font-variant-numeric: tabular-nums;
-  /* Kantfärgen sätts inline per kandidat och matchar tärningsfärgen i
-     Dice So Nice, så spelaren ser vilka tärningar som gav vilket värde. */
-  border: 2px solid transparent;
-}
-.character-wizard .wizard-candidates .candidate.is-chosen {
-  outline: 2px solid rgba(140, 90, 40, 0.9); font-weight: 700;
-}
-.character-wizard .wizard-attribute.not-rolled .wizard-attribute-value { opacity: 0.4; }
 .character-wizard .wizard-blocked {
   border-left: 3px solid #8a2b2b;
   background: rgba(138, 43, 43, 0.10);

@@ -295,7 +295,11 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "revealsProfessionGroup": "tjuv"
+    }
+  },
   "_stats": {
     "coreVersion": "14.365",
     "systemId": "drakar-och-demoner-expert",

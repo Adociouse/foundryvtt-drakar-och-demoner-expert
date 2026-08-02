@@ -42,19 +42,36 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         initial: "vanlig",
         choices: ["vanlig", "slumpens-hjalte", "sann-hjalte", "gudafodd"]
       }),
-      // BP-ledger — RP s.27-30/KH s.3. Spenderas på ras (RASER.md bpCost), särskilda
-      // förmågor, socialt stånd och startkapital (RP s.27-28). Grundegenskaper är
-      // INTE en BP-kategori — de slås fram med 3T6 (RP s.9), inte köps — se
-      // PLAN_WIZARD_V2.md Fas 2 för resonemanget. Färdigheter spenderas av EP
-      // (separat pool, PLAN_WIZARD_V2.md Fas 5), inte BP direkt, men "kvarvarande
-      // BP × 5" konverteras till bonus-EP (RP s.28) — spentFardigheter finns här
-      // ändå ifall en framtida BP-för-färdigheter-väg behövs.
+      // BP-ledger — RP s.27-30/KH s.3. Spenderas på grundegenskaper (RP s.23,
+      // se nedan), ras (RASER.md bpCost), svärdshand (RP s.27), särskilda
+      // förmågor, socialt stånd och startkapital (RP s.27-28). Färdigheter
+      // spenderas av EP (separat pool, PLAN_WIZARD_V2.md Fas 5), inte BP direkt,
+      // men "kvarvarande BP × 5" konverteras till bonus-EP (RP s.28) —
+      // spentFardigheter finns här ändå ifall en framtida BP-för-färdigheter-väg
+      // behövs.
+      //
+      // ⚠ RÄTTELSE 2026-08-02: den här kommentaren påstod tidigare att
+      // "Grundegenskaper är INTE en BP-kategori — de slås fram med 3T6 (RP s.9),
+      // inte köps". Det var fel — RP s.23 ("GRUNDEGENSKAPER") är ett uttalat
+      // köpsystem med en egen BP-kostnadstabell, inte ett slagsystem. `spentAttribut`
+      // härifrån var alltså inte "förberett för framtiden", det var en täckt lucka.
+      // Se DESIGN_DECISIONS.md backlog för hela utredningen (Johans fynd 2026-08-02).
       bp: new fields.SchemaField({
         spentRas: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spentFormagor: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spentSocialt: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spentKapital: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
-        spentFardigheter: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
+        spentFardigheter: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        spentAttribut: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        // RP s.27: svärdshandens slag kan modifieras med spenderad BP, precis som
+        // socialt stånd/startkapital på samma sida — bara den delen missades tills
+        // Johan hittade att fältet aldrig bands till formuläret (2026-08-02).
+        spentSvardshand: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+        // Hjältedåd (HH s.6-7) — bara hjälte-nivåerna. Slaget en gång vid
+        // skapandet (character-wizard.mjs #onRollHjaltedad), rullat in i
+        // `bp.start` i prepareDerivedData nedan, precis som en extra BP-pool
+        // ovanpå bpByNiva-basen.
+        bonusHjaltedad: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
       // Socialt stånd — RP s.27: 2T6 + spenderade BP. `total`/`rank` är härledda
       // (prepareDerivedData), inte satta direkt — `roll`/`bpSpent` är källan.
@@ -160,7 +177,10 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       ),
       hp: new fields.SchemaField({
         value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
-        max: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        max: new fields.NumberField({ required: true, integer: true, initial: 0 }),
+        // Hjältedåd (HH s.6-7) kan lägga extra KP ovanpå (STO+FYS)/2 — se
+        // bp.bonusHjaltedad ovan för samma mekanik på BP-sidan.
+        bonusHjaltedad: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 })
       }),
       resources: new fields.SchemaField({
         psy: new fields.SchemaField({
@@ -297,8 +317,9 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     const bp = this.bp;
     bp.spentSocialt = social.bpSpent;
     bp.spentKapital = capital.bpSpent;
-    bp.start = DODE.bpByNiva[this.niva] ?? DODE.bpByNiva.vanlig;
-    bp.spent = bp.spentRas + bp.spentFormagor + bp.spentSocialt + bp.spentKapital + bp.spentFardigheter;
+    bp.start = (DODE.bpByNiva[this.niva] ?? DODE.bpByNiva.vanlig) + bp.bonusHjaltedad;
+    bp.spent = bp.spentRas + bp.spentFormagor + bp.spentSocialt + bp.spentKapital + bp.spentFardigheter
+      + bp.spentAttribut + bp.spentSvardshand;
     bp.remaining = bp.start - bp.spent;
 
     // EP-budget — RP s.28/KH s.3: nivå×ålder-tabell + kvarvarande BP × 5
@@ -313,7 +334,8 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     this.maxStartFv = DODE.maxStartFvTable[this.niva]?.[this.alder] ?? null;
 
     // KP = (STO + FYS) / 2, avrundat till närmaste heltal — REGLER_EGENSKAPER.md / REGLER_STRID.md
-    this.hp.max = Math.round((a.sto.total + a.fys.total) / 2);
+    // + ev. hjältedåd-bonus (HH s.6-7, se bp.bonusHjaltedad ovan för samma mekanik på BP-sidan).
+    this.hp.max = Math.round((a.sto.total + a.fys.total) / 2) + this.hp.bonusHjaltedad;
     this.hp.value = this.hp.value === null || this.hp.value === undefined
       ? this.hp.max
       : Math.min(this.hp.value, this.hp.max);

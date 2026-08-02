@@ -285,6 +285,14 @@ DODE.bpByNiva = {
   gudafodd: 125
 };
 
+// Konverterar bokens svenska tärningsnotation ("1T10+10") till Foundrys Roll-
+// syntax ("1d10+10") — tabelldata i böckerna (hjältedådstabell m.fl.) skrivs
+// alltid med "T", aldrig "d". Delad helper istället för en inline regex på
+// varje anropsställe, ifall fler tabeller med samma notation dyker upp.
+DODE.swedishDiceToRoll = function (formula) {
+  return String(formula ?? "").replace(/(\d+)\s*[Tt]\s*(\d+)/g, "$1d$2");
+};
+
 // Source: HH p.6 — "En nyskapad hjälte får slå 1T6 slag på tabellen"
 DODE.hjaltedadRollCount = "1T6";
 
@@ -679,6 +687,39 @@ DODE.skillCostOverrideFor = function (actor, costTier) {
     if (eff?.type === "costTierOverride" && eff.tier === costTier) return eff.base;
   }
   return undefined;
+};
+
+// Grundegenskaper KÖPS — RP s.23 ("GRUNDEGENSKAPER"), inte ett slagsystem.
+// ⚠ RÄTTELSE 2026-08-02 (Johans fynd): den kurerade REGLER_EGENSKAPER.md
+// citerar "RP s.23-26" som källa för ett 3T6-slag, men RP s.23 självt är en
+// uttalad köptabell — citatet blandar ihop RP med det äldre REG-systemets
+// slagmetod (samma bok-mot-bok-konflikt som ARCHITECTURE_RULE_AUDIT.md redan
+// flaggat på andra ställen). Se DESIGN_DECISIONS.md backlog. Tabellen nedan
+// är transkriberad direkt ur PDF:en, inte ur den kurerade filen.
+DODE.attributeBuyCumulative = {
+  3: 0, 4: 1, 5: 2, 6: 3, 7: 5, 8: 7, 9: 9, 10: 10, 11: 11, 12: 12,
+  13: 14, 14: 17, 15: 20, 16: 25, 17: 30, 18: 40
+};
+DODE.attributeBuyCost = function (fromValue, toValue) {
+  const from = DODE.attributeBuyCumulative[fromValue] ?? 0;
+  const to = DODE.attributeBuyCumulative[toValue] ?? DODE.attributeBuyCumulative[18];
+  return to - from;
+};
+
+// STO köps som AVVIKELSE (delta) från rasens normalvärde (item-ras.mjs
+// `stoRange.normal`), inte som ett fristående 3-18-värde — RP s.23 "STO".
+// Positiv delta kostar BP; negativ delta GER BP tillbaka, uttryckt här som
+// ett negativt "kumulativt kostnad"-tal så samma `to - from`-formel som
+// DODE.attributeBuyCost fungerar rakt av utan specialfall.
+DODE.stoBuyCumulative = {
+  "-5": -7, "-4": -5, "-3": -3, "-2": -2, "-1": -1, "0": 0,
+  "1": 2, "2": 4, "3": 6, "4": 8, "5": 10
+};
+DODE.stoBuyCost = function (fromDelta, toDelta) {
+  const clamp = (d) => Math.max(-5, Math.min(5, d));
+  const from = DODE.stoBuyCumulative[String(clamp(fromDelta))] ?? 0;
+  const to = DODE.stoBuyCumulative[String(clamp(toDelta))] ?? 0;
+  return to - from;
 };
 
 // EP-kostnad för magi — MAG s.13. Skiljer sig från DODE.skillCost på tre sätt

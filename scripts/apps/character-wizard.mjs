@@ -80,10 +80,12 @@ const NIVA_OPTIONS = [
  * kopplad till Öde-typen utöver KH:s BP/EP-nivåskala, så nivåvalet gör dubbel
  * tjänst istället för att vara en separat wizard-sektion.
  *
- * ⚠ Grundegenskaper spenderar INTE BP i den bokexakta modellen (de slås fram med
- * 3T6, RP s.9) — bara ras, särskilda förmågor, socialt stånd, startkapital och
- * (indirekt via EP) färdigheter gör det (RP s.27-30). Ingen BP-köp-attribut-väg
- * är därför byggd, medvetet — se PLAN_WIZARD_V2.md Fas 2.
+ * ⚠ RÄTTAD 2026-08-02: grundegenskaper KÖPS med BP (RP s.23), precis som ras,
+ * särskilda förmågor, socialt stånd och startkapital — se
+ * DODE.attributeBuyCumulative i config.mjs. Denna docblock-kommentar påstod
+ * tidigare motsatsen ("de slås fram med 3T6, RP s.9") och att ingen
+ * BP-köp-väg var byggd "medvetet" — det var en felläsning av källan, inte
+ * ett avstämt designbeslut. Se DESIGN_DECISIONS.md backlog för utredningen.
  *
  * Socialt stånd/startkapital (Fas 3) implementerar RP s.27–28:s 2T6+BP/9-
  * ståndssystem — källdokumentet REGEL_SocialtStand.md drar själv slutsatsen att
@@ -138,14 +140,14 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     actions: {
       nextStep: DoDECharacterWizard.#onNextStep,
       prevStep: DoDECharacterWizard.#onPrevStep,
-      rollAttribute: DoDECharacterWizard.#onRollAttribute,
-      pickAttributeCandidate: DoDECharacterWizard.#onPickAttributeCandidate,
+      buyAttribute: DoDECharacterWizard.#onBuyAttribute,
+      sellAttribute: DoDECharacterWizard.#onSellAttribute,
       toggleProfessionSkill: DoDECharacterWizard.#onToggleProfessionSkill,
       clearProfessionSkills: DoDECharacterWizard.#onClearProfessionSkills,
       restartAttributes: DoDECharacterWizard.#onRestartAttributes,
-      rollAllAttributes: DoDECharacterWizard.#onRollAllAttributes,
       selectKon: DoDECharacterWizard.#onSelectKon,
       selectNiva: DoDECharacterWizard.#onSelectNiva,
+      rollHjaltedad: DoDECharacterWizard.#onRollHjaltedad,
       selectRace: DoDECharacterWizard.#onSelectRace,
       selectProfession: DoDECharacterWizard.#onSelectProfession,
       selectMagicSchool: DoDECharacterWizard.#onSelectMagicSchool,
@@ -344,11 +346,14 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     niva: "vanlig",
     name: "",
     ageCategory: "Mogen",
+    // Hjältedåd (HH s.6-7) — bara hjälte-nivåerna, se #onRollHjaltedad. `rolls`
+    // är bara UI-detalj för sessionen (visar vilken rad varje slag träffade);
+    // det som faktiskt persisteras är bonusBP/bonusHP, samma "aggregat inte
+    // historik"-princip som spentRas/spentFormagor.
+    hjaltedad: { rollCount: 0, rolls: [], bonusBP: 0, bonusHP: 0 },
+    // null = inte köpt än; #ensureAttributesInitialized sätter baslinjen
+    // (3, respektive rasens stoRange.normal) första gången rasen är känd.
     attributes: { sty: null, sto: null, fys: null, smi: null, int: null, psy: null, kar: null },
-    // Tre framslagna kandidatvärden per grundegenskap när SL kört inställningen
-    // "bestOfThree". Tomt i övriga lägen. Värdet i `attributes` sätts först när
-    // spelaren klickat på en kandidat.
-    attributeCandidates: { sty: [], sto: [], fys: [], smi: [], int: [], psy: [], kar: [] },
     raceUuid: null,
     professionUuid: null,
     // Vald magiskola (nyckel ur DODE.magicSchoolSkills) — materialiseras som en
@@ -363,7 +368,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // BP-ledger — se klassdokblocket. spentSocialt/spentKapital lever INTE här —
     // de härleds från socialStanding.bpSpent/startCapital.bpSpent nedan (samma
     // enda-källa-princip som DataModellens prepareDerivedData använder).
-    bp: { spentRas: 0, spentFormagor: 0, spentFardigheter: 0 },
+    bp: { spentRas: 0, spentFormagor: 0, spentFardigheter: 0, spentAttribut: 0, spentSvardshand: 0 },
+    // Hjältedåd (HH s.6-7) — bara hjälte-nivåer, inte "vanlig". 1T6 rullar
+    // fram ANTALET 1T20-slag mot DODE.hjaltedadTable; bonusBP/bonusHP är
+    // SUMMAN av alla raderna, läggs på ovanpå de fasta 125 (se #bpLedger).
+    hjaltedad: { rollCount: 0, rolls: [], bonusBP: 0, bonusHP: 0 },
     // Svärdshand — RP s.27, samma 2T6+BP-mekanik som socialt stånd på samma sida.
     swordHand: { roll: 0, bpSpent: 0, granted: false },
     socialStanding: { roll: 0, bpSpent: 0 },
@@ -433,6 +442,14 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       ? professions.find((p) => p.uuid === this.state.professionUuid)
       : null;
 
+    // Grundegenskaper KÖPS — RP s.23 (rättelse 2026-08-02, se config.mjs
+    // DODE.attributeBuyCumulative). Sätter en engångsbaslinje (3, eller rasens
+    // STO-normalvärde) första gången en ras är vald — precis som
+    // #specialAbilitySlots() lazy-initierar sina tomma slots, INTE i den
+    // statiska state-definitionen, eftersom STO-normalvärdet inte är känt
+    // förrän rasen är vald. Måste ske FÖRE #effectiveAttributes nedan, annars
+    // beräknas den första renderingen av attribut-steget mot null-värden.
+    this.#ensureAttributesInitialized(selectedRace);
     const effectiveAttributes = this.#effectiveAttributes(selectedRace, this.state.ageCategory);
     // Redigeringsläge: färdighetsladdningen behöver BC, som i sin tur behöver
     // det uppslagna rasdokumentet — därför först här, inte i #loadStateFromActor.
@@ -454,21 +471,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // och DESIGN_DECISIONS.md backlog 4c) — byte sker via drag-släpp på arket.
     context.isEditMode = this.isEditMode;
     context.showStart = stepId === "start";
-    // Slagläge + kandidater till attributsteget.
-    context.rollMode = this.#rollModeSetting();
-    context.isBestOfThree = context.rollMode === "bestOfThree";
-    context.canReroll = context.rollMode !== "standard";
-    context.attributeRows = [...ROLLABLE_ATTRIBUTES, "sto"].map((key) => ({
-      key,
-      label: key.toUpperCase(),
-      formula: key === "sto" ? "2T6+6" : "3T6",
-      value: this.state.attributes[key],
-      rolled: this.state.attributes[key] !== null,
-      candidates: (this.state.attributeCandidates?.[key] ?? []).map((v, i) => {
-        const cs = CONFIG.DODE.candidateColorsets[i % CONFIG.DODE.candidateColorsets.length];
-        return { value: v, chosen: v === this.state.attributes[key], color: cs.css, colorLabel: cs.label };
-      })
-    }));
+    context.attributeBuy = this.#attributeBuyResult(selectedRace, effectiveAttributes);
     context.showKon = stepId === "kon";
     context.showNiva = stepId === "niva";
     context.showGrunder = stepId === "grunder";
@@ -506,15 +509,22 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.nivaOptions = NIVA_OPTIONS.map((option) => ({
       ...option,
       bp: CONFIG.DODE.bpByNiva[option.value],
+      // Hjälte-nivåerna får också slå hjältedåd (HH s.6-7) för bonus-BP/KP
+      // ovanpå den delade 125-basen — "vanlig" gör inte det, se #onRollHjaltedad.
+      isHero: option.value !== "vanlig",
       selected: option.value === this.state.niva
     }));
     context.selectedNivaOption = context.nivaOptions.find((option) => option.selected) ?? null;
+    context.hjaltedad = this.state.hjaltedad;
     const socialResult = this.#socialStandingResult();
     const capitalResult = this.#startCapitalResult(socialResult);
     context.socialStanding = socialResult;
     context.swordHand = this.#swordHandResult();
     context.swordHandOptions = CONFIG.DODE.swordHands;
     context.startCapital = capitalResult;
+    // Hålls i synk vid varje render (inte bara vid sparning) så granska-stegets
+    // BP-tabell visar rätt siffra direkt, samma skäl som #syncAttributeSpend.
+    this.state.bp.spentSvardshand = this.#swordHandBpSpent();
     context.bp = this.#bpLedger(socialResult, capitalResult);
     const epBudget = this.#epResult(context.bp);
     context.races = races.map((r) => ({
@@ -535,10 +545,20 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // lärdom som backlogpost 6a: namn är inte identitet. Flaggan gör dessutom
     // att en kampanjmodul kan lägga sina egna raser i rätt grupp.
     const isElfLineage = (r) => r.raceGroup === "alvslakte";
+    // Progressiv visning (Johan 2026-08-02): en undergrupp (alvsläkten,
+    // yrkesspecialiseringar) syns bara när dess FÖRÄLDER faktiskt är vald —
+    // annars är 13 rasval och 36 yrkesval ett för stort första intryck. Vald
+    // ras/yrke avslöjar sin grupp via `flags.<id>.revealsRaceGroup`/
+    // `revealsProfessionGroup` (satt på Alv respektive Krigare/Tjuv/
+    // Lönnmördare/Bard) — generellt på VÄRDET, inte hårdkodat mot "alv", så
+    // ett framtida Svartfolk-baskön med `revealsRaceGroup: "svartfolk"`
+    // slotar in utan kodändring här, bara nytt kompendieinnehåll.
+    const revealedRaceGroup = selectedRace?.getFlag(game.system.id, "revealsRaceGroup") ?? null;
     context.raceGroups = [
       { label: "Grundraser", races: context.races.filter((r) => !isElfLineage(r)) },
-      { label: "Alvsläkten (Alver s.22)", races: context.races.filter(isElfLineage) }
-    ].filter((g) => g.races.length);
+      { label: "Alvsläkten (Alver s.22)", races: context.races.filter(isElfLineage), group: "alvslakte" }
+    ].filter((g) => g.races.length && (!g.group || g.group === revealedRaceGroup));
+    const revealedProfessionGroup = selectedProfession?.getFlag(game.system.id, "revealsProfessionGroup") ?? null;
     const PROFESSION_GROUPS = [
       ["", "Grundyrken"],
       ["krigare", "Krigarspecialiseringar (KH s.4-9)"],
@@ -546,17 +566,18 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       ["lonnmordare", "Lönnmördarspecialiseringar (T&L s.9-12)"],
       ["bard", "Bardspecialiseringar (T&L s.7-9)"]
     ];
-    // Kravstatus per yrkeskort. Grundegenskaperna är slagna vid det här laget
+    // Kravstatus per yrkeskort. Grundegenskaperna är köpta vid det här laget
     // (attribut-steget ligger före), så kontrollen är meningsfull.
-    // ⚠ Ett omött krav SPÄRRAR inte valet, det märks bara upp. Med 3T6 landar en
-    // rollperson ofta på 10-11 i allt, och då kvalificerar den för NOLL av de 36
-    // yrkena — hård spärr hade låst spelaren ute helt. Boken låter SL avgöra;
+    // ⚠ Ett omött krav SPÄRRAR inte valet, det märks bara upp. En snålt köpt
+    // rollperson kan ändå landa på noll av de 36 yrkena — hård spärr hade låst
+    // spelaren ute helt. Boken låter SL avgöra;
     // guiden visar tydligt vad som inte är uppfyllt och låter bordet bestämma.
     const reqFor = (p) => DoDECharacterWizard.#checkRequirements(
       p.system.requirements, effectiveAttributes);
     context.professionGroups = PROFESSION_GROUPS
       .map(([base, label]) => ({
         label,
+        base,
         professions: context.professions
           .filter((p) => (p.system.baseProfession ?? "") === base)
           .map((p) => {
@@ -564,16 +585,17 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
             return { ...p, reqCheck: check, reqMet: check.allMet };
           })
       }))
-      .filter((g) => g.professions.length);
-    // Kan spelaren över huvud taget kvalificera sig för NÅGOT yrke? Med 3T6 och
-    // lägsta krav 12 är svaret ibland nej — då erbjuds omslag i stället för
-    // att spelaren kör fast (SL-inställning `allowRestartIfUnqualified`).
+      .filter((g) => g.professions.length && (!g.base || g.base === revealedProfessionGroup));
+    // Kan spelaren över huvud taget kvalificera sig för NÅGOT yrke? Med köpta
+    // grundegenskaper är svaret spelarens eget val snarare än otur, men en
+    // för snålt köpt rollperson kan ändå landa här — #onRestartAttributes
+    // erbjuds ovillkorligt (inget SL-inställning-villkor längre, se
+    // dode.mjs — allowRestartIfUnqualified retirerades 2026-08-02).
     const allProfessions = context.professionGroups.flatMap((g) => g.professions);
     context.attributesRolled = Object.values(this.state.attributes).every((v) => v !== null);
     context.noProfessionQualifies = context.attributesRolled
       && allProfessions.length > 0
       && !allProfessions.some((p) => p.reqMet);
-    context.allowRestart = game.settings.get(game.system.id, "allowRestartIfUnqualified");
     context.qualifiedCount = allProfessions.filter((p) => p.reqMet).length;
     // Speglas till ett fält eftersom `steps` (som avgör om magiskolesteget
     // visas) är en synkron getter utan tillgång till de async-uppslagna yrkena.
@@ -591,7 +613,6 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.selectedRace = selectedRace;
     context.selectedProfession = selectedProfession;
     context.ageCategories = AGE_CATEGORIES.map((c) => ({ value: c, selected: c === this.state.ageCategory }));
-    context.rollableAttributes = ROLLABLE_ATTRIBUTES;
     context.attributes = CONFIG.DODE.attributes;
     context.effectiveAttributes = effectiveAttributes;
     context.requirementCheck = requirementCheck;
@@ -669,7 +690,18 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.state.bp = {
       spentRas: sys.bp?.spentRas ?? 0,
       spentFormagor: sys.bp?.spentFormagor ?? 0,
-      spentFardigheter: sys.bp?.spentFardigheter ?? 0
+      spentFardigheter: sys.bp?.spentFardigheter ?? 0,
+      spentAttribut: sys.bp?.spentAttribut ?? 0,
+      spentSvardshand: sys.bp?.spentSvardshand ?? 0,
+      bonusHjaltedad: sys.bp?.bonusHjaltedad ?? 0
+    };
+    // Bara AGGREGATEN läses tillbaka (bonusBP/bonusHP), inte radhistoriken —
+    // samma "aggregat, inte historik"-princip som spentRas m.fl. En omslagen
+    // hjältedåd-lista finns inte att återskapa, bara slutsumman.
+    this.state.hjaltedad = {
+      rollCount: 0, rolls: [],
+      bonusBP: sys.bp?.bonusHjaltedad ?? 0,
+      bonusHP: sys.hp?.bonusHjaltedad ?? 0
     };
     // ⚠ `slotId` läses tillbaka rakt av (aldrig ny) — se schemakommentaren i
     // actor-character.mjs. Ett nytt id här skulle göra en befintlig formaga-
@@ -823,12 +855,26 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    */
   #bpLedger(socialResult, capitalResult) {
     const spent = this.state.bp;
-    const start = CONFIG.DODE.bpByNiva[this.state.niva] ?? CONFIG.DODE.bpByNiva.vanlig;
-    // ⚠ Svärdshandens insats är också BP (RP s.27) och måste räknas med, annars
-    // kan spelaren satsa 15 BP på handen och ändå ha kvar dem till startkapital.
-    const handBp = this.state.swordHand.granted ? 0 : (Number(this.state.swordHand.bpSpent) || 0);
-    const total = spent.spentRas + spent.spentFormagor + socialResult.bpSpent + capitalResult.bpSpent + spent.spentFardigheter + handBp;
+    // Hjältedåd (HH s.6-7) lägger BONUS-BP ovanpå den vanliga 125-poolen för
+    // hjälte-nivåerna — se #onRollHjaltedad. 0 för "vanlig" och för hjälte-
+    // nivåer som inte slagit än.
+    const start = (CONFIG.DODE.bpByNiva[this.state.niva] ?? CONFIG.DODE.bpByNiva.vanlig)
+      + (this.state.hjaltedad?.bonusBP ?? 0);
+    const handBp = this.#swordHandBpSpent();
+    const total = spent.spentRas + spent.spentFormagor + socialResult.bpSpent + capitalResult.bpSpent
+      + spent.spentFardigheter + spent.spentAttribut + handBp;
     return { start, spent: total, remaining: start - total };
+  }
+
+  /**
+   * Svärdshandens BP-insats (RP s.27) — INTE lagrad direkt i `state.bp`, den
+   * härleds från `state.swordHand` av samma "enda källa"-skäl som
+   * spentSocialt/spentKapital på DataModellen. Delad mellan #bpLedger (live
+   * summa i guiden) och #applyToActor/#onCreateCharacter (persisterad summa
+   * på aktören, `bp.spentSvardshand`) så de två aldrig kan komma i otakt.
+   */
+  #swordHandBpSpent() {
+    return this.state.swordHand.granted ? 0 : (Number(this.state.swordHand.bpSpent) || 0);
   }
 
   /**
@@ -1091,7 +1137,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       case "ras": return !!this.state.raceUuid;
       case "hand": return !!this.state.swordHand.granted || this.state.swordHand.roll > 0;
       case "alder": return !!this.state.ageCategory;
-      case "attribut": return Object.values(this.state.attributes).every((v) => v !== null);
+      // Grundegenskaper köps, inget att "slå klart" — #ensureAttributesInitialized
+      // seedar baslinjen så fort rasen är känd, alltid färdigt att gå vidare från.
       case "yrke": return !!this.state.professionUuid;
       case "magiskola": return !!this.state.magicSchoolKey;
       // Exakt så många som RP s.11 ger — annars går EP-budgeten inte ihop och
@@ -1158,6 +1205,16 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       this.state.startCapital.bpSpent = Math.max(0, Number(ev.target.value) || 0);
       this.render();
     });
+    // ⚠ Saknades helt fram till 2026-08-02 (Johans fynd) — `name`-attributet på
+    // fältet i mallen antydde auto-bindning, men wizardens form-handler är en
+    // no-op (se DEFAULT_OPTIONS), så INGET fält binds automatiskt. #onRollSwordHand
+    // läste `state.swordHand.bpSpent` som därför alltid stod kvar på sitt
+    // initialvärde 0, oavsett vad spelaren skrev in.
+    const swordHandBpInput = this.element.querySelector('[name="state.swordHand.bpSpent"]');
+    swordHandBpInput?.addEventListener("change", (ev) => {
+      this.state.swordHand.bpSpent = Math.max(0, Number(ev.target.value) || 0);
+      this.render();
+    });
 
     // Särskilda förmågor — fritext, ingen re-render vid varje tangenttryckning
     // (samma anledning som namnfältet ovan: skulle tappa fokus/markörposition).
@@ -1209,86 +1266,83 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   /**
-   * Slår en grundegenskap och visar tärningarna.
-   *
-   * ⚠ Ett rent `new Roll(...).evaluate()` syns INTE någonstans — varken chattkort
-   * eller 3D-tärningar. Fram till 2026-07-28 gjorde guiden precis det, så siffran
-   * bara dök upp. `ChatMessage.create({ rolls: [roll] })` är husmönstret (samma som
-   * fv-roll.mjs) och är dessutom det Dice So Nice kopplar in sig på — verifierat
-   * mot DSN 6.2.9: guidens slag når `game.dice3d.showForRoll` med formeln "3d6".
-   *
-   * I tre-kandidatläget slås alla tre i EN pool-formel (`{3d6, 3d6, 3d6}`) i
-   * stället för tre separata slag. Då ramlar alla nio tärningarna ner samtidigt
-   * som en hink, vilket är både snabbare och det spelaren vill se — tre slag i
-   * rad hade gett tre animationer efter varandra.
+   * Sätter köpbaslinjen EN gång — 3 för de sex kärnegenskaperna (RP s.23,
+   * "Värde du vill köpa: 3 → 0 BP"), rasens `stoRange.normal` för STO. Körs
+   * bara om attributen aldrig satts (`sty === null`), så en spelares redan
+   * gjorda köp aldrig nollställs av en omrendering — samma lazy-init-mönster
+   * som #specialAbilitySlots() använder för tomma förmågeslots.
    */
-  async #rollAttributeValues(key) {
-    const die = key === "sto" ? "2d6+6" : "3d6";
-    const best = this.#rollModeSetting() === "bestOfThree";
-    const roll = await new Roll(best ? `{${die}, ${die}, ${die}}` : die).evaluate();
-    if (best) {
-      // Ett färgset per kandidat, så spelaren SER vilka tärningar som gav vilket
-      // värde. Dice So Nice läser `options.colorset` per tärningsterm (verifierat
-      // mot DSN 6.2.9); utan modulen ignoreras fältet helt.
-      roll.terms[0].rolls.forEach((r, i) => {
-        const cs = CONFIG.DODE.candidateColorsets[i % CONFIG.DODE.candidateColorsets.length];
-        r.dice.forEach((d) => { d.options.colorset = cs.colorset; });
-      });
-    }
-    const values = best
-      ? roll.terms[0].rolls.map((r) => r.total)
-      : [roll.total];
-    return { values, roll };
-  }
-
-  #rollModeSetting() {
-    return game.settings.get(game.system.id, "attributeRollMode");
+  #ensureAttributesInitialized(selectedRace) {
+    if (this.state.attributes.sty !== null) return;
+    for (const key of ROLLABLE_ATTRIBUTES) this.state.attributes[key] = 3;
+    this.state.attributes.sto = selectedRace?.system?.stoRange?.normal ?? 13;
   }
 
   /**
-   * Ett samlat chattkort för en omgång slag, i stället för ett kort per
-   * grundegenskap. "Slå alla" i tre-kandidatläget hade annars postat 21 kort.
-   * `rolls` bär med alla Roll-objekt så att Dice So Nice animerar hela omgången.
+   * Köpstatus per grundegenskap — RP s.23 (rättelse 2026-08-02: sidan är en
+   * köptabell, inte ett slagsystem — se config.mjs DODE.attributeBuyCumulative
+   * för hela utredningen). Mirrorar #skillPreview i formen, men BP-kostnaden
+   * är BARA informativ — precis som ras/förmågor/socialt stånd/startkapital
+   * redan är i resten av guiden (`bp.remaining` kan gå negativt, SL:s bord
+   * avgör, ingen hård spärr här heller). +/- spärras bara av tabellens egna
+   * gränser: 3-18 för kärnegenskaperna, ±5 från rasens normalvärde för STO
+   * (klampat mot `stoRange.min`/`max` om rasen har ett snävare intervall).
    */
-  async #postRollSummary(rows, rolls) {
-    if (!game.settings.get(game.system.id, "showAttributeRollsInChat")) return;
-    const best = this.#rollModeSetting() === "bestOfThree";
-    const cols = CONFIG.DODE.candidateColorsets
-      .map((c) => `<th style="color:${c.css}">${c.label}</th>`).join("");
-    const head = best
-      ? `<tr><th>Egenskap</th>${cols}<th>Vald</th></tr>`
-      : "<tr><th>Egenskap</th><th>Slag</th></tr>";
-    const body = rows.map((r) => {
-      if (!best) return `<tr><td>${r.label}</td><td><strong>${r.values[0]}</strong></td></tr>`;
-      const cells = r.values.map((v, i) => {
-        const cs = CONFIG.DODE.candidateColorsets[i % CONFIG.DODE.candidateColorsets.length];
-        return `<td style="color:${cs.css};font-weight:600">${v}</td>`;
-      }).join("");
-      return `<tr><td>${r.label}</td>${cells}<td>${r.chosen ?? "—"}</td></tr>`;
-    }).join("");
-    await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
-      flavor: best ? "Grundegenskaper — tre kandidater per egenskap" : "Grundegenskaper",
-      content: `<div class="dode-chat-card"><table class="dode-roll-table">${head}${body}</table></div>`,
-      rolls,
-      sound: CONFIG.sounds.dice
+  #attributeBuyResult(selectedRace, effectiveAttributes) {
+    const stoNormal = selectedRace?.system?.stoRange?.normal ?? 13;
+    const stoMin = Math.max(selectedRace?.system?.stoRange?.min ?? (stoNormal - 5), stoNormal - 5);
+    const stoMax = Math.min(selectedRace?.system?.stoRange?.max ?? (stoNormal + 5), stoNormal + 5);
+    const rows = [...ROLLABLE_ATTRIBUTES, "sto"].map((key) => {
+      const isSto = key === "sto";
+      const value = this.state.attributes[key];
+      const min = isSto ? stoMin : 3;
+      const max = isSto ? stoMax : 18;
+      const buyCost = (from, to) => (isSto ? CONFIG.DODE.stoBuyCost(from - stoNormal, to - stoNormal) : CONFIG.DODE.attributeBuyCost(from, to));
+      const cost = isSto ? buyCost(stoNormal, value) : buyCost(3, value);
+      const eff = effectiveAttributes[key];
+      return {
+        key, label: key.toUpperCase(), value, min, max, cost,
+        // Marginalkostnad för NÄSTA steg — bara informativ (som alla andra
+        // BP-steg i guiden), men gör +/- begripligt utan huvudräkning.
+        nextCost: value < max ? buyCost(value, value + 1) : null,
+        prevRefund: value > min ? buyCost(value, value - 1) : null,
+        canIncrease: value < max, canDecrease: value > min,
+        raceMod: eff?.mod ?? 0, modLabel: eff?.modLabel ?? "", total: eff?.total ?? value
+      };
     });
+    const totalCost = rows.reduce((sum, r) => sum + r.cost, 0);
+    return { rows, totalCost };
   }
 
-  static async #onRollAttribute(event, target) {
-    const key = target.closest("[data-attr]")?.dataset.attr;
-    if (!key) return;
-    const { values, roll } = await this.#rollAttributeValues(key);
-    if (values.length > 1) {
-      // Värdet sätts först när spelaren klickat en kandidat — annars hade det
-      // första slaget smugit in som ett val spelaren aldrig gjorde.
-      this.state.attributeCandidates[key] = values;
-      this.state.attributes[key] = null;
-    } else {
-      this.state.attributes[key] = values[0];
-      this.state.attributeCandidates[key] = [];
-    }
-    await this.#postRollSummary([{ label: key.toUpperCase(), values, chosen: null }], [roll]);
+  /**
+   * Räknar om `state.bp.spentAttribut` från de sju grundegenskapernas
+   * nuvarande köpta värden. Körs vid varje +/- så att BP-ledgern (header,
+   * "BP kvar: X/125") stämmer direkt — samma mönster som `spentFormagor`
+   * i #onRollFormaga. Läser rasen via `fromUuid` snarare än den mappade
+   * context-arrayen, eftersom action-handlers körs utanför _prepareContext.
+   */
+  async #syncAttributeSpend() {
+    const raceDoc = this.state.raceUuid ? await fromUuid(this.state.raceUuid) : null;
+    const stoNormal = raceDoc?.system?.stoRange?.normal ?? 13;
+    let total = 0;
+    for (const key of ROLLABLE_ATTRIBUTES) total += CONFIG.DODE.attributeBuyCost(3, this.state.attributes[key]);
+    total += CONFIG.DODE.stoBuyCost(0, this.state.attributes.sto - stoNormal);
+    this.state.bp.spentAttribut = total;
+  }
+
+  static async #onBuyAttribute(event, target) {
+    const key = target.dataset.attr;
+    if (!key || target.dataset.canIncrease !== "true") return;
+    this.state.attributes[key] += 1;
+    await this.#syncAttributeSpend();
+    this.render();
+  }
+
+  static async #onSellAttribute(event, target) {
+    const key = target.dataset.attr;
+    if (!key || target.dataset.canDecrease !== "true") return;
+    this.state.attributes[key] -= 1;
+    await this.#syncAttributeSpend();
     this.render();
   }
 
@@ -1366,45 +1420,25 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
-  /** Väljer ett av de tre framslagna kandidatvärdena. */
-  static #onPickAttributeCandidate(event, target) {
-    const key = target.closest("[data-attr]")?.dataset.attr;
-    const value = Number(target.dataset.value);
-    if (!key || Number.isNaN(value)) return;
-    this.state.attributes[key] = value;
-    this.render();
-  }
-
-  static async #onRollAllAttributes() {
-    const rows = [];
-    const rolls = [];
-    for (const key of [...ROLLABLE_ATTRIBUTES, "sto"]) {
-      const { values, roll } = await this.#rollAttributeValues(key);
-      rolls.push(roll);
-      if (values.length > 1) {
-        this.state.attributeCandidates[key] = values;
-        this.state.attributes[key] = null;
-      } else {
-        this.state.attributes[key] = values[0];
-        this.state.attributeCandidates[key] = [];
-      }
-      rows.push({ label: key.toUpperCase(), values, chosen: null });
-    }
-    await this.#postRollSummary(rows, rolls);
-    this.render();
-  }
-
+  /**
+   * Återställer alla köpta grundegenskaper till baslinjen (3, respektive
+   * rasens STO-normalvärde) och återbetalar BP:t — repurposed 2026-08-02
+   * från det gamla "slå om alla"-slagsystemet (se config.mjs
+   * DODE.attributeBuyCumulative för varför köp ersatte slag).
+   */
   static async #onRestartAttributes() {
     const ok = await foundry.applications.api.DialogV2.confirm({
-      window: { title: "Slå om alla grundegenskaper?" },
-      content: "<p>Alla framslagna grundegenskaper nollställs och du slår om från början. "
-        + "Övriga val (kön, nivå, namn, ras) behålls.</p>"
+      window: { title: "Återställ grundegenskaper?" },
+      content: "<p>Alla köpta grundegenskaper återställs till baslinjen och den spenderade BP:n "
+        + "återbetalas. Övriga val (kön, nivå, namn, ras) behålls.</p>"
     });
     if (!ok) return;
-    for (const key of [...ROLLABLE_ATTRIBUTES, "sto"]) {
-      this.state.attributes[key] = null;
-      this.state.attributeCandidates[key] = [];
-    }
+    for (const key of ROLLABLE_ATTRIBUTES) this.state.attributes[key] = 3;
+    const raceDoc = this.state.raceUuid ? await fromUuid(this.state.raceUuid) : null;
+    this.state.attributes.sto = raceDoc?.system?.stoRange?.normal ?? 13;
+    this.state.bp.spentAttribut = 0;
+    // Knappen finns även på yrkessteget (ingen kvalificerar), inte bara på
+    // attribut-steget självt — hoppa dit så spelaren ser resultatet direkt.
     this.stepIndex = this.steps.map((s) => s.id ?? s).indexOf("attribut");
     this.render();
   }
@@ -1415,7 +1449,55 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   static #onSelectNiva(event, target) {
-    this.state.niva = target.closest("[data-niva]")?.dataset.niva ?? this.state.niva;
+    const niva = target.closest("[data-niva]")?.dataset.niva ?? this.state.niva;
+    if (niva !== this.state.niva) {
+      this.state.niva = niva;
+      // Ett bytt nivåval nollställer ev. redan slaget hjältedåd — det hörde
+      // till den GAMLA nivån (t.ex. byte bort från en hjälte-nivå till
+      // "vanlig", som inte har hjältedåd alls) och ska inte tyst hänga kvar.
+      this.state.hjaltedad = { rollCount: 0, rolls: [], bonusBP: 0, bonusHP: 0 };
+    }
+    this.render();
+  }
+
+  /**
+   * Hjältedåd — HH s.6-7. Bara hjälte-nivåerna (inte "vanlig") får slå. 1T6
+   * avgör hur MÅNGA gånger man slår 1T20 mot DODE.hjaltedadTable; varje
+   * träffad rad lägger bonusBP/bonusHP OVANPÅ den vanliga 125-poolen —
+   * fasta tal eller tärningsformler (t.ex. "1T10+10", bokens egen notation,
+   * konverterad via DODE.swedishDiceToRoll). `notes` (t.ex. "+10
+   * Startkapital", "Magiskt vapen", "15 hjältepoäng") pekar på mekanik som
+   * inte är byggd (startkapitalbonus, hjältepoäng alls) — visas som text åt
+   * SL att tillämpa för hand, se DESIGN_DECISIONS.md backlog.
+   */
+  static async #onRollHjaltedad() {
+    const evalBonus = async (value) => {
+      if (typeof value === "number") return value;
+      const roll = await new Roll(CONFIG.DODE.swedishDiceToRoll(value)).evaluate();
+      return roll.total;
+    };
+    const countRoll = await new Roll("1d6").evaluate();
+    const rolls = [];
+    let bonusBP = 0;
+    let bonusHP = 0;
+    for (let i = 0; i < countRoll.total; i++) {
+      const tableRoll = await new Roll("1d20").evaluate();
+      const row = CONFIG.DODE.hjaltedadTable.find((r) => tableRoll.total >= r.range[0] && tableRoll.total <= r.range[1]);
+      if (!row) continue;
+      const rowBP = await evalBonus(row.bonusBP);
+      const rowHP = await evalBonus(row.bonusHP);
+      bonusBP += rowBP;
+      bonusHP += rowHP;
+      rolls.push({ roll: tableRoll.total, name: row.name, bonusBP: rowBP, bonusHP: rowHP, notes: row.notes });
+    }
+    this.state.hjaltedad = { rollCount: countRoll.total, rolls, bonusBP, bonusHP };
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
+      flavor: `Hjältedåd — ${countRoll.total} slag`,
+      content: `<div class="dode-chat-card"><ul>${rolls.map((r) =>
+        `<li><strong>${r.name}</strong> (${r.roll}): +${r.bonusBP} BP, +${r.bonusHP} KP${r.notes ? ` — ${r.notes}` : ""}</li>`
+      ).join("")}</ul></div>`
+    });
     this.render();
   }
 
@@ -1449,9 +1531,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const bp = Math.max(0, Number(this.state.swordHand.bpSpent) || 0);
     const roll = await new Roll("2d6").evaluate();
     this.state.swordHand.roll = roll.total;
-    if (game.settings.get(game.system.id, "showAttributeRollsInChat")) {
-      await roll.toMessage({ flavor: `Svärdshand — 2T6 + ${bp} BP` });
-    }
+    // ⚠ Postades tidigare bara om SL-inställningen "showAttributeRollsInChat"
+    // var på — den inställningen retirerades 2026-08-02 tillsammans med hela
+    // slagsystemet för grundegenskaper (se DODE.attributeBuyCumulative). Detta
+    // slag är oförändrat (RP s.27, 2T6+BP), och postas nu alltid, som övriga
+    // skapandeslag i guiden.
+    await roll.toMessage({ flavor: `Svärdshand — 2T6 + ${bp} BP` });
     this.render();
   }
 
@@ -1625,6 +1710,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const shopDocs = (await DoDECharacterWizard.#resolveContentPacks("startingEquipment"))
       .filter((doc) => doc.effects.size === 0);
     const leftoverSm = this.#equipmentResult(shopDocs, capitalResult).remaining;
+    this.state.bp.spentSvardshand = this.#swordHandBpSpent();
+    this.state.bp.bonusHjaltedad = this.state.hjaltedad.bonusBP;
 
     await actor.update({
       name: this.state.name || actor.name,
@@ -1632,6 +1719,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         kon: this.state.kon,
         niva: this.state.niva,
         bp: this.state.bp,
+        hp: { bonusHjaltedad: this.state.hjaltedad.bonusHP },
         swordHand: this.#swordHandResult().key ?? "hoger",
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,
@@ -1713,6 +1801,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
 
     const { img, prototypeToken } = this.#tokenDefaults(raceDoc, professionDoc);
+    this.state.bp.spentSvardshand = this.#swordHandBpSpent();
+    this.state.bp.bonusHjaltedad = this.state.hjaltedad.bonusBP;
 
     const actor = await Actor.create({
       name: this.state.name || "Ny rollperson",
@@ -1723,6 +1813,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         kon: this.state.kon,
         niva: this.state.niva,
         bp: this.state.bp,
+        hp: { bonusHjaltedad: this.state.hjaltedad.bonusHP },
         swordHand: this.#swordHandResult().key ?? "hoger",
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,

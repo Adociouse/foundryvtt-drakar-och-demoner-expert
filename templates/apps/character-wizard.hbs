@@ -14,8 +14,8 @@
     <ol class="wizard-flow">
       <li><strong>Grunderna</strong> — kön, nivå och namn.</li>
       <li><strong>Ras</strong> — kostar BP och ger egenskapsmodifikationer.</li>
-      <li><strong>Grundegenskaper</strong> — slås med 3T6 (STO 2T6+6).</li>
-      <li><strong>Yrke</strong> — kräver vissa grundegenskapsvärden, därför slås de först.</li>
+      <li><strong>Grundegenskaper</strong> — köps med BP (RP s.23).</li>
+      <li><strong>Yrke</strong> — kräver vissa grundegenskapsvärden, därför köps de först.</li>
       <li><strong>Magiskola</strong> — bara för magiker.</li>
       <li><strong>Särskilda förmågor, socialt stånd och startkapital</strong> — slås fram, kostar BP.</li>
       <li><strong>Ålder</strong> — modifierar grundegenskaper och startkapital.</li>
@@ -56,13 +56,13 @@
 
   {{#if showNiva}}
   <section class="wizard-step">
-    <p class="hint">Välj rollpersonens nivå (Hjältarnas Handbok s.37-39). Nivån styr bakgrundspoäng (BP) — högre nivå ger fler BP att spendera på ras, förmågor, socialt stånd och startkapital senare i guiden. Nivån är en ren narrativ kategori — ingen ytterligare mekanisk bonus utöver BP/EP-poolen.</p>
+    <p class="hint">Välj rollpersonens nivå (Hjältarnas Handbok s.37-39). Alla nivåer delar samma bas på 125 BP (HH s.6) — men hjälte-nivåerna får DESSUTOM slå hjältedåd för bonus-BP och extra KP ovanpå basen.</p>
     <div class="wizard-card-grid">
       {{#each nivaOptions as |option|}}
         <div class="wizard-card {{#if option.selected}}selected{{/if}}" data-niva="{{option.value}}" data-action="selectNiva">
           <img src="{{option.img}}" />
           <div class="wizard-card-name">{{option.label}}</div>
-          <div class="wizard-card-meta">{{option.bp}} BP</div>
+          <div class="wizard-card-meta">{{option.bp}} BP{{#if option.isHero}} + hjältedåd{{/if}}</div>
         </div>
       {{/each}}
     </div>
@@ -70,6 +70,28 @@
       <div class="wizard-detail">
         <h4>{{selectedNivaOption.label}}</h4>
         <p>{{selectedNivaOption.description}}</p>
+      </div>
+    {{/if}}
+    {{#if selectedNivaOption.isHero}}
+      <div class="wizard-hjaltedad">
+        <p class="hint">Hjältedåd (HH s.6-7): slå 1T6 för att avgöra hur många gånger du sedan slår 1T20 mot tabellen — varje träff ger bonus-BP och extra KP ovanpå den vanliga poolen.</p>
+        <button type="button" data-action="rollHjaltedad"><i class="fa-solid fa-dice-d20"></i> Slå hjältedåd</button>
+        {{#if hjaltedad.rolls.length}}
+          <p class="hint">{{hjaltedad.rollCount}} slag — totalt <strong>+{{hjaltedad.bonusBP}} BP</strong>, <strong>+{{hjaltedad.bonusHP}} KP</strong></p>
+          <table class="wizard-summary">
+            <tbody>
+              {{#each hjaltedad.rolls as |r|}}
+                <tr>
+                  <td>{{r.roll}}</td>
+                  <td>{{r.name}}</td>
+                  <td>+{{r.bonusBP}} BP</td>
+                  <td>+{{r.bonusHP}} KP</td>
+                  {{#if r.notes}}<td class="hint">{{r.notes}}</td>{{/if}}
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        {{/if}}
       </div>
     {{/if}}
   </section>
@@ -138,55 +160,42 @@
   {{#if showAttribut}}
   <section class="wizard-step">
     <p class="hint">
-      Slå varje grundegenskap själv med tärningsknappen — eller <em>Slå alla</em> på en gång.
-      {{#if isBestOfThree}}<strong>SL har satt "tre kandidater":</strong> varje slag ger tre värden och du väljer ett.
-      {{else if canReroll}}<strong>SL tillåter omslag</strong> — klicka tärningen igen för att slå om en grundegenskap.
-      {{else}}Ett slag per grundegenskap gäller (SL kan öppna för omslag i systeminställningarna).{{/if}}
+      Köp dina grundegenskaper med BP (RP s.23) — startvärdet 3 (STO: {{selectedRace.name}}s normalvärde) kostar
+      inget, varje steg däröver kostar mer. Rasens modifikation läggs på automatiskt och syns direkt.
+      Spenderat på grundegenskaper hittills: <strong>{{attributeBuy.totalCost}} BP</strong>.
     </p>
-    <button type="button" data-action="rollAllAttributes"><i class="fa-solid fa-dice"></i> Slå alla</button>
     <div class="wizard-attribute-grid">
-      {{#each attributeRows as |row|}}
-        <div class="wizard-attribute {{#unless row.rolled}}not-rolled{{/unless}}" data-attr="{{row.key}}">
+      {{#each attributeBuy.rows as |row|}}
+        <div class="wizard-attribute" data-attr="{{row.key}}">
           <label>{{row.label}}</label>
-          <div class="wizard-attribute-value">{{#if row.rolled}}{{lookup (lookup ../effectiveAttributes row.key) "base"}}{{else}}–{{/if}}</div>
-          <button type="button" data-action="rollAttribute" title="Slå {{row.formula}}{{#if row.rolled}} igen{{/if}}">
-            <i class="fa-solid fa-dice-d6"></i>
-          </button>
-          {{#if row.candidates.length}}
-            <div class="wizard-candidates" title="Välj ett av de tre slagna värdena">
-              {{#each row.candidates as |c|}}
-                <button type="button" class="candidate {{#if c.chosen}}is-chosen{{/if}}"
-                  style="border-color:{{c.color}}"
-                  title="{{c.colorLabel}} tärningar"
-                  data-action="pickAttributeCandidate" data-value="{{c.value}}">{{c.value}}</button>
-              {{/each}}
-            </div>
+          <div class="wizard-skill-buy">
+            <button type="button" data-action="sellAttribute" data-attr="{{row.key}}"
+              data-can-decrease="{{row.canDecrease}}" {{#unless row.canDecrease}}disabled{{/unless}}
+              title="{{#if row.prevRefund}}Sälj ett steg (återbetalar {{row.prevRefund}} BP){{else}}Redan lägst{{/if}}">−</button>
+            <span class="wizard-attribute-value">{{row.value}}</span>
+            <button type="button" data-action="buyAttribute" data-attr="{{row.key}}"
+              data-can-increase="{{row.canIncrease}}" {{#unless row.canIncrease}}disabled{{/unless}}
+              title="{{#if row.nextCost}}Köp ett steg till ({{row.nextCost}} BP){{else}}Redan högst{{/if}}">+</button>
+          </div>
+          {{#if row.raceMod}}
+            <div class="wizard-attribute-mod" title="{{row.modLabel}}">= {{row.total}} ({{row.modLabel}})</div>
           {{/if}}
         </div>
       {{/each}}
     </div>
-    {{#if selectedRace}}
-      <p class="hint">Totalt inkl. rasmod från {{selectedRace.name}} visas i nästa steg.</p>
-    {{/if}}
-    {{!-- Yrkestäckning direkt här, inte bara på yrkessteget. Det är NU spelaren
-          väljer kandidater, så det är nu siffran är användbar — den uppdateras
-          för varje val och visar konsekvensen innan man går vidare. --}}
-    {{#if attributesRolled}}
-      {{#if noProfessionQualifies}}
-        <div class="wizard-blocked">
-          <p><i class="fa-solid fa-triangle-exclamation"></i> <strong>Inga yrkeskrav uppfyllda.</strong>
-          Med de här värdena går inget av de {{professions.length}} yrkena att välja — lägsta kravet i listan är 12.
-          {{#if allowRestart}}Slå om, eller gå vidare och stäm av med SL.{{/if}}</p>
-          {{#if allowRestart}}
-            <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Slå om alla grundegenskaper</button>
-          {{/if}}
-        </div>
-      {{else}}
-        <p class="hint wizard-qualified"><i class="fa-solid fa-user-check"></i>
-        <strong>{{qualifiedCount}} av {{professions.length}}</strong> yrken har uppfyllda grundegenskapskrav med de här värdena.</p>
-      {{/if}}
+    <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Återställ inköp</button>
+
+    {{!-- Yrkestäckning direkt här, inte bara på yrkessteget — siffran uppdateras
+          för varje köp och visar konsekvensen innan man går vidare. --}}
+    {{#if noProfessionQualifies}}
+      <div class="wizard-blocked">
+        <p><i class="fa-solid fa-triangle-exclamation"></i> <strong>Inga yrkeskrav uppfyllda.</strong>
+        Med de här värdena går inget av de {{professions.length}} yrkena att välja — lägsta kravet i listan är 12.
+        Justera dina köp, eller gå vidare och stäm av med SL.</p>
+      </div>
     {{else}}
-      <p class="hint">Slå alla grundegenskaper för att se hur många yrken du kan kvalificera dig för.</p>
+      <p class="hint wizard-qualified"><i class="fa-solid fa-user-check"></i>
+      <strong>{{qualifiedCount}} av {{professions.length}}</strong> yrken har uppfyllda grundegenskapskrav med de här värdena.</p>
     {{/if}}
   </section>
   {{/if}}
@@ -243,21 +252,17 @@
     {{#if isEditMode}}
       <p class="hint">Yrket kan inte bytas i redigeringsläge — det styr vilka yrkesfärdigheter rollpersonen har. Behöver det ändå bytas: be SL dra ett nytt yrke till arket.</p>
     {{else}}
-      <p class="hint">Välj ett yrke. Varje yrke har <strong>grundegenskapskrav</strong> (RP s.11) — de visas på korten och färgas efter om dina framslagna värden räcker. Ett omött krav spärrar inte valet: med 3T6 hamnar man ofta på 10–11 i allt, och då kvalificerar man för inget av de 36 yrkena. Stäm av med SL.</p>
+      <p class="hint">Välj ett yrke. Varje yrke har <strong>grundegenskapskrav</strong> (RP s.11) — de visas på korten och färgas efter om dina köpta värden räcker. Ett omött krav spärrar inte valet: stäm av med SL.</p>
     {{/if}}
     {{#if noProfessionQualifies}}
       <div class="wizard-blocked">
         <p><i class="fa-solid fa-triangle-exclamation"></i> <strong>Inga yrkeskrav är uppfyllda.</strong>
-        Med de framslagna grundegenskaperna kvalificerar rollpersonen sig inte för något av de {{professions.length}} yrkena
+        Med de köpta grundegenskaperna kvalificerar rollpersonen sig inte för något av de {{professions.length}} yrkena
         — lägsta kravet i hela listan är 12.</p>
-        {{#if allowRestart}}
-          <p>Du kan slå om alla grundegenskaper och försöka igen, eller välja ett yrke ändå och stämma av med SL.</p>
-          <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Slå om alla grundegenskaper</button>
-        {{else}}
-          <p>SL har stängt av omslag. Välj ett yrke ändå och stäm av vid bordet.</p>
-        {{/if}}
+        <p>Gå tillbaka och justera dina köp, eller välj ett yrke ändå och stäm av med SL.</p>
+        <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Återställ inköpta grundegenskaper</button>
       </div>
-    {{else if attributesRolled}}
+    {{else}}
       <p class="hint">{{qualifiedCount}} av {{professions.length}} yrken har uppfyllda krav.</p>
     {{/if}}
     {{#each professionGroups as |group|}}
@@ -268,7 +273,8 @@
             <img src="{{profession.img}}" />
             <div class="wizard-card-name">{{profession.name}}</div>
             {{!-- Kravstatus. Omött krav spärrar INTE valet — se #_prepareContext
-                  för varför (3T6 ger ofta noll kvalificerade yrken). --}}
+                  för varför (en snålt köpt rollperson kan ändå landa på noll
+                  kvalificerade yrken). --}}
             <div class="wizard-card-meta wizard-req {{#unless profession.reqMet}}req-unmet{{/unless}}"
                  title="{{#if profession.reqMet}}Grundegenskapskraven är uppfyllda{{else}}Kraven är inte uppfyllda — går att välja ändå, men stäm av med SL{{/if}}">
               {{#each profession.reqCheck.entries as |e|}}<span class="req-entry {{#if e.met}}is-met{{else}}is-unmet{{/if}}">{{e.key}} {{e.required}}{{#unless e.unverified}} ({{e.total}}){{/unless}}</span>{{/each}}
@@ -575,7 +581,9 @@
     </table>
     <table class="wizard-summary">
       <tr><td>BP — start ({{selectedNivaOption.label}})</td><td>{{bp.start}}</td></tr>
+      <tr><td>BP — spenderat på grundegenskaper</td><td>{{state.bp.spentAttribut}}</td></tr>
       <tr><td>BP — spenderat på ras</td><td>{{state.bp.spentRas}}</td></tr>
+      <tr><td>BP — spenderat på svärdshand</td><td>{{state.bp.spentSvardshand}}</td></tr>
       <tr><td>BP — spenderat på socialt stånd</td><td>{{socialStanding.bpSpent}}</td></tr>
       <tr><td>BP — spenderat på startkapital</td><td>{{startCapital.bpSpent}}</td></tr>
       <tr><td>BP — kvar</td><td>{{bp.remaining}}</td></tr>
