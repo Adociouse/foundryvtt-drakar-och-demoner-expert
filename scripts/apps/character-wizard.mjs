@@ -335,6 +335,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     return (this.#magicAccess?.access ?? "none") === "full";
   }
 
+  // Cachad av #attributeBuyResult (varje render) — se #attributeBounds.
+  #stoBounds = null;
+
   #selectedProfessionName = "";
   // Speglat av samma skäl som namnet ovan: yrkesfärdighetssteget behöver hela
   // dokumentet (professionSkills), men actions körs utanför _prepareContext.
@@ -615,24 +618,33 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // guiden visar tydligt vad som inte är uppfyllt och låter bordet bestämma.
     const reqFor = (p) => DoDECharacterWizard.#checkRequirements(
       p.system.requirements, effectiveAttributes);
-    context.professionGroups = PROFESSION_GROUPS
-      .map(([base, label]) => ({
-        label,
-        base,
-        professions: context.professions
-          .filter((p) => (p.system.baseProfession ?? "") === base)
-          .map((p) => {
-            const check = reqFor(p);
-            return { ...p, reqCheck: check, reqMet: check.allMet };
-          })
-      }))
+    // ⚠ RÄTTAT 2026-08-02 (Johan: "10 av 36" visades trots att alla grund-
+    // egenskaper var köpta till 18 — borde ha varit nära 36/36). `allGroups`
+    // byggs HÄR, FÖRE den progressiva avslöjningsfiltreringen, och är källan
+    // för `allProfessions`/`qualifiedCount`/`noProfessionQualifies` nedan.
+    // `context.professionGroups` (kortrutnätet, filtrerat på
+    // `revealedProfessionGroup`) är en SEPARAT, mindre lista för VAD SOM VISAS
+    // — de två fick tidigare dela samma array, vilket gjorde att
+    // täckningssiffran bara räknade de yrken som råkade vara synliga just då
+    // (10, om bara Grundyrken var uppfällt) i stället för alla 36.
+    const allGroups = PROFESSION_GROUPS.map(([base, label]) => ({
+      label,
+      base,
+      professions: context.professions
+        .filter((p) => (p.system.baseProfession ?? "") === base)
+        .map((p) => {
+          const check = reqFor(p);
+          return { ...p, reqCheck: check, reqMet: check.allMet };
+        })
+    }));
+    context.professionGroups = allGroups
       .filter((g) => g.professions.length && (!g.base || g.base === revealedProfessionGroup));
     // Kan spelaren över huvud taget kvalificera sig för NÅGOT yrke? Med köpta
     // grundegenskaper är svaret spelarens eget val snarare än otur, men en
     // för snålt köpt rollperson kan ändå landa här — #onRestartAttributes
     // erbjuds ovillkorligt (inget SL-inställning-villkor längre, se
     // dode.mjs — allowRestartIfUnqualified retirerades 2026-08-02).
-    const allProfessions = context.professionGroups.flatMap((g) => g.professions);
+    const allProfessions = allGroups.flatMap((g) => g.professions);
     context.attributesRolled = Object.values(this.state.attributes).every((v) => v !== null);
     context.noProfessionQualifies = context.attributesRolled
       && allProfessions.length > 0
@@ -1349,6 +1361,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const stoNormal = selectedRace?.system?.stoRange?.normal ?? 13;
     const stoMin = Math.max(selectedRace?.system?.stoRange?.min ?? (stoNormal - 5), stoNormal - 5);
     const stoMax = Math.min(selectedRace?.system?.stoRange?.max ?? (stoNormal + 5), stoNormal + 5);
+    // Cachat här (i stället för att slå upp rasen på nytt i #attributeBounds)
+    // så köp-/säljhandlerns kapplöpningsskydd inte behöver ett async
+    // dokumentuppslag — se #attributeBounds docblock.
+    this.#stoBounds = { min: stoMin, max: stoMax };
     const rows = [...ROLLABLE_ATTRIBUTES, "sto"].map((key) => {
       const isSto = key === "sto";
       const value = this.state.attributes[key];
@@ -1387,9 +1403,34 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.state.bp.spentAttribut = total;
   }
 
+  /**
+   * Räknar fram (min, max) för en grundegenskap på nytt, direkt ur `state` —
+   * ⚠ RÄTTAT 2026-08-02: `#onBuyAttribute`/`#onSellAttribute` litade tidigare
+   * ENBART på knappens `data-can-increase`/`data-can-decrease`, ett
+   * ögonblicksvärde från SENASTE rendering. Ett verifierat kapplöpningsfel:
+   * flera klick avfyrade snabbare än `this.render()` (async) hann uppdatera
+   * knappens `disabled`-attribut hann köra igenom vardera sin `#onBuyAttribute`
+   * mot samma, ännu ogiltigförklarade DOM-knapp — värden gick förbi 18 (upp
+   * till 26-29 uppmätt) och tabellslagningen (`DODE.attributeBuyCumulative`,
+   * som bara definierar 3-18) gav `undefined`-kostnader däröver. Handlers
+   * kollar nu gränsen mot `this.state` direkt, inte mot DOM:en, så ett
+   * kapplöpt extra klick blir ett no-op istället för ett hål i schemat.
+   */
+  #attributeBounds(key) {
+    if (key !== "sto") return { min: 3, max: 18 };
+    // Cachad av senaste #attributeBuyResult-anropet (varje render, se
+    // _prepareContext) — undviker ett async rasuppslag inuti en synkron
+    // klick-handler. Fallback om steget aldrig renderats än är osannolik
+    // (knappen kräver att attribut-steget redan visats) men ofarlig: samma
+    // ±5-runt-13-standard som resten av koden faller tillbaka på.
+    return this.#stoBounds ?? { min: 8, max: 18 };
+  }
+
   static async #onBuyAttribute(event, target) {
     const key = target.dataset.attr;
-    if (!key || target.dataset.canIncrease !== "true") return;
+    if (!key) return;
+    const { max } = this.#attributeBounds(key);
+    if (this.state.attributes[key] >= max) return;
     this.state.attributes[key] += 1;
     await this.#syncAttributeSpend();
     this.render();
@@ -1397,7 +1438,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
   static async #onSellAttribute(event, target) {
     const key = target.dataset.attr;
-    if (!key || target.dataset.canDecrease !== "true") return;
+    if (!key) return;
+    const { min } = this.#attributeBounds(key);
+    if (this.state.attributes[key] <= min) return;
     this.state.attributes[key] -= 1;
     await this.#syncAttributeSpend();
     this.render();
