@@ -1555,10 +1555,14 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       rolls.push({ roll: result, name: row.name, description: row.description, bonusBP: rowBP, bonusHP: rowHP, notes: row.notes });
     }
     this.state.hjaltedad = { rollCount: count, rolls, bonusBP, bonusHP };
+    // Ren text, INGA HTML-taggar — den här beskrivningen visas och redigeras
+    // som vanlig text i en <textarea> på rollformuläret (character-sheet.hbs),
+    // inte via en rich text-editor. `<em>`/`<strong>` hade bara synts som
+    // bokstavliga hakparenteser för SL, inte som formatering.
     this.state.hjaltedadAbilities = rolls.map((r) => ({
       name: r.name,
       source: CONFIG.DODE.hjaltedadAbilitySource,
-      description: `${r.description}${r.notes ? ` <em>(${r.notes})</em>` : ""} <strong>+${r.bonusBP} BP, +${r.bonusHP} KP.</strong>`,
+      description: `${r.description}${r.notes ? ` (${r.notes})` : ""} +${r.bonusBP} BP, +${r.bonusHP} KP.`,
       slotId: foundry.utils.randomID()
     }));
     await ChatMessage.create({

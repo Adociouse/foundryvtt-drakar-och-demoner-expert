@@ -166,9 +166,12 @@
   <ol class="skill-list">
     {{#each system.specialAbilities as |ability i|}}
       <li class="skill-row ability-row" data-index="{{i}}">
-        <input type="text" name="system.specialAbilities.{{i}}.name" value="{{ability.name}}" placeholder="Namn" class="skill-name" />
-        <input type="text" name="system.specialAbilities.{{i}}.description" value="{{ability.description}}" placeholder="Beskrivning" class="ability-description" />
-        <button type="button" data-action="deleteAbility" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+        <div class="ability-row-top">
+          <input type="text" name="system.specialAbilities.{{i}}.name" value="{{ability.name}}" placeholder="Namn" class="skill-name" />
+          {{#if ability.source}}<span class="ability-source hint" title="Källa">{{ability.source}}</span>{{/if}}
+          <button type="button" data-action="deleteAbility" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+        </div>
+        <textarea name="system.specialAbilities.{{i}}.description" placeholder="Beskrivning" class="ability-description" rows="2">{{ability.description}}</textarea>
       </li>
     {{else}}
       <li class="skill-row-empty">Inga särskilda förmågor ännu.</li>

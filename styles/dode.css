@@ -230,6 +230,34 @@
   padding: 0.25rem;
 }
 
+/* Särskilda förmågor: namn+källa+radera på en rad, beskrivningen får en egen
+   rad som en riktig <textarea> — GM måste kunna läsa och redigera flera
+   meningars text (t.ex. hjältedåds fulla boktext), inte bara ett kort namn. */
+.dode.sheet .ability-row {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.2rem;
+}
+
+.dode.sheet .ability-row-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dode.sheet .ability-source {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.dode.sheet .ability-description {
+  width: 100%;
+  resize: vertical;
+  font: inherit;
+  min-height: 2.4em;
+}
+
 .dode-roll-card {
   border: 1px solid var(--color-border-light-tertiary);
   border-radius: 4px;
