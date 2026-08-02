@@ -147,6 +147,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       restartAttributes: DoDECharacterWizard.#onRestartAttributes,
       selectKon: DoDECharacterWizard.#onSelectKon,
       selectNiva: DoDECharacterWizard.#onSelectNiva,
+      rollHjaltedadCount: DoDECharacterWizard.#onRollHjaltedadCount,
       rollHjaltedad: DoDECharacterWizard.#onRollHjaltedad,
       selectRace: DoDECharacterWizard.#onSelectRace,
       selectProfession: DoDECharacterWizard.#onSelectProfession,
@@ -346,11 +347,6 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     niva: "vanlig",
     name: "",
     ageCategory: "Mogen",
-    // Hjältedåd (HH s.6-7) — bara hjälte-nivåerna, se #onRollHjaltedad. `rolls`
-    // är bara UI-detalj för sessionen (visar vilken rad varje slag träffade);
-    // det som faktiskt persisteras är bonusBP/bonusHP, samma "aggregat inte
-    // historik"-princip som spentRas/spentFormagor.
-    hjaltedad: { rollCount: 0, rolls: [], bonusBP: 0, bonusHP: 0 },
     // null = inte köpt än; #ensureAttributesInitialized sätter baslinjen
     // (3, respektive rasens stoRange.normal) första gången rasen är känd.
     attributes: { sty: null, sto: null, fys: null, smi: null, int: null, psy: null, kar: null },
@@ -369,10 +365,26 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // de härleds från socialStanding.bpSpent/startCapital.bpSpent nedan (samma
     // enda-källa-princip som DataModellens prepareDerivedData använder).
     bp: { spentRas: 0, spentFormagor: 0, spentFardigheter: 0, spentAttribut: 0, spentSvardshand: 0 },
-    // Hjältedåd (HH s.6-7) — bara hjälte-nivåer, inte "vanlig". 1T6 rullar
-    // fram ANTALET 1T20-slag mot DODE.hjaltedadTable; bonusBP/bonusHP är
-    // SUMMAN av alla raderna, läggs på ovanpå de fasta 125 (se #bpLedger).
+    // Hjältedåd (HH s.6-7) — bara hjälte-nivåer, inte "vanlig". EN TVÅSTEGS-
+    // RAKET (Johan 2026-08-02): #onRollHjaltedadCount slår 1T6 och sätter
+    // rollCount; #onRollHjaltedad slår sedan just så många 1T20 mot
+    // DODE.hjaltedadTable in i `rolls`. bonusBP/bonusHP är SUMMAN av alla
+    // raderna, läggs på ovanpå de fasta 125 (se #bpLedger). `rolls` (med full
+    // beskrivningstext per rad) är bara UI-detalj för DENNA session — det som
+    // faktiskt persisteras på skapandet är bonusBP/bonusHP HÄR, plus en kopia
+    // av varje rad som en riktig specialAbilities-post i hjaltedadAbilities
+    // nedan (så resultatet syns på rollformuläret i spel, inte bara i guiden).
     hjaltedad: { rollCount: 0, rolls: [], bonusBP: 0, bonusHP: 0 },
+    // Hjältedådens resultat speglade som specialAbilities-formade rader
+    // ({name, source, description, slotId}) — HÅLLS ISÄR från
+    // `specialAbilities` nedan (formagor-stegets fasta, nivåstyrda slots)
+    // eftersom #specialAbilitySlots() annars skulle trunkera dem vid
+    // nivåbyte. Byggs av #onRollHjaltedad; #loadStateFromActor läser tillbaka
+    // tidigare sparade rader (source === DODE.hjaltedadAbilitySource) hit,
+    // inte in i specialAbilities, så ett omslag i redigeringsläge inte äter
+    // dem. Sparas som EXTRA specialAbilities-poster vid #onCreateCharacter/
+    // #applyToActor (se dessa).
+    hjaltedadAbilities: [],
     // Svärdshand — RP s.27, samma 2T6+BP-mekanik som socialt stånd på samma sida.
     swordHand: { roll: 0, bpSpent: 0, granted: false },
     socialStanding: { roll: 0, bpSpent: 0 },
@@ -515,6 +527,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       selected: option.value === this.state.niva
     }));
     context.selectedNivaOption = context.nivaOptions.find((option) => option.selected) ?? null;
+    // Johans fynd #2 (2026-08-02): EP-budgeten vid start beror på nivå (INTE bara
+    // ålder), men det syntes ingenstans i nivåstegets sammanfattning. Visar alla
+    // fyra åldersrader för den VALDA nivån — ålder väljs först i ett senare steg,
+    // så exakt EP är inte känt än, men skillnaden mellan nivåerna är det.
+    context.epByAge = CONFIG.DODE.epBudgetTable[this.state.niva] ?? null;
     context.hjaltedad = this.state.hjaltedad;
     const socialResult = this.#socialStandingResult();
     const capitalResult = this.#startCapitalResult(socialResult);
@@ -703,13 +720,27 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       bonusBP: sys.bp?.bonusHjaltedad ?? 0,
       bonusHP: sys.hp?.bonusHjaltedad ?? 0
     };
+    // Hjältedåd-rader (source === DODE.hjaltedadAbilitySource) hålls ISÄR
+    // från de vanliga formagor-slotsen nedan — de läses tillbaka rakt av,
+    // OFÖRÄNDRADE (slotId bevarad), så #specialAbilitySlots() aldrig ser dem
+    // och riskerar trunkera dem vid ett nivåbyte i redigeringsläge. Se
+    // state-fältets docblock ovan.
+    const allAbilities = sys.specialAbilities ?? [];
+    this.state.hjaltedadAbilities = allAbilities
+      .filter((a) => a.source === CONFIG.DODE.hjaltedadAbilitySource)
+      .map((a) => ({
+        name: a.name ?? "", source: a.source, description: a.description ?? "",
+        slotId: a.slotId || foundry.utils.randomID()
+      }));
     // ⚠ `slotId` läses tillbaka rakt av (aldrig ny) — se schemakommentaren i
     // actor-character.mjs. Ett nytt id här skulle göra en befintlig formaga-
     // post föräldralös och skapa en dubblett vid nästa #applyToActor.
     // `effect` läses INTE tillbaka (den avgörs av namnet/tabellslaget, inte
     // lagrad på specialAbilities) — ett omslag i redigeringsläge sätter det
     // på nytt via #onRollFormaga; tills dess visas raden utan känd effekt.
-    this.state.specialAbilities = (sys.specialAbilities ?? []).map((a) => ({
+    this.state.specialAbilities = allAbilities
+      .filter((a) => a.source !== CONFIG.DODE.hjaltedadAbilitySource)
+      .map((a) => ({
       name: a.name ?? "", source: a.source ?? "", description: a.description ?? "",
       bpSpent: 1, rollResult: null, slotId: a.slotId || foundry.utils.randomID(),
       effect: null, effectChoices: []
@@ -1456,47 +1487,88 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       // till den GAMLA nivån (t.ex. byte bort från en hjälte-nivå till
       // "vanlig", som inte har hjältedåd alls) och ska inte tyst hänga kvar.
       this.state.hjaltedad = { rollCount: 0, rolls: [], bonusBP: 0, bonusHP: 0 };
+      this.state.hjaltedadAbilities = [];
     }
     this.render();
   }
 
   /**
-   * Hjältedåd — HH s.6-7. Bara hjälte-nivåerna (inte "vanlig") får slå. 1T6
-   * avgör hur MÅNGA gånger man slår 1T20 mot DODE.hjaltedadTable; varje
-   * träffad rad lägger bonusBP/bonusHP OVANPÅ den vanliga 125-poolen —
-   * fasta tal eller tärningsformler (t.ex. "1T10+10", bokens egen notation,
-   * konverterad via DODE.swedishDiceToRoll). `notes` (t.ex. "+10
-   * Startkapital", "Magiskt vapen", "15 hjältepoäng") pekar på mekanik som
-   * inte är byggd (startkapitalbonus, hjältepoäng alls) — visas som text åt
-   * SL att tillämpa för hand, se DESIGN_DECISIONS.md backlog.
+   * Hjältedåd, STEG 1 av 2 — HH s.6-7. Bara hjälte-nivåerna (inte "vanlig")
+   * får slå. Slår 1T6 för att avgöra hur MÅNGA gånger man sedan slår 1T20 mot
+   * DODE.hjaltedadTable (#onRollHjaltedad, steg 2). Johans fynd 2026-08-02:
+   * en tidigare version slog och summerade båda stegen i EN knapptryckning
+   * utan att någonsin posta 1T6-slaget till chatten — resultatet syntes bara
+   * som en redan uträknad siffra, och Dice So Nice fick aldrig en riktig
+   * `ChatMessage.create({rolls:[...]})` att haka i (samma klass av bugg som
+   * DESIGN_DECISIONS.md redan dokumenterat en gång för grundegenskapsslagen).
+   * Separata knapptryckningar + separata chattkort med `rolls` löser båda:
+   * 1T6-resultatet syns för sig, och tärningarna rullar synligt i båda stegen.
+   */
+  static async #onRollHjaltedadCount() {
+    const countRoll = await new Roll("1d6").evaluate();
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
+      flavor: "Hjältedåd (HH s.6-7) — hur många gånger får du slå?",
+      rolls: [countRoll],
+      sound: CONFIG.sounds.dice
+    });
+    this.state.hjaltedad = { rollCount: countRoll.total, rolls: [], bonusBP: 0, bonusHP: 0 };
+    this.state.hjaltedadAbilities = [];
+    this.render();
+  }
+
+  /**
+   * Hjältedåd, STEG 2 av 2. Slår `state.hjaltedad.rollCount` stycken 1T20 i EN
+   * pool-formel (samma "tärningshink"-teknik som tidigare validerats mot Dice
+   * So Nice för grundegenskapsslagen — `roll.terms[0].rolls` ger varje
+   * enskild tärnings resultat, `ChatMessage.create({rolls:[pool]})` animerar
+   * alla samtidigt i ETT kort i stället för N separata). Varje träffad rad
+   * lägger bonusBP/bonusHP OVANPÅ den vanliga 125-poolen — fasta tal eller
+   * tärningsformler (t.ex. "1T10+10", bokens egen notation, konverterad via
+   * DODE.swedishDiceToRoll). Radens fulla boktext (`description`) och eventuella
+   * `notes` (t.ex. "+10 Startkapital", "Magiskt vapen", "15 hjältepoäng" — de
+   * senare pekar på mekanik som inte är byggd, se DESIGN_DECISIONS.md backlog
+   * 58) sparas i `hjaltedadAbilities` som riktiga specialAbilities-rader, så
+   * spelaren ser VARFÖR bonusen finns, inte bara siffran — och de följer med
+   * till rollformuläret i spel (se #onCreateCharacter/#applyToActor).
    */
   static async #onRollHjaltedad() {
+    const count = this.state.hjaltedad.rollCount;
+    if (!count) return;
     const evalBonus = async (value) => {
       if (typeof value === "number") return value;
       const roll = await new Roll(CONFIG.DODE.swedishDiceToRoll(value)).evaluate();
       return roll.total;
     };
-    const countRoll = await new Roll("1d6").evaluate();
+    const pool = await new Roll(`{${Array(count).fill("1d20").join(",")}}`).evaluate();
+    const dieResults = pool.terms[0].rolls.map((r) => r.total);
     const rolls = [];
     let bonusBP = 0;
     let bonusHP = 0;
-    for (let i = 0; i < countRoll.total; i++) {
-      const tableRoll = await new Roll("1d20").evaluate();
-      const row = CONFIG.DODE.hjaltedadTable.find((r) => tableRoll.total >= r.range[0] && tableRoll.total <= r.range[1]);
+    for (const result of dieResults) {
+      const row = CONFIG.DODE.hjaltedadTable.find((r) => result >= r.range[0] && result <= r.range[1]);
       if (!row) continue;
       const rowBP = await evalBonus(row.bonusBP);
       const rowHP = await evalBonus(row.bonusHP);
       bonusBP += rowBP;
       bonusHP += rowHP;
-      rolls.push({ roll: tableRoll.total, name: row.name, bonusBP: rowBP, bonusHP: rowHP, notes: row.notes });
+      rolls.push({ roll: result, name: row.name, description: row.description, bonusBP: rowBP, bonusHP: rowHP, notes: row.notes });
     }
-    this.state.hjaltedad = { rollCount: countRoll.total, rolls, bonusBP, bonusHP };
+    this.state.hjaltedad = { rollCount: count, rolls, bonusBP, bonusHP };
+    this.state.hjaltedadAbilities = rolls.map((r) => ({
+      name: r.name,
+      source: CONFIG.DODE.hjaltedadAbilitySource,
+      description: `${r.description}${r.notes ? ` <em>(${r.notes})</em>` : ""} <strong>+${r.bonusBP} BP, +${r.bonusHP} KP.</strong>`,
+      slotId: foundry.utils.randomID()
+    }));
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
-      flavor: `Hjältedåd — ${countRoll.total} slag`,
+      flavor: `Hjältedåd — resultat (${count} slag)`,
       content: `<div class="dode-chat-card"><ul>${rolls.map((r) =>
         `<li><strong>${r.name}</strong> (${r.roll}): +${r.bonusBP} BP, +${r.bonusHP} KP${r.notes ? ` — ${r.notes}` : ""}</li>`
-      ).join("")}</ul></div>`
+      ).join("")}</ul></div>`,
+      rolls: [pool],
+      sound: CONFIG.sounds.dice
     });
     this.render();
   }
@@ -1728,9 +1800,17 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         // minskar aldrig; `currency` är det som spenderas i spel.
         currency: CONFIG.DODE.kmToPurse(CONFIG.DODE.silverToKm(Math.max(0, leftoverSm))),
         ep: { spent: skillPreview.epSpent },
-        specialAbilities: this.state.specialAbilities
-          .filter((a) => a.name.trim().length > 0)
-          .map((a) => ({ name: a.name, source: a.source, description: a.description })),
+        // Hjältedåd-rader (hjaltedadAbilities) läggs på OVANPÅ formagor-stegets
+        // egna, fasta slots — se state-fältets docblock för varför de hålls
+        // isär under hela wizard-sessionen.
+        specialAbilities: [
+          ...this.state.specialAbilities
+            .filter((a) => a.name.trim().length > 0)
+            .map((a) => ({ name: a.name, source: a.source, description: a.description })),
+          ...this.state.hjaltedadAbilities.map((a) => ({
+            name: a.name, source: a.source, description: a.description, slotId: a.slotId
+          }))
+        ],
         lifeGoal: this.state.lifeGoalCustom.trim() || this.state.lifeGoal,
         attributes: {
           sty: { value: this.state.attributes.sty },
@@ -1820,8 +1900,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         ep: { spent: skillPreview.epSpent },
         // Bara ifyllda förmågerader sparas — tomma slots (spelaren lämnade en
         // eller flera outnyttjade) skräpar annars ner arkets kommande
-        // förmågelista med tomma rader.
-        specialAbilities: this.state.specialAbilities.filter((a) => a.name.trim().length > 0),
+        // förmågelista med tomma rader. Hjältedåd-rader läggs på ovanpå, se
+        // state-fältets docblock.
+        specialAbilities: [
+          ...this.state.specialAbilities.filter((a) => a.name.trim().length > 0),
+          ...this.state.hjaltedadAbilities
+        ],
         lifeGoal: this.state.lifeGoalCustom.trim() || this.state.lifeGoal,
         attributes: {
           sty: { value: this.state.attributes.sty },

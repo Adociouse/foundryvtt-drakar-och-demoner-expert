@@ -70,27 +70,43 @@
       <div class="wizard-detail">
         <h4>{{selectedNivaOption.label}}</h4>
         <p>{{selectedNivaOption.description}}</p>
+        {{#if epByAge}}
+          <p class="hint">Erfarenhetspoäng vid skapande beror på BÅDE nivå och ålder (HH s.8) — ålder väljs i ett senare steg, men nivån ensam avgör redan nu vilken av dessa rader du hamnar på:
+            Ung <strong>{{lookup epByAge "Ung"}}</strong> · Mogen <strong>{{lookup epByAge "Mogen"}}</strong> · Medelålders <strong>{{lookup epByAge "Medelålders"}}</strong> · Gammal <strong>{{lookup epByAge "Gammal"}}</strong> EP.
+          </p>
+        {{/if}}
       </div>
     {{/if}}
     {{#if selectedNivaOption.isHero}}
       <div class="wizard-hjaltedad">
-        <p class="hint">Hjältedåd (HH s.6-7): slå 1T6 för att avgöra hur många gånger du sedan slår 1T20 mot tabellen — varje träff ger bonus-BP och extra KP ovanpå den vanliga poolen.</p>
-        <button type="button" data-action="rollHjaltedad"><i class="fa-solid fa-dice-d20"></i> Slå hjältedåd</button>
+        <p class="hint">Hjältedåd (HH s.6-7) ger bonus-BP och extra KP ovanpå den vanliga poolen — en tvåstegsraket: först 1T6 för att avgöra HUR MÅNGA gånger du får slå, sedan just så många 1T20 mot tabellen.</p>
+
+        {{#unless hjaltedad.rollCount}}
+          <button type="button" data-action="rollHjaltedadCount"><i class="fa-solid fa-dice-d6"></i> 1. Slå 1T6 — hur många hjältedåd?</button>
+        {{/unless}}
+
+        {{#if hjaltedad.rollCount}}
+          {{#unless hjaltedad.rolls.length}}
+            <p class="hint">1T6 gav <strong>{{hjaltedad.rollCount}}</strong> — du får slå {{hjaltedad.rollCount}} gånger på hjältedådstabellen.</p>
+            <button type="button" data-action="rollHjaltedad"><i class="fa-solid fa-dice-d20"></i> 2. Slå {{hjaltedad.rollCount}}T20 mot tabellen</button>
+          {{/unless}}
+        {{/if}}
+
         {{#if hjaltedad.rolls.length}}
-          <p class="hint">{{hjaltedad.rollCount}} slag — totalt <strong>+{{hjaltedad.bonusBP}} BP</strong>, <strong>+{{hjaltedad.bonusHP}} KP</strong></p>
-          <table class="wizard-summary">
-            <tbody>
-              {{#each hjaltedad.rolls as |r|}}
-                <tr>
-                  <td>{{r.roll}}</td>
-                  <td>{{r.name}}</td>
-                  <td>+{{r.bonusBP}} BP</td>
-                  <td>+{{r.bonusHP}} KP</td>
-                  {{#if r.notes}}<td class="hint">{{r.notes}}</td>{{/if}}
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
+          <p class="hint">{{hjaltedad.rollCount}} slag — totalt <strong>+{{hjaltedad.bonusBP}} BP</strong>, <strong>+{{hjaltedad.bonusHP}} KP</strong>. Sparas automatiskt som särskilda förmågor på rollformuläret.</p>
+          <ul class="wizard-hjaltedad-results">
+            {{#each hjaltedad.rolls as |r|}}
+              <li>
+                <div class="wizard-hjaltedad-result-head">
+                  <strong>{{r.roll}}: {{r.name}}</strong>
+                  <span>+{{r.bonusBP}} BP, +{{r.bonusHP}} KP</span>
+                </div>
+                <p class="hint">{{r.description}}</p>
+                {{#if r.notes}}<p class="hint"><em>{{r.notes}} — inte automatiskt tillämpat, se anteckning på rollpersonen.</em></p>{{/if}}
+              </li>
+            {{/each}}
+          </ul>
+          <button type="button" class="wizard-secondary-action" data-action="rollHjaltedadCount"><i class="fa-solid fa-rotate"></i> Slå om från början</button>
         {{/if}}
       </div>
     {{/if}}
