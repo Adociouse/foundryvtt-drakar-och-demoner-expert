@@ -135,7 +135,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     id: "dode-character-wizard",
     tag: "form",
     classes: ["dode", "sheet", "character-wizard"],
-    position: { width: 640, height: 640 },
+    // Johan 2026-08-02: 640×640 var för litet i praktiken (samma anledning
+    // som rollformuläret bumpades till 900×1000) — särskilt sena steg med
+    // kortrutnät (yrke: upp till 19 kort) och hjältedåd-resultatlistan.
+    // `resizable:true` sedan tidigare, det här är bara ett bekvämare default.
+    position: { width: 900, height: 1000 },
     window: { title: "Ny rollperson", resizable: true },
     actions: {
       nextStep: DoDECharacterWizard.#onNextStep,
