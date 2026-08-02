@@ -29,7 +29,9 @@ The AE system now covers four modifier sources beyond race/age, each tagged with
 - **Spell** (`besvarjelse`): a `spellEffect[]` (AE change definitions) + `spellDuration` (rounds) schema. `DoDEActor#applySpellEffect()` creates a temporary embedded AE (`duration.rounds`, `flags.<system.id>.source: "spell"`, `flags.<system.id>.spellName`). The cast→apply wiring is a deliberate stub — the method is callable but not auto-invoked from `castSpell()` yet (targeting/hit logic is combat, fas 6+).
 - **Scene** (`scripts/utils/scene-effects.mjs`, `game.dode.SceneEffects`): `applyToScene(effectData)` / `removeFromScene(name)` apply/remove AEs across all actors with tokens on the active scene, tagged `flags.<system.id>.source: "scene"`.
 
-Still **not** covered: skill modifiers (planned, requires `flags.<system.id>.skillModifiers` / `effectiveFv` on fardighet) and curse-specific tooling. A visual ActiveEffect editor on the custom item sheets is also not built — `formaga` AEs and spell `spellEffect[]` are authored via `_source` JSON / the API for now.
+Still **not** covered: curse-specific tooling, and no visual ActiveEffect editor exists on the custom item sheets — `formaga` AEs and spell `spellEffect[]` are authored via `_source` JSON / the API for now.
+
+**Skill modifiers (previously listed here as "not covered") are done as of 2026-07-31 — but NOT through this AE system.** Backlog 7/36 found that embedded Items genuinely can't be AE targets (a transfer AE's `key` only resolves against the actor's own schema), so `formaga`/`utrustning` items instead carry a plain `system.skillModifiers` data field, summed live by a getter on `actor-character.mjs` — a second, deliberately separate modifier pipeline running alongside the AE one described above, not an extension of it. See `docs/dev/ARCHITECTURE.md` for the full diagram of both pipelines side by side, and backlog 7/36 below for the write-up.
 
 ### Race and profession as embedded Items with transfer AEs
 
