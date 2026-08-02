@@ -32,6 +32,7 @@ portrait, highly detailed
 - **`muted earthy color palette with warm amber highlights`** — varm dämpad jordton är husstilen. Kalla/blå paletter bara när motivet kräver det (mörkeralv, frostmiljö), och även då dämpat.
 - **`waist-up portrait` + `centered square composition`** — midjebild, centrerad, 1:1.
 - **`portrait icon`** — orden spelar roll; de ger den inramade ikonkänslan snarare än en scen.
+- **Ingen dekorativ bildram/kant** — Johan hittade 2026-08-02 att flera porträtt (bl.a. `morkeralv-man.png`) fått en vit, rundad "polaroid"-ram runt hela bilden trots att `dark blurred background` följdes ordagrant — bakgrunden i sig var mörk, men modellen la ändå på en ljus inramning runt kanten. Pixelsampling i fyra hörn missar detta (rundade hörn faller utanför själva ramen och samplar svart/transparent), så sampla ALLTID flera punkter längs alla fyra kanterna (inte bara hörnen) när porträtt verifieras. Lägg till `no border, no frame, edge-to-edge image, full bleed` i slutet av prompten för att motverka det.
 
 ## Andra motivtyper
 
