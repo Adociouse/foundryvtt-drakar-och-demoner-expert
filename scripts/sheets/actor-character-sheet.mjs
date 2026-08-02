@@ -586,10 +586,14 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
 
     const bpSpent = Math.max(1, Math.min(40, Number(result.bpSpent) || 1));
     const roll = await new Roll(`2d20+${bpSpent}`).evaluate();
-    await roll.toMessage({
+    const message = await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: game.i18n.localize("DODE.Ability.Roll")
     });
+    // Se CONFIG.DODE.waitForDiceAnimation — regel för alla slag i systemet,
+    // DESIGN_DECISIONS.md §6. Utan väntan hinner arket visa den framslagna
+    // förmågan innan tärningarna hunnit landa i Dice So Nice.
+    await CONFIG.DODE.waitForDiceAnimation(message);
     const entry = CONFIG.DODE.rollSpecialAbility(roll.total);
     const effect = entry?.effect ?? null;
 

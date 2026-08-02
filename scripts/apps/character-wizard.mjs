@@ -1543,35 +1543,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // faktiskt slutat rulla, eftersom DSN:s animation körs asynkront vid sidan
     // om chattkortets skapande, inte inuti det await:et. `this.render()` (som
     // avslöjar "du fick N" och nästa knapp) väntar nu på
-    // `waitFor3DAnimationByMessageID` — se #waitForDiceAnimation.
-    await this.#waitForDiceAnimation(message);
+    // CONFIG.DODE.waitForDiceAnimation — se den helperns docblock i
+    // config.mjs för hela regeln (gäller nu ALLA slag i systemet, inte bara
+    // hjältedåd, se DESIGN_DECISIONS.md §6).
+    await CONFIG.DODE.waitForDiceAnimation(message);
     this.state.hjaltedad = { rollCount: countRoll.total, rolls: [], bonusBP: 0, bonusHjaltepoang: 0 };
     this.state.hjaltedadAbilities = [];
     this.render();
-  }
-
-  /**
-   * Väntar in Dice So Nice-animationen för ett specifikt chattkort innan
-   * anroparen avslöjar resultatet i UI:t (se #onRollHjaltedadCount/
-   * #onRollHjaltedad) — annars känns det som att texten dyker upp FÖRE
-   * tärningen landat, eftersom `ChatMessage.create()` löser ut så fort
-   * meddelandet är skapat i databasen, inte när DSN:s ~2s-animation är klar.
-   * No-op om DSN inte är installerat (`game.dice3d` saknas då helt).
-   *
-   * ⚠ Kapslad i en 4s timeout (`Promise.race`) — bekräftat vid liveverifiering
-   * (2026-08-02) att `waitFor3DAnimationByMessageID` ALDRIG löser ut om fliken
-   * är dold (`document.hidden`), eftersom DSN:s Three.js-renderloop är
-   * bunden till `requestAnimationFrame`, som webbläsaren pausar helt för
-   * bakgrundsflikar. Utan timeouten hade guiden kunnat fastna permanent om
-   * spelaren bytte flik mitt i ett slag — en riktig risk, inte bara ett
-   * testartefakt.
-   */
-  async #waitForDiceAnimation(message) {
-    if (!game.dice3d || !message?.id) return;
-    await Promise.race([
-      game.dice3d.waitFor3DAnimationByMessageID(message.id),
-      new Promise((resolve) => setTimeout(resolve, 4000))
-    ]);
   }
 
   /**
@@ -1622,11 +1600,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       rolls: [pool],
       sound: CONFIG.sounds.dice
     });
-    // Se #waitForDiceAnimation — pool-tärningarna (N stycken 1T20) tar sin
-    // tid att landa i DSN, och state sätts inte förrän animationen är klar
-    // så att resultatlistan (med sin fulla boktext) inte dyker upp innan
+    // Se CONFIG.DODE.waitForDiceAnimation — pool-tärningarna (N stycken 1T20)
+    // tar sin tid att landa i DSN, och state sätts inte förrän animationen är
+    // klar så att resultatlistan (med sin fulla boktext) inte dyker upp innan
     // spelaren sett vilka tal tärningarna faktiskt visar.
-    await this.#waitForDiceAnimation(message);
+    await CONFIG.DODE.waitForDiceAnimation(message);
     this.state.hjaltedad = { rollCount: count, rolls, bonusBP, bonusHjaltepoang };
     // Ren text, INGA HTML-taggar — den här beskrivningen visas och redigeras
     // som vanlig text i en <textarea> på rollformuläret (character-sheet.hbs),
@@ -1670,13 +1648,18 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   static async #onRollSwordHand() {
     const bp = Math.max(0, Number(this.state.swordHand.bpSpent) || 0);
     const roll = await new Roll("2d6").evaluate();
-    this.state.swordHand.roll = roll.total;
     // ⚠ Postades tidigare bara om SL-inställningen "showAttributeRollsInChat"
     // var på — den inställningen retirerades 2026-08-02 tillsammans med hela
     // slagsystemet för grundegenskaper (se DODE.attributeBuyCumulative). Detta
     // slag är oförändrat (RP s.27, 2T6+BP), och postas nu alltid, som övriga
     // skapandeslag i guiden.
-    await roll.toMessage({ flavor: `Svärdshand — 2T6 + ${bp} BP` });
+    const message = await roll.toMessage({ flavor: `Svärdshand — 2T6 + ${bp} BP` });
+    // Johan 2026-08-02: samma "text före tärning"-bugg som hjältedåd hade,
+    // funnen på svärdshanden — se CONFIG.DODE.waitForDiceAnimation (nu regel
+    // för ALLA slag, DESIGN_DECISIONS.md §6). `state.swordHand.roll` sätts
+    // (och avslöjas via render()) inte förrän DSN hunnit landa.
+    await CONFIG.DODE.waitForDiceAnimation(message);
+    this.state.swordHand.roll = roll.total;
     this.render();
   }
 
@@ -1692,12 +1675,21 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
   static async #onRollSocialStanding() {
     const roll = await new Roll("2d6").evaluate();
+    // Johan 2026-08-02: postade tidigare INGET chattkort alls (samma
+    // "tyst slag"-bugg redan hittad och rättad för grundegenskaper/svärdshand)
+    // — tärningen syntes aldrig, vare sig i chatten eller i Dice So Nice. Se
+    // CONFIG.DODE.waitForDiceAnimation, nu regel för alla slag (§6).
+    const message = await roll.toMessage({ flavor: "Socialt stånd — 2T6" });
+    await CONFIG.DODE.waitForDiceAnimation(message);
     this.state.socialStanding.roll = roll.total;
     this.render();
   }
 
   static async #onRollStartCapital() {
     const roll = await new Roll("2d6").evaluate();
+    // Se #onRollSocialStanding — samma bugg, samma fix.
+    const message = await roll.toMessage({ flavor: "Startkapital — 2T6" });
+    await CONFIG.DODE.waitForDiceAnimation(message);
     this.state.startCapital.roll = roll.total;
     this.render();
   }
@@ -1718,6 +1710,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const bpSpent = Math.max(1, Math.min(40, Number(bpInput?.value) || 1));
     const roll = await new Roll(`2d20+${bpSpent}`).evaluate();
     const result = CONFIG.DODE.rollSpecialAbility(roll.total);
+    // Johan 2026-08-02: postade tidigare INGET chattkort — samma "tysta slag"-
+    // bugg som socialt stånd/startkapital, nu regel att undvika (§6).
+    const message = await roll.toMessage({ flavor: "Särskild förmåga — 2T20+BP" });
+    await CONFIG.DODE.waitForDiceAnimation(message);
 
     slot.bpSpent = bpSpent;
     slot.rollResult = roll.total;

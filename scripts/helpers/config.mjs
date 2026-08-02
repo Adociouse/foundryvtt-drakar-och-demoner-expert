@@ -293,6 +293,29 @@ DODE.swedishDiceToRoll = function (formula) {
   return String(formula ?? "").replace(/(\d+)\s*[Tt]\s*(\d+)/g, "$1d$2");
 };
 
+/**
+ * REGEL (Johan 2026-08-02, se DESIGN_DECISIONS.md §6): varje kodställe som
+ * postar en `ChatMessage` med `rolls` och sedan omedelbart avslöjar UTFALLET
+ * i eget UI (ett state-fält, en sheet-uppdatering, en knapp som byter text)
+ * MÅSTE `await` den här helpern mellan `ChatMessage.create()`/`Roll#toMessage()`
+ * och den avslöjande koden. `ChatMessage.create()` löser ut så fort
+ * meddelandet finns i databasen — INTE när Dice So Nice faktiskt hunnit
+ * animera klart (~2s) — så utan denna väntan hinner spelaren se resultatet
+ * innan tärningarna visuellt landat. Upptäckt och rättat först för
+ * hjältedåd (character-wizard.mjs), sedan bekräftat som samma bugg på
+ * svärdshanden — se den raden i DESIGN_DECISIONS.md för hela utredningen,
+ * inklusive VARFÖR den kapslas i en 4s timeout (en bakgrundsflik pausar
+ * DSN:s renderloop helt, så själva DSN-löftet kan hänga för evigt annars).
+ * No-op om DSN inte är installerat.
+ */
+DODE.waitForDiceAnimation = async function (message) {
+  if (!game.dice3d || !message?.id) return;
+  await Promise.race([
+    game.dice3d.waitFor3DAnimationByMessageID(message.id),
+    new Promise((resolve) => setTimeout(resolve, 4000))
+  ]);
+};
+
 // Source: HH p.6 — "En nyskapad hjälte får slå 1T6 slag på tabellen"
 DODE.hjaltedadRollCount = "1T6";
 
