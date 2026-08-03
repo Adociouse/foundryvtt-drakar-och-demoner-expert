@@ -227,6 +227,43 @@ Hooks.once("init", () => {
   };
 });
 
+/**
+ * Systemets standard: spelare får FILES_UPLOAD (kunna ladda upp en ny bild till
+ * t.ex. sitt eget porträtt/token), men INTE FILES_BROWSE (kunna bläddra i hela
+ * serverns filträd) — de är oberoende behörigheter i Foundrys kärna
+ * (`file-picker.mjs`: FILES_UPLOAD styr uppladdningsknappen, FILES_BROWSE styr
+ * bläddringen/trädlistan, separata kontrollpunkter). Johans oro 2026-08-03
+ * ("if they have file browse they can see all? Does not seem ok?") gällde
+ * bläddring — den lämnas orörd (kvar på Betrodd, rollid 2+) medan bara
+ * uppladdning sänks till Spelare (rollid 1), så en spelare kan ersätta sin egen
+ * bild utan att någonsin få en lista över allt som ligger på servern.
+ *
+ * Bara GM skriver world-inställningen, och bara om FILES_UPLOAD fortfarande
+ * står på Foundrys egen fabriksstandard (rollid 3, Assistant GM) — rör den
+ * INTE om SL redan varit inne i Configure Permissions och gjort ett eget,
+ * medvetet val. Kör en gång per värld (flaggat via `flags.core` på world-
+ * inställningen self är onödigt — settings-objektet självt är beviset: när det
+ * en gång avviker från fabriksstandarden rör vi det aldrig igen).
+ */
+Hooks.once("ready", async () => {
+  if (!game.user.isGM) return;
+  const current = game.settings.get("core", "permissions") ?? {};
+  // Foundry sätter varje nyskapad världs permissions-setting med "alla roller
+  // från defaultRole och uppåt till Gamemaster" — inte bara [defaultRole]. För
+  // FILES_UPLOAD (defaultRole = Assistant GM) är fabriksstandarden alltså
+  // [ASSISTANT, GAMEMASTER], verifierat direkt mot en riktig körande värld
+  // 2026-08-03 (game.permissions.FILES_UPLOAD === [3,4]).
+  const vanillaUpload = [CONST.USER_ROLES.ASSISTANT, CONST.USER_ROLES.GAMEMASTER];
+  const upload = current.FILES_UPLOAD ?? [];
+  const untouched = upload.length === vanillaUpload.length && vanillaUpload.every((r) => upload.includes(r));
+  if (!untouched) return;
+  await game.settings.set("core", "permissions", {
+    ...current,
+    FILES_UPLOAD: [CONST.USER_ROLES.PLAYER, ...upload]
+  });
+  console.log("DoDE | FILES_UPLOAD-behörigheten sänkt till Spelare (systemstandard, se dode.mjs)");
+});
+
 Hooks.on("renderActorDirectory", (app, html) => {
   const root = html instanceof HTMLElement ? html : html[0];
   const header =
