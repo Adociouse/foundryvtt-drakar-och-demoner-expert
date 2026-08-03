@@ -2,7 +2,7 @@
   <header class="wizard-progress">
     <strong>Steg {{stepNumber}}/{{stepCount}}: {{stepLabel}}</strong>
     <span class="wizard-bp-ledger">BP kvar: <strong>{{bp.remaining}}</strong> / {{bp.start}}</span>
-    <span class="wizard-bp-ledger">EP kvar: <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
+    <span class="wizard-bp-ledger" title="EP-taket = nivå×ålder-tabell + kvarvarande BP × 5 (RP s.28/KH s.3). Spenderar du BP på t.ex. grundegenskaper sjunker alltså EP-taket också — det är avsiktligt, inte en bugg.">EP kvar: <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
   </header>
 
   <div class="wizard-step-container">
