@@ -73,6 +73,32 @@ detailed
 
 ⚠ `no text and no lettering` — bildmodeller lägger annars gärna in pseudo-runor som ser ut som obegriplig text.
 
+### Rastoken (top-down, för spelbrädet)
+
+Johan 2026-08-03: rasernas `prototypeToken.texture.src` ska vara **riktig fågelperspektiv-konst**, inte samma porträtt beskuret till en cirkel (vilket är hur `img`/porträttet redan används, och hur de flesta VTT-system löser tokens — men Johan ville ha äkta top-down här). En helt egen mall, alltså — porträttmallens `waist-up portrait` går inte att återanvända rakt av.
+
+⚠ **Detta var svårt att få rätt — flera misslyckade promptstrategier innan Johans egen formulering (2026-08-03) gav ett upprepbart resultat:**
+1. `seen from directly above (bird's-eye/top-down view)` — modellen ignorerade det helt, gav en vanlig frontal 3/4-porträttvy varje gång, bara beskuren i en cirkel.
+2. Samma fras + `contained within a circular frame` — samma frontala resultat, OCH modellen tolkade "circular frame" bokstavligt och ritade en mörk disk med VITA hörn runt, i stället för att fylla hela dukens kvadrat.
+3. `VTT player character top down` + `exactly like looking down a stairwell at someone standing below` — gav EN lyckad bild men visade sig ej upprepbar; en direkt uppföljande batch med samma prompt gav 0/3 nya top-down-resultat, bara frontala porträtt igen.
+4. **Johans egen prompt (nedan), testad och bekräftad fungerande** — nyckeltilläggen mot försök 3 är `seen from directly above` UPPREPAT ihop med `top-down bird's-eye view looking straight down at the top of the head and shoulders` (dubbel förstärkning i stället för en enda stairwell-metafor), plus den explicita `face is not visible`.
+
+⚠ **Fortfarande inte 100% garanterat** — bildmodellen är i grunden icke-deterministisk för kameravinkel. Sampla flera punkter längs kanterna (samma kontroll som porträttens vita-kant-regel) OCH titta manuellt på varje bild — automatisk pixelkontroll kan bara fånga vita hörn/kanter, inte fel kameravinkel. Retry med oförändrad prompt vid en frontal träff, snarare än att ändra formuleringen igen.
+
+```
+VTT D&D player character top down token art of <MOTIV — kön, släkte,
+kroppstyp, hår/hud>, wearing <KLÄDSEL/UTRUSTNING som säger något om släktet>,
+wielding <VAPEN/ATTRIBUT om relevant>, seen from directly above, top-down
+bird's-eye view looking straight down at the top of the head and shoulders,
+painterly digital fantasy art in the style of a moody atmospheric oil
+painting, muted earthy color palette with warm amber highlights, soft even
+top-down lighting, plain dark background filling the whole square canvas,
+highly detailed, face is not visible, no border, no frame, no vignette,
+edge-to-edge image, full bleed
+```
+
+Filnamn/mapp: `assets/tokens/raser-topdown/<slug>-man.png` / `<slug>-kvinna.png` — se filkonventionstabellen nedan. Kopplas in som `prototypeToken.texture.src` (INTE `img`/`imgMan`/`imgKvinna`, som fortsätter peka på det vanliga porträttet).
+
 ### Skolbakgrund (bakgrundsplatta per magiskola)
 
 Färdiga plattor finns i `assets/backgrounds/magiskolor/<skolnyckel>.png` (13 st, 1024×1024). **Tanken:** när distinkta besvärjelseikoner en dag genereras (backlogpost 24) ska varje skolas besvärjelser dela samma miljö, så att en Nekromanti-formel känns igen som nekromanti redan innan man läst namnet. Motivet i mitten byts, bakgrunden står kvar.
@@ -98,6 +124,7 @@ Miljöerna som användes (2026-07-27): alkemi = alkemistbänk med retorter · an
 | Mapp | Innehåll | Kopplas in via |
 |------|----------|----------------|
 | `assets/tokens/raser/` | `<slug>.png`, `<slug>-man.png`, `<slug>-kvinna.png` | `img` + `system.imgMan` / `system.imgKvinna` |
+| `assets/tokens/raser-topdown/` | `<slug>-man.png`, `<slug>-kvinna.png` | `prototypeToken.texture.src` (guidens `#genderedTopdownImg`, tillagd 2026-08-03) |
 | `assets/tokens/yrken/` | `<slug>.png`, `<slug>-man.png`, `<slug>-kvinna.png` | `img` + `system.imgMan` / `system.imgKvinna` |
 | `assets/tokens/utrustning/` | `<slug>.png` | `img` i `packs/vapen-utrustning/_source/` |
 | `assets/tokens/magiska-foremal/` | `<slug>.png` | `img` i `packs/magiska-foremal/_source/` |

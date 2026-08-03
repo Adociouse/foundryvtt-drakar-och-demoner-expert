@@ -712,6 +712,20 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   /**
+   * Rasens top-down-token (assets/tokens/raser-topdown/, se docs/dev/ART_STYLE.md
+   * "Rastoken") — äkta fågelperspektiv-konst för `prototypeToken.texture.src`,
+   * separat från porträttet `#genderedImg` väljer till `img`. Slug byggs med
+   * samma DODE.skillKey-mönster som övriga tokenmappar, inte ett eget fält på
+   * rasdokumentet — filnamnen sattes upp 2026-08-03 för alla 13 raser.
+   */
+  #genderedTopdownImg(raceDoc) {
+    if (!raceDoc?.name) return null;
+    const slug = CONFIG.DODE.skillKey(raceDoc.name);
+    const variant = this.state.kon === "kvinna" ? "kvinna" : "man";
+    return `systems/${game.system.id}/assets/tokens/raser-topdown/${slug}-${variant}.png`;
+  }
+
+  /**
    * Fyller `state` från en befintlig rollperson (redigeringsläge). Motsatsen
    * till #onCreateCharacter — allt som skrivs där måste kunna läsas tillbaka
    * här, annars nollställs fältet tyst vid nästa sparning.
@@ -896,7 +910,11 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * vilket gäller alla aktörer och inte bara guidens.
    *
    * Porträttet ärvs från ras-/yrkesbilden (könsvarianten, se #genderedImg) —
-   * yrket först eftersom det är mer utmärkande än rasen.
+   * yrket först eftersom det är mer utmärkande än rasen. Tokenbilden på
+   * spelbrädet (`prototypeToken.texture.src`) är separat: äkta top-down-konst
+   * per ras (#genderedTopdownImg), inte samma porträtt beskuret till en cirkel.
+   * Faller tillbaka till porträttet om rasen saknas (professionsval utan ras
+   * ska inte ge en trasig sökväg).
    */
   #tokenDefaults(raceDoc, professionDoc) {
     const portrait = professionDoc
@@ -904,6 +922,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       : raceDoc
         ? this.#genderedImg(raceDoc)
         : null;
+    const tokenImg = (raceDoc ? this.#genderedTopdownImg(raceDoc) : null) || portrait;
     const name = this.state.name || "Ny rollperson";
     const prototypeToken = {
       name,
@@ -913,7 +932,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
       sight: { enabled: true }
     };
-    if (portrait) prototypeToken.texture = { src: portrait };
+    if (tokenImg) prototypeToken.texture = { src: tokenImg };
     return { img: portrait, prototypeToken };
   }
 
