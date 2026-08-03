@@ -195,6 +195,8 @@
           </div>
           {{#if row.raceMod}}
             <div class="wizard-attribute-mod" title="{{row.modLabel}}">= {{row.total}} ({{row.modLabel}})</div>
+          {{else if row.raceStoLabel}}
+            <div class="wizard-attribute-mod wizard-attribute-mod-race" title="{{row.raceStoLabel}}">{{row.raceStoLabel}}</div>
           {{/if}}
         </div>
       {{/each}}

@@ -1399,7 +1399,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         nextCost: value < max ? buyCost(value, value + 1) : null,
         prevRefund: value > min ? buyCost(value, value - 1) : null,
         canIncrease: value < max, canDecrease: value > min,
-        raceMod: eff?.mod ?? 0, modLabel: eff?.modLabel ?? "", total: eff?.total ?? value
+        raceMod: eff?.mod ?? 0, modLabel: eff?.modLabel ?? "", total: eff?.total ?? value,
+        // STO har ingen flat rasbonus (raceMod är alltid 0 för den, se
+        // #effectiveAttributes) utan ett eget spann — visa rasnamn+normalvärde
+        // som referenstext i stället, så STO-rutan inte står utan sammanhang
+        // medan de andra sex visar "+N ras".
+        raceStoLabel: isSto && selectedRace ? `${selectedRace.name}: normal ${stoNormal} (${stoMin}–${stoMax})` : null
       };
     });
     const totalCost = rows.reduce((sum, r) => sum + r.cost, 0);
