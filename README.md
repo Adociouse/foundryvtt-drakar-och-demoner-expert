@@ -1,5 +1,7 @@
 # Drakar och Demoner Expert — Foundry VTT-system
 
+🇸🇪 Svenska | [🇬🇧 English](README.en.md)
+
 Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för det svenska rollspelet **Drakar och Demoner Expert** (1991). Byggt från grunden mot Foundrys moderna DataModel/ApplicationV2-arkitektur — inget `template.json`, inget bundlingsteg för systemkoden.
 
 **System-id:** `drakar-och-demoner-expert`
