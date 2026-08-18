@@ -77,8 +77,8 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 - **De flesta besvärjelser saknar egen bildikon** — 214 av 222 visar sin magiskolas symbol i stället för unik konst.
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**
-- **Hjältepoäng** (Hjältarnas Handboks post-skapande-förmågor) ackumuleras korrekt men saknar fortfarande sin 18-rads slumptabell och en spenderingsvy.
-- **BP-poolen skiljer i dag inte mellan de fyra nivåerna** (alla 125) trots en sourcad 125/150/175-tabell (Alver s.22) — väntar på ett regelbeslut, se `docs/DESIGN_DECISIONS.md`.
+- **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.
+- **Grundtalet i BP-poolen (`DODE.bpByNiva`) är flatt 125 för alla fyra nivåer** trots en sourcad 125/150/175-tabell (Alver s.22) — väntar på ett regelbeslut, se `docs/DESIGN_DECISIONS.md`. Den faktiska startpoolen skiljer sig ändå redan idag i praktiken: hjältenivåerna (Slumpens hjälte/Sann hjälte/Gudafödd) får ett BP-påslag från hjältedådstabellen som Vanlig aldrig rullar.
 - Ingen engelsk lokalisering — bara `lang/sv.json`.
 - Se kodkommentarer märkta `⚠` för specifika, medvetet flaggade regelavvikelser eller förenklingar.
 
