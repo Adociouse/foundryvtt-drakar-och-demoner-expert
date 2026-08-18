@@ -9,34 +9,46 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 
 | Del | Status |
 |---|---|
-| Grundegenskaper, härledda värden (KP, skadebonus, förflyttning, ABS) | Klar |
-| FV-baserade färdighetsslag (perfekt/fummel-bekräftelse) | Klar |
-| Item-typer: ras, yrke, vapen, rustning, besvärjelse + kompendier | Klar (representativa urval, inte fullständiga — se nedan) |
-| NPC/monster-actortyp + monsterkompendium | Klar |
-| Guidad rollpersonsskapare v2 (13 steg, bokexakt BP/EP-ekonomi) | Klar (Fas 1–9 av 10 — se nedan) |
-| Stridsintegration (skada, absorption) och magisystem (kastning, PSY-resurs) | Klar, med några medvetna förenklingar (se kodkommentarer) |
+| Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
+| FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
+| Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
+| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 222 besvärjelser, 14 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment — se nedan) |
+| Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
+| GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Backend klar och liveverifierad — fönster-UI saknas fortfarande, körs via konsolen |
+| Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
+| Magisystem (kastning, PSY-resurs, minimagi, magiskolor) | Klar, med några medvetna förenklingar (se kodkommentarer) |
+| Språkmekanik (modersmål, främmande språk) | Klar |
+| Schemaversionering + JSON export/import (aktörer, NPC:er, items) | Klar, bygger på Foundrys egna `TypeDataModel.migrateData`/`exportToJSON` |
 
 ### Rollpersonsskaparen
 
-En guidad, ApplicationV2-baserad rollpersonsskapare (`scripts/apps/character-wizard.mjs`) tar spelaren genom 13 steg i ordning:
+En guidad, ApplicationV2-baserad rollpersonsskapare (`scripts/apps/character-wizard.mjs`) tar spelaren genom 19 steg i ordning:
 
-1. **Nivå** — Vanlig (125 BP), Extraordinär (150 BP) eller Hjälte (175 BP). Slår ihop Krigarens Handboks och Hjältarnas Handboks BP-tabeller till en enda gradvis skala, för kampanjkontinuitet mellan de två bokserierna.
-2. **Grunder** — namn, kön (styr vilken ras-/yrkesporträttvariant som visas och ärvs)
-3. **Ras** — kostar BP ur nivåpoolen
-4. **Yrke**
-5. **Attribut** — 3T6 per grundegenskap
-6. **Särskilda förmågor** — antal slots styrt av nivå (fritext, se begränsningar nedan)
-7. **Socialt stånd** — 2T6 + valfri BP-spend (RP s.27–28, 9-ståndssystemet)
-8. **Startkapital** — 2T6 + BP, kopplat till socialt stånd
-9. **Ålder** — låser upp EP-budgeten, applicerar startkapitalets åldersmultiplikator (Ung/Mogen/Medelålders/Gammal)
-10. **Färdigheter** — se tvålagersmodellen nedan
-11. **Livsmål** — 21 fördefinierade alternativ + fritext
-12. **Utrustning** — köp vapen/rustning mot startkapitalet
-13. **Granska** — sammanfattning innan rollpersonen skapas
+1. **Start** — introduktion
+2. **Kön** — styr vilken ras-/yrkesporträttvariant som visas och ärvs
+3. **Nivå** — Vanlig, Slumpens hjälte, Sann hjälte eller Gudafödd. Fyra nivåer, olika antal förmågeslots/hjältedådsslag/EP-budget (BP-poolen är i dagsläget 125 för alla fyra i väntan på ett regelbeslut, se `docs/DESIGN_DECISIONS.md`)
+4. **Grunder** — namn
+5. **Ras** — 13 raser (7 grundraser + 6 alvsläkten), kostar BP ur nivåpoolen
+6. **Svärdshand** — höger/vänster/ambidextriös/dubbelhänt, med följdeffekter för Två vapen-mekaniken
+7. **Ålder** — Ung/Mogen/Medelålders/Gammal, ger attributmodifikationer och en kapitalmultiplikator
+8. **Attribut** — **point-buy**, inte tärningsslag (RP s.23 är en explicit köptabell, inte en slagmetod — en tidigare rättad felläsning)
+9. **Yrke** — 36 yrken (11 grundyrken + 25 specialiseringar från Krigarens Handbok/Tjuvar och Lönnmördare)
+10. **Magiskola** — bara för magianvändande yrken
+11. **Särskilda förmågor** — antal slots styrt av nivå, en sourcad 49-rads slumptabell (`DODE.specialAbilitiesTable`) med en "Slå fram förmåga"-knapp; ras-/yrkesförmågor har egna, strukturerade mekaniska effekter där källmaterialet ger dem
+12. **Socialt stånd** — 2T6 + valfri BP-spend (RP s.27–28, 9-ståndssystemet)
+13. **Startkapital** — 2T6 + BP, kopplat till socialt stånd och ålder
+14. **Språk** — modersmål (rasstyrt) + främmande språk
+15. **Yrkesfärdigheter** — yrkets egna färdighetsval (namngivna, vapen-/språk-/stridskonstpooler)
+16. **Färdigheter** — se tvålagersmodellen nedan
+17. **Livsmål** — 21 fördefinierade alternativ + fritext
+18. **Utrustning** — köp vapen/rustning/allmän utrustning mot startkapitalet
+19. **Granska** — sammanfattning innan rollpersonen skapas
 
-**BP/EP-ekonomi:** Varje nivå ger en pool av byggpoäng (BP) som spenderas på ras, socialt stånd och startkapital. Överbliven BP vid slutet av skapandet (`bp.remaining`) omvandlas ×5 till erfarenhetspoäng (EP), som spenderas i färdighetssteget (RP s.28: *"Kvarvarande BP × 5"*).
+**BP/EP-ekonomi:** Varje nivå ger en pool av byggpoäng (BP) som spenderas på ras, svärdshand, socialt stånd och startkapital. Överbliven BP vid slutet av skapandet (`bp.remaining`) omvandlas ×5 till erfarenhetspoäng (EP), som spenderas i färdighetsstegen (RP s.28: *"Kvarvarande BP × 5"*).
 
-**Tvålagers färdighetsmodell:** Alla primära färdigheter (16 st, RP s.36) och yrkets matchade färdigheter tilldelas automatiskt sitt startvärde (FV = grundegenskapens grupp, "BC") vid respektive attributs/yrkets val — inget spelaren behöver slå fram själv. Därefter kan EP-poolen spenderas i färdighetssteget för att höja valfri färdighet över BC, enligt RP s.30:s kumulativa kostnadstabell, begränsat av yrkets maxstartvärde (KH s.3).
+**Tvålagers färdighetsmodell:** Alla primära färdigheter (16 st, RP s.36) och yrkets valda yrkesfärdigheter tilldelas automatiskt sitt startvärde (FV = grundegenskapens grupp, "BC") vid respektive val — inget spelaren behöver slå fram själv. Därefter kan EP-poolen spenderas för att höja valfri färdighet över BC, enligt RP s.30:s kumulativa kostnadstabell, begränsat av yrkets maxstartvärde och eventuella katalogspecifika grundkostnader (Vapentekniker, Stridskonster, Två vapen).
+
+En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`scripts/apps/training.mjs`) och tjäna EP genom äventyr — post-skapande-ekonomi, skild från guiden.
 
 **Bakgrundsbild:** Karaktärsarket och guiden delar samma visuella identitet — en mörk läder-/trätextur (`assets/backgrounds/character-sheet-leather.png` som bakgrund, `imagen_20260719_201503_2.png` som träram via `border-image`), se `styles/dode.css`.
 
@@ -44,21 +56,27 @@ En guidad, ApplicationV2-baserad rollpersonsskapare (`scripts/apps/character-wiz
 
 | Kompendie | Innehåll |
 |---|---|
-| `raser` | 7 raser (Människa, Alv, Halvalv, Halvling/Halvlängdsman, Dvärg, Halvork, Anka) |
-| `yrken` | 11 yrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare), varje yrke med strukturerad `professionSkills`-lista (namn + attribut) för den automatiska färdighetstilldelningen |
-| `vapen-utrustning` | Representativt urval vapen och rustningar, köpbara i guidens utrustningssteg |
-| `besvarjelser` | Representativt urval besvärjelser |
+| `raser` | 13 raser: 7 grundraser (Människa, Alv, Halvalv, Halvlängdsman, Dvärg, Halvork, Anka) + 6 alvsläkten (Alver s.22) |
+| `yrken` | 36 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 25 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
+| `vapen-utrustning` | 339 poster: 23 vapen, 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
+| `besvarjelser` | 222 besvärjelser |
 | `monster` | 14 varelser för NPC/monster-actortypen |
+| `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
+| `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
+| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna |
+| `scener` | Färdiga scener, bl.a. rollpersonsskaparens egen bakgrundsscen |
 
 Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompileras till det LevelDB-format Foundry faktiskt läser — se "Kompendiebyggnad" nedan.
 
 ### Kända begränsningar
 
-- **Fas 10 av rollpersonsskaparen (Hjältarnas Handboks Öde-typer)** är opåbörjad — blockerad av en forskningslucka, ingen konkret Öde-typ-tabell hittad i källmaterialet än. Se `PLAN_WIZARD_V2.md`.
-- **Åldersmodifikationer på grundegenskaper** är inte implementerade (infrastrukturen finns, tabellen är medvetet tom) — blockerad av samma typ av forskningslucka (exakt tabell från RP s.24–25 inte extraherad). Åldersmultiplikatorn på startkapital fungerar dock redan.
-- **Särskilda förmågor** är fritext, inte en tärningstabell — ingen bok-tabell över konkreta förmågor har hittats än, bara antalet slots per nivå är källbelagt.
-- Kompendierna är representativa urval, inte kompletta: en delmängd av vapen och besvärjelser, inga alv-subraser, inga klass-specialiseringar från Krigarens Handbok/Tjuvar och Lönnmördare.
-- Yrkenas `professionSkills`-listor innehåller bara konkreta, namngivna färdigheter — val-baserade poster ("Tala språk, max 2") och breda kategorier ("Alla strid utom Judo och Karate") är medvetet uteslutna, inte gissade.
+- **GM-effektfönstret är inte byggt.** Hela backend för person-/scen-/världseffekter, DoDE-villkor och periodiska effekter (gift m.m.) är klar och liveverifierad, men utan en egen `ApplicationV2`-vy måste en SL använda konsolen (`game.dode.addWorldEffect(...)` m.fl.) för att sätta dem.
+- **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
+- **De flesta besvärjelser saknar egen bildikon** — 214 av 222 visar sin magiskolas symbol i stället för unik konst.
+- **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
+- **Svartfolk-supplementet är inte påbörjat.**
+- **Hjältepoäng** (Hjältarnas Handboks post-skapande-förmågor) ackumuleras korrekt men saknar fortfarande sin 18-rads slumptabell och en spenderingsvy.
+- **BP-poolen skiljer i dag inte mellan de fyra nivåerna** (alla 125) trots en sourcad 125/150/175-tabell (Alver s.22) — väntar på ett regelbeslut, se `docs/DESIGN_DECISIONS.md`.
 - Ingen engelsk lokalisering — bara `lang/sv.json`.
 - Se kodkommentarer märkta `⚠` för specifika, medvetet flaggade regelavvikelser eller förenklingar.
 
@@ -68,32 +86,33 @@ Lägg systemmappen i din Foundry-installations `Data/systems/`-katalog (eller in
 
 ## Arkitektur
 
-- **Ingen `template.json`.** Actor/Item-subtyper deklareras i `system.json`s `documentTypes`; datamodellerna binds i `scripts/dode.mjs` via `CONFIG.Actor.dataModels`/`CONFIG.Item.dataModels`.
+- **Ingen `template.json`.** Actor/Item-subtyper (`character`/`npc`/`handlare`, samt `fardighet`/`ras`/`yrke`/`vapen`/`rustning`/`utrustning`/`besvarjelse`/`minibesvarjelse`/`formaga`) deklareras i `system.json`s `documentTypes`; datamodellerna binds i `scripts/dode.mjs` via `CONFIG.Actor.dataModels`/`CONFIG.Item.dataModels`.
 - **Rena ES-moduler**, laddade direkt av Foundry via `esmodules` i `system.json`. `package.json` finns bara för kompendiebyggverktyget, inte för systemkoden.
 
 ```
 scripts/
-  dode.mjs              Entry point — registrerar datamodeller, sheets, hooks
-  data/                  DataModel-scheman (actor-character.mjs, item-fardighet.mjs, ...)
-  documents/             Document-subklasser (t.ex. actor.mjs — rollSkill(), castSpell())
-  sheets/                ApplicationV2-baserade sheets
-  apps/                  Fristående ApplicationV2-appar (character-wizard.mjs — rollpersonsskaparen)
-  rolls/                 Tärningsmekanik (fv-roll.mjs, damage-roll.mjs)
-  helpers/config.mjs     Speldatakonstanter, källciterade (CONFIG.DODE)
-  build/                 Node-skript för kompendiebyggnad
-templates/*.hbs          Handlebars-mallar för sheets, appar, chattkort
-lang/sv.json             All UI-text
+  dode.mjs               Entry point — registrerar datamodeller, sheets, hooks
+  data/                   DataModel-scheman (actor-character.mjs, item-fardighet.mjs, ...)
+  documents/              Document-subklasser (actor.mjs — rollSkill(), castSpell(); dode-active-effect.mjs)
+  sheets/                 ApplicationV2-baserade sheets (character/npc/handlare/item)
+  apps/                   Fristående ApplicationV2-appar (character-wizard.mjs, training.mjs, time-window.mjs, magic-training.mjs)
+  rolls/                  Tärningsmekanik (fv-roll.mjs, damage-roll.mjs, attack.mjs, dual-wield.mjs)
+  helpers/                Speldatakonstanter och delad logik (config.mjs — CONFIG.DODE, källciterat; special-ability-effects.mjs; schema-migrations.mjs; ep.mjs; time.mjs; anatomy.mjs)
+  utils/                  Fristående verktyg (scene-effects.mjs — game.dode.SceneEffects)
+  build/                  Node-skript för kompendiebyggnad
+templates/*.hbs           Handlebars-mallar för sheets, appar, chattkort
+lang/sv.json              All UI-text
 styles/dode.css
-assets/backgrounds/      Bakgrundstextur + träram, delad mellan ark och guide
-packs/<namn>/            Kompilerad kompendiedata (LevelDB) — det Foundry faktiskt läser
-packs/<namn>/_source/    Kompendiekälla (JSON, git-diffbar) — redigera här
+assets/backgrounds/       Bakgrundstextur + träram, delad mellan ark och guide
+packs/<namn>/             Kompilerad kompendiedata (LevelDB) — det Foundry faktiskt läser
+packs/<namn>/_source/     Kompendiekälla (JSON, git-diffbar) — redigera här
 ```
 
 ## Regelfilosofi
 
-Källmaterialet är ett medvetet, kurerat mixsystem — reglerna hämtas från flera källböcker (grundreglerna, Expert-regler, Krigarens Handbok, Hjältarnas Handbok, med flera) snarare än en enda bok rakt av. Det är ett designval, inte ett misstag.
+Källmaterialet är ett medvetet, kurerat mixsystem — reglerna hämtas från flera källböcker (grundreglerna, Expert-regler, Krigarens Handbok, Hjältarnas Handbok, Alver, Svartfolk, Tjuvar och Lönnmördare, Magikerns Handbok, med flera) snarare än en enda bok rakt av. Det är ett designval, inte ett misstag. Vid en direkt sifferkonflikt mellan de yngre Expert-böckerna gäller precedensen RP > SL > SB > KH > REG (den yngre boken vinner).
 
-Där en implementation avviker från eller förenklar källmaterialet är det flaggat med ett `⚠` i en kodkommentar på beräkningsstället, med bokreferens där det är känt. Tanken är att andra ska kunna se och ifrågasätta en tolkning de inte håller med om, inte behöva gissa sig till den. Håll dig till samma princip i bidrag: cite källa, flagga avvikelser.
+Där en implementation avviker från eller förenklar källmaterialet är det flaggat med ett `⚠` i en kodkommentar på beräkningsstället, med bokreferens där det är känt — vad boken säger, vad koden gör i stället, och varför. Tanken är att andra ska kunna se och ifrågasätta en tolkning de inte håller med om, inte behöva gissa sig till den. Håll dig till samma princip i bidrag: cite källa, flagga avvikelser.
 
 ## Kompendiebyggnad
 
@@ -108,6 +127,8 @@ npm run packs:pack     # packs/<namn>/_source/*.json → LevelDB
 ```
 
 **Kör aldrig `packs:unpack`/`packs:pack` medan Foundry-servern är igång** — LevelDB tillåter bara en skrivande klient åt gången.
+
+Se [CHANGELOG.md](CHANGELOG.md) för versionshistorik och `docs/DESIGN_DECISIONS.md` för fullständig arkitektur-, status- och backlogdokumentation.
 
 ## Licens och rättigheter
 
