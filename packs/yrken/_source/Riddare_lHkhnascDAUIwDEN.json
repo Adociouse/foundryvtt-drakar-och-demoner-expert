@@ -3,9 +3,8 @@
   "type": "yrke",
   "system": {
     "requirements": "STY 14, FYS 12, PSY 12",
-    "professionAbility": "<p>Spendera 5 PSY för att antingen träffa valfri kroppsdel utan CL-avdrag, eller göra maximal vapenskada inkl. max skadebonus.</p>",
     "skillList": "<p>Max 5 vapenfärdigheter, språk, Administration, Avväpna, Dans, Djurträning, Dra vapen, Dolk, Geografi, Heraldik, Historia, Kulturkännedom, Kunskap om magi/odöda, Målning, Räkning, Schack & brädspel, Simma, Spela instrument, Språkkunskap, Trästav, Två vapen.</p>",
-    "description": "<p><em>Krigarens Handbok s.7 anger ett TILLÄGG till grundreglernas riddarlista (\"Se Grundreglerna, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>⚠ Avsteg från RP: Riddare är i grundreglerna ett eget grundyrke (RP s.20). Här grupperas det som en <strong>krigarspecialisering</strong> — Johans beslut 2026-07-28, tolkning av KH s.4 där riddaren beskrivs som mallen de nya krigaryrkena är specialiserade efter. Endast grupperingen ändras; krav och färdigheter är oförändrade. Se CLAUDE.md \"Beslutade avsteg\".</em></p>",
+    "description": "<p><em>Krigarens Handbok s.7 anger ett TILLÄGG till grundreglernas riddarlista (\"Se Grundreglerna, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>⚠ Avsteg från RP: Riddare är i grundreglerna ett eget grundyrke (RP s.20). Här grupperas det som en <strong>krigarspecialisering</strong> — Johans beslut 2026-07-28, tolkning av KH s.4 där riddaren beskrivs som mallen de nya krigaryrkena är specialiserade efter. Endast grupperingen ändras; krav och färdigheter är oförändrade. Se CLAUDE.md \"Beslutade avsteg\".</em></p><p><em>⚠ En felaktig rad med det platta namnet \"Vapentekniker\" (finns inte som en egen färdighet — se DODE.vapentekniker, ~26 separata tekniker) togs bort 2026-08-06. Bara Vapenmästaren har halvprisrabatt på vapentekniker (KH s.38, docs/VAPENAKADEMIER.md, \"den enda yrkesgruppen\") — Riddare kan fortfarande få en teknik utdelad post-skapande via \"+Ny färdighet\", till fullt pris.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare-kvinna.png",
     "professionSkills": [
@@ -212,12 +211,6 @@
         "attribute": "smi",
         "choiceCount": 0,
         "choicePool": ""
-      },
-      {
-        "name": "Vapentekniker",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
       }
     ],
     "source": {
@@ -232,7 +225,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Perfekt träff eller maxskada",
+        "description": "<p>Spendera 5 PSY för att antingen träffa valfri kroppsdel utan CL-avdrag, eller göra maximal vapenskada inkl. max skadebonus.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "lHkhnascDAUIwDEN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/riddare.png",

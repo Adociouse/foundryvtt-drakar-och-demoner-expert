@@ -57,7 +57,10 @@ export default class DoDETimeWindow extends HandlebarsApplicationMixin(Applicati
     const res = await advanceTime({ seconds, kind: this.kind, actors: this.#selected() });
     const lines = res.report.map((r) =>
       `<li>${r.name}: vila ${Math.floor(r.streak)}/7${r.unlocked ? " — <strong>träning öppen</strong>" : ""}`
-      + (r.healed ? ` · läkte ${r.healed} KP` : "") + (r.restored ? " · <em>helt återställd</em>" : "") + "</li>").join("");
+      + (r.healed ? ` · läkte ${r.healed} KP` : "") + (r.restored ? " · <em>helt återställd</em>" : "")
+      + (r.psyRecovered ? ` · återfick ${r.psyRecovered} PSY` : "")
+      + (r.periodicTicks?.length ? ` · <strong>${r.periodicTicks.map((t) => `${t.label} (${t.ticks} tick)`).join(", ")}</strong>` : "")
+      + "</li>").join("");
     // ⚠ Påminnelse i stället för automatik — se DODE.supplyReminder.
     const supplies = res.days >= 1 ? `<p class="hint">${CONFIG.DODE.supplyReminder}</p>` : "";
     await ChatMessage.create({

@@ -4,8 +4,13 @@
   "system": {
     "requirements": "STY 14, FYS 12, SMI 14",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Har automatiskt minst <strong>CL 17</strong> i Upptäcka fara — ett sjätte sinne för all fysisk fara.</p><p><em>Källa: KH s.6-7</em></p>",
     "skillList": "",
+    "skillFloors": [
+      {
+        "key": "upptacka-fara",
+        "minFv": 17
+      }
+    ],
     "professionSkills": [
       {
         "name": "Maximalt fyra valfria vapenfärdigheter",
@@ -202,7 +207,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Sjätte sinne",
+        "description": "<p>Har automatiskt minst <strong>CL 17</strong> i Upptäcka fara — ett sjätte sinne för all fysisk fara.</p><p><em>Källa: KH s.6-7</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkrigprisjag",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/prisjagare-man.png",

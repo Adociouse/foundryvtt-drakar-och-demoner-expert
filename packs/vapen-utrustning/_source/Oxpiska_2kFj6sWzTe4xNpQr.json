@@ -1,0 +1,44 @@
+{
+  "name": "Oxpiska",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "1H",
+    "styGroup": 1,
+    "damage": "1d2",
+    "length": 4,
+    "weight": 2,
+    "baseValue": 3,
+    "weaponType": "latt",
+    "category": "narstrid",
+    "price": 30,
+    "range": "",
+    "hardToParry": true,
+    "description": "<p>Piska (SB s.33): delar Kättingvapens pareringsstraff (CL halverat, vapen eller sköld) och självfummelrisk (18-19-20 på eget anfallsslag = automatisk miss + fummelkontroll). Kan dessutom användas för att rycka ett enhandsvapen ur en motståndares händer på räckhåll — måste uppges INNAN anfallsslaget. Träffar anfallet svärdsarmen: STY mot STY på Motståndstabellen, förloraren tappar sitt vapen 1T4 rutor bort. ⚠ Manuellt SL-upplöst tills vidare, se docs/dev/SPECIALANFALL_SL_GUIDE.md.</p><p>Egen specialregel (Rollpersonen): gör 1T2 skada även vid ett misslyckat FV-slag. Greppet varar bara den SR den träffar.</p>",
+    "source": {
+      "book": "rollpersonen",
+      "page": "49-62"
+    }
+  },
+  "_id": "2kFj6sWzTe4xNpQr",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/oxpiska.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785963600000,
+    "modifiedTime": 1785963600000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2kFj6sWzTe4xNpQr"
+}

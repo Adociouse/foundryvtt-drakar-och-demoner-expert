@@ -4,7 +4,6 @@
   "system": {
     "requirements": "STY 14, FYS 12, SMI 15",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Heroisk och dramatisk — SL kan låta sprätthöken lyckas med nästan vad som helst om det är tillräckligt spektakulärt.</p><p><em>Källa: KH s.8</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -178,7 +177,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Dramatisk tur",
+        "description": "<p>Heroisk och dramatisk — SL kan låta sprätthöken lyckas med nästan vad som helst om det är tillräckligt spektakulärt.</p><p><em>Källa: KH s.8</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkrigspratth",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spratthok-man.png",

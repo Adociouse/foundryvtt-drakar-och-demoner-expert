@@ -16,7 +16,13 @@
       "max": 17,
       "normal": 12
     },
-    "automaticAbilities": "<p>Nomadiskt ryttarsläkte besläktat med skogsalverna. Enligt Alver s.24 kan en injir slå fram de släktesegna särskilda förmågorna <em>Skicklig ryttare</em> (+4 CL på Rida och Slåss till häst) och <em>Stålsättning</em> (sänker SP-skadan med 2 genom att helt ignorera smärtan).</p><p>Förmågan Härdig mot element ger +20 istället för +15 för injirer (Alver s.23).</p>",
+    "automaticAbilities": [
+      {
+        "name": "Alvsläktets särskilda förmågor",
+        "description": "<p>Nomadiskt ryttarsläkte besläktat med skogsalverna. Enligt Alver s.24 kan en injir slå fram de släktesegna särskilda förmågorna <em>Skicklig ryttare</em> (+4 CL på Rida och Slåss till häst) och <em>Stålsättning</em> (sänker SP-skadan med 2 genom att helt ignorera smärtan).</p><p>Förmågan Härdig mot element ger +20 istället för +15 för injirer (Alver s.23).</p>",
+        "effect": null
+      }
+    ],
     "description": "<p>Injirerna är nomadiska ryttare som klarar temperaturer från −40 °C till +40 °C.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/injir-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/injir-kvinna.png",

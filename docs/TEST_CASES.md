@@ -102,6 +102,73 @@ console.table({
 
 ---
 
+## Vapenfärdighetsval (yrkesfärdighetssteget) — UC-W1 till UC-W12
+
+> Tillagd 2026-08-08 på Johans begäran: *"make sure we have test use cases for
+> like 10-15 combos that we test properly... run in wizard with real clicks
+> to make sure they work properly, is intuitive... I felt the weapon
+> selection UI setup is weird and not natural."* Ledde till att den fria
+> textrutan (autokomplettering mot `dode-weapon-suggestions`) byttes mot en
+> riktig `<select>` ur den faktiska vapenkatalogen (samma mönster som
+> språkpoolerna, med "redan valt"/"redan yrkesfärdighet"-utgråning och
+> STY/SMI-attribut synligt per rad) — se `docs/DESIGN_DECISIONS.md` backlog
+> 67 för hela motiveringen och fyndet.
+
+**Täcker hela intervallet 1–6 valfria vapenfärdighetsplatser** (varje yrke i
+`packs/yrken` som har en `vapenfärdighet`-choicePool, sorterat på antal):
+
+| # | Ras | Yrke | Platser | Vad den isolerar |
+|---|---|---|---|---|
+| UC-W1 | Alv | Bard | 1 | "Elfenben-vapenspecialisten" — bara EN vapenfärdighet tillåten. Bard har DESSUTOM egna namngivna vapen (Dolk, Trästav) — testar att poolen inte erbjuder dubbletter av dem. |
+| UC-W2 | Alv | Lönnmördare | 1 | Samma 1-plats-fall, annat yrke/bas — bekräftar mönstret inte är Bard-specifikt. |
+| UC-W3 | Människa | Krigarmunk | 1 | Krigarspecialisering, inte bas-Krigare (som saknar egen vapenpool helt). |
+| UC-W4 | Människa | Vapenmästare | 1 (+dualWieldAlt) | Samma pool som backlog 66:s Ambidextriös-fixtur — kryssrutan expanderar platsen till 2 utan att röra `<select>`-mekaniken. |
+| UC-W5 | Halvorch | Giftmästare | 2 | Lönnmördarspecialisering, låg platsräkning. |
+| UC-W6 | Människa | Fixare | 2 | Tjuvspecialisering, samma platsräkning som UC-W5 men annan bas. |
+| UC-W7 | Dvärg | Sprätthök | 3 | Krigarspecialisering med udda namn — inget släktskap med vapenval i sig, bara ett tredje datapunkt på 3 platser. |
+| UC-W8 | Människa | Stråtrövare | 3 | Tjuvspecialisering, samma platsräkning som UC-W7. |
+| UC-W9 | Människa | Paladin | 4 | **Magianvändare** — testar att vapenpoolen fungerar OFÖRÄNDRAT när `steps`-arrayen också innehåller "magiskola". Hittade en test­metodik-fälla här (se nedan), inte en produktbugg. |
+| UC-W10 | Dvärg | Barbar | 5 | "Krigaren som kan 6 olika vapentyper" nästan — en plats under taket. |
+| UC-W11 | Människa | Soldat | 5 | Samma platsräkning som UC-W10, annan specialisering. |
+| UC-W12 | Människa | Gladiator | 6 | **Johans "krigare som kan 6 olika vapentyper"** — flest platser i hela yrkeskatalogen. |
+
+**Körning:** `docs/dev/seed-test-party.js`s `fillProfessionSkills` motsvarar
+UC-W1–W12 programmatiskt vid varje `DoDETestParty.seed()`, men den FULLA
+verifieringen (riktiga `<select>`-element, riktiga `change`-events, riktig
+DOM-omläsning mellan varje rad) kördes en gång i konsolen 2026-08-08 mot
+alla tolv samtidigt:
+
+```js
+// Öppna guiden, sätt ras/yrke/attribut, rendera EN gång (viktigt — se ⚠
+// nedan), räkna om steps, hoppa till yrkesfardigheter, rendera igen.
+// Klicka sedan igenom varje <select> i tur och ordning med RIKTIGA
+// change-events, läs om DOM:en mellan varje rad (annars ser man en
+// föråldrad "redan valt"-lista och missar riktiga dubbletter).
+```
+
+**Resultat, alla 12:** rätt antal platser fyllda, **noll dubbletter** i någon
+kombo (bekräftar att "redan valt"/"redan yrkesfärdighet"-utgråningen
+fungerar i en RIKTIG interaktionssekvens, inte bara i en statisk
+ögonblicksbild), 0 konsolfel. En fullständig skapelserunda (UC-W1, Alv/Bard,
+"Långbåge" valt) verifierade att den skapade `fardighet`-posten fick rätt
+`attribute:"smi"`, `weaponGroup:"bagar"`, `costTier:"yrkesfardighet"` — exakt
+vad den gamla fritextversionen skulle producerat vid en korrekt stavad
+matchning, men nu utan möjligheten att stava fel.
+
+**⚠ Testmetodik-fälla hittad under UC-W9 (Paladin), värd att komma ihåg:**
+att sätta `app.stepIndex = app.steps.indexOf("yrkesfardigheter")` INNAN
+`app.render()` någonsin körts på den nya ras/yrkes-kombinationen använder en
+FÖRÅLDRAD `steps`-array (från förra kombinationens profession) — om det nya
+yrket har magi (`isMagicUser`) läggs "magiskola" till i arrayen vid nästa
+render, vilket SKIFTAR alla efterföljande index. Symptomet var förvirrande:
+guiden hoppade tyst till "sprak"-steget i stället för "yrkesfardigheter"
+efter ett enda klick, utan något konsolfel. Ingen bugg i själva guiden — bara
+i testskriptets ordning. Fix: `await app.render()` EN gång direkt efter att
+ras/yrke satts, LÄS OM `app.steps` efter den rendern, sätt `stepIndex` mot
+den FÄRSKA arrayen, rendera sedan igen för att faktiskt visa steget.
+
+---
+
 ## Modulkompatibilitet
 
 Testfall för externa moduler (`DESIGN_DECISIONS.md` §3 backlog 15c). Förutsätter att standardsällskapet är seedat och utplacerat på en scen.

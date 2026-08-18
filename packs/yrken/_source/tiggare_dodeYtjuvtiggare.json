@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 16",
     "baseProfession": "tjuv",
-    "professionAbility": "<p><strong>Tjuvens grundförmåga (1 PSY = +1 CL, max +3, 2 ggr per sovperiod)</strong> plus:</p><p>Kan förställa sitt utseende (PSY mot offrets INT). Startar alltid egendomslös.</p><p><em>Källa: T&L s.15-16</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -184,7 +183,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Förklädnad",
+        "description": "<p>Kan förställa sitt utseende (PSY mot offrets INT). Startar alltid egendomslös.</p><p><em>Källa: T&L s.15-16</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYtjuvtiggare",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tiggare-man.png",

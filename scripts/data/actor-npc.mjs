@@ -1,5 +1,6 @@
 import { DODE } from "../helpers/config.mjs";
 import { sourceField } from "./fields-source.mjs";
+import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -20,6 +21,8 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
     });
 
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       attributes: new fields.SchemaField({
         sty: attribute(), sto: attribute(), fys: attribute(),
         smi: attribute(), int: attribute(), psy: attribute(), kar: attribute()
@@ -60,6 +63,12 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
       source: sourceField(),
       biography: new fields.HTMLField({ required: false, initial: "" })
     };
+  }
+
+  /** Se scripts/helpers/schema-migrations.mjs. Inga npc-specifika grenar än. */
+  static migrateData(source) {
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
   }
 
   prepareDerivedData() {

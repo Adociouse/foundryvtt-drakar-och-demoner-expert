@@ -4,8 +4,10 @@
   "system": {
     "requirements": "SMI 16",
     "baseProfession": "tjuv",
-    "professionAbility": "<p><strong>Tjuvens grundförmåga (1 PSY = +1 CL, max +3, 2 ggr per sovperiod)</strong> plus:</p><p>Minst <strong>CL 10</strong> i Överleva i skog; +1 CL i Gömma sig, Orientering, Kamouflage, Smyga och Spåra när det sker i skog.</p><p><em>Källa: T&L s.15</em></p>",
     "skillList": "",
+    "skillFloors": [
+      { "key": "overleva-i-skogstrakter", "minFv": 10 }
+    ],
     "professionSkills": [
       {
         "name": "Tre valfria vapenfärdigheter",
@@ -140,6 +142,12 @@
         "choicePool": ""
       },
       {
+        "name": "Överleva i skogstrakter",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
         "name": "Anfall bakifrån",
         "attribute": "smi",
         "choiceCount": 0,
@@ -208,7 +216,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Skogsvana",
+        "description": "<p>Minst <strong>CL 10</strong> i Överleva i skog; +1 CL i Gömma sig, Orientering, Kamouflage, Smyga och Spåra när det sker i skog.</p><p><em>Källa: T&L s.15</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYtjuvstratro",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/stratrovare-man.png",

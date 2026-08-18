@@ -31,6 +31,16 @@
     <div class="ep-tick-line"><i class="fa-solid fa-check"></i> +{{attackEp.amount}} EP → {{attackEp.skillName}}</div>
   {{/if}}
 
+  {{!-- Kättingvapen/Piska (SB s.33): eget anfallsslag 18-20 tvingar fram ett
+        självfummelslag oavsett vad huvudslaget annars visade. --}}
+  {{#if hardParrySelfFumble}}
+    <div class="roll-line self-fumble-check">
+      <span class="label">Självfummelkontroll (kättingvapen)</span>
+      <span class="d20 {{#if hardParrySelfFumble.fumbled}}fummel{{else}}lyckat{{/if}}">{{hardParrySelfFumble.roll}}</span>
+      <span class="outcome">{{#if hardParrySelfFumble.fumbled}}Fumlat!{{else}}Bara miss{{/if}}</span>
+    </div>
+  {{/if}}
+
   {{#if hasParry}}
     <div class="roll-line">
       <span class="label">Parering</span>

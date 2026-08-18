@@ -16,7 +16,16 @@
       "max": 14,
       "normal": 11
     },
-    "automaticAbilities": "<p>+4 FV Upptäcka fara, +4 FV Lyssna. Mycket bättre syn och hörsel. Odödlig — åldras inte, startar alltid som Ung. Immun mot sjukdomar. Sover bara 4 timmar/natt.</p>",
+    "automaticAbilities": [
+      {
+        "name": "Skärpta sinnen",
+        "description": "<p>+4 FV Upptäcka fara, +4 FV Lyssna. Mycket bättre syn och hörsel.</p>",
+        "effect": { "type": "skillBonus", "skills": ["upptacka-fara", "lyssna"], "value": 4 }
+      },
+      { "name": "Odödlig", "description": "<p>Åldras inte, startar alltid som Ung.</p>", "effect": null },
+      { "name": "Sjukdomsimmun", "description": "<p>Immun mot sjukdomar.</p>", "effect": null },
+      { "name": "Litet sömnbehov", "description": "<p>Sover bara 4 timmar/natt.</p>", "effect": null }
+    ],
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/alv-kvinna.png",

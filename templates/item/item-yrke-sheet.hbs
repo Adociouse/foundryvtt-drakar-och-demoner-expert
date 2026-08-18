@@ -19,8 +19,20 @@
 </section>
 
 <section class="item-description">
-  <h3>Yrkesförmåga</h3>
-  {{editor system.professionAbility target="system.professionAbility" button=true engine="prosemirror"}}
+  <h3>Yrkesförmågor</h3>
+  {{!-- Strukturerad array (2026-08-16, se DESIGN_DECISIONS.md backlog 70) —
+    redigeras via packs/yrken/_source/*.json + ompackning, som professionSkills
+    redan gör, inte via en live ProseMirror-array-editor här. --}}
+  {{#if system.professionAbilities.length}}
+    <dl class="item-ability-list">
+      {{#each system.professionAbilities as |ability|}}
+        <dt>{{#if ability.name}}{{ability.name}}{{else}}—{{/if}}{{#unless ability.effect}} <span class="hint">(ingen mekanisk effekt)</span>{{/unless}}</dt>
+        <dd>{{{ability.description}}}</dd>
+      {{/each}}
+    </dl>
+  {{else}}
+    <p class="hint">Inga strukturerade yrkesförmågor — redigera via packs/yrken/_source/*.json.</p>
+  {{/if}}
   <h3>Möjliga yrkesfärdigheter</h3>
   {{editor system.skillList target="system.skillList" button=true engine="prosemirror"}}
   <h3>Beskrivning</h3>

@@ -4,7 +4,6 @@
   "system": {
     "requirements": "STY 14, FYS 15",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Urfolk-/vildmarkstema. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4.</p><p><em>Källa: KH s.4</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -178,7 +177,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Vildmarkstema",
+        "description": "<p>Urfolk-/vildmarkstema. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4.</p><p><em>Källa: KH s.4</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkrigbarbar0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/barbar-man.png",

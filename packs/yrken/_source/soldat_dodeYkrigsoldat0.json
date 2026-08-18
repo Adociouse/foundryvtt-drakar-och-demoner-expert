@@ -4,7 +4,6 @@
   "system": {
     "requirements": "STY 14, FYS 12",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Goda kontakter i armén: KAR/4 gånger per år kan soldaten kalla på hjälp. Grad väljs vid skapandet: Menig (0 BP) 1T3 vänner, Sergeant (10 BP) 1T6, Kapten (20 BP) 2T6, Överste (30 BP) 3T10.</p><p><em>Källa: KH s.7-8</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -220,7 +219,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Kontakter i armén",
+        "description": "<p>Goda kontakter i armén: KAR/4 gånger per år kan soldaten kalla på hjälp. Grad väljs vid skapandet: Menig (0 BP) 1T3 vänner, Sergeant (10 BP) 1T6, Kapten (20 BP) 2T6, Överste (30 BP) 3T10.</p><p><em>Källa: KH s.7-8</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkrigsoldat0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/soldat-man.png",

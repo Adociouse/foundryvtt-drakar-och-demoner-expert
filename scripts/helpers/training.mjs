@@ -33,9 +33,29 @@ export const ROLLS_PER_WEEK = { ensam: 1, larare: 2 };
  */
 export function skillCap(item, actor) {
   const attr = actor.system.attributes?.[item.system.attribute];
-  const cap = attr?.total ?? null;
-  if (cap === null) return { cap: null, hard: false };
-  const hard = item.system.category === "b" || item.system.costTier === "sekundar";
+  let cap = attr?.total ?? null;
+  let hard = cap === null ? false : (item.system.category === "b" || item.system.costTier === "sekundar");
+
+  // Två vapen (RP s.59): en tränad kombination kan ALDRIG överstiga det lägsta
+  // av de två ingående vapenfärdigheternas FV — ett eget, hårt tak ovanpå det
+  // vanliga grundegenskapstaket, inte i stället för det. Se DODE.twoWeaponCap
+  // i config.mjs och item-fardighet.mjs `twoWeaponCombo`.
+  const combo = item.system.twoWeaponCombo;
+  if (combo?.primaryWeaponKey && combo?.offWeaponKey) {
+    // Effektivt FV (inklusive vapengrupps-/färdighetsmodifierarbonus, se
+    // actor-character.mjs) — samma resonemang som
+    // actor-character-sheet.mjs#onAddTwoWeaponCombo.
+    const effectiveFv = (key) => {
+      const w = actor.items.find((i) => i.type === "fardighet" && i.system.skillKey === key);
+      if (!w) return 0;
+      return w.system.total
+        + (actor.system.weaponGroupBonusTotals?.[key] ?? 0)
+        + (actor.system.skillModifierTotals?.[key] ?? 0);
+    };
+    const comboCap = CONFIG.DODE.twoWeaponCap(effectiveFv(combo.primaryWeaponKey), effectiveFv(combo.offWeaponKey));
+    if (cap === null || comboCap < cap) { cap = comboCap; hard = true; }
+  }
+
   return { cap, hard };
 }
 

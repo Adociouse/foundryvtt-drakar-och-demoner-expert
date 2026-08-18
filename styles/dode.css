@@ -53,9 +53,27 @@
  * ApplicationV2-fönster. Till skillnad från guiden har dessa ark ingen fastspikad
  * nav-fot att skydda — hela arket (rubrik + innehåll) får bara scrolla som en enhet,
  * vilket är standardbeteendet för de flesta Foundry-ark.
+ *
+ * ⚠ FLYTTAD 2026-08-08 (Johan: scroll hoppar till toppen vid varje klick i en
+ * lång lista, "sett i fler menyer"). Roten var att `overflow-y:auto` satt på
+ * `.window-content` — ETT NIVÅ OVANFÖR den mall-del (`[data-application-part=
+ * "form"]`, ren `data-application-part`-attribut satt DIREKT på mallens enda
+ * rotelement, ingen extra wrapper) som Foundrys egen scroll-position-bevarande
+ * mekanism (PARTS `scrollable`, se sheets/*.mjs) faktiskt kan läsa/återställa —
+ * den mekanismen frågar bara EFTER selektorer INOM delens egen rot, aldrig
+ * utanför. `.window-content` självt scrollade alltså "rätt" visuellt, men var
+ * osynlig för `scrollable`-mekanismen, så varje `render()` (färdighetsslag,
+ * equip-växling, köp) nollställde scrollpositionen. Flyttad hit — samma
+ * element som `[data-application-part="form"]` (mallens eget rotelement,
+ * `.dode-*-sheet-body`) — så `scrollable: [""]` i respektive sheets/*.mjs kan
+ * bevara/återställa den. `.window-content` är `display:flex` från Foundrys
+ * kärna, så barnet fyller höjden automatiskt; `min-height:0` krävs för att ett
+ * flex-barn inte ska vägra krympa under sitt eget innehålls höjd.
  */
-.dode.sheet.character .window-content,
-.dode.sheet.npc .window-content {
+.dode.sheet.character [data-application-part="form"],
+.dode.sheet.npc [data-application-part="form"],
+.dode.sheet.handlare [data-application-part="form"] {
+  min-height: 0;
   overflow-y: auto;
 }
 
@@ -360,6 +378,32 @@
   font-size: 0.95rem;
 }
 
+.character-wizard .wizard-language-table {
+  width: 100%;
+  table-layout: fixed;
+}
+.character-wizard .wizard-language-table td {
+  vertical-align: top;
+  padding: 0.2rem 0.5rem 0.2rem 0;
+}
+.character-wizard .wizard-language-table td:first-child {
+  width: 30%;
+  font-weight: bold;
+}
+
+.character-wizard .wizard-language-slots {
+  margin: 0.4rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.character-wizard .wizard-language-fixed { margin: 0; }
+.character-wizard .wizard-language-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .character-wizard .wizard-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -527,6 +571,17 @@
   white-space: nowrap;
 }
 
+/* Bulk +1/-1 för hela kategorin (Johan, 2026-08-16: "one has to click a lot
+   otherwise") — knappar inline i kategorirubriken, inte en egen rad. */
+.character-wizard h4 .wizard-bulk-skill-buy {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  width: auto;
+  margin-left: 0.5rem;
+  font-weight: normal;
+  text-transform: none;
+}
+
 .character-wizard .wizard-skill-buy button {
   padding: 0.05rem 0.4rem;
   font-size: 0.8rem;
@@ -548,6 +603,33 @@
   justify-content: center;
   gap: 0.25rem;
   margin-top: 0.25rem;
+}
+
+/* Fritextpris-poster (t.ex. "20 sm/g") går inte att köpa i guiden — se
+   #equipmentResult i character-wizard.mjs. Utan en tydlig egen märkning ser
+   dessa likadana ut som "för dyrt just nu"-gråade kort, vilket Johan
+   2026-08-08 upplevde som trasiga/oklickbara knappar. */
+.character-wizard .wizard-equipment-card.is-reference-only {
+  opacity: 0.7;
+}
+.character-wizard .wizard-quantity-buy {
+  align-items: center;
+}
+.character-wizard .wizard-quantity-input {
+  width: 3.5em;
+  text-align: right;
+}
+.character-wizard .wizard-quantity-unit {
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+.character-wizard .wizard-reference-badge {
+  display: inline-block;
+  font-size: 0.75em;
+  padding: 0.15em 0.6em;
+  border: 1px dashed #a9855a;
+  border-radius: 999px;
+  color: inherit;
 }
 
 .dode.sheet.character .life-goal-field {
@@ -822,3 +904,7 @@
 .wizard-pick-row:hover { background: rgba(0, 0, 0, 0.06); }
 .wizard-pick-row img { width: 32px; height: 32px; object-fit: cover; border: none; border-radius: 3px; }
 .wizard-pick-row i.fa-plus { width: 32px; text-align: center; opacity: 0.7; }
+
+/* ---- Ras-/yrkesitemens strukturerade förmågelista (read-only, redigeras via _source/*.json) ---- */
+.item-ability-list dt { font-weight: bold; margin-top: 0.5em; }
+.item-ability-list dd { margin: 0 0 0.4em 0; opacity: 0.9; }

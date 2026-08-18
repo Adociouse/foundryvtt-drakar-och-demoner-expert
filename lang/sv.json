@@ -23,6 +23,10 @@
       "2H": "Tvåhand",
       "1-2H": "En/tvåhand"
     },
+    "Status": {
+      "ArmObrukbar": "Arm obrukbar",
+      "HandUpptagen": "Hand upptagen"
+    },
     "WeaponType": {
       "Latt": "Lätt",
       "Tung": "Tung"

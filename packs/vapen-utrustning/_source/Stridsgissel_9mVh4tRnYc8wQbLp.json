@@ -1,0 +1,44 @@
+{
+  "name": "Stridsgissel",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "1-2H",
+    "styGroup": 2,
+    "damage": "1d10",
+    "length": 1,
+    "weight": 2,
+    "baseValue": 11,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 300,
+    "range": "",
+    "hardToParry": true,
+    "description": "<p>Kättingvapen (SB s.33): kättingen kan slå runt både vapen och sköldar — varje pareringsförsök mot ett stridsgissel, oavsett om det görs med vapen eller sköld, får CL halverat. Vapnet är dock svårt att hantera för användaren själv: slår man 18, 19 eller 20 på det egna anfallsslaget räknas det automatiskt som miss, och ett 1T20-slag avgör fummel (resultat högre än eget FV = fumlat, ett rått 20 är alltid fummel).</p><p>⚠ En namngiven variant, <strong>Stridsgissel med spik</strong> (KH s.51), är ännu inte portad — exakta stats obekräftade, se backlog.</p>",
+    "source": {
+      "book": "spelarboken",
+      "page": "33-35"
+    }
+  },
+  "_id": "9mVh4tRnYc8wQbLp",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/stridsgissel.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785963600000,
+    "modifiedTime": 1785963600000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!9mVh4tRnYc8wQbLp"
+}

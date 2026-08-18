@@ -10,8 +10,11 @@ export default class DoDEActor extends Actor {
     // Färdighetsmodifierare (backlogpost 7/36) läggs på HÄR, inte i
     // item.system.total — de är en separat, live-summerad lager från
     // formaga-/utrustningsitem, se actor-character.mjs#prepareDerivedData.
+    // Vapengrupper (RP s.60) är samma slags separat lager, se
+    // actor-character.mjs#computeWeaponGroupBonus.
     const modifier = this.system.skillModifierTotals?.[item.system.skillKey] ?? 0;
-    return rollFV({ actor: this, label: item.name, fv: item.system.total + modifier, item });
+    const weaponGroupBonus = this.system.weaponGroupBonusTotals?.[item.system.skillKey] ?? 0;
+    return rollFV({ actor: this, label: item.name, fv: item.system.total + modifier + weaponGroupBonus, item });
   }
 
   /** @param {number} index Index i NPC:ns system.attacks-array. */

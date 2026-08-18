@@ -17,7 +17,9 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
   };
 
   static PARTS = {
-    form: { template: "systems/drakar-och-demoner-expert/templates/actor/npc-sheet.hbs" }
+    // Se actor-character-sheet.mjs PARTS för hela motiveringen — samma
+    // scroll-till-toppen-vid-varje-klick-fix (Johan 2026-08-08).
+    form: { template: "systems/drakar-och-demoner-expert/templates/actor/npc-sheet.hbs", scrollable: [""] }
   };
 
   get title() {

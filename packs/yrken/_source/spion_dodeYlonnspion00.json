@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 14, INT 14, PSY 14, KAR 14",
     "baseProfession": "lonnmordare",
-    "professionAbility": "<p><strong>Lönnmördarens grundförmåga (bakhugg ×2/×4)</strong> plus:</p><p>Spendera 5 PSY → SL avslöjar information om en vald person.</p><p><em>Källa: T&L s.11</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -322,7 +321,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Underrättelser",
+        "description": "<p>Spendera 5 PSY → SL avslöjar information om en vald person.</p><p><em>Källa: T&L s.11</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYlonnspion00",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spion-man.png",

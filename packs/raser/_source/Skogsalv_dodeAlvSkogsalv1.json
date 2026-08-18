@@ -16,7 +16,13 @@
       "max": 18,
       "normal": 13
     },
-    "automaticAbilities": "<p>Skogslevande alvsläkte (satari). Enligt Alver s.24 kan en skogsalv slå fram den släktesegna särskilda förmågan <em>Utmärkt balanssinne</em> (+5 CL på alla SMI-slag som har med balans att göra).</p>",
+    "automaticAbilities": [
+      {
+        "name": "Alvsläktets särskilda förmåga",
+        "description": "<p>Skogslevande alvsläkte (satari). Enligt Alver s.24 kan en skogsalv slå fram den släktesegna särskilda förmågan <em>Utmärkt balanssinne</em> (+5 CL på alla SMI-slag som har med balans att göra).</p>",
+        "effect": null
+      }
+    ],
     "description": "<p>Skogsalverna lever i trädkronorna och är det vanligaste alvsläktet bland äventyrare.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/skogsalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/skogsalv-kvinna.png",

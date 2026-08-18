@@ -1,0 +1,76 @@
+<div class="wizard-slot">
+  <label class="slot-label">{{slot.label}}</label>
+  {{#if slot.dualWieldAlt}}
+    <label class="wizard-dualwield-toggle">
+      <input type="checkbox" data-dualwield-index="{{slot.index}}" {{#if slot.dualWieldChecked}}checked{{/if}} />
+      {{#if (eq swordHand.key "ambidextrios")}}
+        {{!-- Ambidextriös slipper Två vapen-träningskravet helt (CLAUDE.md-avsteget,
+              backlog 33) — texten fick inte påstå ett träningskrav som inte gäller. --}}
+        Slåss med två vapen (Ambidextriös — ingen Två vapen-färdighet behövs)
+      {{else}}
+        Slåss med två vapen (kräver Två vapen-färdighet)
+      {{/if}}
+    </label>
+  {{/if}}
+  <div class="slot-rows">
+    {{!-- ⚠ `slot` kommer hit som ett explicit hash-partial-argument
+      ({{> wizard-skill-slot slot=slot}}), inte ett block-parameter — så
+      till skillnad från originalversionen (där `slot` var ett |block
+      param| och därför lexiskt synligt hur djupt som helst) måste varje
+      referens INUTI detta {{#each}} gå via `../slot`, annars faller den
+      tyst tillbaka till "hittades inte" (rendrade fritextfältet i stället
+      för <select>, upptäckt i liveverifiering 2026-08-16). --}}
+    {{#each slot.rows as |row|}}
+      {{#if ../slot.isLanguagePool}}
+        <select data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
+          data-slot-attribute="{{../slot.attribute}}">
+          <option value="">— välj —</option>
+          {{#each row.languageOptions as |opt|}}
+            <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}} {{#if opt.disabled}}disabled{{/if}}>{{opt.label}}</option>
+          {{/each}}
+        </select>
+      {{else if ../slot.isWeaponPool}}
+        {{!-- Backlog 66 (Johan: "weapon selection UI... weird and not
+          natural") — riktig dropdown ur den faktiska vapenkatalogen,
+          samma mönster som språkpoolerna, i stället för fritext med
+          autokomplettering. Attributet (STY/SMI) visas per rad så
+          valet syns INNAN man bestämmer sig. --}}
+        <select data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
+          data-slot-attribute="{{../slot.attribute}}">
+          <option value="">— välj vapen —</option>
+          {{#each row.weaponOptions as |opt|}}
+            <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}} {{#if opt.disabled}}disabled{{/if}}>{{opt.label}}</option>
+          {{/each}}
+        </select>
+      {{else if ../slot.isStridskonstPool}}
+        {{!-- Backlog 71/72 (Johan: "Build a DODE.stridskonster structure
+          like DODE.vapentekniker") — riktig dropdown ur den nu byggda
+          teknikkatalogen, samma mönster som vapenpoolen. Fixar den
+          rapporterade "gets ALL the stridskonster"-buggen: varje rad blir
+          en enda namngiven, egen-kostad teknik, inte en platt platshållare. --}}
+        <select data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
+          data-slot-attribute="{{../slot.attribute}}">
+          <option value="">— välj teknik —</option>
+          {{#each row.stridskonstOptions as |opt|}}
+            <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}} {{#if opt.disabled}}disabled{{/if}}>{{opt.label}}</option>
+          {{/each}}
+        </select>
+      {{else}}
+        {{!-- Johan, 2026-08-16: "hantverk valen har vapen som val?" —
+          `list="dode-weapon-suggestions"` var hårdkodat på HELA fritext-
+          grenen, oavsett pool. Fel för hantverk (genuint öppen lista utan en
+          sluten katalog i systemet), rätt bara av misstag för fall där
+          poolens namn RÅKADE innehålla "vapen". Hantverk fick sedan en EGEN,
+          sourcad förslagslista (`DODE.craftSuggestions`, exempel ur äventyr/
+          världsböcker — inte en påhittad sluten katalog, fältet förblir
+          fritext även med förslagen synliga). Stridskonst fick en riktig
+          katalog ovan (backlog 71/72) och hamnar inte längre här. --}}
+        <input type="text"
+          {{#if (eq ../slot.pool "hantverk")}}list="dode-craft-suggestions"{{/if}}
+          data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
+          data-slot-attribute="{{../slot.attribute}}"
+          value="{{row.value}}" placeholder="{{../slot.pool}}…" />
+      {{/if}}
+    {{/each}}
+  </div>
+</div>

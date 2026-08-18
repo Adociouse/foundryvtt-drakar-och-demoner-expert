@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 16",
     "baseProfession": "tjuv",
-    "professionAbility": "<p><strong>Tjuvens grundförmåga (1 PSY = +1 CL, max +3, 2 ggr per sovperiod)</strong> plus:</p><p>Stjäla föremål lyckas med CL <strong>minst 5</strong>, om det är fysiskt möjligt.</p><p><em>Källa: T&L s.12</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -172,7 +171,20 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Skicklig tjuv",
+        "description": "<p>Stjäla föremål lyckas med CL <strong>minst 5</strong>, om det är fysiskt möjligt.</p><p><em>Källa: T&L s.12</em></p>",
+        "effect": null
+      }
+    ],
+    "skillFloors": [
+      {
+        "key": "stjala-foremal",
+        "minFv": 5
+      }
+    ]
   },
   "_id": "dodeYtjuvficktju",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/ficktjuv-man.png",

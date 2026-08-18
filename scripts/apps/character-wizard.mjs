@@ -1,4 +1,5 @@
 import { needsChoice, choiceCount, resolveGrants, applyResolvedAbility, pruneOrphanedAbilityGrants } from "../helpers/special-ability-effects.mjs";
+import { resolveProfessionAbilityRows, resolveRaceAbilityRows } from "../helpers/ability-source-resolver.mjs";
 
 const { HandlebarsApplicationMixin, ApplicationV2, DialogV2 } = foundry.applications.api;
 
@@ -12,7 +13,61 @@ const WIZARD_AMBIENCE_SRC = "systems/drakar-och-demoner-expert/assets/audio/the-
 // (YRKEN.md "Grundegenskapskrav", RP s.11) går annars inte att kontrollera vid
 // valet — alla värden är null då, varje krav blir "overifierat" och kravkollen
 // blir dekoration. Se DESIGN_DECISIONS.md §2-raden om yrkeskrav.
-const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "hand", "attribut", "yrke", "magiskola", "yrkesfardigheter", "formagor", "socialt", "kapital", "alder", "fardigheter", "livsmal", "utrustning", "granska"];
+// ⚠ `alder` flyttad hit (2026-08-05, Johan) — kommer FÖRE attribut/yrke/kapital
+// eftersom `#effectiveAttributes()`, `#checkRequirements()` och
+// `ageCapitalMultiplier`-uppslaget i kapital-steget ALLA redan läste
+// `state.ageCategory` innan spelaren hunnit sätta den (defaultade tyst till
+// "Mogen"). Se docs/DESIGN_DECISIONS.md backlog 34 för hela utredningen —
+// utan den här ordningen ändras attributköpstegens siffror retroaktivt så
+// fort spelaren senare väljer en annan ålder än standardvärdet.
+// Omordnad 2026-08-06 för att följa RP s.23-31:s egen sekvens (Johans
+// direktiv) SÅ LÅNGT den går utan att återinföra en redan fixad bugg. Två
+// hårda beroenden styr vad som INTE kunde flyttas rakt av:
+//   - "alder" måste stå FÖRE "attribut" OCH "kapital" — båda läser
+//     ageCategory för sina LIVE-förhandsvisningar (grundegenskapernas
+//     åldersmod, kapitalets åldersmultiplikator). RP:s eget sidordning
+//     (ålder långt senare, efter startkapital) fungerar på papper eftersom
+//     den fysiska blanketten inte har någon "förhandsvisning" att räkna om
+//     — vår guide har det, så att flytta ålder dit skulle återinföra exakt
+//     den bugg backlog 34 fixade (redan bekräftat med Johan: ålder stannar
+//     tidigt, en medveten guide-specifik avvikelse från bokordningen).
+//   - "ras"/"attribut"/"yrke"/"magiskola" måste komma i den ordningen —
+//     yrke kräver slutgiltiga (rasmodifierade) grundegenskaper för
+//     kravkontrollen, magiskola kräver ett valt yrke.
+// ⚠ RÄTTAD 2026-08-07 (Johan): "formagor" låg först direkt efter "attribut",
+// FÖRE "yrke" — flyttad till EFTER "yrke" eftersom särskilda förmågor
+// (KH s.3) rimligen inte kan slås fram innan yrke är valt, en riktig
+// beroendekedja som fortfarande gäller (se nedan). Ursprungligen flyttad
+// ÄNDA till efter "fardigheter" (matchande Roll20-projektets referens-HTML-
+// guide, dode-chargen/preview.html), med motiveringen att `special-ability-
+// effects.mjs`s `"yrkesUpgrade"`-effekttyp matchar mot redan valda
+// yrkesfärdigheter.
+// ⚠ OMPRÖVAD 2026-08-16 (Johan): "you will likely buy with EP differently"
+// om man redan känner till sina särskilda förmågor — en genuin
+// budgetplaneringspoäng som INTE handlar om ett tekniskt beroende (en
+// kodgranskning samma dag, se DESIGN_DECISIONS.md backlog 69, visade att
+// `yrkesUpgrade` bara matchar fritext mot den statiska sekundärfärdighets-
+// katalogen, aldrig mot spelarens redan valda yrkesfärdigheter — det gamla
+// motivet var svagare än dokumenterat). Poängen är i stället att en spelare
+// som VET att hen t.ex. har +3 FV i Klättra på köpet (Sjöfararbakgrund)
+// rimligen vill spendera sina EP annorlunda på just den färdigheten än om
+// hen inte visste det än. "formagor" flyttad till EFTER "yrke"/"magiskola"
+// (samma s.3-beroende som fortfarande gäller) men FÖRE de EP-spenderande
+// stegen ("socialt"/"kapital"/"sprak"/"yrkesfardigheter"/"fardigheter") —
+// alltså tillbaka till en position nära den allra första, men nu med rätt
+// motivering och utan att återinföra "yrke måste vara valt"-buggen.
+// Övriga, oförändrade beroenden:
+//   - "alder" måste stå FÖRE "attribut" OCH "kapital" — båda läser
+//     ageCategory för sina LIVE-förhandsvisningar.
+//   - "ras"/"attribut"/"yrke"/"magiskola" måste komma i den ordningen —
+//     yrke kräver slutgiltiga (rasmodifierade) grundegenskaper för
+//     kravkontrollen, magiskola kräver ett valt yrke.
+//   - "yrkesfardigheter" står OMEDELBART före "fardigheter" (samma bok-
+//     sektion, RP s.30) — kräver att socialt/kapital redan är klara
+//     eftersom "fardigheter"s EP-budget beror på kvarvarande BP efter ALLT
+//     annat köp. "sprak" (modersmål) står kvar precis före skill-blocket
+//     av samma skäl: den beror på ras och socialt stånd.
+const ALL_STEPS = ["start", "kon", "niva", "grunder", "ras", "hand", "alder", "attribut", "yrke", "magiskola", "formagor", "socialt", "kapital", "sprak", "yrkesfardigheter", "fardigheter", "livsmal", "utrustning", "granska"];
 // Steg som hoppas över i redigeringsläge (befintlig rollperson). Utrustning är
 // spelläge så fort rollpersonen finns — guiden kan inte skilja ett köp vid
 // skapandet från ett fynd i en grotta, så att köra butiken igen skulle antingen
@@ -34,6 +89,7 @@ const STEP_LABELS = {
   formagor: "Särskilda förmågor",
   socialt: "Socialt stånd",
   kapital: "Startkapital",
+  sprak: "Språk",
   alder: "Ålder",
   fardigheter: "Färdigheter",
   livsmal: "Livsmål",
@@ -116,8 +172,9 @@ const NIVA_OPTIONS = [
  * nådd. `state.fardigheter[namn]` lagrar bara den köpta delen ovanpå BC — se
  * `#skillPreview`.
  *
- * Särskilda förmågor (Fas 8, MVP) — `"formagor"`-steget mellan `attribut` och
- * `socialt`. Antalet fritext-slots styrs av nivå (`DODE.abilityRollsByNiva`,
+ * Särskilda förmågor (Fas 8, MVP) — `"formagor"`-steget mellan `yrke`/
+ * `magiskola` och `socialt` (se ALL_STEPS-kommentaren, omflyttad 2026-08-16).
+ * Antalet fritext-slots styrs av nivå (`DODE.abilityRollsByNiva`,
  * KH s.3 — samma tabell som BP), men VAD spelaren skriver i varje slot är fri
  * text, inte en tabellslagning — ingen komplett förmågetabell är extraherad
  * (forskningslucka, se item-yrke.mjs-liknande kommentar i actor-character.mjs).
@@ -157,11 +214,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       selectProfession: DoDECharacterWizard.#onSelectProfession,
       selectMagicSchool: DoDECharacterWizard.#onSelectMagicSchool,
       rollSwordHand: DoDECharacterWizard.#onRollSwordHand,
-      toggleHandGranted: DoDECharacterWizard.#onToggleHandGranted,
       rollSocialStanding: DoDECharacterWizard.#onRollSocialStanding,
       rollStartCapital: DoDECharacterWizard.#onRollStartCapital,
       buySkillFv: DoDECharacterWizard.#onBuySkillFv,
       sellSkillFv: DoDECharacterWizard.#onSellSkillFv,
+      buyAllSkillFv: DoDECharacterWizard.#onBuyAllSkillFv,
+      sellAllSkillFv: DoDECharacterWizard.#onSellAllSkillFv,
       buyEquipment: DoDECharacterWizard.#onBuyEquipment,
       sellEquipment: DoDECharacterWizard.#onSellEquipment,
       rollFormaga: DoDECharacterWizard.#onRollFormaga,
@@ -171,7 +229,14 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   };
 
   static PARTS = {
-    form: { template: "systems/drakar-och-demoner-expert/templates/apps/character-wizard.hbs" }
+    // `scrollable` är Foundrys EGEN mekanism (HandlebarsApplicationMixin,
+    // `_preSyncPartState`/`_syncPartState`) för att spara och återställa en
+    // scroll-position över en re-render — annars nollställs `.wizard-step-
+    // container`s scrollTop varje gång `this.render()` körs efter ETT klick
+    // (t.ex. ett enskilt yrkesfärdighetsval på Steg 14/18), vilket kastar
+    // användaren till toppen av en lång lista efter varje val. Johan
+    // 2026-08-08. Se scripts/apps/training.mjs och sheets/*.mjs för samma fix.
+    form: { template: "systems/drakar-och-demoner-expert/templates/apps/character-wizard.hbs", scrollable: [".wizard-step-container"] }
   };
 
   /**
@@ -342,6 +407,16 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   // Speglat av samma skäl som namnet ovan: yrkesfärdighetssteget behöver hela
   // dokumentet (professionSkills), men actions körs utanför _prepareContext.
   #selectedProfessionDoc = null;
+  // Samma mönster, samma skäl — språksteget (#canAdvance/#onSetMotherTongueLang)
+  // behöver rasdokumentet (raceGroup, för DODE.motherTongueSlots) synkront.
+  #selectedRaceDoc = null;
+  // Samma mönster igen — yrkesfärdighetsstegets vapenfärdighetspooler
+  // (backlog 66, Johan: "weapon selection UI... weird and not natural")
+  // behöver en riktig lista att bygga en <select> av i #professionSkillState,
+  // som körs utanför _prepareContext(). Alla `vapen`-kompendieposter, samma
+  // källa som redan fanns för den fria textens autokomplettering
+  // (weaponSuggestions) — bara riktade om till en riktig dropdown.
+  #weaponDocs = [];
 
   get title() {
     return this.isEditMode ? `Redigera: ${this.actor.name}` : "Ny rollperson";
@@ -368,6 +443,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // ("Maximalt fem valfria vapenfärdigheter"), annars är den en namngiven
     // färdighet ur listan.
     professionSkillPicks: [],
+    // Vapenmästarens "(två)"-alternativ (KH s.8-9, professionSkills-entry
+    // `dualWieldAlt`) — kryssrutan som expanderar en 1-vals-plats till 2 så
+    // spelaren kan välja två vapenfärdigheter i kombination i stället för en.
+    // Nycklas på slot-index eftersom fler än en profession skulle kunna få
+    // flaggan i framtiden.
+    dualWieldChecked: {},
     // BP-ledger — se klassdokblocket. spentSocialt/spentKapital lever INTE här —
     // de härleds från socialStanding.bpSpent/startCapital.bpSpent nedan (samma
     // enda-källa-princip som DataModellens prepareDerivedData använder).
@@ -406,6 +487,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // attribut i #skillPreview, så ett omkastat attributslag eller rasbyte
     // aldrig lämnar en färdighet med en stale bas-FV.
     fardigheter: {},
+    // Modersmål (backlog, session 2026-08-06) — RP s.42/44, se DODE.raceMotherTongues.
+    // `tala`/`lasaSkriva` är arrayer av VALDA språknycklar, index-parade mot
+    // slotlistan `DODE.motherTongueSlots(raceDoc, kind)` — bara index vars slot
+    // faktiskt ÄR ett val ("human" eller {choice}) har ett meningsfullt värde,
+    // fasta slots (t.ex. Alvers "alviska") läses direkt ur slotlistan, sparas
+    // inte här. Se #skillPreview för hur detta blir BC + visningsnamn.
+    motherTongues: { tala: [], lasaSkriva: [] },
     // Särskilda förmågor (Fas 8, MVP) — fritext-slots, storleken styrs av
     // DODE.abilityRollsByNiva[niva] och synkas i #specialAbilitySlots() varje
     // render (inte här vid init) eftersom den beror på ett värde som kan ändras.
@@ -456,6 +544,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // se #resolveContentPacks och DESIGN_DECISIONS.md §7.5.
     const equipmentDocs = (await DoDECharacterWizard.#resolveContentPacks("startingEquipment"))
       .filter((doc) => doc.effects.size === 0);
+    this.#weaponDocs = equipmentDocs.filter((d) => d.type === "vapen")
+      .sort((a, b) => a.name.localeCompare(b.name, "sv"));
 
     // Redigeringsläge: koppla ihop embeddad ras/yrke med kompendiedokumentet
     // innan något annat räknas ut — annars beräknas baschansen utan rasbonus.
@@ -510,6 +600,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.showHand = stepId === "hand";
     context.showSocialt = stepId === "socialt";
     context.showKapital = stepId === "kapital";
+    context.showSprak = stepId === "sprak";
     context.showGranska = stepId === "granska";
     context.showMagiskola = stepId === "magiskola";
     context.showYrkesfardigheter = stepId === "yrkesfardigheter";
@@ -530,12 +621,21 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       ...option,
       selected: option.value === this.state.kon
     }));
+    // Husregeln (Johan 2026-08-06/07) ger varje hjälte-nivå en EGEN
+    // slag-antal-formel i stället för det delade 1T6 (HH s.6-7) — nivåkorten
+    // ska visa VILKEN formel som gäller för just DEN nivån innan man ens
+    // valt, inte bara i detaljboxen efter valet (Johan: "under varje
+    // hjälteikon hur många slag man får som text").
+    const houseRuleOn = game.settings.get(game.system.id, "hjaltedadTieredRollCount");
     context.nivaOptions = NIVA_OPTIONS.map((option) => ({
       ...option,
       bp: CONFIG.DODE.bpByNiva[option.value],
       // Hjälte-nivåerna får också slå hjältedåd (HH s.6-7) för bonus-BP/KP
       // ovanpå den delade 125-basen — "vanlig" gör inte det, se #onRollHjaltedad.
       isHero: option.value !== "vanlig",
+      hjaltedadFormula: option.value !== "vanlig"
+        ? ((houseRuleOn && CONFIG.DODE.hjaltedadCountHouseRule[option.value]) || "1d6").replace(/d/gi, "T")
+        : null,
       selected: option.value === this.state.niva
     }));
     context.selectedNivaOption = context.nivaOptions.find((option) => option.selected) ?? null;
@@ -545,9 +645,30 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // så exakt EP är inte känt än, men skillnaden mellan nivåerna är det.
     context.epByAge = CONFIG.DODE.epBudgetTable[this.state.niva] ?? null;
     context.hjaltedad = this.state.hjaltedad;
+    // Husregel-formeln (om påslagen och nivån har en, se
+    // #onRollHjaltedadCount) — mallen ska ALDRIG hårdkoda "1T6" när en annan
+    // formel faktiskt slås, annars ljuger stegets egen text mot chattkortet.
+    // "d"→"T" bara för VISNING (Roll-formeln själv, skickad till `new Roll()`,
+    // förblir oförändrad "1d2"-syntax i #onRollHjaltedadCount).
+    const rawFormula = (game.settings.get(game.system.id, "hjaltedadTieredRollCount")
+      && CONFIG.DODE.hjaltedadCountHouseRule[this.state.niva]) || "1d6";
+    context.hjaltedadCountFormula = rawFormula.replace(/d/gi, "T");
     const socialResult = this.#socialStandingResult();
     const capitalResult = this.#startCapitalResult(socialResult);
     context.socialStanding = socialResult;
+    // Referenstabell under socialt stånd-steget (Johan 2026-08-07: "borde ha
+    // stödtabell under så man ser vad man kan få för val") — samma
+    // "referens under valen"-mönster som svärdshandens 2T6-tabell och
+    // språkstegets referenstabell. `min` härleds från föregående rads `max`,
+    // eftersom DODE.socialStandingTable (config.mjs) bara lagrar övre gränsen.
+    context.socialStandingTable = (() => {
+      let min = 2;
+      return CONFIG.DODE.socialStandingTable.map((row) => {
+        const label = row.max === Infinity ? `≥${min}` : (min === row.max ? `${min}` : `${min}–${row.max}`);
+        min = row.max + 1;
+        return { range: label, rank: row.rank };
+      });
+    })();
     context.swordHand = this.#swordHandResult();
     context.swordHandOptions = CONFIG.DODE.swordHands;
     context.startCapital = capitalResult;
@@ -655,21 +776,31 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.#selectedProfessionName = selectedProfession?.name ?? "";
     this.#selectedProfessionDoc = selectedProfession ?? null;
     context.professionSkillState = selectedProfession ? this.#professionSkillState() : null;
-    // Förslagslista till de valfria platserna. Vapenfärdigheter har ingen egen
-    // katalog i systemet — vapnen är Items — så vapennamnen ur kompendiet är
-    // det närmaste en lista vi har. Fritext är tillåtet, listan är bara hjälp.
-    context.weaponSuggestions = equipmentDocs
-      .filter((d) => d.type === "vapen").map((d) => d.name).sort();
     // Förslagslista till förmågevalens "valfri sekundär färdighet"-inputs
     // (backlogpost 7/36) — samma "fritext, listan är bara hjälp"-princip.
     context.secondarySkillSuggestions = CONFIG.DODE.secondarySkills.map((s) => s.name).sort();
+    // Johan, 2026-08-16: sourcade hantverksexempel (äventyr/världsböcker) för
+    // hantverksfältets datalist — se CONFIG.DODE.craftSuggestions för källor.
+    context.craftSuggestions = CONFIG.DODE.craftSuggestions;
     context.selectedRace = selectedRace;
+    this.#selectedRaceDoc = selectedRace ?? null;
     context.selectedProfession = selectedProfession;
+    // Ras-/yrkesramverket (2026-08-16): visar den SAMMANSLAGNA listan (bas-
+    // yrkets egna rader + specialiseringens egna) i stället för bara den
+    // valda posten egna `system.professionAbilities` — annars skulle t.ex.
+    // Krigarmunk aldrig visa Krigarens "+5 på initiativ" i guidens detaljkort.
+    context.selectedProfessionAbilityRows = resolveProfessionAbilityRows(selectedProfession, professions);
+    context.selectedRaceAbilityRows = resolveRaceAbilityRows(selectedRace);
     context.ageCategories = AGE_CATEGORIES.map((c) => ({ value: c, selected: c === this.state.ageCategory }));
     context.attributes = CONFIG.DODE.attributes;
     context.effectiveAttributes = effectiveAttributes;
     context.requirementCheck = requirementCheck;
-    const skillPreview = this.#skillPreview(effectiveAttributes, selectedProfession, epBudget);
+    context.motherTongue = this.#motherTongueResult(selectedRace, socialResult, effectiveAttributes);
+    // Referenstabell för språksteget (Johan 2026-08-07: "spelarna [ska]
+    // förstå vad de väljer och varför") — samma "referens under valen"-mönster
+    // som attributstegets grupptabell (backlog 35).
+    context.languages = CONFIG.DODE.languages;
+    const skillPreview = this.#skillPreview(effectiveAttributes, selectedProfession, epBudget, selectedRace);
     context.skillPreview = skillPreview;
     context.ep = {
       max: epBudget.max,
@@ -681,19 +812,39 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // needsChoiceCount/choiceRows läggs på ovanpå rå-sloten (index bevarad,
     // så data-ability-*-index i mallen fortfarande pekar rätt i state) — se
     // needsChoice/choiceCount i special-ability-effects.mjs.
-    context.specialAbilities = this.#specialAbilitySlots().map((slot) => ({
-      ...slot,
-      needsChoiceCount: needsChoice(slot.effect) ? choiceCount(slot.effect) : 0,
-      choiceRows: needsChoice(slot.effect)
-        ? Array.from({ length: choiceCount(slot.effect) }, (_, i) => ({ row: i, value: slot.effectChoices?.[i] ?? "" }))
-        : [],
-      choicePool: slot.effect?.pool === "hantverk" ? "hantverk" : (slot.effect?.pool ?? "")
-    }));
+    context.specialAbilities = this.#specialAbilitySlots().map((slot) => {
+      const choicePool = slot.effect?.pool === "hantverk" ? "hantverk" : (slot.effect?.pool ?? "");
+      // Johan, 2026-08-16: "särkilda förmågot langauge should have language
+      // selction" — samma fritext-mot-datalist-problem som vapenvalet redan
+      // hade (backlog 66/67). Effekten (grantSecondary→addChosen) var redan
+      // riktigt kopplad och skapar en verklig FV20-färdighet — det var bara
+      // INMATNINGEN som var fritext, med risk att spelarens stavning
+      // ("Alvspråk") inte matchar katalogens riktiga namn ("Alviska").
+      const languageOptions = choicePool === "sprak"
+        ? CONFIG.DODE.languages.map((l) => ({ value: l.name, label: l.name }))
+        : null;
+      return {
+        ...slot,
+        needsChoiceCount: needsChoice(slot.effect) ? choiceCount(slot.effect) : 0,
+        choiceRows: needsChoice(slot.effect)
+          ? Array.from({ length: choiceCount(slot.effect) }, (_, i) => ({
+              row: i, value: slot.effectChoices?.[i] ?? "",
+              languageOptions: languageOptions?.map((opt) => ({ ...opt, selected: opt.value === slot.effectChoices?.[i] }))
+            }))
+          : [],
+        choicePool
+      };
+    });
     context.specialAbilityNames = context.specialAbilities
       .map((a) => a.name.trim())
       .filter((name) => name.length > 0)
       .join(", ");
-    context.lifeGoalOptions = CONFIG.DODE.lifeGoals.map((goal) => ({ value: goal, selected: goal === this.state.lifeGoal }));
+    context.lifeGoalOptions = CONFIG.DODE.lifeGoals.map((goal) => ({ value: goal.name, selected: goal.name === this.state.lifeGoal }));
+    // Referenstabell under valet (Johan, 2026-08-16: "livsmål probably need
+    // to have a sub table explaining the contents, otherwise its hard to
+    // understand") — samma mönster som språkstegets redan existerande
+    // beskrivningstabell (backlog 64).
+    context.lifeGoalTable = CONFIG.DODE.lifeGoals;
     context.finalLifeGoal = this.state.lifeGoalCustom.trim() || this.state.lifeGoal;
     context.equipmentResult = this.#equipmentResult(equipmentDocs, capitalResult);
     context.canAdvance = this.#canAdvance(stepId);
@@ -753,6 +904,15 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // inte ber om ett omslag av något som redan är bestämt.
     this.state.swordHand = { roll: 0, bpSpent: 0, granted: sys.swordHand ?? "hoger" };
     this.state.socialStanding = { roll: sys.socialStanding?.roll ?? 0, bpSpent: sys.socialStanding?.bpSpent ?? 0 };
+    // ⚠ Modersmålsvalet läses INTE tillbaka — vilket språk som valdes finns
+    // bara som fritext i den skapade `fardighet`-postens NAMN (t.ex. "Tala
+    // modersmål (Västjori)"), inte som ett eget strukturerat fält, så det går
+    // inte att tillförlitligt parsa tillbaka. Ett omslag i redigeringsläge
+    // visar språksteget tomt igen — spelaren väljer om, `#applyToActor`s
+    // befintliga namn-/nyckelmatchning uppdaterar samma färdighetspost i
+    // stället för att skapa en dubblett (den matchar på `skillKey`, som är
+    // oförändrat "tala-modersmal"/"lasa-skriva-modersmal" oavsett språk).
+    this.state.motherTongues = { tala: [], lasaSkriva: [] };
     this.state.startCapital = { roll: sys.startCapital?.roll ?? 0, bpSpent: sys.startCapital?.bpSpent ?? 0 };
     this.state.bp = {
       spentRas: sys.bp?.spentRas ?? 0,
@@ -868,10 +1028,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         const slot = namedHit >= 0 ? null : list.findIndex((e) => e.choiceCount);
         this.state.professionSkillPicks.push({
           key, name: item.name, attribute: item.system.attribute,
+          weaponGroup: item.system.weaponGroup || "",
           slotIndex: namedHit >= 0 ? null : (slot >= 0 ? slot : null)
         });
       }
     }
+    // Vapenmästarens "(två)"-kryssruta (dualWieldAlt) återskapas från VERKLIGA
+    // val, inte ett eget sparat fält — om ett slot redan har fler val än sin
+    // grundläggande choiceCount måste kryssrutan ha varit ikryssad när
+    // rollpersonen sparades, annars hade #professionSkillState() aldrig gett
+    // plats för det andra valet. Utan detta hade en redigeringsomgång öppnat
+    // steget med kryssrutan tom trots att TVÅ vapenval redan finns sparade.
+    const list = this.#selectedProfessionDoc?.system?.professionSkills ?? [];
+    list.forEach((entry, i) => {
+      if (!entry.dualWieldAlt) return;
+      const count = this.state.professionSkillPicks.filter((p) => p.slotIndex === i).length;
+      if (count > (entry.choiceCount || 1)) this.state.dualWieldChecked[i] = true;
+    });
     this.#pendingSkillLoad = false;
   }
 
@@ -1050,6 +1223,40 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   /**
+   * Modersmål-stegets data — RP s.42/44, DODE.raceMotherTongues (config.mjs).
+   * Bygger en rad per SLOT för Tala/Läsa-Skriva, oavsett om slotten är fast
+   * (t.ex. Alvers "alviska") eller ett val ("human"/{choice}) — mallen visar
+   * fasta rader som ren text och valrader som en `<select>`.
+   *
+   * Visar också en förhandsvisning av det resulterande FV:t (BC, se
+   * DODE.motherTongueTalaBc/motherTongueLasaSkrivaBc) så spelaren ser vad
+   * socialt stånd + INT faktiskt gav INNAN färdighetssteget — annars dyker
+   * talet bara upp senare utan förklaring.
+   */
+  #motherTongueResult(raceDoc, socialResult, effectiveAttributes) {
+    const bucket = CONFIG.DODE.languageSocialBucket(socialResult?.rank ?? "");
+    const intTotal = effectiveAttributes?.int?.total ?? 0;
+    const buildKind = (kind, bc) => {
+      const slots = CONFIG.DODE.motherTongueSlots(raceDoc, kind);
+      const chosen = this.state.motherTongues[kind];
+      const rows = slots.map((slot, index) => {
+        const options = CONFIG.DODE.motherTongueSlotOptions(slot);
+        if (!options) return { index, fixed: true, label: CONFIG.DODE.languageName(slot), selectedKey: slot };
+        const selectedKey = chosen[index] ?? "";
+        return {
+          index, fixed: false, selectedKey,
+          options: options.map((o) => ({ key: o.key, name: o.name, selected: o.key === selectedKey }))
+        };
+      });
+      const complete = rows.every((r) => r.fixed || r.selectedKey);
+      return { kind, bc, rows, complete };
+    };
+    const tala = buildKind("tala", CONFIG.DODE.motherTongueTalaBc(bucket));
+    const lasaSkriva = buildKind("lasaSkriva", CONFIG.DODE.motherTongueLasaSkrivaBc(bucket, intTotal));
+    return { tala, lasaSkriva, complete: tala.complete && lasaSkriva.complete };
+  }
+
+  /**
    * Auto-tilldelade färdigheter — PLAN_WIZARD_V2.md Fas 6: de 16 primära
    * färdigheterna (RP s.36, DODE.primarySkills) + yrkets `professionSkills`
    * (item-yrke.mjs, se dess schemakommentar för forskningsluckan där inte alla
@@ -1066,22 +1273,82 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * `canIncrease` för en enskild färdighet alltid speglar den verkliga
    * kvarvarande poolen efter allt annat som redan köpts, inte en lokal
    * per-färdighet-budget.
+   *
+   * ⚠ **`tala-modersmal`/`lasa-skriva-modersmal` är ett SÄRFALL** — RP s.42/44
+   * ger dem ett fast BC ur socialt stånd (× INT för Läsa/Skriva), INTE
+   * `attributeToGroup(INT)` som alla andra INT-baserade färdigheter. Ett
+   * tidigare fel (upptäckt 2026-08-05, fixat 2026-08-06) räknade dem som
+   * vilken primärfärdighet som helst. `raceDoc` behövs bara för de här två —
+   * övriga färdigheter är opåverkade.
    */
-  #skillPreview(effectiveAttributes, selectedProfession, epBudget) {
+  #skillPreview(effectiveAttributes, selectedProfession, epBudget, raceDoc = null) {
     const bc = (attribute) => {
       const total = effectiveAttributes[attribute]?.total;
       return total == null ? 0 : CONFIG.DODE.attributeToGroup(total);
+    };
+    const socialRank = this.#socialStandingResult().rank;
+    const socialBucket = CONFIG.DODE.languageSocialBucket(socialRank);
+    const intTotal = effectiveAttributes?.int?.total ?? 0;
+    const motherTongueBc = {
+      "tala-modersmal": CONFIG.DODE.motherTongueTalaBc(socialBucket),
+      "lasa-skriva-modersmal": CONFIG.DODE.motherTongueLasaSkrivaBc(socialBucket, intTotal)
+    };
+    // Visningsnamn utökas med de FAKTISKT valda/beviljade språken, t.ex.
+    // "Tala modersmål (Dvärgiska, Kaseni)" — se DODE.motherTongueSlots.
+    // ⚠ Tar skillKEY ("tala-modersmal"), översätter till slot-KIND ("tala")
+    // EN gång här — DODE.motherTongueSlots vill ha "tala"/"lasaSkriva", inte
+    // skillKey. En tidigare bugg skickade skillKey rakt in i den funktionen,
+    // vilket alltid missade (den okända kinden föll tyst tillbaka på ["human"]),
+    // så inget språknamn någonsin visades. Hittat i liveverifiering 2026-08-06.
+    const motherTongueLabel = (skillKey) => {
+      const kind = skillKey === "tala-modersmal" ? "tala" : "lasaSkriva";
+      const slots = CONFIG.DODE.motherTongueSlots(raceDoc, kind);
+      const chosen = this.state.motherTongues[kind];
+      const names = slots.map((slot, index) => {
+        const isChoice = CONFIG.DODE.motherTongueSlotOptions(slot) !== null;
+        const key = isChoice ? chosen[index] : slot;
+        return key ? CONFIG.DODE.languageName(key) : null;
+      }).filter(Boolean);
+      return names.join(", ");
     };
     // ⚠ All matchning går på `skillKey`, aldrig på visningsnamnet — se
     // DODE.skillKey i config.mjs och backlogpost 6a. Yrkens `professionSkills`
     // (kompendiedata) saknar ännu explicita nycklar, så de härleds ur namnet;
     // konfigtabellernas nycklar är däremot frysta och överlever en omdöpning.
-    const buildEntry = (key, name, attribute, costTier) => {
-      const baseFv = bc(attribute);
+    // Yrkets automatiska GOLV på en primär/namngiven färdighet (item-yrke.mjs
+    // `skillFloors`, t.ex. Prisjägarens "automatiskt minst CL 17 i Upptäcka
+    // fara", KH s.6-7) — tidigare bara professionAbility-prosa, aldrig
+    // maskinläst. Gratis, precis som BC — höjer bara baseFv, kostar inget EP.
+    const skillFloors = new Map(
+      (selectedProfession?.system?.skillFloors ?? []).map((f) => [f.key, f.minFv])
+    );
+    // Katalog-nivå grundkostnadsöverskrivning (Vapentekniker/Stridskonster,
+    // Vapenmästarens/Krigarmunkens halva pris) fanns tidigare bara i
+    // training.mjs (post-skapande) — aldrig i guidens egen kostnadsförhands-
+    // visning, eftersom Vapentekniker aldrig var wizard-integrerat. Nu när
+    // Stridskonster ÄR det (backlog 71/72, `choicePool: "stridskonst"`)
+    // måste guiden visa samma korrekta grundkostnad, annars visar den fel
+    // EP-pris (den platta yrkesfärdighet-basen) för en teknik som i själva
+    // verket kostar 0,5-2 EP. `selectedProfession` finns redan i scope här
+    // (används av skillFloors ovan) — bygger en minimal shim istället för
+    // att ändra secondarySkillBaseOverrideFor-signaturen, som annars är
+    // gjord för en RIKTIG Actor-dokument.
+    const professionNameShim = { system: { profession: { name: selectedProfession?.name } } };
+    const buildEntry = (key, name, attribute, costTier, weaponGroup = "") => {
+      let baseFv = bc(attribute);
+      let displayName = name;
+      if (key in motherTongueBc) {
+        baseFv = motherTongueBc[key];
+        const label = motherTongueLabel(key);
+        if (label) displayName = `${name} (${label})`;
+      } else if (skillFloors.has(key)) {
+        baseFv = Math.max(baseFv, skillFloors.get(key));
+      }
       const bought = this.state.fardigheter[key] ?? 0;
       const fv = baseFv + bought;
-      const cost = CONFIG.DODE.skillCost(costTier, baseFv, fv);
-      return { key, name, attribute, costTier, baseFv, fv, cost };
+      const baseOverride = CONFIG.DODE.secondarySkillBaseOverrideFor(key, professionNameShim);
+      const cost = CONFIG.DODE.skillCost(costTier, baseFv, fv, baseOverride);
+      return { key, name: displayName, attribute, costTier, baseFv, fv, cost, weaponGroup, baseOverride };
     };
     const primaryKeys = new Set(CONFIG.DODE.primarySkills.map((s) => s.key));
     const primary = CONFIG.DODE.primarySkills.map((s) => buildEntry(s.key, s.name, s.attribute, "primar"));
@@ -1092,7 +1359,36 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const professionSkills = this.state.professionSkillPicks
       .map((s) => ({ ...s, key: s.key || CONFIG.DODE.skillKey(s.name) }))
       .filter((s) => s.name && !primaryKeys.has(s.key))
-      .map((s) => buildEntry(s.key, s.name, s.attribute, "yrkesfardighet"));
+      .map((s) => buildEntry(s.key, s.name, s.attribute, "yrkesfardighet", s.weaponGroup ?? ""));
+    // Ett `skillFloors`-golv (t.ex. Stråtrövarens "Överleva i skogstrakter",
+    // Prisjägares Upptäcka fara) är boktextens egen "AUTOMATISKT/ALLTID" —
+    // FÅR INTE vara beroende av att spelaren råkar välja just DEN raden bland
+    // sina begränsade 12 yrkesfärdighetsval. Prisjägares golv har alltid
+    // fungerat av en anledning som inte generaliserar: Upptäcka fara är en
+    // PRIMÄR färdighet, alltid närvarande oavsett pick-budget. Stråtrövarens
+    // golv ligger däremot på en YRKESFÄRDIGHET, som konkurrerar om samma 12
+    // platser som alla andra val — en spelare som fyller sina 12 platser med
+    // annat skulle annars aldrig få golvet alls (hittat i liveverifiering
+    // 2026-08-17, `EDGE Stråtrövare skogsvana` visade `totalYrkesfardigheter:
+    // 12` men INGEN "Överleva i skogstrakter"-rad). Fixat genom att lägga
+    // till en garanterad, kostnadsfri post för varje golv-nyckel som INTE
+    // redan täcks av primär eller ett faktiskt spelarval — samma "gratis,
+    // precis som BC"-princip skillFloors-kommentaren i item-yrke.mjs redan
+    // beskriver, nu också garanterad oavsett pick-ordning.
+    const coveredKeys = new Set([...primaryKeys, ...professionSkills.map((s) => s.key)]);
+    const floorOnlySkills = [...skillFloors.keys()]
+      .filter((key) => !coveredKeys.has(key))
+      .map((key) => {
+        const catalogEntry = CONFIG.DODE.secondarySkills.find((s) => s.key === key);
+        return buildEntry(key, catalogEntry?.name ?? key, catalogEntry?.attribute ?? "int", "yrkesfardighet");
+      });
+    // ⚠ `floorOnlySkills` MÅSTE in i den RETURNERADE `professionSkills`, inte
+    // bara i den lokala `all` som räknar EP — `#onCreateCharacter`/
+    // `#applyToActor` itererar `[...skillPreview.primary,
+    // ...skillPreview.professionSkills]` för att FAKTISKT SKAPA `fardighet`-
+    // items på aktören. Utan detta hade golvet räknats med i EP-budgeten men
+    // aldrig blivit en riktig färdighetspost på den skapade rollpersonen.
+    professionSkills.push(...floorOnlySkills);
     const all = [...primary, ...professionSkills];
     const epSpent = all.reduce((sum, entry) => sum + entry.cost, 0);
     const epRemaining = (epBudget?.max ?? 0) - epSpent;
@@ -1100,7 +1396,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     for (const entry of all) {
       entry.canDecrease = entry.fv > entry.baseFv;
       entry.nextCost = maxStartFv != null && entry.fv < maxStartFv
-        ? CONFIG.DODE.skillCost(entry.costTier, entry.fv, entry.fv + 1)
+        ? CONFIG.DODE.skillCost(entry.costTier, entry.fv, entry.fv + 1, entry.baseOverride)
         : null;
       entry.canIncrease = entry.nextCost !== null && entry.nextCost <= epRemaining;
     }
@@ -1142,6 +1438,30 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   /**
+   * Hovertext per utrustningskort (Johan, 2026-08-16) — bara de fält som
+   * faktiskt finns i respektive DataModel-schema (se item-vapen.mjs/
+   * item-rustning.mjs/item-utrustning.mjs); INGET brytvärde (BV) här, det
+   * fältet saknas fortfarande helt på både vapen och rustning (DESIGN_
+   * DECISIONS.md §6, ett redan känt öppet schemagap, inte glömt nu).
+   */
+  static #equipmentStatsTooltip(doc) {
+    const s = doc.system;
+    if (doc.type === "vapen") {
+      const parts = [`Skada: ${s.damage}`, `Vikt: ${s.weight} BEP`, `Fattning: ${s.grip}`];
+      if (s.length) parts.push(`Längd: ${s.length}`);
+      if (s.range) parts.push(`Räckvidd: ${s.range}`);
+      return parts.join(" · ");
+    }
+    if (doc.type === "rustning") {
+      const parts = [`Skydd (Abs): ${s.abs}`, `Vikt: ${s.weight} BEP`];
+      if (s.coverage?.length) parts.push(`Skyddar: ${s.coverage.join(", ")}`);
+      return parts.join(" · ");
+    }
+    // utrustning — bara vikt är ett generiskt, alltid tillgängligt fält.
+    return s.weight ? `Vikt: ${s.weight} BEP` : "";
+  }
+
+  /**
    * Utrustning (Fas 9) — köp/sälj från `vapen-utrustning`-kompendiet (vapen+
    * rustning i samma pack), draget mot `state.startCapital.finalSm`. Ingen
    * `qty`-fält på Item-schemat (plan: "Ingen ny schema för utrustning") — antal
@@ -1151,17 +1471,35 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #equipmentResult(equipmentDocs, capitalResult) {
     const items = equipmentDocs.map((doc) => {
       const qty = this.state.equipment[doc.uuid] ?? 0;
+      // Mängdköpbara poster (Johan 2026-08-08: "purchasable/usable entity",
+      // se backlog 66) — ett fritextpris som "20 sm/g" är INTE referensdata,
+      // det är ett styckpris per gram/dos/kagge som bara saknat ett mängdfält
+      // i UI:t. DODE.parsePriceNote returnerar null för de FÅ notar som
+      // faktiskt ÄR ren referens (ridjursmultiplikatorerna "×0,5"/"×10" —
+      // de prissätter ett ANNAT föremål, inte sig själva).
+      const parsedNote = doc.type === "utrustning" && doc.system.priceNote
+        ? CONFIG.DODE.parsePriceNote(doc.system.priceNote, doc.system.priceUnit)
+        : null;
       // `utrustning` prissätts i bokens eget myntslag och normaliseras till
       // silver i prepareDerivedData; vapen/rustning har ett rent sm-pris.
       // Startkapitalet är i silver, så allt jämförs i silver här.
-      const price = doc.type === "utrustning" ? (doc.system.priceSm ?? 0) : (doc.system.price ?? 0);
+      const price = parsedNote
+        ? CONFIG.DODE.toSilver(parsedNote.amountPerUnit, parsedNote.currency)
+        : (doc.type === "utrustning" ? (doc.system.priceSm ?? 0) : (doc.system.price ?? 0));
       return {
         uuid: doc.uuid, name: doc.name, img: doc.img, type: doc.type, price, qty,
         category: doc.system.category ?? "",
-        // Poster med fritextpris ("4 per kagge", "5 sm/g") har inget styckpris
-        // och är referensdata — de får inte kunna köpas för 0 silver.
         priceLabel: doc.system.priceNote || `${price} sm`,
-        purchasable: !doc.system.priceNote && price > 0
+        isQuantityPurchase: !!parsedNote,
+        unitLabel: parsedNote?.unitLabel ?? "",
+        // Rena multiplikatornotar ("×0,5") har varken ett styckpris eller en
+        // parsad enhet — de förblir referens-only, oköpbara här.
+        purchasable: parsedNote ? true : (!doc.system.priceNote && price > 0),
+        // Johan, 2026-08-16: "hovering over the equipment a text should be
+        // shown about the characteristics" — ett kort blir annars bara en
+        // bild+pris, med vapnets skada/vikt eller rustningens skydd gömt
+        // en klick bort på själva kompendieposten.
+        statsTooltip: DoDECharacterWizard.#equipmentStatsTooltip(doc)
       };
     });
     const spent = items.reduce((sum, entry) => sum + entry.price * entry.qty, 0);
@@ -1170,6 +1508,14 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     for (const entry of items) {
       entry.canBuy = entry.purchasable !== false && entry.price <= remaining;
       entry.canSell = entry.qty > 0;
+      // Mängdfältets `max` — hur många enheter TOTALT (redan köpta + fler man
+      // har råd med just nu) — så fältet klampar mot budgeten i stället för
+      // att tillåta ett negativt "kapital kvar".
+      if (entry.isQuantityPurchase) {
+        const affordableMore = entry.price > 0 ? Math.floor(remaining / entry.price) : Infinity;
+        entry.maxQty = entry.qty + Math.max(0, affordableMore);
+        entry.totalSm = entry.price * entry.qty;
+      }
     }
     // Gruppering per kategori — utrustningssteget gick från 33 till 304 kort när
     // Magi-regelbokens listor portades (2026-07-28), och ett platt rutnät i den
@@ -1187,9 +1533,15 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       if (!buckets.has(key)) buckets.set(key, []);
       buckets.get(key).push(entry);
     }
+    // Johan, 2026-08-16: "utrustning should probably be alphabetically
+    // indexed under each category" — korten låg tidigare i kompendiets
+    // egen (skapelseordnings-)följd inom varje kategori, inte bokstavsordning.
     const groups = ORDER
       .filter((key) => buckets.has(key))
-      .map((key) => ({ key, label: labelFor(key), items: buckets.get(key) }));
+      .map((key) => ({
+        key, label: labelFor(key),
+        items: buckets.get(key).sort((a, b) => a.name.localeCompare(b.name, "sv"))
+      }));
     return { items, groups, budget, spent, remaining };
   }
 
@@ -1234,6 +1586,20 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       case "yrkesfardigheter": return this.state.professionSkillPicks.length >= this.#professionSkillTarget;
       case "socialt": return this.state.socialStanding.roll > 0;
       case "kapital": return this.state.startCapital.roll > 0;
+      // Alla valbara slots (t.ex. "vilket människospråk") måste vara ifyllda —
+      // fasta slots (Alvers "alviska" m.fl.) räknas alltid som klara, se
+      // DODE.motherTongueSlots. socialResult/effectiveAttributes påverkar bara
+      // det FÖRHANDSVISADE BC:t, inte om steget räknas som klart.
+      case "sprak": {
+        for (const kind of ["tala", "lasaSkriva"]) {
+          const slots = CONFIG.DODE.motherTongueSlots(this.#selectedRaceDoc, kind);
+          const chosen = this.state.motherTongues[kind];
+          for (let i = 0; i < slots.length; i++) {
+            if (CONFIG.DODE.motherTongueSlotOptions(slots[i]) && !chosen[i]) return false;
+          }
+        }
+        return true;
+      }
       default: return true;
     }
   }
@@ -1246,6 +1612,77 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       const nextBtn = this.element.querySelector('[data-action="nextStep"]');
       if (nextBtn) nextBtn.disabled = !this.#canAdvance("grunder");
     });
+    // ⚠ Svärdshand "fick du handen som förmåga"-väljaren och modersmålsvalen
+    // (nedan) MÅSTE bindas med en riktig `change`-lyssnare, inte
+    // `data-action` — Foundrys egen `_attachFrameListeners()`
+    // (client/applications/api/application.mjs) binder `[data-action]`
+    // ENDAST till `click`, aldrig `change`. Ett `<select data-action="...">`
+    // ser ut som det borde fungera men gör det ALDRIG: att välja ett
+    // alternativ i en riktig dropdown avfyrar `change`, inte `click`, så
+    // handlern kallas aldrig och tillståndet skrivs aldrig. Upptäckt
+    // 2026-08-06 genom att faktiskt klicka igenom guiden (inte state-
+    // injektion via konsolen) — se CLAUDE.md Livetestregler och
+    // memory.md för hela utredningen. `#onToggleHandGranted` hade dessutom
+    // redan innan dess läst `target.dataset.value` i stället för
+    // `target.value`, ett fel som aldrig kunde synas förrän klicket
+    // faktiskt avfyrades. Samma bugg fanns i den nya `setMotherTongueLang`
+    // eftersom den kopierades från samma (trasiga) mönster.
+    const handSelect = this.element.querySelector('select[name="grantedHand"]');
+    handSelect?.addEventListener("change", (ev) => {
+      this.state.swordHand.granted = ev.target.value || false;
+      this.state.swordHand.roll = 0;
+      this.render();
+    });
+    for (const select of this.element.querySelectorAll(".dode-mother-tongue-select")) {
+      select.addEventListener("change", (ev) => {
+        const kind = ev.target.dataset.kind;
+        const index = Number(ev.target.dataset.index);
+        if (!kind || Number.isNaN(index)) return;
+        this.state.motherTongues[kind][index] = ev.target.value;
+        // Tala/Läsa-Skriva "human"-platser är SAMMA modersmål, inte två
+        // oberoende val (Johan 2026-08-07, se DODE.syncedHumanMotherTongueIndices)
+        // — spegla värdet till motsvarande plats i den andra färdigheten.
+        const synced = CONFIG.DODE.syncedHumanMotherTongueIndices(this.#selectedRaceDoc);
+        if (synced) {
+          if (kind === "tala" && index === synced.talaIndex) {
+            this.state.motherTongues.lasaSkriva[synced.lasaSkrivaIndex] = ev.target.value;
+          } else if (kind === "lasaSkriva" && index === synced.lasaSkrivaIndex) {
+            this.state.motherTongues.tala[synced.talaIndex] = ev.target.value;
+          }
+        }
+        this.render();
+      });
+    }
+    // Mängdköpbara utrustningsposter (Johan 2026-08-08, "purchasable/usable
+    // entity") — direkt mängdinmatning i stället för en ±1-stegare, eftersom
+    // att klicka +1 30 gånger för att köpa 30 gram vore orimligt. Klampar mot
+    // `maxQty` (redan köpt + vad kvarvarande kapital räcker till), se
+    // #equipmentResult. `change`, inte `input`, av samma skäl som övriga
+    // fält i den här filen — ingen omrendering mitt i skrivandet.
+    for (const field of this.element.querySelectorAll(".wizard-quantity-input")) {
+      field.addEventListener("change", (ev) => {
+        const uuid = ev.target.dataset.uuid;
+        const max = Number(ev.target.dataset.max) || 0;
+        const value = Math.max(0, Math.min(max, Math.floor(Number(ev.target.value) || 0)));
+        this.state.equipment[uuid] = value;
+        this.render();
+      });
+    }
+    // Vapenmästarens "(två)"-kryssruta (KH s.8-9, dualWieldAlt) — expanderar
+    // eller drar ihop platsen med en rad. Vid ur-kryssning rensas ev. andra
+    // radens val bort så den inte blir kvar som ett spöke i state.
+    for (const box of this.element.querySelectorAll("[data-dualwield-index]")) {
+      box.addEventListener("change", (ev) => {
+        const slotIndex = Number(ev.target.dataset.dualwieldIndex);
+        this.state.dualWieldChecked[slotIndex] = ev.target.checked;
+        if (!ev.target.checked) {
+          const picks = this.state.professionSkillPicks;
+          const mine = picks.filter((p) => p.slotIndex === slotIndex);
+          if (mine.length > 1) picks.splice(picks.indexOf(mine[mine.length - 1]), 1);
+        }
+        this.render();
+      });
+    }
     // Valfria platser i yrkesfärdighetssteget. Bindningen sker på `change`
     // (inte `input`) så att ett halvskrivet namn inte triggar en omrendering
     // mitt i skrivandet — samma skäl som färdighetsstegets fält.
@@ -1257,11 +1694,34 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         const picks = this.state.professionSkillPicks;
         const mine = picks.filter((p) => p.slotIndex === slotIndex);
         const existing = mine[row];
+        // Vapengrupper (RP s.60) — matchar det inskrivna namnet mot
+        // DODE.weaponGroupFor oavsett vilken pool platsen tillhör (ett
+        // "hantverk"- eller "främmande språk"-namn kolliderar aldrig med ett
+        // vapennamn, så det är säkert att alltid försöka). Träff ger rätt
+        // grundegenskap (STY för flera grupper, inte bara SMI som förut) och
+        // taggar färdigheten för #computeWeaponGroupBonus. Ingen träff faller
+        // tillbaka till exakt samma beteende som innan — fritext, poolens
+        // egen attribute.
+        const weaponGroup = CONFIG.DODE.weaponGroupFor(value);
+        // Stridskonst (backlog 71/72) — MÅSTE använda katalogens egen `key`
+        // (t.ex. "sk-dodande-anfall"), INTE `DODE.skillKey(value)`. Tre av
+        // teknikerna delar visningsnamn med en DODE.vapentekniker-post
+        // ("Dödande anfall", "Psykisk duell", "Virvelvindsanfall") och skulle
+        // annars av misstag matcha VAPENTEKNIKERNS grundkostnad i
+        // secondarySkillBaseOverrideFor (som kollar vapentekniker FÖRE
+        // stridskonster) i stället för stridskonstens egen, lägre kostnad.
+        const stridskonstEntry = CONFIG.DODE.stridskonstFor(value);
+        const attribute = weaponGroup?.attribute
+          ?? (stridskonstEntry ? CONFIG.DODE.stridskonstAttribute(stridskonstEntry) : null)
+          ?? (ev.target.dataset.slotAttribute || "int");
+        const key = stridskonstEntry?.key ?? CONFIG.DODE.skillKey(value);
         if (!value) {
           if (existing) picks.splice(picks.indexOf(existing), 1);
         } else if (existing) {
           existing.name = value;
-          existing.key = CONFIG.DODE.skillKey(value);
+          existing.key = key;
+          existing.attribute = attribute;
+          existing.weaponGroup = weaponGroup?.key ?? "";
         } else {
           if (picks.length >= this.#professionSkillTarget) {
             ui.notifications.warn(`Du har redan valt ${this.#professionSkillTarget} yrkesfärdigheter.`);
@@ -1269,8 +1729,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
             return;
           }
           picks.push({
-            key: CONFIG.DODE.skillKey(value), name: value,
-            attribute: ev.target.dataset.slotAttribute || "int", slotIndex
+            key, name: value,
+            attribute, weaponGroup: weaponGroup?.key ?? "", slotIndex
           });
         }
         this.render();
@@ -1404,7 +1864,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         // #effectiveAttributes) utan ett eget spann — visa rasnamn+normalvärde
         // som referenstext i stället, så STO-rutan inte står utan sammanhang
         // medan de andra sex visar "+N ras".
-        raceStoLabel: isSto && selectedRace ? `${selectedRace.name}: normal ${stoNormal} (${stoMin}–${stoMax})` : null
+        raceStoLabel: isSto && selectedRace ? `${selectedRace.name}: normal ${stoNormal} (${stoMin}–${stoMax})` : null,
+        // BC-grupp (backlog 35, Johan 2026-08-05): "är nästa poäng värd det?"
+        // går inte att avgöra utan att se om köpet faktiskt korsar en
+        // gruppgräns — DODE.attributeToGroup (REG s.6) räknat på det
+        // EFFEKTIVA värdet (inkl. rasmod), samma tal CL-beräkningar använder.
+        group: CONFIG.DODE.attributeToGroup(eff?.total ?? value),
+        nextGroupsUp: value < max ? CONFIG.DODE.attributeToGroup((eff?.total ?? value) + 1) > CONFIG.DODE.attributeToGroup(eff?.total ?? value) : false
       };
     });
     const totalCost = rows.reduce((sum, r) => sum + r.cost, 0);
@@ -1479,8 +1945,50 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const doc = this.#selectedProfessionDoc;
     if (!doc) return 0;
     const list = doc.system.professionSkills ?? [];
-    const available = list.reduce((n, s) => n + (s.choiceCount || 1), 0);
+    const available = list.reduce((n, s, i) => n + this.#slotChoiceCount(s, i), 0);
     return Math.min(this.#isFullMagician ? 9 : 12, available);
+  }
+
+  /**
+   * En platss antal valbara rader — normalt `entry.choiceCount||1`, men +1 om
+   * entryn har `dualWieldAlt` (Vapenmästarens "(två)"-alternativ, KH s.8-9)
+   * OCH spelaren kryssat i den för just detta slot-index. Delad mellan
+   * #professionSkillTarget (summan) och #professionSkillState (raderna) så de
+   * aldrig kan glida isär.
+   */
+  #slotChoiceCount(entry, index) {
+    const base = entry.choiceCount || 1;
+    return entry.dualWieldAlt && this.state.dualWieldChecked[index] ? base + 1 : base;
+  }
+
+  /**
+   * Språkpoolernas fasta prefix — matchar exakt namnkonventionen "+Ny
+   * färdighet"-dialogen (actor-character-sheet.mjs) redan använder för
+   * samma två poolers rader, så samma språk gett vid skapande vs. i spel
+   * åtminstone LÄSER likadant, även om de exakta skillKey:erna kan skilja
+   * sig marginellt (samma egenskap som "vapenfärdighet"-poolen redan har —
+   * nyckeln härleds ur det fria namnet, inte en delad katalogpost).
+   */
+  static #LANGUAGE_POOL_PREFIX = { "främmande språk": "Tala", "läsa/skriva främmande språk": "Läsa/Skriva" };
+
+  /**
+   * Vilka `"<Prefix> <Språk>"`-värden rollpersonen redan har via MODERSMÅL
+   * (Tala/Läsa-Skriva) för den här poolen — utgråas i "Tala/Läsa-skriva
+   * Främmande Språk"-valen (Johan 2026-08-07: "annars blir det dubbelt").
+   * Ett SKILT huvudspråk för Tala vs Läsa/Skriva (Dvärgar/Halvorcher/
+   * Halvalver) betyder att den här mängden är olika beroende på `kind` —
+   * använder samma slot-modell som #motherTongueResult, inte en gissning.
+   */
+  #knownMotherTongueValues(kind, langPrefix) {
+    const slots = CONFIG.DODE.motherTongueSlots(this.#selectedRaceDoc, kind);
+    const chosen = this.state.motherTongues[kind];
+    const values = new Set();
+    slots.forEach((slot, index) => {
+      const isChoice = CONFIG.DODE.motherTongueSlotOptions(slot) !== null;
+      const key = isChoice ? chosen[index] : slot;
+      if (key) values.add(`${langPrefix} ${CONFIG.DODE.languageName(key)}`);
+    });
+    return values;
   }
 
   /** Byggd vy över yrkets lista + spelarens val. */
@@ -1489,18 +1997,116 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const list = doc?.system?.professionSkills ?? [];
     const picks = this.state.professionSkillPicks;
     const target = this.#professionSkillTarget;
+    // Förpass: namngivna färdigheter som yrket redan ger AUTOMATISKT (t.ex.
+    // Bards "Dolk"/"Trästav") — en vapenfärdighetspool-val som råkar matcha
+    // en av dessa vore en meningslös dubblett (samma färdighet två gånger).
+    // Måste byggas FÖRE huvudloopen: named/slots fylls i EN gemensam
+    // `list.forEach`, så en namngiven post längre FRAM i listan än en
+    // vapenpool skulle annars inte synas än när poolen byggs.
+    const namedSkillNames = new Set(list.filter((e) => !e.choiceCount).map((e) => e.name));
     const named = [];
     const slots = [];
     list.forEach((entry, i) => {
       if (entry.choiceCount) {
         const filled = picks.filter((p) => p.slotIndex === i);
+        const count = this.#slotChoiceCount(entry, i);
+        // Språk (RP s.58/42/44), vapenfärdighet (RP s.60, se
+        // DODE.weaponGroupFor) och Stridskonst (RP s.56-58/KH s.91-93, se
+        // DODE.stridskonster) har alla en STÄNGD katalog att välja ur — en
+        // riktig `<select>` i stället för fritext (backlog 66/71, Johan:
+        // "weapon selection UI... weird and not natural" / "Build a
+        // DODE.stridskonster structure"). Andra pooler (hantverk) saknar
+        // fortfarande en katalog i systemet och förblir fritext.
+        const langPrefix = DoDECharacterWizard.#LANGUAGE_POOL_PREFIX[entry.choicePool];
+        const isWeaponPool = /vapen/i.test(entry.choicePool || "");
+        const isStridskonstPool = entry.choicePool === "stridskonst";
+        // Utgråa språk man redan kan — antingen via modersmål (RP s.58: ett
+        // FRÄMMANDE språk är per definition inte redan ens eget) eller för
+        // att man redan valt det i en annan plats i SAMMA pool (två "Tala
+        // Kaseni"-rader vore en meningslös dubblett). De två Främmande-
+        // Språk-poolerna (Tala/Läsa-Skriva) är INTE varandras dubbletter —
+        // att kunna TALA ett språk innebär inte att man kan LÄSA/SKRIVA det.
+        const knownValues = langPrefix
+          ? this.#knownMotherTongueValues(langPrefix === "Tala" ? "tala" : "lasaSkriva", langPrefix)
+          : null;
+        const usedInSlot = (langPrefix || isWeaponPool || isStridskonstPool) ? new Set(filled.map((p) => p.name)) : null;
         slots.push({
           index: i, label: entry.name, pool: entry.choicePool,
-          count: entry.choiceCount, attribute: entry.attribute,
+          count, attribute: entry.attribute,
+          dualWieldAlt: !!entry.dualWieldAlt,
+          dualWieldChecked: !!this.state.dualWieldChecked[i],
+          isLanguagePool: !!langPrefix,
+          isWeaponPool,
+          isStridskonstPool,
           // En rad per plats: ifylld eller tom.
-          rows: Array.from({ length: entry.choiceCount }, (_, n) => ({
-            slotIndex: i, row: n, value: filled[n]?.name ?? ""
-          }))
+          rows: Array.from({ length: count }, (_, n) => {
+            const value = filled[n]?.name ?? "";
+            const row = { slotIndex: i, row: n, value };
+            if (langPrefix) {
+              row.languageOptions = CONFIG.DODE.languages.map((l) => {
+                const optionValue = `${langPrefix} ${l.name}`;
+                let reason = null;
+                if (optionValue !== value) {
+                  if (knownValues.has(optionValue)) reason = "redan modersmål";
+                  else if (usedInSlot.has(optionValue)) reason = "redan valt";
+                }
+                return {
+                  value: optionValue, selected: optionValue === value,
+                  disabled: !!reason, label: reason ? `${l.name} (${reason})` : l.name
+                };
+              });
+            } else if (isWeaponPool) {
+              // Attributet visas per vapen (RP s.60 vapengrupp, samma
+              // matchning `#onSlotFieldChange`/`weaponGroupFor` redan gör vid
+              // sparning) — en spelare ser då om vapnet är STY- eller
+              // SMI-baserat INNAN valet görs, inte bara efteråt.
+              row.weaponOptions = this.#weaponDocs.map((w) => {
+                const group = CONFIG.DODE.weaponGroupFor(w.name);
+                let reason = null;
+                if (w.name !== value) {
+                  if (namedSkillNames.has(w.name)) reason = "redan yrkesfärdighet";
+                  else if (usedInSlot.has(w.name)) reason = "redan valt";
+                }
+                // Fall tillbaka på poolens egen deklarerade grundegenskap
+                // (samma värde `#onSlotFieldChange` redan använder vid
+                // sparning, se dess `ev.target.dataset.slotAttribute`-fallback)
+                // för vapen som INTE matchar en DODE.weaponGroups-post — annars
+                // visar hintraden attribut för 18 av 23 vapen men tystnar helt
+                // för de 5 utan gruppmedlemskap (Bola/Lasso/Oxpiska — medvetet
+                // odelade specialvapen, se packs/vapen-utrustning/_source/*
+                // beskrivningarna), en omärkt informationslucka en spelare
+                // inte kan se anledningen till.
+                const attrKey = group?.attribute ?? entry.attribute;
+                const attrLabel = attrKey ? attrKey.toUpperCase() : "";
+                return {
+                  value: w.name, selected: w.name === value,
+                  disabled: !!reason,
+                  label: reason ? `${w.name} (${reason})` : (attrLabel ? `${w.name} — ${attrLabel}` : w.name)
+                };
+              });
+            } else if (isStridskonstPool) {
+              // Riktig katalog (backlog 71/72, DODE.stridskonster) i stället
+              // för fritext — samma "gets ALL the stridskonster"-bugg Johan
+              // rapporterade (en enda hårdkodad monolitisk "Stridskonster"-
+              // post) kunde annars återuppstå via fritext som inte matchar
+              // katalogens riktiga tekniknamn. Varje rad blir EN specifik,
+              // egen teknik (t.ex. "Krosslag"), inte en platt platshållare.
+              row.stridskonstOptions = CONFIG.DODE.stridskonster.map((t) => {
+                let reason = null;
+                if (t.name !== value) {
+                  if (namedSkillNames.has(t.name)) reason = "redan yrkesfärdighet";
+                  else if (usedInSlot.has(t.name)) reason = "redan valt";
+                }
+                const attrLabel = CONFIG.DODE.stridskonstAttribute(t).toUpperCase();
+                return {
+                  value: t.name, selected: t.name === value,
+                  disabled: !!reason,
+                  label: reason ? `${t.name} (${reason})` : `${t.name} — ${t.grundkostnad} EP, ${attrLabel}`
+                };
+              });
+            }
+            return row;
+          })
         });
       } else {
         const key = entry.key || CONFIG.DODE.skillKey(entry.name);
@@ -1510,8 +2116,26 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         });
       }
     });
+    // Johan, 2026-08-16: "step 13 should have valfria separate in Weapons,
+    // Languages and namngivna more clearly. maybe with separators between."
+    // De tre poolsorterna renderas nu i egna grupper (samma
+    // .wizard-group-heading-stil som redan skiljer ras-/yrkeskorten och
+    // Namngivna färdigheter) i stället för en enda odelad "Valfria
+    // platser"-lista där vapen-, språk- och fritextrader stod om varandra.
+    const weaponSlots = slots.filter((s) => s.isWeaponPool);
+    const languageSlots = slots.filter((s) => s.isLanguagePool);
+    const otherSlots = slots.filter((s) => !s.isWeaponPool && !s.isLanguagePool);
+    // Rubrikbadgen ska visa antal VAL (rader), inte antal pooler — annars
+    // visar en Gladiats "Vapenfärdigheter"-rubrik siffran 1 (en enda pool)
+    // i stället för 6 (de faktiska vapenplatserna), rakt motsatsen till
+    // vad hela den här omstruktureringen skulle förtydliga.
+    const sumRows = (arr) => arr.reduce((n, s) => n + s.rows.length, 0);
     return {
-      named, slots, target,
+      named, slots, weaponSlots, languageSlots, otherSlots,
+      weaponSlotCount: sumRows(weaponSlots),
+      languageSlotCount: sumRows(languageSlots),
+      otherSlotCount: sumRows(otherSlots),
+      target,
       chosen: picks.length,
       remaining: Math.max(0, target - picks.length),
       complete: picks.length >= target,
@@ -1541,6 +2165,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
   static #onClearProfessionSkills() {
     this.state.professionSkillPicks = [];
+    this.state.dualWieldChecked = {};
     this.render();
   }
 
@@ -1596,12 +2221,23 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * DESIGN_DECISIONS.md redan dokumenterat en gång för grundegenskapsslagen).
    * Separata knapptryckningar + separata chattkort med `rolls` löser båda:
    * 1T6-resultatet syns för sig, och tärningarna rullar synligt i båda stegen.
+   *
+   * ⚠ HUSREGEL-VÄXEL (Johan, 2026-08-07): om SL:s inställning
+   * `hjaltedadTieredRollCount` är påslagen, ersätts det gemensamma 1T6 med
+   * DODE.hjaltedadCountHouseRule[niva] (Slumpens hjälte 1T2, Sann hjälte
+   * 2+1T2, Gudafödd 4+1T2) — INTE en boktabell, se den inställningens och
+   * tabellens docblock för hela motiveringen. Av som standard: då slås 1T6
+   * exakt som HH s.6-7 säger, oavsett nivå.
    */
   static async #onRollHjaltedadCount() {
-    const countRoll = await new Roll("1d6").evaluate();
+    const houseRuleOn = game.settings.get(game.system.id, "hjaltedadTieredRollCount");
+    const houseRuleFormula = CONFIG.DODE.hjaltedadCountHouseRule[this.state.niva];
+    const formula = houseRuleOn && houseRuleFormula ? houseRuleFormula : "1d6";
+    const countRoll = await new Roll(formula).evaluate();
     const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
-      flavor: "Hjältedåd (HH s.6-7) — hur många gånger får du slå?",
+      flavor: "Hjältedåd (HH s.6-7) — hur många gånger får du slå?"
+        + (houseRuleOn && houseRuleFormula ? " (husregel, ej standard — se SL-inställningarna)" : ""),
       rolls: [countRoll],
       sound: CONFIG.sounds.dice
     });
@@ -1730,16 +2366,6 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     this.render();
   }
 
-  /**
-   * ⚠ RP s.27: "Har du fått dubbelhänt eller ambidextriös som särskild förmåga
-   * så behöver du inte slå på den här tabellen." Växeln hoppar över slaget helt.
-   */
-  static async #onToggleHandGranted(event, target) {
-    this.state.swordHand.granted = target.dataset.value || false;
-    this.state.swordHand.roll = 0;
-    this.render();
-  }
-
   static async #onRollSocialStanding() {
     const roll = await new Roll("2d6").evaluate();
     // Johan 2026-08-02: postade tidigare INGET chattkort alls (samma
@@ -1808,6 +2434,13 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * #onCreateCharacter (nyskapande); körs EFTER att aktören/dess primära och
    * yrkesfärdigheter redan finns, så `ensureSeeds` i special-ability-effects.mjs
    * kan se om en förmågas färdighet redan är täckt av det.
+   *
+   * ⚠ Prunar INTE själv (2026-08-16, ras-/yrkesramverket) — returnerar bara
+   * sina `keepSlotIds`. Anropande kod måste kombinera dem med #applyRace-/
+   * #applyProfessionAbilityGrants's motsvarande listor och pruna EN gång, se
+   * pruneOrphanedAbilityGrants's docblock för varför (tre producenter delar
+   * samma formaga-itemtyp och flagg-nyckel).
+   * @returns {Promise<string[]>} keepSlotIds
    */
   async #applySpecialAbilityGrants(actor) {
     const keepSlotIds = [];
@@ -1817,7 +2450,47 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       const resolved = resolveGrants(slot.effect, slot.effectChoices ?? []);
       await applyResolvedAbility(actor, slot.slotId, slot.name, slot.effect, resolved);
     }
-    await pruneOrphanedAbilityGrants(actor, keepSlotIds);
+    return keepSlotIds;
+  }
+
+  /**
+   * Applicerar rasens automatiska förmågor (item-ras.mjs `automaticAbilities`)
+   * på en redan skapad aktör — 2026-08-16, ras-/yrkesramverket (DESIGN_
+   * DECISIONS.md backlog 70). Indexbaserade slotId:n är säkra här (till
+   * skillnad från särskilda förmågors slumpade slotId:n): en ras förmågelista
+   * är FAST kompendieinnehåll, aldrig omordnad av spelaren.
+   * @returns {Promise<string[]>} keepSlotIds
+   */
+  async #applyRaceAbilityGrants(actor, raceDoc) {
+    const rows = resolveRaceAbilityRows(raceDoc);
+    const keepSlotIds = [];
+    for (let i = 0; i < rows.length; i++) {
+      if (!rows[i].effect) continue;
+      const slotId = `race-ability-${i}`;
+      keepSlotIds.push(slotId);
+      const resolved = resolveGrants(rows[i].effect, []);
+      await applyResolvedAbility(actor, slotId, rows[i].name || raceDoc.name, rows[i].effect, resolved, "ras");
+    }
+    return keepSlotIds;
+  }
+
+  /**
+   * Applicerar yrkets automatiska förmågor (item-yrke.mjs `professionAbilities`,
+   * inklusive basyrkets egna via resolveProfessionAbilityRows) — samma mönster
+   * som #applyRaceAbilityGrants.
+   * @returns {Promise<string[]>} keepSlotIds
+   */
+  async #applyProfessionAbilityGrants(actor, professionDoc, allProfessionDocs) {
+    const rows = resolveProfessionAbilityRows(professionDoc, allProfessionDocs);
+    const keepSlotIds = [];
+    for (let i = 0; i < rows.length; i++) {
+      if (!rows[i].effect) continue;
+      const slotId = `profession-ability-${i}`;
+      keepSlotIds.push(slotId);
+      const resolved = resolveGrants(rows[i].effect, []);
+      await applyResolvedAbility(actor, slotId, rows[i].name || professionDoc.name, rows[i].effect, resolved, "yrke");
+    }
+    return keepSlotIds;
   }
 
   /**
@@ -1847,6 +2520,49 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const current = this.state.fardigheter[key] ?? 0;
     if (current <= 0) return;
     this.state.fardigheter[key] = current - 1;
+    this.render();
+  }
+
+  /**
+   * Höjer ALLA färdigheter i en kategori ("primar"/"yrkesfardighet") med +1
+   * FV var, i ett enda klick (Johan, 2026-08-16: "there would be good to
+   * have +1 and -1 button all primary and all yrkesfärdigheter on category
+   * level as one has to click a lot otherwise" — en primär-kategori kan ha
+   * 16+ rader). Samma EP-/max-FV-kontroll som `#onBuySkillFv` görs per rad,
+   * men räknas om LEVANDE mellan varje enskild höjning (inte en gång i
+   * förväg) — annars skulle en tidig rad i listan kunna äta upp EP en SENARE
+   * rad också hade haft råd med, och tvärtom en redan-otillräcklig kontroll
+   * hade blockerat rader som blir prisvärda efter att en annan INTE höjdes.
+   */
+  static async #onBuyAllSkillFv(event, target) {
+    const category = target.dataset.category;
+    const raceDoc = this.state.raceUuid ? await fromUuid(this.state.raceUuid) : null;
+    const professionDoc = this.state.professionUuid ? await fromUuid(this.state.professionUuid) : null;
+    const effectiveAttributes = this.#effectiveAttributes(raceDoc, this.state.ageCategory);
+    const epBudget = this.#epResult(this.#bpLedger(this.#socialStandingResult(), this.#startCapitalResult(this.#socialStandingResult())));
+    const currentList = () => {
+      const preview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget, raceDoc);
+      return category === "primar" ? preview.primary : preview.professionSkills;
+    };
+    for (const key of currentList().map((s) => s.key)) {
+      const skill = currentList().find((s) => s.key === key);
+      if (skill?.canIncrease) this.state.fardigheter[key] = (this.state.fardigheter[key] ?? 0) + 1;
+    }
+    this.render();
+  }
+
+  /** Sänker ALLA färdigheter i en kategori med −1 FV var (symmetrisk motpart till #onBuyAllSkillFv). */
+  static #onSellAllSkillFv(event, target) {
+    const category = target.dataset.category;
+    const keys = category === "primar"
+      ? CONFIG.DODE.primarySkills.map((s) => s.key)
+      : this.state.professionSkillPicks
+          .map((s) => s.key || CONFIG.DODE.skillKey(s.name))
+          .filter((key, i, arr) => arr.indexOf(key) === i);
+    for (const key of keys) {
+      const current = this.state.fardigheter[key] ?? 0;
+      if (current > 0) this.state.fardigheter[key] = current - 1;
+    }
     this.render();
   }
 
@@ -1906,7 +2622,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const capitalResult = this.#startCapitalResult(socialResult);
     const bpLedger = this.#bpLedger(socialResult, capitalResult);
     const epBudget = this.#epResult(bpLedger);
-    const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
+    const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget, raceDoc);
     // Samma filtrerade lista som utrustningssteget använder (poster med
     // ActiveEffects är uteslutna där) — annars kan restkapitalet skilja sig
     // från det spelaren såg i steget.
@@ -1975,26 +2691,38 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         const needsFv = existing.system.fv !== skill.fv;
         const needsTier = existing.system.costTier !== skill.costTier;
         const needsKey = existing.system.skillKey !== skill.key;
-        if (needsFv || needsTier || needsKey) {
+        const needsWeaponGroup = (existing.system.weaponGroup || "") !== (skill.weaponGroup || "");
+        if (needsFv || needsTier || needsKey || needsWeaponGroup) {
           toUpdate.push({
             _id: existing.id,
             "system.fv": skill.fv,
             "system.costTier": skill.costTier,
-            "system.skillKey": skill.key
+            "system.skillKey": skill.key,
+            "system.weaponGroup": skill.weaponGroup || ""
           });
         }
       } else {
         toCreate.push({
           name: skill.name,
           type: "fardighet",
-          system: { skillKey: skill.key, attribute: skill.attribute, category: "a", fv: skill.fv, costTier: skill.costTier }
+          system: {
+            skillKey: skill.key, attribute: skill.attribute, category: "a", fv: skill.fv,
+            costTier: skill.costTier, weaponGroup: skill.weaponGroup || ""
+          }
         });
       }
     }
     if (toUpdate.length) await actor.updateEmbeddedDocuments("Item", toUpdate);
     if (toCreate.length) await actor.createEmbeddedDocuments("Item", toCreate);
 
-    await this.#applySpecialAbilityGrants(actor);
+    // Ras-/yrkesramverket (2026-08-16) — samma "kombinera keepSlotIds, pruna
+    // EN gång"-ordning som #onCreateCharacter, se pruneOrphanedAbilityGrants
+    // docblock för varför.
+    const allProfessionDocs = await DoDECharacterWizard.#resolveContentPacks("professions");
+    const raceKeep = await this.#applyRaceAbilityGrants(actor, raceDoc);
+    const professionKeep = await this.#applyProfessionAbilityGrants(actor, professionDoc, allProfessionDocs);
+    const specialKeep = await this.#applySpecialAbilityGrants(actor);
+    await pruneOrphanedAbilityGrants(actor, [...raceKeep, ...professionKeep, ...specialKeep]);
 
     ui.notifications.info(`${actor.name} uppdaterad via guiden.`);
     await this.close();
@@ -2009,7 +2737,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const capitalResult = this.#startCapitalResult(socialResult);
     const bpLedger = this.#bpLedger(socialResult, capitalResult);
     const epBudget = this.#epResult(bpLedger);
-    const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget);
+    const skillPreview = this.#skillPreview(effectiveAttributes, professionDoc, epBudget, raceDoc);
 
     const { img, prototypeToken } = this.#tokenDefaults(raceDoc, professionDoc);
     this.state.bp.spentSvardshand = this.#swordHandBpSpent();
@@ -2073,7 +2801,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       itemsToCreate.push({
         name: skill.name,
         type: "fardighet",
-        system: { skillKey: skill.key, attribute: skill.attribute, category: "a", fv: skill.fv, costTier: skill.costTier }
+        system: {
+          skillKey: skill.key, attribute: skill.attribute, category: "a", fv: skill.fv,
+          costTier: skill.costTier, weaponGroup: skill.weaponGroup || ""
+        }
       });
     }
     // Magiskola — en skola ÄR en färdighet i regelverket (MAGI.md, se
@@ -2089,12 +2820,26 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       });
     }
     // Utrustning — en separat embeddad kopia per köpt enhet (Item-schemat har
-    // inget `qty`-fält, se klassdokblocket). Låga MVP-kvantiteter förväntas
-    // (vapen/rustning, inte staplade pilar), så detta är inget prestandaproblem.
+    // inget `qty`-fält för HELA vapen/rustning, se klassdokblocket). Låga
+    // MVP-kvantiteter förväntas (vapen/rustning, inte staplade pilar), så
+    // detta är inget prestandaproblem.
+    //
+    // ⚠ Mängdköpta poster (backlog 66, "purchasable/usable entity" — gram/
+    // dos/kagge-prissatt utrustning som Saffran/Sarassos) är UNDANTAGET: här
+    // ÄR `qty` (t.ex. 20 gram) ett riktigt `system.quantity`-värde, inte "20
+    // separata föremål" — item-utrustning.mjs har redan ett `quantity`-fält
+    // som räknar totalvikt/-pris. 20 gram saffran ska bli EN item-rad med
+    // quantity:20, inte 20 rader.
     for (const [uuid, qty] of Object.entries(this.state.equipment)) {
       if (qty <= 0) continue;
       const doc = await fromUuid(uuid);
       if (!doc) continue;
+      const isQuantityPurchase = doc.type === "utrustning"
+        && !!CONFIG.DODE.parsePriceNote(doc.system.priceNote, doc.system.priceUnit);
+      if (isQuantityPurchase) {
+        itemsToCreate.push(foundry.utils.mergeObject(doc.toObject(), { _id: null, "system.quantity": qty }));
+        continue;
+      }
       // Varje köpt enhet måste bli ett eget embedded Item med eget _id — annars
       // kolliderar flera köp av samma kompendieföremål (samma _id från
       // toObject()) i en och samma createEmbeddedDocuments-anrop. `_id: null`
@@ -2103,7 +2848,15 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     }
     if (itemsToCreate.length) await actor.createEmbeddedDocuments("Item", itemsToCreate);
 
-    await this.#applySpecialAbilityGrants(actor);
+    // Ras-/yrkesramverket (2026-08-16, DESIGN_DECISIONS.md backlog 70) — körs
+    // EFTER att primära/yrkesfärdigheter redan finns (samma ordningsberoende
+    // ensureSeeds i special-ability-effects.mjs kräver för särskilda
+    // förmågor). Kombinerad prune, se pruneOrphanedAbilityGrants docblock.
+    const allProfessionDocs = await DoDECharacterWizard.#resolveContentPacks("professions");
+    const raceKeep = await this.#applyRaceAbilityGrants(actor, raceDoc);
+    const professionKeep = await this.#applyProfessionAbilityGrants(actor, professionDoc, allProfessionDocs);
+    const specialKeep = await this.#applySpecialAbilityGrants(actor);
+    await pruneOrphanedAbilityGrants(actor, [...raceKeep, ...professionKeep, ...specialKeep]);
 
     const ageMods = CONFIG.DODE.ageAttributeModifiers[this.state.ageCategory] ?? {};
     const ageAeChanges = Object.entries(ageMods)

@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 14, PSY 12",
     "baseProfession": "bard",
-    "professionAbility": "<p><strong>Lönnmördarens grundförmåga (bakhugg ×2/×4)</strong> plus:</p><p>+1 CL per spenderad PSY (max +3) i Hasardspel, Brädspel och Bluffa.</p><p><em>Källa: T&L s.9</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -196,7 +195,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Hasardspelstalang",
+        "description": "<p>+1 CL per spenderad PSY (max +3) i Hasardspel, Brädspel och Bluffa.</p><p><em>Källa: T&L s.9</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYlonnspelare",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/spelaren-man.png",

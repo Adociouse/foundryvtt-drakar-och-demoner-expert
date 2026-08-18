@@ -16,7 +16,13 @@
       "max": 17,
       "normal": 12
     },
-    "automaticAbilities": "<p>Underjordiskt alvsläkte. Enligt Alver s.23 kan en grottalv slå fram de släktesegna särskilda förmågorna <em>Metallkänsla</em> (identifierar metaller på syn, lukt och känsel) och <em>Mörkerseende</em> (ser i totalt kolmörker, till skillnad från övriga alver).</p><p>Banemansförmågan gäller för grottalver vanligtvis dvärgar (Alver s.23).</p>",
+    "automaticAbilities": [
+      {
+        "name": "Alvsläktets särskilda förmågor",
+        "description": "<p>Underjordiskt alvsläkte. Enligt Alver s.23 kan en grottalv slå fram de släktesegna särskilda förmågorna <em>Metallkänsla</em> (identifierar metaller på syn, lukt och känsel) och <em>Mörkerseende</em> (ser i totalt kolmörker, till skillnad från övriga alver).</p><p>Banemansförmågan gäller för grottalver vanligtvis dvärgar (Alver s.23).</p>",
+        "effect": null
+      }
+    ],
     "description": "<p>Grottalverna lever i naturliga grottsystem under jorden och är skickliga konsthantverkare med ett ofelbart orienteringssinne under jord.</p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/grottalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/grottalv-kvinna.png",

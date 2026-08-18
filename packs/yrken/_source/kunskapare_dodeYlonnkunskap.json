@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 14, INT 12, PSY 12, KAR 12",
     "baseProfession": "lonnmordare",
-    "professionAbility": "<p><strong>Lönnmördarens grundförmåga (bakhugg ×2/×4)</strong> plus:</p><p>Får även <strong>bardens yrkesförmåga</strong>.</p><p><em>Källa: T&L s.10</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -176,12 +175,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Teckenspråk (tjuv, lönnmördare)",
         "attribute": "int",
         "choiceCount": 0,
@@ -324,6 +317,12 @@
         "attribute": "int",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "description": "<p>Specialisering av grundyrket Lonnmordare (T&L s.10).</p>",
@@ -340,7 +339,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Bardens yrkesförmåga",
+        "description": "<p>Får även <strong>bardens yrkesförmåga</strong>.</p><p><em>Källa: T&L s.10</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYlonnkunskap",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kunskapare-man.png",

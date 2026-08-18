@@ -1,4 +1,5 @@
 import { sourceField } from "./fields-source.mjs";
+import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -9,6 +10,8 @@ const fields = foundry.data.fields;
 export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       school: new fields.StringField({
         required: true,
         initial: "elementarmagi",
@@ -69,5 +72,11 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
   prepareDerivedData() {
     // Vad som faktiskt går att lägga på ett köp just nu.
     this.ep.available = Math.max(0, this.ep.earned - this.ep.spent);
+  }
+
+  /** Se scripts/helpers/schema-migrations.mjs. Inga besvärjelse-specifika grenar än. */
+  static migrateData(source) {
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
   }
 }

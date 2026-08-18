@@ -141,11 +141,30 @@ export async function resolveAttack({
 
   const atk = await classifiedRoll(fv);
 
+  // ⚠ Kättingvapen/Piska (SB s.33, item-vapen.mjs `hardToParry`) — TVÅ
+  // separata, oberoende regler i samma stycke, lätt att sammanblanda:
+  //  1. Bäraren riskerar ett eget självfummelslag: ett rått anfallsslag på
+  //     18, 19 ELLER 20 räknas automatiskt som miss (oavsett FV), och avgörs
+  //     sedan av ett 1T20 (resultat > eget FV = fumlat; ett rått 20 på DETTA
+  //     slag är alltid fummel). Detta ersätter `classifiedRoll`s vanliga
+  //     raw-20-hantering för just det här vapnet.
+  //  2. Varje pareringsförsök mot vapnet — vapen ELLER sköld — får CL
+  //     halverat (se nedan, `parryFvBase`).
+  let hardParrySelfFumble = null;
+  if (weapon?.system?.hardToParry && atk.roll.total >= 18) {
+    const confirm = await new Roll("1d20").evaluate();
+    const fumbled = confirm.total === 20 || confirm.total > fv;
+    atk.outcome = fumbled ? "fummel" : "misslyckat";
+    hardParrySelfFumble = { roll: confirm, fumbled };
+  }
+
   // ⚠ Parering: aldrig mot projektilvapen, och aldrig med ett avståndsvapen i
   // handen (SLB s.17). Kastvapen får pareras om försvararen har sköld.
   const canParry = !!parryItem && !ranged;
+  const parryFvBase = parrySkill?.system.total ?? parryFv ?? baseFv;
+  const effectiveParryFv = weapon?.system?.hardToParry ? Math.floor(parryFvBase / 2) : parryFvBase;
   const par = canParry
-    ? await classifiedRoll(parrySkill?.system.total ?? parryFv ?? baseFv)
+    ? await classifiedRoll(effectiveParryFv)
     : { roll: null, outcome: null };
 
   // ⚠ EP-streck för BÅDA slagen — se awardSkillEp(). Sker oavsett vad
@@ -157,7 +176,7 @@ export async function resolveAttack({
   const verdict = resolveMatrix(atk.outcome, par.outcome);
   const out = {
     fv, modTotal, mods, attack: atk, parry: par, verdict,
-    attackEp, parryEp,
+    attackEp, parryEp, hardParrySelfFumble,
     aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null
   };
 
@@ -317,11 +336,17 @@ export async function postAttackCard(result, { attacker, weapon, parryItem, rang
       cssClass: result.attack.outcome,
       // ⚠ EP-streck för anfalls- och pareringsslaget var för sig — se
       // awardSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
-      attackEp: result.attackEp, parryEp: result.parryEp
+      attackEp: result.attackEp, parryEp: result.parryEp,
+      // Kättingvapen/Piska (SB s.33) — se resolveAttack.
+      hardParrySelfFumble: result.hardParrySelfFumble ? {
+        roll: result.hardParrySelfFumble.roll.total,
+        fumbled: result.hardParrySelfFumble.fumbled
+      } : null
     });
 
   const rolls = [result.attack.roll];
   if (result.parry.roll) rolls.push(result.parry.roll);
+  if (result.hardParrySelfFumble) rolls.push(result.hardParrySelfFumble.roll);
   if (result.damage?.roll) rolls.push(result.damage.roll);
   if (result.cleanKnockout?.roll) rolls.push(result.cleanKnockout.roll);
   if (result.attackEp?.roll) rolls.push(result.attackEp.roll);

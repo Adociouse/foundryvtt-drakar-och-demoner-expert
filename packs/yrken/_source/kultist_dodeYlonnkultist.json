@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 14, PSY 12",
     "baseProfession": "lonnmordare",
-    "professionAbility": "<p><strong>Lönnmördarens grundförmåga (bakhugg ×2/×4)</strong> plus:</p><p>CL i strid <strong>+2</strong>. Ignorerar smärta (−1 KP och SP per träff).</p><p><em>Källa: T&L s.11</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -111,12 +110,6 @@
       },
       {
         "name": "Stavhopp",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
-        "name": "Stridskonster",
         "attribute": "smi",
         "choiceCount": 0,
         "choicePool": ""
@@ -246,6 +239,12 @@
         "attribute": "int",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "description": "<p>Specialisering av grundyrket Lonnmordare (T&L s.11).</p>",
@@ -262,7 +261,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Smärttålighet",
+        "description": "<p>CL i strid <strong>+2</strong>. Ignorerar smärta (−1 KP och SP per träff).</p><p><em>Källa: T&L s.11</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYlonnkultist",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kultist-man.png",

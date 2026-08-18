@@ -23,7 +23,11 @@ export default class DoDEHandlareSheet extends HandlebarsApplicationMixin(ActorS
   };
 
   static PARTS = {
-    form: { template: "systems/drakar-och-demoner-expert/templates/actor/handlare-sheet.hbs" }
+    // Se actor-character-sheet.mjs PARTS för hela motiveringen. Butiksarket
+    // saknade dessutom scroll-CSS HELT (bara `.dode.sheet.character`/`.npc`
+    // hade fixen från session 8) — en lång varulista klipptes tyst av utan
+    // ens en scrollbar, ett strängare fel än scroll-reset. Fixad i samma pass.
+    form: { template: "systems/drakar-och-demoner-expert/templates/actor/handlare-sheet.hbs", scrollable: [""] }
   };
 
   get title() {

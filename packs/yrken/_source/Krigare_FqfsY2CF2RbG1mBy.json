@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "STY 14, FYS 12",
-    "professionAbility": "<p>+5 på alla initiativslag. Grunden för alla krigarspecialiseringar i Krigarens Handbok.</p>",
     "skillList": "<p>Alla vapenfärdigheter, språk, Avväpna, Bärsärkagång, Dra vapen, Dolk, Geografi, Hantverk, Hasardspel, Kulturkännedom, Simma, Stridskonster, Trästav, Två vapen.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare-man.png",
@@ -76,12 +75,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Trästav",
         "attribute": "smi",
         "choiceCount": 0,
@@ -92,6 +85,12 @@
         "attribute": "smi",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "source": {
@@ -105,7 +104,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Krigarens grundförmåga",
+        "description": "<p>+5 på alla initiativslag. Grunden för alla krigarspecialiseringar i Krigarens Handbok.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "FqfsY2CF2RbG1mBy",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigare.png",

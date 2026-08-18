@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "FYS 12, SMI 12, PSY 12",
-    "professionAbility": "<p>Magiskolan Animism räknas som yrkesfärdighet; kan lära alla besvärjelser med skolvärde ≤ 12, men kan inte lära besvärjelser från start — måste tränas upp under spel.</p>",
     "skillList": "<p>Max 3 vapenfärdigheter, språk, Animism, Djurhelning, Djurträning, Dolk, Drogkunskap, Geografi, Geologi, Giftkunskap, Hantverk, Hantera fällor, Knopar, Kulturkännedom, Orientering, Simma, Spå väder, Zoologi, Örtkunskap, Överlevnad.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare-man.png",
@@ -149,7 +148,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": false,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Animism som yrkesfärdighet",
+        "description": "<p>Magiskolan Animism räknas som yrkesfärdighet; kan lära alla besvärjelser med skolvärde ≤ 12, men kan inte lära besvärjelser från start — måste tränas upp under spel.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "WqmtsnTlaj04nMA0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/utbygdsjagare.png",

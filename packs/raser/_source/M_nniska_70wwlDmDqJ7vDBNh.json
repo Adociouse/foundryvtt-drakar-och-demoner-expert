@@ -16,7 +16,9 @@
       "max": 18,
       "normal": 13
     },
-    "automaticAbilities": "<p>Inget specifikt. Passar alla yrken. Vanligaste spelbara rasen.</p>",
+    "automaticAbilities": [
+      { "name": "Ingen särskild förmåga", "description": "<p>Inget specifikt. Passar alla yrken. Vanligaste spelbara rasen.</p>", "effect": null }
+    ],
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/manniska-kvinna.png",

@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 14, KAR 16",
     "baseProfession": "bard",
-    "professionAbility": "<p><strong>Bardens grundförmåga (sång/spel: KAR+5 för åhörare, +5 CL socialt i 1 timme)</strong> plus:</p><p>Spendera 1 PSY + en gyckelkonst → motståndaren blir häpen i <strong>1 SR</strong>.</p><p><em>Källa: T&L s.8</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -232,7 +231,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Gyckelkonst",
+        "description": "<p>Spendera 1 PSY + en gyckelkonst → motståndaren blir häpen i <strong>1 SR</strong>.</p><p><em>Källa: T&L s.8</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYbardgycklar",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gycklare-man.png",

@@ -4,7 +4,6 @@
   "system": {
     "requirements": "STY 14, FYS 12, SMI 16, PSY 15, INT 11",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Köper stridskonsttekniker (se REGLER_STRID.md) för <strong>halva grundkostnaden</strong>.</p><p><em>Källa: KH s.5</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -134,12 +133,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Trästav",
         "attribute": "smi",
         "choiceCount": 0,
@@ -156,6 +149,12 @@
         "attribute": "int",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.5).</p>",
@@ -172,7 +171,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Billiga stridskonster",
+        "description": "<p>Köper stridskonsttekniker (se REGLER_STRID.md) för <strong>halva grundkostnaden</strong>.</p><p><em>Källa: KH s.5</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkrigkrigarm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/krigarmunk-man.png",

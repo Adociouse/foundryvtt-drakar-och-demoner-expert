@@ -17,9 +17,27 @@
  * Det är avsiktligt: seedningen blir därmed också ett regressionstest av
  * rollpersonsskaparen (färdighetsgenerering, ålders-AE, prototyptoken osv.).
  * Går seedningen igenom utan fel fungerar hela skaparkedjan.
+ *
+ * ⚠⚠ STÅENDE REGEL (Johan 2026-08-08): "new features break legacy artifacts...
+ * value building migration tools less than rebuild items based on requirements
+ * if needed." Den här filen är INTE en engångsleverans — guidens `state`-form
+ * växer varje gång ett nytt steg läggs till (attributköp, hjältedåd, svärdshand,
+ * språk, yrkesfärdighetsval har alla lagts till EFTER att filen ursprungligen
+ * skrevs 2026-07-27, och seedningen slutade tyst spegla verkligheten:
+ * yrkesfärdigheter blev 0 eftersom `professionSkillPicks` aldrig fylldes i,
+ * och modersmålsnamnen blev tomma eftersom `motherTongues` aldrig fylldes i).
+ * **När ett wizard-steg ändrar sin `state`-form: uppdatera `createViaWizard`
+ * i SAMMA session** — inte en migrationsfunktion för gamla seedade aktörer
+ * (de raderas och byggs om av `teardown()`+`seed()`), utan en uppdaterad
+ * BYGGFUNKTION som producerar korrekta aktörer enligt de AKTUELLA kraven.
+ * Fixturerna är alltid engångsbyggda på nytt, aldrig migrerade.
  */
 const DoDETestParty = (() => {
   const FIXTURE_FLAG = "testFixture";
+  // Deterministiskt, alltid tillgängligt (alla raser i DODE.raceMotherTongues
+  // har minst ett "human"-alternativ) — används som defaultval för varje
+  // olåst modersmåls-/språkval så fixturerna blir reproducerbara mellan körningar.
+  const DEFAULT_HUMAN_LANGUAGE = "vastjori";
 
   /**
    * ⚠ UUID är primärnyckeln, namnet bara en läsbar fallback.
@@ -57,20 +75,43 @@ const DoDETestParty = (() => {
       alv: { name: "Alv", uuid: "Compendium.drakar-och-demoner-expert.raser.Item.DV7tkdY5DFbslQ4B" },
       manniska: { name: "Människa", uuid: "Compendium.drakar-och-demoner-expert.raser.Item.70wwlDmDqJ7vDBNh" },
       halvlangdsman: { name: "Halvlängdsman", uuid: "Compendium.drakar-och-demoner-expert.raser.Item.g4F6i6vck9nOafyr" },
-      anka: { name: "Anka", uuid: "Compendium.drakar-och-demoner-expert.raser.Item.osxxtEzS9uugtho6" }
+      anka: { name: "Anka", uuid: "Compendium.drakar-och-demoner-expert.raser.Item.osxxtEzS9uugtho6" },
+      // Alvsläkt-MEDLEM, inte bas-Alv — session 2026-08-08 hittade en riktig
+      // bugg (motherTongueRaceKey läste system-fält i stället för flagga) som
+      // bara syns på just en medlem, aldrig på bas-Alv. Se docs/DESIGN_DECISIONS.md
+      // backlog 64. Fixturen finns för att en framtida regression ska synas HÄR
+      // igen, inte bara upptäckas via en ny spelarrapport.
+      skogsalv: { name: "Skogsalv", uuid: "Compendium.drakar-och-demoner-expert.raser.Item.dodeAlvSkogsalv1" }
     },
     yrken: {
       krigare: { name: "Krigare", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.FqfsY2CF2RbG1mBy" },
       magiker: { name: "Magiker", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.XkPUZFz1f0e1avVM" },
       tjuv: { name: "Tjuv", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.5C1N1gJYsQwesfqN" },
-      utbygdsjagare: { name: "Utbygdsjägare", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.WqmtsnTlaj04nMA0" }
+      utbygdsjagare: { name: "Utbygdsjägare", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.WqmtsnTlaj04nMA0" },
+      // Enda yrket med en dualWieldAlt-plats (KH s.8-9) — behövs för att
+      // regressionstesta Ambidextriös-checkboxtexten (backlog 64) och Två
+      // vapen-husregeln (CLAUDE.md-avsteget) tillsammans.
+      vapenmastare: { name: "Vapenmästare", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.dodeYkrigvapenma" },
+      // Backlog 71/72 (Stridskonster/skillFloors) — Krigarmunk regressionstestar
+      // det nya `choicePool:"stridskonst"`-valet OCH Krigarmunkens halva pris
+      // (secondarySkillBaseOverrideFor), Stråtrövare det nya "Överleva i
+      // skogstrakter"-golvet.
+      krigarmunk: { name: "Krigarmunk", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.dodeYkrigkrigarm" },
+      stratrovare: { name: "Stråtrövare", uuid: "Compendium.drakar-och-demoner-expert.yrken.Item.dodeYtjuvstratro" }
     },
     utrustning: {
       bredsvard: { name: "Bredsvärd", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.JO4hXSY5ZwYVJzZk" },
-      ringbrynja: { name: "Ringbrynja", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.vXwmf5ag4g8gUSBo" },
+      // ⚠ UUID-drift hittad och fixad 2026-08-08: den platta "Ringbrynja"/"Läder"
+      // (helkroppsrustning) finns inte längre — SB s.27:s per-kroppsdels-
+      // rustningssystem (backlog 53, 2026-07-29) ersatte dem med separata
+      // Harnesk/Armskydd/Benskydd/Huva-poster. `resolve()`s namn-fallback
+      // hittade INTE de gamla namnen (varnade tyst i konsolen i stället för
+      // att krascha) — exakt den sortens tyst drift den här filens ⚠⚠-regel
+      // ovan finns för att fånga. Pekar nu på torsodelen av varje rustningstyp.
+      ringbrynja: { name: "Brynja, ringbrynja", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.brynjaringbrynja" },
       dolk: { name: "Dolk", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.TnTigfxjU5S8HV1d" },
       kortsvard: { name: "Kortsvärd", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.emiDjdMa6lrIXAqR" },
-      lader: { name: "Läder", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.baK0VIeXX3YeJYs6" },
+      lader: { name: "Harnesk, läder", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.harneskladerxxxx" },
       langbage: { name: "Långbåge", uuid: "Compendium.drakar-och-demoner-expert.vapen-utrustning.Item.jGLXZOtbDn34Xqhi" }
     }
   };
@@ -134,8 +175,142 @@ const DoDETestParty = (() => {
       attributes: { sty: 10, sto: 6, fys: 10, smi: 10, int: 10, psy: 10, kar: 4 },
       equipment: [],
       note: "Anka har KAR −5 → totalt −1. Testar att attributeToGroup och arket klarar ett NEGATIVT attributvärde."
+    },
+    {
+      // Se REF.raser.skogsalv ovan för varför den här fixturen finns.
+      name: "EDGE Skogsalv modersmål", kon: "kvinna", niva: "vanlig",
+      race: REF.raser.skogsalv, profession: null, age: "Mogen",
+      attributes: { sty: 10, sto: 13, fys: 10, smi: 14, int: 13, psy: 11, kar: 12 },
+      equipment: [],
+      note: "Alvsläkt-MEDLEM (inte bas-Alv). Regression för motherTongueRaceKey-buggen (backlog 64) — Tala/Läsa-skriva modersmål ska visa BÅDE Alviska (medfött, fast) OCH ett människospråk (valt), inte bara människospråket."
+    },
+    {
+      name: "EDGE Ambidextriös Vapenmästare", kon: "man", niva: "vanlig",
+      race: REF.raser.manniska, profession: REF.yrken.vapenmastare, age: "Mogen",
+      attributes: { sty: 14, sto: 12, fys: 12, smi: 15, int: 10, psy: 12, kar: 8 },
+      swordHand: "ambidextrios",
+      equipment: [],
+      note: "Ambidextriös + Vapenmästarens dualWieldAlt-plats (KH s.8-9) samtidigt. Regression för checkboxtexten som felaktigt påstod ett Två vapen-träningskrav (backlog 64) — Ambidextriös slipper det kravet helt (CLAUDE.md-avsteget)."
+    },
+    {
+      name: "EDGE Krigarmunk stridskonst", kon: "man", niva: "vanlig",
+      race: REF.raser.manniska, profession: REF.yrken.krigarmunk, age: "Mogen",
+      attributes: { sty: 14, sto: 10, fys: 12, smi: 16, int: 11, psy: 15, kar: 10 },
+      equipment: [],
+      note: "Backlog 71/72. Regression för det nya choicePool:\"stridskonst\"-valet (en riktig, namngiven teknik i stället för den gamla monolitiska \"Stridskonster\"-posten) OCH Krigarmunkens halva pris (secondarySkillBaseOverrideFor) på den valda teknikens grundkostnad."
+    },
+    {
+      name: "EDGE Stråtrövare skogsvana", kon: "kvinna", niva: "vanlig",
+      race: REF.raser.manniska, profession: REF.yrken.stratrovare, age: "Mogen",
+      attributes: { sty: 10, sto: 10, fys: 10, smi: 16, int: 10, psy: 10, kar: 10 },
+      equipment: [],
+      note: "Backlog 71. Regression för det nya \"Överleva i skogstrakter\"-golvet (skillFloors, minFv:10) — ska visa FV 10 automatiskt utan EP-kostnad, separat från den generiska \"Överlevnad\"-yrkesfärdigheten."
     }
   ];
+
+  /**
+   * Fyller `state.motherTongues.tala`/`lasaSkriva` med DEFAULT_HUMAN_LANGUAGE
+   * för varje olåst ("human"/`{choice:...}`) plats, deterministiskt så
+   * fixturerna blir reproducerbara. Fasta platser (Alviska, Dvärgiska osv)
+   * behöver inget värde i arrayen — #motherTongueResult läser slotens EGEN
+   * fasta nyckel för dem — men vi fyller ändå i null för att hålla
+   * array-längden korrekt (kosmetiskt, läses aldrig).
+   *
+   * Speglar sedan 2026-08-07 samma "human"-plats till BÅDA Tala och
+   * Läsa/Skriva när DODE.syncedHumanMotherTongueIndices säger att de hör
+   * ihop (Människa/Alv/Halvlängdsman/Anka/Halvorch) — annars skulle
+   * fixturerna själva bryta mot regeln vi just byggde.
+   */
+  function fillMotherTongues(w, raceDoc) {
+    for (const kind of ["tala", "lasaSkriva"]) {
+      const slots = CONFIG.DODE.motherTongueSlots(raceDoc, kind);
+      w.state.motherTongues[kind] = slots.map((slot) => {
+        const options = CONFIG.DODE.motherTongueSlotOptions(slot);
+        if (!options) return null; // fast plats, aldrig läst
+        // Föredra DEFAULT_HUMAN_LANGUAGE om den finns i poolen (den gör det
+        // för varje "human"/blandad plats), annars första alternativet.
+        const preferred = options.find((o) => o.key === DEFAULT_HUMAN_LANGUAGE);
+        return (preferred ?? options[0])?.key ?? null;
+      });
+    }
+    const synced = CONFIG.DODE.syncedHumanMotherTongueIndices(raceDoc);
+    if (synced) {
+      w.state.motherTongues.tala[synced.talaIndex] = DEFAULT_HUMAN_LANGUAGE;
+      w.state.motherTongues.lasaSkriva[synced.lasaSkrivaIndex] = DEFAULT_HUMAN_LANGUAGE;
+    }
+  }
+
+  /**
+   * Fyller `state.professionSkillPicks` upp till yrkets riktiga mål
+   * (`professionSkillState.target`, RP s.11: 12 vanligt / 9 för magiker) genom
+   * att läsa den FAKTISKA, redan renderade guide-kontexten i stället för att
+   * gissa reglerna på nytt här — om #professionSkillTarget/#professionSkillState
+   * någonsin ändras räcker det att seedningen fortsätter läsa rätt context-fält.
+   * Namngivna färdigheter väljs först (enklast, mest representativt); pooler
+   * (vapenfärdighet/språk/hantverk) fylls sist med ett rimligt default-värde
+   * per pool-typ. `picks`-objektens FORM speglar exakt vad #onToggleProfessionSkill
+   * respektive change-lyssnaren för `[data-slot-index]` bygger, så resultatet
+   * är oskiljbart från om en spelare klickat/skrivit själv.
+   */
+  async function fillProfessionSkills(w) {
+    const ctx = await w._prepareContext({});
+    const skillState = ctx.professionSkillState;
+    if (!skillState) return;
+    const picks = w.state.professionSkillPicks;
+
+    for (const sk of skillState.named) {
+      if (picks.length >= skillState.target) break;
+      picks.push({ key: sk.key, name: sk.name, attribute: sk.attribute, slotIndex: null });
+    }
+    for (const slot of skillState.slots) {
+      // ⚠ `slot.rows[row].languageOptions`/`.weaponOptions` är EN statisk
+      // ögonblicksbild tagen innan den här loopen börjat fylla i något —
+      // rad 0 och rad 1 i SAMMA pool ser alltså identiskt "inget valt än"-
+      // läge, trots att en riktig spelare skulle se rad 1 utgråa vad hen
+      // redan valt i rad 0 (se #professionSkillState/`usedInSlot`). Utan en
+      // egen `localUsed`-mängd skulle två rader i samma pool (t.ex.
+      // Vapenmästares "Tala max tre") tyst kunna få SAMMA värde två gånger
+      // — ett fel den riktiga guiden aldrig kan producera (den läser om
+      // `usedInSlot` vid varje re-render), men som seedningen kunde ha gjort
+      // tyst om den bara läste den statiska ögonblicksbilden rakt av.
+      const localUsed = new Set();
+      for (let row = 0; row < slot.count && picks.length < skillState.target; row++) {
+        let value = null;
+        if (slot.isLanguagePool) {
+          value = (slot.rows[row]?.languageOptions ?? [])
+            .find((o) => !o.disabled && !localUsed.has(o.value))?.value ?? null;
+        } else if (slot.isWeaponPool) {
+          // Riktiga vapen ur den faktiska katalogen (samma <select> spelaren
+          // ser, backlog 66) — testar vapengrupp-spillover på köpet, precis
+          // som den gamla hårdkodade "Bredsvärd" gjorde, men nu ett ANNAT
+          // vapen per rad i stället för samma vapen om poolen har fler än en plats.
+          value = (slot.rows[row]?.weaponOptions ?? [])
+            .find((o) => !o.disabled && !localUsed.has(o.value))?.value ?? null;
+        } else if (slot.isStridskonstPool) {
+          // Riktiga tekniker ur DODE.stridskonster (backlog 71/72, samma
+          // <select> spelaren ser) — testar att en teknik med egen,
+          // katalogsourcad grundkostnad kostnadsberäknas korrekt i stället
+          // för den gamla monolitiska "Stridskonster"-platshållaren.
+          value = (slot.rows[row]?.stridskonstOptions ?? [])
+            .find((o) => !o.disabled && !localUsed.has(o.value))?.value ?? null;
+        } else {
+          value = `${slot.pool} (testval ${row})`;
+        }
+        if (!value) continue;
+        localUsed.add(value);
+        const weaponGroup = CONFIG.DODE.weaponGroupFor(value);
+        const stridskonstEntry = CONFIG.DODE.stridskonstFor(value);
+        const attribute = weaponGroup?.attribute
+          ?? (stridskonstEntry ? CONFIG.DODE.stridskonstAttribute(stridskonstEntry) : null)
+          ?? slot.attribute ?? "int";
+        picks.push({
+          key: stridskonstEntry?.key ?? CONFIG.DODE.skillKey(value), name: value,
+          attribute, weaponGroup: weaponGroup?.key ?? "", slotIndex: slot.index
+        });
+      }
+      if (picks.length >= skillState.target) break;
+    }
+  }
 
   /** Skapar EN fixtur via guidens riktiga skaparväg. */
   async function createViaWizard(spec) {
@@ -176,6 +351,22 @@ const DoDETestParty = (() => {
     // fixturerna blir reproducerbara mellan körningar.
     w.state.socialStanding = { roll: 7, bpSpent: 0 };
     w.state.startCapital = { roll: 7, bpSpent: 0 };
+    // Svärdshand: lämnas orörd (→ fallback "hoger" vid skapande, se
+    // #onCreateCharacter) om inte specen uttryckligen begär en särskild hand
+    // (t.ex. "ambidextrios" för att regressionstesta Två vapen-husregeln).
+    if (spec.swordHand) w.state.swordHand.granted = spec.swordHand;
+
+    // Modersmål och yrkesfärdighetsval — se docblocken på respektive
+    // funktion. Måste ske EFTER att ras/yrke/attribut är satta (behöver
+    // #selectedRaceDoc/#selectedProfessionDoc, som bara sätts av
+    // _prepareContext) men FÖRE granska-steget.
+    await w._prepareContext({}); // sätter #selectedRaceDoc/#selectedProfessionDoc
+    fillMotherTongues(w, raceDoc);
+    if (professionDoc) await fillProfessionSkills(w);
+    // Hjältedåd (hjälte-nivåer) lämnas medvetet OROLLAT här — se
+    // docs/TEST_CASES.md UC-1b för varför, och `#onRollHjaltedadCount`/
+    // `#onRollHjaltedad` för det riktiga, tärningsbaserade flödet som
+    // testas separat, inte via seedningen.
 
     for (const ref of spec.equipment ?? []) {
       const doc = await resolve("startingEquipment", ref);
@@ -229,20 +420,27 @@ const DoDETestParty = (() => {
   function report() {
     const rows = game.actors
       .filter((a) => a.getFlag(game.system.id, FIXTURE_FLAG))
-      .map((a) => ({
-        namn: a.name,
-        ras: a.items.find((i) => i.type === "ras")?.name ?? "—",
-        yrke: a.items.find((i) => i.type === "yrke")?.name ?? "—",
-        alder: a.system.alder || "—",
-        niva: a.system.niva,
-        STY: a.system.attributes.sty.total,
-        KAR: a.system.attributes.kar.total,
-        KP: a.system.hp.max,
-        PSY: a.system.resources.psy.max,
-        fardigheter: a.items.filter((i) => i.type === "fardighet").length,
-        utrustning: a.items.filter((i) => ["vapen", "rustning"].includes(i.type)).length,
-        actorLink: a.prototypeToken.actorLink
-      }));
+      .map((a) => {
+        const skills = a.items.filter((i) => i.type === "fardighet");
+        const modersmal = skills.find((i) => i.system.skillKey === "tala-modersmal");
+        return {
+          namn: a.name,
+          ras: a.items.find((i) => i.type === "ras")?.name ?? "—",
+          yrke: a.items.find((i) => i.type === "yrke")?.name ?? "—",
+          alder: a.system.alder || "—",
+          niva: a.system.niva,
+          svardshand: a.system.swordHand,
+          STY: a.system.attributes.sty.total,
+          KAR: a.system.attributes.kar.total,
+          KP: a.system.hp.max,
+          PSY: a.system.resources.psy.max,
+          primara: skills.filter((i) => i.system.costTier === "primar").length,
+          yrkesfardigheter: skills.filter((i) => i.system.costTier === "yrkesfardighet").length,
+          modersmal: modersmal?.name ?? "—",
+          utrustning: a.items.filter((i) => ["vapen", "rustning"].includes(i.type)).length,
+          actorLink: a.prototypeToken.actorLink
+        };
+      });
     console.table(rows);
     return rows;
   }

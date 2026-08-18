@@ -4,7 +4,6 @@
   "system": {
     "requirements": "STY 14, FYS 12, SMI 12",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Arenakrigare. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4-5.</p><p><em>Källa: KH s.4-5</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -140,12 +139,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Trästav",
         "attribute": "smi",
         "choiceCount": 0,
@@ -162,6 +155,12 @@
         "attribute": "smi",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "description": "<p>Specialisering av grundyrket Krigare (KH s.4-5).</p>",
@@ -178,7 +177,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Arenakrigare",
+        "description": "<p>Arenakrigare. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4-5.</p><p><em>Källa: KH s.4-5</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkriggladiat",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gladiator-man.png",

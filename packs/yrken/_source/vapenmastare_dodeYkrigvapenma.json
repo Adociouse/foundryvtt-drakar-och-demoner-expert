@@ -4,14 +4,14 @@
   "system": {
     "requirements": "STY 14, FYS 12, SMI 15, PSY 12",
     "baseProfession": "krigare",
-    "professionAbility": "<p><strong>Krigarens grundförmåga (+5 på initiativ)</strong> plus:</p><p>Spendera <strong>5 PSY</strong> för en extra parering <em>eller</em> en extra attack per stridsrunda.</p><p><em>Källa: KH s.8-9</em></p>",
     "skillList": "",
     "professionSkills": [
       {
         "name": "Maximalt en valfri vapenfärdighet",
         "attribute": "smi",
         "choiceCount": 1,
-        "choicePool": "vapenfärdighet"
+        "choicePool": "vapenfärdighet",
+        "dualWieldAlt": true
       },
       {
         "name": "Tala maximalt tre valfria främmande språk",
@@ -134,12 +134,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Taktik",
         "attribute": "int",
         "choiceCount": 0,
@@ -152,13 +146,13 @@
         "choicePool": ""
       },
       {
-        "name": "Vapentekniker",
+        "name": "en valfri Stridskonst",
         "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
-    "description": "<p>Specialisering av grundyrket Krigare (KH s.8-9).</p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen.</em></p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen.</em></p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen.</em></p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen.</em></p>",
+    "description": "<p>Specialisering av grundyrket Krigare (KH s.8-9).</p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen. Den valfria andra vapenfärdigheten väljs i guiden via kryssrutan \"Slåss med två vapen\" på detta steg (2026-08-04).</em></p><p><em>⚠ Vapenmästaren är den enda yrkesgrupp som får lära vapentekniker som yrkesfärdighet, till halva priset (KH s.38, docs/VAPENAKADEMIER.md) — men en tidigare, felaktig rad här listade bara ett enda platt namn \"Vapentekniker\" (finns inte som en egen färdighet, se DODE.vapentekniker — det är ~26 separata tekniker). Raden togs bort 2026-08-06; halvprisrabatten kräver den inte (DODE.secondarySkillBaseOverrideFor läser rollpersonens yrke, inte NÄR färdigheten delades ut) — SL delar ut önskad teknik via arkets \"+Ny färdighet\" precis som vanligt, rabatten slår in automatiskt.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-kvinna.png",
     "source": {
@@ -172,7 +166,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Extra parering eller attack",
+        "description": "<p>Spendera <strong>5 PSY</strong> för en extra parering <em>eller</em> en extra attack per stridsrunda.</p><p><em>Källa: KH s.8-9</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYkrigvapenma",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/vapenmastare-man.png",

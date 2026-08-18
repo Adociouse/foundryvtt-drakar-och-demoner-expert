@@ -36,7 +36,18 @@
 
 <section class="item-description">
   <h3>Automatiska förmågor</h3>
-  {{editor system.automaticAbilities target="system.automaticAbilities" button=true engine="prosemirror"}}
+  {{!-- Strukturerad array (2026-08-16, se DESIGN_DECISIONS.md backlog 70) —
+    redigeras via packs/raser/_source/*.json + ompackning. --}}
+  {{#if system.automaticAbilities.length}}
+    <dl class="item-ability-list">
+      {{#each system.automaticAbilities as |ability|}}
+        <dt>{{#if ability.name}}{{ability.name}}{{else}}—{{/if}}{{#unless ability.effect}} <span class="hint">(ingen mekanisk effekt)</span>{{/unless}}</dt>
+        <dd>{{{ability.description}}}</dd>
+      {{/each}}
+    </dl>
+  {{else}}
+    <p class="hint">Inga strukturerade automatiska förmågor — redigera via packs/raser/_source/*.json.</p>
+  {{/if}}
   <h3>Beskrivning</h3>
   {{editor system.description target="system.description" button=true engine="prosemirror"}}
 </section>

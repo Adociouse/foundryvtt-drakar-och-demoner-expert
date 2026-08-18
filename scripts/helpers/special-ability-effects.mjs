@@ -57,12 +57,14 @@ export function choiceCount(effect) {
 /**
  * @param {object|null} effect En rad ur DODE.specialAbilitiesTable's `effect`.
  * @param {string[]} choices Spelarens fria textval, längd = choiceCount(effect).
- * @returns {{skillModifiers: Array<{skillKey:string,value:number}>, fardighetSeeds: Array<{key:string,name:string,attribute:string,costTier:string}>}}
+ * @returns {{skillModifiers: Array<{skillKey:string,value:number}>, fardighetSeeds: Array<{key:string,name:string,attribute:string,costTier:string}>, recoveryModifiers: Array<{resource:string,operation:string,value:number}>}}
  */
 export function resolveGrants(effect, choices = []) {
   const skillModifiers = [];
   const fardighetSeeds = [];
-  if (!effect) return { skillModifiers, fardighetSeeds };
+  const recoveryModifiers = [];
+  const statModifiers = [];
+  if (!effect) return { skillModifiers, fardighetSeeds, recoveryModifiers, statModifiers };
 
   const addFixed = (key, value, costTier = "sekundar") => {
     skillModifiers.push({ skillKey: key, value });
@@ -77,8 +79,12 @@ export function resolveGrants(effect, choices = []) {
 
   switch (effect.type) {
     case "skillBonus": {
+      // `effect.costTier` (2026-08-16, ras-/yrkesramverket): valfri override —
+      // t.ex. Dvärgs "+5 FV i Geologi (räknas som primärfärdighet)". Saknas
+      // den faller det tillbaka på addFixed/addChosens egen "sekundar"-default,
+      // oförändrat beteende för alla befintliga anrop.
       if (effect.skills) {
-        for (const key of effect.skills) addFixed(key, effect.value);
+        for (const key of effect.skills) addFixed(key, effect.value, effect.costTier ?? "sekundar");
       } else if (effect.pool === "hantverk") {
         const craft = String(choices[0] ?? "").trim();
         if (craft) {
@@ -91,7 +97,12 @@ export function resolveGrants(effect, choices = []) {
       break;
     }
     case "grantSecondary": {
-      if (effect.pool === "sprak") {
+      // `effect.skills` (2026-08-16, ras-/yrkesramverket) — en FAST lista,
+      // samma mönster som skillBonus redan har. T.ex. Ankas "Automatiskt FV
+      // 20 i Simma": ingen spelarvals-pool, bara en given färdighet.
+      if (effect.skills) {
+        for (const key of effect.skills) addFixed(key, effect.fv, effect.costTier ?? "sekundar");
+      } else if (effect.pool === "sprak") {
         const lang = String(choices[0] ?? "").trim();
         if (lang) {
           for (const label of effect.labels ?? ["Tala"]) {
@@ -115,8 +126,21 @@ export function resolveGrants(effect, choices = []) {
       // Ingen skill-koppling — effekten flaggas direkt på formaga-itemet i
       // applyResolvedAbility, DODE.skillCostOverrideFor läser den där.
       break;
+    case "recoveryModifier":
+      // Gott läkekött / God mental kontroll (rad 73/74) — se item-formaga.mjs
+      // `recoveryModifiers` och actor-character.mjs `recoveryModifierTotals`.
+      recoveryModifiers.push({ resource: effect.resource, operation: effect.operation, value: effect.value });
+      break;
+    case "statModifier":
+      // Multiplikator/tillägg på en HÄRLEDD attributsumma (hp.max/psy.max) —
+      // t.ex. "Extremt smärttålig" (Totala KP × 1,5). Skiljer sig medvetet från
+      // recoveryModifier, som riktar sig mot LÄKNINGSTAKTEN, en annan mekanik
+      // än poolens STORLEK — se item-formaga.mjs `statModifiers` och
+      // actor-character.mjs `#applyStatModifiers`.
+      statModifiers.push({ stat: effect.stat, operation: effect.operation, value: effect.value });
+      break;
   }
-  return { skillModifiers, fardighetSeeds };
+  return { skillModifiers, fardighetSeeds, recoveryModifiers, statModifiers };
 }
 
 const TIER_RANK = { sekundar: 0, yrkesfardighet: 1, primar: 2 };
@@ -162,12 +186,16 @@ async function ensureSeeds(actor, seeds) {
  * EN förmågeslot — se filhuvudet för varför taggning sker på `slotId`.
  *
  * @param {Actor} actor
- * @param {string} slotId Stabil identitet för sloten (`specialAbilities[].slotId`).
+ * @param {string} slotId Stabil identitet för sloten (`specialAbilities[].slotId`,
+ *   eller `"race-ability-N"`/`"profession-ability-N"` för ras-/yrkesramverket).
  * @param {string} name Förmågans namn (visningsnamn på formaga-itemet).
- * @param {object|null} effect Raden ur DODE.specialAbilitiesTable, eller null.
- * @param {{skillModifiers: Array, fardighetSeeds: Array}} resolved Från resolveGrants.
+ * @param {object|null} effect Raden ur DODE.specialAbilitiesTable/professionAbilities/
+ *   automaticAbilities, eller null.
+ * @param {{skillModifiers: Array, fardighetSeeds: Array, recoveryModifiers?: Array, statModifiers?: Array}} resolved Från resolveGrants.
+ * @param {string} [origin="bas"] `formaga.system.origin` — "bas" (särskilda
+ *   förmågor), "ras" eller "yrke" (2026-08-16, ras-/yrkesramverket).
  */
-export async function applyResolvedAbility(actor, slotId, name, effect, resolved) {
+export async function applyResolvedAbility(actor, slotId, name, effect, resolved, origin = "bas") {
   const existing = actor.items.find(
     (i) => i.type === "formaga" && i.getFlag(game.system.id, "specialAbilitySlot") === slotId
   );
@@ -183,7 +211,12 @@ export async function applyResolvedAbility(actor, slotId, name, effect, resolved
   const data = {
     name,
     type: "formaga",
-    system: { origin: "bas", skillModifiers: resolved.skillModifiers },
+    system: {
+      origin,
+      skillModifiers: resolved.skillModifiers,
+      recoveryModifiers: resolved.recoveryModifiers ?? [],
+      statModifiers: resolved.statModifiers ?? []
+    },
     [`flags.${game.system.id}.specialAbilitySlot`]: slotId,
     [`flags.${game.system.id}.effect`]: effect
   };
@@ -197,9 +230,22 @@ export async function applyResolvedAbility(actor, slotId, name, effect, resolved
 /**
  * Städar bort formaga-poster vars slot inte längre finns (nivåsänkning som
  * kortar wizardens slot-array, eller en rad borttagen på arket). Körs EFTER
- * att alla kvarvarande slots hunnit köra applyResolvedAbility.
+ * att ALLA producenter (särskilda förmågor, ras, yrke) hunnit köra
+ * applyResolvedAbility — en enda kombinerad `keepSlotIds`-lista, inte tre
+ * separata pruningar.
+ *
+ * ⚠ VIKTIGT (2026-08-16, upptäckt under design av ras-/yrkesramverket): de
+ * tre slot-namnrymderna ("<randomID>" för särskilda förmågor, "race-ability-N",
+ * "profession-ability-N") delar samma flagg-nyckel (`specialAbilitySlot`) på
+ * SAMMA `formaga`-itemtyp. Ett tidigare utkast lät varje producent pruna för
+ * sig med sin egen, ofullständiga `keepSlotIds`-lista — det hade RADERAT de
+ * ANDRA producenternas poster (t.ex. skulle särskilda förmågors prune-anrop,
+ * som bara känner till sina egna slotId:n, tolka varje ras-/yrkes-formaga som
+ * "föräldralös" och ta bort den). Anropande kod MÅSTE alltså samla ihop
+ * keepSlotIds från ALLA tre producenterna innan detta anrop görs EN gång —
+ * se character-wizard.mjs `#onCreateCharacter`/`#applyToActor`.
  * @param {Actor} actor
- * @param {string[]} keepSlotIds Alla `slotId` som fortfarande finns.
+ * @param {string[]} keepSlotIds Alla `slotId` som fortfarande finns, FRÅN ALLA producenter.
  */
 export async function pruneOrphanedAbilityGrants(actor, keepSlotIds) {
   const keep = new Set(keepSlotIds);

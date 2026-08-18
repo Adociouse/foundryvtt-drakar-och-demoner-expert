@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "INT 12, PSY 14",
-    "professionAbility": "<p>Lär och kastar besvärjelser från dag ett. Väljer bara 9 (inte 12) yrkesfärdigheter. Måste ta en magiskola (Animism/Elementarmagi/Mentalism) som yrkesfärdighet.</p>",
     "skillList": "<p>Språk, Alkemi, Astrologi, Djurhelning, Djurträning, Drogkunskap, Geografi, Giftkunskap, Kulturkännedom, Kunskap om demoner/magi/odöda, Magisk kanalisering, en valfri magiskola, Räkning, Simma, Språkkunskap, Trästav, Zoologi, Örtkunskap.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker-man.png",
@@ -147,7 +146,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Magianvändning från start",
+        "description": "<p>Lär och kastar besvärjelser från dag ett. Väljer bara 9 (inte 12) yrkesfärdigheter. Måste ta en magiskola (Animism/Elementarmagi/Mentalism) som yrkesfärdighet.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "XkPUZFz1f0e1avVM",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/magiker.png",

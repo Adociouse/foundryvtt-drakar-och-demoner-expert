@@ -3,6 +3,15 @@
     <strong>Steg {{stepNumber}}/{{stepCount}}: {{stepLabel}}</strong>
     <span class="wizard-bp-ledger">BP kvar: <strong>{{bp.remaining}}</strong> / {{bp.start}}</span>
     <span class="wizard-bp-ledger" title="EP-taket = nivå×ålder-tabell + kvarvarande BP × 5 (RP s.28/KH s.3). Spenderar du BP på t.ex. grundegenskaper sjunker alltså EP-taket också — det är avsiktligt, inte en bugg.">EP kvar: <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
+    {{!-- Johan, 2026-08-16: "kapital should probably be on top menu as well
+      ... so one sees it when doing the purchases as it scrolls away
+      otherwise." Samma readout som redan fanns inne i utrustningssteget
+      (equipmentResult.remaining/.budget), pinnad i den fasta headern precis
+      som BP/EP redan är — syns bara från och med kapitalsteget (innan dess
+      är budget 0 och raden meningslös). --}}
+    {{#if equipmentResult.budget}}
+      <span class="wizard-bp-ledger">Kapital kvar: <strong>{{equipmentResult.remaining}}</strong> / {{equipmentResult.budget}} sm</span>
+    {{/if}}
   </header>
 
   <div class="wizard-step-container">
@@ -14,12 +23,15 @@
     <ol class="wizard-flow">
       <li><strong>Grunderna</strong> — kön, nivå och namn.</li>
       <li><strong>Ras</strong> — kostar BP och ger egenskapsmodifikationer.</li>
+      <li><strong>Svärdshand</strong> — slås fram (2T6+BP), avgör vänster/höger/dubbelhänt/ambidextriös.</li>
+      <li><strong>Ålder</strong> — modifierar grundegenskaper och startkapital (satt tidigt, före de steg som läser den — en medveten avvikelse från bokens sidordning, se kodkommentar).</li>
       <li><strong>Grundegenskaper</strong> — köps med BP (RP s.23).</li>
       <li><strong>Yrke</strong> — kräver vissa grundegenskapsvärden, därför köps de först.</li>
       <li><strong>Magiskola</strong> — bara för magiker.</li>
-      <li><strong>Särskilda förmågor, socialt stånd och startkapital</strong> — slås fram, kostar BP.</li>
-      <li><strong>Ålder</strong> — modifierar grundegenskaper och startkapital.</li>
-      <li><strong>Färdigheter</strong> — köps med EP.</li>
+      <li><strong>Särskilda förmågor</strong> — slås fram, kostar BP (efter yrke, INNAN du spenderar EP på färdigheter — så du vet om en förmåga redan ger bonus-FV i något innan du köper det själv).</li>
+      <li><strong>Socialt stånd och startkapital</strong> — slås fram, kostar BP.</li>
+      <li><strong>Språk</strong> — modersmål ges av ras och socialt stånd (RP s.42/44), inget slag.</li>
+      <li><strong>Yrkesfärdigheter och färdigheter</strong> — välj färdigheter ur yrkets lista (RP s.11), sedan baschanser + köp med EP (samma sektion i RP s.30, ett steg direkt efter det andra här).</li>
       <li><strong>Livsmål och utrustning</strong> — handla för startkapitalet.</li>
       <li><strong>Granska</strong> — kontrollera allt och skapa rollpersonen.</li>
     </ol>
@@ -62,7 +74,7 @@
         <div class="wizard-card {{#if option.selected}}selected{{/if}}" data-niva="{{option.value}}" data-action="selectNiva">
           <img src="{{option.img}}" />
           <div class="wizard-card-name">{{option.label}}</div>
-          <div class="wizard-card-meta">{{option.bp}} BP{{#if option.isHero}} + hjältedåd{{/if}}</div>
+          <div class="wizard-card-meta">{{option.bp}} BP{{#if option.isHero}} + hjältedåd ({{option.hjaltedadFormula}}){{/if}}</div>
         </div>
       {{/each}}
     </div>
@@ -79,15 +91,16 @@
     {{/if}}
     {{#if selectedNivaOption.isHero}}
       <div class="wizard-hjaltedad">
-        <p class="hint">Hjältedåd (HH s.6-7) ger bonus-BP och hjältepoäng (en egen valuta, inte kroppspoäng) ovanpå den vanliga poolen — en tvåstegsraket: först 1T6 för att avgöra HUR MÅNGA gånger du får slå, sedan just så många 1T20 mot tabellen.</p>
+        <p class="hint">Hjältedåd (HH s.6-7) ger bonus-BP och hjältepoäng (en egen valuta, inte kroppspoäng) ovanpå den vanliga poolen — en tvåstegsraket: först {{hjaltedadCountFormula}} för att avgöra HUR MÅNGA gånger du får slå, sedan just så många 1T20 mot tabellen.
+          {{#unless (eq hjaltedadCountFormula "1T6")}}<span class="hint">⚠ Husregel (ej standard) — se SL-inställningarna.</span>{{/unless}}</p>
 
         {{#unless hjaltedad.rollCount}}
-          <button type="button" data-action="rollHjaltedadCount"><i class="fa-solid fa-dice-d6"></i> 1. Slå 1T6 — hur många hjältedåd?</button>
+          <button type="button" data-action="rollHjaltedadCount"><i class="fa-solid fa-dice-d6"></i> 1. Slå {{hjaltedadCountFormula}} — hur många hjältedåd?</button>
         {{/unless}}
 
         {{#if hjaltedad.rollCount}}
           {{#unless hjaltedad.rolls.length}}
-            <p class="hint">1T6 gav <strong>{{hjaltedad.rollCount}}</strong> — du får slå {{hjaltedad.rollCount}} gånger på hjältedådstabellen.</p>
+            <p class="hint">{{hjaltedadCountFormula}} gav <strong>{{hjaltedad.rollCount}}</strong> — du får slå {{hjaltedad.rollCount}} gånger på hjältedådstabellen.</p>
             <button type="button" data-action="rollHjaltedad"><i class="fa-solid fa-dice-d20"></i> 2. Slå {{hjaltedad.rollCount}}T20 mot tabellen</button>
           {{/unless}}
         {{/if}}
@@ -143,7 +156,9 @@
     {{#if selectedRace}}
       <div class="wizard-detail">
         <h4>{{selectedRace.name}}</h4>
-        {{{selectedRace.system.automaticAbilities}}}
+        {{#each selectedRaceAbilityRows as |ability|}}
+          <p>{{#if ability.name}}<strong>{{ability.name}}:</strong> {{/if}}{{{ability.description}}}</p>
+        {{/each}}
       </div>
     {{/if}}
   </section>
@@ -198,10 +213,34 @@
           {{else if row.raceStoLabel}}
             <div class="wizard-attribute-mod wizard-attribute-mod-race" title="{{row.raceStoLabel}}">{{row.raceStoLabel}}</div>
           {{/if}}
+          {{!-- BC-grupp (backlog 35): utan den här syns inte om nästa köp faktiskt
+                spelar någon roll — en poäng som INTE korsar en gruppgräns är ofta
+                inte värd BP:n. --}}
+          <div class="wizard-attribute-group {{#if row.nextGroupsUp}}wizard-attribute-group-next{{/if}}"
+            title="{{#if row.nextGroupsUp}}Nästa poäng höjer gruppen till {{/if}}Grupp {{row.group}}">
+            Grupp {{row.group}}{{#if row.nextGroupsUp}} <i class="fa-solid fa-arrow-up"></i>{{/if}}
+          </div>
         </div>
       {{/each}}
     </div>
     <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> Återställ inköp</button>
+
+    {{!-- Referenstabell (backlog 35, Johan: "BC-tabellen UNDER köpraderna").
+          Kort och läsbar räckvidd — attribut går sällan över ~25. --}}
+    <details class="wizard-group-reference">
+      <summary>Grupptabell (referens — REG s.6)</summary>
+      <table class="wizard-group-table">
+        <thead><tr><th>Värde</th><th>Grupp</th></tr></thead>
+        <tbody>
+          <tr><td>1–3</td><td>0</td></tr>
+          <tr><td>4–8</td><td>1</td></tr>
+          <tr><td>9–12</td><td>2</td></tr>
+          <tr><td>13–16</td><td>3</td></tr>
+          <tr><td>17–20</td><td>4</td></tr>
+          <tr><td>21–25</td><td>5</td></tr>
+        </tbody>
+      </table>
+    </details>
 
     {{!-- Yrkestäckning direkt här, inte bara på yrkessteget — siffran uppdateras
           för varje köp och visar konsekvensen innan man går vidare. --}}
@@ -247,12 +286,25 @@
                     Block-parametrar är lexikalt synliga rakt igenom nästlade
                     block utan `../` — samma fälla gäller `slot.choicePool`. --}}
               <label>Val {{#if (gt slot.needsChoiceCount 1)}}{{choice.row}}{{/if}}
-                <input type="text"
-                  {{#if (eq slot.choicePool "hantverk")}}placeholder="Hantverkstyp, t.ex. Smide"
-                  {{else if (eq slot.choicePool "sprak")}}placeholder="Språk, t.ex. Alvspråk"
-                  {{else}}list="dode-secondary-skill-suggestions" placeholder="Sekundär färdighet"{{/if}}
-                  data-ability-choice-index="{{i}}" data-ability-choice-slot="{{choice.row}}"
-                  value="{{choice.value}}" />
+                {{#if (eq slot.choicePool "sprak")}}
+                  {{!-- Backlog (Johan, 2026-08-16: "särkilda förmågot langauge
+                    should have language selction") — riktig dropdown ur
+                    CONFIG.DODE.languages, samma katalog språksteget redan
+                    använder, i stället för fritext som riskerar att inte
+                    matcha katalogens riktiga namn. --}}
+                  <select data-ability-choice-index="{{i}}" data-ability-choice-slot="{{choice.row}}">
+                    <option value="">— välj språk —</option>
+                    {{#each choice.languageOptions as |opt|}}
+                      <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}}>{{opt.label}}</option>
+                    {{/each}}
+                  </select>
+                {{else}}
+                  <input type="text"
+                    {{#if (eq slot.choicePool "hantverk")}}list="dode-craft-suggestions" placeholder="Hantverkstyp, t.ex. Smide"
+                    {{else}}list="dode-secondary-skill-suggestions" placeholder="Sekundär färdighet"{{/if}}
+                    data-ability-choice-index="{{i}}" data-ability-choice-slot="{{choice.row}}"
+                    value="{{choice.value}}" />
+                {{/if}}
               </label>
             {{/each}}
           </div>
@@ -328,7 +380,9 @@
             {{/each}}
           </ul>
         {{/if}}
-        {{{selectedProfession.system.professionAbility}}}
+        {{#each selectedProfessionAbilityRows as |ability|}}
+          <p>{{#if ability.name}}<strong>{{ability.name}}:</strong> {{/if}}{{{ability.description}}}</p>
+        {{/each}}
       </div>
     {{/if}}
   </section>
@@ -361,23 +415,47 @@
         <button type="button" data-action="clearProfessionSkills"><i class="fa-solid fa-rotate-left"></i> Nollställ</button>
       </p>
 
-      {{#if slots.length}}
-        <h4 class="wizard-group-heading">Valfria platser</h4>
-        {{#each slots as |slot|}}
-          <div class="wizard-slot">
-            <label class="slot-label">{{slot.label}}</label>
-            <div class="slot-rows">
-              {{#each slot.rows as |row|}}
-                <input type="text" list="dode-weapon-suggestions"
-                  data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
-                  data-slot-attribute="{{slot.attribute}}"
-                  value="{{row.value}}" placeholder="{{slot.pool}}…" />
-              {{/each}}
-            </div>
-          </div>
+      {{#if weaponSlots.length}}
+        <h4 class="wizard-group-heading">
+          Vapenfärdigheter <span class="wizard-group-count">{{weaponSlotCount}}</span>
+        </h4>
+        {{!-- Johan, 2026-08-16: antalet vapenval (1 hos Bard, 6 hos Gladiator)
+          stod tidigare utan förklaring — bara siffran. RP s.11 sätter varje
+          yrkes egen lista, men VARFÖR den varierar går att säga generellt
+          utan att gissa någon enskild yrkesmotivering: stridsinriktade
+          yrken/specialiseringar tränar fler vapentyper, yrken med annan
+          inriktning (magi, hantverk, sociala färdigheter osv) färre. --}}
+        <p class="hint wizard-weapon-count-hint">
+          <i class="fa-solid fa-circle-info"></i>
+          Antalet vapenval sätts av yrkets egen lista (RP s.11) och varierar
+          mycket: stridsinriktade yrken och krigarspecialiseringar väljer
+          bland flera vapentyper, medan yrken med annan inriktning (magi,
+          hantverk, sociala färdigheter osv) oftast bara väljer ett fåtal —
+          eller som här, bara ett.
+        </p>
+        {{#each weaponSlots as |slot|}}
+          {{> "systems/drakar-och-demoner-expert/templates/apps/wizard-skill-slot.hbs" slot=slot swordHand=../../swordHand}}
         {{/each}}
-        <datalist id="dode-weapon-suggestions">
-          {{#each ../weaponSuggestions as |w|}}<option value="{{w}}"></option>{{/each}}
+      {{/if}}
+
+      {{#if languageSlots.length}}
+        <h4 class="wizard-group-heading">
+          Språk <span class="wizard-group-count">{{languageSlotCount}}</span>
+        </h4>
+        {{#each languageSlots as |slot|}}
+          {{> "systems/drakar-och-demoner-expert/templates/apps/wizard-skill-slot.hbs" slot=slot swordHand=../../swordHand}}
+        {{/each}}
+      {{/if}}
+
+      {{#if otherSlots.length}}
+        <h4 class="wizard-group-heading">
+          Övriga val <span class="wizard-group-count">{{otherSlotCount}}</span>
+        </h4>
+        {{#each otherSlots as |slot|}}
+          {{> "systems/drakar-och-demoner-expert/templates/apps/wizard-skill-slot.hbs" slot=slot swordHand=../../swordHand}}
+        {{/each}}
+        <datalist id="dode-craft-suggestions">
+          {{#each ../craftSuggestions as |c|}}<option value="{{c}}"></option>{{/each}}
         </datalist>
       {{/if}}
 
@@ -406,7 +484,7 @@
 
     <label class="hand-granted">
       Fick du handen som särskild förmåga? Då slår du inte.
-      <select data-action="toggleHandGranted" name="grantedHand">
+      <select name="grantedHand">
         <option value="" {{#unless swordHand.granted}}selected{{/unless}}>Nej — slå fram</option>
         <option value="dubbelhant" {{#if (eq swordHand.granted "dubbelhant")}}selected{{/if}}>Dubbelhänt (förmåga)</option>
         <option value="ambidextrios" {{#if (eq swordHand.granted "ambidextrios")}}selected{{/if}}>Ambidextriös (förmåga)</option>
@@ -418,12 +496,17 @@
         <input type="number" min="0" name="state.swordHand.bpSpent" value="{{swordHand.bpSpent}}" />
       </label>
       {{!-- Regelverkets dolda pärla: 15 BP garanterar minst Dubbelhänt och ger
-            Ambidextriös i 33 fall av 36. --}}
+            Ambidextriös i 33 fall av 36. Ambidextriös-radens verkliga poäng
+            (2026-08-05, backlog 33) är inte bara "ingen sämre hand" — det är
+            att Två vapen-träningskravet försvinner helt, se avsteget i
+            CLAUDE.md. --}}
       <p class="hint hand-tip">
         <i class="fa-solid fa-lightbulb"></i>
         2T6+15 blir lägst 17 — alltså <strong>garanterat minst Dubbelhänt</strong>,
         och <strong>Ambidextriös i 92 % av fallen</strong>. Att köpa bort sin sämre
-        hand tidigt sparar mycket senare.
+        hand tidigt sparar mycket senare — och <strong>Ambidextriös låter dig
+        dessutom slåss med två kända vapen i valfri kombination direkt, utan att
+        först behöva träna en egen Två vapen-färdighet</strong> för just det paret.
       </p>
       <button type="button" data-action="rollSwordHand"><i class="fa-solid fa-dice"></i> Slå 2T6</button>
     {{/unless}}
@@ -438,6 +521,18 @@
       {{/if}}
       {{#if swordHand.noOffHandPenalty}}
         <p class="hand-perk"><i class="fa-solid fa-star"></i> Ingen sämre hand — sköldhandens −10 CL gäller inte dig.</p>
+        {{#if (eq swordHand.key "ambidextrios")}}
+          {{!-- Skiljer sig från Dubbelhänt (backlog 33): bara Ambidextriös slipper
+                Två vapen-träningskravet, RP s.27 "inte samtidigt" gäller fortfarande
+                Dubbelhänt. Se avsteget i CLAUDE.md. --}}
+          <p class="hand-perk ambidextrios-perk">
+            <i class="fa-solid fa-hands"></i> Du kan dessutom slåss med <strong>två kända
+            vapen i valfri kombination</strong> utan att träna en Två vapen-färdighet
+            först — så länge kombinationen är rimlig (inga tvåhandsvapen, inte
+            båge+svärd). En Dubbelhänt rollperson måste fortfarande träna varje
+            vapenkombination för sig (RP s.59).
+          </p>
+        {{/if}}
       {{/if}}
     </div>
 
@@ -465,6 +560,13 @@
     <label>BP att spendera på socialt stånd
       <input type="number" min="0" name="state.socialStanding.bpSpent" value="{{socialStanding.bpSpent}}" />
     </label>
+
+    <table class="dode-roll-table">
+      <tr><th>2T6+BP</th><th>Socialt stånd</th></tr>
+      {{#each socialStandingTable as |row|}}
+        <tr><td>{{row.range}}</td><td>{{row.rank}}</td></tr>
+      {{/each}}
+    </table>
   </section>
   {{/if}}
 
@@ -486,10 +588,79 @@
   </section>
   {{/if}}
 
+  {{#if showSprak}}
+  <section class="wizard-step">
+    <p class="hint">Modersmål ges av ras och socialt stånd (RP s.42/44) — inget slag, bara ett val där rasen ger flera möjligheter. Tala och Läsa/Skriva räknas som SKILDA färdigheter med egna Baschanser (BC); vissa raser (Dvärgar, Halvorcher, Halvalver) talar fler språk än de kan läsa/skriva.</p>
+
+    <h4>Tala modersmål — BC {{motherTongue.tala.bc}}</h4>
+    <div class="wizard-language-slots">
+      {{#each motherTongue.tala.rows as |row|}}
+        {{#if row.fixed}}
+          <p class="wizard-language-fixed"><i class="fa-solid fa-check"></i> {{row.label}} <span class="hint">(medfött)</span></p>
+        {{else}}
+          <label class="wizard-language-choice">
+            Välj ett människospråk
+            <select class="dode-mother-tongue-select" data-kind="tala" data-index="{{row.index}}">
+              <option value="">— välj —</option>
+              {{#each row.options as |opt|}}
+                <option value="{{opt.key}}" {{#if opt.selected}}selected{{/if}}>{{opt.name}}</option>
+              {{/each}}
+            </select>
+          </label>
+        {{/if}}
+      {{/each}}
+    </div>
+
+    <h4>Läsa/Skriva modersmål — BC {{motherTongue.lasaSkriva.bc}}</h4>
+    <div class="wizard-language-slots">
+      {{#each motherTongue.lasaSkriva.rows as |row|}}
+        {{#if row.fixed}}
+          <p class="wizard-language-fixed"><i class="fa-solid fa-check"></i> {{row.label}} <span class="hint">(medfött)</span></p>
+        {{else}}
+          <label class="wizard-language-choice">
+            Välj språk
+            <select class="dode-mother-tongue-select" data-kind="lasaSkriva" data-index="{{row.index}}">
+              <option value="">— välj —</option>
+              {{#each row.options as |opt|}}
+                <option value="{{opt.key}}" {{#if opt.selected}}selected{{/if}}>{{opt.name}}</option>
+              {{/each}}
+            </select>
+          </label>
+        {{/if}}
+      {{/each}}
+    </div>
+    {{#unless motherTongue.complete}}
+      <p class="hint">⚠ Alla språkval måste fyllas i innan du kan gå vidare.</p>
+    {{/unless}}
+
+    {{!-- Referens: vad de olika språken faktiskt är och var de talas
+          (Johan 2026-08-07) — samma "referens under valen"-mönster som
+          attributstegets grupptabell. --}}
+    <details class="wizard-group-reference">
+      <summary>Språken i Ereb Altor (referens — Kampanjboken s.44)</summary>
+      <table class="wizard-group-table wizard-language-table">
+        <thead><tr><th>Språk</th><th>Var det talas</th></tr></thead>
+        <tbody>
+          {{#each languages as |l|}}
+            <tr><td>{{l.name}}</td><td>{{l.description}}</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </details>
+  </section>
+  {{/if}}
+
   {{#if showFardigheter}}
   <section class="wizard-step">
     <p class="hint">Grundfärdighetsvärde (FV) = baschans (BC, grupp av grundegenskapen — REGLER_EGENSKAPER.md). Höj FV med EP nedan — RP s.30: kostnaden ökar per steg (kumulativ tabell), och beror på färdighetens kategori (primär 2 / yrkesfärdighet 3 / sekundär 5 EP per grundsteg). Knappen grånas när EP inte räcker eller max-FV vid skapande ({{ep.maxStartFv}}, KH s.3) är nådd.</p>
-    <h4>Primära färdigheter ({{skillPreview.primary.length}})</h4>
+    <h4>Primära färdigheter ({{skillPreview.primary.length}})
+      {{!-- Johan, 2026-08-16: "+1 and -1 button all primary and all
+        yrkesfärdigheter on category level as one has to click a lot
+        otherwise" — en kategori kan ha 16+ rader, ett klick per steg per
+        rad blir orimligt många klick för en hel rollperson. --}}
+      <button type="button" class="wizard-bulk-skill-buy" data-action="buyAllSkillFv" data-category="primar"><i class="fa-solid fa-angles-up"></i> Höj alla +1</button>
+      <button type="button" class="wizard-bulk-skill-buy" data-action="sellAllSkillFv" data-category="primar"><i class="fa-solid fa-angles-down"></i> Sänk alla −1</button>
+    </h4>
     <table class="wizard-summary wizard-skill-table">
       {{#each skillPreview.primary as |skill|}}
         <tr>
@@ -503,7 +674,12 @@
         </tr>
       {{/each}}
     </table>
-    <h4>Yrkesfärdigheter ({{skillPreview.professionSkills.length}})</h4>
+    <h4>Yrkesfärdigheter ({{skillPreview.professionSkills.length}})
+      {{#if skillPreview.professionSkills.length}}
+        <button type="button" class="wizard-bulk-skill-buy" data-action="buyAllSkillFv" data-category="yrkesfardighet"><i class="fa-solid fa-angles-up"></i> Höj alla +1</button>
+        <button type="button" class="wizard-bulk-skill-buy" data-action="sellAllSkillFv" data-category="yrkesfardighet"><i class="fa-solid fa-angles-down"></i> Sänk alla −1</button>
+      {{/if}}
+    </h4>
     {{#if selectedProfession}}
       {{#if skillPreview.professionSkills.length}}
         <table class="wizard-summary wizard-skill-table">
@@ -545,25 +721,58 @@
     {{#if finalLifeGoal}}
       <p class="hint">Valt livsmål: <strong>{{finalLifeGoal}}</strong></p>
     {{/if}}
+
+    {{!-- Johan, 2026-08-16: "livsmål probably need to have a sub table
+      explaining the contents, otherwise its hard to understand" — samma
+      mönster som attributstegets grupptabell/språkstegets beskrivningstabell
+      (backlog 35/64), ordagrann bokbeskrivning ur REG s.13-14. --}}
+    <details class="wizard-group-reference">
+      <summary>Vad betyder livsmålen? (referens — REG s.13-14)</summary>
+      <table class="wizard-group-table">
+        <thead><tr><th>Livsmål</th><th>Beskrivning</th></tr></thead>
+        <tbody>
+          {{#each lifeGoalTable as |goal|}}
+            <tr><td>{{goal.name}}</td><td>{{goal.description}}</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </details>
   </section>
   {{/if}}
 
   {{#if showUtrustning}}
   <section class="wizard-step">
-    <p class="hint">Köp utrustning för startkapitalet. Kort grånas när priset överstiger kvarvarande kapital.</p>
+    <p class="hint">Köp utrustning för startkapitalet. Kort grånas när priset överstiger kvarvarande kapital.
+      Kort med ett fält och en enhet (t.ex. "sm/g") köps i MÄNGD — skriv hur många gram/doser/kaggar du vill ha,
+      totalpriset räknas fram automatiskt. Kort märkta <strong>"Referens"</strong> saknar ett eget pris helt
+      (de prissätter ett ANNAT föremål, t.ex. ett otämjt ridjur) och går inte att köpa här.</p>
     <p class="wizard-roll-result">Kapital kvar: <strong>{{equipmentResult.remaining}}</strong> / {{equipmentResult.budget}} sm</p>
     {{#each equipmentResult.groups as |group|}}
       <h4 class="wizard-group-heading">{{group.label}} <span class="wizard-group-count">{{group.items.length}}</span></h4>
       <div class="wizard-card-grid wizard-equipment-grid">
         {{#each group.items as |entry|}}
-          <div class="wizard-card wizard-equipment-card" data-uuid="{{entry.uuid}}">
+          <div class="wizard-card wizard-equipment-card {{#unless entry.purchasable}}is-reference-only{{/unless}}" data-uuid="{{entry.uuid}}" title="{{entry.statsTooltip}}">
             <img src="{{entry.img}}" />
             <div class="wizard-card-name">{{entry.name}}</div>
-            <div class="wizard-card-meta">{{entry.priceLabel}}{{#if entry.qty}} · {{entry.qty}} st{{/if}}</div>
-            <div class="wizard-skill-buy">
-              <button type="button" data-action="sellEquipment" data-uuid="{{entry.uuid}}" {{#unless entry.canSell}}disabled{{/unless}}>−</button>
-              <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>Köp</button>
-            </div>
+            {{#if entry.isQuantityPurchase}}
+              <div class="wizard-card-meta">{{entry.priceLabel}}{{#if entry.qty}} · {{entry.totalSm}} sm totalt{{/if}}</div>
+              <div class="wizard-skill-buy wizard-quantity-buy">
+                <input type="number" min="0" max="{{entry.maxQty}}" class="wizard-quantity-input"
+                  data-uuid="{{entry.uuid}}" data-max="{{entry.maxQty}}" value="{{entry.qty}}" />
+                <span class="wizard-quantity-unit">{{entry.unitLabel}}</span>
+              </div>
+            {{else if entry.purchasable}}
+              <div class="wizard-card-meta">{{entry.priceLabel}}{{#if entry.qty}} · {{entry.qty}} st{{/if}}</div>
+              <div class="wizard-skill-buy">
+                <button type="button" data-action="sellEquipment" data-uuid="{{entry.uuid}}" {{#unless entry.canSell}}disabled{{/unless}}>−</button>
+                <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>Köp</button>
+              </div>
+            {{else}}
+              <div class="wizard-card-meta">{{entry.priceLabel}}</div>
+              <div class="wizard-skill-buy">
+                <span class="wizard-reference-badge" title="Prissätter ett annat föremål — inte köpbart här.">Referens</span>
+              </div>
+            {{/if}}
           </div>
         {{/each}}
       </div>
@@ -584,10 +793,8 @@
       <tr><td>Startkapital</td><td>{{#if startCapital.finalSm}}{{startCapital.baseSm}} sm × {{startCapital.capitalMultiplier}} = {{startCapital.finalSm}} sm{{else}}—{{/if}}</td></tr>
       <tr><td>Ålder</td><td>{{state.ageCategory}}</td></tr>
       <tr><td>EP</td><td>{{ep.spent}} spenderat av {{ep.max}}{{#if ep.maxStartFv}} (max FV {{ep.maxStartFv}}){{/if}} — {{ep.remaining}} kvar</td></tr>
-      <tr><td>Färdigheter</td><td>{{skillPreview.total}} st ({{skillPreview.primary.length}} primära + {{skillPreview.professionSkills.length}} yrkesfärdigheter)</td></tr>
       <tr><td>Särskilda förmågor</td><td>{{#if specialAbilityNames}}{{specialAbilityNames}}{{else}}—{{/if}}</td></tr>
       <tr><td>Livsmål</td><td>{{#if finalLifeGoal}}{{finalLifeGoal}}{{else}}—{{/if}}</td></tr>
-      <tr><td>Utrustning</td><td>{{equipmentResult.spent}} sm spenderat av {{equipmentResult.budget}} — {{equipmentResult.remaining}} kvar</td></tr>
     </table>
     <table class="wizard-summary">
       {{#each attributes as |labelKey key|}}
@@ -597,15 +804,58 @@
         </tr>
       {{/each}}
     </table>
-    <table class="wizard-summary">
-      <tr><td>BP — start ({{selectedNivaOption.label}})</td><td>{{bp.start}}</td></tr>
-      <tr><td>BP — spenderat på grundegenskaper</td><td>{{state.bp.spentAttribut}}</td></tr>
-      <tr><td>BP — spenderat på ras</td><td>{{state.bp.spentRas}}</td></tr>
-      <tr><td>BP — spenderat på svärdshand</td><td>{{state.bp.spentSvardshand}}</td></tr>
-      <tr><td>BP — spenderat på socialt stånd</td><td>{{socialStanding.bpSpent}}</td></tr>
-      <tr><td>BP — spenderat på startkapital</td><td>{{startCapital.bpSpent}}</td></tr>
-      <tr><td>BP — kvar</td><td>{{bp.remaining}}</td></tr>
+
+    {{!-- Johan 2026-08-08: granskningssteget visade bara ANTAL/summor (BP-ledger,
+      "12 st färdigheter", "340 sm spenderat") — inget en spelare faktiskt kan
+      läsa och känna igen sin rollperson i. Samma "namn + FV"-tabellstil som
+      själva färdighetssteget (se showFardigheter ovan) och samma korttyp som
+      utrustningssteget, så det ser ut som en riktig sammanfattning av VAD man
+      fått, inte en bokföringspost. --}}
+    <h4>Färdigheter ({{skillPreview.total}})</h4>
+    <table class="wizard-summary wizard-skill-table">
+      {{#each skillPreview.primary as |skill|}}
+        <tr><td>{{skill.name}}</td><td>{{skill.attribute}}</td><td>FV {{skill.fv}}</td></tr>
+      {{/each}}
+      {{#each skillPreview.professionSkills as |skill|}}
+        <tr><td>{{skill.name}}</td><td>{{skill.attribute}}</td><td>FV {{skill.fv}}</td></tr>
+      {{/each}}
     </table>
+
+    <h4>Utrustning <span class="wizard-group-count">{{equipmentResult.spent}} / {{equipmentResult.budget}} sm</span></h4>
+    {{#if equipmentResult.groups}}
+      <div class="wizard-card-grid wizard-equipment-grid">
+        {{#each equipmentResult.groups as |group|}}
+          {{#each group.items as |entry|}}
+            {{#if entry.qty}}
+              <div class="wizard-card wizard-equipment-card">
+                <img src="{{entry.img}}" />
+                <div class="wizard-card-name">{{entry.name}}</div>
+                <div class="wizard-card-meta">
+                  {{entry.priceLabel}} · {{entry.qty}} {{#if entry.isQuantityPurchase}}{{entry.unitLabel}}{{else}}st{{/if}}
+                </div>
+              </div>
+            {{/if}}
+          {{/each}}
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="hint">Ingen utrustning köpt än.</p>
+    {{/if}}
+
+    <details class="wizard-group-reference">
+      <summary>BP-ledger (referens)</summary>
+      <table class="wizard-summary">
+        <tr><td>BP — start ({{selectedNivaOption.label}})</td><td>{{bp.start}}</td></tr>
+        <tr><td>BP — spenderat på grundegenskaper</td><td>{{state.bp.spentAttribut}}</td></tr>
+        <tr><td>BP — spenderat på ras</td><td>{{state.bp.spentRas}}</td></tr>
+        <tr><td>BP — spenderat på svärdshand</td><td>{{state.bp.spentSvardshand}}</td></tr>
+        <tr><td>BP — spenderat på socialt stånd</td><td>{{socialStanding.bpSpent}}</td></tr>
+        <tr><td>BP — spenderat på startkapital</td><td>{{startCapital.bpSpent}}</td></tr>
+        <tr><td>BP — kvar</td><td>{{bp.remaining}}</td></tr>
+        <tr><td>EP</td><td>{{ep.spent}} spenderat av {{ep.max}}{{#if ep.maxStartFv}} (max FV {{ep.maxStartFv}}){{/if}} — {{ep.remaining}} kvar</td></tr>
+      </table>
+    </details>
+
     <p class="hint">Efter att rollpersonen skapats: lägg till färdigheter och utrustning direkt på arket (dra från kompendier eller "Ny färdighet"-knappen).</p>
   </section>
   {{/if}}

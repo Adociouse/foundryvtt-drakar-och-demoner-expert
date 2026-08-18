@@ -1,4 +1,5 @@
 import { sourceField } from "./fields-source.mjs";
+import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -21,6 +22,8 @@ const fields = foundry.data.fields;
 export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       category: new fields.StringField({
         required: true,
         initial: "diverse",
@@ -58,6 +61,14 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
       skillModifiers: new fields.ArrayField(new fields.SchemaField({
         skillKey: new fields.StringField({ required: true, initial: "" }),
         value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+      })),
+      // HP-/PSY-återhämtningsmodifierare medan buren (t.ex. en meditationsstav,
+      // +50% PSY-återhämtning) — samma equip-/activationSeconds-grind som
+      // skillModifiers ovan. Se docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R10.
+      recoveryModifiers: new fields.ArrayField(new fields.SchemaField({
+        resource: new fields.StringField({ required: true, initial: "hp", choices: ["hp", "psy"] }),
+        operation: new fields.StringField({ required: true, initial: "multiply", choices: ["add", "multiply"] }),
+        value: new fields.NumberField({ required: true, initial: 1 })
       })),
       // Antal aktiveringar kvar innan föremålet är förbrukat/uttjänt. `null` =
       // obegränsat (normalfallet för allt utom testade laddningsföremål).
@@ -107,5 +118,11 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
     this.priceDisplay = this.priceNote
       ? this.priceNote
       : `${this.price} ${this.priceUnit}`;
+  }
+
+  /** Se scripts/helpers/schema-migrations.mjs. Inga utrustning-specifika grenar än. */
+  static migrateData(source) {
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
   }
 }

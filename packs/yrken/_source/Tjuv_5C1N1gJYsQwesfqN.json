@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "SMI 16",
-    "professionAbility": "<p>Spendera 1 PSY = +1 CL på valfri färdighet, max +3 (3 PSY). Max 2 gånger per sovperiod (8 tim, alver 4 tim).</p>",
     "skillList": "<p>Max 2 vapenfärdigheter, språk, Administration, Akrobatik, Buktala, Dra vapen, Dolk, Drogkunskap, Förfalskning, Geografi, Giftkunskap, Gyckelkonster, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Simma, Skådespeleri, Spela instrument, Stavhopp, Teckenspråk, Trästav, Undre världen, Änterhake.</p>",
     "description": "<p><em>Tjuvar och Lönnmördare anger ett TILLÄGG till grundreglernas lista (\"Se Drakar och Demoners regelböcker, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p>",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv-man.png",
@@ -285,7 +284,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Tjuvens grundförmåga",
+        "description": "<p>Spendera 1 PSY = +1 CL på valfri färdighet, max +3 (3 PSY). Max 2 gånger per sovperiod (8 tim, alver 4 tim).</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "5C1N1gJYsQwesfqN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/tjuv.png",

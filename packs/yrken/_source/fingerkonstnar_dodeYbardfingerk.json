@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 12, KAR 14",
     "baseProfession": "bard",
-    "professionAbility": "<p><strong>Bardens grundförmåga (sång/spel: KAR+5 för åhörare, +5 CL socialt i 1 timme)</strong> plus:</p><p>Kan använda en begränsad mängd minimagi.</p><p><em>Källa: T&L s.8</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -202,7 +201,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Minimagi",
+        "description": "<p>Kan använda en begränsad mängd minimagi.</p><p><em>Källa: T&L s.8</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYbardfingerk",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fingerkonstnar-man.png",

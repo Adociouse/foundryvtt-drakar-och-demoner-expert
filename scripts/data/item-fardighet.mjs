@@ -1,4 +1,5 @@
 import { sourceField } from "./fields-source.mjs";
+import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -28,6 +29,9 @@ const fields = foundry.data.fields;
 export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs för
+      // hela migrationsramverket och SCHEMA_LOG.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       attribute: new fields.StringField({
         required: true,
         initial: "smi",
@@ -44,6 +48,25 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
       // EP-köp) ska gå på `skillKey`. Tomt på äldre färdigheter skapade före
       // 2026-07-27 — då härleds nyckeln ur namnet som fallback.
       skillKey: new fields.StringField({ required: false, initial: "" }),
+      // Vapengrupp (RP s.60, DODE.weaponGroups i config.mjs) — bara satt för
+      // färdigheter som RÅKAR vara ett namngivet vapen. Tomt fält = ingen
+      // gruppspilloverbonus (#computeWeaponGroupBonus i actor-character.mjs).
+      // Satt av guidens vapenfärdighetsväljare vid igenkänt namn, annars av
+      // spelaren/SL manuellt på itemsheeten.
+      weaponGroup: new fields.StringField({ required: false, initial: "" }),
+      // Två vapen-kombination (RP s.59) — bara satt när DENNA färdighet
+      // representerar en specifik tränad vapenkombination, t.ex.
+      // "Två vapen (Kortsvärd+Dolk)". Varje kombination är sin EGEN färdighet
+      // (RP: "Färdigheten måste utvecklas individuellt för varje kombination
+      // av vapen") — en aktör kan alltså ha flera sådana items. Nycklarna
+      // pekar på de två färdigheternas egna skillKey, inte på vapenitems —
+      // se DESIGN_DECISIONS.md-planfilens Del 2-resonemang om varför
+      // handfördelning INTE lagras här (ett rent stridstidskonern, hör
+      // hemma i den ännu obyggda handlingsekonomi-lagern, §9).
+      twoWeaponCombo: new fields.SchemaField({
+        primaryWeaponKey: new fields.StringField({ required: false, initial: "" }),
+        offWeaponKey: new fields.StringField({ required: false, initial: "" })
+      }, { required: false }),
       // EP-pott intjänad i spel — REG s.45-46. ⚠ EP från äventyr är BUNDET till
       // den färdighet som tjänade in det ("noteras ett streck vid färdigheten"),
       // till skillnad från SL:s bonuspoäng som är fria (actor.system.ep.bonus).
@@ -92,5 +115,11 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
     this.ep.available = Math.max(0, this.ep.earned - this.ep.spent);
     this.total = this.fv + this.bonus;
     this.bonusDisplay = this.bonus > 0 ? `+${this.bonus}` : `${this.bonus}`;
+  }
+
+  /** Se scripts/helpers/schema-migrations.mjs. Inga fardighet-specifika grenar än. */
+  static migrateData(source) {
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
   }
 }

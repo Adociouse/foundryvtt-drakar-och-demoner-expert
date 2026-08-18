@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 12, KAR 14",
     "baseProfession": "bard",
-    "professionAbility": "<p><strong>Bardens grundförmåga (sång/spel: KAR+5 för åhörare, +5 CL socialt i 1 timme)</strong> plus:</p><p>+5 CL i <strong>en</strong> av Bluffa, Köpslå eller Övertala, max <strong>2 gånger per sovperiod</strong>.</p><p><em>Källa: T&L s.7</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -232,7 +231,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Social manipulation",
+        "description": "<p>+5 CL i <strong>en</strong> av Bluffa, Köpslå eller Övertala, max <strong>2 gånger per sovperiod</strong>.</p><p><em>Källa: T&L s.7</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYbardbedraga",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/bedragare-man.png",

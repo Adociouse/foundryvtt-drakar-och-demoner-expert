@@ -4,7 +4,6 @@
   "system": {
     "requirements": "STY 14, SMI 16",
     "baseProfession": "tjuv",
-    "professionAbility": "<p><strong>Tjuvens grundförmåga (1 PSY = +1 CL, max +3, 2 ggr per sovperiod)</strong> plus:</p><p>Har även <strong>krigarens yrkesförmåga</strong> (+5 på initiativ).</p><p><em>Källa: T&L s.15</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -214,7 +213,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Krigarens yrkesförmåga",
+        "description": "<p>Har även <strong>krigarens yrkesförmåga</strong> (+5 på initiativ).</p><p><em>Källa: T&L s.15</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYtjuvhantlan",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/hantlangare-man.png",

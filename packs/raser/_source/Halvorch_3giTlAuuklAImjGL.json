@@ -16,7 +16,16 @@
       "max": 18,
       "normal": 13
     },
-    "automaticAbilities": "<p>+4 FV i Slagsmål. Mörkersyn. Motbjudande utseende (redan reflekterat i KAR −3). Kan lära Benmagi under vissa villkor (Svartfolk-boken).</p>",
+    "automaticAbilities": [
+      {
+        "name": "Slagsmålsvana",
+        "description": "<p>+4 FV i Slagsmål.</p>",
+        "effect": { "type": "skillBonus", "skills": ["slagsmal"], "value": 4 }
+      },
+      { "name": "Mörkersyn", "description": "<p>Mörkersyn.</p>", "effect": null },
+      { "name": "Motbjudande utseende", "description": "<p>Motbjudande utseende (redan reflekterat i egenskapsmodifikationerna, KAR −3).</p>", "effect": null },
+      { "name": "Benmagi", "description": "<p>Kan lära Benmagi under vissa villkor (Svartfolk-boken).</p>", "effect": null }
+    ],
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvorch-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvorch-kvinna.png",

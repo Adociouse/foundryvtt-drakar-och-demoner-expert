@@ -20,6 +20,7 @@ import { clearEpTicks } from "./ep.mjs";
 
 export const DAY = 86400;
 export const WEEK = 604800;
+export const HOUR = 3600;
 
 /** Tidsslag. `strid` hanteras av rundhooken, inte harifran. */
 export const TIME_KINDS = {
@@ -27,6 +28,16 @@ export const TIME_KINDS = {
   resa: { label: "Resa", healDivisor: 2, buildsStreak: false },
   aventyr: { label: "Äventyr", healDivisor: 2, buildsStreak: false }
 };
+
+/**
+ * PSY-atervinning — **RP 22.6**: 1 PSY/timme vid fullstandig vila, 1 PSY/3
+ * timmar vid kroppslig aktivitet. EGEN tabell, inte TIME_KINDS.healDivisor —
+ * annan tidsenhet (timmar, inte veckor) OCH andra kvoter (resa/aventyr delar
+ * samma "kroppslig aktivitet"-takt, HP-tabellen har separata skal). Se
+ * docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R13 for varfor de inte far
+ * dela tabell.
+ */
+export const PSY_RECOVERY_SECONDS = { vila: HOUR, resa: 3 * HOUR, aventyr: 3 * HOUR };
 
 /**
  * Naturlig lakning — **SLB s.20**: *"en (1) forlorad KP per vecka i alla
@@ -38,11 +49,18 @@ export const TIME_KINDS = {
  * ⚠ **Nar alla kroppsdelar ar hela aterstalls totala KP automatiskt** till max.
  * Man laker alltsa inte de tva spparen var for sig hela vagen.
  * ⚠ **Infekterad kroppsdel laker ingenting** (SLB s.20) — inte implementerat an,
- * se backlogpost 56.
+ * se backlogpost 56 / AATERHAMTNING_ANVANDNINGSFALL.md UC-R6 (den blockeringen
+ * maste ga FORE recoveryModifierTotals nedan, inte multipliceras med den).
+ *
+ * ⚠ **recoveryModifierTotals.hp** (actor-character.mjs) lagger till Gott
+ * lakekott/GM-effekter/scen-effekter OVANPA `healDivisor` — multiplicerar
+ * INTE bort resa/aventyr-halveringen, komponerar med den (UC-R7).
  */
 export async function applyHealing(actor, seconds, kind) {
   const cfg = TIME_KINDS[kind] ?? TIME_KINDS.aventyr;
-  const kp = Math.floor(seconds / (WEEK * cfg.healDivisor));
+  const recovery = actor.system.recoveryModifierTotals?.hp ?? { add: 0, multiply: 1 };
+  const rawKp = (seconds / (WEEK * cfg.healDivisor)) * recovery.multiply + recovery.add;
+  const kp = Math.floor(rawKp);
   if (kp <= 0) return { healed: 0, restored: false };
 
   const hp = actor.system.hp ?? {};
@@ -61,6 +79,27 @@ export async function applyHealing(actor, seconds, kind) {
 
   if (Object.keys(update).length) await actor.update(update);
   return { healed: kp, restored: allWhole && Object.keys(locs).length > 0 };
+}
+
+/**
+ * PSY-atervinning — RP 22.6, se PSY_RECOVERY_SECONDS ovan. Till skillnad fran
+ * applyHealing finns ingen kroppsdelsuppdelning eller "allt helt"-logik att
+ * ta hansyn till — PSY ar en enda pool. `recoveryModifierTotals.psy` samma
+ * add/multiply-komposition som HP-sidan.
+ */
+export async function applyPsyRecovery(actor, seconds, kind) {
+  const secondsPerPoint = PSY_RECOVERY_SECONDS[kind] ?? PSY_RECOVERY_SECONDS.aventyr;
+  const recovery = actor.system.recoveryModifierTotals?.psy ?? { add: 0, multiply: 1 };
+  const rawPoints = (seconds / secondsPerPoint) * recovery.multiply + recovery.add;
+  const points = Math.floor(rawPoints);
+  if (points <= 0) return { recovered: 0 };
+
+  const psy = actor.system.resources?.psy ?? {};
+  const before = psy.value ?? 0;
+  const after = Math.min(psy.max ?? 0, before + points);
+  if (after === before) return { recovered: 0 };
+  await actor.update({ "system.resources.psy.value": after });
+  return { recovered: after - before };
 }
 
 /**
@@ -92,7 +131,11 @@ export async function advanceTime({ seconds, kind = "aventyr", actors = [] }) {
     // Sovperiod intraffar i alla slag utom strid.
     const cleared = await clearEpTicks(actor);
     const heal = await applyHealing(actor, seconds, kind);
-    report.push({ name: actor.name, streak, unlocked, cleared, ...heal });
+    const psy = await applyPsyRecovery(actor, seconds, kind);
+    // Periodiska effekter (gift m.fl.) tickar annars bara i strid — se
+    // DODE.applyPeriodicTicksForElapsedTime, UC-R20.
+    const periodicTicks = await CONFIG.DODE.applyPeriodicTicksForElapsedTime(actor, seconds);
+    report.push({ name: actor.name, streak, unlocked, cleared, ...heal, psyRecovered: psy.recovered, periodicTicks });
   }
   return { seconds, days, kind: cfg.label, report };
 }

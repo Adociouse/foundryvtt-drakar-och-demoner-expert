@@ -16,7 +16,18 @@
       "max": 6,
       "normal": 5
     },
-    "automaticAbilities": "<p>+4 FV i Gömma sig. +1T3 BC i Provsmaka. Svåra att se när de vill gömma sig.</p>",
+    "automaticAbilities": [
+      {
+        "name": "Skickliga på att gömma sig",
+        "description": "<p>+4 FV i Gömma sig. Svåra att se när de vill gömma sig.</p>",
+        "effect": { "type": "skillBonus", "skills": ["gomma-sig"], "value": 4 }
+      },
+      {
+        "name": "Provsmakartalang",
+        "description": "<p>+1T3 BC i Provsmaka.</p>",
+        "effect": null
+      }
+    ],
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvlangdsman-kvinna.png",

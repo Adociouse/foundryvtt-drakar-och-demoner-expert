@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 16, INT 16",
     "baseProfession": "tjuv",
-    "professionAbility": "<p><strong>Tjuvens grundförmåga (1 PSY = +1 CL, max +3, 2 ggr per sovperiod)</strong> plus:</p><p>+1 CL per spenderad PSY (max +3) i Hantera fällor, Låsdyrkning, Finsmide, Finna dolda ting och Knopar.</p><p><em>Källa: T&L s.14</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -196,7 +195,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Fällsinne",
+        "description": "<p>+1 CL per spenderad PSY (max +3) i Hantera fällor, Låsdyrkning, Finsmide, Finna dolda ting och Knopar.</p><p><em>Källa: T&L s.14</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYtjuvgillrar",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/gillrare-man.png",

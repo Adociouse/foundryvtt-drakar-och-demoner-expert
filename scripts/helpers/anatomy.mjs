@@ -129,6 +129,31 @@ export async function applyLocationDamage(actor, locationKey, damage, { intent =
 }
 
 /**
+ * GM-genväg (GM-effektfönstrets person-flik) — sätter ett träffområdes KP
+ * direkt till "obrukbar"-tröskeln, för narrativa fall utan ett riktigt slag
+ * bakom sig (t.ex. en SLP som stympar en spelares arm för berättelsens skull).
+ * Återanvänder `ensureHitLocations`/`locationEffect` exakt som ett vanligt
+ * slag skulle göra — ⚠ INTE en parallell modell, se
+ * docs/dev/GM_EFFEKTFONSTER_ANALYS.md om varför fysisk skada aldrig ska få en
+ * andra sanningskälla.
+ *
+ * @param {Actor} actor
+ * @param {string} locationKey Nyckel ur DODE.hitLocations för aktörens bodyPlan.
+ * @returns {Promise<{locationState: object, effect: object}>}
+ */
+export async function gmDisableLocation(actor, locationKey) {
+  const locations = await ensureHitLocations(actor);
+  if (!locations?.[locationKey]) {
+    throw new Error(`gmDisableLocation: okänt träffområde "${locationKey}" för ${actor.name}.`);
+  }
+  const updated = foundry.utils.deepClone(actor.system.hitLocations);
+  updated[locationKey].value = 0;
+  await actor.update({ "system.hitLocations": updated });
+  const effect = locationEffect(locationKey, updated[locationKey], 0);
+  return { locationState: updated[locationKey], effect };
+}
+
+/**
  * Avstånd mellan två tokens — **Foundrys egen mätning**, inte egen geometri.
  *
  * ⚠ Johan 2026-07-29: *"But foundry has distance function, right?"* Ja, och den

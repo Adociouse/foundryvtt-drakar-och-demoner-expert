@@ -15,7 +15,9 @@ export default class DoDETrainingApp extends DoDETrainingBase {
   };
 
   static PARTS = {
-    body: { template: "systems/drakar-och-demoner-expert/templates/apps/training.hbs" }
+    // Se character-wizard.mjs PARTS för varför `scrollable` behövs — samma
+    // scroll-till-toppen-vid-varje-klick-bugg gäller här (Johan 2026-08-08).
+    body: { template: "systems/drakar-och-demoner-expert/templates/apps/training.hbs", scrollable: [".dode-training-body"] }
   };
 
   get title() {
@@ -32,9 +34,13 @@ export default class DoDETrainingApp extends DoDETrainingBase {
     const cappedOut = cap !== null && fv >= cap;
     const attrLabel = item.system.attribute.toUpperCase();
     const attrValue = this.actor.system.attributes?.[item.system.attribute]?.total ?? 0;
-    // Lättlärd (backlogpost 36) — sänker sekundär grundkostnad 5→4 för denna
-    // aktör. Se CONFIG.DODE.skillCostOverrideFor.
-    const baseOverride = CONFIG.DODE.skillCostOverrideFor(this.actor, item.system.costTier);
+    // Katalogens EGEN grundkostnad (Två vapen=4, en vapenteknik=1-3, RP s.30/
+    // KH s.38-39) väger tyngre än den platta kategori-basen — se
+    // CONFIG.DODE.secondarySkillBaseOverrideFor. Faller tillbaka till
+    // Lättlärd-effekten (backlogpost 36, CONFIG.DODE.skillCostOverrideFor) för
+    // färdigheter utan egen katalogpost.
+    const baseOverride = CONFIG.DODE.secondarySkillBaseOverrideFor(item.system.skillKey, this.actor)
+      ?? CONFIG.DODE.skillCostOverrideFor(this.actor, item.system.costTier);
 
     return {
       ...this.buildRow({

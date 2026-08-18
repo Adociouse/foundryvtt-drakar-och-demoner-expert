@@ -1,4 +1,5 @@
 import { sourceField } from "./fields-source.mjs";
+import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -10,6 +11,8 @@ const fields = foundry.data.fields;
 export default class DoDERustningData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       slot: new fields.StringField({ required: true, initial: "kropp", choices: ["kropp", "huvud", "skold"] }),
       // Utrustad? Styr om föremålets ActiveEffects (transfer:true) faktiskt
       // appliceras på aktören — DoDeActiveEffect.apply() släcker effekten när
@@ -37,5 +40,11 @@ export default class DoDERustningData extends foundry.abstract.TypeDataModel {
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
     };
+  }
+
+  /** Se scripts/helpers/schema-migrations.mjs. Inga rustning-specifika grenar än. */
+  static migrateData(source) {
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
   }
 }

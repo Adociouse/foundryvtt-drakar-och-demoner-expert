@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "INT 16",
-    "professionAbility": "<p>−5 på alla slag på Skräcktabellen.</p>",
     "skillList": "<p>Flera språk (tala/läsa/skriva), Administration, Alkemi, Astrologi, Dolk, Drogkunskap, Förfalskning, Geografi, Geologi, Giftkunskap, Hasardspel, Heraldik, Historia, Kulturkännedom, Kunskap om demoner/magi/odöda, Räkning, Schack & brädspel, Simma, Språkkunskap, Trästav, Zoologi, Örtkunskap.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lard-man-man.png",
@@ -171,7 +170,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Orädd",
+        "description": "<p>−5 på alla slag på Skräcktabellen.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "BmOBJ3ZtVKtI4Zue",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/lard-man.png",

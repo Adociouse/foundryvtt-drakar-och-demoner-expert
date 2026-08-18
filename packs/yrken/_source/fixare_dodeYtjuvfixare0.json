@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 16, INT 9, KAR 12",
     "baseProfession": "tjuv",
-    "professionAbility": "<p><strong>Tjuvens grundförmåga (1 PSY = +1 CL, max +3, 2 ggr per sovperiod)</strong> plus:</p><p>Spendera 6 PSY för att ordna saker och kontakter via undre världen.</p><p><em>Källa: T&L s.13</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -214,7 +213,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Kontakter i undre världen",
+        "description": "<p>Spendera 6 PSY för att ordna saker och kontakter via undre världen.</p><p><em>Källa: T&L s.13</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYtjuvfixare0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/fixare-man.png",

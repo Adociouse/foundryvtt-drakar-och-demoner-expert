@@ -1,5 +1,6 @@
 import { DODE } from "../helpers/config.mjs";
 import DoDeActiveEffect from "../documents/dode-active-effect.mjs";
+import { SCHEMA_VERSION, migrateCharacterNiva } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -16,6 +17,10 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     });
 
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs för
+      // hela migrationsramverket, SCHEMA_LOG och varför den här mekanismen är
+      // native Foundry (TypeDataModel#migrateData) och inte egenbyggd.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       attributes: new fields.SchemaField({
         sty: attribute(),
         sto: attribute(),
@@ -205,6 +210,18 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     };
   }
 
+  /**
+   * Se scripts/helpers/schema-migrations.mjs SCHEMA_LOG för vad som faktiskt
+   * migreras och varför — den gamla 3-nivå `niva`-skalan (v1) är den enda
+   * grenen just nu. Anropas AUTOMATISKT av Foundry (världsuppstart och
+   * Document#importFromJSON), aldrig manuellt.
+   */
+  static migrateData(source) {
+    migrateCharacterNiva(source);
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
+  }
+
   prepareBaseData() {
     for (const key of Object.keys(DODE.attributes)) {
       this.attributes[key].bonus = 0;
@@ -346,6 +363,9 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // fältets docblock ovan för varför den tidigare `hp.bonusHjaltedad`-
     // kopplingen var fel.
     this.hp.max = Math.round((a.sto.total + a.fys.total) / 2);
+    // Ras-/yrkes-formagor (t.ex. "Extremt smärttålig") — måste ligga FÖRE
+    // value-klampen nedan, annars klampas mot det oaugmenterade maxvärdet.
+    this.hp.max = this.#applyStatModifiers("hp.max", this.hp.max);
     this.hp.value = this.hp.value === null || this.hp.value === undefined
       ? this.hp.max
       : Math.min(this.hp.value, this.hp.max);
@@ -367,6 +387,7 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // PSY-resurs: max = PSY-attributets total. Nuvarande PSY förbrukas vid besvärjelsekastning
     // (MAGI.md) — se DoDEActor#castSpell.
     this.resources.psy.max = a.psy.total;
+    this.resources.psy.max = this.#applyStatModifiers("psy.max", this.resources.psy.max);
     this.resources.psy.value = this.resources.psy.value === null || this.resources.psy.value === undefined
       ? this.resources.psy.max
       : Math.min(this.resources.psy.value, this.resources.psy.max);
@@ -397,6 +418,58 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
    * `activationSeconds` är satt dessutom att `flags.<id>.activeUntil` inte
    * gått ut — se scripts/documents/item.mjs.
    */
+  /**
+   * Delad aktiv-kontroll för item-burna aktörsbonusar — bröts ut ur
+   * #computeSkillModifiers 2026-08-05 när #computeRecoveryModifiers behövde
+   * exakt samma logik (formaga alltid aktiv, utrustning/vapen/rustning kräver
+   * equipped + ej utgången activationSeconds). Ett enda ställe att hålla i
+   * synk i stället för två kopior som kan glida isär.
+   */
+  #isModifierItemActive(item, worldTime) {
+    if (item.type === "formaga") return true;
+    if (!["utrustning", "vapen", "rustning"].includes(item.type)) return false;
+    if (item.system.equipped !== true) return false;
+    const activationSeconds = item.system.activationSeconds;
+    if (activationSeconds) {
+      const activeUntil = item.getFlag(game.system.id, "activeUntil") ?? 0;
+      if (worldTime >= activeUntil) return false;
+    }
+    return true;
+  }
+
+  /**
+   * Summerar `formaga`-buren `statModifiers` (item-formaga.mjs) mot ETT
+   * härlett fält ("hp.max"/"psy.max") — t.ex. "Extremt smärttålig" (KP×1,5).
+   * 2026-08-16, ras-/yrkesramverket (DESIGN_DECISIONS.md backlog 70).
+   *
+   * ⚠ Medveten förenkling, INTE en live getter à la skillModifierTotals:
+   * ras-/yrkes-formagor är alltid aktiva (#isModifierItemActive returnerar
+   * `true` ovillkorat för `type:"formaga"`, ingen `activationSeconds`-gate),
+   * så ingen world-time-utgångsrisk finns ännu för dagens innehåll — den
+   * risken är exakt vad som tvingade skillModifierTotals att bli en getter
+   * 2026-07-31 (Runas Duntofflor, ett TIDSBEGRÄNSAT utrustningsföremål).
+   * En framtida tidsbegränsad källa (besvärjelse/välsignelse) till
+   * statModifiers skulle behöva samma getter-konvertering — hp.max/psy.max
+   * är idag vanliga fält, inte getters, och den konverteringen är en större
+   * ändring än den här omgången kräver. Flaggat, inte byggt.
+   */
+  #applyStatModifiers(stat, base) {
+    const worldTime = game.time?.worldTime ?? 0;
+    let add = 0;
+    let multiply = 1;
+    for (const item of this.parent?.items ?? []) {
+      const mods = item.system?.statModifiers;
+      if (!mods?.length) continue;
+      if (!this.#isModifierItemActive(item, worldTime)) continue;
+      for (const mod of mods) {
+        if (mod.stat !== stat) continue;
+        if (mod.operation === "multiply") multiply *= mod.value;
+        else add += mod.value;
+      }
+    }
+    return Math.round((base + add) * multiply);
+  }
+
   #computeSkillModifiers() {
     const worldTime = game.time?.worldTime ?? 0;
     const totals = {};
@@ -404,24 +477,57 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     for (const item of this.parent?.items ?? []) {
       const mods = item.system?.skillModifiers;
       if (!mods?.length) continue;
-      if (item.type === "formaga") {
-        // alltid aktiv
-      } else if (["utrustning", "vapen", "rustning"].includes(item.type)) {
-        if (item.system.equipped !== true) continue;
-        const activationSeconds = item.system.activationSeconds;
-        if (activationSeconds) {
-          const activeUntil = item.getFlag(game.system.id, "activeUntil") ?? 0;
-          if (worldTime >= activeUntil) continue;
-        }
-      } else {
-        continue;
-      }
+      if (!this.#isModifierItemActive(item, worldTime)) continue;
       for (const mod of mods) {
         if (!mod.skillKey || !mod.value) continue;
         totals[mod.skillKey] = (totals[mod.skillKey] ?? 0) + mod.value;
         (sources[mod.skillKey] ??= []).push({ label: item.name, value: mod.value });
+        // ⚠ Särfall: "tva-vapen" är den GENERISKA nyckeln en formaga-effekt
+        // (t.ex. "God koordinationsförmåga", HH-tabellen i config.mjs) pekar
+        // på, men RP s.59 gör varje tränad vapenkombination till en EGEN
+        // färdighet med sin egen skillKey (item-fardighet.mjs `twoWeaponCombo`)
+        // — inte en enda delad "tva-vapen"-post. Utan detta hade en sådan
+        // förmåga bara matchat en färdighet som råkar heta exakt "tva-vapen",
+        // vilket ingen riktig Två vapen-kombination någonsin gör. Sprid
+        // bonusen till VARJE kombinationsfärdighet aktören faktiskt har.
+        if (mod.skillKey === "tva-vapen") {
+          for (const combo of this.parent?.items ?? []) {
+            if (combo.type !== "fardighet" || !combo.system.twoWeaponCombo?.primaryWeaponKey) continue;
+            const comboKey = combo.system.skillKey;
+            if (!comboKey || comboKey === "tva-vapen") continue;
+            totals[comboKey] = (totals[comboKey] ?? 0) + mod.value;
+            (sources[comboKey] ??= []).push({ label: item.name, value: mod.value });
+          }
+        }
       }
     }
+
+    // GM-effekter (scen/värld, namngivna färdighetsmodifierare) — se
+    // DODE.namedSkillModEffects i config.mjs och
+    // docs/dev/GM_EFFEKTFONSTER_ANALYS.md. Attributnivå-scen-effekter ("Dimön
+    // PSY×2") går INTE via den här vägen — de är riktiga ActiveEffects satta
+    // av game.dode.SceneEffects och flödar redan in via Foundrys egen
+    // prepareDerivedData-kedja. Det här täcker bara NAMNGIVNA färdigheter,
+    // som aldrig kan vara AE-mål (§6).
+    // ⚠ `getActiveTokens(true)` utan `document:true` returnerar RITADE
+    // placeable Token-objekt (`.parent` = canvas-lagret), inte token-
+    // DOKUMENTET (`.parent` = Scenen) — kraschade `scene?.getFlag is not a
+    // function` för VARJE färdighetsslag/arkrendering så fort en riktig
+    // token faktiskt stod synlig på den just då visade scenen. Bara upptäckt
+    // 2026-08-06 via ett riktigt canvas/token-test, se recoveryModifierTotals
+    // ovan och memory.md för samma fynd i den andra av de två platser detta
+    // mönster kopierades till.
+    const scene = this.parent?.getActiveTokens?.(true, true)?.[0]?.parent ?? game.scenes?.active ?? null;
+    const named = CONFIG.DODE.namedSkillModEffects(this.parent, scene);
+    for (const [skillKey, sourceList] of Object.entries(named.sources)) {
+      for (const src of sourceList) {
+        totals[skillKey] = src.operation === "multiply"
+          ? (totals[skillKey] ?? 0) * src.value
+          : (totals[skillKey] ?? 0) + src.value;
+        (sources[skillKey] ??= []).push(src);
+      }
+    }
+
     return { totals, sources };
   }
 
@@ -431,5 +537,111 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
 
   get skillModifierSources() {
     return this.#computeSkillModifiers().sources;
+  }
+
+  /**
+   * HP-/PSY-återhämtningsmodifierare — docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md.
+   * Samma tre källor som skillModifiers (item-burna, via #isModifierItemActive)
+   * PLUS aktör-/scen-/världs-GM-effekter (`DODE.recoveryModEffects`, config.mjs)
+   * — till skillnad från namngivna färdigheter kan en resurs som HP/PSY inte
+   * bara nås via item-scan, en besvärjelse måste kunna ge en TIDSBEGRÄNSAD
+   * personlig bonus som överlever scenbyten (UC-R11), därav aktör-scope.
+   *
+   * Multiplikatorer komponeras SEKVENTIELLT (samma ordning de påträffas i),
+   * precis som Foundrys egna ActiveEffect-pipeline redan gör för MULTIPLY-läge
+   * på ett schemafält — UC-R5:s stapling (2× × 3× = 6×) är alltså inte ett eget
+   * beslut här, det är samma komposition kärnan redan använder överallt annars.
+   *
+   * @returns {{hp: {add:number, multiply:number}, psy: {add:number, multiply:number}}}
+   */
+  #computeRecoveryModifiers() {
+    const worldTime = game.time?.worldTime ?? 0;
+    const totals = { hp: { add: 0, multiply: 1 }, psy: { add: 0, multiply: 1 } };
+    for (const item of this.parent?.items ?? []) {
+      const mods = item.system?.recoveryModifiers;
+      if (!mods?.length) continue;
+      if (!this.#isModifierItemActive(item, worldTime)) continue;
+      for (const mod of mods) {
+        const bucket = totals[mod.resource];
+        if (!bucket) continue;
+        if (mod.operation === "multiply") bucket.multiply *= mod.value;
+        else bucket.add += mod.value;
+      }
+    }
+
+    // GM-effekter (person/scen/värld) — se DODE.recoveryModEffects i config.mjs.
+    // ⚠ `getActiveTokens(true)` utan `document:true` returnerar de RITADE
+    // placeable Token-objekten (PIXI display objects), vars `.parent` är
+    // canvas-lagret de ritas i — INTE token-DOKUMENTET, vars `.parent` är
+    // Scenen. Utan andra argumentet `true` kraschade det här på riktiga,
+    // canvas-placerade tokens (`scene?.getFlag is not a function`) — ett fel
+    // ingen tidigare test hittade eftersom inget tidigare test hade en
+    // rollperson med en RIKTIG token på en riktig scen (se memory.md
+    // 2026-08-06, Johans krav på canvas-baserade tester).
+    const scene = this.parent?.getActiveTokens?.(true, true)?.[0]?.parent ?? game.scenes?.active ?? null;
+    const gm = CONFIG.DODE.recoveryModEffects(this.parent, scene);
+    for (const resource of ["hp", "psy"]) {
+      totals[resource].add += gm[resource].add;
+      totals[resource].multiply *= gm[resource].multiply;
+    }
+    return totals;
+  }
+
+  get recoveryModifierTotals() {
+    return this.#computeRecoveryModifiers();
+  }
+
+  /**
+   * Vapengrupper — RP s.60, se DODE.weaponGroups i config.mjs. Om en aktör har
+   * FV X i ett vapen har hen automatiskt minst floor(X/2) i alla andra vapen
+   * inom samma vapengrupp. En RIKTIG getter (samma skäl som
+   * #computeSkillModifiers ovan — måste räknas om vid varje läsning, inte
+   * cachas i prepareDerivedData) eftersom den beror på andra fardighet-items
+   * `total`+`skillModifierTotals`, som själva kan ändras utan ett
+   * `actor.update()` på DENNA beräkning.
+   *
+   * Bonusen läggs på `total+skillModifierTotals` (inte bara `fv`) så en
+   * utrustningsbonus på källfärdigheten räknas med i vad som sprider sig till
+   * syskonvapnen — annars hade en magisk vapenbonus bara gällt ETT vapen i
+   * stället för att göra bäraren till en bättre allroundare inom gruppen.
+   */
+  #computeWeaponGroupBonus() {
+    const totals = {};
+    const sources = {};
+    const skillMods = this.skillModifierTotals;
+    const weaponSkills = (this.parent?.items ?? []).filter(
+      (i) => i.type === "fardighet" && i.system.weaponGroup
+    );
+    const byGroup = {};
+    for (const item of weaponSkills) {
+      (byGroup[item.system.weaponGroup] ??= []).push(item);
+    }
+    for (const group of Object.values(byGroup)) {
+      if (group.length < 2) continue;
+      let best = null;
+      for (const item of group) {
+        const effective = item.system.total + (skillMods[item.system.skillKey] ?? 0);
+        if (!best || effective > best.effective) best = { item, effective };
+      }
+      const halfBest = Math.floor(best.effective / 2);
+      for (const item of group) {
+        if (item === best.item) continue;
+        const key = item.system.skillKey;
+        const ownEffective = item.system.total + (skillMods[key] ?? 0);
+        const bonus = Math.max(0, halfBest - ownEffective);
+        if (bonus <= 0) continue;
+        totals[key] = (totals[key] ?? 0) + bonus;
+        (sources[key] ??= []).push({ label: `Vapengrupp: ${best.item.name} ${best.effective}`, value: bonus });
+      }
+    }
+    return { totals, sources };
+  }
+
+  get weaponGroupBonusTotals() {
+    return this.#computeWeaponGroupBonus().totals;
+  }
+
+  get weaponGroupBonusSources() {
+    return this.#computeWeaponGroupBonus().sources;
   }
 }

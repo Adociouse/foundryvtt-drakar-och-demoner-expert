@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "INT 12, PSY 12",
-    "professionAbility": "<p>Handpåläggning: läker 1 KP per SR för 1 PSY per KP återhämtat. Kan även fördriva sjukdom och neutralisera gift (PSY/2 mot svårighetsgraden).</p>",
     "skillList": "<p>Språk, Alkemi, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk, Hypnotisera, Kulturkännedom, Kunskap om demoner/magi/odöda, Läkekonst, Massage, Orientering, Simma, Trästav, Zoologi, Örtkunskap, Överlevnad.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare-man.png",
@@ -153,7 +152,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Handpåläggning",
+        "description": "<p>Handpåläggning: läker 1 KP per SR för 1 PSY per KP återhämtat. Kan även fördriva sjukdom och neutralisera gift (PSY/2 mot svårighetsgraden).</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "viLRzlEEhczFdWAt",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/helare.png",

@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "INT 12, PSY 12",
-    "professionAbility": "<p>Meditation: 1 SR per +1 FV, kumulativt upp till max dubbelt ursprungligt FV, gäller ett enda slag inom en minut efter meditationen.</p>",
     "skillList": "<p>Språk, Avväpna, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk, Heraldik, Historia, Knopar, Kulturkännedom, Kunskap om demoner/magi/odöda, Läkekonst, Massage, Målning, Räkning, Simma, Spela instrument, Språkkunskap, Stridskonster, Trästav, Zoologi, Örtkunskap.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk-man.png",
@@ -148,12 +147,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Trästav",
         "attribute": "smi",
         "choiceCount": 0,
@@ -206,6 +199,12 @@
         "attribute": "int",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "source": {
@@ -219,7 +218,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Meditation",
+        "description": "<p>Meditation: 1 SR per +1 FV, kumulativt upp till max dubbelt ursprungligt FV, gäller ett enda slag inom en minut efter meditationen.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "zpl0XjtJRt7Ujtno",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/munk.png",

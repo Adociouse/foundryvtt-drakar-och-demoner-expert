@@ -34,6 +34,7 @@ import DoDETimeWindow from "./apps/time-window.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import { DODE } from "./helpers/config.mjs";
 import { resolveAttack, postAttackCard } from "./rolls/attack.mjs";
+import { resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS } from "./rolls/dual-wield.mjs";
 
 const SYSTEM_ID = "drakar-och-demoner-expert";
 
@@ -44,6 +45,28 @@ Hooks.once("init", () => {
   CONFIG.Actor.documentClass = DoDEActor;
   CONFIG.ActiveEffect.documentClass = DoDeActiveEffect;
   CONFIG.Item.documentClass = DoDeItem;
+
+  // DoDE-specifika villkor i Foundrys egen statuseffekt-lista — se
+  // docs/dev/GM_EFFEKTFONSTER_ANALYS.md. En gång registrerade dyker de upp i
+  // Token HUD automatiskt (rutans egen native toggle-UI, ingen egen byggd här)
+  // och blir riktiga ActiveEffects med `statuses:[id]` när de sätts på.
+  // ⚠ Rent villkorsflaggor (typ 4 i effektanalysen) — ingen egen mekanik
+  // hänger på själva togglen, det är den framtida handlingsekonomin (Part 5)
+  // som frågar `DODE.actorConditions(actor)` innan den tillåter en handling.
+  for (const status of [
+    {
+      id: "armObrukbar",
+      name: "DODE.Status.ArmObrukbar",
+      img: "systems/drakar-och-demoner-expert/assets/tokens/statuseffekter/arm-obrukbar.png"
+    },
+    {
+      id: "handUpptagen",
+      name: "DODE.Status.HandUpptagen",
+      img: "systems/drakar-och-demoner-expert/assets/tokens/statuseffekter/hand-upptagen.png"
+    }
+  ]) {
+    CONFIG.statusEffects.push(status);
+  }
 
   Object.assign(CONFIG.Actor.dataModels, {
     character: DoDECharacterData,
@@ -143,6 +166,46 @@ Hooks.once("init", () => {
   // Varaktighet för "det rena utslaget" — se resolveAttack i rolls/attack.mjs.
   // ⚠ AVSTEG utan bokstöd (Johan 2026-07-29); därför en inställning och inte en
   // konstant, så varje bord kan sätta hur brutal tjuvfantasin får vara.
+  // Världseffekter (GM-effektfönstret, Part 1) — en lista, inte ett enskilt
+  // värde, så `config:false`: redigeras via fönstret (DODE.addWorldEffect/
+  // removeWorldEffect i config.mjs), aldrig som rå Settings-JSON i UI:t.
+  game.settings.register(SYSTEM_ID, "worldEffects", {
+    name: "Världseffekter (GM-effektfönstret)",
+    scope: "world",
+    config: false,
+    type: Array,
+    default: []
+  });
+
+  // Hjältedåd-antal per nivå — HUSREGEL, INTE grundregler.
+  //
+  // ⚠ EJ STANDARDREGLER. HH s.6-7 anger bara "slå 1T6" för hur många gånger en
+  // hjälte-nivå (Slumpens hjälte/Sann hjälte/Gudafödd) får slå på
+  // hjältedådstabellen — samma 1T6 oavsett vilken av de tre nivåerna, se
+  // #onRollHjaltedadCount. Johan (2026-08-07), efter att ha kört
+  // hjältemenyn många gånger: en flat 1T6 gör att en Gudafödd statistiskt
+  // inte alls skiljer sig från en Slumpens hjälte i antal slag, trots att de
+  // ska vara mekaniskt olika sällsynta/mäktiga (HH s.37-39). Han vill ha en
+  // ALTERNATIV formel tillgänglig som en avstängningsbar SL-inställning för
+  // sin egen kampanj — INTE som ny systemstandard för alla bord. Default
+  // `false` (av) medvetet: byter man på den ändrar man en tryckt regel, ett
+  // beslut varje bord ska ta själva, inte något systemet ska välja åt dem.
+  // Formlerna (DODE.hjaltedadCountHouseRule, config.mjs) är Johans egna,
+  // inte bokkällade: Slumpens hjälte 1T2, Sann hjälte 2+1T2, Gudafödd 4+1T2.
+  game.settings.register(SYSTEM_ID, "hjaltedadTieredRollCount", {
+    name: "Hjältedåd: nivåstyrt antal slag (HUSREGEL)",
+    hint: "⚠ INTE en grundregel — HH s.6-7 säger \"slå 1T6\" för alla tre hjälte-nivåer "
+      + "lika. Om påslagen ersätts det gemensamma 1T6 med en formel per nivå (Slumpens "
+      + "hjälte 1T2, Sann hjälte 2+1T2, Gudafödd 4+1T2), så nivåerna faktiskt skiljer sig "
+      + "åt i hur många gånger man får slå. Av som standard — ett medvetet bordsval, inte "
+      + "en systemrekommendation.",
+    scope: "world",
+    config: true,
+    restricted: true,
+    type: Boolean,
+    default: false
+  });
+
   game.settings.register(SYSTEM_ID, "cleanKnockoutDuration", {
     name: "Rent utslag — varaktighet (dygn)",
     hint: "Tärningsformel för hur länge ett perfekt, riktat och bedövande huvudslag "
@@ -180,7 +243,8 @@ Hooks.once("init", () => {
   // Delade delmallar måste laddas innan {{> "path"}} kan användas.
   foundry.applications.handlebars.loadTemplates([
     "systems/drakar-och-demoner-expert/templates/apps/training-header.hbs",
-    "systems/drakar-och-demoner-expert/templates/apps/training-rows.hbs"
+    "systems/drakar-och-demoner-expert/templates/apps/training-rows.hbs",
+    "systems/drakar-och-demoner-expert/templates/apps/wizard-skill-slot.hbs"
   ]);
 
   game.dode = {
@@ -223,7 +287,10 @@ Hooks.once("init", () => {
     resolveAttack, postAttackCard,
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
-    SceneEffects
+    SceneEffects,
+    // Två vapen — RP s.59. GM: game.dode.resolveTwoAttacks({attacker, primaryWeapon,
+    // primarySkill, offWeapon, offSkill, primaryTarget, combo}).
+    resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS
   };
 });
 
@@ -298,6 +365,26 @@ Hooks.on("combatRound", async (combat, updateData, updateOptions) => {
   if (!game.user.isGM) return;
   if ((updateOptions?.direction ?? 1) < 0) return;
   await game.time.advance(CONFIG.DODE.SECONDS_PER_ROUND);
+});
+
+/**
+ * Periodiska effekter (Del 4b, GM-effektfönstret) med `cadence:"round"` —
+ * gift m.fl. Tickar en gång per stridsrunda för varje combatant med en aktiv
+ * periodisk effekt. `"hour"`/`"day"`-kadens ligger utanför stridsklockan och
+ * konsumeras i stället lazy vid läsning (samma mönster som `activationSeconds`
+ * på utrustning) — inte byggt här, se docs/dev/GM_EFFEKTFONSTER_ANALYS.md.
+ */
+Hooks.on("combatRound", async (combat, updateData, updateOptions) => {
+  if (!game.user.isGM) return;
+  if ((updateOptions?.direction ?? 1) < 0) return;
+  for (const combatant of combat.combatants) {
+    const actor = combatant.actor;
+    if (!actor) continue;
+    const roundEffects = CONFIG.DODE.getPeriodicEffects(actor).filter((e) => e.cadence === "round");
+    for (const effect of roundEffects) {
+      await CONFIG.DODE.tickPeriodicEffect(actor, effect);
+    }
+  }
 });
 
 Hooks.on("updateActor", async (actor, changes) => {

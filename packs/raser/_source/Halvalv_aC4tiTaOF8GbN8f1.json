@@ -16,7 +16,15 @@
       "max": 16,
       "normal": 12
     },
-    "automaticAbilities": "<p>+2 FV Upptäcka fara, +2 FV Lyssna. Dubbelt bättre hörsel och syn jämfört med människa. Lever längre än människor (dock inte odödliga). Passar alla yrken.</p>",
+    "automaticAbilities": [
+      {
+        "name": "Skärpta sinnen",
+        "description": "<p>+2 FV Upptäcka fara, +2 FV Lyssna. Dubbelt bättre hörsel och syn jämfört med människa.</p>",
+        "effect": { "type": "skillBonus", "skills": ["upptacka-fara", "lyssna"], "value": 2 }
+      },
+      { "name": "Lång livslängd", "description": "<p>Lever längre än människor (dock inte odödliga).</p>", "effect": null },
+      { "name": "Anpassningsbar", "description": "<p>Passar alla yrken.</p>", "effect": null }
+    ],
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/halvalv-kvinna.png",

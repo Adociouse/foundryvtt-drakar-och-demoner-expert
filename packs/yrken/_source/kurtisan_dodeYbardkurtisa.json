@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 12, KAR 14",
     "baseProfession": "bard",
-    "professionAbility": "<p><strong>Bardens grundförmåga (sång/spel: KAR+5 för åhörare, +5 CL socialt i 1 timme)</strong> plus:</p><p>Spendera 5 PSY + KAR mot offrets PSY → offret förblindas av passion i KAR timmar.</p><p><em>Källa: T&L s.9</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -184,7 +183,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Passionsblick",
+        "description": "<p>Spendera 5 PSY + KAR mot offrets PSY → offret förblindas av passion i KAR timmar.</p><p><em>Källa: T&L s.9</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYbardkurtisa",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/kurtisan-man.png",

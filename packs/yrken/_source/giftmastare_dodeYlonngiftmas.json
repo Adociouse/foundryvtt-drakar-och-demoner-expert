@@ -4,7 +4,6 @@
   "system": {
     "requirements": "SMI 14, PSY 12",
     "baseProfession": "lonnmordare",
-    "professionAbility": "<p><strong>Lönnmördarens grundförmåga (bakhugg ×2/×4)</strong> plus:</p><p>Lyckat INT-slag → skapa gift av tillgängliga medel. Har dessutom giftresistens.</p><p><em>Källa: T&L s.10</em></p>",
     "skillList": "",
     "professionSkills": [
       {
@@ -98,12 +97,6 @@
         "choicePool": ""
       },
       {
-        "name": "Stridskonster",
-        "attribute": "smi",
-        "choiceCount": 0,
-        "choicePool": ""
-      },
-      {
         "name": "Teckenspråk (lönnmördare)",
         "attribute": "int",
         "choiceCount": 0,
@@ -174,6 +167,12 @@
         "attribute": "int",
         "choiceCount": 0,
         "choicePool": ""
+      },
+      {
+        "name": "en valfri Stridskonst",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "stridskonst"
       }
     ],
     "description": "<p>Specialisering av grundyrket Lonnmordare (T&L s.10).</p>",
@@ -190,7 +189,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Giftkonst",
+        "description": "<p>Lyckat INT-slag → skapa gift av tillgängliga medel. Har dessutom giftresistens.</p><p><em>Källa: T&L s.10</em></p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "dodeYlonngiftmas",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/giftmastare-man.png",

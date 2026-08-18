@@ -5,6 +5,9 @@ const { DialogV2 } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 const GEAR_TYPES = ["vapen", "rustning", "utrustning", "besvarjelse"];
+// RP s.30 ordnar de tre EP-kostnadskategorierna primär/yrkesfärdighet/sekundär
+// — samma ordning används här för visningen, se DODE.costTiers (config.mjs).
+const SKILL_TIER_ORDER = ["primar", "yrkesfardighet", "sekundar"];
 
 export default class DoDECharacterSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   static DEFAULT_OPTIONS = {
@@ -20,6 +23,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     actions: {
       rollSkill: DoDECharacterSheet.#onRollSkill,
       addSkill: DoDECharacterSheet.#onAddSkill,
+      addTwoWeaponCombo: DoDECharacterSheet.#onAddTwoWeaponCombo,
       grantSpell: DoDECharacterSheet.#onGrantSpell,
       editSkill: DoDECharacterSheet.#onEditSkill,
       deleteSkill: DoDECharacterSheet.#onDeleteSkill,
@@ -47,7 +51,16 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   };
 
   static PARTS = {
-    form: { template: "systems/drakar-och-demoner-expert/templates/actor/character-sheet.hbs" }
+    // `scrollable: [""]` = roten av delen (`.dode-character-sheet-body`
+    // själv — HandlebarsApplicationMixin sätter `data-application-part="form"`
+    // DIREKT på mallens enda rotelement, ingen extra wrapper) är scrollbar.
+    // Utan det nollställs scroll-positionen vid VARJE re-render (ett
+    // färdighetsslag, en equip-växling, ett förmåge-tillägg — allt som
+    // uppdaterar aktören renderar om arket automatiskt), vilket kastar
+    // användaren till toppen av en lång lista efter varje klick. Johan
+    // 2026-08-08 ("sett i fler menyer"). CSS-motparten (`overflow-y:auto`
+    // flyttad från `.window-content` till just den här roten) i dode.css.
+    form: { template: "systems/drakar-och-demoner-expert/templates/actor/character-sheet.hbs", scrollable: [""] }
   };
 
   get title() {
@@ -67,20 +80,31 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // getters och är svårt att lita på.
     context.skills = this.actor.items
       .filter((i) => i.type === "fardighet")
+      // Johan 2026-08-07: primära färdigheter ska stå före sekundära
+      // erfarenheter (RP s.30/38-62) — annars beror ordningen på oavsiktlig
+      // skapelseordning (t.ex. en sekundär färdighet utdelad före resten av
+      // guiden hann köra klart hade kunnat hamna högst upp).
+      .sort((a, b) => SKILL_TIER_ORDER.indexOf(a.system.costTier) - SKILL_TIER_ORDER.indexOf(b.system.costTier)
+        || a.name.localeCompare(b.name, "sv"))
       .map((i) => {
         // Färdighetsmodifierare (backlogpost 7/36) — live-summerad från
         // formaga-/utrustningsitem, se actor-character.mjs#prepareDerivedData.
         // Separat lager från item.system.total (fv+bonus), aldrig skrivet dit.
         const modifierSources = this.actor.system.skillModifierSources?.[i.system.skillKey] ?? [];
         const modifier = this.actor.system.skillModifierTotals?.[i.system.skillKey] ?? 0;
+        // Vapengrupper (RP s.60) — samma "separat lager" som modifier ovan,
+        // se actor-character.mjs#computeWeaponGroupBonus.
+        const weaponGroupSources = this.actor.system.weaponGroupBonusSources?.[i.system.skillKey] ?? [];
+        const weaponGroupBonus = this.actor.system.weaponGroupBonusTotals?.[i.system.skillKey] ?? 0;
+        const totalModifier = modifier + weaponGroupBonus;
         return {
           id: i.id, name: i.name, system: i.system,
           grantedBy: i.getFlag(game.system.id, "grantedBy"),
           grantedReason: i.getFlag(game.system.id, "grantedReason"),
-          modifier,
-          effectiveTotal: i.system.total + modifier,
-          modifierTooltip: modifierSources.map((s) => `${s.label}: +${s.value}`).join("\n"),
-          hasBonusOrModifier: !!(i.system.bonus || modifier)
+          modifier: totalModifier,
+          effectiveTotal: i.system.total + totalModifier,
+          modifierTooltip: [...modifierSources, ...weaponGroupSources].map((s) => `${s.label}: +${s.value}`).join("\n"),
+          hasBonusOrModifier: !!(i.system.bonus || totalModifier)
         };
       });
     context.gear = this.actor.items
@@ -379,6 +403,25 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       ["yrkesfardighet", "Magiskolor", CONFIG.DODE.magicSchoolSkills.map((m) => ({
         key: m.key, name: game.i18n.localize(m.labelKey), attribute: m.attribute
       }))],
+      // Vapentekniker (KH s.20/38-40) — post-skapande sekundära färdigheter,
+      // en egen optgroup snarare än inblandade i CONFIG.DODE.secondarySkills
+      // så att gruppen syns tydligt som "det man lär sig på en vapenakademi".
+      ["sekundar", "Vapentekniker", CONFIG.DODE.vapentekniker],
+      // Stridskonster (RP s.56-58/KH s.91-93, backlog 71/72) — samma
+      // post-skapande mönster som Vapentekniker ovan. Guidens
+      // `choicePool: "stridskonst"` ger bara EN teknik vid skapandet;
+      // ytterligare tekniker (eller för yrken utan en egen platsallokering)
+      // delas ut här, precis som en vapenakademis tekniker.
+      ["sekundar", "Stridskonster", CONFIG.DODE.stridskonster],
+      // Tala/Läsa-Skriva Främmande Språk (RP s.58) — "Varje språk räknas som
+      // en separat färdighet", samma mönster som Vapenfärdigheter ovan: en
+      // rad per språk i DODE.languages, inte en enda generisk "Språk"-post.
+      ["sekundar", "Tala Främmande Språk", CONFIG.DODE.languages.map((l) => ({
+        key: `tala-frammande-${l.key}`, name: `Tala ${l.name}`, attribute: "int"
+      }))],
+      ["sekundar", "Läsa/Skriva Främmande Språk", CONFIG.DODE.languages.map((l) => ({
+        key: `lasa-skriva-frammande-${l.key}`, name: `Läsa/Skriva ${l.name}`, attribute: "int"
+      }))],
       ["sekundar", game.i18n.localize("DODE.CostTier.Sekundar"), CONFIG.DODE.secondarySkills]
     ];
     let optionsHtml = "";
@@ -429,6 +472,89 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       content: `<div class="dode-chat-card"><h3>Ny färdighet</h3>`
         + `<p><strong>${actor.name}</strong> lärde sig <strong>${name}</strong> (FV ${fv}, ${game.i18n.localize(CONFIG.DODE.costTiers[costTier])}).</p>`
         + (reason ? `<p class="dode-chat-note">${reason}</p>` : "") + `</div>`
+    });
+  }
+
+  /**
+   * SL:s boon för en Två vapen-kombination — RP s.59: "Färdigheten måste
+   * utvecklas individuellt för varje kombination av vapen." Skilt från
+   * #onAddSkill ovan eftersom en kombination refererar TVÅ befintliga
+   * vapenfärdigheter (inte ett enda namn+attribut) och har egna härledda
+   * regler (FV-tak = lägsta av de två, auto-BC = hälften avrundat nedåt av
+   * det lägsta, DODE.twoWeaponCap/twoWeaponAutoBc i config.mjs) — inget av
+   * detta passar den generiska dialogen.
+   *
+   * Bara färdigheter taggade med en vapengrupp (`system.weaponGroup`, se
+   * DODE.weaponGroups) listas som val — det utesluter inte fritt inskrivna
+   * vapenfärdigheter (spelaren kan alltid ange dem manuellt på itemsheeten
+   * efteråt), men förhindrar nonsens-kombinationer som "Två vapen
+   * (Bluffa+Simma)" i den vanliga vägen.
+   */
+  static async #onAddTwoWeaponCombo() {
+    if (!game.user.isGM) {
+      ui.notifications.warn("Bara SL kan dela ut Två vapen-kombinationer — de lärs in genom träning i spel.");
+      return;
+    }
+    const actor = this.actor;
+    const weaponSkills = actor.items.filter((i) => i.type === "fardighet" && i.system.weaponGroup);
+    if (weaponSkills.length < 2) {
+      ui.notifications.warn(`${actor.name} behöver minst två vapenfärdigheter (med vapengrupp satt) innan en Två vapen-kombination går att skapa.`);
+      return;
+    }
+    // Det EFFEKTIVA FV:t (inte bara item.system.total) — en vapenfärdighet som
+    // bara har vapengruppsbonus (t.ex. ett andra svärd man aldrig tränat
+    // direkt, FV 0 + vapengrupp 7) ska räknas med sin verkliga stridsförmåga,
+    // inte det tomma grundvärdet. Se actor-character.mjs
+    // #computeWeaponGroupBonus/#computeSkillModifiers.
+    const effectiveFv = (item) => item.system.total
+      + (actor.system.weaponGroupBonusTotals?.[item.system.skillKey] ?? 0)
+      + (actor.system.skillModifierTotals?.[item.system.skillKey] ?? 0);
+    const options = weaponSkills.map((i) => `<option value="${i.system.skillKey}">${i.name} (FV ${effectiveFv(i)})</option>`).join("");
+    const result = await foundry.applications.api.DialogV2.input({
+      window: { title: `Ny Två vapen-kombination — ${actor.name}` },
+      content: `
+        <p class="hint">RP s.59: FV kan aldrig överstiga den lägsta av de två vapnens FV. BC blir automatiskt
+        hälften (avrundat nedåt) av det lägsta. Tvåhandsvapen kan inte kombineras (Man kan inte använda något
+        vapen med tvåhandsfattning i kombination med ett annat vapen).</p>
+        <div class="form-group"><label>Svärdshand</label><select name="primaryKey">${options}</select></div>
+        <div class="form-group"><label>Sköldhand</label><select name="offKey">${options}</select></div>`
+    });
+    if (!result) return;
+
+    const primary = weaponSkills.find((i) => i.system.skillKey === result.primaryKey);
+    const off = weaponSkills.find((i) => i.system.skillKey === result.offKey);
+    if (!primary || !off || primary === off) {
+      ui.notifications.warn("Välj två OLIKA vapenfärdigheter.");
+      return;
+    }
+
+    const comboName = `Två vapen (${primary.name}+${off.name})`;
+    const comboKey = CONFIG.DODE.skillKey(comboName);
+    if (actor.items.some((i) => i.type === "fardighet" && i.system.skillKey === comboKey)) {
+      ui.notifications.warn(`${actor.name} har redan ${comboName}.`);
+      return;
+    }
+    const primaryAttr = primary.system.attribute;
+    const offAttr = off.system.attribute;
+    // RP s.59: delad grundegenskap om vapnen delar en, annars SMI.
+    const attribute = primaryAttr === offAttr ? primaryAttr : "smi";
+    const primaryFv = effectiveFv(primary);
+    const offFv = effectiveFv(off);
+    const fv = CONFIG.DODE.twoWeaponAutoBc(primaryFv, offFv);
+
+    await actor.createEmbeddedDocuments("Item", [{
+      name: comboName, type: "fardighet",
+      system: {
+        skillKey: comboKey, attribute, costTier: "sekundar", fv,
+        twoWeaponCombo: { primaryWeaponKey: primary.system.skillKey, offWeaponKey: off.system.skillKey }
+      },
+      flags: { [game.system.id]: { grantedBy: game.user.name, grantedReason: "Två vapen-träning" } }
+    }]);
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      content: `<div class="dode-chat-card"><h3>Ny färdighet</h3>`
+        + `<p><strong>${actor.name}</strong> lärde sig <strong>${comboName}</strong> (FV ${fv}, auto-BC).</p>`
+        + `<p class="dode-chat-note">FV-tak: ${CONFIG.DODE.twoWeaponCap(primaryFv, offFv)} (RP s.59)</p></div>`
     });
   }
 

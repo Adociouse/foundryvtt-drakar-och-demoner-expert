@@ -1,0 +1,44 @@
+{
+  "name": "Bola",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "1H",
+    "styGroup": 2,
+    "damage": "Spec (1T4 vid misslyckat FV-slag)",
+    "length": 1,
+    "weight": 1,
+    "baseValue": 0,
+    "weaponType": "latt",
+    "category": "kast",
+    "price": 5,
+    "range": "STY×1 rutor",
+    "hardToParry": false,
+    "description": "<p>Specialvapen (REGLER_STRID.md, Rollpersonen). Vid träff: slå normalt anfallsslag, sedan ett FV-slag. Lyckas FV-slaget: det avsedda händer (snor kring ben = mål faller, kring arm = obrukbar, kring huvud = omtumlad 1T3 SR). Misslyckas FV-slaget: 1T4 skada, inget mer. En snärjd arm/huvud tar 1T3 SR att befria. ⚠ Manuellt SL-upplöst tills vidare, se docs/dev/SPECIALANFALL_SL_GUIDE.md.</p>",
+    "source": {
+      "book": "rollpersonen",
+      "page": "49-62"
+    }
+  },
+  "_id": "5hRt8mYcVn3zLwKq",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/bola.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785963600000,
+    "modifiedTime": 1785963600000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5hRt8mYcVn3zLwKq"
+}

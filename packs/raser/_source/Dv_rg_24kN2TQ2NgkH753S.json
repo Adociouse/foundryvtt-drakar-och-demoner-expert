@@ -16,7 +16,15 @@
       "max": 9,
       "normal": 7
     },
-    "automaticAbilities": "<p>Perfekt mörkersyn. +5 FV i Geologi (räknas som primärfärdighet). Kan normalt inte bära helrustning utan specialtillverkning.</p>",
+    "automaticAbilities": [
+      { "name": "Perfekt mörkersyn", "description": "<p>Perfekt mörkersyn.</p>", "effect": null },
+      {
+        "name": "Geologikunskap",
+        "description": "<p>+5 FV i Geologi (räknas som primärfärdighet).</p>",
+        "effect": { "type": "skillBonus", "skills": ["geologi"], "value": 5, "costTier": "primar" }
+      },
+      { "name": "Rustningsbegränsning", "description": "<p>Kan normalt inte bära helrustning utan specialtillverkning.</p>", "effect": null }
+    ],
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-man.png",
     "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/raser/dvarg-kvinna.png",

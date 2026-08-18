@@ -1,4 +1,5 @@
 import { sourceField } from "./fields-source.mjs";
+import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
 
@@ -9,6 +10,8 @@ const fields = foundry.data.fields;
 export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     return {
+      // Schema-versionsstämpel — se scripts/helpers/schema-migrations.mjs.
+      schemaVersion: new fields.NumberField({ required: false, integer: true, initial: SCHEMA_VERSION }),
       requirements: new fields.StringField({ required: false, initial: "" }),
       // Grundyrke som detta yrke är en specialisering av — tomt för grundyrkena
       // själva. Krigar-/tjuv-/lönnmördar-/bardspecialiseringarna (KH s.4-9,
@@ -27,6 +30,29 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
         blank: true,
         choices: ["", "krigare", "tjuv", "lonnmordare", "bard"]
       }),
+      /**
+       * Yrkesförmågor — strukturerad ersättning för det gamla fria
+       * `professionAbility`-textfältet (2026-08-16, se DESIGN_DECISIONS.md
+       * backlog 70 och wise-herding-lemur.md-planen). Speglar
+       * `DODE.specialAbilitiesTable`s radform (config.mjs): `effect`
+       * återanvänder EXAKT samma typvokabulär som `resolveGrants`
+       * (special-ability-effects.mjs) redan konsumerar för särskilda
+       * förmågor — `null` när ingen av de befintliga effekttyperna passar
+       * (majoriteten av innehållet just nu; se scripts/helpers/
+       * ability-source-resolver.mjs för hur en specialiserings rader slås
+       * ihop med sitt grundyrkes via `baseProfession`).
+       */
+      professionAbilities: new fields.ArrayField(
+        new fields.SchemaField({
+          name: new fields.StringField({ required: false, initial: "" }),
+          description: new fields.HTMLField({ required: false, initial: "" }),
+          effect: new fields.ObjectField({ required: false, nullable: true, initial: null })
+        })
+      ),
+      // ⚠ Deprecated, oläst — kvar en migreringscykel så gammal aktördata
+      // (som fortfarande kan ha detta i _source, innan alla packs är
+      // ompackade) inte kraschar vid laddning. Ta bort när alla packs är
+      // bekräftat ompackade mot professionAbilities ovan.
       professionAbility: new fields.HTMLField({ required: false, initial: "" }),
       skillList: new fields.HTMLField({ required: false, initial: "" }),
       // Strukturerad delmängd av yrkets tillåtna färdigheter — CHARACTERMANCER-
@@ -66,7 +92,32 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
             choices: ["sty", "sto", "fys", "smi", "int", "psy", "kar"]
           }),
           choiceCount: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
-          choicePool: new fields.StringField({ required: false, initial: "", blank: true })
+          choicePool: new fields.StringField({ required: false, initial: "", blank: true }),
+          // Vapenmästarens "(två)"-alternativ (KH s.8-9) — bara satt på den
+          // enda posten det gäller. Wizarden visar en kryssruta som expanderar
+          // just den platsen från 1 till 2 valfria vapenfärdigheter när
+          // ikryssad (choiceCount självt ändras aldrig, se
+          // character-wizard.mjs #slotChoiceCount).
+          dualWieldAlt: new fields.BooleanField({ required: false, initial: false })
+        })
+      ),
+      /**
+       * Automatiska GOLV på en primär- eller namngiven färdighet — t.ex.
+       * Prisjägarens "Har automatiskt minst CL 17 i Upptäcka fara" (KH s.6-7).
+       * Tidigare bara `professionAbility`-prosa, aldrig maskinläst (samma
+       * mönster som backlog 59 redan flaggade för rasers automatiska
+       * förmågor). Ett golv är GRATIS (ingen EP behövs för att nå det, precis
+       * som professionAbility-texten beskriver "automatiskt") — konsumeras i
+       * character-wizard.mjs `#skillPreview`, som tar max(BC, golvet) som
+       * baseFv. Skiljer sig från `grantSecondary`-mönstret i special-ability-
+       * effects.mjs (som SÄTTER ett FV på en färdighet spelaren annars inte
+       * fått ha alls) — det här är bara ett golv UNDER en färdighet spelaren
+       * redan har (primär eller namngiven yrkesfärdighet).
+       */
+      skillFloors: new fields.ArrayField(
+        new fields.SchemaField({
+          key: new fields.StringField({ required: true, initial: "" }),
+          minFv: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 })
         })
       ),
       /**
@@ -106,5 +157,11 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
       imgMan: new fields.StringField({ required: false, initial: "" }),
       imgKvinna: new fields.StringField({ required: false, initial: "" })
     };
+  }
+
+  /** Se scripts/helpers/schema-migrations.mjs. Inga yrke-specifika grenar än. */
+  static migrateData(source) {
+    source.schemaVersion = SCHEMA_VERSION;
+    return super.migrateData(source);
   }
 }

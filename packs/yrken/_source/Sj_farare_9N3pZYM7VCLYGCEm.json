@@ -3,7 +3,6 @@
   "type": "yrke",
   "system": {
     "requirements": "FYS 12, SMI 12",
-    "professionAbility": "<p>+5 på FYS/STO/STY mot alla motståndsslag mot besvärjelser eller naturkrafter som rör elementen.</p>",
     "skillList": "<p>Max 3 vapenfärdigheter, språk, Akrobatik, Dans, Dolk, Geografi, Gycklekonster, Hantverk, Hasardspel, Knopar, Kulturkännedom, Muta, Navigation, Orientering, Schack & brädspel, Simma, Sjökunnighet, Spela instrument, Spå väder, Stavhopp, Trästav, Undre världen, Änterhake.</p>",
     "description": "",
     "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare-man.png",
@@ -165,7 +164,14 @@
       "allowGeneralSpells": true,
       "canLearnAtCreation": true,
       "epShareMax": 0
-    }
+    },
+    "professionAbilities": [
+      {
+        "name": "Elementresistens",
+        "description": "<p>+5 på FYS/STO/STY mot alla motståndsslag mot besvärjelser eller naturkrafter som rör elementen.</p>",
+        "effect": null
+      }
+    ]
   },
   "_id": "9N3pZYM7VCLYGCEm",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/sjofarare.png",
