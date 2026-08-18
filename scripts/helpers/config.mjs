@@ -122,6 +122,31 @@ DODE.toSilver = function (value, unit = "sm") {
 };
 
 /**
+ * Tolkar `system.priceNote` (Magi-regelbokens s.43-48-import, backlog 41) —
+ * poster utan ett rent styckpris fick i stället en fritextnot som "20 sm/g",
+ * "320 gm/dos", "4 per kagge". Johan 2026-08-08: dessa är i grunden köpbara
+ * — "en köpbar/brukbar mängd-entitet" — de saknade bara ett UI för att välja
+ * MÄNGD. Matchar `<tal> [myntslag]/<enhet>` eller `<tal> per <enhet>`.
+ *
+ * Returnerar `null` för notar som INTE är ett mängdpris (t.ex. "×0,5"/"×10"
+ * på ridjursraderna Otämjd/Stridstränad — de är prismultiplikatorer på ett
+ * ANNAT föremåls grundpris, inte en egen köpbar mängd, och ska förbli
+ * "Referens"-märkta i guiden).
+ *
+ * @returns {{amountPerUnit:number, currency:string, unitLabel:string}|null}
+ */
+DODE.parsePriceNote = function (priceNote, fallbackCurrency = "sm") {
+  const match = String(priceNote ?? "").match(/^(\d+(?:[.,]\d+)?)\s*(km|sm|gm)?\s*(?:\/|per)\s*(\S+)$/i);
+  if (!match) return null;
+  const [, amountStr, currency, unitLabel] = match;
+  return {
+    amountPerUnit: Number(amountStr.replace(",", ".")),
+    currency: currency ?? fallbackCurrency,
+    unitLabel
+  };
+};
+
+/**
  * Börsaritmetik räknas i KOPPARMYNT som atom, aldrig i silver som flyttal.
  * Ett köp på 12,5 sm som dras från 3 gm + 2 sm får inte bli 0.30000000000000004
  * silver — heltalskoppar gör varje summa exakt och jämförbar.
@@ -259,25 +284,29 @@ DODE.magicSchoolSkills = Object.keys(DODE.magicSchools).map((school) => ({
 // Rollpersonsnivåer — HH s.37-39 (fyra nivåer: Vanlig / Slumpens hjälte / Sann
 // hjälte / Gudafödd hjälte). BP-pool per nivå (spenderas på ras/förmågor/
 // socialt stånd/startkapital/färdigheter i senare faser — se PLAN_WIZARD_V2.md).
-// Source: HH p.6 — base 125 BP for ALL hero types ("läggs till de 125 man normalt får").
-// Extra BP comes from hjältedåd rolls (see DODE.hjaltedadTable).
-// DESIGN DECISION: fixed 125 for all tiers. To implement the full HH system,
-// use hjältedådstabell rolls instead of fixed tiers.
+// Source: HH s.6 ("Hur du skapar en hjälte", Bakgrundspoäng), ordagrant: "De
+// extra bakgrundspoängen man får här läggs till de 125 man normalt får." —
+// alltså flat 125 för alla fyra nivåer, all skillnad mellan nivåerna kommer
+// från hjältedådstabellens tärningsslag (DODE.hjaltedadTable/hjaltedadCountHouseRule),
+// aldrig ur ett eget grundtal per nivå. Gudafödd (fjärde nivån) är själva
+// projektets egen extrapolering av HH:s tre bok-nivåer (Slumpens/Sanna/
+// Gudafödda hjältar, s.4-5) till en fjärde, mer implementerbar mekanisk
+// skiktning — inte ett fjärde bok-nivå-namn.
 //
-// ⚠ RÄTTELSE 2026-07-27: kommentaren här påstod tidigare att "no per-type BP
-// differentiation exists" — det är FEL. Alver-supplementet s.22 ("Hur du skapar
-// en alv") har en explicit nivåtabell:
-//     Vanlig / Extraordinär / Hjälte
-//     BP                125 / 150 / 200→175
-//     Antal slag för förmågor  1 / 2 / 3
-//     Erfarenhetspoäng  150 / 200 / 250
-//     Max FV från start  15 / 17 / 19
-// Det SOURCEAR de 150/175 som §3 backlogpost 4 hittills flaggat som "unsourced
-// extrapolations" — talen var alltså rätt hela tiden, bara felaktigt attribuerade.
-// Värdena här lämnas AVSIKTLIGT oförändrade tills ett regelbeslut tas: boken
-// kallar dem "regelförslag" specifikt för alvskapande, och att ändra dem skulle
-// retroaktivt flytta budgeten för varje befintlig rollperson. Se backlogpost 4.
-// (DODE.abilityRollsByNiva nedan stämmer redan med bokens 1/2/3.)
+// ⚠ BESLUT (Johan, 2026-08-18, docs/DESIGN_DECISIONS.md backlog 4): Alver-
+// supplementet s.22 ("Hur du skapar en alv") har en EGEN nivåtabell
+// (Vanlig/Extraordinär/Hjälte = 125/150/175 BP, plus egna EP/Max FV-tal utan
+// åldersdimension) som tidigare flaggades som en möjlig konkurrerande källa
+// för de här talen. Boken själv kallar den uttryckligen "regelförslag...
+// specifikt [för] skapandet av en alv" (INTE ett obligatoriskt ersättande
+// system) — Johans beslut: BP och hjältepoäng är SAMMA system för alla raser,
+// inklusive alver. Alver s.22:s tabell är en inspirationskälla, inte en
+// mekanisk override. Ingen kodändring krävdes — denna flata 125-tabell var
+// redan korrekt implementerad, bara odokumenterad som ett medvetet beslut i
+// stället för en öppen fråga. Samma beslut: ålderskategorins EP-skalning
+// (DODE.epBudgetTable) förblir oförändrad för alla raser inkl. alver — ingen
+// separat "längre livslängd ger mer EP"-mekanik läggs till (osourcad, och
+// ålderskategorivalet ger redan samma spak till alla raser).
 DODE.bpByNiva = {
   vanlig: 125,
   "slumpens-hjalte": 125,
@@ -376,6 +405,22 @@ DODE.hjaltedadTable = [
 // synkar sitt EGET fasta antal slots mot DODE.abilityRollsByNiva) aldrig
 // blandar ihop de två och råkar trunkera hjältedåden vid nivåbyte.
 DODE.hjaltedadAbilitySource = "Hjältedåd (HH s.6-7)";
+
+// ⚠ HUSREGEL, INTE HH:s tryckta regel — se `hjaltedadTieredRollCount`-
+// inställningen i dode.mjs för hela motiveringen (Johan, 2026-08-07). HH
+// s.6-7 säger bara "slå 1T6" för hur många gånger man slår på
+// DODE.hjaltedadTable, samma formel oavsett om man är Slumpens hjälte, Sann
+// hjälte eller Gudafödd. Den här tabellen är den ALTERNATIVA, nivåstyrda
+// formeln som `#onRollHjaltedadCount` (character-wizard.mjs) använder i
+// stället för "1d6", men BARA om SL slagit på inställningen — annars
+// används alltid det tryckta 1T6:et. Formlerna är Johans egna påhitt för sin
+// kampanj, inte källbelagda — därför en egen tabell, inte en "rättelse" av
+// hjaltedadTable ovan.
+DODE.hjaltedadCountHouseRule = {
+  "slumpens-hjalte": "1d2",
+  "sann-hjalte": "2+1d2",
+  gudafodd: "4+1d2"
+};
 
 // Antal slag/slots för särskilda förmågor vid rollpersonsskapande — KH s.3,
 // raden "Antal slag för särskilda förmågor" (Vanlig/Extraordinär/Hjälte =
@@ -482,8 +527,18 @@ DODE.specialAbilitiesTable = [
   { range: [70, 70], name: "Extremt orädd", description: "−5 på alla slag på Skräcktabellen" },
   { range: [71, 71], name: "Orubblig vilja", description: "+5 på PSY på alla slag PSY mot PSY på Motståndstabellen" },
   { range: [72, 72], name: "Härdig mot element", description: "+5 på FYS på alla Motståndslag mot eld, köld, vatten, vind, etc." },
-  { range: [73, 73], name: "Gott läkekött", description: "KP-förluster av fysiskt våld eller elementarbesvärjelser läker dubbelt så fort" },
-  { range: [74, 74], name: "God mental kontroll", description: "Återfår PSY-poäng förbrukade av besvärjelser på halva tiden. Ej för icke-magiker (räknas som resultat 73)" },
+  { range: [73, 73], name: "Gott läkekött", description: "KP-förluster av fysiskt våld eller elementarbesvärjelser läker dubbelt så fort",
+    effect: { type: "recoveryModifier", resource: "hp", operation: "multiply", value: 2 } },
+  // ⚠ "Ej för icke-magiker (räknas som resultat 73)" i beskrivningen ovan är
+  // INTE hanterat av effekten här — resolveGrants/applyResolvedAbility
+  // (special-ability-effects.mjs) har ingen aktörsmedveten substitutionslogik
+  // som byter ut en förmåga mot en annan beroende på yrkets magic.access.
+  // En icke-magiker som slår 74 får i dagsläget den här PSY-effekten rakt av
+  // (ofarligt no-op — se AATERHAMTNING_ANVANDNINGSFALL.md UC-R9 — psy.max är 0
+  // för en icke-magiker, så multipliceringen ger fortfarande 0 återvunnet),
+  // snarare än att tyst bli Gott läkekött. Flaggat, inte byggt.
+  { range: [74, 74], name: "God mental kontroll", description: "Återfår PSY-poäng förbrukade av besvärjelser på halva tiden. Ej för icke-magiker (räknas som resultat 73)",
+    effect: { type: "recoveryModifier", resource: "psy", operation: "multiply", value: 2 } },
   { range: [75, 75], name: "Naturlig färdighet med vapen", description: "+5 FV på en valfri vapenfärdighet" },
   { range: [76, 76], name: "Kluven personlighet", description: "Förutom egen yrkesförmåga: välj även yrkesförmågan från valfritt annat yrke" },
   { range: [77, 77], name: "God känsla för yrket", description: "Kostnaden för att lära sig en besvärjelse eller en yrkesfärdighet halveras alltid (avrunda uppåt). Halvera efter multiplikation" },
@@ -554,15 +609,55 @@ DODE.epBudgetTable = {
   gudafodd: { Ung: 250, Mogen: 300, "Medelålders": 350, Gammal: 400 }
 };
 
-// Livsmål — CHARACTERMANCER-WORKFLOW.md, källa "Expert Regler" (21 poster).
+// Livsmål — REG s.12-14 "Bestäm rollpersonens livsmål" (21 poster, namn +
+// ordagrann bokbeskrivning). Namnen kom ursprungligen från CHARACTERMANCER-
+// WORKFLOW.md ("Expert Regler"); beskrivningarna transkriberade direkt ur
+// PDF:en 2026-08-16 (Johan: "livsmål probably need to have a sub table
+// explaining the contents, otherwise its hard to understand") eftersom
+// rå-textextraktet har svår tvåspaltsbleed på just det avsnittet — se kurerad
+// källa docs/extracts/DODE_Regler_LIVSMAL.md (Roll20-projektet).
 // Guiden erbjuder dessa i en dropdown + fritextalternativ ("Annat") — se
 // character-wizard.mjs "livsmal"-steget.
 DODE.lifeGoals = [
-  "Anarkism", "Berömmelse", "Den starkes rätt", "Egoism", "Finess",
-  "Frihet", "Harmoni & Barmhärtighet", "Jämlikhet", "Kärlek",
-  "Konservatism", "Kunskap", "Lag & Ordning", "Makt", "Naturvän",
-  "Ridderlighet", "Rikedom", "Rättvisa–Hämnd", "Skämt", "Stolthet",
-  "Stridsära", "Upptäckarlust"
+  { name: "Anarkism", description: "All form av statsmakt är förkastlig och måste krossas. Staten förtrycker alltid medborgarna." },
+  { name: "Berömmelse", description: "Stora och berömda namn bevaras till eftervärlden. De svaga och betydelselösa glöms snabbt bort." },
+  { name: "Den starkes rätt", description: "De starka och dugliga har rätt, de svaga och odugliga har fel." },
+  { name: "Egoism", description: "Jag är viktigast och bäst, och endast mina intressen spelar någon roll för mig." },
+  { name: "Finess", description: "Alla handlingar ska utföras med stil och finess. Att göra någonting på ett klumpigt eller smaklöst sätt är förkastligt." },
+  { name: "Frihet", description: "Var människa bestämmer över sig själv, och blandar sig inte oombedd i andras affärer." },
+  { name: "Harmoni & Barmhärtighet", description: "Hjälp de svaga och behövande. Sträva efter fred och ordning." },
+  { name: "Jämlikhet", description: "Alla intelligenta varelser har samma värde." },
+  { name: "Kärlek", description: "Sök efter den stora kärleken i livet. När du har funnit honom eller henne, håll fast vid den personen för allt vad du är värd." },
+  { name: "Konservatism", description: "Det som är gammalt och välbeprövat är gott. Nya påfund medför förändringar och instabilitet." },
+  { name: "Kunskap", description: "Den som är vis kan utnyttja sin kunskap till nyttiga saker." },
+  { name: "Lag & Ordning", description: "Lagar och förordningar är gjorda för att efterlevas till punkt och pricka. Den som bryter mot dem hotar samhället." },
+  { name: "Makt", description: "Makt är viktigt, för med dess hjälp kan man förändra omvärlden till att bli sådan som man vill ha den. Godhjärtade mäktiga personer tänker förändra världen på ett sätt som gagnar alla; hårdhjärtade tänker mindre på hur makten drabbar andra." },
+  { name: "Naturvän", description: "Naturen är vår moder och hon måste beskyddas mot missbruk och exploatering." },
+  { name: "Ridderlighet", description: "Det traditionella västerländska riddaridealet (höviskhet, ärlighet, rättvisa, barmhärtighet, sportslighet) utgör det goda samhällets ryggrad." },
+  { name: "Rikedom", description: "Med pengar når man sina mål. Pengarna är det viktigaste redskapet när man försöker göra något." },
+  { name: "Rättvisa–Hämnd", description: "Rättvisa ska eftersträvas enligt principen öga för öga, tand för tand. På detta sätt kan man avskräcka folk från att skada andra." },
+  { name: "Skämt", description: "Livet är ett skämt, så varför inte skratta åt det." },
+  { name: "Stolthet", description: "Låt ingen befläcka din heder och ära på något sätt." },
+  { name: "Stridsära", description: "Sann ära vinner man genom djärvhet i strid." },
+  { name: "Upptäckarlust", description: "Det finns alltid spännande och okända saker som väntar runt hörnet." }
+];
+
+// Hantverk — EJ en sluten katalog (till skillnad från vapen/språk finns ingen
+// uttömmande hantverkslista i grundreglerna, "Hantverkarbakgrund"/sekundär
+// "Hantverk"-poolen är uttryckligen "valfri hantverksfärdighet"). De här är
+// bara EXEMPEL, sourcade av Johan 2026-08-16 ur olika äventyr/världsböcker,
+// för att ge en `<datalist>`-förslagslista i stället för ett tomt fritextfält
+// — spelaren kan alltid skriva något annat, fältet förblir fritext.
+// Smide/Snickeri/Stenslipning/Bokbinderi/Skomakeri: grundreglernas egna
+// exempel på hantverkstyper. Sadelmakare/Gobelängvävare: Kandra (Ereb Altor-
+// världsmaterial). Träsnideri och Gravyr, Magiskt material: Monster och Män
+// (Gothmog), byborna i dalen under Zvuldos magiakademi. Skeppsbyggnad
+// (Fartyg): Ereb Altor — Spelledarboken, dalkernas exportvara på Caddo.
+// Bronsgjutarkonst: Ereb Altor — Kampanjboken, Golwyndakulturen.
+DODE.craftSuggestions = [
+  "Smide", "Snickeri", "Stenslipning", "Bokbinderi", "Skomakeri",
+  "Sadelmakare", "Gobelängvävare", "Träsnideri och Gravyr",
+  "Magiskt material", "Skeppsbyggnad (Fartyg)", "Bronsgjutarkonst"
 ];
 
 // Max FV en färdighet får ha vid rollpersonsskapande — HH, Erfarenhetspoäng-
@@ -602,6 +697,332 @@ DODE.skillKey = function (name) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 };
+
+/**
+ * Vapengrupper — RP s.60 ("VAPENFÄRDIGHETER — Vapengrupper"), cross-referenced
+ * mot SB s.34-35:s fullständiga 52-vapentabell (Spelarboken, Gothmog-scan
+ * 2026-08-04). Varje vapen är en EGEN färdighet (inte gruppen som köps en gång
+ * — se DESIGN_DECISIONS.md backlogpost 44, korrigerad: RP:s egen text säger
+ * uttryckligen "Varje vapen är en separat färdighet", inte "köp gruppen").
+ * Det gruppen ger är i stället automatisk deltäckning: känner man ETT vapen i
+ * en grupp väl får man minst hälften (avrundat nedåt) av det högsta FV:t i
+ * ALLA andra vapen i samma grupp — se #computeWeaponGroupBonus i
+ * actor-character.mjs.
+ *
+ * ⚠ Ett fåtal medlemmar är inte uttryckligen namngivna av RP:s egen (icke
+ * uttömmande) "urval"-lista utan placerade efter vapnets form/STY-krav i
+ * SB:s tabell — flaggade i docs/DESIGN_DECISIONS.md:s "wise-herding-lemur"
+ * planfil (mastertabellen), inte gissade tyst här. Korpnäbb (Enhands
+ * krossvapen), Partisan/Glav (Stickvapen), Pik (Stångvapen) är sådana.
+ *
+ * Grundegenskap per grupp: STY för Enhandssvärd/Enhands krossvapen/
+ * Enhandsyxor/Tvåhandsvapen, SMI för resten — RP s.60:s egen tabellkolumn.
+ */
+DODE.weaponGroups = [
+  { key: "dolkar", name: "Dolkar", attribute: "smi",
+    weapons: ["Dolk", "Parerdolk"] },
+  { key: "enhandssvard", name: "Enhandssvärd", attribute: "sty",
+    weapons: ["Kortsvärd", "Bredsvärd", "Kroksabel", "Bastardsvärd"] },
+  { key: "enhands-krossvapen", name: "Enhands krossvapen", attribute: "sty",
+    weapons: ["Klubba", "Spikklubba", "Stridshammare", "Morgonstjärna", "Hjälmkrossare",
+      "Stor träklubba", "Stor spikklubba", "Korpnäbb"] },
+  { key: "enhandsyxor", name: "Enhandsyxor", attribute: "sty",
+    // Bredyxa (REG s.58, "1–2H | STY-gr 2") tillagd 2026-08-16 — samma
+    // "placera efter vapnets form, inte fattningskolumnen" -princip som
+    // redan gav Korpnäbb sin grupp (se filhuvudets ⚠), och samma exakta
+    // precedens som Kroksabel (också "1–2H") redan fick i enhandssvard.
+    weapons: ["Handyxa", "Stridsyxa", "Skäggyxa", "Bredyxa"] },
+  { key: "tvahandsvapen", name: "Tvåhandsvapen", attribute: "sty",
+    weapons: ["Tvåhandssvärd", "Tvåhandsyxa"] },
+  { key: "stickvapen", name: "Stickvapen", attribute: "smi",
+    weapons: ["Kortspjut", "Långspjut", "Tornerlans", "Lans", "Treudd", "Spetum", "Partisan", "Glav"] },
+  { key: "kattingvapen", name: "Kättingvapen", attribute: "smi",
+    weapons: ["Stridsslaga", "Stridsgissel"] },
+  { key: "stangvapen", name: "Stångvapen", attribute: "smi",
+    weapons: ["Trästav", "Hillebard", "Pålyxa", "Pik"] },
+  { key: "bagar", name: "Bågar", attribute: "smi",
+    weapons: ["Liten båge", "Kortbåge", "Långbåge", "Sammansatt båge"] },
+  { key: "armborst", name: "Armborst", attribute: "smi",
+    weapons: ["Lätt armborst", "Tungt armborst", "Arbalest"] },
+  { key: "slunga", name: "Slunga", attribute: "smi",
+    weapons: ["Slunga", "Stavslunga"] },
+  { key: "kastvapen", name: "Kastvapen", attribute: "smi",
+    // Kaststjärna (REG s.59, samma "Kastvapen"-tabell som Kastspjut/Kastkniv/
+    // Kastyxa) tillagd 2026-08-16 — en genuin katalogslucka (fanns i
+    // kompendiet men inte i den här gruppen), inte en tolkning: boken listar
+    // dem tillsammans, till skillnad från Bola/Lasso i samma tabell som är
+    // uttryckligen "Spec"-skada/specialvapen och medvetet står utanför.
+    weapons: ["Kastspjut", "Kastkniv", "Kastyxa", "Kaststjärna"] },
+  { key: "piska", name: "Piska", attribute: "smi",
+    weapons: ["Piska"] },
+  { key: "skoldar", name: "Sköldar", attribute: "smi",
+    weapons: ["Targ", "Bucklare", "Rundsköld, liten", "Rundsköld, stor", "Långsköld",
+      "Vanlig sköld", "Scutata", "Romersk sköld", "Pavise"] },
+  { key: "blasror", name: "Blåsrör", attribute: "smi",
+    weapons: ["Blåsrör"] }
+];
+
+/**
+ * Slår upp vilken vapengrupp ett vapennamn tillhör (case/diakritik-okänsligt,
+ * samma normalisering som DODE.skillKey). Returnerar hela gruppposten
+ * ({key, name, attribute, weapons}) eller null om namnet inte matchar någon
+ * grupp — anropande kod (guidens vapenfärdighetsväljare) ska då falla
+ * tillbaka till fritext/SMI precis som innan denna tabell fanns, inte krascha.
+ */
+DODE.weaponGroupFor = function (weaponName) {
+  const key = DODE.skillKey(weaponName);
+  if (!key) return null;
+  for (const group of DODE.weaponGroups) {
+    if (group.weapons.some((w) => DODE.skillKey(w) === key)) return group;
+  }
+  return null;
+};
+
+/**
+ * Vapentekniker — KH s.20 ("Vapentekniker", Typ Sekundär B, Barbar/Paladin/
+ * Prisjägare/Riddare/Soldat/Vapenmästare) och KH s.38-40 ("Vapenakademier",
+ * själva teknikkatalogen). Varje teknik är sin EGEN färdighet (KH s.38: "De
+ * läggs inte ihop till samma färdighetsvärde... Eleven kan ha olika höga FV i
+ * olika tekniker") — grundkostnad+grundegenskap ur den tabellen, inte den
+ * platta sekundär-basen (se DODE.secondarySkillBaseOverrideFor).
+ *
+ * ⚠ **Dubbelhugg** har en fullständig teknikbeskrivning men ingen synlig rad
+ * i kostnadstabellen (Johans scan av KH s.38-39) — `grundkostnad: null`
+ * tills en fysisk boksida bekräftar siffran, i stället för att gissa.
+ *
+ * Post-skapande, ej wizard-integrerat (Johans beslut 2026-08-04): läggs till
+ * via arkets befintliga "Dela ut färdighet"-knapp (SL-låst) precis som andra
+ * sekundära färdigheter, inte via rollpersonsskaparen.
+ */
+DODE.vapentekniker = [
+  { key: "anfall-bakifran-teknik", name: "Anfall bakifrån (teknik)", attribute: "smi", grundkostnad: 1,
+    description: "Den anfallande kan glida förbi motståndaren vid ett anfall och hamna bakom dennes rygg. Inte möjlig mot en motståndare som är beredd och har sin fulla uppmärksamhet riktad mot angriparen, bara mot en som distraheras av annat." },
+  { key: "avvapna-teknik", name: "Avväpna (teknik)", attribute: "smi", grundkostnad: 2,
+    description: "En raffinerad variant av Avväpna — inget slag mot STY krävs. Lyckas tekniken flyger vapnet ur händerna på motståndaren och landar 1T3+1 meter bort. Ett perfekt slag innebär att man kan ta vapnet och använda det själv." },
+  { key: "bryta-vapen", name: "Bryta vapen", attribute: "smi", grundkostnad: 1,
+    description: "Kräver ett vapen med vapenbrytare. Mäter anfallarens STY+FV mot vapnets brytvärde (BV). Lyckas anfallet bryts vapnet av. Kan också användas för att hugga av skaftade vapen eller kröka/bryta klena svärd." },
+  { key: "distrahera", name: "Distrahera", attribute: "smi", grundkostnad: 1,
+    description: "Små knep — prata, blända med solen i vapnet, m.m. — som ger motståndaren -3 CL. Ett perfekt slag distraherar hela stridsrundan. Ingen egen handling, kan göras samtidigt med ett vanligt anfall." },
+  { key: "dra-vapen-teknik", name: "Dra vapen (teknik)", attribute: "smi", grundkostnad: 3,
+    description: "Dra vapnet och anfalla i samma handling. FV kan aldrig vara högre än FV i vapnet som anfallet görs med. Kräver att vapnet är lätt åtkomligt och bägge händerna fria." },
+  { key: "dubbelhugg", name: "Dubbelhugg", attribute: "smi", grundkostnad: null,
+    description: "⚠ Grundkostnad ej bekräftad — kontrollera mot fysisk bok innan detta fält fylls i. Tillåter anfall två gånger i samma handling mot samma motståndare, ett efter det andra. Bara en gång per stridsrunda. Kan göras med dolkar, enhandssvärd och enhandsyxor." },
+  { key: "dodande-anfall", name: "Dödande anfall", attribute: "smi", grundkostnad: 2,
+    description: "Ett anfall mot en särskilt känslig punkt. Lyckas det görs maximal skada för vapnet och maximal skadebonus. Bara en gång per stridsrunda. Ett perfekt dödande anfall ignorerar rustningens absorbering helt." },
+  { key: "flygande-hugg", name: "Flygande hugg", attribute: "smi", grundkostnad: 2,
+    description: "Ett hopp över motståndaren med ett skärande hugg mot huvud eller bröstkorg, inget avdrag för riktat anfall. Lyckas det landar angriparen 1T3+1 meter bort och gör +3 KP och SP. Kan inte göras mot metallrustning." },
+  { key: "forutse-blotta", name: "Förutse blotta", attribute: "int", grundkostnad: 1,
+    description: "Konsten att inse hur motståndaren kommer att reagera nästa handling — ger +5 CL vid anfall mot den förutsedda blottan. Tar ingen handling, bara en gång per stridsrunda." },
+  { key: "hugg-teknik", name: "Hugg (teknik)", attribute: "sty", grundkostnad: 1,
+    description: "Konsten att mätta ett våldsamt hugg mot punkten som gör mesta skadan — +2 KP och SP om anfallet lyckas. Ingen egen handling, används tillsammans med ett vanligt anfall. Bara en gång per stridsrunda." },
+  { key: "harskri", name: "Härskri", attribute: "psy", grundkostnad: 2,
+    description: "Jämförs mot motståndarens PSY på Motståndstabellen. Vinner angriparen förlorar motståndaren sin nästa handling. Bara en gång per stridsrunda." },
+  { key: "kanes-manover", name: "Kanes manöver", attribute: "smi", grundkostnad: 2,
+    description: "En raffinerad Dra vapen — man anfaller FÖRST i stridsrundan trots att vapnet satt i skidan innan striden började. Kan bara göras med svärd." },
+  { key: "kasta-svard", name: "Kasta svärd", attribute: "smi", grundkostnad: 1,
+    description: "Svärdet kastas upp till tre rutor mot en motståndare och gör normal skada." },
+  { key: "knahugg", name: "Knähugg", attribute: "smi", grundkostnad: 1,
+    description: "Angriparen går ned på knä och hugger mot motståndaren, som får -5 CL i Parera." },
+  { key: "krossande-slag", name: "Krossande slag", attribute: "sty", grundkostnad: 2,
+    description: "Om anfallet gör mer skada än kroppsdelens totala KP bryts/krossas ben och kroppsdelen blir obrukbar direkt (i stället för vid dubbel skada). Slag mot mage/bröst/huvud gör motståndaren medvetslös. Kan bara göras med krossvapen, kättingvapen och tvåhandsvapen." },
+  { key: "lang-stot", name: "Lång stöt", attribute: "smi", grundkostnad: 2,
+    description: "Ett utfall med hela kroppens kraft — +2 CL och +1 KP/SP skada. Motståndaren kan inte slå tillbaka i samma handling, bara parera. Bara en gång per stridsrunda. Kan bara göras med enhandssvärd och dolkar." },
+  { key: "parering-teknik", name: "Parering (teknik)", attribute: "smi", grundkostnad: 1,
+    description: "Konsten att parera med vilket föremål som helst — hattar, stolar, ölsejdlar m.m. — utan krav på högre brytvärde än det anfallande vapnet. Parera är en handling." },
+  { key: "psykisk-duell", name: "Psykisk duell", attribute: "psy", grundkostnad: 3,
+    description: "Jämförs mot motståndarens PSY på Motståndstabellen. Lyckas det viker motståndaren undan och kan inte anfalla på 1T10 stridsrundor. Effekten försvinner om den som använde tekniken själv anfaller." },
+  { key: "skoldanfall", name: "Sköldanfall", attribute: "sty", grundkostnad: 1,
+    description: "Anfall med skölden — stöts upp mot motståndaren eller svingas mot honom. En vanlig attack; skada för sköldar anges i vapentabellerna." },
+  { key: "smartstot", name: "Smärtstöt", attribute: "smi", grundkostnad: 1,
+    description: "Anfallet sätts in mot en särskild smärtsam punkt — -3 CL på anfallet, men lyckas det görs maximalt antal SP (bara så många KP som slaget anger)." },
+  { key: "stot-teknik", name: "Stöt (teknik)", attribute: "smi", grundkostnad: 1,
+    description: "En kortare variant av Lång stöt — +3 CL. Ingen egen handling, används tillsammans med ett vanligt anfall." },
+  { key: "svepande-hugg", name: "Svepande hugg", attribute: "smi", grundkostnad: 3,
+    description: "Ett hugg som sveper och kan träffa flera motståndare (FV5→2, FV10→3, FV15→4, FV20→5, över FV20→6 max). -3 CL på anfallet. Bara en gång per stridsrunda. Första motståndaren tar full skada, resten -3/-6/-9 osv." },
+  { key: "tvinga-ur-balans", name: "Tvinga ur balans", attribute: "sty", grundkostnad: 1,
+    description: "Pressar motståndaren med vapnet så hårt att denne tvingas retirera. Ger motståndaren -5 CL på både anfall och försvar resten av stridsrundan. Tar en handling." },
+  { key: "undanmanover-teknik", name: "Undanmanöver (teknik)", attribute: "smi", grundkostnad: 1,
+    description: "Differensvärdet för en lyckad undanmanöver dras från motståndarens CL för attacken. Tar en handling." },
+  { key: "virvelvindsanfall", name: "Virvelvindsanfall", attribute: "smi", grundkostnad: 2,
+    description: "En ström av hugg åt alla håll medan man rör sig framåt — -3 CL, men kan anfalla en ny motståndare varje handling utan att använda en handling för förflyttning (max 3 rutor mellan motståndarna)." },
+  { key: "vrida-klinga", name: "Vrida klinga", attribute: "smi", grundkostnad: 1,
+    description: "Tvingar ut motståndarens svärd från kroppen så att man kan anfalla hans hand och arm i stället. Lyckas tekniken ger den +5 CL för att anfalla armen." }
+];
+
+/**
+ * Stridskonster (obeväpnad strid) — RP s.56-58 (grundregler, Krigare/
+ * Lönnmördare/Munk) + KH s.91-93 (Österländska stridskonster-tillägget, 5
+ * genuint nya tekniker + 7 återanvända vapentekniker-namn med egen, lägre
+ * grundkostnad i stridskonst-sammanhang). Fullt sourcat kurerat extrakt:
+ * Roll20-projektets `docs/extracts/DODE_Stridskonster.md` (rå-OCR:en för
+ * båda källsidorna har kraftig tvåspaltsbleed, opålitlig för sökning).
+ *
+ * ⚠ **STRUKTURELLT ANNORLUNDA än DODE.vapentekniker ovan, trots samma
+ * tabellform.** Detta är BARA teknikkatalogen (namn + grundkostnad +
+ * beskrivning) — en ren datakälla, ingen `attribute`-nyckel per teknik
+ * eftersom boken inte ger någon: hela stridskonsten delar EN grundegenskap
+ * (SMI) och ETT FV över ALLA valda tekniker ("Det FV man har lärt sig i en
+ * stridskonst gäller för samtliga tekniker i stridskonsten", RP s.58) — till
+ * skillnad från Vapentekniker, där varje teknik är sin EGEN oberoende
+ * färdighet med eget FV och egen grundegenskap. En rollperson KOMPONERAR
+ * själv sin stridskonst genom att välja valfria tekniker ur listan nedan,
+ * SUMMERAR deras grundkostnader (avrundat uppåt) till EN grundkostnad för
+ * hela stridskonsten, och betalar 2 EP extra om den inte valts som
+ * yrkesfärdighet. **Själva den köp-/inlärningsmekaniken (bundle-komponering,
+ * summering, delat FV) är INTE byggd än** — bara katalogdata. Se extraktets
+ * "Öppen implementationsfråga"-avsnitt och DESIGN_DECISIONS.md backlog 71/27.
+ *
+ * `vapenteknikRef` (bara satt på de 7 återanvända teknikerna): pekar på
+ * motsvarande `DODE.vapentekniker`-nyckel för delad mekanisk beskrivning —
+ * grundkostnaden här är MEDVETET en annan siffra än den nyckelns egen
+ * (stridskonst-kontext är billigare än vapen-kontext för samma teknik,
+ * bekräftat i källan, inte en avvikelse att rätta).
+ */
+DODE.stridskonster = [
+  // RP s.57 — grundlistan (22 tekniker).
+  { key: "sk-avvapning", name: "Avväpning", grundkostnad: 1,
+    description: "Obeväpnad parering mot ett beväpnat anfall — lyckas motståndarens attack fungerar tekniken som en vanlig parering, misslyckas den far vapnet 1T3 rutor åt något håll. Ett perfekt slag: försvararen tar vapnet i egna händer." },
+  { key: "sk-bakatspark", name: "Bakåtspark", grundkostnad: 0.5,
+    description: "Spark mot en motståndare i rutan bakom angriparen. 1T6 skada." },
+  { key: "sk-bedovningsslag", name: "Bedövningsslag", grundkostnad: 1,
+    description: "⚠ Kan bara användas mot människoliknande motståndare (RP s.57). Knytnävs-/fingerslag mot nervknutar, 1T3 skada. Vid skada måste offret slå Svårt FYS eller bli tillfälligt bedövad och förlora nästa attack/parering. Icke-människotyp tar bara 1T3 skada totalt." },
+  { key: "sk-blind-strid", name: "Blind strid", grundkostnad: 2,
+    description: "Alltid påkopplad, inget färdighetsslag krävs. Kan slåss i beckmörker, men eftersom terrängen inte känns av kan det ändå vara besvärligt." },
+  { key: "sk-dubbelslag", name: "Dubbelslag", grundkostnad: 1,
+    description: "Två knytnävsattacker samtidigt mot OLIKA motståndare i samma SR (1T3 skada/attack, separata slag, offren får inte stå mer än 180° isär)." },
+  { key: "sk-dubbelspark", name: "Dubbelspark", grundkostnad: 1.5,
+    description: "Flygande hoppspark mot två olika motståndare, en per fot (1T6 skada/spark, separata slag, offren max 1 meter isär). Se även Hoppspark." },
+  { key: "sk-fallteknik-rullning", name: "Fallteknik/Rullning", grundkostnad: 0.5,
+    description: "Lyckat slag → halv fallskada. Lyckad rullning flyttar upp till 5 rutor i en SR (kan inte huggas med närstridsvapen på en rullande person). Misslyckad rullning ger bara halva sträckan och liggande." },
+  { key: "sk-fint", name: "Fint", grundkostnad: 0.5,
+    description: "Utförs samtidigt med ett anfall. Lyckas finten halveras motståndarens parerings-CL (avrunda nedåt). Kan göras med alla attacktyper utom avståndsvapen." },
+  { key: "sk-hoppspark", name: "Hoppspark", grundkostnad: 1,
+    description: "Rutas sats + hopp, spark mot huvud/bröstkorg, 1T8 skada. Missar → landar i målets ruta. Lyckat SMI-slag → landar på fötterna men gör inget annat nästa runda; misslyckat → liggande. −2 på initiativslaget." },
+  { key: "sk-hogt-kast", name: "Högt kast", grundkostnad: 1,
+    description: "⚠ Kan bara användas mot människoliknande motståndare (RP s.57). Utförs alltid sist i SR. Lyckas kastet kastas offret 1T3 rutor i valfri riktning och blir liggande — Svårt SMI-slag eller 1T3 skada." },
+  { key: "sk-initiativbonus", name: "Initiativbonus", grundkostnad: 0.5,
+    description: "Alltid påkopplad, inget slag krävs. +5 till SMI vid beräkning av turordning." },
+  { key: "sk-krosslag", name: "Krosslag", grundkostnad: 1,
+    description: "Knytnävsslag mot särskilt ömtåliga punkter (tinningar, struphuvud, solar plexus, njure m.m.). 1T6 skada." },
+  { key: "sk-liggande-knastaende-strid", name: "Liggande/Knästående strid", grundkostnad: 1,
+    description: "Alltid påkopplad, inget slag krävs. Kan anfalla/parera/utföra låga kast liggandes. Ingen anfallsbonus mot ett liggande mål för motståndare med denna teknik." },
+  { key: "sk-lagt-kast", name: "Lågt kast", grundkostnad: 0.5,
+    description: "⚠ Kan bara användas mot människoliknande motståndare (RP s.57). Lyckas kastet kastas försvararen omkull i sin egen ruta utan skada (kan pareras). Reser sig efter 1T2 SR." },
+  { key: "sk-lasning-neddragning", name: "Låsning/Neddragning", grundkostnad: 1,
+    description: "⚠ Kan bara användas mot människoliknande motståndare (RP s.57). Ett anfall — lyckas det låses motståndaren mot marken. Att ta sig ur greppet kräver att försvararen övervinner angriparens FV med sin egen halverade SMI (avrunda nedåt)." },
+  { key: "sk-normalt-slag", name: "Normalt slag", grundkostnad: 0.5,
+    description: "Knytnävsslag mot huvud/bröstkorg, 1T3 skada." },
+  { key: "sk-normal-spark", name: "Normal spark", grundkostnad: 0.5,
+    description: "Spark mot ben/bröstkorg/huvud, 1T6 skada." },
+  { key: "sk-obevapnad-parering-av-vapen", name: "Obeväpnad parering av vapen", grundkostnad: 0.5,
+    description: "Parerar alla närstridsattacker, även vapenanfall, trots att man är obeväpnad." },
+  { key: "sk-rundspark", name: "Rundspark", grundkostnad: 1,
+    description: "Snurr för extra fart, 1T8 skada. Missar → förlorar balansen, kan inte anfalla/parera nästa runda. −2 på initiativslaget." },
+  { key: "sk-stalsattning", name: "Stålsättning", grundkostnad: 1,
+    description: "Används varje gång kämpen tar skada. Lyckat slag → halv skada (avrunda). Kan inte användas mot slag mot huvudet." },
+  { key: "sk-uppresning", name: "Uppresning", grundkostnad: 0.5,
+    description: "Reser sig omedelbart efter att ha kastats omkull, förutsatt ett lyckat färdighetsslag — oavsett när i SR fallet inträffade." },
+  { key: "sk-vidvinkelsyn", name: "Vidvinkelsyn", grundkostnad: 1,
+    description: "Alltid påkopplad, inget slag krävs. Iakttagelsefältet vidgas till 270°." },
+
+  // KH s.93 — Österländska stridskonster-tillägget, 5 genuint nya tekniker.
+  { key: "sk-fallande-spark", name: "Fallande spark", grundkostnad: 1.5,
+    description: "Flygande spark, båda fötterna riktas snett nedåt. 1T6 KP + 1T8 SP. Bara en gång per stridsrunda." },
+  { key: "sk-forutse-anfall", name: "Förutse anfall", grundkostnad: 1,
+    description: "Inse hur motståndaren kommer att anfalla i nästa handling. Lyckas tekniken: +2 CL på parering. Ingen egen handling." },
+  { key: "sk-projektilparering", name: "Projektilparering", grundkostnad: 1.5,
+    description: "Parera/undvika pilar, slungstenar, kastspjut m.fl. projektiler. Kan försöka undvika flera samtidigt: −5 CL för två, −10 för tre, −15 för fyra, −20 för fem." },
+  { key: "sk-rullande-attack", name: "Rullande attack", grundkostnad: 1,
+    description: "Mjukt framåtfall, utnyttjar rörelseenergin vid uppresning. +5 på initiativslaget, +1 på skadan. Kan INTE kombineras med tekniken Initiativbonus." },
+  { key: "sk-rustad-strid", name: "Rustad strid", grundkostnad: 1,
+    description: "Gör det möjligt att använda en stridskonst i rustning, upp till och med förstärkt ringbrynja (dubbel ringbrynja/hel lamellerad/laminerad/metallrustning utesluter en stridskonst helt). Gäller EN rustningstyp, specificerad när färdigheten skaffas — slås varje stridsrunda man slåss i rustning." },
+
+  // KH s.93 — 7 återanvända vapenteknik-namn, egen (lägre) grundkostnad i
+  // stridskonst-sammanhang. `vapenteknikRef` pekar på den delade beskrivningen.
+  { key: "sk-anfall-bakifran", name: "Anfall bakifrån", grundkostnad: 0.5, vapenteknikRef: "anfall-bakifran-teknik",
+    description: "Se DODE.vapentekniker → Anfall bakifrån (teknik)." },
+  { key: "sk-dodande-anfall", name: "Dödande anfall", grundkostnad: 1.5, vapenteknikRef: "dodande-anfall",
+    description: "Se DODE.vapentekniker → Dödande anfall. Kan i stridskonst-sammanhang bara kombineras med Normal spark och Normalt slag, inte andra specialtekniker." },
+  { key: "sk-forutse-blotta", name: "Förutse blotta", grundkostnad: 0.5, vapenteknikRef: "forutse-blotta",
+    description: "Se DODE.vapentekniker → Förutse blotta." },
+  { key: "sk-kiai", name: "Kiai", grundkostnad: 1, vapenteknikRef: "harskri",
+    description: "Se DODE.vapentekniker → Härskri (samma teknik, östligt namn)." },
+  { key: "sk-psykisk-duell", name: "Psykisk duell", grundkostnad: 2, vapenteknikRef: "psykisk-duell",
+    description: "Se DODE.vapentekniker → Psykisk duell." },
+  { key: "sk-undanmanover", name: "Undanmanöver", grundkostnad: 0.5, vapenteknikRef: "undanmanover-teknik",
+    description: "Se DODE.vapentekniker → Undanmanöver (teknik)." },
+  { key: "sk-virvelvindsanfall", name: "Virvelvindsanfall", grundkostnad: 1, vapenteknikRef: "virvelvindsanfall",
+    description: "Se DODE.vapentekniker → Virvelvindsanfall. Kan i stridskonst-sammanhang bara kombineras med Normal spark och Normalt slag, inte andra specialtekniker." }
+];
+
+/** Slår upp en DODE.stridskonster-post på namn (samma matchningsmönster som DODE.weaponGroupFor). */
+DODE.stridskonstFor = function (name) {
+  if (!name) return null;
+  return DODE.stridskonster.find((t) => t.name === name) ?? null;
+};
+
+/**
+ * Effektiv grundegenskap för en enskild stridskonstteknik — boken ger ingen
+ * egen per-teknik-egenskap (hela familjen delar SMI, RP s.56), UTOM för de 7
+ * teknikerna som återanvänder ett vapentekniker-namn (`vapenteknikRef`),
+ * där den bakomliggande vapentekniken har en egen, mer specifik egenskap
+ * (t.ex. Kiai/Härskri = PSY) som är mer korrekt att slå mot.
+ */
+DODE.stridskonstAttribute = function (entry) {
+  if (!entry) return "smi";
+  if (entry.vapenteknikRef) {
+    const ref = DODE.vapentekniker.find((t) => t.key === entry.vapenteknikRef);
+    if (ref?.attribute) return ref.attribute;
+  }
+  return "smi";
+};
+
+/**
+ * Vapenakademier — KH s.41-45, tre namngivna skolor. Rent GM-referensmaterial
+ * (mästare/plats/tröskel för antagning) plus de fält en SL faktiskt kan tänkas
+ * vilja slå upp mekaniskt (kostnad/tid/EP-tak/vilka tekniker som lärs ut).
+ * `techniquesTaught` pekar på DODE.vapentekniker-nycklar ovan.
+ */
+DODE.vapenakademier = [
+  {
+    key: "faktskolan-pa-beyural", name: "Fäktskolan på Beyural",
+    master: "Eledain", location: "Gringul, Beyural (Erebos)",
+    weaponsTaught: ["Långsvärd", "Bredsvärd", "Värja", "Stickvärja", "Dolk", "Njurdolk", "Stilett", "Parerdolk"],
+    techniquesTaught: ["avvapna-teknik", "distrahera", "forutse-blotta", "hugg-teknik", "lang-stot",
+      "parering-teknik", "smartstot", "stot-teknik", "undanmanover-teknik"],
+    otherSkills: ["Akrobatik", "Etikett", "Flintlåspistol", "Två vapen"],
+    costPerYear: 8000,
+    discountTiers: "FV15+ i minst två lärda vapen: 4.000 sm/år. FV18+ i minst två: gratis (som lärare).",
+    duration: "3 år (kan avbrytas/återupptas)",
+    ledighet: "3 månader sommar + 1 månad vinter",
+    maxEP: 216
+  },
+  {
+    key: "kanes-orden", name: "Kanes orden",
+    master: "Kane (alvisk krigarmunk, 300+ år)", location: "Dolt kloster i Cer-bergen",
+    weaponsTaught: ["Alla enhandssvärd", "Alla sköldar"],
+    techniquesTaught: ["bryta-vapen", "dubbelhugg", "dodande-anfall", "hugg-teknik", "kanes-manover",
+      "parering-teknik", "skoldanfall", "stot-teknik", "svepande-hugg", "undanmanover-teknik"],
+    otherSkills: ["Meditation", "Överlevnad i bergstrakter", "Etikett", "Munkorden"],
+    costPerYear: 0,
+    discountTiers: "Alltid gratis — men akademin måste hittas genom prövningar (ädelmod/självuppoffring/givmildhet/medlidande) och flyttar plats mellan besök.",
+    duration: "3 år, ingen ledighet alls under träningen",
+    ledighet: "Ingen",
+    maxEP: 312
+  },
+  {
+    key: "hauksheim", name: "Hauksheim",
+    master: "Hauk (barbar, ~50 år, saknar vänster arm)", location: "Tarkens krök, Jorduashur (Sigsdal)",
+    weaponsTaught: ["Bredyxa", "Handyxa", "Stridsyxa", "Skäggyxa"],
+    techniquesTaught: ["dubbelhugg", "hugg-teknik", "krossande-slag", "parering-teknik", "svepande-hugg", "tvinga-ur-balans"],
+    otherSkills: ["Överlevnad i tundra", "Jakt", "Fiske", "Simma"],
+    costPerYear: 10000,
+    discountTiers: "Inga officiella rabatter (Hauk kan enstaka gånger avstå avgiften för en elev han gillar).",
+    duration: "3 år normalt (5 år om man bara tränar vintertid — samma EP-summa)",
+    ledighet: "2 månader sommar + 2 månader vinter",
+    maxEP: 216
+  }
+];
 
 // Primära färdigheter — REGLER_FARDIGHETER.md, källa RP s.36. Alla rollpersoner
 // börjar med dessa (grundkostnad 2 EP/FV-steg vid EP-köp, se DODE.skillCost
@@ -678,7 +1099,17 @@ DODE.secondarySkills = [
   { key: "lasdyrkning", name: "Låsdyrkning", attribute: "smi" },
   { key: "lakekonst", name: "Läkekonst", attribute: "int" },
   { key: "lapplasning", name: "Läppläsning", attribute: "int" },
-  { key: "lasa-skriva-sprak", name: "Läsa/Skriva språk", attribute: "int" },
+  // "Läsa/Skriva språk"/"Tala språk (Kate. B)" (RP s.58, källdokets rader 228/253)
+  // fanns tidigare här som två oprecisa katalograder (BC "varierar" — ett
+  // dokumenterat forskningshål). Ersatta 2026-08-06 med `DODE.languages` +
+  // en riktig per-språk-rad i "+Ny färdighet"-dialogen (se
+  // actor-character-sheet.mjs) sedan RP s.58 lästes direkt ur skanningen och
+  // gav exakt Grundegenskap: INT (samma gruppformel som alla andra sekundära
+  // färdigheter, ingen särregel) plus den fullständiga 0-5-nivåskalan. RP s.58
+  // sourcar bara TALA — en parallell Läsa/Skriva-variant är en rimlig
+  // spegling (samma mönster som modersmål har både en tal- och en läs/skriv-
+  // färdighet), inte en gissad siffra, eftersom BC-formeln är identisk med
+  // alla andra sekundära färdigheter.
   { key: "magisk-kanalisering", name: "Magisk kanalisering", attribute: "int" },
   { key: "massage", name: "Massage", attribute: "smi" },
   { key: "muta", name: "Muta", attribute: "kar" },
@@ -699,17 +1130,202 @@ DODE.secondarySkills = [
   { key: "stavhopp", name: "Stavhopp", attribute: "smi" },
   { key: "stridskonster", name: "Stridskonster", attribute: "smi" },
   { key: "taktik", name: "Taktik", attribute: "int" },
-  { key: "tala-sprak-kate-b", name: "Tala språk (Kate. B)", attribute: "int" },
   { key: "teckensprak", name: "Teckenspråk", attribute: "int" },
   { key: "trastav", name: "Trästav", attribute: "smi" },
-  { key: "tva-vapen", name: "Två vapen", attribute: "smi" },
+  // baseOverride: RP s.59:s egen grundkostnad (4), inte den platta sekundär-
+  // basen (5) — se DODE.secondarySkillBaseOverrideFor.
+  { key: "tva-vapen", name: "Två vapen", attribute: "smi", baseOverride: 4 },
   { key: "undre-varlden", name: "Undre världen", attribute: "int" },
   { key: "vapenfardigheter", name: "Vapenfärdigheter", attribute: "smi" },
   { key: "zoologi", name: "Zoologi", attribute: "int" },
   { key: "anterhake", name: "Änterhake", attribute: "smi" },
   { key: "ortkunskap", name: "Örtkunskap", attribute: "int" },
-  { key: "overlevnad", name: "Överlevnad", attribute: "int" }
+  { key: "overlevnad", name: "Överlevnad", attribute: "int" },
+  // Egen post, skild från den generiska "Överlevnad" ovan — källtexten
+  // (T&L s.15, "De har alltid minst 10 i CL i Överleva i skogstrakter")
+  // namnger den som en EGEN färdighet, separat från "Överlevnad" som redan
+  // står med i Stråtrövarens egen yrkesfärdighetslista. Behövs för att
+  // Stråtrövarens automatiska golv ska kunna uttryckas som ett vanligt,
+  // OVILLKORAT `skillFloors`-golv (samma mönster som Prisjägares Upptäcka
+  // fara-golv) UTAN att felaktigt ge bonusen överallt — se
+  // packs/yrken/_source/stratrovare_dodeYtjuvstratro.json. Johan,
+  // 2026-08-17: "We need a new skill. 'Överleva i skog'" — löser den öppna
+  // beslutspunkten från backlog 71 genom att göra kontexten till FÄRDIGHETEN
+  // själv i stället för en ny effekttyp.
+  { key: "overleva-i-skogstrakter", name: "Överleva i skogstrakter", attribute: "int" }
 ];
+
+// Språk (backlog, session 2026-08-06) — RP s.42/44/58 (docs/språk-i-ereb-altor.md
+// i Roll20-projektet, transkriberat direkt ur skanningar samma session). Tre
+// separata mekaniker delar den här språklistan:
+//   1. Läsa/Skriva Modersmål (primär) — fast BC ur socialt stånd × INT, INTE
+//      grupp-BC. Se DODE.motherTongueLasaSkrivaBc.
+//   2. Tala Modersmål (primär) — fast BC ur socialt stånd ENSAMT (INT spelar
+//      ingen roll att TALA sitt modersmål). Se DODE.motherTongueTalaBc.
+//   3. Tala/Läsa-Skriva Främmande Språk (sekundär) — vanlig grupp-BC precis
+//      som alla andra sekundära färdigheter (RP s.58: "Grundegenskap: INT",
+//      samma formatering som varje annan sekundär färdighet i källan — ingen
+//      särregel hittad). Varje språk är sin EGEN färdighet (RP s.58, ordagrant:
+//      "Varje språk räknas som en separat färdighet") — se "+Ny färdighet"-
+//      dialogen i actor-character-sheet.mjs, som erbjuder en rad per språk
+//      här nedan, samma mönster som Vapenfärdigheter redan använder.
+// `description` = "var talas det" (docs/språk-i-ereb-altor.md §1, Ereb Altor —
+// Kampanjbok s.44), visad som en referenstabell under guidens språkval (Johan,
+// 2026-08-07: "spelarna [ska] förstå vad de väljer och varför"). ⚠ "Västjori
+// är ALLMÄNNA språket" är Johans egen kampanjramning, inte ett ordagrant citat
+// ur källan — källan säger bara att Västjori talas i flest riken (den bredast
+// spridda Jori-dialekten), vilket stödjer men inte bokstavligen SÄGER
+// "allmänspråk". Flaggat här, inte tyst framställt som ett direkt citat.
+DODE.languages = [
+  { key: "vastjori", name: "Västjori (Jori)",
+    description: "Allmänna språket i Ereb Altor — talas i Kardien, Felicien, Zorakin, Magilre, Mereld, Bzegusta, samt delar av Klomellien och Trakorien." },
+  { key: "ostjori", name: "Östjori (Jori)",
+    description: "Talas i Berendien, Hynsolge och de erebosiska öarna." },
+  { key: "nyjori", name: "Nyjori (Jori)",
+    description: "Talas i östra delarna av Zorakin, norra Berendien och vissa erebosiska småöar." },
+  { key: "kejserlig-jori", name: "Kejserlig Jori (Jori)",
+    description: "Utdött som folkspråk — används numera bara av lärda män och i diplomatisk korrespondens. Extremt högtidligt." },
+  { key: "hamuriska", name: "Hamuriska (Sydnarguriska)",
+    description: "Barbarspråk — talas i sydöstra Klomellien." },
+  { key: "kaseni", name: "Kaseni (Sydnarguriska)",
+    description: "Barbarspråk — talas på norra Aidne-halvön." },
+  { key: "isbarbarernas-sprak", name: "Isbarbarernas språk (Tjugiska)",
+    description: "Barbarspråk — talas av isbarbarerna i Orghin och Sanithsid." },
+  { key: "barboskin", name: "Barboskin (Tjugiska)",
+    description: "Barbarspråk — talas av ziddis-folket på ön Palamux." },
+  { key: "alviska", name: "Alviska", description: "Alvernas eget språk." },
+  { key: "dvargiska", name: "Dvärgiska", description: "Dvärgarnas eget språk." },
+  { key: "svartiska", name: "Svartiska", description: "Svartfolkets (orchernas) eget språk." },
+  { key: "erdir", name: "Erdir (Forntunga)",
+    description: "Uråldrigt, utdött sedan innan Jorpagnas uppkomst. Används idag av uråldriga raser och i magiska ritualer. Skrivs med omkring 60 tecken." }
+];
+
+// "Ett människospråk" — poolen varje ras med den frasen väljer FRÅN (RP s.42/44).
+// Erdir är uttryckligen ett utdött rituellt/uråldrigt språk (SPRÅK I EREB ALTOR,
+// docs/språk-i-ereb-altor.md §1), inte ett levande människospråk — utesluten.
+const HUMAN_LANGUAGE_KEYS = ["vastjori", "ostjori", "nyjori", "kejserlig-jori", "hamuriska", "kaseni", "isbarbarernas-sprak", "barboskin"];
+DODE.humanLanguages = DODE.languages.filter((l) => HUMAN_LANGUAGE_KEYS.includes(l.key));
+
+/**
+ * Modersmål per ras — RP s.42 (Läsa/Skriva) och s.44 (Tala), lästa direkt ur
+ * skanningen 2026-08-06 (inte den äldre, grövre sammanfattningen i
+ * docs/språk-i-ereb-altor.md §2, som denna tabell nu är facit över).
+ *
+ * ⚠ **Dvärgar och Halvorch skiljer sig verkligen mellan Tala och Läsa/Skriva**
+ * — inte en sidbrytnings-utelämning (en tidigare, ogrundad gissning i samma
+ * dokument, rättad samma session): Dvärgar TALAR dvärgiska OCH ett
+ * människospråk, men får bara BC i att LÄSA/SKRIVA dvärgiska. Halvorch TALAR
+ * svartiska OCH ett människospråk, men får bara BC i att LÄSA/SKRIVA ett
+ * människospråk (ingen svartiska). Halvalver har redan sedan tidigare samma
+ * sorts skillnad (alviska OCH människospråk för Tala; alviska ELLER
+ * människospråk — ett val — för Läsa/Skriva), nu bekräftat att mönstret är
+ * bredare än bara halvalver.
+ *
+ * Varje rad-array är en lista SLOTS: en sträng = ett fast beviljat språk, den
+ * bokstavliga strängen `"human"` = spelaren väljer ETT ur DODE.humanLanguages,
+ * `{choice:[...]}` = spelaren väljer ETT ur den givna mixade listan (kan
+ * innehålla `"human"` som utvidgas till hela människospråks-poolen).
+ */
+DODE.raceMotherTongues = {
+  manniska: { tala: ["human"], lasaSkriva: ["human"] },
+  alv: { tala: ["alviska", "human"], lasaSkriva: ["alviska", "human"] },
+  dvarg: { tala: ["dvargiska", "human"], lasaSkriva: ["dvargiska"] },
+  halvalv: { tala: ["alviska", "human"], lasaSkriva: [{ choice: ["human", "alviska"] }] },
+  halvlangdsman: { tala: ["human"], lasaSkriva: ["human"] },
+  halvorch: { tala: ["svartiska", "human"], lasaSkriva: ["human"] },
+  anka: { tala: ["human"], lasaSkriva: ["human"] }
+};
+
+/**
+ * Alvsläktena (Gråalv/Grottalv/Högalv/Injir/Mörkeralv/Skogsalv) ärver Alvs språk.
+ * ⚠ `raceGroup` är en FLAGGA (`getFlag`), inte ett `system`-schemafält —
+ * character-wizard.mjs sätter den via `r.getFlag(game.system.id, "raceGroup")`
+ * (progressiv avslöjning, backlogpost 56/57). En tidigare version av den här
+ * funktionen läste `raceDoc.system?.raceGroup`, som är odeklarerat i
+ * item-ras.mjs:s schema och alltså ALLTID `undefined` — varje alvsläkte föll
+ * tyst tillbaka på `DODE.skillKey(raceDoc.name)` ("skogsalv" osv, obefintlig
+ * nyckel i DODE.raceMotherTongues) och därmed vidare på `["human"]`, så den
+ * fasta Alviska-raden försvann helt så fort spelaren valde en SPECIFIK
+ * alvsläkt-medlem i stället för bas-Alv. Hittad 2026-08-07 efter att en
+ * tidigare liveverifiering mot BAS-Alv (som inte har flaggan alls, bara
+ * skillKey "alv" — redan rätt) missat att testa en faktisk medlem.
+ */
+DODE.motherTongueRaceKey = function (raceDoc) {
+  if (!raceDoc) return null;
+  if (raceDoc.getFlag?.(game.system.id, "raceGroup") === "alvslakte") return "alv";
+  return DODE.skillKey(raceDoc.name);
+};
+
+/** @returns {Array} Slot-listan (se DODE.raceMotherTongues) för en ras+färdighet. */
+DODE.motherTongueSlots = function (raceDoc, kind) {
+  const key = DODE.motherTongueRaceKey(raceDoc);
+  return DODE.raceMotherTongues[key]?.[kind] ?? ["human"];
+};
+
+/**
+ * Om en ras har en OKONSTRUERAD "human"-plats i BÅDA Tala och Läsa/Skriva
+ * (den bokstavliga strängen "human", inte en `{choice:[...]}`-plats)
+ * representerar de facto SAMMA modersmål — man kan inte TALA ett människospråk
+ * och LÄSA/SKRIVA ett annat som modersmål. Johan 2026-08-07: "Om man väljer
+ * väst jori som modersmål borde man nog inte kunna skriva ett annat språk som
+ * modersmål. Borde bli samma automatiskt." Halvalvs Läsa/Skriva-plats är en
+ * avsiktlig `{choice:["human","alviska"]}`-plats (en riktig valmöjlighet,
+ * redan källbelagd) och räknas INTE hit — bara de rena "human"-fallen
+ * (Människa, Alv, Halvlängdsman, Anka, Halvorch) synkas.
+ * @returns {{talaIndex:number, lasaSkrivaIndex:number}|null}
+ */
+DODE.syncedHumanMotherTongueIndices = function (raceDoc) {
+  const talaIndex = DODE.motherTongueSlots(raceDoc, "tala").indexOf("human");
+  const lasaSkrivaIndex = DODE.motherTongueSlots(raceDoc, "lasaSkriva").indexOf("human");
+  if (talaIndex === -1 || lasaSkrivaIndex === -1) return null;
+  return { talaIndex, lasaSkrivaIndex };
+};
+
+/** @returns {Array|null} Valbara språk för en slot, eller null om slotten är FAST (inget val). */
+DODE.motherTongueSlotOptions = function (slot) {
+  if (slot === "human") return DODE.humanLanguages;
+  if (slot && typeof slot === "object" && slot.choice) {
+    return slot.choice.flatMap((c) => (c === "human" ? DODE.humanLanguages : [DODE.languages.find((l) => l.key === c)])).filter(Boolean);
+  }
+  return null;
+};
+
+/** @returns {string} Visningsnamn för en FAST slot (en sträng som inte är "human"). */
+DODE.languageName = function (key) {
+  return DODE.languages.find((l) => l.key === key)?.name ?? key;
+};
+
+// Socialt-stånds-bucket för språktabellerna (RP s.42/44) — DODE.socialStandingTable
+// (RP s.27, REGEL_SocialtStand.md) har 9 rangordningar, språktabellerna bara 5.
+// De fyra översta (Lägre/Högre överklass, Lågadel, Högadel) slås ihop till
+// "Överklass el. adel"; de två understa (Egendomslös, Lägre underklass) till
+// "Övriga" — en ren sammanslagning av en grövre till en finare befintlig
+// bok-tabell, inte ett påhittat mellansteg.
+DODE.languageSocialBucket = function (rank) {
+  if (["Lägre överklass", "Högre överklass", "Lågadel", "Högadel"].includes(rank)) return "overklass-adel";
+  if (rank === "Högre medelklass") return "hogre-medelklass";
+  if (rank === "Lägre medelklass") return "lagre-medelklass";
+  if (rank === "Högre underklass") return "hogre-underklass";
+  return "ovriga"; // Egendomslös, Lägre underklass — samt okänt/ej slaget
+};
+
+/** Tala Modersmål — RP s.44: FV 20 (B5) för överklass/adel, FV 16 (B4) för alla andra. INT oväsentligt. */
+DODE.motherTongueTalaBc = function (bucket) {
+  return bucket === "overklass-adel" ? 20 : 16;
+};
+
+/** Läsa/Skriva Modersmål — RP s.42: 10-radig tabell, socialt stånd × INT (15+ vs 1-14). */
+DODE.motherTongueLasaSkrivaBc = function (bucket, intValue) {
+  const highInt = (intValue ?? 0) >= 15;
+  const table = {
+    "overklass-adel": highInt ? 20 : 16,
+    "hogre-medelklass": highInt ? 16 : 11,
+    "lagre-medelklass": highInt ? 11 : 5,
+    "hogre-underklass": highInt ? 5 : 1,
+    ovriga: highInt ? 1 : 0
+  };
+  return table[bucket] ?? 0;
+};
 
 // Färdighetens EP-kostnadskategori — RP s.30: primär/yrkesfärdighet/sekundär
 // ger olika grundkostnad (2/3/5 EP per FV-steg) vid EP-köp. Konsumeras av
@@ -748,6 +1364,70 @@ DODE.skillCostOverrideFor = function (actor, costTier) {
     if (eff?.type === "costTierOverride" && eff.tier === costTier) return eff.base;
   }
   return undefined;
+};
+
+/**
+ * Två vapen — RP s.59: FV-taket för en tränad vapenkombination kan aldrig
+ * överstiga det LÄGSTA av de två ingående vapenfärdigheternas FV, och
+ * startvärdet (BC) blir automatiskt hälften (avrundat nedåt) av det lägsta.
+ * Ordagrant: "Färdighetsvärdet att använda två vapen tillsammans kan aldrig
+ * överstiga det lägsta av de enskilda FV:na... man får automatiskt hälften
+ * (avrunda nedåt) av det lägsta FV:t som BC."
+ */
+DODE.twoWeaponCap = function (primaryFv, offFv) {
+  return Math.min(primaryFv ?? 0, offFv ?? 0);
+};
+DODE.twoWeaponAutoBc = function (primaryFv, offFv) {
+  return Math.floor(DODE.twoWeaponCap(primaryFv, offFv) / 2);
+};
+
+/**
+ * Grundkostnad ur en namngiven färdighetskatalog (DODE.secondarySkills eller
+ * DODE.vapentekniker) — backlogpost 36-liknande men KATALOG-nivå, inte
+ * aktör-nivå (skilt från DODE.skillCostOverrideFor ovan, som läser en
+ * "Lättlärd"-effekt på just DEN aktören). Katalogens egna grundkostnad (t.ex.
+ * Två vapen=4, en vapenteknik=1-3, RP s.30/KH s.38-39) väger tyngre än den
+ * platta kategori-basen (sekundär=5) — se DESIGN_DECISIONS.md backlog om
+ * REGLER_FARDIGHETER.md:s "Kostnad varierar per färdighet, men koden använder
+ * en platt grundkostnad" som denna funktion delvis stänger.
+ *
+ * Vapenmästarens halva pris för vapentekniker lärda SOM yrkesfärdighet
+ * (KH s.38, "kostar det hälften så mycket som vanligt att lära sig en
+ * vapenteknik, avrunda uppåt") hanteras HÄR, inte i en separat
+ * costTierOverride — den är knuten till specifikt vapentekniker-katalogen,
+ * inte till aktörens costTier i stort, så den generiska
+ * skillCostOverrideFor-mekanismen (som gäller en hel costTier) passar inte.
+ *
+ * Krigarmunkens halva pris för Stridskonster-tekniker (KH s.5, "Räkna ut
+ * totalsumman och halvera den") hanteras med SAMMA per-teknik-halvering som
+ * Vapenmästarens — en MEDVETEN förenkling (Johan, 2026-08-17: "Simplified
+ * for now with backlog"), inte bokens ordagranna mekanik. Boken beskriver
+ * Stridskonster som en spelar-komponerad BUNDLE med ett DELAT FV över alla
+ * valda tekniker (grundkostnaderna summeras FÖRST, halveras sedan EN gång
+ * som en TOTAL) — se `docs/DESIGN_DECISIONS.md` backlog 71/72 och Roll20-
+ * projektets `docs/extracts/DODE_Stridskonster.md`. Den här funktionen
+ * halverar i stället VARJE teknik OBEROENDE (samma independent-FV-modell
+ * som Vapentekniker), avrundat uppåt per teknik precis som Vapenmästaren.
+ * Bygg om till bundle-modellen enligt extraktets "Öppen implementations-
+ * fråga" innan denna kommentar tas bort.
+ */
+DODE.secondarySkillBaseOverrideFor = function (skillKey, actor) {
+  const fromVapentekniker = DODE.vapentekniker?.find((t) => t.key === skillKey);
+  if (fromVapentekniker?.grundkostnad != null) {
+    const isVapenmastare = actor?.system?.profession?.name === "Vapenmästare";
+    return isVapenmastare
+      ? Math.ceil(fromVapentekniker.grundkostnad / 2)
+      : fromVapentekniker.grundkostnad;
+  }
+  const fromStridskonster = DODE.stridskonster?.find((t) => t.key === skillKey);
+  if (fromStridskonster?.grundkostnad != null) {
+    const isKrigarmunk = actor?.system?.profession?.name === "Krigarmunk";
+    return isKrigarmunk
+      ? Math.ceil(fromStridskonster.grundkostnad / 2)
+      : fromStridskonster.grundkostnad;
+  }
+  const fromSecondary = DODE.secondarySkills.find((s) => s.key === skillKey);
+  return fromSecondary?.baseOverride;
 };
 
 // Grundegenskaper KÖPS — RP s.23 ("GRUNDEGENSKAPER"), inte ett slagsystem.
@@ -1279,3 +1959,421 @@ DODE.timeSteps = [
  * inte till det här fönstret. Se backlogposten om ljuskällor.
  */
 DODE.supplyReminder = "⚠ Dra av förbrukning: proviant, vatten, facklor och lampolja.";
+
+/**
+ * GM-effekter (person/scen/värld) — docs/dev/GM_EFFEKTFONSTER_ANALYS.md.
+ *
+ * ⚠ Bara den del av effektmodellen som INTE redan har en hemvist bor här:
+ *  - Attributnivå-effekter på scennivå ("Dimön PSY×2") går via den BEFINTLIGA
+ *    `game.dode.SceneEffects` (scripts/utils/scene-effects.mjs) — riktiga
+ *    ActiveEffects, inte det här. Bygg inte om den.
+ *  - Personnivå-villkor ("armObrukbar") går via CONFIG.statusEffects + Token
+ *    HUD — riktiga ActiveEffects med `statuses:[id]`, inte det här heller.
+ *  - Det HÄR täcker bara det tre sorters effekter som saknar en Foundry-egen
+ *    hemvist: namngivna färdighetsmodifierare (skillMod) och situationella
+ *    CL-modifierare (clMod) på scen-/världsnivå, samt periodiska HP-/
+ *    färdighetstickar (periodic) — se GM_EFFEKTFONSTER_ANALYS.md "Fyra olika
+ *    EFFEKTTYPER".
+ *
+ * Radform: {id, label, scope:"scene"|"world", kind:"skillMod"|"clMod"|"periodic",
+ *   operation:"add"|"multiply", skillKey, value, cadence:"round"|"hour"|"day",
+ *   duration:{mode:"timed"|"manual", expiresAt}, source, note}
+ */
+DODE.NAMED_EFFECTS_FLAG = "namedEffects";
+
+/** Har en `timed`-effekt gått ut? `manual`-effekter går aldrig ut av sig själva. */
+DODE.isEffectExpired = function (effect) {
+  if (effect?.duration?.mode !== "timed") return false;
+  const expiresAt = effect.duration.expiresAt ?? 0;
+  return (game.time?.worldTime ?? 0) >= expiresAt;
+};
+
+/**
+ * Världseffekter — lagras i en world-scoped Setting (ingen Document-typ täcker
+ * "gäller för alla i världen" på samma sätt som en Scene/Region täcker ett
+ * område). ⚠ Ingen inbyggd urblekning här (till skillnad från ActiveEffects'
+ * egen `duration`) — `isEffectExpired` konsulteras av läsarna, inte av lagret.
+ */
+DODE.getWorldEffects = function ({ includeExpired = false } = {}) {
+  const all = game.settings.get(game.system.id, "worldEffects") ?? [];
+  return includeExpired ? all : all.filter((e) => !DODE.isEffectExpired(e));
+};
+
+DODE.addWorldEffect = async function (effect) {
+  const all = game.settings.get(game.system.id, "worldEffects") ?? [];
+  const record = { id: foundry.utils.randomID(), ...effect };
+  await game.settings.set(game.system.id, "worldEffects", [...all, record]);
+  return record;
+};
+
+DODE.removeWorldEffect = async function (id) {
+  const all = game.settings.get(game.system.id, "worldEffects") ?? [];
+  await game.settings.set(game.system.id, "worldEffects", all.filter((e) => e.id !== id));
+};
+
+/** Scen-effekter — en ren dataflagga på Scene-dokumentet, GM-only skrivning. */
+DODE.getSceneEffects = function (scene, { includeExpired = false } = {}) {
+  const all = scene?.getFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG) ?? [];
+  return includeExpired ? all : all.filter((e) => !DODE.isEffectExpired(e));
+};
+
+DODE.addSceneEffect = async function (scene, effect) {
+  const all = scene.getFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG) ?? [];
+  const record = { id: foundry.utils.randomID(), ...effect };
+  await scene.setFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG, [...all, record]);
+  return record;
+};
+
+DODE.removeSceneEffect = async function (scene, id) {
+  const all = scene.getFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG) ?? [];
+  await scene.setFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG, all.filter((e) => e.id !== id));
+};
+
+/**
+ * Aktör-scopade GM-effekter — en aktörsflagga, samma form som scen/värld.
+ * Tillkom 2026-08-05 för återhämtningseffekter: en besvärjelse måste kunna ge
+ * en TIDSBEGRÄNSAD personlig bonus som överlever scenbyten (UC-R11,
+ * AATERHAMTNING_ANVANDNINGSFALL.md) — skiljer sig från person-scope-villkor
+ * (typ 4, CONFIG.statusEffects) genom att den bär ett VÄRDE (skillMod/clMod/
+ * recoveryMod), inte bara ett sant/falskt.
+ */
+DODE.getActorEffects = function (actor, { includeExpired = false } = {}) {
+  const all = actor?.getFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG) ?? [];
+  return includeExpired ? all : all.filter((e) => !DODE.isEffectExpired(e));
+};
+
+DODE.addActorEffect = async function (actor, effect) {
+  const all = actor.getFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG) ?? [];
+  const record = { id: foundry.utils.randomID(), ...effect };
+  await actor.setFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG, [...all, record]);
+  return record;
+};
+
+DODE.removeActorEffect = async function (actor, id) {
+  const all = actor.getFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG) ?? [];
+  await actor.setFlag(game.system.id, DODE.NAMED_EFFECTS_FLAG, all.filter((e) => e.id !== id));
+};
+
+/**
+ * Namngivna färdighetsmodifierare (skillMod) på scen-/världsnivå, för given
+ * aktör. Samma add/multiply-semantik som `skillModifierTotals`
+ * (actor-character.mjs) — den funktionen är den som faktiskt konsumerar detta,
+ * det här är bara den delade uppslagslogiken.
+ *
+ * @param {Actor} actor
+ * @param {Scene|null} scene Aktörens aktuella scen (null = ingen scenmatchning).
+ * @returns {{totals: Record<string, number>, sources: Record<string, {label:string,value:number,operation:string}[]>}}
+ */
+DODE.namedSkillModEffects = function (actor, scene = null) {
+  const effects = [
+    ...(scene ? DODE.getSceneEffects(scene) : []),
+    ...DODE.getWorldEffects()
+  ].filter((e) => e.kind === "skillMod" && e.skillKey);
+  const totals = {};
+  const sources = {};
+  for (const e of effects) {
+    const op = e.operation === "multiply" ? "multiply" : "add";
+    if (op === "add") {
+      totals[e.skillKey] = (totals[e.skillKey] ?? 0) + (e.value ?? 0);
+    } else {
+      // Multiplikation appliceras på den ADDITIVA totalen så här långt —
+      // ordningen (add sedan multiply) matchar hur DODE.magicCostMultiplier
+      // och andra bonus×faktor-beräkningar redan görs i den här filen.
+      totals[e.skillKey] = (totals[e.skillKey] ?? 0) * (e.value ?? 1);
+    }
+    (sources[e.skillKey] ??= []).push({ label: e.label ?? e.source ?? "Effekt", value: e.value, operation: op });
+  }
+  return { totals, sources };
+};
+
+/**
+ * HP-/PSY-återhämtningsmodifierare (recoveryMod) från GM-effekter — person-,
+ * scen- OCH världsscope, till skillnad från namedSkillModEffects ovan (bara
+ * scen+värld). Se docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R9–R15.
+ *
+ * @param {Actor} actor
+ * @param {Scene|null} scene
+ * @returns {{hp: {add:number, multiply:number}, psy: {add:number, multiply:number}}}
+ */
+DODE.recoveryModEffects = function (actor, scene = null) {
+  const totals = { hp: { add: 0, multiply: 1 }, psy: { add: 0, multiply: 1 } };
+  const effects = [
+    ...(actor ? DODE.getActorEffects(actor) : []),
+    ...(scene ? DODE.getSceneEffects(scene) : []),
+    ...DODE.getWorldEffects()
+  ].filter((e) => e.kind === "recoveryMod" && totals[e.resource]);
+  for (const e of effects) {
+    const bucket = totals[e.resource];
+    if (e.operation === "multiply") bucket.multiply *= (e.value ?? 1);
+    else bucket.add += (e.value ?? 0);
+  }
+  return totals;
+};
+
+/**
+ * Situationella CL-modifierare (clMod) från scen+värld — för att blanda in i
+ * `resolveAttack()`s `mods`-objekt (rolls/attack.mjs). Returnerar en enkel
+ * summa, inte per-färdighet, eftersom CL-mods är slagspecifika snarare än
+ * bundna till en namngiven färdighet.
+ */
+DODE.situationalClMods = function (actor, sceneId = null) {
+  const scene = sceneId ? game.scenes?.get(sceneId) : (game.scenes?.active ?? canvas?.scene ?? null);
+  const effects = [
+    ...(scene ? DODE.getSceneEffects(scene) : []),
+    ...DODE.getWorldEffects()
+  ].filter((e) => e.kind === "clMod");
+  return effects.reduce((sum, e) => sum + (e.value ?? 0), 0);
+};
+
+/**
+ * Aktörens aktiva villkor (statuseffekter) — tunn wrapper runt Foundrys egen
+ * `Actor#statuses` (ett Set av CONFIG.statusEffects-id:n med en aktiv
+ * ActiveEffect just nu). Se DODE_conditions/Token HUD, inte ett eget lager.
+ */
+DODE.actorConditions = function (actor) {
+  return actor?.statuses ?? new Set();
+};
+
+/**
+ * Ambidextriös-undantaget — CLAUDE.md "Beslutade avsteg", Johan 2026-08-04:
+ * en Ambidextriös rollperson hoppar över Två vapen-träningskravet helt (RP:s
+ * egen definition av Ambidextriös — "bägge händerna samtidigt ... utan några
+ * som helst problem" — tolkas som att redan uppfylla vad färdigheten
+ * representerar). Dubbelhänt får INTE samma genväg (RP s.27: "dock inte
+ * samtidigt", precis den kvalitet Två vapen kräver).
+ */
+DODE.canDualWieldWithoutTraining = function (actor) {
+  return actor?.system?.swordHand === "ambidextrios";
+};
+
+/**
+ * Periodiska effekter (kind:"periodic") — person-scopade, till skillnad från
+ * skillMod/clMod ovan. En förgiftad karaktär är EN specifik aktörs problem,
+ * inte scenens eller världens — så det här lagret är en flagga på AKTÖREN,
+ * inte scen-/världseffekt-listorna. Se docs/dev/GM_EFFEKTFONSTER_ANALYS.md:
+ * ingen inbyggd Foundry-mekanism gör "skada en gång per runda/timme/dygn,
+ * sedan sluta" — ActiveEffect-lägen (ADD/MULTIPLY) är statiska/kontinuerliga.
+ *
+ * Radform: {id, label, cadence:"round"|"hour"|"day", target:"hp"|skillKey,
+ *   amount, ticksRemaining, source, onsetAt (worldTime periodens aktivering)}
+ */
+DODE.PERIODIC_EFFECTS_FLAG = "periodicEffects";
+
+DODE.getPeriodicEffects = function (actor) {
+  return actor?.getFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG) ?? [];
+};
+
+DODE.addPeriodicEffect = async function (actor, effect) {
+  const all = DODE.getPeriodicEffects(actor);
+  const record = { id: foundry.utils.randomID(), ...effect };
+  await actor.setFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG, [...all, record]);
+  return record;
+};
+
+DODE.removePeriodicEffect = async function (actor, id) {
+  const all = DODE.getPeriodicEffects(actor);
+  await actor.setFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG, all.filter((e) => e.id !== id));
+};
+
+/**
+ * Per-aktör kö för `tickPeriodicEffect` — se funktionens egen kommentar för
+ * varför den här behövs. Modulnivå, inte på `DODE`, med avsikt: rent internt
+ * synkroniseringstillstånd, inte en del av det publika `CONFIG.DODE`-API:t.
+ */
+const _periodicTickQueues = new Map();
+function _queuePerActor(actorId, task) {
+  const prev = _periodicTickQueues.get(actorId) ?? Promise.resolve();
+  const next = prev.then(task, task);
+  _periodicTickQueues.set(actorId, next.catch(() => {}));
+  return next;
+}
+
+/**
+ * Tickar EN periodisk effekt `count` gånger på en gång (default 1 — ett
+ * enskilt stridsrunde-tick; ett större `count` används av `advanceTime()` för
+ * att lösa upp flera dagars/rundors ackumulerad effekt i ETT hopp i stället
+ * för en loop, t.ex. "3 dagar strandsatt i öknen" utan att en Combat behöver
+ * existera — se docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R20 och Johans
+ * uttryckliga fråga 2026-08-05 om hur SL hanterar kvarvarande gifttickar
+ * UTANFÖR strid.
+ *
+ * Drar `amount × count` från HP eller en namngiven färdighets `system.bonus`
+ * (ett negativt bonusfält, samma fält "Färdigheters bonus/total-fältmönster"
+ * § session 8 redan använder för manuella justeringar), minskar
+ * `ticksRemaining` med `count` (aldrig under 0), tar bort effekten helt när
+ * den når 0.
+ *
+ * ⚠ **HP klampas INTE vid 0** — RP/SLB s.18-20:s dödsmodell (0 till −FYS:
+ * blöder, ≤ −FYS: dör) kräver att KP kan gå negativt. Ett tidigare
+ * `Math.max(0, ...)`-klamp här gjorde gift OFÖRMÖGET att döda, i strid mot
+ * `anatomy.mjs#applyLocationDamage`, som redan aldrig klampar. Rättat
+ * 2026-08-05 efter Johans fråga om hur en SL kan låta ett förgiftat offer dö
+ * av exponering i öknen — svaret ska vara "ja, om giftet är dödligt nog",
+ * inte "nej, motorn stoppar vid 0 oavsett".
+ *
+ * ⚠ **Serialiserad per aktör OCH läser färskt tillstånd vid körning, inte
+ * vid anrop.** Rättat 2026-08-06 efter ett RIKTIGT canvas/token-drivet test
+ * (Johan: "all characters should be on canvas with real test characters or
+ * it cannot be considered a real test... hook tests are exactly the place
+ * where things break") avslöjade att två snabbt påföljande
+ * `combat.nextRound()`-anrop kunde tappa en tick helt TYST, utan
+ * konsolfel: `combatRound`-hooken (dode.mjs) väntar INTE in föregående
+ * hookanrops `await actor.update(...)` innan Foundry tillåter nästa runda,
+ * så två överlappande anrop kunde båda läsa SAMMA gamla hp/ticksRemaining
+ * och skriva samma nya värde två gånger. En tidigare hook-genvägstest
+ * (`Hooks.callAll(...)` med en handkonstruerad `{combatants:[{actor}]}`,
+ * ETT anrop i taget) kunde aldrig avslöja detta — bara en riktig sekvens av
+ * riktiga `combat.nextRound()`-anrop mot en riktigt placerad, länkad token
+ * gjorde det. HP- och flagg-uppdateringen slås nu ihop till EN atomär
+ * `actor.update()` (i stället för två separata dokumentuppdateringar), och
+ * en modulnivå-kö (`_queuePerActor`) tvingar överlappande anrop för SAMMA
+ * aktör att köra i tur och ordning, var och en läsandes det just då senaste
+ * tillståndet — inte ett argument som kan vara inaktuellt.
+ */
+DODE.tickPeriodicEffect = async function (actor, effect, count = 1) {
+  return _queuePerActor(actor.id, async () => {
+    const latest = DODE.getPeriodicEffects(actor).find((e) => e.id === effect.id);
+    if (!latest) return; // redan borttagen av en tidigare tick i samma kö
+    const applied = Math.min(count, latest.ticksRemaining ?? 1);
+    if (applied <= 0) return;
+
+    const remaining = (latest.ticksRemaining ?? 1) - applied;
+    const currentEffects = DODE.getPeriodicEffects(actor);
+    const nextEffects = remaining <= 0
+      ? currentEffects.filter((e) => e.id !== latest.id)
+      : currentEffects.map((e) => (e.id === latest.id ? { ...e, ticksRemaining: remaining } : e));
+
+    if (latest.target === "hp") {
+      const hp = actor.system.hp ?? {};
+      await actor.update({
+        "system.hp.value": (hp.value ?? hp.max ?? 0) - latest.amount * applied,
+        [`flags.${game.system.id}.${DODE.PERIODIC_EFFECTS_FLAG}`]: nextEffects
+      });
+    } else {
+      const item = actor.items.find((i) => i.type === "fardighet" && i.system.skillKey === latest.target);
+      if (item) await item.update({ "system.bonus": (item.system.bonus ?? 0) - latest.amount * applied });
+      await actor.setFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG, nextEffects);
+    }
+  });
+};
+
+/**
+ * Löser upp ackumulerad periodisk effekt (gift m.fl.) när tiden flyttas
+ * UTANFÖR strid — SL:s tidsfönster (`apps/time-window.mjs`/`advanceTime()`)
+ * är den enda platsen tiden rör sig när ingen `Combat` är igång, och fram
+ * till nu tickade `cadence:"round"`-effekter ENDAST via `combatRound`-hooken
+ * (dode.mjs) — en förgiftad karaktär som lämnar striden slutade alltså ta
+ * skada helt, oavsett hur mycket speltid som gick. Johan, 2026-08-05: en SL
+ * måste kunna låta en strandsatt, förgiftad rollperson dö av exponering i
+ * öknen utan att först tvinga fram en påhittad stridssituation.
+ *
+ * Konverterar förfluten tid till hela stridsrundor (`SECONDS_PER_ROUND`,
+ * avrundat nedåt — en påbörjad runda räknas inte) och tickar varje
+ * `"round"`-kadens-effekt på aktören i EN batch (se `tickPeriodicEffect`s
+ * `count`-parameter) i stället för en runda-för-runda-loop. `"hour"`/
+ * `"day"`-kadens har ingen sourcad användning ännu (bara Gift finns byggt,
+ * och Gift använder alltid `"round"`) — lämnas orört tills ett verkligt
+ * fall dyker upp, se docs/dev/GM_EFFEKTFONSTER_ANALYS.md.
+ */
+DODE.applyPeriodicTicksForElapsedTime = async function (actor, seconds) {
+  const rounds = Math.floor(seconds / DODE.SECONDS_PER_ROUND);
+  if (rounds < 1) return [];
+  const applied = [];
+  for (const effect of DODE.getPeriodicEffects(actor).filter((e) => e.cadence === "round")) {
+    await DODE.tickPeriodicEffect(actor, effect, rounds);
+    applied.push({ label: effect.label, ticks: Math.min(rounds, effect.ticksRemaining ?? 1) });
+  }
+  return applied;
+};
+
+/**
+ * Gift — SL-boken s.50-51 (REGLER_STRID.md "Gift"). ⚠ **Effektnivån
+ * (lindrig/måttlig/allvarlig/dödlig) avgörs av offrets FYS mot giftets STY på
+ * "Motståndstabellen" — den tabellen är refererad överallt i källmaterialet
+ * (minst 15 olika regler, Judo/Bola/Lasso/Härskri/Psykisk duell m.fl.) men
+ * ALDRIG faktiskt transkriberad någonstans i det kurerade materialet (bara
+ * "se grundreglerna"). Den kan alltså inte byggas här utan att gissa siffror
+ * — se DESIGN_DECISIONS.md backlog. `severity` är därför ett explicit
+ * SL-angivet argument, inte något den här funktionen räknar fram.**
+ *
+ * Det som ÄR fullt sourcat och byggs här: tidsfördröjningen till debut per
+ * effektnivå, med giftets STY dragen av (STY 15 → "20" blir "5").
+ *
+ * @param {Actor} actor Offret.
+ * @param {object} o
+ * @param {"lindrig"|"mattlig"|"allvarlig"|"dodlig"} o.severity
+ * @param {number} o.poisonSty
+ * @param {number} [o.amount=1] Skada per tick.
+ * @param {"hp"|string} [o.target="hp"]
+ * @param {number} o.ticks Antal tickar innan giftet klingar av. ⚠ Ingen
+ *   bokkälla hittad för det här talet heller — SL anger det, funktionen
+ *   gissar inte ett standardvärde.
+ */
+DODE.applyPoisonEffect = async function (actor, { severity, poisonSty, amount = 1, target = "hp", ticks }) {
+  if (!Number.isInteger(ticks) || ticks < 1) {
+    throw new Error("applyPoisonEffect: `ticks` måste anges explicit av SL — ingen bokkälla för ett standardvärde.");
+  }
+  const highSty = poisonSty >= 30;
+  const onsetTable = highSty
+    ? { lindrig: { value: 1, unit: "SR" }, mattlig: { value: 2, unit: "SR" }, allvarlig: { value: 3, unit: "SR" }, dodlig: { value: 1, unit: "minut" } }
+    : { lindrig: { value: 20, unit: "SR" }, mattlig: { value: 20, unit: "minut" }, allvarlig: { value: 20, unit: "timme" }, dodlig: { value: 20, unit: "dygn" } };
+  const onset = onsetTable[severity];
+  if (!onset) throw new Error(`applyPoisonEffect: okänd effektnivå "${severity}".`);
+  // ⚠ STY dras bara av inom SAMMA enhet på under-30-grenen (RP:s exempel:
+  // STY 15 → 20 SR blir 5 SR). Över-30-grenen ger inget avdrag i källan.
+  const value = highSty ? onset.value : Math.max(1, onset.value - poisonSty);
+
+  return DODE.addPeriodicEffect(actor, {
+    label: `Gift (${severity})`,
+    cadence: "round",
+    target,
+    amount,
+    ticksRemaining: ticks,
+    source: "poison",
+    onsetDelay: { value, unit: onset.unit }
+  });
+};
+
+/**
+ * Motståndstabellen — SL s.34 / RP s.37-38. Källan för "se grundreglerna" som
+ * refereras av ~15 olika regler (Judo, Bola, Lasso, Piska, Härskri, Psykisk
+ * duell, gift, magiskt motstånd m.fl., se docs/extracts/DODE_Regler_
+ * MOTSTANDSTABELLEN.md i Roll20-projektet för fulla tabellen och sourcingen)
+ * — hittad och transkriberad 2026-08-05 efter att ha saknats helt tidigare.
+ *
+ * Två användningssätt av samma tabell (RP s.37, ordagrant): antingen slår
+ * man mot en FAST svårighetsgrad (DODE.difficultyGrades) för en generisk
+ * situation, eller mot en ANNAN VARELSES relevanta grundegenskap som SG —
+ * det är vad ett "motståndslag" (X mot Y på Motståndstabellen) egentligen är.
+ *
+ * ⚠ Formeln är avläst ur tabellens eget mönster, inte tryckt som formel i
+ * boken — verifierad cell för cell mot den tryckta tabellen (SG 1-21,
+ * grundegenskap 1-21) innan den ersatte en uppslagstabell. Extrapolerar
+ * korrekt bortom tryckets SG 21/värde 21-gräns ("21 osv").
+ */
+DODE.difficultyGrades = {
+  "mycket-latt": 1, latt: 5, normalt: 10, svart: 15, "mycket-svart": 20, "extremt-svart": 25
+};
+
+/** @returns {number|null} Måltal för 1T20, `null` = automatiskt misslyckande, `Infinity` = automatisk framgång. */
+DODE.resistanceTarget = function (sg, attributeValue) {
+  const raw = attributeValue - sg + 10;
+  if (raw < 1) return null;
+  if (raw >= 20) return Infinity;
+  return raw;
+};
+
+/**
+ * Slår ett motståndsslag/grundegenskapsslag mot Motståndstabellen.
+ * @param {number} sg Svårighetsgrad — en fast DODE.difficultyGrades-nivå,
+ *   eller en motståndares relevanta grundegenskapsvärde för ett riktigt
+ *   motståndslag (t.ex. giftets STY).
+ * @param {number} attributeValue Den agerandes lämpliga grundegenskapsvärde.
+ */
+DODE.rollResistance = async function (sg, attributeValue) {
+  const target = DODE.resistanceTarget(sg, attributeValue);
+  if (target === null) return { roll: null, success: false, target, autoResult: "auto-miss" };
+  if (target === Infinity) return { roll: null, success: true, target, autoResult: "auto-success" };
+  const roll = await new Roll("1d20").evaluate();
+  return { roll, success: roll.total <= target, target, autoResult: null };
+};

@@ -80,7 +80,6 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
 - **The Svartfolk (Dark Folk) supplement hasn't been started.**
 - **Heroic abilities (HH p.20/46-48) can't be spent yet.** The heroic-deeds table (HH p.6-7) already rolls during character creation and correctly accumulates heroic points as a currency — but the separate 18-row table that currency is meant to be spent against, plus a UI for doing so, aren't built.
-- **The base number in the build-point table (`DODE.bpByNiva`) is flat 125 across all four tiers** despite a sourced 125/150/175 table — pending a rules decision, see `docs/DESIGN_DECISIONS.md`. The actual starting pool already differs in practice today, though: the hero tiers (Random Hero/True Hero/Godborn) get a build-point top-up from the heroic-deeds table that Ordinary never rolls for.
 - No English localization of the game content itself — only `lang/sv.json` exists, so the system's UI and compendiums are Swedish-only regardless of this README's language.
 - See code comments marked `⚠` for specific, deliberately flagged rule deviations or simplifications.
 
