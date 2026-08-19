@@ -90,7 +90,10 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
 
   async _prepareContext() {
     const scene = game.scenes.active ?? canvas?.scene ?? null;
-    const actors = game.actors.filter((a) => a.type === "character");
+    // ⚠ Inkluderade tidigare bara "character" — NPC:er gick inte att välja
+    // alls här, vilket direkt skulle blockera t.ex. "lägg brinnande på tre
+    // NPC:er". Fixad 2026-08-19 (Områdeseffekter, del 2).
+    const actors = game.actors.filter((a) => a.type === "character" || a.type === "npc");
     const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
 
     return {
@@ -217,20 +220,46 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     this.render();
   }
 
-  static async #onAddPeriodicEffect(event, target) {
-    const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
-    if (!actor) return ui.notifications.warn("Välj en rollperson.");
-    const form = target.closest("[data-effect-form]");
+  /**
+   * Delad fältläsning för periodeffekt-formuläret — bruten ut ur
+   * #onAddPeriodicEffect (Områdeseffekter del 2, 2026-08-19) så både den
+   * vanliga enda-aktör-vägen och det nya "tillämpa på målsatta tokens"-läget
+   * använder EXAKT samma fält, ingen risk att de glider isär.
+   */
+  #readPeriodicEffectFields(form) {
     const label = form.querySelector('[name="label"]').value.trim();
-    if (!label) return ui.notifications.warn("Effekten behöver ett namn.");
+    if (!label) { ui.notifications.warn("Effekten behöver ett namn."); return null; }
     const cadence = form.querySelector('[name="cadence"]').value;
     const targetField = form.querySelector('[name="target"]').value.trim() || "hp";
     const amount = Number(form.querySelector('[name="amount"]').value) || 0;
     const ticksRemaining = Number(form.querySelector('[name="ticks"]').value) || 0;
-    if (ticksRemaining < 1) return ui.notifications.warn("Antal tickar måste vara minst 1.");
-    await CONFIG.DODE.addPeriodicEffect(actor, {
-      label, cadence, target: targetField, amount, ticksRemaining, source: "gm"
-    });
+    if (ticksRemaining < 1) { ui.notifications.warn("Antal tickar måste vara minst 1."); return null; }
+    // ⚠ `source` styr ikonsynken (PERIODIC_STATUS_ICONS, config.mjs) — tidigare
+    // hårdkodad till "gm" här, vilket gjorde att GM-tillagda effekter ALDRIG
+    // tände Token HUD-ikonen även för gift/eld. Fixad i samma veva.
+    const source = form.querySelector('[name="source"]')?.value || "gm";
+    return { label, cadence, target: targetField, amount, ticksRemaining, source };
+  }
+
+  static async #onAddPeriodicEffect(event, target) {
+    const form = target.closest("[data-effect-form]");
+    const fields = this.#readPeriodicEffectFields(form);
+    if (!fields) return;
+
+    // Tillämpa på målsatta tokens (Områdeseffekter del 2) — SL:s snabbväg för
+    // att applicera en konsekvens ("dessa tre brinner") på flera aktörer i
+    // ETT klick i stället för att växla aktörsväljaren N gånger. Dedupas på
+    // aktör (två länkade tokens av samma aktör ska inte ge dubbla effekter).
+    if (form.querySelector('input[name="applyToTargets"]')?.checked) {
+      const actors = [...new Set([...game.user.targets].map((t) => t.actor).filter(Boolean))];
+      if (!actors.length) { ui.notifications.warn("Inga tokens målsatta."); return; }
+      for (const actor of actors) await CONFIG.DODE.addPeriodicEffect(actor, fields);
+      ui.notifications.info(`"${fields.label}" tillagd på ${actors.length} mål.`);
+    } else {
+      const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
+      if (!actor) return ui.notifications.warn("Välj en rollperson.");
+      await CONFIG.DODE.addPeriodicEffect(actor, fields);
+    }
     this.render();
   }
 

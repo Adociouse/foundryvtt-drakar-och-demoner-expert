@@ -58,6 +58,16 @@
         <input type="text" name="target" placeholder="hp eller färdighetsnyckel" list="dode-gm-skill-keys" value="hp" />
         <input type="number" name="amount" placeholder="Skada/tick" value="1" />
         <input type="number" name="ticks" placeholder="Antal tickar" value="1" min="1" />
+        <select name="source" title="Styr om en Token HUD-ikon tänds automatiskt (gift/eld/blödning)">
+          <option value="gm">Generisk (ingen ikon)</option>
+          <option value="poison">Gift</option>
+          <option value="eld">Eld</option>
+          <option value="blodning">Blödning</option>
+        </select>
+        <label class="mod-check apply-to-targets">
+          <input type="checkbox" name="applyToTargets" />
+          Tillämpa på målsatta tokens i stället för vald rollperson
+        </label>
         <button type="button" data-action="addPeriodicEffect"><i class="fa-solid fa-plus"></i> Lägg till</button>
       </div>
     {{else}}

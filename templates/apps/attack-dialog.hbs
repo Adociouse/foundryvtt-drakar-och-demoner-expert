@@ -1,11 +1,14 @@
 <div class="dode-attack-dialog-body">
-  <section class="attack-target">
-    {{#if target}}
-      <span class="target-label">Mål</span>
-      <img src="{{target.img}}" alt="" />
-      <span class="target-name">{{target.name}}</span>
+  <section class="attack-target {{#if multiTarget}}multi{{/if}}">
+    {{#if targets.length}}
+      <span class="target-label">{{#if multiTarget}}Mål ({{targets.length}}){{else}}Mål{{/if}}</span>
+      <ul class="target-list">
+        {{#each targets}}
+          <li><img src="{{this.img}}" alt="" /><span class="target-name">{{this.name}}</span></li>
+        {{/each}}
+      </ul>
     {{else}}
-      <p class="hint">⚠ Inget mål valt — högerklicka en token på kartan för att sikta på den, öppna sedan om dialogen.</p>
+      <p class="hint">⚠ Inget mål valt — högerklicka en token på kartan för att sikta på den (Shift-klick för flera), öppna sedan om dialogen.</p>
     {{/if}}
   </section>
 
@@ -23,12 +26,14 @@
     <p class="hint">⚠ Inget matchande färdighets-item hittat för valt vapen — lägg till en färdighetsrad innan anfallet kan slås.</p>
   {{/if}}
 
-  <label class="field">Riktat träffområde
-    <select name="aimedAt">
-      <option value="">(inget — slår normalt)</option>
-      {{#each aimedOptions}}<option value="{{this.key}}">{{this.label}} (−5 CL)</option>{{/each}}
-    </select>
-  </label>
+  {{#if showAimed}}
+    <label class="field">Riktat träffområde
+      <select name="aimedAt">
+        <option value="">(inget — slår normalt)</option>
+        {{#each aimedOptions}}<option value="{{this.key}}">{{this.label}} (−5 CL)</option>{{/each}}
+      </select>
+    </label>
+  {{/if}}
 
   <fieldset class="intent-fieldset">
     <legend>Avsikt</legend>
@@ -60,7 +65,9 @@
   </label>
 
   <div class="parry-section">
-    {{#if parryBlockedReason}}
+    {{#if multiTarget}}
+      {{#if multiAutoParryNote}}<p class="hint">{{multiAutoParryNote}}</p>{{/if}}
+    {{else if parryBlockedReason}}
       <p class="hint">{{parryBlockedReason}}</p>
     {{else if canParry}}
       <label class="mod-check">

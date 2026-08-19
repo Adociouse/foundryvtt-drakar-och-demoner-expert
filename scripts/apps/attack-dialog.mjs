@@ -58,6 +58,29 @@ function effectiveFv(actor, skillItem) {
 }
 
 /**
+ * Bästa tillgängliga pareringsföremål för en försvarare — samma urval som
+ * _prepareContext()s `parryOptions`-lista (utrustat vapen/sköld, högst FV
+ * vinner), men returnerar bara ETT resultat direkt. Egen, medvetet duplicerad
+ * liten funktion (i stället för att refaktorera _prepareContext) — används av
+ * flermålsanfallets AUTOMATISKA pareringsläge (se #onSubmitAttack), där det
+ * inte finns någon manuell väljare att fråga per mål. Om målet saknar ett
+ * riktigt Item (t.ex. en icke-migrerad NPC) returneras `null` — flermålsläget
+ * ber INTE om en manuell FV-gissning per mål (det skulle bryta "ett submit,
+ * klart"-flödet), målet parerar helt enkelt inte i den batchen.
+ */
+function bestParryOption(targetActor, { targetBlind = false, morker = 0 } = {}) {
+  if (!targetActor) return null;
+  const candidates = targetActor.items.filter((i) =>
+    (i.type === "vapen" && i.system.equipped) || (i.type === "rustning" && i.system.slot === "skold" && i.system.equipped)
+  ).map((i) => {
+    const skill = findWeaponSkill(targetActor, i.name);
+    const rawFv = effectiveFv(targetActor, skill);
+    return { item: i, skill, fv: targetBlind ? Math.max(1, rawFv + morker) : rawFv };
+  }).sort((a, b) => b.fv - a.fv);
+  return candidates[0] ?? null;
+}
+
+/**
  * Anfallsdialogen — "detaljerad strid" (SLB s.16-18). En författningsyta
  * ovanpå den redan byggda, konsol-testade stridsmotorn (`resolveAttack`/
  * `postAttackCard`, rolls/attack.mjs) — ingen ny stridslogik här, bara
@@ -133,8 +156,16 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     return (ranged || isThrown ? RANGED_MODS : MELEE_MODS).morker;
   }
 
-  #targetToken() {
-    return game.user.targets.first() ?? null;
+  /**
+   * Alla just nu Foundry-målsatta tokens (game.user.targets, en Set GM:en/
+   * spelaren redan bygger med Foundrys egen targeting — T/Shift-klick, ingen
+   * ny mål-väljar-UI byggd här). Flermålsanfall (Områdeseffekter, del 1,
+   * 2026-08-19): ett anfall/en besvärjelseeffekt kan träffa flera KÄNDA,
+   * redan markerade mål — INTE en simulering av var elden sprider sig, bara
+   * en batch av samma redan bevisade en-mot-ett-upplösning (#onSubmitAttack).
+   */
+  #targetTokens() {
+    return [...game.user.targets];
   }
 
   /**
@@ -185,7 +216,16 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const ranged = category === "projektil";
     const isThrown = category === "kast";
 
-    const targetToken = this.#targetToken();
+    const targets = this.#targetTokens();
+    const multiTarget = targets.length > 1;
+    // ⚠ Riktat träffområde är ett PER-MÅL-begrepp (olika varelser har olika
+    // kroppsplan) — meningslöst över flera samtidigt olika mål i EN
+    // submission, döljs helt vid flermål i stället för att gissa ett delat
+    // träffområde. `showAimed` styr bara UI:t; `targetToken`/`targetActor`
+    // nedan pekar på det FÖRSTA målet och används bara av den (oförändrade)
+    // enda-måls-pareringsvyn.
+    const showAimed = !multiTarget;
+    const targetToken = targets[0] ?? null;
     const targetActor = targetToken?.actor ?? null;
     const bodyPlan = targetActor?.system?.bodyPlan ?? "humanoid";
     const planDef = CONFIG.DODE.bodyPlans[bodyPlan] ?? CONFIG.DODE.bodyPlans.humanoid;
@@ -241,10 +281,19 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const targetNpcAttacks = targetActor?.type === "npc" ? (targetActor.system.attacks ?? []) : [];
     const suggestedParryFv = targetNpcAttacks.length ? Math.max(...targetNpcAttacks.map((a) => a.fv ?? 0)) : "";
 
+    // Flermål (2+): ingen förhandsvisad pareringslista går att visa meningsfullt
+    // (varje mål kan ha olika utrustning/villkor) — i stället ett förklarande
+    // rad, samma "ranged aldrig parerbart"-regel som redan gäller (om vapnet
+    // är ranged visas ingen rad alls, precis som för ett enda mål).
+    const multiAutoParryNote = multiTarget && !ranged
+      ? "Parering sker automatiskt per mål med bästa tillgängliga försvar."
+      : null;
+
     return {
       isNpc, weaponOptions, weaponKey: this.weaponKey,
       selectedNoSkill: !!weaponOptions.find((w) => w.key === this.weaponKey)?.noSkill,
-      target: targetActor ? { name: targetActor.name, img: targetToken.document.texture.src ?? targetActor.img } : null,
+      targets: targets.map((t) => ({ name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img })),
+      multiTarget, multiAutoParryNote, showAimed,
       aimedOptions, modEntries, canParry, parryOptions,
       parryBlockedReason: targetBlocking
         ? `⚠ Målet är ${BLOCKING_STATUS_LABELS[targetBlocking]} — kan inte parera (SLB s.17)` : null,
@@ -299,8 +348,9 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
 
   static async #onSubmitAttack(event, target) {
     const form = this.element;
-    const targetToken = this.#targetToken();
-    if (!targetToken?.actor) { ui.notifications.warn("Inget mål valt — högerklicka en token på kartan."); return; }
+    const targets = this.#targetTokens().filter((t) => t?.actor);
+    if (!targets.length) { ui.notifications.warn("Inget mål valt — högerklicka en token på kartan."); return; }
+    const multiTarget = targets.length > 1;
 
     const isNpc = this.isNpc;
     const selected = this.#selectedWeapon();
@@ -344,80 +394,115 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const mods = {};
     for (const el of form.querySelectorAll('[data-mod-value]:checked')) mods[el.dataset.modKey] = Number(el.dataset.modValue);
     if (this.actor.statuses?.has("blind")) mods.blind_attacker = this.#morkerFor(ranged, isThrown);
-    const aimedAt = form.querySelector('select[name="aimedAt"]')?.value || null;
+    // Riktat träffområde är ett per-mål-begrepp, döljs i UI:t vid flermål
+    // (se _prepareContext) — samma sak gäller här: ignorera fältet helt.
+    const aimedAt = multiTarget ? null : (form.querySelector('select[name="aimedAt"]')?.value || null);
     const intent = form.querySelector('input[name="intent"]:checked')?.value ?? "skada";
 
     // Parering uteblir helt vid ett blockerande villkor ELLER SL:s
     // engångsbedömning "målet är oförberett" — läses FÄRSKT här, inte
     // cachat från _prepareContext (samma disciplin som periodisk-effekt-
-    // koden redan etablerat: läs aktuellt tillstånd vid körning).
+    // koden redan etablerat: läs aktuellt tillstånd vid körning). Delad av
+    // ALLA mål i batchen — en enda engångsbedömning för hela anfallet, inte
+    // en per mål-fråga (skulle bryta "ett submit, klart"-flödet).
     const attackUnprepared = !!form.querySelector('input[name="attackUnprepared"]')?.checked;
-    const targetBlocking = blockingStatusOf(targetToken.actor);
-    let parryItem = null, parrySkill = null, parryFv = null;
-    if (!attackUnprepared && !targetBlocking && form.querySelector('input[name="targetParries"]')?.checked) {
-      const parryKey = form.querySelector('select[name="parryItemKey"]')?.value;
-      const item = parryKey ? (targetToken.actor.items.get(parryKey) ?? null) : null;
-      let rawFv = null;
-      // ⚠ Egen lokal `defenderSkill` — MEDVETET inte döpt `skill`, för att inte
-      // skugga funktionens yttre `skill` (anfallarens färdighet, läst igen i
-      // resolveAttack-anropet nedan). Blockscopat `const` hade varit tekniskt
-      // säkert även med samma namn, men ett namnbyte är billigare än att lita
-      // på att nästa redigerare minns det.
-      let defenderSkill = null;
-      if (item) {
-        parryItem = item;
-        defenderSkill = findWeaponSkill(targetToken.actor, item.name);
-        rawFv = defenderSkill ? effectiveFv(targetToken.actor, defenderSkill) : null;
-      }
-      if (rawFv === null) {
-        // ⚠ De flesta NPC:er (och obeväpnade karaktärer) har inget vapen-/
-        // rustning-Item alls att peka på — SLB s.17 kräver bara "ett vapen
-        // eller en sköld att parera med", inte ett registrerat Item, så det
-        // här är INTE ett fel, det är normalfallet för en NPC-försvarare.
-        // Samma "SL anger explicit FV"-flyktväg som `fv`-overriden på
-        // anfallssidan redan använder för SLP:er utan färdighets-Item.
-        rawFv = Number(form.querySelector('input[name="parryFvOverride"]')?.value) || 0;
-        if (!rawFv) {
-          ui.notifications.warn(`Inget FV att parera med för ${targetToken.actor.name} — ange ett manuellt.`);
-          return;
-        }
-        if (!parryItem) {
-          // Syntetiskt "vapen" enbart för att uppfylla resolveAttack()s
-          // `!!parryItem`-grind — samma mönster som NPC-anfallarens
-          // syntetiska vapenobjekt ovan. `baseValue: null` gör att
-          // vapenslitage-grenen redan hanterar "inget brytvärde" snyggt
-          // (attack.mjs har detta fallet inbyggt sedan tidigare).
-          parryItem = { name: "Naturligt försvar", img: targetToken.actor.img, system: { baseValue: null } };
-        }
-      }
-      // Blind mål: kollapsa till den redan byggda parryFv-flyktvägen med
-      // Mörker-avdraget inräknat — resolveAttack har ingen egen
-      // "pareringsmodifierare"-parameter (bara mods för anfallaren), så
-      // det här är den korrekta, motor-oförändrade vägen in.
-      if (targetToken.actor.statuses?.has("blind")) {
-        parryFv = Math.max(1, rawFv + this.#morkerFor(ranged, isThrown));
-      } else if (defenderSkill) {
-        parrySkill = defenderSkill;
-      } else {
-        parryFv = rawFv;
-      }
-    }
+    // Enda-måls-läget behåller den manuella pareringskryssrutan/väljaren
+    // oförändrad. Flermålsläget har ingen sådan UI (se _prepareContext) —
+    // parering försöks där ALLTID automatiskt när mekaniskt möjligt.
+    const wantsParry = multiTarget || !!form.querySelector('input[name="targetParries"]')?.checked;
 
     const attackerToken = this.actor.getActiveTokens(true)[0]?.document ?? null;
 
-    const result = await resolveAttack({
-      attacker: this.actor, weapon, skill, fv,
-      target: targetToken.actor, parryItem, parrySkill, parryFv,
-      aimedAt, intent, mods, ranged, detailed: true,
-      attackerToken, targetToken: targetToken.document
-    });
-
-    if (result.outOfRange) {
-      ui.notifications.warn(result.reason);
-      return;
+    // ⚠ Delat rubrikmeddelande FÖRE loopen vid flermål — annars ser chatten
+    // ut som N orelaterade anfall i stället för EN handling mot flera mål.
+    if (multiTarget) {
+      await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: `<p><strong>${weapon.name}</strong> — ${targets.length} mål</p>`
+      });
     }
 
-    await postAttackCard(result, { attacker: this.actor, weapon, parryItem, ranged });
+    for (const targetToken of targets) {
+      const targetBlocking = blockingStatusOf(targetToken.actor);
+      let parryItem = null, parrySkill = null, parryFv = null;
+      if (!attackUnprepared && !targetBlocking && wantsParry) {
+        if (multiTarget) {
+          // Automatiskt läge: bästa tillgängliga Item, ingen manuell prompt
+          // per mål (se bestParryOption — saknar målet ett riktigt Item
+          // parerar det helt enkelt inte i den här batchen).
+          const targetBlind = !!targetToken.actor.statuses?.has("blind");
+          const morker = this.#morkerFor(ranged, isThrown);
+          const best = bestParryOption(targetToken.actor, { targetBlind, morker });
+          if (best) {
+            parryItem = best.item;
+            if (targetBlind || !best.skill) parryFv = best.fv;
+            else parrySkill = best.skill;
+          }
+        } else {
+          const parryKey = form.querySelector('select[name="parryItemKey"]')?.value;
+          const item = parryKey ? (targetToken.actor.items.get(parryKey) ?? null) : null;
+          let rawFv = null;
+          // ⚠ Egen lokal `defenderSkill` — MEDVETET inte döpt `skill`, för att inte
+          // skugga funktionens yttre `skill` (anfallarens färdighet, läst igen i
+          // resolveAttack-anropet nedan). Blockscopat `const` hade varit tekniskt
+          // säkert även med samma namn, men ett namnbyte är billigare än att lita
+          // på att nästa redigerare minns det.
+          let defenderSkill = null;
+          if (item) {
+            parryItem = item;
+            defenderSkill = findWeaponSkill(targetToken.actor, item.name);
+            rawFv = defenderSkill ? effectiveFv(targetToken.actor, defenderSkill) : null;
+          }
+          if (rawFv === null) {
+            // ⚠ De flesta NPC:er (och obeväpnade karaktärer) har inget vapen-/
+            // rustning-Item alls att peka på — SLB s.17 kräver bara "ett vapen
+            // eller en sköld att parera med", inte ett registrerat Item, så det
+            // här är INTE ett fel, det är normalfallet för en NPC-försvarare.
+            // Samma "SL anger explicit FV"-flyktväg som `fv`-overriden på
+            // anfallssidan redan använder för SLP:er utan färdighets-Item.
+            rawFv = Number(form.querySelector('input[name="parryFvOverride"]')?.value) || 0;
+            if (!rawFv) {
+              ui.notifications.warn(`Inget FV att parera med för ${targetToken.actor.name} — ange ett manuellt.`);
+              return;
+            }
+            if (!parryItem) {
+              // Syntetiskt "vapen" enbart för att uppfylla resolveAttack()s
+              // `!!parryItem`-grind — samma mönster som NPC-anfallarens
+              // syntetiska vapenobjekt ovan. `baseValue: null` gör att
+              // vapenslitage-grenen redan hanterar "inget brytvärde" snyggt
+              // (attack.mjs har detta fallet inbyggt sedan tidigare).
+              parryItem = { name: "Naturligt försvar", img: targetToken.actor.img, system: { baseValue: null } };
+            }
+          }
+          // Blind mål: kollapsa till den redan byggda parryFv-flyktvägen med
+          // Mörker-avdraget inräknat — resolveAttack har ingen egen
+          // "pareringsmodifierare"-parameter (bara mods för anfallaren), så
+          // det här är den korrekta, motor-oförändrade vägen in.
+          if (targetToken.actor.statuses?.has("blind")) {
+            parryFv = Math.max(1, rawFv + this.#morkerFor(ranged, isThrown));
+          } else if (defenderSkill) {
+            parrySkill = defenderSkill;
+          } else {
+            parryFv = rawFv;
+          }
+        }
+      }
+
+      const result = await resolveAttack({
+        attacker: this.actor, weapon, skill, fv,
+        target: targetToken.actor, parryItem, parrySkill, parryFv,
+        aimedAt, intent, mods, ranged, detailed: true,
+        attackerToken, targetToken: targetToken.document
+      });
+
+      if (result.outOfRange) {
+        ui.notifications.warn(`${targetToken.actor.name}: ${result.reason}`);
+        continue;
+      }
+
+      await postAttackCard(result, { attacker: this.actor, weapon, parryItem, ranged });
+    }
+
     this.close();
   }
 }
