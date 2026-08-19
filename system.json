@@ -164,6 +164,7 @@
     }
   ],
   "socket": false,
+  "background": "systems/drakar-och-demoner-expert/assets/backgrounds/Ereb_Altor.png",
   "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "resources.psy",
   "compatibility": {
