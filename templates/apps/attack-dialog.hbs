@@ -1,0 +1,97 @@
+<div class="dode-attack-dialog-body">
+  <section class="attack-target">
+    {{#if target}}
+      <img src="{{target.img}}" alt="" />
+      <span class="target-name">{{target.name}}</span>
+    {{else}}
+      <p class="hint">Inget mål — högerklicka en token på kartan och välj den, öppna sedan om dialogen.</p>
+    {{/if}}
+  </section>
+
+  <label class="field">
+    {{#if isNpc}}Anfall{{else}}Vapen{{/if}}
+    <select name="weaponKey">
+      {{#each weaponOptions}}
+        <option value="{{this.key}}" data-base-fv="{{this.baseFv}}" {{#if (eq this.key ../weaponKey)}}selected{{/if}}>
+          {{this.label}} (FV {{this.baseFv}}){{#if this.noSkill}} — ⚠ ingen färdighet{{/if}}
+        </option>
+      {{/each}}
+    </select>
+  </label>
+  {{#if selectedNoSkill}}
+    <p class="hint">⚠ Inget matchande färdighets-item hittat för valt vapen — lägg till en färdighetsrad innan anfallet kan slås.</p>
+  {{/if}}
+
+  <label class="field">Riktat träffområde
+    <select name="aimedAt">
+      <option value="">(inget — slår normalt)</option>
+      {{#each aimedOptions}}<option value="{{this.key}}">{{this.label}} (−5 CL)</option>{{/each}}
+    </select>
+  </label>
+
+  <fieldset class="intent-fieldset">
+    <legend>Avsikt</legend>
+    <label><input type="radio" name="intent" value="skada" checked /> Skada</label>
+    <label><input type="radio" name="intent" value="bedova" /> Bedöva</label>
+  </fieldset>
+
+  {{#if modEntries.length}}
+    <fieldset class="mods-fieldset">
+      <legend>Situationsmodifikationer</legend>
+      {{#each modEntries}}
+        <label class="mod-check">
+          <input type="checkbox" data-mod-key="{{this.key}}" data-mod-value="{{this.value}}" />
+          {{this.label}}
+        </label>
+      {{/each}}
+    </fieldset>
+  {{/if}}
+
+  {{#if attackerBlindLabel}}
+    <p class="hint">⚠ {{attackerBlindLabel}} (samma modifierare som Mörker, redan inräknad nedan)</p>
+  {{/if}}
+
+  <p class="fv-preview">FV {{baseFv}} (grund {{baseFv}})</p>
+
+  <label class="mod-check attack-unprepared">
+    <input type="checkbox" name="attackUnprepared" />
+    Detta anfall: målet är oförberett (ingen parering, oavsett annat nedan)
+  </label>
+
+  <div class="parry-section">
+    {{#if parryBlockedReason}}
+      <p class="hint">{{parryBlockedReason}}</p>
+    {{else if canParry}}
+      <label class="mod-check">
+        <input type="checkbox" name="targetParries" {{#if parryDefaultChecked}}checked{{/if}} />
+        Målet parerar
+      </label>
+      <div class="parry-fields {{#unless parryDefaultChecked}}hidden{{/unless}}">
+        {{#if targetBlind}}
+          <p class="hint">⚠ Målet är blint — FV nedan är redan sänkt med Mörker-modifieraren.</p>
+        {{/if}}
+        {{#if parryOptions.length}}
+          <label class="field">Med
+            <select name="parryItemKey">
+              {{#each parryOptions}}
+                <option value="{{this.key}}">{{this.label}} (FV {{this.baseFv}}){{#if this.noSkill}} — ⚠ ingen färdighet{{/if}}</option>
+              {{/each}}
+            </select>
+          </label>
+          <label class="field">Manuellt FV (om ingen färdighet hittas ovan)
+            <input type="number" name="parryFvOverride" min="0" />
+          </label>
+        {{else}}
+          <p class="hint">⚠ Inget vapen-/rustnings-item att peka på (vanligt för NPC:er — SLB s.17 kräver bara "ett vapen eller en sköld", inte ett registrerat item). Ange FV direkt.</p>
+          <label class="field">Manuellt FV att parera med
+            <input type="number" name="parryFvOverride" min="0" value="{{suggestedParryFv}}" />
+          </label>
+        {{/if}}
+      </div>
+    {{/if}}
+  </div>
+
+  <button type="button" data-action="submitAttack" class="submit-attack">
+    <i class="fa-solid fa-crosshairs"></i> Anfall
+  </button>
+</div>

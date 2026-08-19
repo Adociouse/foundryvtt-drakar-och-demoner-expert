@@ -10,6 +10,7 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
     actions: {
       rollAttack: DoDENpcSheet.#onRollAttack,
       rollAttackDamage: DoDENpcSheet.#onRollAttackDamage,
+      declareAttack: DoDENpcSheet.#onDeclareAttack,
       addAttack: DoDENpcSheet.#onAddAttack,
       deleteAttack: DoDENpcSheet.#onDeleteAttack
     },
@@ -42,6 +43,14 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
   static async #onRollAttackDamage(event, target) {
     const index = Number(target.closest("[data-attack-index]")?.dataset.attackIndex);
     if (!Number.isNaN(index)) await this.actor.rollAttackDamage(index);
+  }
+
+  /** Öppnar Anfallsdialogen (detaljerad strid) förvald till denna anfallsrad. */
+  static async #onDeclareAttack(event, target) {
+    const index = Number(target.closest("[data-attack-index]")?.dataset.attackIndex);
+    if (Number.isNaN(index)) return;
+    const { default: DoDEAttackDialog } = await import("../apps/attack-dialog.mjs");
+    new DoDEAttackDialog(this.actor, { npcAttackIndex: index }).render(true);
   }
 
   static async #onAddAttack() {

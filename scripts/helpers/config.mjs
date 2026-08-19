@@ -2159,6 +2159,31 @@ DODE.canDualWieldWithoutTraining = function (actor) {
  */
 DODE.PERIODIC_EFFECTS_FLAG = "periodicEffects";
 
+// Bara de källor som redan har en tydlig Foundry-kärn-ikonmotsvarighet.
+// Utökas efter behov, inte en fullständig katalog — se planen "Stridsflödets
+// 'smoothness'" (Claude-planarkivet), Del 4.
+const PERIODIC_STATUS_ICONS = { poison: "poison", eld: "burning", blodning: "bleeding" };
+
+/**
+ * Synkar en periodeffektkällas Foundry-statusikon mot FAKTISKT kvarvarande
+ * effekter på aktören — anropas efter varje add/remove/utgång. Räknar alltid
+ * om från grunden (i stället för att varje anropsplats själv ska hålla reda
+ * på "gick just DEN HÄR till 0 nu") — skyddar mot att en andra giftkälla
+ * tystnar ikonen när bara den FÖRSTA klingar av. `actor.toggleStatusEffect`
+ * (Foundry-kärna) är idempotent, så ett onödigt anrop är ofarligt.
+ *
+ * ⚠ Bara riktningen periodeffekt → ikon byggs. Den omvända riktningen (SL
+ * klickar ikonen manuellt → ska det SKAPA en periodeffekt?) skulle kräva att
+ * gissa severity/ticks, precis den sortens gissning `applyPoisonEffect`
+ * medvetet vägrar göra — medvetet utanför scope.
+ */
+async function syncPeriodicStatusIcon(actor, source) {
+  const iconId = PERIODIC_STATUS_ICONS[source];
+  if (!iconId || !actor) return;
+  const stillActive = DODE.getPeriodicEffects(actor).some((e) => PERIODIC_STATUS_ICONS[e.source] === iconId);
+  await actor.toggleStatusEffect(iconId, { active: stillActive });
+}
+
 DODE.getPeriodicEffects = function (actor) {
   return actor?.getFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG) ?? [];
 };
@@ -2167,12 +2192,15 @@ DODE.addPeriodicEffect = async function (actor, effect) {
   const all = DODE.getPeriodicEffects(actor);
   const record = { id: foundry.utils.randomID(), ...effect };
   await actor.setFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG, [...all, record]);
+  await syncPeriodicStatusIcon(actor, record.source);
   return record;
 };
 
 DODE.removePeriodicEffect = async function (actor, id) {
   const all = DODE.getPeriodicEffects(actor);
+  const removed = all.find((e) => e.id === id);
   await actor.setFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG, all.filter((e) => e.id !== id));
+  if (removed) await syncPeriodicStatusIcon(actor, removed.source);
 };
 
 /**
@@ -2254,6 +2282,10 @@ DODE.tickPeriodicEffect = async function (actor, effect, count = 1) {
       if (item) await item.update({ "system.bonus": (item.system.bonus ?? 0) - latest.amount * applied });
       await actor.setFlag(game.system.id, DODE.PERIODIC_EFFECTS_FLAG, nextEffects);
     }
+    // Ikonsynk EFTER skrivningen ovan, så getPeriodicEffects() inuti den ser
+    // det uppdaterade (ev. borttagna) tillståndet — bara relevant om denna
+    // tick tömde effekten helt, men ofarligt att köra varje gång (idempotent).
+    await syncPeriodicStatusIcon(actor, latest.source);
   });
 };
 

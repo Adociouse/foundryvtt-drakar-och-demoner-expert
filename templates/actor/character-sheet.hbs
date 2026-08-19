@@ -237,6 +237,7 @@
         <a data-action="editItem" class="skill-name">{{entry.item.name}}</a>
         {{#if entry.isVapen}}
           <span class="skill-fv">{{entry.item.system.damage}}</span>
+          <button type="button" data-action="declareAttack" title="Anfall (detaljerad strid)"><i class="fa-solid fa-crosshairs"></i></button>
           <button type="button" data-action="rollDamage" title="Slå skada"><i class="fa-solid fa-burst"></i></button>
         {{else if entry.isRustning}}
           <span class="skill-fv">Abs {{entry.item.system.abs}}</span>

@@ -39,6 +39,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       toggleWizardUnlock: DoDECharacterSheet.#onToggleWizardUnlock,
       openWizardEdit: DoDECharacterSheet.#onOpenWizardEdit,
       rollDamage: DoDECharacterSheet.#onRollDamage,
+      declareAttack: DoDECharacterSheet.#onDeclareAttack,
       castSpell: DoDECharacterSheet.#onCastSpell,
       openTraining: DoDECharacterSheet.#onOpenTraining,
       openMagicTraining: DoDECharacterSheet.#onOpenMagicTraining,
@@ -811,6 +812,19 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static async #onRollDamage(event, target) {
     const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
     if (item) await this.actor.rollWeaponDamage(item);
+  }
+
+  /**
+   * Öppnar Anfallsdialogen (detaljerad strid, SLB s.16-18) förvald till detta
+   * vapen — se scripts/apps/attack-dialog.mjs. Skild från #onRollDamage ovan,
+   * som bara slår en fristående skaderulle utan parering/träffområde/rustning
+   * ("vanlig strid"-läget, se attack-dialog.mjs:s egen docblock).
+   */
+  static async #onDeclareAttack(event, target) {
+    const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
+    if (!item) return;
+    const { default: DoDEAttackDialog } = await import("../apps/attack-dialog.mjs");
+    new DoDEAttackDialog(this.actor, { weapon: item }).render(true);
   }
 
   static async #onCastSpell(event, target) {

@@ -134,7 +134,21 @@ export async function resolveAttack({
   // ⚠ **Vapnet bär inte FV** — färdigheten gör det (`item-vapen.mjs` har damage,
   // styGroup, baseValue m.m. men inget fv). Den som anropar måste skicka
   // färdigheten eller ett uttryckligt `fv`; annars finns ingen chans att träffa.
-  const baseFv = skill?.system.total ?? fvOverride ?? 0;
+  //
+  // ⚠ **Vapengrupps-/färdighetsmodifierare saknades här — hittat och rättat
+  // 2026-08-18 under Anfallsdialog-arbetet.** `actor.rollSkill()`
+  // (documents/actor.mjs) har alltid lagt `weaponGroupBonusTotals`/
+  // `skillModifierTotals` OVANPÅ `item.system.total` som ett separat,
+  // live-summerat lager (se den funktionens egen kommentar) — `resolveAttack`
+  // läste bara `skill.system.total` rakt av och missade båda. Ett stridsslag
+  // gav alltså tystare FV än ett vanligt färdighetsslag för SAMMA färdighet,
+  // t.ex. hela vapengruppens gratis delkredit (RP s.60) räknades aldrig i
+  // strid. Samma tillägg görs nu för BÅDE anfallaren och pareraren nedan.
+  const attackerBonus = skill
+    ? (attacker?.system?.weaponGroupBonusTotals?.[skill.system.skillKey] ?? 0)
+      + (attacker?.system?.skillModifierTotals?.[skill.system.skillKey] ?? 0)
+    : 0;
+  const baseFv = (skill ? skill.system.total + attackerBonus : null) ?? fvOverride ?? 0;
   if (!baseFv) throw new Error("resolveAttack: skicka `skill` (fardighet-Item) eller `fv` — vapnet bär inget FV.");
   const modTotal = Object.values(mods).reduce((a, b) => a + b, 0) + (aimedAt ? -5 : 0);
   const fv = Math.max(1, baseFv + modTotal);
@@ -160,8 +174,14 @@ export async function resolveAttack({
 
   // ⚠ Parering: aldrig mot projektilvapen, och aldrig med ett avståndsvapen i
   // handen (SLB s.17). Kastvapen får pareras om försvararen har sköld.
+  // Samma vapengrupps-/färdighetsmodifierare-tillägg som `baseFv` ovan,
+  // fast på FÖRSVARAREN (`target`) — samma bugg, samma fix.
   const canParry = !!parryItem && !ranged;
-  const parryFvBase = parrySkill?.system.total ?? parryFv ?? baseFv;
+  const parryBonus = parrySkill
+    ? (target?.system?.weaponGroupBonusTotals?.[parrySkill.system.skillKey] ?? 0)
+      + (target?.system?.skillModifierTotals?.[parrySkill.system.skillKey] ?? 0)
+    : 0;
+  const parryFvBase = (parrySkill ? parrySkill.system.total + parryBonus : null) ?? parryFv ?? baseFv;
   const effectiveParryFv = weapon?.system?.hardToParry ? Math.floor(parryFvBase / 2) : parryFvBase;
   const par = canParry
     ? await classifiedRoll(effectiveParryFv)

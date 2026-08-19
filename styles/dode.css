@@ -942,3 +942,30 @@
 .dode-gm-effects-body .effect-form input[type="number"] { width: 64px; }
 .dode-gm-effects-body .effect-form .hidden { display: none; }
 .dode-gm-effects-body .effect-form button { font-size: 0.82em; white-space: nowrap; }
+
+/* ---- Anfallsdialogen (detaljerad strid, SLB s.16-18) ---- */
+.dode-attack-dialog-body { padding: 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.dode-attack-dialog-body .hidden { display: none; }
+.dode-attack-dialog-body .attack-target { display: flex; align-items: center; gap: 8px; }
+.dode-attack-dialog-body .attack-target img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; border: none; }
+.dode-attack-dialog-body .target-name { font-weight: 600; }
+.dode-attack-dialog-body .hint { opacity: 0.75; font-style: italic; font-size: 0.85em; margin: 0; }
+.dode-attack-dialog-body .field { display: flex; flex-direction: column; gap: 2px; font-size: 0.85em; }
+.dode-attack-dialog-body fieldset { border: 1px solid rgba(0, 0, 0, 0.15); border-radius: 4px; padding: 6px 8px; margin: 0; }
+.dode-attack-dialog-body fieldset legend { font-size: 0.8em; opacity: 0.8; padding: 0 4px; }
+.dode-attack-dialog-body .intent-fieldset { display: flex; gap: 12px; }
+.dode-attack-dialog-body .mods-fieldset { display: flex; flex-direction: column; gap: 3px; }
+.dode-attack-dialog-body .mod-check { display: flex; align-items: center; gap: 6px; font-size: 0.85em; }
+.dode-attack-dialog-body .fv-preview { font-weight: 600; font-size: 1.05em; margin: 0; text-align: center; }
+.dode-attack-dialog-body .parry-fields { display: flex; flex-direction: column; gap: 6px; padding-left: 20px; }
+.dode-attack-dialog-body .attack-unprepared { border-top: 1px solid rgba(0, 0, 0, 0.15); padding-top: 6px; }
+.dode-attack-dialog-body .parry-section.hidden { display: none; }
+.dode-attack-dialog-body .submit-attack { align-self: center; padding: 6px 18px; font-weight: 600; }
+
+/* ---- Combat Tracker-tillägget (ABS + snabbanfall per rad) ---- */
+.dode-abs {
+  display: flex; align-items: center; gap: 3px; font-size: 0.8em; opacity: 0.85;
+  white-space: nowrap; margin: 0 4px;
+}
+.dode-quick-attack { color: var(--color-text-light-highlight, inherit); }
+

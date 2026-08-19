@@ -33,6 +33,8 @@ import DoDETrainingApp from "./apps/training.mjs";
 import DoDETimeWindow from "./apps/time-window.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import DoDEGmEffectsApp from "./apps/gm-effects.mjs";
+import DoDEAttackDialog from "./apps/attack-dialog.mjs";
+import DoDECombatTracker from "./apps/combat-tracker.mjs";
 import { DODE } from "./helpers/config.mjs";
 import { resolveAttack, postAttackCard } from "./rolls/attack.mjs";
 import { resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS } from "./rolls/dual-wield.mjs";
@@ -68,6 +70,11 @@ Hooks.once("init", () => {
   ]) {
     CONFIG.statusEffects.push(status);
   }
+
+  // Utökad Combat Tracker (ABS + snabbanfallsknapp per rad) — MÅSTE sättas här
+  // (init), inte i ready: Game#initializeUI() instansierar CONFIG.ui.* strikt
+  // mellan setup- och ready-hookarna, se planen "Stridsflödets 'smoothness'".
+  CONFIG.ui.combat = DoDECombatTracker;
 
   Object.assign(CONFIG.Actor.dataModels, {
     character: DoDECharacterData,
@@ -290,6 +297,9 @@ Hooks.once("init", () => {
     // docs/dev/GM_EFFEKTFONSTER_ANALYS.md. Författningsyta, ingen egen
     // datamodell; öppnas även från Aktörskatalogens header-knapp (GM-only).
     openGmEffects: () => new DoDEGmEffectsApp().render(true),
+    // Anfallsdialogen (detaljerad strid) — normalt öppnad via en vapen-/
+    // anfallsrads egen knapp, konsolparitet för SL: game.dode.openAttackDialog(actor, {weapon}).
+    openAttackDialog: (actor, opts) => new DoDEAttackDialog(actor, opts).render(true),
     // Stridsupplösning — SLB s.16-18. GM: game.dode.resolveAttack({attacker, weapon, target, ...})
     resolveAttack, postAttackCard,
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
@@ -297,8 +307,54 @@ Hooks.once("init", () => {
     SceneEffects,
     // Två vapen — RP s.59. GM: game.dode.resolveTwoAttacks({attacker, primaryWeapon,
     // primarySkill, offWeapon, offSkill, primaryTarget, combo}).
-    resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS
+    resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS,
+    // Snabbanfall-hotbarmakron (se hotbarDrop-hooken nedan) anropar detta —
+    // löser aktören mot VILKEN TOKEN SOM JUST DÅ ÄR VALD, inte den aktör som
+    // råkade vara vald när makrot skapades. Namn, inte ID: `weaponOrAttackName`
+    // slås upp på nytt varje klick, samma etablerade namn-matchningskonvention
+    // som resten av stridssystemet (se rolls/dual-wield.mjs).
+    declareAttackMacro(weaponOrAttackName) {
+      const actor = ChatMessage.getSpeakerActor(ChatMessage.getSpeaker());
+      if (!actor) return ui.notifications.warn("Ingen token vald.");
+      if (actor.type === "npc") {
+        const index = actor.system.attacks.findIndex((a) => a.name === weaponOrAttackName);
+        if (index < 0) return ui.notifications.warn(`${actor.name} har inget anfall som heter "${weaponOrAttackName}".`);
+        return game.dode.openAttackDialog(actor, { npcAttackIndex: index });
+      }
+      const weapon = actor.items.find((i) => i.type === "vapen" && i.name === weaponOrAttackName);
+      if (!weapon) return ui.notifications.warn(`${actor.name} har inget vapen som heter "${weaponOrAttackName}".`);
+      return game.dode.openAttackDialog(actor, { weapon });
+    }
   };
+});
+
+/**
+ * Dra ett vapen-item till hotbaren → skapar ett makro som anfaller med det
+ * vapnet, löst mot vilken token som är vald VID KLICKTILLFÄLLET (inte
+ * dragtillfället) — se game.dode.declareAttackMacro ovan. Samma mönster
+ * dnd5e:s hotbarDrop-hantering redan bevisat (dnd5e.mjs, `create5eMacro`),
+ * byggt på ren Foundry-kärn-API (`hotbarDrop`-hooken, `ChatMessage.getSpeaker`)
+ * — inget dnd5e-specifikt lånas in.
+ *
+ * ⚠ Registreras i `ready`, INTE `init` — till skillnad från `CONFIG.ui.combat`
+ * fyrar `hotbarDrop` bara senare vid ett användarklick, så tidpunkten spelar
+ * ingen roll för korrekthet (samma resonemang dnd5e:s egen kodkommentar ger).
+ * Egen `ready`-hook, inte den GM-låsta nedan — en spelare ska kunna dra sitt
+ * eget vapen till sin egen hotbar utan att vara SL.
+ */
+Hooks.once("ready", () => {
+  Hooks.on("hotbarDrop", (bar, data, slot) => {
+    if (data.type !== "Item") return;
+    (async () => {
+      const item = await Item.implementation.fromDropData(data);
+      if (!item || item.type !== "vapen") return; // låt kärnans generiska fallback ta över
+      const command = `game.dode.declareAttackMacro(${JSON.stringify(item.name)})`;
+      const macro = game.macros.find((m) => m.name === item.name && m.command === command && m.isAuthor)
+        ?? await Macro.create({ name: item.name, type: "script", img: item.img, command, author: game.user.id });
+      await game.user.assignHotbarMacro(macro, slot);
+    })();
+    return false;
+  });
 });
 
 /**
