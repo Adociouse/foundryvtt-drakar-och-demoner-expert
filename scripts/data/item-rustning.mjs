@@ -36,6 +36,11 @@ export default class DoDERustningData extends foundry.abstract.TypeDataModel {
       abs: new fields.NumberField({ required: true, integer: true, initial: 0, min: 0 }),
       weight: new fields.NumberField({ required: false, initial: 0 }),
       price: new fields.NumberField({ required: false, integer: true, initial: 0 }),
+      // Naturlig rustning (tjockt skinn, fjäll) — mekaniskt IDENTISK med en
+      // tillverkad rustning (samma ABS-beräkning), bara inte plockbar/lootbar.
+      // Beslut 2026-08-19, se motsvarande fält i item-vapen.mjs. Styr enbart
+      // drag/loot-UI, ingen mekanisk skillnad.
+      natural: new fields.BooleanField({ required: false, initial: false }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })

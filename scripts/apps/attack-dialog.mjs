@@ -101,9 +101,18 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     super();
     this.actor = actor;
     this.isNpc = actor.type === "npc";
-    this.weaponKey = this.isNpc
-      ? (npcAttackIndex !== null ? String(npcAttackIndex) : (actor.system.attacks?.length ? "0" : null))
-      : (weapon?.id ?? actor.items.find((i) => i.type === "vapen")?.id ?? null);
+    if (this.isNpc) {
+      // `item:<id>`/`atk:<index>` — två skilda nyckelrymder (riktiga
+      // vapen-Items EFTER NPC-migreringen 2026-08-19, och de äldre fritext-
+      // attacks[]-raderna) som annars skulle krocka i samma <select>. Se
+      // #selectedWeapon för motsvarande uppslag.
+      const equippedWeapon = actor.items.find((i) => i.type === "vapen" && i.system.equipped);
+      this.weaponKey = npcAttackIndex !== null
+        ? `atk:${npcAttackIndex}`
+        : (equippedWeapon ? `item:${equippedWeapon.id}` : (actor.system.attacks?.length ? "atk:0" : null));
+    } else {
+      this.weaponKey = weapon?.id ?? actor.items.find((i) => i.type === "vapen")?.id ?? null;
+    }
   }
 
   get title() {
@@ -128,28 +137,51 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     return game.user.targets.first() ?? null;
   }
 
+  /**
+   * @returns {?{kind:"item",item:Item}|{kind:"atk",row:object,index:number}|Item}
+   * NPC: diskriminerad union (`item:`/`atk:`-prefix, se konstruktorn).
+   * Karaktär: rå Item, oförändrat beteende.
+   */
   #selectedWeapon() {
     if (this.isNpc) {
-      const index = Number(this.weaponKey);
-      const row = this.actor.system.attacks?.[index];
-      return row ? { row, index } : null;
+      if (this.weaponKey?.startsWith("item:")) {
+        const item = this.actor.items.get(this.weaponKey.slice(5));
+        return item ? { kind: "item", item } : null;
+      }
+      if (this.weaponKey?.startsWith("atk:")) {
+        const index = Number(this.weaponKey.slice(4));
+        const row = this.actor.system.attacks?.[index];
+        return row ? { kind: "atk", row, index } : null;
+      }
+      return null;
     }
     return this.actor.items.get(this.weaponKey) ?? null;
   }
 
   async _prepareContext() {
     const isNpc = this.isNpc;
+    // Union: riktiga utrustade vapen-Items (NPC-migreringen 2026-08-19,
+    // t.ex. naturliga klor/bett) FÖRE de äldre fritext-attacks[]-raderna —
+    // en icke-migrerad/SL-improviserad NPC (bara attacks[]) fungerar precis
+    // som innan, en migrerad NPC får äkta Item-alternativ i tillägg.
     const weaponOptions = isNpc
-      ? (this.actor.system.attacks ?? []).map((a, index) => ({
-        key: String(index), label: a.name || "Namnlöst anfall", baseFv: a.fv ?? 0
-      }))
+      ? [
+        ...this.actor.items.filter((i) => i.type === "vapen" && i.system.equipped).map((i) => {
+          const skill = findWeaponSkill(this.actor, i.name);
+          return { key: `item:${i.id}`, label: i.name, baseFv: effectiveFv(this.actor, skill), noSkill: !skill };
+        }),
+        ...(this.actor.system.attacks ?? []).map((a, index) => ({
+          key: `atk:${index}`, label: a.name || "Namnlöst anfall", baseFv: a.fv ?? 0
+        }))
+      ]
       : this.actor.items.filter((i) => i.type === "vapen").map((i) => {
         const skill = findWeaponSkill(this.actor, i.name);
         return { key: i.id, label: i.name, baseFv: effectiveFv(this.actor, skill), noSkill: !skill };
       });
 
     const selected = this.#selectedWeapon();
-    const category = isNpc ? "narstrid" : (selected?.system?.category ?? "narstrid");
+    const selectedItem = isNpc ? (selected?.kind === "item" ? selected.item : null) : selected;
+    const category = selectedItem?.system?.category ?? "narstrid";
     const ranged = category === "projektil";
     const isThrown = category === "kast";
 
@@ -211,7 +243,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
 
     return {
       isNpc, weaponOptions, weaponKey: this.weaponKey,
-      selectedNoSkill: !isNpc && !!weaponOptions.find((w) => w.key === this.weaponKey)?.noSkill,
+      selectedNoSkill: !!weaponOptions.find((w) => w.key === this.weaponKey)?.noSkill,
       target: targetActor ? { name: targetActor.name, img: targetToken.document.texture.src ?? targetActor.img } : null,
       aimedOptions, modEntries, canParry, parryOptions,
       parryBlockedReason: targetBlocking
@@ -276,12 +308,25 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
 
     let weapon, skill, fv;
     if (isNpc) {
-      weapon = {
-        name: selected.row.name, img: this.actor.img,
-        system: { damage: selected.row.damage, category: "narstrid", hardToParry: false, length: 0 }
-      };
-      skill = null;
-      fv = selected.row.fv;
+      if (selected.kind === "item") {
+        // Migrerad NPC med ett riktigt vapen-Item (naturligt eller
+        // tillverkat) — samma väg som karaktärer, matchande fardighet-item
+        // krävs (migreringsskriptet skapar alltid ett, se Fas E).
+        weapon = selected.item;
+        skill = findWeaponSkill(this.actor, weapon.name);
+        if (!skill) {
+          ui.notifications.warn(`Ingen färdighet kopplad till ${weapon.name} — lägg till en färdighetsrad först.`);
+          return;
+        }
+        fv = null;
+      } else {
+        weapon = {
+          name: selected.row.name, img: this.actor.img,
+          system: { damage: selected.row.damage, category: "narstrid", hardToParry: false, length: 0 }
+        };
+        skill = null;
+        fv = selected.row.fv;
+      }
     } else {
       weapon = selected;
       skill = findWeaponSkill(this.actor, weapon.name);

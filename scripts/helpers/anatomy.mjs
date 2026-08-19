@@ -40,8 +40,29 @@ export async function ensureHitLocations(actor) {
  * används aktörens samlade `abs` för alla områden. Se DESIGN_DECISIONS.md.
  */
 export function armourFor(actor, locationKey = null) {
-  // ⚠ Utan träffområde (vanlig strid) används aktörens samlade abs som förut.
-  if (!locationKey) return actor.system.abs ?? 0;
+  // ⚠ "Har aktören NÅGOT rustnings-Item" — inte "har aktören NÅGRA Items
+  // alls". Den senare kontrollen (tidigare `actor.items?.size`) tystade
+  // tyst en NPC:s abs-fält till 0 så fort NPC:n fick ETT vapen-Item utan
+  // ett matchande rustnings-Item (t.ex. via NPC-vapen/rustnings-migreringen,
+  // 2026-08-19) — inget konsolfel, bara plötsligt oskyddad NPC.
+  const hasArmourItems = (actor.items ?? []).some((i) => i.type === "rustning" && i.system.equipped);
+
+  // ⚠ Utan träffområde (vanlig strid): karaktärer härleder redan
+  // `system.abs` ur sina rustnings-Items i prepareDerivedData()
+  // (actor-character.mjs) — läs det direkt som förut. NPC:er gör INTE
+  // den härledningen; `system.abs` är ett manuellt fält som blir stale
+  // så fort en NPC får riktiga rustnings-Items, så för NPC:er med
+  // rustnings-Items måste vi läsa Items direkt i stället.
+  if (!locationKey) {
+    if (actor.type === "npc" && hasArmourItems) {
+      let best = 0;
+      for (const item of actor.items ?? []) {
+        if (item.type === "rustning" && item.system.equipped) best = Math.max(best, item.system.abs ?? 0);
+      }
+      return best;
+    }
+    return actor.system.abs ?? 0;
+  }
 
   // ⚠ SB s.27: rustning är namngivna DELAR med var sin täckning. Den bästa
   // buret plåten över just det träffområdet gäller — de staplas inte.
@@ -53,8 +74,8 @@ export function armourFor(actor, locationKey = null) {
     if (cov.length && !cov.includes(locationKey)) continue;
     best = Math.max(best, item.system.abs ?? 0);
   }
-  // SLP:er har inga rustnings-Item — de bär sitt abs direkt på aktören.
-  return best || (actor.items?.size ? 0 : (actor.system.abs ?? 0));
+  // SLP:er utan rustnings-Item bär sitt abs direkt på aktören.
+  return best || (hasArmourItems ? 0 : (actor.system.abs ?? 0));
 }
 
 /**

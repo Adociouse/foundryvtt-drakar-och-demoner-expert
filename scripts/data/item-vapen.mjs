@@ -32,6 +32,14 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
       // Konsumeras i rolls/attack.mjs#resolveAttack. Bäraren riskerar dessutom ett
       // eget självfummelslag på anfallsslag 18/19/20 — se samma funktion.
       hardToParry: new fields.BooleanField({ required: false, initial: false }),
+      // Naturligt vapen (klor, bett, tjockt skinn, drakeld) — mekaniskt
+      // IDENTISKT med ett tillverkat vapen (samma FV/skada/parering-
+      // beräkning), bara inte plockbart/lootbart. Beslut 2026-08-19:
+      // naturliga attacker räknas som vapen, bara "grown out of the being"
+      // — gäller även icke-närstridsattacker (t.ex. en drakes eldandedräkt),
+      // så fältet är oberoende av `category`. Styr enbart drag/loot-UI
+      // (se actor-npc-sheet.mjs och npc-sheet.hbs), ingen mekanisk skillnad.
+      natural: new fields.BooleanField({ required: false, initial: false }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })

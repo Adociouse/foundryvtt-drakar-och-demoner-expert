@@ -1,10 +1,11 @@
 <div class="dode-attack-dialog-body">
   <section class="attack-target">
     {{#if target}}
+      <span class="target-label">Mål</span>
       <img src="{{target.img}}" alt="" />
       <span class="target-name">{{target.name}}</span>
     {{else}}
-      <p class="hint">Inget mål — högerklicka en token på kartan och välj den, öppna sedan om dialogen.</p>
+      <p class="hint">⚠ Inget mål valt — högerklicka en token på kartan för att sikta på den, öppna sedan om dialogen.</p>
     {{/if}}
   </section>
 

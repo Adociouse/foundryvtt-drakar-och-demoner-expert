@@ -51,6 +51,40 @@
   </ol>
 </section>
 
+<section class="gear">
+  <header class="skills-header">
+    <h3>{{localize "DODE.Actor.Utrustning"}}</h3>
+  </header>
+  <ol class="skill-list">
+    {{#each gear as |entry|}}
+      <li class="skill-row {{#if entry.isNatural}}natural-item{{/if}}" data-item-id="{{entry.item.id}}">
+        <a data-action="editItem" class="skill-name">{{entry.item.name}}</a>
+        {{#if entry.isNatural}}
+          <i class="fa-solid fa-paw" title="Naturligt — inte plockbart/lootbart"></i>
+        {{/if}}
+        {{#if entry.isVapen}}
+          <span class="skill-fv">{{entry.item.system.damage}}</span>
+          <button type="button" data-action="declareAttack" title="Anfall (detaljerad strid)"><i class="fa-solid fa-crosshairs"></i></button>
+        {{else if entry.isRustning}}
+          <span class="skill-fv">Abs {{entry.item.system.abs}}</span>
+        {{else if entry.isUtrustning}}
+          {{#if entry.item.system.quantity}}<span class="skill-fv">{{entry.item.system.quantity}} st</span>{{/if}}
+        {{/if}}
+        {{#if entry.canEquip}}
+          <button type="button" data-action="toggleEquipped"
+            class="equip-toggle {{#if entry.item.system.equipped}}is-equipped{{/if}}"
+            title="{{#if entry.item.system.equipped}}Utrustad — klicka för att ta av{{else}}Ej utrustad — klicka för att utrusta{{/if}}">
+            <i class="fa-solid {{#if entry.item.system.equipped}}fa-shield{{else}}fa-shield-halved{{/if}}"></i>
+          </button>
+        {{/if}}
+        <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{else}}
+      <li class="skill-row-empty">Ingen utrustning ännu — dra hit vapen, rustning eller utrustning från ett kompendium.</li>
+    {{/each}}
+  </ol>
+</section>
+
 <section class="npc-fields">
   <label>Färdigheter (fritext) <input type="text" name="system.skills" value="{{system.skills}}" /></label>
 </section>
