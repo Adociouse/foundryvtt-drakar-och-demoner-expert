@@ -908,3 +908,37 @@
 /* ---- Ras-/yrkesitemens strukturerade förmågelista (read-only, redigeras via _source/*.json) ---- */
 .item-ability-list dt { font-weight: bold; margin-top: 0.5em; }
 .item-ability-list dd { margin: 0 0 0.4em 0; opacity: 0.9; }
+
+/* ---- GM-effektfönstret (backlog 69, docs/dev/GM_EFFEKTFONSTER_ANALYS.md) ---- */
+.dode-gm-effects-body { padding: 8px; overflow-y: auto; }
+.dode-gm-effects-body .hint { opacity: 0.7; font-style: italic; font-size: 0.82rem; margin: 0 0 8px; }
+.dode-gm-effects-body .effect-scope { margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.dode-gm-effects-body .effect-scope h3 { margin: 0 0 6px; font-size: 1rem; }
+.dode-gm-effects-body .effect-scope h4 { margin: 10px 0 4px; font-size: 0.9rem; opacity: 0.85; }
+.dode-gm-effects-body .actor-picker { display: flex; align-items: center; gap: 6px; font-size: 0.85em; margin-bottom: 8px; }
+.dode-gm-effects-body .actor-picker select { flex: 1 1 auto; }
+
+.dode-gm-effects-body .effect-list { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.dode-gm-effects-body .effect-list li {
+  display: flex; align-items: center; gap: 8px; font-size: 0.82em;
+  padding: 3px 6px; border-radius: 3px; background: rgba(0, 0, 0, 0.08);
+}
+.dode-gm-effects-body .effect-list li.is-expired { opacity: 0.5; text-decoration: line-through; }
+.dode-gm-effects-body .effect-list .label { flex: 1 1 auto; font-weight: 600; }
+.dode-gm-effects-body .effect-list .kind,
+.dode-gm-effects-body .effect-list .duration { opacity: 0.75; white-space: nowrap; }
+.dode-gm-effects-body .effect-list .value { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.dode-gm-effects-body .effect-list button { padding: 1px 5px; opacity: 0.7; }
+.dode-gm-effects-body .effect-list button:hover { opacity: 1; }
+
+.dode-gm-effects-body .effect-form {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+  padding: 6px; margin-top: 4px; border-radius: 4px; background: rgba(0, 0, 0, 0.06);
+}
+.dode-gm-effects-body .effect-form input,
+.dode-gm-effects-body .effect-form select { font-size: 0.82em; }
+.dode-gm-effects-body .effect-form input[name="label"],
+.dode-gm-effects-body .effect-form input[name="note"] { flex: 1 1 140px; min-width: 100px; }
+.dode-gm-effects-body .effect-form input[type="number"] { width: 64px; }
+.dode-gm-effects-body .effect-form .hidden { display: none; }
+.dode-gm-effects-body .effect-form button { font-size: 0.82em; white-space: nowrap; }

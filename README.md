@@ -16,7 +16,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
 | Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 222 besvärjelser, 14 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment — se nedan) |
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
-| GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Backend klar och liveverifierad — fönster-UI saknas fortfarande, körs via konsolen |
+| GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
 | Magisystem (kastning, PSY-resurs, minimagi, magiskolor) | Klar, med några medvetna förenklingar (se kodkommentarer) |
 | Språkmekanik (modersmål, främmande språk) | Klar |
@@ -72,7 +72,7 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 
 ### Kända begränsningar
 
-- **GM-effektfönstret är inte byggt.** Hela backend för person-/scen-/världseffekter, DoDE-villkor och periodiska effekter (gift m.m.) är klar och liveverifierad, men utan en egen `ApplicationV2`-vy måste en SL använda konsolen (`game.dode.addWorldEffect(...)` m.fl.) för att sätta dem.
+- **GM-effekternas skillMod/CL-mod/läkningstakt-lager syns inte som ikoner på token.** GM-effektfönstret (`scripts/apps/gm-effects.mjs`) redigerar person-/scen-/världseffekter lagrade som ren data i en Setting/flagga, inte som riktiga `ActiveEffect`-dokument (embedded färdighets-Items kan inte vara AE-mål, se kodkommentarer) — de påverkar rätt siffra i beräkningarna men ger ingen visuell markering på tokenet. Genuina `ActiveEffect`-baserade buffar (`game.dode.SceneEffects`, utrustning/förmågor) FÅR en ikon på tokenet om anroparen anger en `img`, och DoDE:s två registrerade villkor (Arm obrukbar/Hand upptagen) syns automatiskt via Foundrys egen Token HUD — men periodiska effekter som gift har heller ingen egen ikon i dagsläget, bara en rad i GM-effektfönstrets aktörssektion.
 - **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
 - **De flesta besvärjelser saknar egen bildikon** — 214 av 222 visar sin magiskolas symbol i stället för unik konst.
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
@@ -96,7 +96,7 @@ scripts/
   data/                   DataModel-scheman (actor-character.mjs, item-fardighet.mjs, ...)
   documents/              Document-subklasser (actor.mjs — rollSkill(), castSpell(); dode-active-effect.mjs)
   sheets/                 ApplicationV2-baserade sheets (character/npc/handlare/item)
-  apps/                   Fristående ApplicationV2-appar (character-wizard.mjs, training.mjs, time-window.mjs, magic-training.mjs)
+  apps/                   Fristående ApplicationV2-appar (character-wizard.mjs, training.mjs, time-window.mjs, magic-training.mjs, gm-effects.mjs)
   rolls/                  Tärningsmekanik (fv-roll.mjs, damage-roll.mjs, attack.mjs, dual-wield.mjs)
   helpers/                Speldatakonstanter och delad logik (config.mjs — CONFIG.DODE, källciterat; special-ability-effects.mjs; schema-migrations.mjs; ep.mjs; time.mjs; anatomy.mjs)
   utils/                  Fristående verktyg (scene-effects.mjs — game.dode.SceneEffects)

@@ -18,7 +18,7 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 | Guided character wizard (19 steps, book-accurate BP/EP economy, point-buy attributes) | Done, see details below |
 | Compendiums: 13 races, 36 professions, 339 weapons/equipment, 222 spells, 14 monsters | Done (art coverage and weapon roster still have gaps — see below) |
 | Weapon system: weapon groups, dual-wielding, weapon techniques/academies, unarmed combat styles | Done, with one deliberate simplification (see below) |
-| GM effects (actor/scene/world), status conditions, periodic effects (poison etc.) | Backend done and live-verified — no dedicated window UI yet, driven from the console |
+| GM effects (actor/scene/world), status conditions, periodic effects (poison etc.) | Done, with its own GM effects window (`scripts/apps/gm-effects.mjs`) |
 | Training economy (post-creation skill purchases), earning XP in play | Done, own `ApplicationV2` view |
 | Magic system (casting, PSY resource, cantrips, magic schools) | Done, with a few deliberate simplifications (see code comments) |
 | Language mechanics (mother tongue, foreign languages) | Done |
@@ -74,7 +74,7 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 
 ### Known limitations
 
-- **No GM effects window yet.** The full backend for actor/scene/world effects, status conditions, and periodic effects (poison etc.) is done and live-verified, but without a dedicated `ApplicationV2` view a GM has to use the console (`game.dode.addWorldEffect(...)` etc.) to set them.
+- **GM effects' skillMod/CL-mod/recovery-rate layer doesn't show as a token icon.** The GM effects window (`scripts/apps/gm-effects.mjs`) edits actor/scene/world effects stored as plain data in a Setting/flag, not as real `ActiveEffect` documents (embedded skill Items can't be AE targets, see code comments) — they affect the right number in calculations but carry no visual marker on the token. Genuine `ActiveEffect`-based buffs (`game.dode.SceneEffects`, equipment/abilities) DO get a token icon if the caller supplies an `img`, and DoDE's two registered conditions (Arm Disabled/Hand Occupied) show automatically via Foundry's own Token HUD — but periodic effects like poison also have no icon of their own yet, just a row in the GM effects window's actor section.
 - **The weapon roster covers 23 of the Player's Handbook's ~52 weapons.** The weapon-group system is built for the full table, but not every entry has been transcribed into the compendium yet.
 - **Most spells lack their own icon** — 214 of 222 show their magic school's symbol instead of unique art.
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
@@ -98,7 +98,7 @@ scripts/
   data/                    DataModel schemas (actor-character.mjs, item-fardighet.mjs, ...)
   documents/               Document subclasses (actor.mjs — rollSkill(), castSpell(); dode-active-effect.mjs)
   sheets/                  ApplicationV2-based sheets (character/npc/handlare/item)
-  apps/                    Standalone ApplicationV2 apps (character-wizard.mjs, training.mjs, time-window.mjs, magic-training.mjs)
+  apps/                    Standalone ApplicationV2 apps (character-wizard.mjs, training.mjs, time-window.mjs, magic-training.mjs, gm-effects.mjs)
   rolls/                   Dice mechanics (fv-roll.mjs, damage-roll.mjs, attack.mjs, dual-wield.mjs)
   helpers/                 Game-data constants and shared logic (config.mjs — CONFIG.DODE, source-cited; special-ability-effects.mjs; schema-migrations.mjs; ep.mjs; time.mjs; anatomy.mjs)
   utils/                   Standalone utilities (scene-effects.mjs — game.dode.SceneEffects)

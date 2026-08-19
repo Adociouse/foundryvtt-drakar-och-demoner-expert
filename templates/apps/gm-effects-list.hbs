@@ -1,0 +1,15 @@
+{{#if effects.length}}
+  <ul class="effect-list">
+    {{#each effects}}
+      <li data-effect-id="{{this.id}}" class="{{#if this.expired}}is-expired{{/if}}">
+        <span class="label" title="{{this.note}}">{{this.label}}</span>
+        <span class="kind">{{this.kindLabel}}{{#unless (eq this.targetLabel "—")}} · {{this.targetLabel}}{{/unless}}</span>
+        <span class="value">{{this.opLabel}}{{this.value}}</span>
+        <span class="duration">{{#if this.expired}}⚠ utgången{{else}}{{this.durationLabel}}{{/if}}</span>
+        <button type="button" data-action="{{../removeAction}}" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p class="hint">Inga effekter.</p>
+{{/if}}

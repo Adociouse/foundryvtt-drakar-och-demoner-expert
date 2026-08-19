@@ -32,6 +32,7 @@ import DoDECharacterWizard from "./apps/character-wizard.mjs";
 import DoDETrainingApp from "./apps/training.mjs";
 import DoDETimeWindow from "./apps/time-window.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
+import DoDEGmEffectsApp from "./apps/gm-effects.mjs";
 import { DODE } from "./helpers/config.mjs";
 import { resolveAttack, postAttackCard } from "./rolls/attack.mjs";
 import { resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS } from "./rolls/dual-wield.mjs";
@@ -244,7 +245,9 @@ Hooks.once("init", () => {
   foundry.applications.handlebars.loadTemplates([
     "systems/drakar-och-demoner-expert/templates/apps/training-header.hbs",
     "systems/drakar-och-demoner-expert/templates/apps/training-rows.hbs",
-    "systems/drakar-och-demoner-expert/templates/apps/wizard-skill-slot.hbs"
+    "systems/drakar-och-demoner-expert/templates/apps/wizard-skill-slot.hbs",
+    "systems/drakar-och-demoner-expert/templates/apps/gm-effects-list.hbs",
+    "systems/drakar-och-demoner-expert/templates/apps/gm-effects-form.hbs"
   ]);
 
   game.dode = {
@@ -283,6 +286,10 @@ Hooks.once("init", () => {
     // Magi har ett eget fönster — EP-källorna skiljer sig från vanliga
     // färdigheters (SB s.7), se apps/magic-training.mjs.
     openMagicTraining: (actor) => new DoDEMagicTrainingApp(actor).render(true),
+    // GM-effekter (skillMod/clMod/recoveryMod + periodiska effekter) — se
+    // docs/dev/GM_EFFEKTFONSTER_ANALYS.md. Författningsyta, ingen egen
+    // datamodell; öppnas även från Aktörskatalogens header-knapp (GM-only).
+    openGmEffects: () => new DoDEGmEffectsApp().render(true),
     // Stridsupplösning — SLB s.16-18. GM: game.dode.resolveAttack({attacker, weapon, target, ...})
     resolveAttack, postAttackCard,
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
@@ -346,6 +353,17 @@ Hooks.on("renderActorDirectory", (app, html) => {
   button.innerHTML = '<i class="fa-solid fa-hat-wizard"></i> Ny rollperson (guide)';
   button.addEventListener("click", () => game.dode.openCharacterWizard());
   header.appendChild(button);
+
+  // GM-effektfönstret — bara meningsfullt för SL, som redan är den enda
+  // rollen som kan skriva scen-/världs-/aktörsflaggorna (se config.mjs).
+  if (game.user.isGM && !header.querySelector(".dode-open-gm-effects")) {
+    const gmButton = document.createElement("button");
+    gmButton.type = "button";
+    gmButton.classList.add("dode-open-gm-effects");
+    gmButton.innerHTML = '<i class="fa-solid fa-wand-sparkles"></i> GM-effekter';
+    gmButton.addEventListener("click", () => game.dode.openGmEffects());
+    header.appendChild(gmButton);
+  }
 });
 
 /**

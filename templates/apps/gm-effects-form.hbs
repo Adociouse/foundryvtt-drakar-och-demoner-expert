@@ -1,0 +1,38 @@
+<div class="effect-form" data-effect-form>
+  <input type="text" name="label" placeholder="Namn (t.ex. Välsignelse av Sol)" />
+  <select name="kind">
+    <option value="skillMod">Färdighetsbonus</option>
+    <option value="clMod">Situationellt CL-mod</option>
+    <option value="recoveryMod">Läkningstakt</option>
+  </select>
+  <span data-field="skillKey">
+    <input type="text" name="skillKey" placeholder="Färdighetsnyckel" list="dode-gm-skill-keys" />
+  </span>
+  <span data-field="resource">
+    <select name="resource">
+      <option value="hp">KP</option>
+      <option value="psy">PSY</option>
+    </select>
+  </span>
+  <span data-field="operation">
+    <select name="operation">
+      <option value="add">Addera</option>
+      <option value="multiply">Multiplicera</option>
+    </select>
+  </span>
+  <input type="number" name="value" placeholder="Värde" step="1" />
+  <select name="durationMode">
+    <option value="manual">Tills borttagen</option>
+    <option value="timed">Tidsbegränsad</option>
+  </select>
+  <span data-field="durationAmount">
+    <input type="number" name="durationAmount" placeholder="Antal" min="0" value="1" />
+    <select name="durationUnit">
+      <option value="minuter">minuter</option>
+      <option value="timmar">timmar</option>
+      <option value="dygn">dygn</option>
+    </select>
+  </span>
+  <input type="text" name="note" placeholder="Anteckning (valfri)" />
+  <button type="button" data-action="{{addAction}}"><i class="fa-solid fa-plus"></i> Lägg till</button>
+</div>

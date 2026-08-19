@@ -1,0 +1,67 @@
+<div class="dode-gm-effects-body">
+  <p class="hint">Färdighetsbonus/CL-mod/läkningstakt på scen-/världs-/aktörsnivå. Attributbonusar hanteras via
+    <code>game.dode.SceneEffects</code>, villkor via Token HUD — se docs/dev/GM_EFFEKTFONSTER_ANALYS.md.</p>
+
+  <datalist id="dode-gm-skill-keys">
+    {{#each skillOptions}}<option value="{{this.key}}">{{this.name}}</option>{{/each}}
+  </datalist>
+
+  <section class="effect-scope">
+    <h3><i class="fa-solid fa-globe"></i> Världseffekter</h3>
+    {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-list.hbs" effects=worldEffects removeAction="removeWorldEffect"}}
+    {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-form.hbs" addAction="addWorldEffect"}}
+  </section>
+
+  <section class="effect-scope">
+    <h3><i class="fa-solid fa-map"></i> Sceneffekter{{#if scene}} — {{scene.name}}{{/if}}</h3>
+    {{#if scene}}
+      {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-list.hbs" effects=sceneEffects removeAction="removeSceneEffect"}}
+      {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-form.hbs" addAction="addSceneEffect"}}
+    {{else}}
+      <p class="hint">Ingen aktiv scen — öppna eller aktivera en scen för att sätta sceneffekter.</p>
+    {{/if}}
+  </section>
+
+  <section class="effect-scope">
+    <h3><i class="fa-solid fa-user"></i> Aktörseffekter</h3>
+    <label class="actor-picker">Rollperson
+      <select name="actorId">
+        {{#each actors}}<option value="{{this.id}}" {{#if this.active}}selected{{/if}}>{{this.name}}</option>{{/each}}
+      </select>
+    </label>
+    {{#if actor}}
+      {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-list.hbs" effects=actorEffects removeAction="removeActorEffect"}}
+      {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-form.hbs" addAction="addActorEffect"}}
+
+      <h4>Periodiska effekter (gift m.fl.)</h4>
+      {{#if periodicEffects.length}}
+        <ul class="effect-list periodic-list">
+          {{#each periodicEffects}}
+            <li data-effect-id="{{this.id}}">
+              <span class="label">{{this.label}}</span>
+              <span class="kind">{{this.amount}} / {{this.cadence}} mot {{this.target}}</span>
+              <span class="value">{{this.ticksRemaining}} kvar</span>
+              <button type="button" data-action="removePeriodicEffect" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p class="hint">Inga periodiska effekter.</p>
+      {{/if}}
+      <div class="effect-form" data-effect-form>
+        <input type="text" name="label" placeholder="Namn (t.ex. Gift, allvarlig)" />
+        <select name="cadence">
+          <option value="round">Per runda</option>
+          <option value="hour">Per timme</option>
+          <option value="day">Per dygn</option>
+        </select>
+        <input type="text" name="target" placeholder="hp eller färdighetsnyckel" list="dode-gm-skill-keys" value="hp" />
+        <input type="number" name="amount" placeholder="Skada/tick" value="1" />
+        <input type="number" name="ticks" placeholder="Antal tickar" value="1" min="1" />
+        <button type="button" data-action="addPeriodicEffect"><i class="fa-solid fa-plus"></i> Lägg till</button>
+      </div>
+    {{else}}
+      <p class="hint">Ingen rollperson vald.</p>
+    {{/if}}
+  </section>
+</div>
