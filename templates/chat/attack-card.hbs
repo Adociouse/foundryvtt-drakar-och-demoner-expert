@@ -10,6 +10,23 @@
     {{#if intentBedova}}<i class="fa-solid fa-hand-fist" title="Bedövande avsikt"></i>{{/if}}
   </header>
 
+  {{!-- Spelar-anfall-planen, 2026-08-21: en spelare utan skrivbehörighet på
+        målet får kortet postat DIREKT (riktiga tärningar, redan uträknat)
+        men markerat väntande — SL:s Godkänn skriver bara undan det redan
+        beräknade resultatet, rullar inget om. Se dode.mjs's
+        renderChatMessageHTML-hook för klicklogiken; den manipulerar den
+        här blocken direkt i DOM:en (och sparar om `content`) i stället för
+        att rendera om hela kortet. --}}
+  {{#if pendingBanner}}
+    <div class="pending-banner">
+      <i class="fa-solid fa-hourglass-half"></i> Väntar på SL-godkännande
+    </div>
+    <div class="pending-actions">
+      <button type="button" data-action="approveAttackRequest"><i class="fa-solid fa-check"></i> Godkänn</button>
+      <button type="button" data-action="rejectAttackRequest"><i class="fa-solid fa-xmark"></i> Avvisa</button>
+    </div>
+  {{/if}}
+
   {{!-- CL-uppdelningen: bas + varje modifikation, så bordet ser varför. --}}
   <div class="cl-line" title="Chans att lyckas">
     CL <strong>{{fv}}</strong>

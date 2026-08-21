@@ -36,7 +36,7 @@ import DoDEGmEffectsApp from "./apps/gm-effects.mjs";
 import DoDEAttackDialog from "./apps/attack-dialog.mjs";
 import DoDECombatTracker from "./apps/combat-tracker.mjs";
 import { DODE } from "./helpers/config.mjs";
-import { resolveAttack, postAttackCard } from "./rolls/attack.mjs";
+import { resolveAttack, applyAttackResult, postAttackCard } from "./rolls/attack.mjs";
 import { resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS } from "./rolls/dual-wield.mjs";
 
 const SYSTEM_ID = "drakar-och-demoner-expert";
@@ -301,7 +301,10 @@ Hooks.once("init", () => {
     // anfallsrads egen knapp, konsolparitet för SL: game.dode.openAttackDialog(actor, {weapon}).
     openAttackDialog: (actor, opts) => new DoDEAttackDialog(actor, opts).render(true),
     // Stridsupplösning — SLB s.16-18. GM: game.dode.resolveAttack({attacker, weapon, target, ...})
-    resolveAttack, postAttackCard,
+    // `applyAttackResult` skriver ett `resolveAttack()`-resultats pending-fält
+    // (EP/slitage/skada) — se Spelar-anfall-planen, 2026-08-21, och
+    // renderChatMessageHTML-hooken nedan för godkännande-flödet som anropar den.
+    resolveAttack, applyAttackResult, postAttackCard,
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects,
@@ -355,6 +358,71 @@ Hooks.once("ready", () => {
     })();
     return false;
   });
+});
+
+/**
+ * Godkännande/avvisning av väntande spelar-anfall — Spelar-anfall-planen,
+ * 2026-08-21. Kortet är redan fullt beräknat och postat med spelarens EGNA
+ * tärningar (se attack.mjs's postAttackCard/`pending`) — SL:s Godkänn kör
+ * INGET nytt tärningsslag, bara `applyAttackResult()`s skrivningar (KP,
+ * vapenslitage, EP). Bara SL ser knapparna göra något (kortet självt är
+ * publikt, alla ser resultatet) — `renderChatMessageHTML` fyrar för ALLA
+ * klienter, `!game.user.isGM`-vakten gör resten till en no-op för spelare.
+ *
+ * ⚠ `html` är ett RIKTIGT `HTMLElement` i den här Foundry-versionen (inte
+ * jQuery) — `renderChatMessageHTML` ersatte den äldre `renderChatMessage`
+ * specifikt för det (common/documents/chat-message.mjs).
+ *
+ * ⚠ Manipulerar DOM:en direkt och sparar tillbaka `element.innerHTML` som
+ * nytt `content` i stället för att rendera om hela mallen via
+ * `renderTemplate` — `applyAttackResult` behöver bara `result.pending`
+ * (redan ren JSON-data i flaggan), aldrig hela det ursprungliga
+ * `resolveAttack()`-resultatet (som bar `Roll`-instanser bara relevanta för
+ * DEN URSPRUNGLIGA postningens Dice So Nice-animation).
+ */
+Hooks.on("renderChatMessageHTML", (message, html) => {
+  if (!game.user.isGM) return;
+  const flag = message.getFlag(game.system.id, "pendingAttack");
+  if (!flag || flag.processed) return;
+
+  const approveBtn = html.querySelector('[data-action="approveAttackRequest"]');
+  const rejectBtn = html.querySelector('[data-action="rejectAttackRequest"]');
+  if (!approveBtn && !rejectBtn) return;
+
+  // ⚠ Läser FÄRSKT `pendingAttack`-tillstånd (inte den stängda `flag`-
+  // variabeln ovan) och sätter `processed` FÖRST, innan någon skrivning görs
+  // — skydd mot att två SL-klienter som klickar samtidigt kör samma anfall
+  // två gånger. Samma "läs senaste tillstånd, lås innan skrivning"-disciplin
+  // som periodeffekt-kön (config.mjs `_queuePerActor`) redan etablerat.
+  const lockAndMark = async (note) => {
+    const latest = game.messages.get(message.id)?.getFlag(game.system.id, "pendingAttack");
+    if (!latest || latest.processed) { ui.notifications.info("Redan hanterat av en annan SL-klient."); return false; }
+    await message.setFlag(game.system.id, "pendingAttack", { ...latest, processed: true });
+    html.querySelector(".pending-banner")?.replaceWith(
+      Object.assign(document.createElement("div"), { className: "processed-note", textContent: note })
+    );
+    html.querySelector(".pending-actions")?.remove();
+    await message.update({ content: html.innerHTML });
+    return true;
+  };
+
+  approveBtn?.addEventListener("click", async () => {
+    const attacker = game.actors.get(flag.attackerId);
+    const target = game.actors.get(flag.targetId);
+    if (!attacker || !target) { ui.notifications.error("Anfallaren eller målet finns inte längre — kan inte godkänna."); return; }
+    if (!(await lockAndMark(`✅ Godkänt av ${game.user.name}`))) return;
+    const pending = flag.pending ?? {};
+    const weapon = pending.wear?.side === "attacker" ? attacker.items.get(pending.wear.itemId) : null;
+    const parryItem = pending.wear?.side === "defender" ? target.items.get(pending.wear.itemId) : null;
+    try {
+      await applyAttackResult({ pending }, { attacker, target, weapon, parryItem });
+    } catch (err) {
+      console.error("DoDE | applyAttackResult misslyckades efter godkännande", err);
+      ui.notifications.error("Kunde inte skriva anfallets resultat — se konsolen.");
+    }
+  });
+
+  rejectBtn?.addEventListener("click", () => lockAndMark(`❌ Avvisat av ${game.user.name}`));
 });
 
 /**

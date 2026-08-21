@@ -879,6 +879,15 @@
   background: rgba(60,60,120,0.18); font-size: 0.85em; }
 .dode-attack-card .wear-line { font-size: 0.85em; opacity: 0.85; margin-top: 3px; }
 .dode-attack-card .verdict-note { font-size: 0.8em; opacity: 0.7; font-style: italic; margin-top: 3px; }
+/* Spelar-anfall-planen, 2026-08-21 — väntande kort (SL-godkännande). */
+.dode-attack-card .pending-banner { display: flex; align-items: center; gap: 6px;
+  padding: 3px 6px; margin-bottom: 4px; border-radius: 3px; font-size: 0.82em;
+  background: rgba(200,150,40,0.18); }
+.dode-attack-card .pending-actions { display: flex; gap: 6px; margin-bottom: 6px; }
+.dode-attack-card .pending-actions button { font-size: 0.82em; padding: 2px 8px; }
+.dode-attack-card .pending-actions button[data-action="approveAttackRequest"] { color: #2f6d3a; }
+.dode-attack-card .pending-actions button[data-action="rejectAttackRequest"] { color: #a33; }
+.dode-attack-card .processed-note { font-size: 0.82em; opacity: 0.75; margin-bottom: 4px; font-style: italic; }
 
 /* ---- Tidsfönstret (§10) ---- */
 .dode-time-body { padding: 8px; }

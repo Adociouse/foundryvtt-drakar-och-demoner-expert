@@ -439,6 +439,10 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       });
     }
 
+    // Spelar-anfall-planen, 2026-08-21, Fas B — sant om NÅGOT mål i batchen
+    // gick till godkännande i stället för att skrivas direkt.
+    let anyPending = false;
+
     for (const targetToken of targets) {
       const targetBlocking = blockingStatusOf(targetToken.actor);
       let parryItem = null, parrySkill = null, parryFv = null;
@@ -517,14 +521,29 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
         continue;
       }
 
-      // ⚠ Spelar-anfall-planen, 2026-08-21, Fas A: `resolveAttack()` skriver
-      // inget längre — `applyAttackResult()` gör de faktiska skrivningarna
-      // (EP, vapenslitage, skada). Ovillkorat här (SL:s väg, oförändrat
-      // beteende) — permission-grenen (SL-godkännande för spelare utan
-      // ägarskap på målet) är Fas B, byggs INTE i det här passet.
-      await applyAttackResult(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem });
+      // ⚠ Spelar-anfall-planen, 2026-08-21, Fas B: SL (eller en spelare som
+      // redan äger målet — t.ex. PvP eller en egenägd andra rollperson)
+      // skriver DIREKT, exakt som Fas A:s regressionstestade beteende. En
+      // spelare UTAN ägarskap på målet (normalfallet: NPC:er är SL-ägda)
+      // kan inte skriva KP/slitage/EP på målet alls — resultatet postas
+      // ändå OMEDELBART (spelarens egna, redan slagna tärningar, se
+      // postAttackCard) men markerat väntande, och SL:s godkännande
+      // (dode.mjs's renderChatMessageHTML-hook) gör skrivningen senare.
+      const canApplyDirectly = game.user.isGM || targetToken.actor.isOwner;
+      if (canApplyDirectly) {
+        await applyAttackResult(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem });
+        await postAttackCard(result, { attacker: this.actor, weapon, parryItem, ranged });
+      } else {
+        await postAttackCard(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem, ranged, pending: true });
+        anyPending = true;
+      }
+    }
 
-      await postAttackCard(result, { attacker: this.actor, weapon, parryItem, ranged });
+    if (anyPending) {
+      ui.notifications.info("Anfallet är skickat och väntar på SL-godkännande.");
+      if (!game.users.some((u) => u.isGM && u.active)) {
+        ui.notifications.warn("Ingen SL är online just nu — anfallet väntar tills en SL loggar in och godkänner.");
+      }
     }
 
     this.close();

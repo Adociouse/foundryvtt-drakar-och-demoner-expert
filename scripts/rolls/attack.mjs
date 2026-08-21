@@ -391,52 +391,78 @@ const VERDICT_NOTE = {
 };
 
 /**
- * Postar stridskortet. Följer stridsdiagrammets ordning (SLB s.31) uppifrån och
- * ned, så att bordet kan följa med i samma sekvens som boken.
- *
- * ⚠ Alla tärningar bifogas `rolls` så att Dice So Nice animerar dem.
+ * Bygger mallkontexten för stridskortet. Godkännande-/avvisningshooken
+ * (`dode.mjs`s `renderChatMessageHTML`, Spelar-anfall-planen 2026-08-21)
+ * manipulerar det REDAN renderade kortets DOM direkt i stället för att
+ * rendera om via den här funktionen — se hookens egen kommentar för varför
+ * (kräver inte att `result` sparas i sin helhet, bara `pending`).
  */
-export async function postAttackCard(result, { attacker, weapon, parryItem, ranged }) {
+function buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, pendingBanner = false }) {
   const parts = Object.entries(result.mods ?? {}).map(([k, v]) => ({
     label: k, value: v, positive: v > 0
   }));
   if (result.aimed) parts.push({ label: "riktat", value: -5, positive: false });
 
+  return {
+    attackerName: attacker.name,
+    weaponName: weapon?.name ?? "Obeväpnad",
+    weaponImg: weapon?.img ?? attacker.img,
+    aimed: result.aimed,
+    intentBedova: result.intent === "bedova",
+    fv: result.fv, base: result.fv - result.modTotal, clParts: parts,
+    attackRoll: result.attack.roll.total,
+    attackOutcome: result.attack.outcome,
+    attackOutcomeLabel: OUTCOME_LABEL[result.attack.outcome],
+    hasParry: !!result.parry.roll,
+    parryRoll: result.parry.roll?.total,
+    parryOutcome: result.parry.outcome,
+    parryOutcomeLabel: OUTCOME_LABEL[result.parry.outcome],
+    parryItemName: parryItem?.name ?? "",
+    ranged,
+    locationLabel: result.location?.label,
+    damage: result.damage?.roll ? {
+      rolled: result.damage.roll.total, abs: result.damage.abs,
+      applied: result.damage.applied, maximised: result.damage.maximised
+    } : null,
+    totalAfter: result.totalAfter, pulled: result.pulled,
+    effect: result.effect, wear: result.wear, cleanKnockout: result.cleanKnockout,
+    verdictNote: VERDICT_NOTE[result.verdict.result] ?? "",
+    cssClass: result.attack.outcome,
+    // ⚠ EP-streck för anfalls- och pareringsslaget var för sig — se
+    // computeSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
+    attackEp: result.attackEp, parryEp: result.parryEp,
+    // Kättingvapen/Piska (SB s.33) — se resolveAttack.
+    hardParrySelfFumble: result.hardParrySelfFumble ? {
+      roll: result.hardParrySelfFumble.roll.total,
+      fumbled: result.hardParrySelfFumble.fumbled
+    } : null,
+    // Spelar-anfall-planen, 2026-08-21 — se dode.mjs's renderChatMessageHTML-hook.
+    pendingBanner
+  };
+}
+
+/**
+ * Postar stridskortet. Följer stridsdiagrammets ordning (SLB s.31) uppifrån och
+ * ned, så att bordet kan följa med i samma sekvens som boken.
+ *
+ * ⚠ Alla tärningar bifogas `rolls` så att Dice So Nice animerar dem — OAVSETT
+ * `pending`. Spelar-anfall-planen, 2026-08-21: känslan av "jag slog mina
+ * tärningar" avgörs av NÄR kortet postas (nu, på anropande klient), inte av
+ * VEM som senare skriver undan resultatet — se `applyAttackResult`.
+ *
+ * @param {object} [o]
+ * @param {Actor}  [o.target]  Bara nödvändigt när `pending` är sant — sparas i
+ *   kortets flagga så godkännande-hooken kan återskapa `applyAttackResult`s
+ *   kontext utan att behöva gissa vilket mål kortet gällde.
+ * @param {boolean}[o.pending] Sant när den anropande användaren INTE har
+ *   skrivbehörighet på målet — kortet visar ett väntar-band + Godkänn/Avvisa
+ *   i stället för att vara ett färdigt resultat.
+ */
+export async function postAttackCard(result, { attacker, target = null, weapon, parryItem, ranged, pending = false }) {
   const content = await renderTemplate(
-    "systems/drakar-och-demoner-expert/templates/chat/attack-card.hbs", {
-      attackerName: attacker.name,
-      weaponName: weapon?.name ?? "Obeväpnad",
-      weaponImg: weapon?.img ?? attacker.img,
-      aimed: result.aimed,
-      intentBedova: result.intent === "bedova",
-      fv: result.fv, base: result.fv - result.modTotal, clParts: parts,
-      attackRoll: result.attack.roll.total,
-      attackOutcome: result.attack.outcome,
-      attackOutcomeLabel: OUTCOME_LABEL[result.attack.outcome],
-      hasParry: !!result.parry.roll,
-      parryRoll: result.parry.roll?.total,
-      parryOutcome: result.parry.outcome,
-      parryOutcomeLabel: OUTCOME_LABEL[result.parry.outcome],
-      parryItemName: parryItem?.name ?? "",
-      ranged,
-      locationLabel: result.location?.label,
-      damage: result.damage?.roll ? {
-        rolled: result.damage.roll.total, abs: result.damage.abs,
-        applied: result.damage.applied, maximised: result.damage.maximised
-      } : null,
-      totalAfter: result.totalAfter, pulled: result.pulled,
-      effect: result.effect, wear: result.wear, cleanKnockout: result.cleanKnockout,
-      verdictNote: VERDICT_NOTE[result.verdict.result] ?? "",
-      cssClass: result.attack.outcome,
-      // ⚠ EP-streck för anfalls- och pareringsslaget var för sig — se
-      // computeSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
-      attackEp: result.attackEp, parryEp: result.parryEp,
-      // Kättingvapen/Piska (SB s.33) — se resolveAttack.
-      hardParrySelfFumble: result.hardParrySelfFumble ? {
-        roll: result.hardParrySelfFumble.roll.total,
-        fumbled: result.hardParrySelfFumble.fumbled
-      } : null
-    });
+    "systems/drakar-och-demoner-expert/templates/chat/attack-card.hbs",
+    buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, pendingBanner: pending })
+  );
 
   const rolls = [result.attack.roll];
   if (result.parry.roll) rolls.push(result.parry.roll);
@@ -446,8 +472,28 @@ export async function postAttackCard(result, { attacker, weapon, parryItem, rang
   if (result.attackEp?.roll) rolls.push(result.attackEp.roll);
   if (result.parryEp?.roll) rolls.push(result.parryEp.roll);
 
-  return ChatMessage.create({
+  const messageData = {
     speaker: ChatMessage.getSpeaker({ actor: attacker }),
     content, rolls, sound: CONFIG.sounds.dice
-  });
+  };
+
+  if (pending) {
+    // ⚠ Bara `result.pending` behövs för `applyAttackResult` — inga Roll-
+    // instanser, redan ren JSON-data (se resolveAttack()s pending-fält).
+    // `weapon`/`parryItem` återskapas vid godkännande ur `pending.wear.itemId`
+    // + `side` (se dode.mjs-hooken), behöver inte sparas separat här.
+    messageData.flags = {
+      [game.system.id]: {
+        pendingAttack: {
+          pending: result.pending,
+          attackerId: attacker.id,
+          targetId: target?.id ?? null,
+          ranged,
+          processed: false
+        }
+      }
+    };
+  }
+
+  return ChatMessage.create(messageData);
 }
