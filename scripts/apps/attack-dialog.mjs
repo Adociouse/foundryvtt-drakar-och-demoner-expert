@@ -1,4 +1,4 @@
-import { resolveAttack, postAttackCard, MELEE_MODS, RANGED_MODS } from "../rolls/attack.mjs";
+import { resolveAttack, applyAttackResult, postAttackCard, MELEE_MODS, RANGED_MODS } from "../rolls/attack.mjs";
 
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
@@ -246,7 +246,12 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       (i) => i.type === "rustning" && i.system.slot === "skold" && i.system.equipped
     ) ?? null;
     const targetBlocking = blockingStatusOf(targetActor);
-    const canParry = !ranged && (!isThrown || !!targetShield) && !targetBlocking;
+    // ⚠ `parryable` (Spelar-anfall-planen, 2026-08-21) — ett TILLÄGG till
+    // category-baserad oparerbarhet, aldrig en väg att göra ett projektilvapen
+    // parerbart (`!ranged` gäller alltid). Icke-Item-vapen (NPC-fritextrader)
+    // saknar fältet — `!== false` behåller dem parerbara som förut.
+    const weaponParryable = selectedItem?.system?.parryable !== false;
+    const canParry = weaponParryable && !ranged && (!isThrown || !!targetShield) && !targetBlocking;
 
     // Blind mål: pareringens FV sänks med Mörker-värdet (samma modifierare,
     // se #morkerFor) — en straffavgift, inte ett fullt block, Johans
@@ -285,7 +290,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     // (varje mål kan ha olika utrustning/villkor) — i stället ett förklarande
     // rad, samma "ranged aldrig parerbart"-regel som redan gäller (om vapnet
     // är ranged visas ingen rad alls, precis som för ett enda mål).
-    const multiAutoParryNote = multiTarget && !ranged
+    const multiAutoParryNote = multiTarget && !ranged && weaponParryable
       ? "Parering sker automatiskt per mål med bästa tillgängliga försvar."
       : null;
 
@@ -302,6 +307,11 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       // undantag (redan täckta av canParry ovan). Johans uttryckliga rättelse
       // 2026-08-18 efter att en demo visade motsatsen för en NPC utan Items.
       parryDefaultChecked: canParry,
+      // Fri SL-satt bonus till försvararens parering — bara meningsfull i
+      // enda-måls-läget, där SL manuellt kör dialogen (t.ex. ett tydligt
+      // "telegraferat" anfall, en drake som synligt drar in luft innan den
+      // andas eld). Se resolveAttack()s `parryBonus`-parameter.
+      showParryBonus: !multiTarget && canParry,
       suggestedParryFv,
       targetBlind,
       attackerBlindLabel: attackerBlind ? `Blind (dig): ${morker}` : null,
@@ -406,10 +416,17 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     // ALLA mål i batchen — en enda engångsbedömning för hela anfallet, inte
     // en per mål-fråga (skulle bryta "ett submit, klart"-flödet).
     const attackUnprepared = !!form.querySelector('input[name="attackUnprepared"]')?.checked;
+    // ⚠ `parryable` (Spelar-anfall-planen, 2026-08-21) — läses här FÄRSKT från
+    // det faktiska valda vapnet, oavsett läge (enda/flermål), samma "aldrig en
+    // väg att göra projektil parerbart"-princip som resolveAttack()s egen gate.
+    const weaponParryable = weapon.system.parryable !== false;
     // Enda-måls-läget behåller den manuella pareringskryssrutan/väljaren
     // oförändrad. Flermålsläget har ingen sådan UI (se _prepareContext) —
     // parering försöks där ALLTID automatiskt när mekaniskt möjligt.
-    const wantsParry = multiTarget || !!form.querySelector('input[name="targetParries"]')?.checked;
+    const wantsParry = weaponParryable && (multiTarget || !!form.querySelector('input[name="targetParries"]')?.checked);
+    // Fri SL-satt pareringsbonus (enda-måls-läget bara, se _prepareContext
+    // showParryBonus) — 0 om fältet inte visas/finns.
+    const parryBonus = multiTarget ? 0 : (Number(form.querySelector('input[name="parryBonus"]')?.value) || 0);
 
     const attackerToken = this.actor.getActiveTokens(true)[0]?.document ?? null;
 
@@ -490,7 +507,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
 
       const result = await resolveAttack({
         attacker: this.actor, weapon, skill, fv,
-        target: targetToken.actor, parryItem, parrySkill, parryFv,
+        target: targetToken.actor, parryItem, parrySkill, parryFv, parryBonus,
         aimedAt, intent, mods, ranged, detailed: true,
         attackerToken, targetToken: targetToken.document
       });
@@ -499,6 +516,13 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
         ui.notifications.warn(`${targetToken.actor.name}: ${result.reason}`);
         continue;
       }
+
+      // ⚠ Spelar-anfall-planen, 2026-08-21, Fas A: `resolveAttack()` skriver
+      // inget längre — `applyAttackResult()` gör de faktiska skrivningarna
+      // (EP, vapenslitage, skada). Ovillkorat här (SL:s väg, oförändrat
+      // beteende) — permission-grenen (SL-godkännande för spelare utan
+      // ägarskap på målet) är Fas B, byggs INTE i det här passet.
+      await applyAttackResult(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem });
 
       await postAttackCard(result, { attacker: this.actor, weapon, parryItem, ranged });
     }

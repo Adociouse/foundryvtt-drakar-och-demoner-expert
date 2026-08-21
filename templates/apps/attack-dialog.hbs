@@ -95,6 +95,12 @@
             <input type="number" name="parryFvOverride" min="0" value="{{suggestedParryFv}}" />
           </label>
         {{/if}}
+        {{#if showParryBonus}}
+          <label class="field" title="T.ex. ett tydligt &quot;telegraferat&quot; anfall — en drake som synligt drar in luft innan den andas eld, en bågskytt som långsamt siktar över en klyfta. Fri SL-bedömning, ingen bokciterad siffra.">
+            SL-bonus till försvararens parering
+            <input type="number" name="parryBonus" value="0" />
+          </label>
+        {{/if}}
       </div>
     {{/if}}
   </div>

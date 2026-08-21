@@ -1,4 +1,4 @@
-import { ensureHitLocations, applyLocationDamage, armourFor, tokenDistance, meleeReach } from "../helpers/anatomy.mjs";
+import { ensureHitLocations, applyLocationDamage, previewLocationDamage, armourFor, tokenDistance, meleeReach } from "../helpers/anatomy.mjs";
 import { combineDamageFormula } from "./damage-roll.mjs";
 import { canEarnFromUse, rollEpAward, awardItemEp } from "../helpers/ep.mjs";
 
@@ -55,14 +55,20 @@ async function classifiedRoll(fv) {
  *
  * ⚠ Bara rollpersoner (inte SLP) tjänar EP — SLP:er saknar de EP-bärande
  * färdighets-Item helt (se doc-kommentaren på `skill`/`parrySkill` nedan).
+ *
+ * ⚠ **Bara BERÄKNAR + RULLAR, skriver INGET** (Spelar-anfall-planen,
+ * 2026-08-21) — `awardItemEp`s faktiska `item.update()` flyttad till
+ * `applyAttackResult`, så en anfallande klient utan skrivbehörighet på
+ * försvararen ändå kan räkna ut och VISA hela resultatet. `rollEpAward`s
+ * tärning slås ändå HÄR (i den rena fasen) så Dice So Nice-animationen sker
+ * på den klient som faktiskt slår — se `applyAttackResult` för skrivningen.
  */
-async function awardSkillEp(actorType, skill, outcome) {
+async function computeSkillEp(actorType, skill, outcome) {
   if (actorType !== "character") return null;
   if (!["lyckat", "perfekt"].includes(outcome)) return null;
   if (!canEarnFromUse(skill)) return null;
   const { amount, roll } = await rollEpAward(outcome);
-  await awardItemEp(skill, amount);
-  return { amount, roll, skillName: skill.name };
+  return { skillId: skill.id, amount, roll, skillName: skill.name };
 }
 
 /**
@@ -104,6 +110,12 @@ export function resolveMatrix(attack, parry) {
  * @param {boolean}[o.ranged]      Avståndsanfall — ⚠ kan aldrig pareras utom kastvapen
  * @param {boolean}[o.defending]   Försvarar sig målet? Styr träfftabellens kolumn
  * @param {boolean}[o.detailed]    Visa/tillämpa träffområdeseffekter
+ * @param {number} [o.parryBonus]  Fri SL-satt bonus till FÖRSVARARENS pareringsCL
+ *   (Spelar-anfall-planen, 2026-08-21) — t.ex. ett tydligt "telegraferat" anfall
+ *   (en drake som synligt drar in luft, en bågskytt som långsamt siktar) där SL
+ *   vill ge extra pareringschans. Alltid 0 om inte uttryckligen satt av SL i
+ *   den manuella enda-måls-dialogen; ALDRIG i flermåls-/snabbanfallsläget.
+ *   Samma "SL:s ad hoc-bedömning"-princip som `mods`, ingen bokciterad siffra.
  * @param {TokenDocument} [o.attackerToken] Tillsammans med targetToken ger detta
  *   en RÄCKVIDDSKONTROLL via Foundrys egen `canvas.grid.measurePath` — respekterar
  *   rutnätstyp och diagonalregel. Utelämnas de görs ingen kontroll alls.
@@ -113,7 +125,7 @@ export async function resolveAttack({
   attacker, weapon, target, skill = null, fv: fvOverride = null, parryItem = null,
   parrySkill = null, parryFv = null, aimedAt = null,
   intent = "skada", mods = {}, ranged = false, defending = true, detailed = true,
-  attackerToken = null, targetToken = null
+  parryBonus = 0, attackerToken = null, targetToken = null
 }) {
   // ⚠ Räckvidd mäts med Foundrys egen funktion, inte egen geometri — se
   // tokenDistance(). Kontrollen görs bara när båda tokens skickas med, så
@@ -174,31 +186,45 @@ export async function resolveAttack({
 
   // ⚠ Parering: aldrig mot projektilvapen, och aldrig med ett avståndsvapen i
   // handen (SLB s.17). Kastvapen får pareras om försvararen har sköld.
+  // ⚠ `weapon.system.parryable` (Spelar-anfall-planen, 2026-08-21): default
+  // `true` (icke-Item-vapen, t.ex. NPC-fritextanfall, saknar fältet — `!==
+  // false` behåller dem parerbara som förut). ETT TILLÄGG, aldrig en väg att
+  // göra ett projektilvapen parerbart — `!ranged` gäller alltid först. Låter
+  // enstaka närstrids-/kastvapen (t.ex. ett magiskt vapen som "slår igenom"
+  // all parering) markeras oparerbara utan att felaktigt kategoriseras om
+  // till projektil.
+  const canParry = !!parryItem && !ranged && weapon?.system?.parryable !== false;
   // Samma vapengrupps-/färdighetsmodifierare-tillägg som `baseFv` ovan,
   // fast på FÖRSVARAREN (`target`) — samma bugg, samma fix.
-  const canParry = !!parryItem && !ranged;
-  const parryBonus = parrySkill
+  const parrySkillBonus = parrySkill
     ? (target?.system?.weaponGroupBonusTotals?.[parrySkill.system.skillKey] ?? 0)
       + (target?.system?.skillModifierTotals?.[parrySkill.system.skillKey] ?? 0)
     : 0;
-  const parryFvBase = (parrySkill ? parrySkill.system.total + parryBonus : null) ?? parryFv ?? baseFv;
+  const parryFvBase = ((parrySkill ? parrySkill.system.total + parrySkillBonus : null) ?? parryFv ?? baseFv) + parryBonus;
   const effectiveParryFv = weapon?.system?.hardToParry ? Math.floor(parryFvBase / 2) : parryFvBase;
   const par = canParry
     ? await classifiedRoll(effectiveParryFv)
     : { roll: null, outcome: null };
 
-  // ⚠ EP-streck för BÅDA slagen — se awardSkillEp(). Sker oavsett vad
+  // ⚠ EP-streck för BÅDA slagen — se computeSkillEp(). Sker oavsett vad
   // utfallsmatrisen sedan gör med anfallet; det är det lyckade SLAGET som ger
-  // EP (RP s.63), inte att hugget faktiskt gick igenom.
-  const attackEp = skill ? await awardSkillEp(attacker?.type, skill, atk.outcome) : null;
-  const parryEp = canParry && parrySkill ? await awardSkillEp(target?.type, parrySkill, par.outcome) : null;
+  // EP (RP s.63), inte att hugget faktiskt gick igenom. Tärningen slås HÄR
+  // (ren fas), men skrivningen (EP-strecket, `awardItemEp`) sker först i
+  // `applyAttackResult` — se computeSkillEp()s egen kommentar.
+  const attackEp = skill ? await computeSkillEp(attacker?.type, skill, atk.outcome) : null;
+  const parryEp = canParry && parrySkill ? await computeSkillEp(target?.type, parrySkill, par.outcome) : null;
 
   const verdict = resolveMatrix(atk.outcome, par.outcome);
   const out = {
     fv, modTotal, mods, attack: atk, parry: par, verdict,
     attackEp, parryEp, hardParrySelfFumble,
-    aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null
+    aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null,
+    // ⚠ Skrivningar som ANNARS skulle ske här skjuts upp till `applyAttackResult`
+    // — se Spelar-anfall-planen, 2026-08-21. Fylls i av grenarna nedan.
+    pending: { attackerEp: null, defenderEp: null, wear: null, damage: null }
   };
+  if (attackEp) out.pending.attackerEp = { skillId: attackEp.skillId, amount: attackEp.amount };
+  if (parryEp) out.pending.defenderEp = { skillId: parryEp.skillId, amount: parryEp.amount };
 
   // ⚠ Träffområdet slås ALLTID — se modulkommentaren. Även när `detailed` är
   // false; då används det bara inte.
@@ -219,14 +245,15 @@ export async function resolveAttack({
     // ⚠ SLP:ers attacker är fritext i `system.attacks`, inte Item-dokument
     // (MONSTER.md: källorna anger dem så). Slitaget kan då bara rapporteras,
     // inte bokföras — därför en guard i stället för ett antagande om Document.
-    if (worn && typeof item?.update === "function") {
-      await item.update({ "system.baseValue": Math.max(0, bv - 1) });
-    }
+    // ⚠ Skrivningen (`item.update`) sker inte här längre — se
+    // `out.pending.wear`/`applyAttackResult`.
+    const persisted = typeof item?.update === "function";
+    if (worn && persisted) out.pending.wear = { itemId: item.id, side: verdict.wearOn, newBaseValue: Math.max(0, bv - 1) };
     const broke = worn && bv - 1 <= 0;
     out.wear = {
       item: item?.name ?? "—", damage: dmg.total, bv, bvAfter: worn ? Math.max(0, bv - 1) : bv,
       worn, broke, wearOn: verdict.wearOn,
-      persisted: typeof item?.update === "function",
+      persisted,
       overflow: broke ? Math.max(0, dmg.total - 0) : 0,
       note: bv === null ? "⚠ Föremålet saknar brytvärde (baseValue)" : ""
     };
@@ -238,10 +265,11 @@ export async function resolveAttack({
     if (broke && verdict.wearOn === "defender") {
       const abs = armourFor(target, out.location.location);
       const applied = Math.max(0, dmg.total - 1 - abs);
-      const res = await applyLocationDamage(target, out.location.location, applied, { intent });
+      const res = previewLocationDamage(target, out.location.location, applied, { intent, allowHypotheticalLocations: detailed });
       out.damage = { roll: dmg, formula: weapon?.system.damage, abs, applied, viaBrokenParry: true, minusOne: true };
       out.effect = res.effect;
       out.totalAfter = res.totalAfter;
+      out.pending.damage = { location: out.location.location, amount: applied, intent, detailed };
     }
     return out;
   }
@@ -299,12 +327,58 @@ export async function resolveAttack({
   damage = Math.max(0, damage - abs);
   out.damage = { roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage };
 
-  if (detailed) await ensureHitLocations(target);
-  const applied = await applyLocationDamage(target, out.location.location, damage, { intent });
+  // ⚠ `ensureHitLocations`s skrivning OCH själva skadeskrivningen skjuts upp
+  // till `applyAttackResult` — se `out.pending.damage`. Förhandsvisningen
+  // (`previewLocationDamage`) räknar mot en hypotetisk träffområdeskarta om
+  // ingen redan finns, styrt av samma `detailed`-flagga som annars hade
+  // gett `ensureHitLocations` grönt ljus.
+  const applied = previewLocationDamage(target, out.location.location, damage, { intent, allowHypotheticalLocations: detailed });
   out.effect = applied.effect;
   out.totalAfter = applied.totalAfter;
   out.pulled = applied.pulled;
+  out.pending.damage = { location: out.location.location, amount: damage, intent, detailed };
   return out;
+}
+
+/**
+ * Utför ALLA skrivningar ett `resolveAttack()`-resultat beskriver (EP-streck,
+ * vapenslitage, skada) — se `out.pending`. Kräver att ANROPAREN redan har
+ * behörighet på de inblandade dokumenten; ingen egen permission-hantering
+ * här. Anropas antingen OMEDELBART (SL, eller en spelare som redan äger
+ * målet) eller efter SL:s godkännande av ett väntande anfallskort — se
+ * Spelar-anfall-planen, 2026-08-21.
+ *
+ * @param {object} result Returvärdet från `resolveAttack()`.
+ * @param {object} ctx
+ * @param {Actor}  ctx.attacker
+ * @param {Actor}  ctx.target
+ * @param {Item}   [ctx.weapon]      Måste ha `.update` om `pending.wear.side === "attacker"`.
+ * @param {Item}   [ctx.parryItem]   Måste ha `.update` om `pending.wear.side === "defender"`.
+ * @returns {Promise<{totalAfter:number, locationState:object, effect:object, pulled:boolean}|null>}
+ *   Den FAKTISKA (inte förhandsvisade) skadeupplösningen, om någon skada skrevs.
+ */
+export async function applyAttackResult(result, { attacker, target, weapon = null, parryItem = null }) {
+  const p = result?.pending ?? {};
+
+  if (p.attackerEp) {
+    const item = attacker?.items.get(p.attackerEp.skillId);
+    if (item) await awardItemEp(item, p.attackerEp.amount);
+  }
+  if (p.defenderEp) {
+    const item = target?.items.get(p.defenderEp.skillId);
+    if (item) await awardItemEp(item, p.defenderEp.amount);
+  }
+  if (p.wear) {
+    const item = p.wear.side === "attacker" ? weapon : parryItem;
+    if (item?.id === p.wear.itemId && typeof item.update === "function") {
+      await item.update({ "system.baseValue": p.wear.newBaseValue });
+    }
+  }
+  if (p.damage) {
+    if (p.damage.detailed) await ensureHitLocations(target);
+    return applyLocationDamage(target, p.damage.location, p.damage.amount, { intent: p.damage.intent });
+  }
+  return null;
 }
 
 const OUTCOME_LABEL = { perfekt: "Perfekt!", lyckat: "Lyckat", misslyckat: "Misslyckat", fummel: "Fummel!" };
@@ -355,7 +429,7 @@ export async function postAttackCard(result, { attacker, weapon, parryItem, rang
       verdictNote: VERDICT_NOTE[result.verdict.result] ?? "",
       cssClass: result.attack.outcome,
       // ⚠ EP-streck för anfalls- och pareringsslaget var för sig — se
-      // awardSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
+      // computeSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
       attackEp: result.attackEp, parryEp: result.parryEp,
       // Kättingvapen/Piska (SB s.33) — se resolveAttack.
       hardParrySelfFumble: result.hardParrySelfFumble ? {

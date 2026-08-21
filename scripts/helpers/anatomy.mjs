@@ -15,18 +15,32 @@
  * 1-4 delar man inte in kroppen i olika träffområden." Riktade anfall är alltså
  * meningslösa mot råttor och liknande, och anropande kod måste tåla `null`.
  */
-export async function ensureHitLocations(actor) {
+/**
+ * Ren härledning av träffområdes-KP — SAMMA formel som `ensureHitLocations`,
+ * men utan skrivningen. Används för att FÖRHANDSVISA ett träffområdeseffekt
+ * (Spelar-anfall-planen, 2026-08-21: en anfallande klient utan behörighet på
+ * målet kan inte skriva `system.hitLocations`, men behöver ändå kunna
+ * BERÄKNA vad ett träffområdesslag skulle innebära för att visa ett
+ * fullständigt, redan uträknat kort innan SL godkänner). Returnerar `null`
+ * under samma villkor som `ensureHitLocations` (< 5 Totala KP, RP s.48).
+ */
+function deriveHitLocationsPure(actor) {
   const existing = actor.system.hitLocations;
   if (existing && Object.keys(existing).length) return existing;
-
   const maxKp = actor.system.hp?.max ?? 0;
   const plan = actor.system.bodyPlan ?? "humanoid";
   const derived = CONFIG.DODE.hitLocationKp(plan, maxKp);
   if (!derived) return null;
-
-  // Varje område får value === max vid skapandet; skador dras sedan från value.
   const locations = {};
   for (const [key, max] of Object.entries(derived)) locations[key] = { value: max, max };
+  return locations;
+}
+
+export async function ensureHitLocations(actor) {
+  const existing = actor.system.hitLocations;
+  if (existing && Object.keys(existing).length) return existing;
+  const locations = deriveHitLocationsPure(actor);
+  if (!locations) return null;
   await actor.update({ "system.hitLocations": locations });
   return locations;
 }
@@ -120,8 +134,19 @@ export function locationEffect(locationKey, locationState, damageTaken) {
  *
  * `intent: "bedova"` är ⚠ **ETT AVSTEG** — se `resolveAttack` i rolls/attack.mjs.
  */
-export async function applyLocationDamage(actor, locationKey, damage, { intent = "skada" } = {}) {
-  const locations = foundry.utils.deepClone(actor.system.hitLocations ?? {});
+/**
+ * Ren beräkningskärna, delad av `applyLocationDamage` (skriver) och
+ * `previewLocationDamage` (skriver INTE) — se Spelar-anfall-planen,
+ * 2026-08-21, för varför uppdelningen finns: en anfallande klient utan
+ * skrivbehörighet på målet måste ändå kunna räkna ut HELA resultatet.
+ *
+ * `locationsOverride` låter förhandsvisningen räkna mot en HYPOTETISK
+ * träffområdeskarta (från `deriveHitLocationsPure`) utan att den någonsin
+ * skrivs — samma träffområde som en efterföljande riktig skrivning skulle
+ * härleda, bara utan sidoeffekten.
+ */
+function computeLocationDamage(actor, locationKey, damage, { intent = "skada", locationsOverride = null } = {}) {
+  const locations = foundry.utils.deepClone(locationsOverride ?? actor.system.hitLocations ?? {});
   const state = locations[locationKey];
   const hp = actor.system.hp ?? {};
   let totalAfter = (hp.value ?? hp.max ?? 0) - damage;
@@ -144,9 +169,37 @@ export async function applyLocationDamage(actor, locationKey, damage, { intent =
 
   const update = { "system.hp.value": totalAfter };
   if (state) update["system.hitLocations"] = locations;
-  await actor.update(update);
+  return { totalAfter, locationState: state, effect, pulled, update };
+}
 
-  return { totalAfter, locationState: state, effect, pulled };
+/**
+ * Lägger skada på ett träffområde OCH på Totala KP (SLB s.18: "I detaljerad
+ * strid dras skadan från både träffområdets KP och totala KP"). SKRIVER —
+ * kräver att anroparen har behörighet på `actor`. Samma kontrakt som förut:
+ * anroparen ansvarar för att ha kört `ensureHitLocations` FÖRST om
+ * träffområdeseffekter ska räknas (den `detailed`-styrda vägen i attack.mjs).
+ */
+export async function applyLocationDamage(actor, locationKey, damage, opts = {}) {
+  const r = computeLocationDamage(actor, locationKey, damage, opts);
+  await actor.update(r.update);
+  return { totalAfter: r.totalAfter, locationState: r.locationState, effect: r.effect, pulled: r.pulled };
+}
+
+/**
+ * Samma beräkning som `applyLocationDamage`, men SKRIVER INGET — för
+ * förhandsvisning på en klient som (ännu) inte har skrivbehörighet på målet.
+ * Härleder en HYPOTETISK träffområdeskarta om ingen redan finns (i stället
+ * för att kräva `ensureHitLocations`s skrivning), styrt av
+ * `allowHypotheticalLocations` (motsvarar attack.mjs's `detailed`-flagga —
+ * vanlig strid ska INTE börja räkna träffområden bara för att en
+ * förhandsvisning råkar köras).
+ */
+export function previewLocationDamage(actor, locationKey, damage, { allowHypotheticalLocations = true, ...opts } = {}) {
+  const existing = actor.system.hitLocations;
+  const hasReal = existing && Object.keys(existing).length;
+  const locationsOverride = (!hasReal && allowHypotheticalLocations) ? deriveHitLocationsPure(actor) : null;
+  const r = computeLocationDamage(actor, locationKey, damage, { ...opts, locationsOverride });
+  return { totalAfter: r.totalAfter, locationState: r.locationState, effect: r.effect, pulled: r.pulled };
 }
 
 /**

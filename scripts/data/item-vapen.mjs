@@ -40,6 +40,18 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
       // så fältet är oberoende av `category`. Styr enbart drag/loot-UI
       // (se actor-npc-sheet.mjs och npc-sheet.hbs), ingen mekanisk skillnad.
       natural: new fields.BooleanField({ required: false, initial: false }),
+      // Kan detta vapen pareras ALLS? Default true (bevarar allt befintligt
+      // innehålls beteende oförändrat). Ett TILLÄGG till category-baserad
+      // oparerbarhet (projektilvapen är redan alltid oparerbara, `!ranged` i
+      // resolveAttack), aldrig en väg att göra ett projektilvapen parerbart.
+      // Låter enstaka närstrids-/kastvapen (t.ex. ett magiskt vapen som "slår
+      // igenom" all parering) markeras oparerbara utan att felaktigt
+      // kategoriseras om. Beslut 2026-08-21 (Spelar-anfall-planen), Johans
+      // exempel: pil/spjut/shuriken/drakeld/mantikoreblixt är redan
+      // korrekt oparerbara via category:"projektil" — det här fältet täcker
+      // det ANNAT INTE täckta fallet, "most melee weapons are parryable,
+      // some magic weapons might not be".
+      parryable: new fields.BooleanField({ required: false, initial: true }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })
