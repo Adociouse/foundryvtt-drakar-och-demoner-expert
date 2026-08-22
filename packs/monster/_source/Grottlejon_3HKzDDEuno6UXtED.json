@@ -32,20 +32,7 @@
     "count": "1",
     "habitat": "4 & 5",
     "rarity": "Ovanlig",
-    "attacks": [
-      {
-        "name": "2 Klor",
-        "fv": 14,
-        "damage": "1d6",
-        "note": "GC 70%"
-      },
-      {
-        "name": "Bett",
-        "fv": 14,
-        "damage": "1d8",
-        "note": "GC 70%"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Lever ensamt i bergsgrotta. Ungefär lika stor som en nutida tiger. Jagar hästar och stäppdjur.</p>",
     "hp": {
       "value": null,

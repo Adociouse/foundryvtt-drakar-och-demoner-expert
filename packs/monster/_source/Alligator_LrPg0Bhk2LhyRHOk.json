@@ -1,0 +1,396 @@
+{
+  "name": "Alligator",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 23
+      },
+      "sto": {
+        "value": 23
+      },
+      "fys": {
+        "value": 11
+      },
+      "smi": {
+        "value": 7
+      },
+      "int": {
+        "value": 4
+      },
+      "psy": {
+        "value": 11
+      },
+      "kar": {
+        "value": 0
+      }
+    },
+    "abs": 4,
+    "damageBonus": "1d6",
+    "movement": "L6/S10",
+    "moral": null,
+    "count": "3T10",
+    "habitat": "7 & 12",
+    "rarity": "Vanlig",
+    "attacks": [],
+    "special": "<p>Reptil med fyrkantiga sammanvuxna hornplåtar på bål och stjärt. Lever mest i sötvatten, blir ca 4,5 meter varav svansen halva längden.</p>",
+    "hp": {
+      "value": null,
+      "max": 0
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": "20"
+    }
+  },
+  "_id": "LrPg0Bhk2LhyRHOk",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/alligator.png",
+  "prototypeToken": {
+    "name": "Alligator",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 2,
+    "height": 2,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/alligator.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "name": "Bett",
+      "type": "vapen",
+      "_id": "QVFiXETEnBU4nZd1",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d8",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb1",
+          "page": "20"
+        },
+        "description": "<p>Källans GC 60% → FV 12 (÷5, se DODE_Monsterboken1_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787417895612,
+        "modifiedTime": 1787417895612,
+        "lastModifiedBy": "GenMonsterbok1x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!LrPg0Bhk2LhyRHOk.QVFiXETEnBU4nZd1"
+    },
+    {
+      "name": "Bett",
+      "type": "fardighet",
+      "_id": "Uo7FKhxSzchkaQRK",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "bett",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 12,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb1",
+          "page": "20"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787417895612,
+        "modifiedTime": 1787417895612,
+        "lastModifiedBy": "GenMonsterbok1x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!LrPg0Bhk2LhyRHOk.Uo7FKhxSzchkaQRK"
+    },
+    {
+      "name": "Svanssnärt",
+      "type": "vapen",
+      "_id": "AGCUun1IEoGbLZCd",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/svanssnart.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d4",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb1",
+          "page": "20"
+        },
+        "description": "<p>Källans GC 50% → FV 10 (÷5, se DODE_Monsterboken1_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787417895612,
+        "modifiedTime": 1787417895612,
+        "lastModifiedBy": "GenMonsterbok1x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!LrPg0Bhk2LhyRHOk.AGCUun1IEoGbLZCd"
+    },
+    {
+      "name": "Svanssnärt",
+      "type": "fardighet",
+      "_id": "TFXSv3SGkML0hDix",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/svanssnart.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "svanssnart",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 10,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb1",
+          "page": "20"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787417895612,
+        "modifiedTime": 1787417895612,
+        "lastModifiedBy": "GenMonsterbok1x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!LrPg0Bhk2LhyRHOk.TFXSv3SGkML0hDix"
+    },
+    {
+      "name": "Läderplåt",
+      "type": "rustning",
+      "_id": "0hMqEiGSQM9L15y2",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/naturlig-rustning.png",
+      "system": {
+        "schemaVersion": 1,
+        "slot": "kropp",
+        "equipped": true,
+        "baseValue": 0,
+        "styGroup": 0,
+        "coverage": [],
+        "armourGroup": "",
+        "abs": 4,
+        "weight": 0,
+        "price": 0,
+        "natural": true,
+        "source": {
+          "book": "mb1",
+          "page": "20"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787417895612,
+        "modifiedTime": 1787417895612,
+        "lastModifiedBy": "GenMonsterbok1x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!LrPg0Bhk2LhyRHOk.0hMqEiGSQM9L15y2"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787417895612,
+    "modifiedTime": 1787417895612,
+    "lastModifiedBy": "GenMonsterbok1x01",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!LrPg0Bhk2LhyRHOk"
+}

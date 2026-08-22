@@ -32,26 +32,7 @@
     "count": "1",
     "habitat": "3 & 5",
     "rarity": "Ovanlig",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 9,
-        "damage": "1d6",
-        "note": "GC 45%, halv skadebonus"
-      },
-      {
-        "name": "2 Klor",
-        "fv": 11,
-        "damage": "1d6",
-        "note": "GC 55%"
-      },
-      {
-        "name": "Kram",
-        "fv": 0,
-        "damage": "2d8",
-        "note": "Specialattack — se Speciellt"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Om björnen träffar samma mål med båda klorna fastnar målet i björnkram. Nästa SR och tills greppet bryts: kramattack automatisk + 95% bettchans. Bryts med STY mot STY.</p>",
     "hp": {
       "value": null,

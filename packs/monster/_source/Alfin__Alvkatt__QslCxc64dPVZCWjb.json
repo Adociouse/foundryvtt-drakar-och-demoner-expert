@@ -32,14 +32,7 @@
     "count": "Varierar (lever med alvfolk)",
     "habitat": "Med alvfolk",
     "rarity": "",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 10,
-        "damage": "1d2",
-        "note": "GC 50%"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Kameleonthud — anpassar pälsfärg efter omgivning. Åldras inte, precis som alvfolket de lever med. Naturlig spiritus familiarus för alvfolksmagiker. Ägs aldrig av icke-alvfolksvarelser — aldrig till salu.</p>",
     "hp": {
       "value": null,

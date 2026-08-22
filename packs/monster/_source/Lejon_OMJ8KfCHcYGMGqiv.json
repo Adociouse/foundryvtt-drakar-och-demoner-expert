@@ -32,20 +32,7 @@
     "count": "1 hane, 1T4 honor, 2T4 ungar",
     "habitat": "4",
     "rarity": "Ovanlig",
-    "attacks": [
-      {
-        "name": "2 Klor",
-        "fv": 13,
-        "damage": "1d6",
-        "note": "GC 65%"
-      },
-      {
-        "name": "Bett",
-        "fv": 13,
-        "damage": "1d8",
-        "note": "GC 65%"
-      }
-    ],
+    "attacks": [],
     "hp": {
       "value": null,
       "max": 0

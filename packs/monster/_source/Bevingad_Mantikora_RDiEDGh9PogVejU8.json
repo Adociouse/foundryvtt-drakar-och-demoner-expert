@@ -32,20 +32,7 @@
     "count": "1",
     "habitat": "4–5",
     "rarity": "Mycket sällsynt",
-    "attacks": [
-      {
-        "name": "2 Klor",
-        "fv": 9,
-        "damage": "1d6",
-        "note": "GC 45%"
-      },
-      {
-        "name": "Svansgadd",
-        "fv": 9,
-        "damage": "1d10 + gift",
-        "note": "GC 45%, giftstyrka ≈ FYS"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Kan hoppa 20 m horisontellt och 10 m höjd med vestigalvingarna (tar en SR att ladda upp). Kan kommunicera på mantikora-språket.</p>",
     "hp": {
       "value": null,

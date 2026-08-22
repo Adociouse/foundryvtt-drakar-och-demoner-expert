@@ -32,14 +32,7 @@
     "count": "1",
     "habitat": "Överallt",
     "rarity": "Vanlig",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 9,
-        "damage": "1d4 + gift",
-        "note": "GC 45%. Giftstyrka 1–20 (SL:s val) — huggorm ≈5, mamba ≈20"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Angriper normalt bara om hotad. Giftverkan enligt giftreglerna i REGLER_STRID.md.</p>",
     "hp": {
       "value": null,

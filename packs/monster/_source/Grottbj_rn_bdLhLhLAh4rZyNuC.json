@@ -32,26 +32,7 @@
     "count": "1",
     "habitat": "5 & 8",
     "rarity": "Sällsynt",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 12,
-        "damage": "1d8",
-        "note": "GC 60%"
-      },
-      {
-        "name": "2 Klor",
-        "fv": 14,
-        "damage": "1d6",
-        "note": "GC 70%"
-      },
-      {
-        "name": "Kram",
-        "fv": 0,
-        "damage": "2d8",
-        "note": "Samma björnkramsregler som Brunbjörn"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Ca 3 meter lång — den största björnen. Grå päls, utmärkt kamouflage i bergsmark. Extremt vilt och farligt.</p>",
     "hp": {
       "value": null,

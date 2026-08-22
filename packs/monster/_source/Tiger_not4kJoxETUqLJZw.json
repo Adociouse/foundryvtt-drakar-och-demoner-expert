@@ -32,20 +32,7 @@
     "count": "1",
     "habitat": "2, 3 & 4",
     "rarity": "Ovanlig",
-    "attacks": [
-      {
-        "name": "2 Klor",
-        "fv": 14,
-        "damage": "1d6",
-        "note": "GC 70%"
-      },
-      {
-        "name": "Bett",
-        "fv": 14,
-        "damage": "1d8",
-        "note": "GC 70%"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Kattdjuret som oftast jagar människor. Jagar vid solnedgång.</p>",
     "hp": {
       "value": null,

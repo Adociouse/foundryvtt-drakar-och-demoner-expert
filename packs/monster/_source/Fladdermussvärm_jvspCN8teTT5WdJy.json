@@ -1,0 +1,162 @@
+{
+  "name": "Fladdermussvärm",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 0
+      },
+      "sto": {
+        "value": 0
+      },
+      "fys": {
+        "value": 0
+      },
+      "smi": {
+        "value": 0
+      },
+      "int": {
+        "value": 0
+      },
+      "psy": {
+        "value": 0
+      },
+      "kar": {
+        "value": 0
+      }
+    },
+    "abs": 0,
+    "damageBonus": "",
+    "movement": "F20",
+    "moral": null,
+    "count": "1T100×10",
+    "habitat": "8",
+    "rarity": "Vanlig",
+    "attacks": [],
+    "special": "<p>⚠ <strong>Svärmen har medvetet inga grundegenskaper eller KP i källan</strong> — den hanteras helt av specialregeln nedan, inte av vanliga stridsslag.</p><p>En varelse angrips av <strong>2T6 fladdermöss per SR</strong>. För varje fladdermus slår SL <strong>1T10</strong> (inte 1T100): överstiger slaget offrets rustningsabsorption gör bettet 1 poäng skada plus <strong>10% risk för sjukdom eller infektion</strong>, och fladdermusen suger sig fast och gör 1 poäng skada varje SR den sitter kvar.</p><p>Hugg i luften med svärd/yxa/klubba dödar 1 fladdermus per lyckat slag; <strong>spjut, dolkar och skjutvapen är omöjliga att använda</strong>. Få bort kvarsittande: 1T100 mot SMI×5 — misslyckat tar bort 1, lyckat 2, perfekt 4. <strong>En tänd fackla skrämmer 1T10 på flykten.</strong></p>",
+    "hp": {
+      "value": null,
+      "max": 0
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "mb1",
+      "page": "23"
+    }
+  },
+  "_id": "jvspCN8teTT5WdJy",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/fladdermussvarm.png",
+  "prototypeToken": {
+    "name": "Fladdermussvärm",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/fladdermussvarm.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787417895612,
+    "modifiedTime": 1787417895612,
+    "lastModifiedBy": "GenMonsterbok1x01",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!jvspCN8teTT5WdJy"
+}

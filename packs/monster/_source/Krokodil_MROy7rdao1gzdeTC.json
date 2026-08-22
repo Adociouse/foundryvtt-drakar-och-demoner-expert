@@ -32,20 +32,7 @@
     "count": "3T10",
     "habitat": "7 & 12",
     "rarity": "Vanlig",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 14,
-        "damage": "1d8",
-        "note": "GC 70%"
-      },
-      {
-        "name": "Svanssnärt",
-        "fv": 12,
-        "damage": "1d4",
-        "note": "GC 60%"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Ca 6 meter lång. Lever i sötvatten och vid havskuster.</p>",
     "hp": {
       "value": null,

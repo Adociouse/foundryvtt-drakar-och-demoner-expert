@@ -88,7 +88,22 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
     }
 
     // KP = (STO + FYS) / 2 — samma formel som rollpersonen, verifierad mot MONSTER.md-blocken.
-    this.hp.max = Math.round((a.sto.value + a.fys.value) / 2);
+    //
+    // ⚠ UNDANTAG: ODÖDA. Monsterboken 1 (s.89 Mumie, s.90 Skelett, s.95 Zombie,
+    // s.93 Vampyr) säger uttryckligen att odöda "har ingen FYS" och att deras
+    // KP i stället beräknas ur medelvärdet av **STO och STY**. Med den vanliga
+    // formeln hade FYS 0 gett absurt låga värden — ett mänskligt skelett skulle
+    // få 6 KP i stället för bokens 17, och en vampyr 6 i stället för 22, alltså
+    // en varelse som dör av ett enda slag. Hittat vid liveverifiering av
+    // Monsterboken 1-importen 2026-08-22.
+    //
+    // FYS === 0 är den enda markören som behövs: ingen levande varelse i
+    // källmaterialet har FYS 0, och boken använder just "ingen FYS" som sin
+    // egen definition av odöd. Ingen ny schemaflagga krävs alltså.
+    const isUndead = a.fys.value === 0;
+    this.hp.max = isUndead
+      ? Math.round((a.sto.value + a.sty.value) / 2)
+      : Math.round((a.sto.value + a.fys.value) / 2);
     this.hp.value = this.hp.value === null || this.hp.value === undefined
       ? this.hp.max
       : Math.min(this.hp.value, this.hp.max);

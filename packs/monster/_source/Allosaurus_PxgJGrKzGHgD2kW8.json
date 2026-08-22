@@ -32,26 +32,7 @@
     "count": "2T3+1",
     "habitat": "2, 3, 6",
     "rarity": "Mycket sällsynt",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 15,
-        "damage": "2d6",
-        "note": "GC 75%"
-      },
-      {
-        "name": "2 Klor",
-        "fv": 15,
-        "damage": "1d6",
-        "note": "GC 75%"
-      },
-      {
-        "name": "Svanssnärt",
-        "fv": 13,
-        "damage": "1d4",
-        "note": "GC 65%"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Troligen asätare snarare än aktiv jägare. Lever förmodligen i flockar. Karaktäristiska knölar och näskam på huvudet.</p>",
     "hp": {
       "value": null,

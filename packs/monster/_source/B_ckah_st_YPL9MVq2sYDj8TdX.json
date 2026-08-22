@@ -32,20 +32,7 @@
     "count": "1",
     "habitat": "7",
     "rarity": "Mycket sällsynt",
-    "attacks": [
-      {
-        "name": "Bett",
-        "fv": 17,
-        "damage": "1d8",
-        "note": "GC 85%"
-      },
-      {
-        "name": "2 Hovar",
-        "fv": 15,
-        "damage": "1d6",
-        "note": "GC 75%"
-      }
-    ],
+    "attacks": [],
     "special": "<p>Ser ut som en vanlig grå eller vit häst — men har rovdjurständer. Andas luft OCH vatten. Psykisk attack på 10 m (PSY mot PSY): lyckas → offret tvingas psykiskt klättra upp och rida, rusar sedan ut i vatten för att dränka offret.</p>",
     "hp": {
       "value": null,
