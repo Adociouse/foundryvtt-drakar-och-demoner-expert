@@ -34,10 +34,14 @@ import DoDETimeWindow from "./apps/time-window.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import DoDEGmEffectsApp from "./apps/gm-effects.mjs";
 import DoDEAttackDialog from "./apps/attack-dialog.mjs";
+import DoDESpellDialog from "./apps/spell-dialog.mjs";
 import DoDECombatTracker from "./apps/combat-tracker.mjs";
 import { DODE } from "./helpers/config.mjs";
 import { resolveAttack, applyAttackResult, postAttackCard } from "./rolls/attack.mjs";
+import { resolveSpellCast, applySpellResult, postSpellCard } from "./rolls/spell.mjs";
 import { resolveTwoAttacks, canUseTwoWeapons, effectiveSkillFv, TWO_WEAPON_OPTIONS } from "./rolls/dual-wield.mjs";
+import { applyLoot } from "./rolls/loot.mjs";
+import { applySell } from "./rolls/sell.mjs";
 
 const SYSTEM_ID = "drakar-och-demoner-expert";
 
@@ -225,6 +229,32 @@ Hooks.once("init", () => {
     default: "1d3"
   });
 
+  // ⚠ HOMEBREW, av som standard. Johans uttryckliga fråga 2026-08-21 under
+  // krogslagsmålet: SLB s.17s "Perfekt → automatisk maximal skada, rustning
+  // dras ej bort" gäller ORDAGRANT bara anfallsslag/pareringsslag (se
+  // spell.mjs's docblock för resonemanget om varför besvärjelser INTE fick
+  // samma regel per default — tabellen är strukturerad kring en pareringsrulle
+  // besvärjelser saknar). Johan bad uttryckligen om en SL-växlingsbar
+  // inställning i stället för ett hårdkodat ja/nej, så olika bord kan välja.
+  // Bara skadan maximeras (samma teknik som redan används för vapen — riktiga
+  // tärningar slås och visas, men SUMMAN räknas som om varje tärning visade
+  // sitt högsta värde) — motstånd/reduktion dras fortfarande av som vanligt,
+  // ingen "rustning dras ej bort"-motsvarighet för magiskt motstånd inbyggd.
+  game.settings.register(SYSTEM_ID, "perfectSpellMaxDamage", {
+    name: "Perfekt besvärjelse ger maximal skada (husregel)",
+    hint: "Av som standard: MAGI.md:s egen regel för Perfekt (halv PSY-kostnad) är den "
+      + "kompletta, avsiktliga regeln — SLB s.17:s maxskada-regel för vapen gäller inte "
+      + "besvärjelser i grundutförandet (ingen pareringsrulle att hänga upp den på). "
+      + "På: en Perfekt skadebesvärjelse räknar sin skada som om alla tärningar visade "
+      + "sitt högsta värde (riktiga tärningar slås och syns ändå). Magiskt motstånd/"
+      + "reduktion dras fortfarande av som vanligt.",
+    scope: "world",
+    config: true,
+    restricted: true,
+    type: Boolean,
+    default: false
+  });
+
   // Initiativ — **Spelledarboken s.16**: "Först i stridsrundan ska alla
   // stridsdeltagare slå ett initiativslag, 1T10+SMI (plus eventuella övriga
   // modifikationer). De som får ett högt resultat får agera före de som får ett
@@ -300,11 +330,19 @@ Hooks.once("init", () => {
     // Anfallsdialogen (detaljerad strid) — normalt öppnad via en vapen-/
     // anfallsrads egen knapp, konsolparitet för SL: game.dode.openAttackDialog(actor, {weapon}).
     openAttackDialog: (actor, opts) => new DoDEAttackDialog(actor, opts).render(true),
+    // Kast-dialogen (Magisystem-planen Fas 3) — normalt öppnad via en
+    // besvärjelserads egen knapp, konsolparitet för SL: game.dode.openSpellDialog(actor, {item}).
+    openSpellDialog: (actor, opts) => new DoDESpellDialog(actor, opts).render(true),
     // Stridsupplösning — SLB s.16-18. GM: game.dode.resolveAttack({attacker, weapon, target, ...})
     // `applyAttackResult` skriver ett `resolveAttack()`-resultats pending-fält
     // (EP/slitage/skada) — se Spelar-anfall-planen, 2026-08-21, och
     // renderChatMessageHTML-hooken nedan för godkännande-flödet som anropar den.
     resolveAttack, applyAttackResult, postAttackCard,
+    // Besvärjelsekastning mot mål — MAGI.md, Fas 2 (2026-08-21). Mirror av
+    // resolveAttack/applyAttackResult/postAttackCard ovan, se rolls/spell.mjs
+    // för hela pending/apply-uppdelningen. GM/konsol: game.dode.resolveSpellCast(
+    // {caster, item, effektgrad, targets}).
+    resolveSpellCast, applySpellResult, postSpellCard,
     // Scen-/miljömodifikationer via ActiveEffects (flags.<system.id>.source:"scene").
     // GM: game.dode.SceneEffects.applyToScene({ name, changes:[...] }) / removeFromScene(name).
     SceneEffects,
@@ -361,43 +399,29 @@ Hooks.once("ready", () => {
 });
 
 /**
- * Godkännande/avvisning av väntande spelar-anfall — Spelar-anfall-planen,
- * 2026-08-21. Kortet är redan fullt beräknat och postat med spelarens EGNA
- * tärningar (se attack.mjs's postAttackCard/`pending`) — SL:s Godkänn kör
- * INGET nytt tärningsslag, bara `applyAttackResult()`s skrivningar (KP,
- * vapenslitage, EP). Bara SL ser knapparna göra något (kortet självt är
- * publikt, alla ser resultatet) — `renderChatMessageHTML` fyrar för ALLA
- * klienter, `!game.user.isGM`-vakten gör resten till en no-op för spelare.
+ * Skapar en lås-och-markera-funktion för EN väntande-flagga på ett kort.
+ * Delad mellan anfalls- och besvärjelsegrenarna nedan (den senare tillagd i
+ * Magisystem-planens Fas 3, 2026-08-21 — generaliserad från den
+ * ursprungliga, anfalls-bara hooken samma dag).
  *
- * ⚠ `html` är ett RIKTIGT `HTMLElement` i den här Foundry-versionen (inte
- * jQuery) — `renderChatMessageHTML` ersatte den äldre `renderChatMessage`
- * specifikt för det (common/documents/chat-message.mjs).
+ * ⚠ Läser FÄRSKT flagg-tillstånd (inte en stängd variabel från renderingen)
+ * och sätter `processed` FÖRST, innan någon skrivning görs — skydd mot att
+ * två SL-klienter som klickar samtidigt kör samma godkännande två gånger.
+ * Samma "läs senaste tillstånd, lås innan skrivning"-disciplin som
+ * periodeffekt-kön (config.mjs `_queuePerActor`) redan etablerat.
  *
  * ⚠ Manipulerar DOM:en direkt och sparar tillbaka `element.innerHTML` som
  * nytt `content` i stället för att rendera om hela mallen via
- * `renderTemplate` — `applyAttackResult` behöver bara `result.pending`
- * (redan ren JSON-data i flaggan), aldrig hela det ursprungliga
- * `resolveAttack()`-resultatet (som bar `Roll`-instanser bara relevanta för
- * DEN URSPRUNGLIGA postningens Dice So Nice-animation).
+ * `renderTemplate` — skrivningen (`applyAttackResult`/`applySpellResult`)
+ * behöver bara `pending` (redan ren JSON-data i flaggan), aldrig hela det
+ * ursprungliga resultatet (som bar `Roll`-instanser bara relevanta för DEN
+ * URSPRUNGLIGA postningens Dice So Nice-animation).
  */
-Hooks.on("renderChatMessageHTML", (message, html) => {
-  if (!game.user.isGM) return;
-  const flag = message.getFlag(game.system.id, "pendingAttack");
-  if (!flag || flag.processed) return;
-
-  const approveBtn = html.querySelector('[data-action="approveAttackRequest"]');
-  const rejectBtn = html.querySelector('[data-action="rejectAttackRequest"]');
-  if (!approveBtn && !rejectBtn) return;
-
-  // ⚠ Läser FÄRSKT `pendingAttack`-tillstånd (inte den stängda `flag`-
-  // variabeln ovan) och sätter `processed` FÖRST, innan någon skrivning görs
-  // — skydd mot att två SL-klienter som klickar samtidigt kör samma anfall
-  // två gånger. Samma "läs senaste tillstånd, lås innan skrivning"-disciplin
-  // som periodeffekt-kön (config.mjs `_queuePerActor`) redan etablerat.
-  const lockAndMark = async (note) => {
-    const latest = game.messages.get(message.id)?.getFlag(game.system.id, "pendingAttack");
+function makeLockAndMark(message, html, flagKey) {
+  return async (note) => {
+    const latest = game.messages.get(message.id)?.getFlag(game.system.id, flagKey);
     if (!latest || latest.processed) { ui.notifications.info("Redan hanterat av en annan SL-klient."); return false; }
-    await message.setFlag(game.system.id, "pendingAttack", { ...latest, processed: true });
+    await message.setFlag(game.system.id, flagKey, { ...latest, processed: true });
     html.querySelector(".pending-banner")?.replaceWith(
       Object.assign(document.createElement("div"), { className: "processed-note", textContent: note })
     );
@@ -405,24 +429,194 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
     await message.update({ content: html.innerHTML });
     return true;
   };
+}
 
-  approveBtn?.addEventListener("click", async () => {
-    const attacker = game.actors.get(flag.attackerId);
-    const target = game.actors.get(flag.targetId);
-    if (!attacker || !target) { ui.notifications.error("Anfallaren eller målet finns inte längre — kan inte godkänna."); return; }
-    if (!(await lockAndMark(`✅ Godkänt av ${game.user.name}`))) return;
-    const pending = flag.pending ?? {};
-    const weapon = pending.wear?.side === "attacker" ? attacker.items.get(pending.wear.itemId) : null;
-    const parryItem = pending.wear?.side === "defender" ? target.items.get(pending.wear.itemId) : null;
-    try {
-      await applyAttackResult({ pending }, { attacker, target, weapon, parryItem });
-    } catch (err) {
-      console.error("DoDE | applyAttackResult misslyckades efter godkännande", err);
-      ui.notifications.error("Kunde inte skriva anfallets resultat — se konsolen.");
+/**
+ * Godkännande/avvisning av väntande spelar-anfall OCH -besvärjelser —
+ * Spelar-anfall-planen (2026-08-21) resp. Magisystem-planens Fas 3
+ * (2026-08-21, samma dag). Kortet är redan fullt beräknat och postat med
+ * spelarens EGNA tärningar (se attack.mjs/spell.mjs's `pending`-parameter)
+ * — SL:s Godkänn kör INGET nytt tärningsslag, bara den deferrade
+ * skrivningen. Bara SL ser knapparna göra något (kortet självt är publikt,
+ * alla ser resultatet) — `renderChatMessageHTML` fyrar för ALLA klienter,
+ * `!game.user.isGM`-vakten gör resten till en no-op för spelare.
+ *
+ * ⚠ `html` är ett RIKTIGT `HTMLElement` i den här Foundry-versionen (inte
+ * jQuery) — `renderChatMessageHTML` ersatte den äldre `renderChatMessage`
+ * specifikt för det (common/documents/chat-message.mjs).
+ */
+Hooks.on("renderChatMessageHTML", (message, html) => {
+  if (!game.user.isGM) {
+    // ⚠ Live-fynd 2026-08-21: Godkänn/Avvisa-knapparna ligger i kortets
+    // HTML-innehåll (synligt för ALLA som ser meddelandet), men bara GM:s
+    // klient kopplar in en klicklyssnare (se gaten nedan) — en spelare som
+    // klickade dem fick alltså inget att hända alls, utan felmeddelande.
+    // Ta bort dem helt för icke-GM, lämna bara väntar-bandet kvar.
+    html.querySelectorAll(".pending-actions").forEach((el) => el.remove());
+    return;
+  }
+
+  const attackFlag = message.getFlag(game.system.id, "pendingAttack");
+  if (attackFlag && !attackFlag.processed) {
+    const approveBtn = html.querySelector('[data-action="approveAttackRequest"]');
+    const rejectBtn = html.querySelector('[data-action="rejectAttackRequest"]');
+    if (approveBtn || rejectBtn) {
+      const lockAndMark = makeLockAndMark(message, html, "pendingAttack");
+
+      approveBtn?.addEventListener("click", async () => {
+        // ⚠ `fromUuidSync`, INTE `game.actors.get(id)` (rättat 2026-08-21,
+        // hittat under Magisystem-passets Fas 3-liveverifiering — se
+        // attack.mjs:s postAttackCard-kommentar för hela orsaken: en olänkad
+        // NPC-tokens `.id` är delat med bas-aktören, `game.actors.get` hade
+        // alltid gett bas-objektet, inte den specifika token-instans som
+        // faktiskt förhandsvisades/målsattes).
+        const attacker = attackFlag.attackerUuid ? fromUuidSync(attackFlag.attackerUuid) : null;
+        const target = attackFlag.targetUuid ? fromUuidSync(attackFlag.targetUuid) : null;
+        if (!attacker || !target) { ui.notifications.error("Anfallaren eller målet finns inte längre — kan inte godkänna."); return; }
+        if (!(await lockAndMark(`✅ Godkänt av ${game.user.name}`))) return;
+        const pending = attackFlag.pending ?? {};
+        const weapon = pending.wear?.side === "attacker" ? attacker.items.get(pending.wear.itemId) : null;
+        const parryItem = pending.wear?.side === "defender" ? target.items.get(pending.wear.itemId) : null;
+        try {
+          await applyAttackResult({ pending }, { attacker, target, weapon, parryItem });
+        } catch (err) {
+          console.error("DoDE | applyAttackResult misslyckades efter godkännande", err);
+          ui.notifications.error("Kunde inte skriva anfallets resultat — se konsolen.");
+        }
+      });
+
+      rejectBtn?.addEventListener("click", () => lockAndMark(`❌ Avvisat av ${game.user.name}`));
     }
-  });
+  }
 
-  rejectBtn?.addEventListener("click", () => lockAndMark(`❌ Avvisat av ${game.user.name}`));
+  // Besvärjelsegodkännande — Magisystem-planen Fas 3 (2026-08-21). Speglar
+  // anfallsgrenen exakt; se spell.mjs's postSpellCard/applySpellResult för
+  // vad `pending`/`itemId` bär. `targets.length !== targetIds.length`
+  // fångar en raderad aktör bland flera mål — samma "hellre avbryt än
+  // applicera på ett ofullständigt målurval"-princip som ett saknat enda mål
+  // redan följer i anfallsgrenen.
+  const spellFlag = message.getFlag(game.system.id, "pendingSpell");
+  if (spellFlag && !spellFlag.processed) {
+    const approveSpellBtn = html.querySelector('[data-action="approveSpellRequest"]');
+    const rejectSpellBtn = html.querySelector('[data-action="rejectSpellRequest"]');
+    if (approveSpellBtn || rejectSpellBtn) {
+      const lockAndMarkSpell = makeLockAndMark(message, html, "pendingSpell");
+
+      approveSpellBtn?.addEventListener("click", async () => {
+        // ⚠ `fromUuidSync`, se attack-grenens motsvarande kommentar ovan —
+        // samma rot-orsak (delat `.id` mellan en olänkad NPC-tokens
+        // synthetic actor och bas-aktören i `game.actors`).
+        const caster = spellFlag.casterUuid ? fromUuidSync(spellFlag.casterUuid) : null;
+        const item = caster?.items.get(spellFlag.itemId);
+        const targetUuids = spellFlag.targetUuids ?? [];
+        const targets = targetUuids.map((uuid) => fromUuidSync(uuid)).filter(Boolean);
+        if (!caster || !item || targets.length !== targetUuids.length) {
+          ui.notifications.error("Kastaren, besvärjelsen eller ett mål finns inte längre — kan inte godkänna.");
+          return;
+        }
+        if (!(await lockAndMarkSpell(`✅ Godkänt av ${game.user.name}`))) return;
+        try {
+          await applySpellResult({ pending: spellFlag.pending, item }, { caster, targets });
+        } catch (err) {
+          console.error("DoDE | applySpellResult misslyckades efter godkännande", err);
+          ui.notifications.error("Kunde inte skriva besvärjelsens resultat — se konsolen.");
+        }
+      });
+
+      rejectSpellBtn?.addEventListener("click", () => lockAndMarkSpell(`❌ Avvisat av ${game.user.name}`));
+    }
+  }
+
+  // Plundringsgodkännande — se rolls/loot.mjs för hela resonemanget. Samma
+  // mönster som anfall/besvärjelser, men här finns inget att förhandsberäkna
+  // (inget slag) — godkännande KÖR själva överföringen, den enda skrivningen.
+  const lootFlag = message.getFlag(game.system.id, "pendingLoot");
+  if (lootFlag && !lootFlag.processed) {
+    const approveLootBtn = html.querySelector('[data-action="approveLootRequest"]');
+    const rejectLootBtn = html.querySelector('[data-action="rejectLootRequest"]');
+    if (approveLootBtn || rejectLootBtn) {
+      const lockAndMarkLoot = makeLockAndMark(message, html, "pendingLoot");
+
+      approveLootBtn?.addEventListener("click", async () => {
+        if (!(await lockAndMarkLoot(`✅ Godkänt av ${game.user.name}`))) return;
+        try {
+          await applyLoot(lootFlag);
+        } catch (err) {
+          console.error("DoDE | applyLoot misslyckades efter godkännande", err);
+          ui.notifications.error("Kunde inte genomföra plundringen — se konsolen.");
+        }
+      });
+
+      rejectLootBtn?.addEventListener("click", () => lockAndMarkLoot(`❌ Avvisat av ${game.user.name}`));
+    }
+  }
+
+  // Försäljningsgodkännande — se rolls/sell.mjs. Samma form som plundring,
+  // men gaten för DIREKT applicering (i requestSell) är `game.user.isGM`,
+  // inte ägarskap — en spelare äger alltid sin egen rollperson, så
+  // ägarskapsgaten hade gjort godkännande meningslöst här.
+  const sellFlag = message.getFlag(game.system.id, "pendingSell");
+  if (sellFlag && !sellFlag.processed) {
+    const approveSellBtn = html.querySelector('[data-action="approveSellRequest"]');
+    const rejectSellBtn = html.querySelector('[data-action="rejectSellRequest"]');
+    if (approveSellBtn || rejectSellBtn) {
+      const lockAndMarkSell = makeLockAndMark(message, html, "pendingSell");
+
+      approveSellBtn?.addEventListener("click", async () => {
+        if (!(await lockAndMarkSell(`✅ Godkänt av ${game.user.name}`))) return;
+        try {
+          await applySell(sellFlag);
+        } catch (err) {
+          console.error("DoDE | applySell misslyckades efter godkännande", err);
+          ui.notifications.error("Kunde inte genomföra försäljningen — se konsolen.");
+        }
+      });
+
+      rejectSellBtn?.addEventListener("click", () => lockAndMarkSell(`❌ Avvisat av ${game.user.name}`));
+    }
+  }
+});
+
+/**
+ * Berätta när en besvärjelses effekt tar slut — live-fynd 2026-08-21 (Johan:
+ * "if he is no longer blind the icon should vanish and a text message state
+ * Spell effect blindness expired?"). Utan detta försvinner statusikonen/
+ * ActiveEffecten tyst (utgången varaktighet, botad, eller SL-borttagen för
+ * hand) utan att bordet ser VARFÖR eller VILKEN besvärjelse det var.
+ * Flaggan (`flags.<system>.source === "spell"` + `sourceName`) sätts av BÅDA
+ * vägarna en besvärjelse kan skapa en ActiveEffect: `applySpellEffect`
+ * (actor.mjs, buff via buildTemporaryEffectData) och `applySpellResult`s
+ * statusEffect-gren (spell.mjs, `toggleStatusEffect`) — samma flagg-form,
+ * en gemensam hook.
+ *
+ * ⚠ Bara GM:s klient postar — annars skulle VARJE ansluten spelare posta
+ * samma meddelande en gång var (`deleteActiveEffect` fyrar lokalt hos alla).
+ */
+Hooks.on("deleteActiveEffect", (effect) => {
+  if (!game.user.isGM) return;
+  if (effect.getFlag(game.system.id, "source") !== "spell") return;
+  const spellName = effect.getFlag(game.system.id, "sourceName") ?? effect.name;
+  const actorName = effect.parent?.name ?? "Okänd";
+  ChatMessage.create({
+    content: `<div class="dode-chat-card"><p>💨 <strong>${spellName}</strong> på ${actorName} har upphört.</p></div>`
+  });
+});
+
+/**
+ * "Spöktoken"-varning — live-fynd 2026-08-21 (krogslagsmålet): fyra tokens
+ * (`Sigrid Järnhand`, `Stigman`, `Varg`, `Rurik Tvåyxa`) pekade på ett
+ * aktörs-id som inte längre fanns i världen — troligen kvarlämnade från en
+ * tidigare raderad aktör. De syntes bara som namn utan hälsobar/typ, och
+ * förvirrade en riktig strid (Johan: "confused the fight"). Ingen automatisk
+ * städning här — bara en tydlig varning när scenen laddas, så SL kan städa
+ * INNAN en strid börjar i stället för att upptäcka det mitt i en runda.
+ */
+Hooks.on("canvasReady", (canvas) => {
+  if (!game.user.isGM) return;
+  const ghosts = canvas.scene?.tokens.filter((t) => !t.actor) ?? [];
+  if (!ghosts.length) return;
+  const names = ghosts.map((t) => t.name).join(", ");
+  ui.notifications.warn(`Scenen "${canvas.scene.name}" har ${ghosts.length} spöktoken(s) utan kopplad aktör: ${names}. Kontrollera/städa innan striden börjar.`, { permanent: true });
 });
 
 /**

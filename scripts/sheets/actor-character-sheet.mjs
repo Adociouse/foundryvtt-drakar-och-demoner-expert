@@ -1,4 +1,5 @@
 import { needsChoice, choiceCount, resolveGrants, applyResolvedAbility } from "../helpers/special-ability-effects.mjs";
+import { requestSell } from "../rolls/sell.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { DialogV2 } = foundry.applications.api;
@@ -31,6 +32,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       deleteItem: DoDECharacterSheet.#onDeleteItem,
       toggleEquipped: DoDECharacterSheet.#onToggleEquipped,
       consumeItem: DoDECharacterSheet.#onConsumeItem,
+      sellItem: DoDECharacterSheet.#onSellItem,
       addAbility: DoDECharacterSheet.#onAddAbility,
       rollAbility: DoDECharacterSheet.#onRollAbility,
       deleteAbility: DoDECharacterSheet.#onDeleteAbility,
@@ -669,6 +671,20 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   }
 
   /**
+   * Sälj till en handlare — rolls/sell.mjs. Handlaren är den FÖRSTA
+   * målsatta token som faktiskt är `type:"handlare"` — samma "hovra + T"-
+   * konvention som resten av strid/magi-passet redan etablerat, ingen egen
+   * väljar-UI byggd för det här (en spelare säljer typiskt mot EN öppen
+   * butik åt gången).
+   */
+  static async #onSellItem(event, target) {
+    const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
+    if (!item) return;
+    const merchant = [...game.user.targets].map((t) => t.actor).find((a) => a?.type === "handlare");
+    await requestSell(this.actor, item.id, merchant);
+  }
+
+  /**
    * `specialAbilities` är ett vanligt ArrayField på rollpersonens egen data,
    * inte embeddade Items (till skillnad från färdigheter/utrustning) — lägg
    * till/ta bort skriver om hela arrayen via `actor.update`, inte
@@ -827,11 +843,18 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     new DoDEAttackDialog(this.actor, { weapon: item }).render(true);
   }
 
+  /**
+   * Öppnar Kast-dialogen (Magisystem-planen Fas 3, 2026-08-21) förvald till
+   * denna besvärjelse — se scripts/apps/spell-dialog.mjs. Ersätter den
+   * TIDIGARE direkta `actor.castSpell()`-anropet (som bara gjorde en ren
+   * CL/PSY-kontroll utan mål/effekt) — samma övergång som #onDeclareAttack
+   * en gång gjorde för #onRollDamage.
+   */
   static async #onCastSpell(event, target) {
-    const row = target.closest("[data-item-id]");
     const item = DoDECharacterSheet.#itemFromEvent(this.actor, target);
-    const effektgrad = Number(row?.querySelector("[data-effektgrad]")?.value) || 1;
-    if (item) await this.actor.castSpell(item, effektgrad);
+    if (!item) return;
+    const { default: DoDESpellDialog } = await import("../apps/spell-dialog.mjs");
+    new DoDESpellDialog(this.actor, { item }).render(true);
   }
 
   /** @override */

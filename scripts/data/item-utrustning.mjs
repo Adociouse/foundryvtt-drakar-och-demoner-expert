@@ -62,6 +62,18 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
         skillKey: new fields.StringField({ required: true, initial: "" }),
         value: new fields.NumberField({ required: true, integer: true, initial: 0 })
       })),
+      // Magiska bärbara föremål som höjer HP/PSY-max medan utrustade (t.ex. en
+      // stav som ger +3 PSY) — samma fält/form som item-formaga.mjs's
+      // `statModifiers`, konsumerat av SAMMA `#applyStatModifiers`-summering
+      // i actor-character.mjs (som redan skannar "utrustning"-typade items,
+      // gated på `equipped`, se `#isModifierItemActive`) — bara fältet
+      // saknades här, ingen ändring behövdes i själva summeringslogiken.
+      // Live-fynd 2026-08-21, Johan: "Malakor med... en stav som ger +3PSY".
+      statModifiers: new fields.ArrayField(new fields.SchemaField({
+        stat: new fields.StringField({ required: true, initial: "hp.max", choices: ["hp.max", "psy.max"] }),
+        operation: new fields.StringField({ required: true, initial: "add", choices: ["add", "multiply"] }),
+        value: new fields.NumberField({ required: true, integer: true, initial: 0 })
+      })),
       // HP-/PSY-återhämtningsmodifierare medan buren (t.ex. en meditationsstav,
       // +50% PSY-återhämtning) — samma equip-/activationSeconds-grind som
       // skillModifiers ovan. Se docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R10.

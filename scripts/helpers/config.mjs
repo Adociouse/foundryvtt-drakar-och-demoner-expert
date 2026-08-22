@@ -2409,3 +2409,161 @@ DODE.rollResistance = async function (sg, attributeValue) {
   const roll = await new Roll("1d20").evaluate();
   return { roll, success: roll.total <= target, target, autoResult: null };
 };
+
+/**
+ * Löser motstånd/immunitet mot en skadetyp för en instant-effekt
+ * (scripts/rolls/spell.mjs, Fas 2) — se fields-resistances.mjs för de tre
+ * bokmönstren (Motståndskraft/Syraskydd/Blindskydd) den tolkar.
+ *
+ * ⚠ `incomingE` (kastarens effektgrad) används bara för `overcomeE`-fallet,
+ * och avgörs med en RAK TALJÄMFÖRELSE — inget slag. Det är medvetet skilt
+ * från DODE.rollResistance ovan: boken säger "övervinna MED E" för Blindskydd,
+ * inte "slå ett motståndsslag", så en slumpkomponent hade varit fel mekanik,
+ * inte bara en annan implementation av samma mekanik.
+ *
+ * @param {Actor} actor Mottagaren — läser `actor.system.resistances`.
+ * @param {string} damageType
+ * @param {number} [incomingE=0]
+ * @returns {{reduction:number, immune:boolean, blocked:boolean}} `blocked` är
+ *   det fältet att kolla för "ska effekten utebli helt" — `immune` speglar
+ *   samma sak, kvar som ett separat, mer läsbart namn för anroparen.
+ */
+DODE.resolveResistance = function (actor, damageType, incomingE = 0) {
+  const entry = (actor?.system?.resistances ?? []).find((r) => r.damageType === damageType);
+  if (!entry) return { reduction: 0, immune: false, blocked: false };
+  if (entry.reduction === "immun") {
+    const blocked = entry.overcomeE == null || incomingE <= entry.overcomeE;
+    return { reduction: 0, immune: blocked, blocked };
+  }
+  return { reduction: Number(entry.reduction) || 0, immune: false, blocked: false };
+};
+
+/**
+ * Slår upp en namngiven RollTable direkt ur `tabeller`-kompendiet, oavsett om
+ * SL råkat importera den till världens `game.tables` eller inte. Delad av
+ * `rollFearTable`/`rollSnedtandningstabell`/`rollFobiTable` nedan.
+ * @returns {Promise<RollTable|null>}
+ */
+async function getTabellerTable(name) {
+  const pack = game.packs.get(`${game.system.id}.tabeller`);
+  return pack ? (await pack.getDocuments()).find((t) => t.name === name) ?? null : null;
+}
+
+/**
+ * Drar från Skräcktabellen (packs/tabeller, sourcad Magi-regelboken s.25) —
+ * tabellen fanns redan, bara utan en dragningspunkt (se
+ * docs/dev/MAGI_STRID_ANVANDNINGSFALL.md ⚠ RÄTTELSE 2026-08-21).
+ * ⚠ Returnerar `{roll, result}` (Fas 4-tillägg, 2026-08-21) — INTE bara
+ * resultatet som tidigare, så `roll` kan bifogas chattkortets `rolls`-array
+ * och Dice So Nice faktiskt animerar draget. Alla anropare uppdaterade i
+ * samma pass (spell.mjs).
+ * @returns {Promise<{roll:Roll, result:TableResult}|null>}
+ */
+DODE.rollFearTable = async function () {
+  const table = await getTabellerTable("Skräcktabell");
+  if (!table) return null;
+  const draw = await table.draw({ displayChat: false });
+  return draw.results[0] ? { roll: draw.roll, result: draw.results[0] } : null;
+};
+
+/**
+ * Drar från Fobitabellen (1T10) — bara relevant via Snedtändningstabellens
+ * 20+-resultat, se `rollSnedtandningstabell` nedan.
+ * @returns {Promise<{roll:Roll, result:TableResult}|null>}
+ */
+DODE.rollFobiTable = async function () {
+  const table = await getTabellerTable("Fobitabellen");
+  if (!table) return null;
+  const draw = await table.draw({ displayChat: false });
+  return draw.results[0] ? { roll: draw.roll, result: draw.results[0] } : null;
+};
+
+/**
+ * Drar från Snedtändningstabellen (packs/tabeller, sourcad D&DE 0_Magi.pdf
+ * s.8 — se docs/extracts/DODE_Magi_SNEDTANDNINGSTABELL.md, Roll20-projektet,
+ * för det fulla kurerade underlaget; den kurerade docs/wiki/MAGI.md hade bara
+ * en osourcad placeholder-tabell innan detta). Vid ETT fumlat kastningsslag
+ * (`castSpell()`/`resolveSpellCast()`).
+ *
+ * ⚠ Formeln är BOKENS EGEN, inte en fri tolkning: "Slå 1T20 och addera
+ * besvärjelsens effektgrad till resultatet" — därför tar funktionen emot `E`
+ * och bygger en egen `Roll("1d20 + @E", {E})` i stället för att använda
+ * tabellens lagrade `formula`-fält (bara "1d20", en rimlig fallback för en
+ * SL som drar manuellt ur kompendiesidan utan att komma ihåg att lägga på E
+ * själv — se tabellens egen beskrivningstext).
+ *
+ * ⚠ Bara DRAR och returnerar texten — tillämpar INGET mekaniskt (KP-avdrag,
+ * blindhet/stumhet/förlamning-status, INT-sänkning). Samma nivå av
+ * automatisering som Skräcktabellen redan har (en beskrivande dragning SL
+ * tolkar, inte en fullt mekaniserad effektkedja) — en framtida utökning,
+ * flaggad i backlog, inte den här passets omfattning.
+ *
+ * @param {number} effektgrad
+ * @returns {Promise<{roll:Roll, result:TableResult, fobi:{roll:Roll,result:TableResult}|null}|null>}
+ *   `fobi` är satt bara när huvudresultatet är den översta bucketen (20+,
+ *   "Total minnesförlust"), som boken hänvisar vidare till Fobitabellen.
+ */
+DODE.rollSnedtandningstabell = async function (effektgrad) {
+  const table = await getTabellerTable("Snedtändningstabellen");
+  if (!table) return null;
+  const roll = new Roll("1d20 + @E", { E: Math.max(1, Math.floor(effektgrad) || 1) });
+  const draw = await table.draw({ roll, displayChat: false });
+  const result = draw.results[0] ?? null;
+  const fobi = result?.name === "Total minnesförlust" ? await DODE.rollFobiTable() : null;
+  return result ? { roll: draw.roll, result, fobi } : null;
+};
+
+/**
+ * Vapenstridens fyra fummeltabeller (Sköldar/Närstridsvapen/Avståndsvapen/
+ * Obeväpnad strid) — Magisystem-planens Fas 6, 2026-08-21. Sourcad
+ * Spelarboken (D&DE III) s.39-41, se docs/extracts/DODE_Spelarboken_
+ * FUMMELTABELLER.md (Roll20-projektet) för fulla underlaget och tolkningen
+ * av vilken tabell som gäller när (vapentyp, inte anfall/parering — flera
+ * rader nämner uttryckligen "attack ELLER parering", samma tabell täcker båda).
+ *
+ * ⚠ Bara DRAGET/visat, ingen mekanisk tillämpning av effekttexten (CL-
+ * avdrag, vapentapp, skada m.m.) — samma automatiseringsnivå som Skräck-/
+ * Snedtändningstabellen redan har, SL tolkar och applicerar manuellt.
+ */
+const FUMMEL_TABLE_NAMES = {
+  narstrid: "Fummeltabell för Närstridsvapen",
+  avstand: "Fummeltabell för Avståndsvapen",
+  obevapnad: "Fummeltabell för Obeväpnad strid",
+  skold: "Fummeltabell för Sköldar"
+};
+
+async function drawFummelRow(table, rollsOut) {
+  const draw = await table.draw({ displayChat: false });
+  rollsOut.push(draw.roll);
+  return draw.results[0] ?? null;
+}
+
+/**
+ * Används bara för de TVÅ EXTRA dragningarna rad 20 utlöser — boken: "Slå två
+ * gånger på tabellen och slå om ifall du slår '20' EN GÅNG TILL". Skild från
+ * själva PRIMÄRDRAGET, vars egen 20:a alltid rapporteras (dess text ÄR
+ * regeln som utlöser de två extra dragningarna, inte ett resultat att kasta bort).
+ */
+async function drawFummelRowNoTwenty(table, rollsOut) {
+  let result = await drawFummelRow(table, rollsOut);
+  while (result?.range?.[0] === 20) result = await drawFummelRow(table, rollsOut);
+  return result;
+}
+
+/**
+ * @param {"narstrid"|"avstand"|"obevapnad"|"skold"} tableKey
+ * @returns {Promise<{primary:TableResult, extra:TableResult[], rolls:Roll[]}|null>}
+ *   `extra` har 0 poster normalt, 2 om `primary` var rad 20 ("Rejäl klantighet").
+ */
+DODE.rollWeaponFummelTable = async function (tableKey) {
+  const table = await getTabellerTable(FUMMEL_TABLE_NAMES[tableKey]);
+  if (!table) return null;
+  const rolls = [];
+  const primary = await drawFummelRow(table, rolls);
+  const extra = [];
+  if (primary?.range?.[0] === 20) {
+    extra.push(await drawFummelRowNoTwenty(table, rolls));
+    extra.push(await drawFummelRowNoTwenty(table, rolls));
+  }
+  return { primary, extra, rolls };
+};

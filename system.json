@@ -20,6 +20,11 @@
       "lang": "sv",
       "name": "Svenska",
       "path": "lang/sv.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
     }
   ],
   "documentTypes": {

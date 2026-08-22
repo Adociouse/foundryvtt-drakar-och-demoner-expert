@@ -1,5 +1,6 @@
 import { DODE } from "../helpers/config.mjs";
 import { sourceField } from "./fields-source.mjs";
+import { resistancesField } from "./fields-resistances.mjs";
 import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
@@ -45,6 +46,8 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
       // gör det möjligt att blanda vanlig och detaljerad strid utan bokföring.
       hitLocations: new fields.ObjectField({ required: false, initial: () => ({}) }),
       abs: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+      // Motstånd/immunitet mot skadetyp (eld/kyla/syra m.fl.) — se fields-resistances.mjs.
+      resistances: resistancesField(),
       damageBonus: new fields.StringField({ required: false, initial: "" }),
       movement: new fields.StringField({ required: false, initial: "" }),
       moral: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),

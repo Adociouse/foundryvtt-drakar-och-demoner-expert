@@ -73,6 +73,25 @@ detailed
 
 ⚠ `no text and no lettering` — bildmodeller lägger annars gärna in pseudo-runor som ser ut som obegriplig text.
 
+### Tabellikon (RollTable — SL-tabeller som Snedtändning/Fummel)
+
+De flesta bordstabeller återanvänder bara en befintlig magiskole-/föremålsikon (t.ex. Skräcktabellen fick `magiskolor/nekromanti.png`) — helt tillräckligt för en SL-only referenstabell. **Undantag, Johans instruktion 2026-08-21:** vapenstridens fyra Fummeltabeller (Sköldar/Närstridsvapen/Avståndsvapen/Obeväpnad strid) fick egna genererade ikoner eftersom "fummel table icons can be a bit more witty/fun" — tabellernas eget innehåll ÄR komiska missöden (tappade vapen, sprucken sköld, snubblande slagskämpar), så ikonen får gärna spegla det i stället för att vara en neutral vapensilhuett.
+
+```
+Fantasy RPG inventory item icon depicting a comic combat mishap: <MISSÖDE — t.ex.
+en sköld som snurrar loss, ett svärd som flyger ur greppet, en pil som far snett>,
+a single dynamic action captured mid-blunder, centered on a dark neutral
+background, painterly digital fantasy art in the style of a moody atmospheric oil
+painting, muted earthy color palette with warm amber highlights, dramatic side
+lighting, centered square composition, highly detailed, slightly comedic and
+whimsical mood despite the painterly style, no border, no frame, no vignette,
+edge-to-edge image, full bleed, no text, no lettering
+```
+
+⚠ Modellen lade två gånger av fyra försök på en dekorativ ram/rundade hörn trots `dark neutral background` — samma vita-kant-fälla som porträttreglerna redan varnar för, fast här som en tydlig sten-/guldram i stället för en vit polaroid-kant. De explicita `no border, no frame, no vignette, edge-to-edge image, full bleed`-tilläggen (kopierade från porträttreglerna) löste det i omtagningarna. Sampla alla fyra kanterna vid verifiering, inte bara hörnen.
+
+Filnamn/mapp: `assets/tokens/tabeller/<slug>.png` (ny mapp 2026-08-21). Kopplas in som `img` på RollTable-dokumentet i `packs/tabeller/_source/`.
+
 ### Rastoken (top-down, för spelbrädet)
 
 Johan 2026-08-03: rasernas `prototypeToken.texture.src` ska vara **riktig fågelperspektiv-konst**, inte samma porträtt beskuret till en cirkel (vilket är hur `img`/porträttet redan används, och hur de flesta VTT-system löser tokens — men Johan ville ha äkta top-down här). En helt egen mall, alltså — porträttmallens `waist-up portrait` går inte att återanvända rakt av.
@@ -131,6 +150,7 @@ Miljöerna som användes (2026-07-27): alkemi = alkemistbänk med retorter · an
 | `assets/tokens/besvarjelser/` | `<slug>.png` | `img` i `packs/besvarjelser/_source/` |
 | `assets/tokens/monster/` | `<slug>.png` | `img` **och** `prototypeToken.texture.src` |
 | `assets/tokens/magiskolor/` | `<skolnyckel>.png` | `img` på posten i `DODE.magicSchoolSkills` (ingen kompendiepost) |
+| `assets/tokens/tabeller/` | `<slug>.png` | `img` på RollTable-dokumentet i `packs/tabeller/_source/` — bara de tabeller som fått en egen genererad ikon (se "Tabellikon" ovan), övriga återanvänder en befintlig ikon |
 
 - Sökvägen skrivs alltid med systemprefix: `systems/drakar-och-demoner-expert/assets/tokens/<mapp>/<slug>.png`.
 - Guiden väljer man-/kvinnavariant utifrån könssteget (`#genderedImg` i `character-wizard.mjs`).

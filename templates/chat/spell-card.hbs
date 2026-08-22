@@ -1,0 +1,70 @@
+{{!-- Besvärjelsekort — mirror av attack-card.hbs:s struktur/CSS (samma
+      .dode-attack-card-klass återanvänds för de delade rollLine/d20/outcome-
+      reglerna i dode.css; .dode-spell-card är bara en hook för framtida
+      besvärjelsespecifik styling, ingen duplicerad CSS än). --}}
+<div class="dode-attack-card dode-spell-card {{cssClass}}">
+  <header class="attack-header">
+    <img src="{{spellImg}}" alt="" />
+    <div>
+      <strong>{{casterName}}</strong>{{#if targetName}} <i class="fa-solid fa-arrow-right target-arrow"></i> <strong class="target-name">{{targetName}}</strong>{{/if}}
+      <span class="weapon">{{spellName}} (E{{E}}) — {{school}}</span>
+    </div>
+  </header>
+
+  {{#if pendingBanner}}
+    <div class="pending-banner">
+      <i class="fa-solid fa-hourglass-half"></i> Väntar på SL-godkännande
+    </div>
+    <div class="pending-actions">
+      <button type="button" data-action="approveSpellRequest"><i class="fa-solid fa-check"></i> Godkänn</button>
+      <button type="button" data-action="rejectSpellRequest"><i class="fa-solid fa-xmark"></i> Avvisa</button>
+    </div>
+  {{/if}}
+
+  <div class="cl-line" title="Chans att lyckas">CL <strong>{{cl}}</strong></div>
+
+  <div class="roll-line">
+    <span class="label">Kastning</span>
+    <span class="d20 {{castOutcome}}">{{castRoll}}</span>
+    <span class="outcome {{castOutcome}}">{{castOutcomeLabel}}</span>
+  </div>
+
+  {{#if psyCost}}<div class="ep-tick-line">−{{psyCost}} PSY</div>{{/if}}
+  {{#if snedtandning}}
+    <div class="effect-line kritisk">
+      <i class="fa-solid fa-triangle-exclamation"></i> Snedtändning: <strong>{{snedtandning.name}}</strong>. {{snedtandning.description}}
+      {{#if snedtandning.fobiName}}<br />Fobi: <strong>{{snedtandning.fobiName}}</strong>. {{snedtandning.fobiDescription}}{{/if}}
+    </div>
+  {{else if fumbled}}
+    <div class="verdict-note">⚠ Slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet)</div>
+  {{/if}}
+
+  {{#each targets}}
+    <div class="damage-line spell-target">
+      <span class="location">{{this.name}}</span>
+      {{#if this.resisted}}
+        <span class="outcome {{#if this.resisted.success}}lyckat{{else}}misslyckat{{/if}}">
+          {{#if this.resisted.autoResult}}{{this.resisted.autoResult}}{{else}}{{this.resisted.rolled}}{{/if}}
+          {{#if this.resisted.success}}motstod{{else}}motstod ej{{/if}}
+        </span>
+      {{/if}}
+    </div>
+    {{#if this.instantEffect}}
+      <div class="damage-line">
+        <span class="label">{{#if (eq this.instantEffect.kind "heal")}}Läkning{{else}}Skada{{/if}}</span>
+        <span class="dmg">{{this.instantEffect.rolled}}{{#if this.instantEffect.maximised}} (max){{/if}}</span>
+        {{#if this.instantEffect.blocked}}
+          <span class="abs">immun</span>
+        {{else}}
+          {{#if this.instantEffect.reduction}}<span class="abs">− {{this.instantEffect.reduction}} motstånd</span>{{/if}}
+          <strong class="applied">{{this.instantEffect.applied}} {{#if (eq this.instantEffect.kind "heal")}}KP läkt{{else}}KP skada{{/if}}</strong>
+        {{/if}}
+      </div>
+      {{#unless this.instantEffect.blocked}}
+        <div class="total-line">Totala KP efter: <strong>{{this.instantEffect.totalAfter}}</strong></div>
+      {{/unless}}
+    {{/if}}
+    {{#if this.statusApplied}}<div class="wear-line"><i class="fa-solid fa-circle-exclamation"></i> {{this.statusApplied}}</div>{{/if}}
+    {{#if this.fearDraw}}<div class="effect-line kritisk"><i class="fa-solid fa-face-flushed"></i> {{this.fearDraw.text}}</div>{{/if}}
+  {{/each}}
+</div>

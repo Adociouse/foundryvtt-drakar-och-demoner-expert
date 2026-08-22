@@ -1,5 +1,6 @@
 import { DODE } from "../helpers/config.mjs";
 import DoDeActiveEffect from "../documents/dode-active-effect.mjs";
+import { resistancesField } from "./fields-resistances.mjs";
 import { SCHEMA_VERSION, migrateCharacterNiva } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
@@ -201,6 +202,8 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
           max: new fields.NumberField({ required: true, integer: true, initial: 0 })
         })
       }),
+      // Motstånd/immunitet mot skadetyp (eld/kyla/syra m.fl.) — se fields-resistances.mjs.
+      resistances: resistancesField(),
       // Livsmål — CHARACTERMANCER-WORKFLOW.md, källa "Expert Regler" (21 poster,
       // se DODE.lifeGoals i config.mjs). Ett av de 21 ELLER fritext — bara en
       // sträng, ingen strukturell skillnad mellan de två (fritext skriver bara

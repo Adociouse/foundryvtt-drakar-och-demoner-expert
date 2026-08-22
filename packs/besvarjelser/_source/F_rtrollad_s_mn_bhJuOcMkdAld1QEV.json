@@ -9,6 +9,9 @@
     "range": "Sx10 rutor",
     "description": "<p>Sövar E varelser (1E/varelse, +1E/20 extra STO); kan ej väckas normalt</p>",
     "ritual": false,
+    "statusEffect": "sleep",
+    "targetMode": "multi",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "35-40"
@@ -20,7 +23,7 @@
   "folder": "U06x1PcA5ANHV5qk",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

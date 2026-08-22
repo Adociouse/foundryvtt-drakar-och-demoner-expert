@@ -1,0 +1,549 @@
+{
+  "name": "Fummeltabell för Närstridsvapen",
+  "_id": "YeON8YbGaIHcKin7",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/tabeller/fummeltabell-narstridsvapen.png",
+  "description": "<p>Vapenstrids fummeltabell (SLB s.31: \"Fummel → Slå på rätt fummeltabell\"). Rad 20: rekursiv omdragning — dra två gånger till, slå om varje ny 20:a.</p><p><em>Källa: Spelarboken (D&amp;DE III) s.39-41.</em></p>",
+  "results": [
+    {
+      "_id": "qycO2ewLlmt0VMK6",
+      "type": "text",
+      "name": "Du tar i för allt vad du är värd men fullföljer lite för lå…",
+      "img": null,
+      "description": "Du tar i för allt vad du är värd men fullföljer lite för långt ner i marken. Ditt vapen klarar inte av detta, utan går tvärt av på mitten.",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.qycO2ewLlmt0VMK6"
+    },
+    {
+      "_id": "mcaGObBIAD7wDGwV",
+      "type": "text",
+      "name": "En osynlig spricka i ditt vapen uppenbarar sig när du minst…",
+      "img": null,
+      "description": "En osynlig spricka i ditt vapen uppenbarar sig när du minst anar det. Vapnet går av och den hårdaste delen träffar dig i huvudet. Du tar 1KP i skada (oavsett om du har hjälm).",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.mcaGObBIAD7wDGwV"
+    },
+    {
+      "_id": "6cnx5zAmvirgrYF8",
+      "type": "text",
+      "name": "Du blir knäsvag av stridens hetta, vacklar till och missar …",
+      "img": null,
+      "description": "Du blir knäsvag av stridens hetta, vacklar till och missar denna attack/parering. Du får enbart parera i nästa SR, men med −10 på CL.",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.6cnx5zAmvirgrYF8"
+    },
+    {
+      "_id": "7n4XY0Otl62daVPE",
+      "type": "text",
+      "name": "Du tar i så mycket att du sträcker en ryggmuskel",
+      "img": null,
+      "description": "Du tar i så mycket att du sträcker en ryggmuskel. −4 på CL på alla SMI- och STY-baserade färdigheter i 1T2+1 dagar. Bra försök.",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.7n4XY0Otl62daVPE"
+    },
+    {
+      "_id": "lkgVwcrXj6We8q26",
+      "type": "text",
+      "name": "Utan att märka det har ditt vapen hamnat fel i händerna",
+      "img": null,
+      "description": "Utan att märka det har ditt vapen hamnat fel i händerna. Förutom att du missar din attack/parering denna SR så har du −3 på CL med vapnet de följande 1T4+1 stridsrundorna.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.lkgVwcrXj6We8q26"
+    },
+    {
+      "_id": "hiaIkbZJqcZYue78",
+      "type": "text",
+      "name": "En plötslig nysning tvingar dig att parera nästa SR, med −2…",
+      "img": null,
+      "description": "En plötslig nysning tvingar dig att parera nästa SR, med −2 på CL.",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.hiaIkbZJqcZYue78"
+    },
+    {
+      "_id": "1pVFfLGkn1hA8r29",
+      "type": "text",
+      "name": "På grund av svettiga händer tappar du greppet om ditt vapen…",
+      "img": null,
+      "description": "På grund av svettiga händer tappar du greppet om ditt vapen som far iväg 1T3 rutor åt slumpmässigt håll.",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.1pVFfLGkn1hA8r29"
+    },
+    {
+      "_id": "euPHbylcmFBg3IGv",
+      "type": "text",
+      "name": "Du chockas av din egen vildsinthet och kommer helt ur balans",
+      "img": null,
+      "description": "Du chockas av din egen vildsinthet och kommer helt ur balans. Du misslyckas automatiskt med alla pareringar och attacker i denna och de följande 1T3 stridsrundorna.",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.euPHbylcmFBg3IGv"
+    },
+    {
+      "_id": "Kv82XaLAoUzqws8X",
+      "type": "text",
+      "name": "Du snubblar på dina egna fötter och faller som en fura",
+      "img": null,
+      "description": "Du snubblar på dina egna fötter och faller som en fura. Det tar denna och nästa SR att resa sig.",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.Kv82XaLAoUzqws8X"
+    },
+    {
+      "_id": "Xj4ju9E72CPpaqXi",
+      "type": "text",
+      "name": "Du snubblar och faller framstupa i något som påminner om et…",
+      "img": null,
+      "description": "Du snubblar och faller framstupa i något som påminner om ett självmordsförsök. Det tar tre SR att hämta sig från chocken och resa sig.",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.Xj4ju9E72CPpaqXi"
+    },
+    {
+      "_id": "n5E1uu4Z6GAWCfQS",
+      "type": "text",
+      "name": "Du tappar delar av din rustning",
+      "img": null,
+      "description": "Du tappar delar av din rustning. Använd Träffområdestabellen, kolumnen för närstrid, för att se vilken del det är. Om du inte använder träffområden minskas rustningens absorbering med 2.",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.n5E1uu4Z6GAWCfQS"
+    },
+    {
+      "_id": "V2O6ACu2DX3660oP",
+      "type": "text",
+      "name": "Du landar fel efter ett glädjeskutt och vrickar foten",
+      "img": null,
+      "description": "Du landar fel efter ett glädjeskutt och vrickar foten. Förflyttningsförmågan minskas med 2 i 1T6 dagar.",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.V2O6ACu2DX3660oP"
+    },
+    {
+      "_id": "Gw0AYe74Gbx07C9d",
+      "type": "text",
+      "name": "Det du just gjorde skulle lätt ge dig anställning som hovjo…",
+      "img": null,
+      "description": "Det du just gjorde skulle lätt ge dig anställning som hovjonglör. Tyvärr imponerar det inte på din motståndare, som får +5 på nästa attack mot dig.",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.Gw0AYe74Gbx07C9d"
+    },
+    {
+      "_id": "0nC4vt85ibCuOIFu",
+      "type": "text",
+      "name": "Du tappar ditt vapen vid dina fötter",
+      "img": null,
+      "description": "Du tappar ditt vapen vid dina fötter. Tur att det inte var på fötterna.",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.0nC4vt85ibCuOIFu"
+    },
+    {
+      "_id": "dz2Y7Fe67VirBW7T",
+      "type": "text",
+      "name": "Du mister tillfälligt greppet om ditt vapen och försöker st…",
+      "img": null,
+      "description": "Du mister tillfälligt greppet om ditt vapen och försöker stirra ihjäl din motståndare nästa SR.",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.dz2Y7Fe67VirBW7T"
+    },
+    {
+      "_id": "YX28fNshiwfrcCZT",
+      "type": "text",
+      "name": "Du tappar ditt vapen på din ena fot och tar 1 KP i skada",
+      "img": null,
+      "description": "Du tappar ditt vapen på din ena fot och tar 1 KP i skada.",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.YX28fNshiwfrcCZT"
+    },
+    {
+      "_id": "5Ti4I1xiGUCOcaNK",
+      "type": "text",
+      "name": "Du jagar en irriterande insekt med vapnet men träffar närms…",
+      "img": null,
+      "description": "Du jagar en irriterande insekt med vapnet men träffar närmsta vän (gör en normal attack omedelbart).",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.5Ti4I1xiGUCOcaNK"
+    },
+    {
+      "_id": "CmfPvMHMEpNBeexz",
+      "type": "text",
+      "name": "Extremt, fruktansvärt, ohyggligt klumpig rörelse",
+      "img": null,
+      "description": "Extremt, fruktansvärt, ohyggligt klumpig rörelse. Nästa fientliga attack lyckas automatiskt och du får inte parera. Skämt!",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.CmfPvMHMEpNBeexz"
+    },
+    {
+      "_id": "IPnDNXGpiU8Ys8iN",
+      "type": "text",
+      "name": "I din upphetsning väljer du tungan och faller till marken",
+      "img": null,
+      "description": "I din upphetsning väljer du tungan och faller till marken. Du kvävs om ingen kommer till din undsättning inom 15 SR.",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.IPnDNXGpiU8Ys8iN"
+    },
+    {
+      "_id": "uNjlRxbhOFTSWEHw",
+      "type": "text",
+      "name": "Rejäl klantighet",
+      "img": null,
+      "description": "Rejäl klantighet. Slå två gånger på tabellen och slå om ifall du slår '20' en gång till.",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!YeON8YbGaIHcKin7.uNjlRxbhOFTSWEHw"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!YeON8YbGaIHcKin7"
+}

@@ -63,6 +63,83 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
           value: new fields.StringField({ required: true, initial: "" })
         })
       ),
+      // Momentan HP-förändring vid kastning (skada/läkning) — separat från
+      // spellEffect ovan, som bara kan skapa varaktiga .bonus-ActiveEffects.
+      // `formula` följer samma tärningsformel-konvention som item-vapen.mjs:s
+      // `damage`-fält (t.ex. "1T6*@E"), där @E ersätts med kastets effektgrad
+      // vid upplösning (scripts/rolls/spell.mjs, fas 2). Beslut 2026-08-21,
+      // se docs/dev/MAGI_STRID_ANVANDNINGSFALL.md: motorn saknade helt en
+      // instant-HP-delta-primitiv (UC-M1/M3/M11/M12).
+      instantEffect: new fields.SchemaField({
+        kind: new fields.StringField({ required: false, initial: "none", choices: ["none", "damage", "heal"] }),
+        formula: new fields.StringField({ required: false, initial: "" })
+      }),
+      // Skadetyp för instantEffect.kind:"damage" — matchas mot en aktörs
+      // `resistances[]` (actor-character.mjs/actor-npc.mjs) via
+      // CONFIG.DODE.resolveResistance (fas 2). "none" = ingen resistans möjlig
+      // (t.ex. rent mentala effekter utan en fysisk skadekälla).
+      damageType: new fields.StringField({
+        required: false,
+        initial: "none",
+        choices: ["none", "physical", "fire", "cold", "acid", "lightning", "poison", "mental"]
+      }),
+      // Foundry-kärnans egen status-id (samma sex som attack-dialog.mjs:s
+      // PARRY_BLOCKING_STATUSES + t.ex. "blind") att toggla vid lyckad
+      // kastning — skilt från spellEffect, som bara ändrar .bonus-fält och
+      // aldrig kan uttrycka en riktig statustoggle (UC-M5/M6/M8/M9).
+      statusEffect: new fields.StringField({ required: false, initial: "" }),
+      // Räddningsslag — kopplar mot den redan byggda, tidigare oanvända
+      // DODE.rollResistance/resistanceTarget (config.mjs, Motståndstabellen,
+      // SL s.34/RP s.37-38). "attribute-save" = ett äkta slumpmässigt
+      // attribut-vs-SG-slag (rädsla/mental påverkan, UC-M7). Skilt från
+      // resistances[].overcomeE (actor-character.mjs), som är en
+      // deterministisk taltröskel utan slag ("övervinna MED E" — UC-M17).
+      resistedBy: new fields.StringField({ required: false, initial: "none", choices: ["none", "attribute-save"] }),
+      // Bara relevant när resistedBy:"attribute-save". Dynamiska choices (samma
+      // mönster som fields-source.mjs:s sourceField) i stället för en hårdkodad
+      // kopia av DODE.attributes nycklar.
+      saveAttribute: new fields.StringField({
+        required: false, initial: "", blank: true,
+        choices: () => ["", ...Object.keys(CONFIG.DODE?.attributes ?? {})]
+      }),
+      // Svårighetsgrad för räddningsslaget — en fritt AUKTORERAD nivå (samma
+      // DODE.difficultyGrades-skala som Motståndstabellen redan använder),
+      // INTE en härledd formel från effektgrad. Fas 2-tillägg (2026-08-21):
+      // en formel som kopplar E→SG vore en ny, osourcad homebrew-regel som
+      // enligt CLAUDE.md kräver ett uttalat skaparbeslut — att i stället låta
+      // innehållsförfattaren välja SG direkt (precis som sValue/spellDuration
+      // redan är auktorerade tal) undviker den frågan helt.
+      saveDifficulty: new fields.StringField({
+        required: false, initial: "normalt",
+        choices: ["mycket-latt", "latt", "normalt", "svart", "mycket-svart", "extremt-svart"]
+      }),
+      // Drar Skräcktabellen (packs/tabeller) vid ETT misslyckat räddningsslag
+      // mot den här besvärjelsen — Rädsla/Panik/Terror-mönstret (UC-M7).
+      // Bara meningsfullt tillsammans med resistedBy:"attribute-save".
+      triggersFearTable: new fields.BooleanField({ required: false, initial: false }),
+      // Hur besvärjelsen väljer mål — informerar kast-UI:t (fas 3), ingen
+      // motorlogik i sig. "multi"/"area" återanvänder Anfallsdialogens redan
+      // byggda flermåls-loop-mönster (game.user.targets).
+      // "split" tillagt 2026-08-21 (live-fynd/Johans SL-ruling under
+      // krogslagsmålet, se Eld: "Temperaturhöjning i 1 m sfär vid målet...
+      // alternativt E sfärer med lägre skada"). Skiljer sig från "multi"
+      // (varje mål får HELA effekten dupplicerad) — "split" delar EN delad
+      // pool av effektgrad-tärningar mellan valfritt antal mål (1..E), fler
+      // mål = färre tärningar/mål. Formaliserat som: mål N (1..E) väljs via
+      // hur många tokens spelaren målsatt, tärningar/mål = E - N + 1 (N=1
+      // ger samma resultat som innan detta fält fanns, bakåtkompatibelt).
+      // Se spell.mjs#resolveSpellCast för beräkningen.
+      targetMode: new fields.StringField({
+        required: false,
+        initial: "single",
+        choices: ["self", "touch", "single", "multi", "area", "split"]
+      }),
+      // Den "stödkolumn för battle" Johan efterfrågade — flaggar besvärjelser
+      // som är relevanta att visa/filtrera i en stridssituation, till
+      // skillnad från de ~150 rent narrativa/utility-besvärjelserna (Karta,
+      // Levitation, Väderförutsägelse m.fl.) som inte behöver någon av
+      // fälten ovan. Ren kureringsflagga, ingen motorlogik läser den än.
+      battleRelevant: new fields.BooleanField({ required: false, initial: false }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })

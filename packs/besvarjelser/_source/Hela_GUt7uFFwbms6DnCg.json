@@ -9,6 +9,12 @@
     "description": "<p>Helar E KP hos offret.</p>",
     "ritual": false,
     "kvick": false,
+    "instantEffect": {
+      "kind": "heal",
+      "formula": "@E"
+    },
+    "targetMode": "touch",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "3-16"
@@ -20,7 +26,7 @@
   "folder": "R8oaopxZZs7ntDKl",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

@@ -9,6 +9,13 @@
     "duration": "",
     "ritual": false,
     "kvick": false,
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@{E}d6"
+    },
+    "damageType": "fire",
+    "targetMode": "split",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "18-26"
@@ -20,7 +27,7 @@
   "folder": "GYHnhvls5MdcpM7L",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

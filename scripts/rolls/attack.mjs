@@ -24,11 +24,40 @@ export const RANGED_MODS = {
 };
 
 /**
- * Slår ett FV-slag och klassar utfallet enligt samma perfekt/fummel-bekräftelse
- * som `rollFV` — men utan chattkort, eftersom anfall och parering redovisas
- * tillsammans i ett kort.
+ * Vilken av de fyra fummeltabellerna (config.mjs `rollWeaponFummelTable`)
+ * som gäller för ett ANFALL — vald efter VAPENTYP, se
+ * docs/extracts/DODE_Spelarboken_FUMMELTABELLER.md. Inget vapen alls
+ * (obeväpnad/naturlig attack utan Item) → "obevapnad".
  */
-async function classifiedRoll(fv) {
+function attackFummelTableKey(weapon) {
+  if (!weapon) return "obevapnad";
+  const category = weapon.system?.category;
+  if (category === "narstrid") return "narstrid";
+  if (category === "projektil" || category === "kast") return "avstand";
+  return "obevapnad";
+}
+
+/**
+ * Vilken fummeltabell som gäller för en PARERING — sköld har sin EGEN tabell
+ * (skild från vapnets), annars samma vapentyp-logik som anfall. Ett
+ * pareringsföremål är alltid `rustning`(sköld) eller `vapen` — aldrig
+ * `projektil`/`kast` (parering med avståndsvapen är omöjlig, `canParry`
+ * spärrar redan det i attack-dialog.mjs).
+ */
+function parryFummelTableKey(parryItem) {
+  if (!parryItem) return "obevapnad";
+  if (parryItem.system?.slot === "skold") return "skold";
+  return "narstrid";
+}
+
+/**
+ * Slår ett FV-slag och klassar utfallet enligt samma perfekt/fummel-bekräftelse
+ * som `rollFV` — men utan chattkort, eftersom anfall och parering (och,
+ * fr.o.m. Fas 2, besvärjelsekastning) redovisas tillsammans i ett kort.
+ * Exporterad så `scripts/rolls/spell.mjs` kan återanvända samma
+ * bekräftelselogik i stället för att duplicera den.
+ */
+export async function classifiedRoll(fv) {
   const roll = await new Roll("1d20").evaluate();
   let outcome = roll.total <= fv ? "lyckat" : "misslyckat";
   if (roll.total === 1) {
@@ -226,6 +255,17 @@ export async function resolveAttack({
   if (attackEp) out.pending.attackerEp = { skillId: attackEp.skillId, amount: attackEp.amount };
   if (parryEp) out.pending.defenderEp = { skillId: parryEp.skillId, amount: parryEp.amount };
 
+  // ⚠ Fummeltabell-dragning (Magisystem-planen Fas 6, 2026-08-21) — sker HÄR,
+  // i den rena beräkningsfasen, INTE i applyAttackResult: draget är
+  // slumpmässigt och ska ALDRIG slås om vid ett ev. SL-godkännande (samma
+  // princip som Snedtändningstabellen redan följer). Bara visat, ingen
+  // mekanisk tillämpning av effekttexten — se rollWeaponFummelTable().
+  if (verdict.result === "fummeltabell-anfall") {
+    out.fummelDraw = await CONFIG.DODE.rollWeaponFummelTable(attackFummelTableKey(weapon));
+  } else if (verdict.result === "fummeltabell-parering" || verdict.alsoFumbleTable === "parering") {
+    out.fummelDraw = await CONFIG.DODE.rollWeaponFummelTable(parryFummelTableKey(parryItem));
+  }
+
   // ⚠ Träffområdet slås ALLTID — se modulkommentaren. Även när `detailed` är
   // false; då används det bara inte.
   const plan = target?.system.bodyPlan ?? "humanoid";
@@ -383,8 +423,6 @@ export async function applyAttackResult(result, { attacker, target, weapon = nul
 
 const OUTCOME_LABEL = { perfekt: "Perfekt!", lyckat: "Lyckat", misslyckat: "Misslyckat", fummel: "Fummel!" };
 const VERDICT_NOTE = {
-  "fummeltabell-anfall": "⚠ Slå på fummeltabellen för anfall (ej byggd än)",
-  "fummeltabell-parering": "⚠ Slå på fummeltabellen för pareringar (ej byggd än)",
   ingenting: "Ingenting händer — fortsätt med nästa attack",
   parerat: "Pareringen höll — anfallet är slut (SLB s.31)",
   vapenslitage: "Pareringen tog emot ett misslyckat hugg — anfallarens vapen slits"
@@ -397,7 +435,7 @@ const VERDICT_NOTE = {
  * rendera om via den här funktionen — se hookens egen kommentar för varför
  * (kräver inte att `result` sparas i sin helhet, bara `pending`).
  */
-function buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, pendingBanner = false }) {
+function buildAttackCardContext(result, { attacker, target, weapon, parryItem, ranged, pendingBanner = false }) {
   const parts = Object.entries(result.mods ?? {}).map(([k, v]) => ({
     label: k, value: v, positive: v > 0
   }));
@@ -405,6 +443,12 @@ function buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, p
 
   return {
     attackerName: attacker.name,
+    // ⚠ Rättad 2026-08-21 (Johans fynd mitt i en liveverifiering — kortet
+    // visade ett rått "Totala KP kvar: -1" utan att säga VEMS KP, tolkades
+    // som anfallarens egna). `target` fanns redan tillgängligt i `postAttackCard`s
+    // anropare (attack-dialog.mjs), bara aldrig vidarebefordrat hit — samma
+    // gap fanns i BÅDA direkt-tillämpningsgrenen och (delvis) den väntande.
+    targetName: target?.name ?? "",
     weaponName: weapon?.name ?? "Obeväpnad",
     weaponImg: weapon?.img ?? attacker.img,
     aimed: result.aimed,
@@ -427,6 +471,11 @@ function buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, p
     totalAfter: result.totalAfter, pulled: result.pulled,
     effect: result.effect, wear: result.wear, cleanKnockout: result.cleanKnockout,
     verdictNote: VERDICT_NOTE[result.verdict.result] ?? "",
+    // Fummeltabell-dragning (Fas 6, 2026-08-21) — se resolveAttack().
+    fummelDraw: result.fummelDraw ? {
+      primaryName: result.fummelDraw.primary?.name, primaryText: result.fummelDraw.primary?.description,
+      extra: (result.fummelDraw.extra ?? []).map((r) => ({ name: r?.name, text: r?.description }))
+    } : null,
     cssClass: result.attack.outcome,
     // ⚠ EP-streck för anfalls- och pareringsslaget var för sig — se
     // computeSkillEp(). Ett lyckat parerat anfall kan alltså visa BÅDA.
@@ -451,9 +500,10 @@ function buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, p
  * VEM som senare skriver undan resultatet — se `applyAttackResult`.
  *
  * @param {object} [o]
- * @param {Actor}  [o.target]  Bara nödvändigt när `pending` är sant — sparas i
- *   kortets flagga så godkännande-hooken kan återskapa `applyAttackResult`s
- *   kontext utan att behöva gissa vilket mål kortet gällde.
+ * @param {Actor}  [o.target]  Målets namn visas alltid på kortet (se
+ *   `targetName`, rättat 2026-08-21) — och sparas dessutom i kortets flagga
+ *   när `pending` är sant, så godkännande-hooken kan återskapa
+ *   `applyAttackResult`s kontext utan att behöva gissa vilket mål kortet gällde.
  * @param {boolean}[o.pending] Sant när den anropande användaren INTE har
  *   skrivbehörighet på målet — kortet visar ett väntar-band + Godkänn/Avvisa
  *   i stället för att vara ett färdigt resultat.
@@ -461,20 +511,38 @@ function buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, p
 export async function postAttackCard(result, { attacker, target = null, weapon, parryItem, ranged, pending = false }) {
   const content = await renderTemplate(
     "systems/drakar-och-demoner-expert/templates/chat/attack-card.hbs",
-    buildAttackCardContext(result, { attacker, weapon, parryItem, ranged, pendingBanner: pending })
+    buildAttackCardContext(result, { attacker, target, weapon, parryItem, ranged, pendingBanner: pending })
   );
 
-  const rolls = [result.attack.roll];
-  if (result.parry.roll) rolls.push(result.parry.roll);
-  if (result.hardParrySelfFumble) rolls.push(result.hardParrySelfFumble.roll);
-  if (result.damage?.roll) rolls.push(result.damage.roll);
-  if (result.cleanKnockout?.roll) rolls.push(result.cleanKnockout.roll);
-  if (result.attackEp?.roll) rolls.push(result.attackEp.roll);
-  if (result.parryEp?.roll) rolls.push(result.parryEp.roll);
+  // ⚠ Rullflaggor + tvådelad postning (mirror av spell.mjs:s postSpellCard,
+  // 2026-08-21 — se den funktionens kommentar för hela resonemanget/historien
+  // bakom "en riktig paus utan dubbel-animation"-mönstret). Anfallsrullen
+  // postas EGET/DIREKT, en riktig paus väntas ut, sedan det fulla kortet med
+  // de ÅTERSTÅENDE rullarna — aldrig samma Roll-instans i två meddelanden.
+  result.attack.roll.options.flavor = "Anfall";
+  const restRolls = [];
+  if (result.parry.roll) { result.parry.roll.options.flavor = "Parering"; restRolls.push(result.parry.roll); }
+  if (result.hardParrySelfFumble) { result.hardParrySelfFumble.roll.options.flavor = "Självfummelkontroll"; restRolls.push(result.hardParrySelfFumble.roll); }
+  if (result.damage?.roll) { result.damage.roll.options.flavor = "Skada"; restRolls.push(result.damage.roll); }
+  if (result.cleanKnockout?.roll) restRolls.push(result.cleanKnockout.roll);
+  if (result.attackEp?.roll) restRolls.push(result.attackEp.roll);
+  if (result.parryEp?.roll) restRolls.push(result.parryEp.roll);
+  if (result.fummelDraw?.rolls) {
+    for (const r of result.fummelDraw.rolls) r.options.flavor = "Fummeltabell";
+    restRolls.push(...result.fummelDraw.rolls);
+  }
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor: attacker }),
+    content: `<div class="dode-chat-card"><p>🎲 <strong>${attacker.name}</strong> anfaller... <strong>${result.attack.roll.total}</strong> — ${OUTCOME_LABEL[result.attack.outcome]}</p></div>`,
+    rolls: [result.attack.roll],
+    sound: CONFIG.sounds.dice
+  });
+  if (restRolls.length) await new Promise((r) => setTimeout(r, 900));
 
   const messageData = {
     speaker: ChatMessage.getSpeaker({ actor: attacker }),
-    content, rolls, sound: CONFIG.sounds.dice
+    content, rolls: restRolls, sound: restRolls.length ? CONFIG.sounds.dice : null
   };
 
   if (pending) {
@@ -482,12 +550,21 @@ export async function postAttackCard(result, { attacker, target = null, weapon, 
     // instanser, redan ren JSON-data (se resolveAttack()s pending-fält).
     // `weapon`/`parryItem` återskapas vid godkännande ur `pending.wear.itemId`
     // + `side` (se dode.mjs-hooken), behöver inte sparas separat här.
+    // ⚠ `Uuid`, INTE ett bart aktörs-id (rättat 2026-08-21, hittat under
+    // Magisystem-passets Fas 3-liveverifiering, se motsvarande fix i
+    // spell.mjs/dode.mjs samma dag): för en OLÄNKAD NPC-token är `target.id`
+    // BASE-aktörens id, delat av ALLA tokens av samma NPC på kartan —
+    // `game.actors.get(id)` i godkännande-hooken hade då alltid skrivit till
+    // bas-aktören, INTE den specifika token-instans som faktiskt målsattes
+    // och förhandsvisades. `target.uuid` kodar scen+token-vägen för olänkade
+    // tokens (`Scene.<id>.Token.<id>.Actor.<id>`) och löses tillbaka med
+    // `fromUuidSync` — samma objekt som förhandsvisningen räknade mot.
     messageData.flags = {
       [game.system.id]: {
         pendingAttack: {
           pending: result.pending,
-          attackerId: attacker.id,
-          targetId: target?.id ?? null,
+          attackerUuid: attacker.uuid,
+          targetUuid: target?.uuid ?? null,
           ranged,
           processed: false
         }

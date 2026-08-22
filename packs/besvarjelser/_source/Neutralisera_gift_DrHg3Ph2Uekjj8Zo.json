@@ -9,6 +9,8 @@
     "range": "Beröring",
     "description": "<p>Neutraliserar ett aktivt gift i offrets kropp</p>",
     "ritual": false,
+    "targetMode": "touch",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "3-16"
@@ -20,7 +22,7 @@
   "folder": "R8oaopxZZs7ntDKl",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

@@ -1,0 +1,549 @@
+{
+  "name": "Fummeltabell för Obeväpnad strid",
+  "_id": "01EBboz37fdwWNrY",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/tabeller/fummeltabell-obevapnad-strid.png",
+  "description": "<p>Vapenstrids fummeltabell (SLB s.31: \"Fummel → Slå på rätt fummeltabell\"). Rad 20: rekursiv omdragning — dra två gånger till, slå om varje ny 20:a.</p><p><em>Källa: Spelarboken (D&amp;DE III) s.39-41.</em></p>",
+  "results": [
+    {
+      "_id": "CMvWF71tpy6cZRSh",
+      "type": "text",
+      "name": "Du snubblar på en osynlig sköldpadda och missar automatiskt…",
+      "img": null,
+      "description": "Du snubblar på en osynlig sköldpadda och missar automatiskt nästa attack eller parering.",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.CMvWF71tpy6cZRSh"
+    },
+    {
+      "_id": "7K5FQv4IiX4fMOMH",
+      "type": "text",
+      "name": "En reva i dina kläder på överkroppen gör att plagget förhin…",
+      "img": null,
+      "description": "En reva i dina kläder på överkroppen gör att plagget förhindrar dina rörelser. −3 på alla attacker och pareringar tills du åtgärdar det en hel SR.",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.7K5FQv4IiX4fMOMH"
+    },
+    {
+      "_id": "t6MnPzfEN8GcRKgv",
+      "type": "text",
+      "name": "Dålig uppvärmning orsakar sträckning i axeln (låret för en …",
+      "img": null,
+      "description": "Dålig uppvärmning orsakar sträckning i axeln (låret för en spark). −3 på CL på alla färdigheter som kräver den kroppsdelen i 1T2 dagar.",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.t6MnPzfEN8GcRKgv"
+    },
+    {
+      "_id": "V2OyNhqwQpZ3jtDT",
+      "type": "text",
+      "name": "Du kan utläsa av motståndarens ansiktsuttryck att du tror a…",
+      "img": null,
+      "description": "Du kan utläsa av motståndarens ansiktsuttryck att du tror att du är steloperterad i hela kroppen. Du måste parera med −5 på CL nästa SR.",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.V2OyNhqwQpZ3jtDT"
+    },
+    {
+      "_id": "BVPGHiNxMmESdZgA",
+      "type": "text",
+      "name": "En engagerande hunger gör sig påmind, vilket ger din motstå…",
+      "img": null,
+      "description": "En engagerande hunger gör sig påmind, vilket ger din motståndare chansen att klippa till ostört. Du får inte parera eller anfalla i nästa SR.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.BVPGHiNxMmESdZgA"
+    },
+    {
+      "_id": "dJVKnjmDGjaVVQyP",
+      "type": "text",
+      "name": "Efter den här osedvanligt misslyckade manövern inser du att…",
+      "img": null,
+      "description": "Efter den här osedvanligt misslyckade manövern inser du att ditt anfall är bästa försvar. Du får inte parera de följande två stridsrundorna.",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.dJVKnjmDGjaVVQyP"
+    },
+    {
+      "_id": "EqtsC0WKGfHJJKCN",
+      "type": "text",
+      "name": "Du fattar inte riktigt hur, men lyckas peta i ett finger i …",
+      "img": null,
+      "description": "Du fattar inte riktigt hur, men lyckas peta i ett finger i ditt vänstra öga. Konfunderad förlorar du nästa attack eller parering (du får endast parera).",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.EqtsC0WKGfHJJKCN"
+    },
+    {
+      "_id": "RNRdiRhfEjXqpOPj",
+      "type": "text",
+      "name": "I ett plötsligt tillfälle av klarsyn inser du att det här ä…",
+      "img": null,
+      "description": "I ett plötsligt tillfälle av klarsyn inser du att det här är något för dig. −5 på nästa attack eller parering.",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.RNRdiRhfEjXqpOPj"
+    },
+    {
+      "_id": "ha1iV1uBYpZf074I",
+      "type": "text",
+      "name": "Du gör allting helt rätt — fast tvärtom",
+      "img": null,
+      "description": "Du gör allting helt rätt — fast tvärtom. −10 på CL nästa attack eller parering.",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.ha1iV1uBYpZf074I"
+    },
+    {
+      "_id": "YMv2OgSXBRYluqgL",
+      "type": "text",
+      "name": "Du tappar delar av din rustning",
+      "img": null,
+      "description": "Du tappar delar av din rustning. Använd Träffområdestabellen, kolumnen för närstrid, för att se vilken del det är. Om du inte använder träffområden minskas rustningens absorbering med 2.",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.YMv2OgSXBRYluqgL"
+    },
+    {
+      "_id": "ewZBK5AvDHtXLY9O",
+      "type": "text",
+      "name": "Du snubblar och ramlar handlöst framstupa så illa att du sl…",
+      "img": null,
+      "description": "Du snubblar och ramlar handlöst framstupa så illa att du slår i 1T2 rutor framåt. Det tar denna och nästa SR att resa sig.",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.ewZBK5AvDHtXLY9O"
+    },
+    {
+      "_id": "j1lOgtjEOYanUDvt",
+      "type": "text",
+      "name": "Du blir distraherad av en blåsa under tungan",
+      "img": null,
+      "description": "Du blir distraherad av en blåsa under tungan. Alla som anfaller dig nästa SR har +3 på CL.",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.j1lOgtjEOYanUDvt"
+    },
+    {
+      "_id": "AAchqv9RMlKgXRqw",
+      "type": "text",
+      "name": "Dina skrattande försök till obeväpnad strid ger din motstån…",
+      "img": null,
+      "description": "Dina skrattande försök till obeväpnad strid ger din motståndare sådant självförtroende att han har +3 på CL på sina nästa två attacker mot dig.",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.AAchqv9RMlKgXRqw"
+    },
+    {
+      "_id": "28RY6gEIlENTpwLW",
+      "type": "text",
+      "name": "Du lyckas trampa snett och vricka foten",
+      "img": null,
+      "description": "Du lyckas trampa snett och vricka foten. Förflyttningsförmågan minskas med 2 i 1T6 dagar.",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.28RY6gEIlENTpwLW"
+    },
+    {
+      "_id": "5Dpc1So63XnKlyqs",
+      "type": "text",
+      "name": "Du har sovit i en oställning, vilket orsakar nackspärr prec…",
+      "img": null,
+      "description": "Du har sovit i en oställning, vilket orsakar nackspärr precis när det behövs som bäst. −6 på CL på alla SMI-baserade färdigheter i 1T20 SR.",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.5Dpc1So63XnKlyqs"
+    },
+    {
+      "_id": "4gezXMftpDNEPhvY",
+      "type": "text",
+      "name": "Ett plötsligt ryggskott gör livet surt för dig",
+      "img": null,
+      "description": "Ett plötsligt ryggskott gör livet surt för dig. Du får leka puckelrygg tills någon lyckas med färdigheten Massage på dig. Under tiden har du −10 på alla SMI-baserade färdigheter.",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.4gezXMftpDNEPhvY"
+    },
+    {
+      "_id": "iVJz2ZX9cPTWFPSW",
+      "type": "text",
+      "name": "Oändligt misslyckad rörelse knäcker ditt självförtroende to…",
+      "img": null,
+      "description": "Oändligt misslyckad rörelse knäcker ditt självförtroende totalt. Du har −2 på CL på alla attacker och pareringar ända tills du lyckas med ett bättre slag.",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.iVJz2ZX9cPTWFPSW"
+    },
+    {
+      "_id": "SMVkCFIwQeBSxMkM",
+      "type": "text",
+      "name": "Du lyckas få ett klockrent (perfekt) knytnävsslag — på närm…",
+      "img": null,
+      "description": "Du lyckas få ett klockrent (perfekt) knytnävsslag — på närmsta vän.",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.SMVkCFIwQeBSxMkM"
+    },
+    {
+      "_id": "23f8r0RpecgHZI2C",
+      "type": "text",
+      "name": "Du är ruskigt imponerad av din motståndares skicklighet",
+      "img": null,
+      "description": "Du är ruskigt imponerad av din motståndares skicklighet. Se och lär.",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.23f8r0RpecgHZI2C"
+    },
+    {
+      "_id": "r1MeBxziiTOfLo6b",
+      "type": "text",
+      "name": "Rejäl klantighet",
+      "img": null,
+      "description": "Rejäl klantighet. Slå två gånger på tabellen och slå om ifall du slår '20' en gång till.",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!01EBboz37fdwWNrY.r1MeBxziiTOfLo6b"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!01EBboz37fdwWNrY"
+}

@@ -1,7 +1,7 @@
 {
   "name": "Särskilda förmågor",
   "_id": "xV2OqmaPfFzG5xFf",
-  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/tabeller/sarskilda-formagor.png",
   "description": "<p>Slå <strong>2T20 + spenderade BP</strong> och läs av resultatet. Guiden och rollpersonsarket har en knapp som gör detta åt dig; tabellen finns här för att kunna slås direkt eller länkas från en journal.</p><p><em>Källa: Rollpersonen s.25-27. Systemets egen kopia ligger i <code>CONFIG.DODE.specialAbilitiesTable</code>.</em></p>",
   "results": [
     {
@@ -1285,7 +1285,7 @@
   "folder": null,
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

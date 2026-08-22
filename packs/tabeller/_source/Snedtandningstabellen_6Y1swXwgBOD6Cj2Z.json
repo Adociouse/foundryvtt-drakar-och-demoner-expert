@@ -1,0 +1,211 @@
+{
+  "name": "Snedtändningstabellen",
+  "_id": "6Y1swXwgBOD6Cj2Z",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "description": "<p>Slås av magikern när ett kastningsslag <strong>fumlas</strong> (MAG s.14: \"Om magikern fumlar med en besvärjelse har den snedtänt och han ska slå ett slag på snedtändningstabellen\").</p><p><strong>Slå 1T20 och addera besvärjelsens effektgrad till resultatet.</strong></p><p>⚠ Resultatet 20+ hänvisar vidare till Fobitabellen (samma pack). ⚠ Bara draget/visat här — den faktiska mekaniska effekten (KP-avdrag, blindhet, stumhet, INT-förlust m.m.) är inte automatiserad, SL tillämpar texten manuellt.</p><p><em>Källa: D&amp;DE 0_Magi.pdf s.8 (0-Magi-utgåvan). Se docs/extracts/DODE_Magi_SNEDTANDNINGSTABELL.md (Roll20-projektet) för det fullständiga kurerade underlaget.</em></p>",
+  "results": [
+    {
+      "_id": "RdIHsGCNCMmIrxxY",
+      "type": "text",
+      "name": "Halverad effekt",
+      "img": null,
+      "description": "Besvärjelsens effektgrad halveras (avrunda uppåt). SL avgör exakt vilken effekt detta har. Den träffar sitt avsedda mål.",
+      "weight": 1,
+      "range": [
+        1,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.RdIHsGCNCMmIrxxY"
+    },
+    {
+      "_id": "oPHwAhrZ0SjKSwYI",
+      "type": "text",
+      "name": "Magisk återstöt",
+      "img": null,
+      "description": "Du skadas av den magiska energi som flödar fel. Du förlorar lika många KP som besvärjelsens effektgrad, och blir medvetslös 1T8 minuter. Om du använder nya stridssystemet drabbar inte skadan någon kroppsdel, utan dras från Totala KP.",
+      "weight": 1,
+      "range": [
+        6,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.oPHwAhrZ0SjKSwYI"
+    },
+    {
+      "_id": "5EkxyFrTnrYnWn2B",
+      "type": "text",
+      "name": "Vänd mot kastaren",
+      "img": null,
+      "description": "Om du har kastat en besvärjelse som skulle ha ett negativt resultat på sitt offer har dess fulla effekt drabbat dig. Om du kastade en besvärjelse som skulle ha haft positivt eller neutralt resultat för dess mottagare förlorar du lika många KP som besvärjelsens effektgrad i skada. Du blir medvetslös i 1T8 minuter och blind i 1T8 timmar.",
+      "weight": 1,
+      "range": [
+        12,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.5EkxyFrTnrYnWn2B"
+    },
+    {
+      "_id": "nvbyuYpkTpRg0Xfp",
+      "type": "text",
+      "name": "Stum",
+      "img": null,
+      "description": "Du blir stum i 1T8 dagar. Du kan bara utöva symbolism under denna tid.",
+      "weight": 1,
+      "range": [
+        16,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.nvbyuYpkTpRg0Xfp"
+    },
+    {
+      "_id": "YdcaGjIWmZgmoJ32",
+      "type": "text",
+      "name": "Magiskt förlamad",
+      "img": null,
+      "description": "Du blir fullständigt förlamad i 1T8 dagar och kan under denna tid inte utöva någon form av magi. Du kan fortfarande tala.",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.YdcaGjIWmZgmoJ32"
+    },
+    {
+      "_id": "srQhNf7LULK4FzKb",
+      "type": "text",
+      "name": "Hjärnskada",
+      "img": null,
+      "description": "Du har drabbats av en hjärnskada. Din INT och alla INT-baserade färdigheter minskas med 1T4. Du glömmer lika många besvärjelser. Förlusten av färdigheter och besvärjelser kan inte kureras, men kan återvinnas genom studier och träning. Din INT kan återställas om någon annan lägger HELA E6 på dig.",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.srQhNf7LULK4FzKb"
+    },
+    {
+      "_id": "ZMaoXziaDC6hS0Sz",
+      "type": "text",
+      "name": "Total minnesförlust",
+      "img": null,
+      "description": "Du drabbas av total minnesförlust under 1T8 dagar. Under denna tid kan du inte använda några av dina färdigheter eller besvärjelser. Du beter dig som en lallande idiot, och dina vänner måste ta hand om dig eftersom du inte kan klara dig själv. Du kan inte hjälpas av HELA. Vidare drabbas du av en fobi (se Fobitabellen) under 1T8 månader. Fobin kan inte botas av HELA, men går över med tiden.",
+      "weight": 1,
+      "range": [
+        20,
+        999
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!6Y1swXwgBOD6Cj2Z.ZMaoXziaDC6hS0Sz"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!6Y1swXwgBOD6Cj2Z"
+}

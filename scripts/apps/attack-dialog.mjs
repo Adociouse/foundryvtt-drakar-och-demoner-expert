@@ -532,7 +532,10 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       const canApplyDirectly = game.user.isGM || targetToken.actor.isOwner;
       if (canApplyDirectly) {
         await applyAttackResult(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem });
-        await postAttackCard(result, { attacker: this.actor, weapon, parryItem, ranged });
+        // ⚠ `target` skickas nu ALLTID med (rättad 2026-08-21, Johans fynd
+        // mitt i liveverifieringen) — utan den visste kortet aldrig vems KP
+        // "Totala KP kvar"-raden syftade på, bara anfallarens namn stod med.
+        await postAttackCard(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem, ranged });
       } else {
         await postAttackCard(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem, ranged, pending: true });
         anyPending = true;

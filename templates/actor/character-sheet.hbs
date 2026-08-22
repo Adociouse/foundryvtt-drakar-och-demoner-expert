@@ -242,8 +242,8 @@
         {{else if entry.isRustning}}
           <span class="skill-fv">Abs {{entry.item.system.abs}}</span>
         {{else if entry.isBesvarjelse}}
-          <span class="fv-input">E <input type="number" class="effektgrad-input" data-effektgrad value="1" min="1" /></span>
-          <button type="button" data-action="castSpell" title="Kasta"><i class="fa-solid fa-hand-sparkles"></i></button>
+          <span class="skill-fv">S{{entry.item.system.sValue}}</span>
+          <button type="button" data-action="castSpell" title="Kasta (öppnar kast-dialogen)"><i class="fa-solid fa-hand-sparkles"></i></button>
         {{else if entry.isUtrustning}}
           {{#if entry.item.system.quantity}}<span class="skill-fv">{{entry.item.system.quantity}} st</span>{{/if}}
           <span class="skill-fv" title="{{localize 'DODE.Equipment.TotalWeight'}}">{{entry.item.system.totalWeight}} BEP</span>
@@ -261,6 +261,9 @@
             <i class="fa-solid fa-flask"></i>
           </button>
         {{/if}}
+        {{#unless entry.isBesvarjelse}}
+          <button type="button" data-action="sellItem" title="Sälj till en målsatt handlare (hovra + T)"><i class="fa-solid fa-coins"></i></button>
+        {{/unless}}
         <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
       </li>
     {{else}}

@@ -1,8 +1,19 @@
 <div class="dode-npc-sheet-body">
+{{!-- ⚠ Icke-SL ser BARA namn/bild + plundringslistan nedan — se
+      actor-npc-sheet.mjs's `isGM`-kommentar för varför (Observer-behörighet
+      krävs för att plundringsdata ska nå klienten alls, men Foundry har
+      ingen fältgranulär behörighet, så resten av arket — anfallsdata,
+      attribut, Speciellt/Beskrivning, som ofta bär SL-hemligheter — döljs
+      HÄR i mallen i stället). --}}
 <header class="sheet-header">
-  <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" />
+  <img class="profile-img" src="{{actor.img}}" {{#if isGM}}data-action="editImage" data-edit="img"{{/if}} title="{{actor.name}}" />
   <div class="header-fields">
-    <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+    {{#if isGM}}
+      <input class="actor-name" name="name" type="text" value="{{actor.name}}" placeholder="Namn" />
+    {{else}}
+      <h2 class="actor-name-readonly">{{actor.name}}</h2>
+    {{/if}}
+    {{#if isGM}}
     <div class="derived-row">
       <span>{{localize "DODE.Derived.KP"}}: <input class="hp-value" type="number" name="system.hp.value" value="{{system.hp.value}}" /> / {{system.hp.max}}</span>
       <span>ABS <input type="number" name="system.abs" value="{{system.abs}}" min="0" /></span>
@@ -15,9 +26,11 @@
       <span>Hemvist <input type="text" name="system.habitat" value="{{system.habitat}}" /></span>
       <span>Vanlighet <input type="text" name="system.rarity" value="{{system.rarity}}" /></span>
     </div>
+    {{/if}}
   </div>
 </header>
 
+{{#if isGM}}
 <section class="attributes-grid">
   {{#each attributes as |labelKey key|}}
     <div class="attribute">
@@ -50,6 +63,7 @@
     {{/each}}
   </ol>
 </section>
+{{/if}}
 
 <section class="gear">
   <header class="skills-header">
@@ -64,20 +78,25 @@
         {{/if}}
         {{#if entry.isVapen}}
           <span class="skill-fv">{{entry.item.system.damage}}</span>
-          <button type="button" data-action="declareAttack" title="Anfall (detaljerad strid)"><i class="fa-solid fa-crosshairs"></i></button>
+          {{#if ../isGM}}<button type="button" data-action="declareAttack" title="Anfall (detaljerad strid)"><i class="fa-solid fa-crosshairs"></i></button>{{/if}}
         {{else if entry.isRustning}}
           <span class="skill-fv">Abs {{entry.item.system.abs}}</span>
         {{else if entry.isUtrustning}}
           {{#if entry.item.system.quantity}}<span class="skill-fv">{{entry.item.system.quantity}} st</span>{{/if}}
         {{/if}}
-        {{#if entry.canEquip}}
-          <button type="button" data-action="toggleEquipped"
-            class="equip-toggle {{#if entry.item.system.equipped}}is-equipped{{/if}}"
-            title="{{#if entry.item.system.equipped}}Utrustad — klicka för att ta av{{else}}Ej utrustad — klicka för att utrusta{{/if}}">
-            <i class="fa-solid {{#if entry.item.system.equipped}}fa-shield{{else}}fa-shield-halved{{/if}}"></i>
-          </button>
+        {{#if ../isGM}}
+          {{#if entry.canEquip}}
+            <button type="button" data-action="toggleEquipped"
+              class="equip-toggle {{#if entry.item.system.equipped}}is-equipped{{/if}}"
+              title="{{#if entry.item.system.equipped}}Utrustad — klicka för att ta av{{else}}Ej utrustad — klicka för att utrusta{{/if}}">
+              <i class="fa-solid {{#if entry.item.system.equipped}}fa-shield{{else}}fa-shield-halved{{/if}}"></i>
+            </button>
+          {{/if}}
         {{/if}}
-        <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+        {{#unless entry.isNatural}}
+          <button type="button" data-action="requestLoot" title="Plundra till din rollperson"><i class="fa-solid fa-sack-dollar"></i></button>
+        {{/unless}}
+        {{#if ../isGM}}<button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>{{/if}}
       </li>
     {{else}}
       <li class="skill-row-empty">Ingen utrustning ännu — dra hit vapen, rustning eller utrustning från ett kompendium.</li>
@@ -85,6 +104,7 @@
   </ol>
 </section>
 
+{{#if isGM}}
 <section class="npc-fields">
   <label>Färdigheter (fritext) <input type="text" name="system.skills" value="{{system.skills}}" /></label>
 </section>
@@ -95,4 +115,5 @@
   <h3>Beskrivning</h3>
   {{editor system.biography target="system.biography" button=true engine="prosemirror"}}
 </section>
+{{/if}}
 </div>

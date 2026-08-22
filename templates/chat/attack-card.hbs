@@ -4,7 +4,7 @@
   <header class="attack-header">
     <img src="{{weaponImg}}" alt="" />
     <div>
-      <strong>{{attackerName}}</strong>
+      <strong>{{attackerName}}</strong>{{#if targetName}} <i class="fa-solid fa-arrow-right target-arrow"></i> <strong class="target-name">{{targetName}}</strong>{{/if}}
       <span class="weapon">{{weaponName}}{{#if aimed}} — riktat mot {{locationLabel}}{{/if}}</span>
     </div>
     {{#if intentBedova}}<i class="fa-solid fa-hand-fist" title="Bedövande avsikt"></i>{{/if}}
@@ -37,7 +37,7 @@
     {{/if}}
   </div>
 
-  <div class="roll-line">
+  <div class="roll-line role-attack">
     <span class="label">Anfall</span>
     <span class="d20 {{attackOutcome}}">{{attackRoll}}</span>
     <span class="outcome {{attackOutcome}}">{{attackOutcomeLabel}}</span>
@@ -59,7 +59,7 @@
   {{/if}}
 
   {{#if hasParry}}
-    <div class="roll-line">
+    <div class="roll-line role-parry">
       <span class="label">Parering</span>
       <span class="d20 {{parryOutcome}}">{{parryRoll}}</span>
       <span class="outcome {{parryOutcome}}">{{parryOutcomeLabel}}</span>
@@ -103,4 +103,11 @@
   {{/if}}
 
   {{#if verdictNote}}<div class="verdict-note">{{verdictNote}}</div>{{/if}}
+
+  {{#if fummelDraw}}
+    <div class="effect-line kritisk">
+      <i class="fa-solid fa-triangle-exclamation"></i> Fummeltabell: <strong>{{fummelDraw.primaryName}}</strong>. {{fummelDraw.primaryText}}
+      {{#each fummelDraw.extra}}<br />+ <strong>{{this.name}}</strong>. {{this.text}}{{/each}}
+    </div>
+  {{/if}}
 </div>

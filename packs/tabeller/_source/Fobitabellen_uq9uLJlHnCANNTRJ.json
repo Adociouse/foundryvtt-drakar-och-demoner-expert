@@ -1,0 +1,289 @@
+{
+  "name": "Fobitabellen",
+  "_id": "uq9uLJlHnCANNTRJ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/tabeller/fobitabellen.png",
+  "description": "<p>Slås när Snedtändningstabellens 20+-resultat (\"Total minnesförlust\") drabbar en magiker — offret får den utslagna fobin under 1T8 månader.</p><p><em>Källa: D&amp;DE 0_Magi.pdf s.8 (0-Magi-utgåvan). Se docs/extracts/DODE_Magi_SNEDTANDNINGSTABELL.md (Roll20-projektet).</em></p>",
+  "results": [
+    {
+      "_id": "EB95swyMPwIzUcHl",
+      "type": "text",
+      "name": "Agorafobi",
+      "img": null,
+      "description": "Skräck för öppna områden. Där är du utsatt för fara och kan angripas av monster från alla håll.",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.EB95swyMPwIzUcHl"
+    },
+    {
+      "_id": "oSiFhdoJkIGdvDMX",
+      "type": "text",
+      "name": "Klaustrofobi",
+      "img": null,
+      "description": "Skräck för att bli instängd. I trånga och instängda utrymmen kan du kvävas, och väggarna kan krossa dig när de pressas samman.",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.oSiFhdoJkIGdvDMX"
+    },
+    {
+      "_id": "NyJGguHI3n5yv7mx",
+      "type": "text",
+      "name": "Demofobi",
+      "img": null,
+      "description": "Skräck för folkmassor. I folksamlingar finns det fiender, och de är ute efter dig.",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.NyJGguHI3n5yv7mx"
+    },
+    {
+      "_id": "atGydnHvr8GqYTdp",
+      "type": "text",
+      "name": "Ailurofobi",
+      "img": null,
+      "description": "Skräck för kattdjur. Kattdjur är farliga och äter varelser av din ras.",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.atGydnHvr8GqYTdp"
+    },
+    {
+      "_id": "YDV07uPue8tu2HFv",
+      "type": "text",
+      "name": "Entomofobi",
+      "img": null,
+      "description": "Skräck för insekter. Dessa är giftiga och rovgiriga varelser som är ute efter dig.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.YDV07uPue8tu2HFv"
+    },
+    {
+      "_id": "nVArgdMLE20mlA5J",
+      "type": "text",
+      "name": "Ofiofobi",
+      "img": null,
+      "description": "Skräck för ormar. De är giftiga och gömmer sig på de mest otroliga ställena.",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.nVArgdMLE20mlA5J"
+    },
+    {
+      "_id": "1rf0W45dtI26HFkv",
+      "type": "text",
+      "name": "Skotofobi",
+      "img": null,
+      "description": "Rädsla för mörker. I mörkret ruvar de mest fruktansvärda faror. Endast med hjälp av ljus kan du hålla dem borta.",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.1rf0W45dtI26HFkv"
+    },
+    {
+      "_id": "Yiz9MOWzt0vxol9h",
+      "type": "text",
+      "name": "Dendrofobi",
+      "img": null,
+      "description": "Skräck för träd. Träden döljer en hatisk intelligens som vill förgöra alla andra former av intelligent liv. (Denna fobi kan inte drabba skogslevande älvfolk. Slå om!)",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.Yiz9MOWzt0vxol9h"
+    },
+    {
+      "_id": "IA2dHymdPk2Ze6ZY",
+      "type": "text",
+      "name": "Talassofobi",
+      "img": null,
+      "description": "Skräck för havet. Det stora svallande havet störtar in över fasta land och försöker uppsluka det. Du måste hålla dig borta från kusterna för att klara dig. Havsresor är helt uteslutna. (Denna fobi kan inte drabba gråalver. Slå om!)",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.IA2dHymdPk2Ze6ZY"
+    },
+    {
+      "_id": "uHYXRGMnJRIxQQHR",
+      "type": "text",
+      "name": "Xenofobi",
+      "img": null,
+      "description": "Skräck för främlingar. Intelligenta varelser du inte känner kan vara representanter för fienden. Detta gäller särskilt sådana som inte är av din ras eller nationalitet.",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!uq9uLJlHnCANNTRJ.uHYXRGMnJRIxQQHR"
+    }
+  ],
+  "formula": "1d10",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!uq9uLJlHnCANNTRJ"
+}

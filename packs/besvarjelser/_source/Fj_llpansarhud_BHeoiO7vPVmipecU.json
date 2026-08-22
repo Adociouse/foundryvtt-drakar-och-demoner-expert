@@ -9,6 +9,8 @@
     "range": "Personlig",
     "description": "<p>Huden blir hård och fjällig (silveraktig); +4 abs; KAR −4 under varaktigheten</p>",
     "ritual": false,
+    "targetMode": "self",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "39-46"
@@ -20,7 +22,7 @@
   "folder": "jAaX0JH0rKlJYw9n",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

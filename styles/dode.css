@@ -857,12 +857,20 @@
 .dode-attack-card .attack-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
 .dode-attack-card .attack-header img { width: 32px; height: 32px; border: none; object-fit: cover; }
 .dode-attack-card .attack-header .weapon { display: block; font-size: 0.85em; opacity: 0.8; }
+.dode-attack-card .attack-header .target-arrow { opacity: 0.6; font-size: 0.8em; margin: 0 2px; }
+.dode-attack-card .attack-header .target-name { color: #a33; }
 .dode-attack-card .cl-line { font-size: 0.85em; margin-bottom: 4px; }
 .dode-attack-card .cl-parts { opacity: 0.7; }
-.dode-attack-card .roll-line { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+.dode-attack-card .roll-line { display: flex; align-items: center; gap: 6px; padding: 2px 0 2px 6px;
+  border-left: 3px solid transparent; }
 .dode-attack-card .roll-line .label { flex: 0 0 60px; opacity: 0.8; }
 .dode-attack-card .roll-line .via { font-size: 0.8em; opacity: 0.6; }
 .dode-attack-card .roll-line.muted { opacity: 0.6; font-style: italic; font-size: 0.85em; }
+/* Anfall vs Parering — visuellt särskiljda oavsett utfallsfärg (lyckat/
+   misslyckat), Johans live-feedback 2026-08-21: "one color for attack..
+   one for defence". */
+.dode-attack-card .roll-line.role-attack { border-left-color: #b5462f; }
+.dode-attack-card .roll-line.role-parry { border-left-color: #2f5fb5; }
 .dode-attack-card .d20 { font-weight: 700; min-width: 1.8em; text-align: center; }
 .dode-attack-card .outcome.perfekt, .dode-attack-card .d20.perfekt { color: #2f6d3a; }
 .dode-attack-card .outcome.fummel, .dode-attack-card .d20.fummel { color: #a33; }
@@ -975,6 +983,29 @@
 .dode-attack-dialog-body .attack-unprepared { border-top: 1px solid rgba(0, 0, 0, 0.15); padding-top: 6px; }
 .dode-attack-dialog-body .parry-section.hidden { display: none; }
 .dode-attack-dialog-body .submit-attack { align-self: center; padding: 6px 18px; font-weight: 600; }
+
+/* ---- Kast-dialogen (Magisystem-planen Fas 3) — delar Anfallsdialogens
+   grundstilar (mål-lista, .field, .hint) via samma klassnamn på ny rot. ---- */
+.dode-spell-dialog-body { padding: 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.dode-spell-dialog-body .hint,
+.dode-attack-dialog-body .hint { opacity: 0.75; font-style: italic; font-size: 0.85em; margin: 0; }
+.dode-spell-dialog-body .field,
+.dode-attack-dialog-body .field { display: flex; flex-direction: column; gap: 2px; font-size: 0.85em; }
+.dode-spell-dialog-body .spell-target { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.dode-spell-dialog-body .target-label,
+.dode-attack-dialog-body .target-label { font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; flex-basis: 100%; }
+.dode-spell-dialog-body .target-name,
+.dode-attack-dialog-body .target-name { font-weight: 600; }
+.dode-spell-dialog-body .target-list,
+.dode-attack-dialog-body .target-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.dode-spell-dialog-body .target-list li,
+.dode-attack-dialog-body .target-list li { display: flex; align-items: center; gap: 4px; }
+.dode-spell-dialog-body .target-list img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; border: none; }
+.dode-spell-dialog-body .spell-target.multi .target-list img { width: 24px; height: 24px; }
+.dode-spell-dialog-body .spell-description { font-size: 0.85em; opacity: 0.85; }
+.dode-spell-dialog-body .cl-preview { font-weight: 600; font-size: 1.05em; margin: 0; text-align: center; }
+.dode-spell-dialog-body .psy-hint { text-align: center; }
+.dode-spell-dialog-body .submit-cast { align-self: center; padding: 6px 18px; font-weight: 600; }
 
 /* ---- Combat Tracker-tillägget (ABS + snabbanfall per rad) ---- */
 .dode-abs {

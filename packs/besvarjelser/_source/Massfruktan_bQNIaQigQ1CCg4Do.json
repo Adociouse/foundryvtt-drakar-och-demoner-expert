@@ -9,6 +9,9 @@
     "range": "Sx2 rutor",
     "description": "<p>Alla intelligenta slår på Skräcktabellen (max en gång per varaktighet)</p>",
     "ritual": false,
+    "triggersFearTable": true,
+    "targetMode": "area",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "26-34"
@@ -20,7 +23,7 @@
   "folder": "RIMgmAlELKcOeHG3",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

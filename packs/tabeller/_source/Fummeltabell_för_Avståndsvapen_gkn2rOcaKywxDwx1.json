@@ -1,0 +1,549 @@
+{
+  "name": "Fummeltabell för Avståndsvapen",
+  "_id": "gkn2rOcaKywxDwx1",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/tabeller/fummeltabell-avstandsvapen.png",
+  "description": "<p>Vapenstrids fummeltabell (SLB s.31: \"Fummel → Slå på rätt fummeltabell\"). Rad 20: rekursiv omdragning — dra två gånger till, slå om varje ny 20:a.</p><p><em>Källa: Spelarboken (D&amp;DE III) s.39-41.</em></p>",
+  "results": [
+    {
+      "_id": "fgTeUyAt70Rtp0Mq",
+      "type": "text",
+      "name": "Du överanstränger dig vid anfallet och lyckas knäcka bågen …",
+      "img": null,
+      "description": "Du överanstränger dig vid anfallet och lyckas knäcka bågen (slita sönder slungan, bryta av kastvapnet). Vapnet obrukbart.",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.fgTeUyAt70Rtp0Mq"
+    },
+    {
+      "_id": "3fAFkxQPr2DQHqxL",
+      "type": "text",
+      "name": "Du underskattar dina egna krafter",
+      "img": null,
+      "description": "Du underskattar dina egna krafter. Bågsträngen går av (slungan brister, kastvapnet bryts av).",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.3fAFkxQPr2DQHqxL"
+    },
+    {
+      "_id": "wv60QQ74nyYSCh4v",
+      "type": "text",
+      "name": "Du blir distraherad av något i ditt förflutna och kan inte …",
+      "img": null,
+      "description": "Du blir distraherad av något i ditt förflutna och kan inte agera avdömningen. −4 på CL på avståndsattacker under 1T2 timmar.",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.wv60QQ74nyYSCh4v"
+    },
+    {
+      "_id": "uL4400vU5qjZsN7K",
+      "type": "text",
+      "name": "Din hjärna blir överhettad och du får problem med avståndsb…",
+      "img": null,
+      "description": "Din hjärna blir överhettad och du får problem med avståndsbedömningen. −4 på CL på avståndsattacker under 1T2 timmar.",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.uL4400vU5qjZsN7K"
+    },
+    {
+      "_id": "p1PubKhItKjMJyhj",
+      "type": "text",
+      "name": "Någonting går väldigt snett — din projektil",
+      "img": null,
+      "description": "Någonting går väldigt snett — din projektil. Hänfört spenderar du hela nästa SR med att se var den landar.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.p1PubKhItKjMJyhj"
+    },
+    {
+      "_id": "EYwkYT1mujXGLX2R",
+      "type": "text",
+      "name": "Plötsligt inser du att det inte är dagidag",
+      "img": null,
+      "description": "Plötsligt inser du att det inte är dagidag. Du måste spendera hela SR med att återfå självförtroendet.",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.EYwkYT1mujXGLX2R"
+    },
+    {
+      "_id": "DLQxMkBgGV6QugFP",
+      "type": "text",
+      "name": "En loppa innanför rustningen bryter din koncentration",
+      "img": null,
+      "description": "En loppa innanför rustningen bryter din koncentration. −4 på CL i SR.",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.DLQxMkBgGV6QugFP"
+    },
+    {
+      "_id": "m1777z68ay3aU97S",
+      "type": "text",
+      "name": "I din iver att bli hjälte hänger fingrarna inte riktigt med…",
+      "img": null,
+      "description": "(Slunga) I din iver att bli hjälte hänger fingrarna inte riktigt med och du står och fumlar med att få pilen på strängen (slungstenen i sin \"ficka\"; kastvapnet rätt i handen) i denna och nästa SR. Prova närstrid i gengäld.",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.m1777z68ay3aU97S"
+    },
+    {
+      "_id": "smhSVmvW6nvbvdca",
+      "type": "text",
+      "name": "Någon \"där uppe\" gillar dig inte",
+      "img": null,
+      "description": "Någon \"där uppe\" gillar dig inte. Denna attack och de två följande attackerna du gör missar automatiskt.",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.smhSVmvW6nvbvdca"
+    },
+    {
+      "_id": "DsRmJb4Hp1j826RJ",
+      "type": "text",
+      "name": "Du glömmer bort vad balans är för något och har −5 på alla …",
+      "img": null,
+      "description": "Du glömmer bort vad balans är för något och har −5 på alla manöver i nästa SR. Du tappar ditt vapen vid dina fötter.",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.DsRmJb4Hp1j826RJ"
+    },
+    {
+      "_id": "2gICjEfMp7tjEBu7",
+      "type": "text",
+      "name": "Med fem tummar mitt i varje hand är det inte så lätt",
+      "img": null,
+      "description": "Med fem tummar mitt i varje hand är det inte så lätt. (Pilbåge) Du släpper iväg din pil och mister ena örat på kuppen. Till råga på allt missar du det grova. (Armborst) Du skjuter iväg pilen med ett finger som kommer i vägen. Finger och pil far framåt och slår 1T6 skada. (Slunga) Superbt anfall mot dig själv. (Kastvapen) Du lyckas med bedriften att skära upp handflatan med ditt eget vassa kastvapen. Inga fler attacker med den handen den vecka.",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.2gICjEfMp7tjEBu7"
+    },
+    {
+      "_id": "Vg2jdzArA6ktcpfr",
+      "type": "text",
+      "name": "Du förvirrar dig och skjuter (slungar, kastar) utan att sik…",
+      "img": null,
+      "description": "Du förvirrar dig och skjuter (slungar, kastar) utan att sikta. Ännu ivrigare att reparera misstaget gör du samma misstag nästa runda också! −15 på CL.",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.Vg2jdzArA6ktcpfr"
+    },
+    {
+      "_id": "XfJw1jSw0RRXAffc",
+      "type": "text",
+      "name": "Du skär dig i handen på någonting vasst på ditt vapen",
+      "img": null,
+      "description": "Du skär dig i handen på någonting vasst på ditt vapen. −2 på CL i 1 dygn.",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.XfJw1jSw0RRXAffc"
+    },
+    {
+      "_id": "38ndZ2Tq9PI8cRdw",
+      "type": "text",
+      "name": "Svett och/eller blod rinner in i ögonen och ger dig allvarl…",
+      "img": null,
+      "description": "Svett och/eller blod rinner in i ögonen och ger dig allvarliga problem. Du missar automatiskt nästa attack.",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.38ndZ2Tq9PI8cRdw"
+    },
+    {
+      "_id": "Vk231X0XRNDtyBJN",
+      "type": "text",
+      "name": "Du tänker på något annat och tappar vapnet vid dina fötter",
+      "img": null,
+      "description": "Du tänker på något annat och tappar vapnet vid dina fötter. Kastvapen far iväg 1T6 rutor åt slumpmässigt håll.",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.Vk231X0XRNDtyBJN"
+    },
+    {
+      "_id": "Th55gxLNh8eujheP",
+      "type": "text",
+      "name": "Du tappar pilen/slungstenen på marken och hittar inte den f…",
+      "img": null,
+      "description": "(Projektilvapen) Du tappar pilen/slungstenen på marken och hittar inte den förrän nästa SR (nej, du får inte ta en ny!). (Kastvapen) Du släpper ditt grepp lite för tidigt och vapnet landar fem meter bakom dig. Konfunderad står du och stirrar nästa SR.",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.Th55gxLNh8eujheP"
+    },
+    {
+      "_id": "g68MHrXQPKRz7IZk",
+      "type": "text",
+      "name": "Du skjuter iväg din pil och mister ena örat på kuppen — fin…",
+      "img": null,
+      "description": "(Pilbåge/Armborst) Du skjuter iväg din pil och mister ena örat på kuppen — finger och pil far iväg och slår 1T6 skada på dig själv. (Kastvapen) Du lyckas med bedriften att skära upp handflatan med ditt eget vassa kastvapen. Inga fler attacker med handen den veckan.",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.g68MHrXQPKRz7IZk"
+    },
+    {
+      "_id": "XSZgGb9JmltQo8EL",
+      "type": "text",
+      "name": "Du lyckas automatiskt med attacken — tyvärr träffar den när…",
+      "img": null,
+      "description": "Du lyckas automatiskt med attacken — tyvärr träffar den närmsta vän i skottfältet.",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.XSZgGb9JmltQo8EL"
+    },
+    {
+      "_id": "YXBQtKLnaXHRbjko",
+      "type": "text",
+      "name": "Du träffar dig själv i foten",
+      "img": null,
+      "description": "Du träffar dig själv i foten. Skada 1 KP. Förflyttningsförmågan halverad i 1T6+3 dagar. Skickligt!",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.YXBQtKLnaXHRbjko"
+    },
+    {
+      "_id": "UBWzxmejMIJvHszd",
+      "type": "text",
+      "name": "Rejäl klantighet",
+      "img": null,
+      "description": "Rejäl klantighet. Slå två gånger på tabellen och slå om ifall du slår '20' en gång till.",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1785247754585,
+        "modifiedTime": 1785247754585,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!gkn2rOcaKywxDwx1.UBWzxmejMIJvHszd"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1785247754585,
+    "modifiedTime": 1785247754585,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!gkn2rOcaKywxDwx1"
+}

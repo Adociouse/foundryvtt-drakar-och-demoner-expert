@@ -102,13 +102,15 @@ export async function resolveTwoAttacks({
     attacker, weapon: primaryWeapon, skill: primarySkill,
     target: primaryTarget, ...sharedOptions
   });
-  await postAttackCard(primary, { attacker, weapon: primaryWeapon, parryItem: null, ranged: !!sharedOptions.ranged });
+  // ⚠ `target` med (rättad 2026-08-21, samma fynd som attack-dialog.mjs) —
+  // annars visar kortet aldrig vems KP som drogs, bara anfallarens namn.
+  await postAttackCard(primary, { attacker, target: primaryTarget, weapon: primaryWeapon, parryItem: null, ranged: !!sharedOptions.ranged });
 
   const off = await resolveAttack({
     attacker, weapon: offWeapon, skill: offSkill,
     target: offTarget ?? primaryTarget, ...sharedOptions
   });
-  await postAttackCard(off, { attacker, weapon: offWeapon, parryItem: null, ranged: !!sharedOptions.ranged });
+  await postAttackCard(off, { attacker, target: offTarget ?? primaryTarget, weapon: offWeapon, parryItem: null, ranged: !!sharedOptions.ranged });
 
   return { allowed: true, reason: gate.reason, primary, off };
 }

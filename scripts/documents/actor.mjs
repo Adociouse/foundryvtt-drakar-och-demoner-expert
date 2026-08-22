@@ -1,6 +1,33 @@
 import { rollFV } from "../rolls/fv-roll.mjs";
 import { rollDamage, combineDamageFormula } from "../rolls/damage-roll.mjs";
 
+/**
+ * Delad ActiveEffect-payload för besvärjelser (applySpellEffect) och
+ * konsumerbar utrustning (consumeItem) — samma `{key,mode,value}`-changeform,
+ * samma flagg-/origin-konvention, tidigare byggd två gånger nästan identiskt
+ * (upptäckt vid research inför magisystem-designen 2026-08-21, se
+ * docs/dev/MAGI_STRID_ANVANDNINGSFALL.md punkt 5). Ren dedup, ingen
+ * beteendeändring — utom att `spellName`/`itemName` slås ihop till en enda
+ * `sourceName`-flagga (ingen tidigare kod läste de gamla nycklarna, se grep
+ * inför den här ändringen).
+ * @param {Item} item Källan — "besvarjelse" eller "utrustning".
+ * @param {Array<{key:string, mode?:number, value:string}>} changes Redan filtrerade changes.
+ * @param {{sourceKind:string, duration?:object}} opts `sourceKind` blir flags.<system.id>.source.
+ */
+function buildTemporaryEffectData(item, changes, { sourceKind, duration = {} }) {
+  return {
+    name: item.name,
+    img: item.img,
+    changes: changes.map((c) => ({ key: c.key, mode: c.mode ?? CONST.ACTIVE_EFFECT_MODES.ADD, value: String(c.value) })),
+    duration,
+    origin: item.uuid,
+    transfer: false,
+    disabled: false,
+    [`flags.${game.system.id}.source`]: sourceKind,
+    [`flags.${game.system.id}.sourceName`]: item.name
+  };
+}
+
 export default class DoDEActor extends Actor {
   /** @param {Item} item En "fardighet"-item ägd av denna actor. */
   async rollSkill(item) {
@@ -45,8 +72,9 @@ export default class DoDEActor extends Actor {
   /**
    * Kastar en besvärjelse — MAGI.md: CL = S - 2*(E-1), PSY-kostnad = E vid lyckat
    * slag, halva E (avrundat till magikerns fördel, min 1) vid perfekt, full E vid
-   * fummel (+ snedtändningstabell, ej automatiserad). Inget PSY-avdrag vid vanligt
-   * misslyckat slag.
+   * fummel (+ en riktig dragning på Snedtändningstabellen, se
+   * CONFIG.DODE.rollSnedtandningstabell — Magisystem-planen Fas 4, 2026-08-21).
+   * Inget PSY-avdrag vid vanligt misslyckat slag.
    *
    * Förenkling: `item.system.sValue` (besvärjelsens tabellerade skolvärde) används
    * som skicklighetsvärde (S) i CL-formeln. Egentligen är S kastarens PERSONLIGA
@@ -70,10 +98,24 @@ export default class DoDEActor extends Actor {
     }
 
     if (psyCost > 0 || outcome === "fummel") {
-      const note = outcome === "fummel"
-        ? `${psyCost} PSY förbrukat. Fummel — slå på Snedtändningstabellen (MAGI.md, ej automatiserad).`
-        : `${psyCost} PSY förbrukat.`;
-      await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor: this }), content: `<p>${note}</p>` });
+      let note = `${psyCost} PSY förbrukat.`;
+      const rolls = [];
+      if (outcome === "fummel") {
+        const draw = await CONFIG.DODE.rollSnedtandningstabell(E);
+        if (draw) {
+          note = `${psyCost} PSY förbrukat. Fummel — Snedtändningstabellen: <strong>${draw.result.name}</strong>. ${draw.result.description}`
+            + (draw.fobi ? ` Fobi: <strong>${draw.fobi.result.name}</strong>. ${draw.fobi.result.description}` : "");
+          rolls.push(draw.roll);
+          if (draw.fobi) rolls.push(draw.fobi.roll);
+        } else {
+          note = `${psyCost} PSY förbrukat. Fummel — slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet).`;
+        }
+      }
+      await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        content: `<p>${note}</p>`,
+        rolls, sound: rolls.length ? CONFIG.sounds.dice : null
+      });
     }
   }
 
@@ -103,17 +145,9 @@ export default class DoDEActor extends Actor {
     if (!changes.length) return;
 
     const rounds = item.system.spellDuration ?? 0;
-    return target.createEmbeddedDocuments("ActiveEffect", [{
-      name: item.name,
-      img: item.img,
-      changes,
-      duration: rounds > 0 ? { rounds } : {},
-      origin: item.uuid,
-      transfer: false,
-      disabled: false,
-      [`flags.${game.system.id}.source`]: "spell",
-      [`flags.${game.system.id}.spellName`]: item.name
-    }]);
+    return target.createEmbeddedDocuments("ActiveEffect", [
+      buildTemporaryEffectData(item, changes, { sourceKind: "spell", duration: rounds > 0 ? { rounds } : {} })
+    ]);
   }
 
   /**
@@ -158,17 +192,12 @@ export default class DoDEActor extends Actor {
       changes = changes.map((c) => ({ ...c, key: c.key.replaceAll("$CHOICE", result.attribute) }));
     }
 
-    await this.createEmbeddedDocuments("ActiveEffect", [{
-      name: item.name,
-      img: item.img,
-      changes: changes.map((c) => ({ key: c.key, mode: c.mode ?? 2, value: String(c.value) })),
-      duration: item.system.activationSeconds ? { seconds: item.system.activationSeconds } : {},
-      origin: item.uuid,
-      transfer: false,
-      disabled: false,
-      [`flags.${game.system.id}.source`]: "consumable",
-      [`flags.${game.system.id}.itemName`]: item.name
-    }]);
+    await this.createEmbeddedDocuments("ActiveEffect", [
+      buildTemporaryEffectData(item, changes, {
+        sourceKind: "consumable",
+        duration: item.system.activationSeconds ? { seconds: item.system.activationSeconds } : {}
+      })
+    ]);
 
     const remaining = item.system.chargesRemaining;
     if (typeof remaining === "number") {

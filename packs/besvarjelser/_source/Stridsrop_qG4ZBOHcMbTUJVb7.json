@@ -9,6 +9,8 @@
     "range": "Sx2 rutor",
     "description": "<p>Allierade: +5 CL i strid, behöver ej slå moralslag under varaktigheten</p>",
     "ritual": false,
+    "targetMode": "multi",
+    "battleRelevant": true,
     "source": {
       "book": "formelboken",
       "page": "53-56"
@@ -20,7 +22,7 @@
   "folder": "jjtnfKTBdaPM42Nl",
   "sort": 0,
   "ownership": {
-    "default": 0
+    "default": 2
   },
   "flags": {},
   "_stats": {

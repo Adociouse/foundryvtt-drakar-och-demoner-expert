@@ -1,3 +1,5 @@
+import { requestLoot } from "../rolls/loot.mjs";
+
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
@@ -24,7 +26,8 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
       deleteAttack: DoDENpcSheet.#onDeleteAttack,
       editItem: DoDENpcSheet.#onEditItem,
       deleteItem: DoDENpcSheet.#onDeleteItem,
-      toggleEquipped: DoDENpcSheet.#onToggleEquipped
+      toggleEquipped: DoDENpcSheet.#onToggleEquipped,
+      requestLoot: DoDENpcSheet.#onRequestLoot
     },
     form: { submitOnChange: true, closeOnSubmit: false }
   };
@@ -39,11 +42,40 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
     return this.actor.name;
   }
 
+  /**
+   * ⚠ Live-fynd 2026-08-21 (Johan, som Player2): `ActorSheetV2` inaktiverar
+   * AUTOMATISKT varenda formulärkontroll (inputs OCH `data-action`-knappar)
+   * när `!this.isEditable` — vilket är EXAKT läget för en spelare med bara
+   * Observer-behörighet på ett lik (se `_prepareContext`s `isGM`-kommentar
+   * för varför Observer krävs). Plundringsknappen är AVSIKTLIGT till för
+   * just den användaren, så den måste räddas undan Foundrys blanda-disable
+   * i efterhand — körs EFTER kärnans egen render/disable-passering.
+   */
+  async _onRender(context, options) {
+    // ⚠ `DocumentSheetV2#_onRender` (Foundry-kärnan) är `async` och kör sin
+    // `_toggleDisabled(true)`-inaktivering EFTER ett eget `await` — utan att
+    // AWAITA `super._onRender()` här körde denna metods återaktivering FÖRE
+    // kärnans inaktivering (race), och blev alltså tyst överskriven direkt
+    // efteråt. Måste awaitas för att komma EFTER i tur.
+    await super._onRender?.(context, options);
+    this.element.querySelectorAll('[data-action="requestLoot"]').forEach((btn) => { btn.disabled = false; });
+  }
+
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.actor = this.actor;
     context.system = this.actor.system;
     context.attributes = CONFIG.DODE.attributes;
+    // ⚠ Live-fynd 2026-08-21 (Johan, som Player2): för att plundringsknappen
+    // (rolls/loot.mjs) ska kunna se vad som finns att plundra måste spelaren
+    // ha Observer-behörighet på liket — men Observer visar HELA arket i
+    // Foundrys kärna, inklusive "Speciellt"/beskrivning (som ofta bär SL-
+    // hemligheter, t.ex. en gåtlösning) och attackernas FV/skada (rått
+    // stridsdata). Foundry har ingen fältgranulär behörighet, så
+    // begränsningen görs HÄR i mallen i stället: `isGM` styr om Anfall/
+    // attribut/Speciellt/Beskrivning-sektionerna ens renderas för en
+    // icke-SL-tittare — bara Utrustning (plundringslistan) syns då.
+    context.isGM = game.user.isGM;
     context.gear = this.actor.items
       .filter((i) => GEAR_TYPES.includes(i.type))
       .map((item) => ({
@@ -75,6 +107,12 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
   static async #onToggleEquipped(event, target) {
     const item = DoDENpcSheet.#itemFromEvent(this.actor, target);
     if (item) await item.update({ "system.equipped": !item.system.equipped });
+  }
+
+  /** Plundring — se rolls/loot.mjs. `game.user.character` = spelarens egen rollperson. */
+  static async #onRequestLoot(event, target) {
+    const item = DoDENpcSheet.#itemFromEvent(this.actor, target);
+    if (item) await requestLoot(this.actor, item.id, game.user.character);
   }
 
   /** Samma mönster som actor-character-sheet.mjs#_onDrop — kopierar (loot är GM:s manuella radering, inte en flytt). */

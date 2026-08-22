@@ -1,0 +1,163 @@
+{
+  "DODE": {
+    "Attribute": {
+      "STY": "Strength",
+      "STO": "Size",
+      "FYS": "Physique",
+      "SMI": "Agility",
+      "INT": "Intelligence",
+      "PSY": "Psyche",
+      "KAR": "Charisma"
+    },
+    "SkillCategory": {
+      "A": "Category A",
+      "B": "Category B"
+    },
+    "CostTier": {
+      "Primar": "Primary",
+      "Yrkesfardighet": "Profession skill",
+      "Sekundar": "Secondary"
+    },
+    "WeaponGrip": {
+      "1H": "One-handed",
+      "2H": "Two-handed",
+      "1-2H": "One/two-handed"
+    },
+    "Status": {
+      "ArmObrukbar": "Arm disabled",
+      "HandUpptagen": "Hand occupied"
+    },
+    "WeaponType": {
+      "Latt": "Light",
+      "Tung": "Heavy"
+    },
+    "WeaponCategory": {
+      "Narstrid": "Melee",
+      "Projektil": "Projectile",
+      "Kast": "Thrown weapon"
+    },
+    "ArmorSlot": {
+      "Kropp": "Body",
+      "Huvud": "Head",
+      "Skold": "Shield"
+    },
+    "MagicSchool": {
+      "Alkemi": "Alchemy",
+      "Animism": "Animism",
+      "Demonologi": "Demonology",
+      "Elementarmagi": "Elemental Magic",
+      "Harmonism": "Harmonism",
+      "Haxkonster": "Witchcraft",
+      "Illusionism": "Illusionism",
+      "Mentalism": "Mentalism",
+      "Nekromanti": "Necromancy",
+      "Rostmagi": "Voice Magic",
+      "Spiritism": "Spiritism",
+      "Stavmagi": "Staff Magic",
+      "Symbolism": "Symbolism"
+    },
+    "Sheet": {
+      "Character": "Character",
+      "Npc": "Monster/NPC",
+      "Item": "Item",
+      "Ras": "Race",
+      "Yrke": "Profession",
+      "Vapen": "Weapon",
+      "Rustning": "Armor",
+      "Besvarjelse": "Spell",
+      "Handlare": "Merchant (shop)"
+    },
+    "Skill": {
+      "New": "New skill",
+      "Group": "Group",
+      "Pick": "Choose skill",
+      "Custom": "Other (write custom name)",
+      "CustomName": "Custom name (if \"Other\" chosen)"
+    },
+    "Ability": {
+      "Roll": "Roll for special ability",
+      "BpSpent": "BP to spend (1-40)"
+    },
+    "Derived": {
+      "KP": "Hit Points",
+      "Psy": "PSY",
+      "DamageBonus": "Damage bonus",
+      "Abs": "ABS",
+      "Movement": "Movement",
+      "CarryCapacity": "Carry capacity"
+    },
+    "RollCard": {
+      "Perfekt": "Perfect!",
+      "Fummel": "Fumble!",
+      "Lyckat": "Success",
+      "Misslyckat": "Failure"
+    },
+    "Actor": {
+      "Ras": "Race",
+      "RasDrop": "Drop a race here",
+      "Yrke": "Profession",
+      "YrkeDrop": "Drop a profession here",
+      "Utrustning": "Equipment",
+      "Base": "Base",
+      "Mod": "Mod",
+      "Total": "Total",
+      "Currency": "Purse"
+    },
+    "Coin": {
+      "Km": "Copper coins (cc)",
+      "Sm": "Silver coins (sc)",
+      "Gm": "Gold coins (gc)"
+    },
+    "EquipmentCategory": {
+      "Verktyg": "Tools",
+      "Kladsel": "Clothing",
+      "Behallare": "Containers",
+      "Koksutrustning": "Kitchenware",
+      "Lagerutrustning": "Camping gear",
+      "Tjuvverktyg": "Thieves' tools",
+      "Instrument": "Instruments & transport",
+      "Droger": "Drugs",
+      "Mat": "Food & drink",
+      "Riddjur": "Draft & riding animals",
+      "Fordon": "Vehicles",
+      "Vardesaker": "Valuables",
+      "Diverse": "Miscellaneous"
+    },
+    "Equipment": {
+      "Category": "Category",
+      "Quantity": "Quantity",
+      "Weight": "Weight (BEP)",
+      "Price": "Price",
+      "PriceUnit": "Coin type",
+      "PriceNote": "Price note (free text)",
+      "Equipped": "Equipped (activates any ActiveEffects)",
+      "Source": "Source",
+      "PriceSm": "Price in silver",
+      "PriceSmHint": "Normalized to silver coins. ⚠ The cc/sc/gc exchange rate isn't documented in the source material — see CONFIG.DODE.coinToSilver.",
+      "TotalWeight": "Total weight"
+    },
+    "Source": {
+      "Book": "Source book",
+      "Page": "Page",
+      "Label": "Source"
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "Monster/NPC",
+      "handlare": "Merchant"
+    },
+    "Item": {
+      "fardighet": "Skill",
+      "ras": "Race",
+      "yrke": "Profession",
+      "vapen": "Weapon",
+      "rustning": "Armor",
+      "besvarjelse": "Spell",
+      "formaga": "Ability",
+      "utrustning": "Equipment",
+      "minibesvarjelse": "Mini-spell"
+    }
+  }
+}

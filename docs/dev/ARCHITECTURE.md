@@ -150,6 +150,8 @@ sheet shows skill.effectiveTotal"]
 
 Backlog 7 is only half-closed by this: `formaga` and `utrustning` are wired into Pipeline B because they're the two source types that actually have content today. `ras`/`yrke` could carry the same `skillModifiers` field the day something like Skogsalv's +10 CL Gömma sig needs it — no further architecture required, just the field and the content.
 
+⚠ Not yet diagrammed as its own pipeline (pre-existing gap, not new tonight): a **parallel, structurally-identical** mechanism, `statModifiers` (`{stat: "hp.max"|"psy.max", operation, value}`), consumed by `actor-character.mjs`'s `#applyStatModifiers` — same item-scan-plus-`equipped`/`activationSeconds`-gate shape as Pipeline B above, just targeting a derived resource field instead of a named skill's total. `item-formaga.mjs` has carried it since the ras/yrke abilities pass (backlog 70/71); `item-utrustning.mjs` gained it 2026-08-22 (a wearable "+3 PSY" staff, live-demo loot) — the consumer already scanned `utrustning`-typed items, only the schema field was missing.
+
 ---
 
 ## 4. From table row to formaga item
@@ -211,7 +213,7 @@ sequenceDiagram
 |---|---|
 | `scripts/data/actor-character.mjs` | the two skillModifier getters; attribute bonus aggregation |
 | `scripts/data/item-formaga.mjs` | `skillModifiers` field, "always active" source |
-| `scripts/data/item-utrustning.mjs` | `skillModifiers`, `chargesRemaining`, `activationSeconds`, `consumable`, `effectChanges` |
+| `scripts/data/item-utrustning.mjs` | `skillModifiers`, `statModifiers` (2026-08-22 — hp.max/psy.max add/multiply, same shape and consumer as `item-formaga.mjs`'s, see below), `chargesRemaining`, `activationSeconds`, `consumable`, `effectChanges` |
 | `scripts/documents/item.mjs` | `DoDeItem` — equip-activation timing hook |
 | `scripts/documents/dode-active-effect.mjs` | `DoDeActiveEffect` — Pipeline A's equip/condition gate |
 | `scripts/documents/actor.mjs` | `rollSkill` (reads Pipeline B), `consumeItem`, `castSpell` |

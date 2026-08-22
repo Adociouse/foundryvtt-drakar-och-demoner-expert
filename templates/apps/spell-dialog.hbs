@@ -1,0 +1,47 @@
+<div class="dode-spell-dialog-body">
+  {{#if noSpells}}
+    <p class="hint">⚠ Inga besvärjelser på den här rollpersonen.</p>
+  {{else}}
+    <label class="field">Besvärjelse
+      <select name="itemId">
+        {{#each spellOptions}}
+          <option value="{{this.key}}" data-s-value="{{this.sValue}}" {{#if (eq this.key ../itemId)}}selected{{/if}}>
+            {{this.label}}
+          </option>
+        {{/each}}
+      </select>
+    </label>
+
+    {{#if itemDescription}}<div class="spell-description">{{{itemDescription}}}</div>{{/if}}
+
+    <label class="field">Effektgrad (E)
+      <input type="number" name="effektgrad" min="1" value="1" />
+    </label>
+    <p class="cl-preview">CL {{sValue}}</p>
+    {{#if isSplit}}<p class="hint split-preview"></p>{{/if}}
+    <p class="hint psy-hint">PSY: {{psyValue}} / {{psyMax}}</p>
+
+    <section class="spell-target {{#if multiTarget}}multi{{/if}}">
+      {{#if needsTargets}}
+        {{#if splitNote}}<p class="hint">{{splitNote}}</p>{{/if}}
+        {{#if targets.length}}
+          <span class="target-label">{{#if multiTarget}}Mål ({{targets.length}}){{else}}Mål{{/if}}</span>
+          <ul class="target-list">
+            {{#each targets}}
+              <li><img src="{{this.img}}" alt="" /><span class="target-name">{{this.name}}</span></li>
+            {{/each}}
+          </ul>
+          {{#if tooManyTargetsNote}}<p class="hint">{{tooManyTargetsNote}}</p>{{/if}}
+        {{else}}
+          <p class="hint">⚠ Inget mål valt — hovra en token på kartan och tryck <strong>T</strong> för att sikta på den{{#if multiTarget}} (flera: Shift-klick eller dra en markeringsruta){{/if}}, öppna sedan om dialogen.</p>
+        {{/if}}
+      {{else}}
+        <p class="hint">{{selfTargetNote}}</p>
+      {{/if}}
+    </section>
+
+    <button type="button" data-action="submitCast" class="submit-cast">
+      <i class="fa-solid fa-hand-sparkles"></i> Kasta
+    </button>
+  {{/if}}
+</div>
