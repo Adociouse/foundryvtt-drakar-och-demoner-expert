@@ -233,7 +233,7 @@
   </header>
   <ol class="skill-list">
     {{#each gear as |entry|}}
-      <li class="skill-row" data-item-id="{{entry.item.id}}">
+      <li class="skill-row draggable" data-item-id="{{entry.item.id}}">
         <a data-action="editItem" class="skill-name">{{entry.item.name}}</a>
         {{#if entry.isVapen}}
           <span class="skill-fv">{{entry.item.system.damage}}</span>

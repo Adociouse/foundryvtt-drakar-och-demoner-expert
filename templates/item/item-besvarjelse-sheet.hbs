@@ -13,6 +13,12 @@
   <label>Räckvidd <input type="text" name="system.range" value="{{system.range}}" /></label>
   <label class="checkbox-field"><input type="checkbox" name="system.ritual" {{checked system.ritual}} /> Ritual</label>
   <label class="checkbox-field"><input type="checkbox" name="system.kvick" {{checked system.kvick}} /> Kvick</label>
+  {{!-- SB s.7: en magisk kodex för just denna besvärjelse krävs för att kunna
+        ENSAMTRÄNA den. Träning med lärare kräver ingen kodex. --}}
+  <label class="checkbox-field" title="Krävs för ensamträning av besvärjelsen (SB s.7)">
+    <input type="checkbox" name="system.hasCodex" {{checked system.hasCodex}} />
+    Magisk kodex tillgänglig
+  </label>
   <label>Effektvaraktighet (stridsrundor)
     <input type="number" name="system.spellDuration" value="{{system.spellDuration}}" min="0" />
   </label>
@@ -37,9 +43,3 @@
   {{editor system.description target="system.description" button=true engine="prosemirror"}}
 </section>
 </div>
-  {{!-- SB s.7: en magisk kodex för just denna besvärjelse krävs för att kunna
-        ENSAMTRÄNA den. Träning med lärare kräver ingen kodex. --}}
-  <label class="checkbox-field" title="Krävs för ensamträning av besvärjelsen (SB s.7)">
-    <input type="checkbox" name="system.hasCodex" {{checked system.hasCodex}} />
-    Magisk kodex tillgänglig
-  </label>

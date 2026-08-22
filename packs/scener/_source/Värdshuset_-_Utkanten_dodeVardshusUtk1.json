@@ -20,6 +20,66 @@
     "alpha": 0.2,
     "color": "#000000"
   },
+  "tokens": [
+    {
+      "_id": "lassloPersonTok1",
+      "name": "Lasslo Värdshusvärden",
+      "actorId": "dodeLassloPers01",
+      "actorLink": false,
+      "x": 592,
+      "y": 384,
+      "width": 1,
+      "height": 1,
+      "texture": {
+        "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "fit": "contain",
+        "scaleX": 1,
+        "scaleY": 1,
+        "tint": "#ffffff",
+        "alphaThreshold": 0.75
+      },
+      "sight": {
+        "enabled": false
+      },
+      "disposition": 1,
+      "displayName": 30,
+      "displayBars": 30,
+      "hidden": false,
+      "flags": {},
+      "_key": "!scenes.tokens!dodeVardshusUtk1.lassloPersonTok1"
+    },
+    {
+      "_id": "lassloBardiskTok1",
+      "name": "Bar",
+      "actorId": "dodeLassloVard10",
+      "actorLink": true,
+      "x": 592,
+      "y": 448,
+      "width": 1,
+      "height": 1,
+      "texture": {
+        "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+        "anchorX": 0.5,
+        "anchorY": 0.5,
+        "fit": "contain",
+        "scaleX": 1,
+        "scaleY": 1,
+        "tint": "#ffffff",
+        "alphaThreshold": 0.75
+      },
+      "sight": {
+        "enabled": false
+      },
+      "disposition": 1,
+      "displayName": 30,
+      "displayBars": 0,
+      "hidden": false,
+      "flags": {},
+      "_key": "!scenes.tokens!dodeVardshusUtk1.lassloBardiskTok1"
+    }
+  ],
   "initial": {
     "x": 512,
     "y": 512,

@@ -14,9 +14,12 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
     classes: ["dode", "sheet", "actor", "npc"],
     position: { width: 640, height: 760 },
     window: { resizable: true },
-    // Naturliga items (klor, bett, tjockt skinn — natural:true) exkluderas
-    // ur selektorn helt, så Foundry aldrig ens fäster en dragstart-lyssnare
-    // på den raden — de är inte lootbara. Beslut 2026-08-19, se item-vapen.mjs.
+    // ⚠ Denna array läses ALDRIG av installerad Foundry-version — se samma
+    // fynd/kommentar i actor-character-sheet.mjs (ActorSheetV2s `_dragDrop`-
+    // getter hårdkodar ".draggable"). Den faktiska drag-spärren för naturliga
+    // items (klor, bett, tjockt skinn — natural:true, inte lootbara, beslut
+    // 2026-08-19) sker i stället genom att npc-sheet.hbs bara sätter
+    // `class="draggable"` på icke-naturliga rader — se dess `{{#if entry.isNatural}}`.
     dragDrop: [{ dragSelector: "[data-item-id]:not(.natural-item)", dropSelector: "form" }],
     actions: {
       rollAttack: DoDENpcSheet.#onRollAttack,
@@ -113,6 +116,17 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
   static async #onRequestLoot(event, target) {
     const item = DoDENpcSheet.#itemFromEvent(this.actor, target);
     if (item) await requestLoot(this.actor, item.id, game.user.character);
+  }
+
+  /**
+   * Samma motivering och fynd som actor-character-sheet.mjs#_canDragStart —
+   * ApplicationV2:s bas-implementation defaultar till `game.user.isGM`, vilket
+   * annars tyst skulle blockera drag även för en spelare som äger en NPC-typad
+   * aktör (t.ex. en framtida stridsföljeslagare).
+   * @override
+   */
+  _canDragStart(selector) {
+    return game.user.isGM || this.actor.isOwner;
   }
 
   /** Samma mönster som actor-character-sheet.mjs#_onDrop — kopierar (loot är GM:s manuella radering, inte en flytt). */

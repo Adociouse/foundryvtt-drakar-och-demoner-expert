@@ -6,8 +6,9 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 
 **System id:** `drakar-och-demoner-expert`
 **Foundry compatibility:** minimum v12, verified against v14
+**Client language:** Swedish (`lang/sv.json`) and English (`lang/en.json`) UI translations are both available in Foundry's language picker.
 
-> **Note:** the game content (compendiums, rules) is in Swedish only — this is a translation of the project README, not of the system itself. See "Known limitations" below.
+> **Note:** the game content (compendiums, rules) is in Swedish only, regardless of the chosen client language — this is a translation of the project README, not of the system's game data. See "Known limitations" below.
 
 ## Status
 
@@ -74,13 +75,13 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 
 ### Known limitations
 
-- **GM effects' skillMod/CL-mod/recovery-rate layer doesn't show as a token icon.** The GM effects window (`scripts/apps/gm-effects.mjs`) edits actor/scene/world effects stored as plain data in a Setting/flag, not as real `ActiveEffect` documents (embedded skill Items can't be AE targets, see code comments) — they affect the right number in calculations but carry no visual marker on the token. Genuine `ActiveEffect`-based buffs (`game.dode.SceneEffects`, equipment/abilities) DO get a token icon if the caller supplies an `img`, and DoDE's two registered conditions (Arm Disabled/Hand Occupied) show automatically via Foundry's own Token HUD — but periodic effects like poison also have no icon of their own yet, just a row in the GM effects window's actor section.
+- **GM effects' skillMod/CL-mod/recovery-rate layer doesn't show as a token icon.** The GM effects window (`scripts/apps/gm-effects.mjs`) edits actor/scene/world effects stored as plain data in a Setting/flag, not as real `ActiveEffect` documents (embedded skill Items can't be AE targets, see code comments) — they affect the right number in calculations but carry no visual marker on the token. Genuine `ActiveEffect`-based buffs (`game.dode.SceneEffects`, equipment/abilities) DO get a token icon if the caller supplies an `img`, and DoDE's two registered conditions (Arm Disabled/Hand Occupied) show automatically via Foundry's own Token HUD. Periodic effects (poison/fire/bleeding) auto-sync to Foundry's matching core status icons (`poison`/`burning`/`bleeding`) on the Token HUD — other periodic-effect sources still only show as a row in the GM effects window's actor section.
 - **The weapon roster covers 23 of the Player's Handbook's ~52 weapons.** The weapon-group system is built for the full table, but not every entry has been transcribed into the compendium yet.
 - **Most spells lack their own icon** — 214 of 222 show their magic school's symbol instead of unique art.
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
 - **The Svartfolk (Dark Folk) supplement hasn't been started.**
 - **Heroic abilities (HH p.20/46-48) can't be spent yet.** The heroic-deeds table (HH p.6-7) already rolls during character creation and correctly accumulates heroic points as a currency — but the separate 18-row table that currency is meant to be spent against, plus a UI for doing so, aren't built.
-- No English localization of the game content itself — only `lang/sv.json` exists, so the system's UI and compendiums are Swedish-only regardless of this README's language.
+- The UI chrome has an English translation (`lang/en.json`), but the game content itself (compendiums, rules text) is Swedish-only regardless of the chosen client language.
 - See code comments marked `⚠` for specific, deliberately flagged rule deviations or simplifications.
 
 ## Installation

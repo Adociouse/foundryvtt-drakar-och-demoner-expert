@@ -73,4 +73,17 @@ export async function applyLoot({ corpseUuid, itemId, looterUuid }) {
   await ChatMessage.create({
     content: `<div class="dode-chat-card"><p>🎒 <strong>${looter.name}</strong> plundrade <strong>${item.name}</strong> från ${corpse.name}.</p></div>`
   });
+
+  // Motsvarigheten till "dead" → Observer-hooken i dode.mjs: när det sista
+  // lootbara föremålet är taget tappar liket sin Observer-behörighet igen,
+  // så det slutar synas i alla spelares Actors-sidopanel. `handlare`-butiker
+  // rörs aldrig här (dit kommer man aldrig via applyLoot). Ingen isGM-koll
+  // behövs — anroparen (godkännande-hooken eller direktvägen) har redan
+  // skrivbehörighet på `corpse` för att ha kommit hit över huvud taget.
+  if (corpse.type === "npc") {
+    const stillLootable = corpse.items.some((i) => ["vapen", "rustning", "utrustning"].includes(i.type));
+    if (!stillLootable && (corpse.ownership?.default ?? 0) >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER) {
+      await corpse.update({ "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE });
+    }
+  }
 }

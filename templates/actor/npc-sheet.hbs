@@ -71,7 +71,7 @@
   </header>
   <ol class="skill-list">
     {{#each gear as |entry|}}
-      <li class="skill-row {{#if entry.isNatural}}natural-item{{/if}}" data-item-id="{{entry.item.id}}">
+      <li class="skill-row {{#if entry.isNatural}}natural-item{{else}}draggable{{/if}}" data-item-id="{{entry.item.id}}">
         <a data-action="editItem" class="skill-name">{{entry.item.name}}</a>
         {{#if entry.isNatural}}
           <i class="fa-solid fa-paw" title="Naturligt — inte plockbart/lootbart"></i>

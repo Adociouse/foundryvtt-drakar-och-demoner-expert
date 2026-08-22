@@ -1,8 +1,8 @@
 {
-  "name": "Lasslo Värdshusvärden",
+  "name": "Bar",
   "type": "handlare",
   "_id": "dodeLassloVard10",
-  "img": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/npc/bardisk.png",
   "system": {
     "shopName": "Den Trötta Draken",
     "greeting": "Stig på, stig på! Elden brinner, ölet är kallt och rummen är rena — mestadels.",
@@ -16,13 +16,13 @@
     }
   },
   "prototypeToken": {
-    "name": "Lasslo Värdshusvärden",
+    "name": "Bar",
     "displayName": 30,
     "actorLink": true,
     "width": 1,
     "height": 1,
     "texture": {
-      "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/bardisk.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -1136,7 +1136,7 @@
       "system": {
         "category": "lagerutrustning",
         "quantity": 1,
-        "weight": 1.0,
+        "weight": 1,
         "price": 60,
         "priceUnit": "sm",
         "priceNote": "",
@@ -1175,7 +1175,7 @@
       "system": {
         "category": "lagerutrustning",
         "quantity": 1,
-        "weight": 1.0,
+        "weight": 1,
         "price": 125,
         "priceUnit": "sm",
         "priceNote": "",

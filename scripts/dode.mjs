@@ -365,31 +365,48 @@ Hooks.once("init", () => {
       const weapon = actor.items.find((i) => i.type === "vapen" && i.name === weaponOrAttackName);
       if (!weapon) return ui.notifications.warn(`${actor.name} har inget vapen som heter "${weaponOrAttackName}".`);
       return game.dode.openAttackDialog(actor, { weapon });
+    },
+    // Samma mönster som declareAttackMacro ovan, för besvärjelser (se
+    // hotbarDrop-hooken nedan) — namn slås upp färskt mot vilken token som
+    // just då är vald, inte den aktör som råkade vara vald vid dragtillfället.
+    declareSpellCastMacro(spellName) {
+      const actor = ChatMessage.getSpeakerActor(ChatMessage.getSpeaker());
+      if (!actor) return ui.notifications.warn("Ingen token vald.");
+      const spell = actor.items.find((i) => ["besvarjelse", "minibesvarjelse"].includes(i.type) && i.name === spellName);
+      if (!spell) return ui.notifications.warn(`${actor.name} kan inte "${spellName}".`);
+      return game.dode.openSpellDialog(actor, { item: spell });
     }
   };
 });
 
 /**
- * Dra ett vapen-item till hotbaren → skapar ett makro som anfaller med det
- * vapnet, löst mot vilken token som är vald VID KLICKTILLFÄLLET (inte
- * dragtillfället) — se game.dode.declareAttackMacro ovan. Samma mönster
- * dnd5e:s hotbarDrop-hantering redan bevisat (dnd5e.mjs, `create5eMacro`),
- * byggt på ren Foundry-kärn-API (`hotbarDrop`-hooken, `ChatMessage.getSpeaker`)
- * — inget dnd5e-specifikt lånas in.
+ * Dra ett vapen- ELLER besvärjelse-item till hotbaren → skapar ett makro som
+ * anfaller/kastar med det, löst mot vilken token som är vald VID
+ * KLICKTILLFÄLLET (inte dragtillfället) — se game.dode.declareAttackMacro/
+ * declareSpellCastMacro ovan. Samma mönster dnd5e:s hotbarDrop-hantering
+ * redan bevisat (dnd5e.mjs, `create5eMacro`), byggt på ren Foundry-kärn-API
+ * (`hotbarDrop`-hooken, `ChatMessage.getSpeaker`) — inget dnd5e-specifikt
+ * lånas in.
  *
  * ⚠ Registreras i `ready`, INTE `init` — till skillnad från `CONFIG.ui.combat`
  * fyrar `hotbarDrop` bara senare vid ett användarklick, så tidpunkten spelar
  * ingen roll för korrekthet (samma resonemang dnd5e:s egen kodkommentar ger).
  * Egen `ready`-hook, inte den GM-låsta nedan — en spelare ska kunna dra sitt
- * eget vapen till sin egen hotbar utan att vara SL.
+ * eget vapen/besvärjelse till sin egen hotbar utan att vara SL.
  */
 Hooks.once("ready", () => {
+  const HOTBAR_MACRO_TYPES = {
+    vapen: "declareAttackMacro",
+    besvarjelse: "declareSpellCastMacro",
+    minibesvarjelse: "declareSpellCastMacro"
+  };
   Hooks.on("hotbarDrop", (bar, data, slot) => {
     if (data.type !== "Item") return;
     (async () => {
       const item = await Item.implementation.fromDropData(data);
-      if (!item || item.type !== "vapen") return; // låt kärnans generiska fallback ta över
-      const command = `game.dode.declareAttackMacro(${JSON.stringify(item.name)})`;
+      const fn = HOTBAR_MACRO_TYPES[item?.type];
+      if (!fn) return; // låt kärnans generiska fallback ta över
+      const command = `game.dode.${fn}(${JSON.stringify(item.name)})`;
       const macro = game.macros.find((m) => m.name === item.name && m.command === command && m.isAuthor)
         ?? await Macro.create({ name: item.name, type: "script", img: item.img, command, author: game.user.id });
       await game.user.assignHotbarMacro(macro, slot);
@@ -578,6 +595,40 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
 });
 
 /**
+ * NPC-behörighetsläckan: en spelare som fick Observer (krävs för Plundra-
+ * knappen, se loot.mjs) ser inte bara det öppnade liket — varje `npc`-aktör
+ * med `ownership.default >= LIMITED` listas dessutom i ALLA spelares Actors-
+ * sidopanel (Foundrys egen `ClientDocument#visible`-getter, kärn-API, testar
+ * bara `testUserPermission(user, "LIMITED")` — ingen känsla för "levande
+ * fiende" kontra "redan plundrat lik"). Johan, skärmdump 2026-08-22: en
+ * spelare såg "Skelett (togad)", "Vaktskelett (fjällpansar)" och "Malakor
+ * Benbrytare" listade i sin egen meny — döda motståndare som SKA gå att
+ * plundra, men som inte ska stå namngivna i spelarens sidopanel förrän de
+ * faktiskt är besegrade, och inte längre efter allt är plundrat.
+ *
+ * Lösning, Johans uttryckliga val: `npc`-aktörer föds med `default:0`
+ * (osynliga), får `default:2` (Observer) AUTOMATISKT i samma stund `dead`-
+ * statusen sätts (samma `toggleStatusEffect("dead", ...)`-anrop striden
+ * redan använder — se auto-städningshooken ovan), och tappar den igen så
+ * fort inget lootbart föremål återstår (se loot.mjs#applyLoot). `handlare`-
+ * aktörer (riktiga butiker, t.ex. "Torvald Krögaren — Bardisk") räknas INTE
+ * hit — en butik ska gå att besöka när som helst, inte bara efter ett dråp.
+ *
+ * `toggleStatusEffect` skapar en riktig ActiveEffect med `statuses:["dead"]`
+ * — `createActiveEffect` är alltså rätt krok, samma mekanism som redan
+ * dokumenterats i dode.mjs. Bara GM:s klient skriver (samma engångs-skydd
+ * som `deleteActiveEffect`-hooken nedan).
+ */
+Hooks.on("createActiveEffect", (effect) => {
+  if (!game.user.isGM) return;
+  const actor = effect.parent;
+  if (!actor || actor.documentName !== "Actor" || actor.type !== "npc") return;
+  if (!effect.statuses?.has("dead")) return;
+  if ((actor.ownership?.default ?? 0) >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER) return;
+  actor.update({ "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER });
+});
+
+/**
  * Berätta när en besvärjelses effekt tar slut — live-fynd 2026-08-21 (Johan:
  * "if he is no longer blind the icon should vanish and a text message state
  * Spell effect blindness expired?"). Utan detta försvinner statusikonen/
@@ -617,6 +668,35 @@ Hooks.on("canvasReady", (canvas) => {
   if (!ghosts.length) return;
   const names = ghosts.map((t) => t.name).join(", ");
   ui.notifications.warn(`Scenen "${canvas.scene.name}" har ${ghosts.length} spöktoken(s) utan kopplad aktör: ${names}. Kontrollera/städa innan striden börjar.`, { permanent: true });
+});
+
+/**
+ * Besegrade NPC-token städas automatiskt bort vid scenbyte (load/unload) —
+ * Johans beslut 2026-08-22, efter att döda skelett/Malakor-tokens legat kvar
+ * på "Värdshuset — Utkanten" efter en avslutad strid ("Looks like you have
+ * ghosts.. thought we said we always clear the map on every load/unload
+ * after a fight?"). Nyckeln `updateScene`s `active`-fält fyrar EN gång per
+ * scenbyte, både för scenen som lämnas (`active:false`) och den som blir
+ * aktiv (`active:true`) — att sopa vid BÅDA hållen täcker "load" och
+ * "unload" utan att behöva jaga ett separat unload-event Foundry inte har.
+ *
+ * Bara `type:"npc"` — en spelares egen rollperson kan bära `dead`-statusen
+ * av dramatiska skäl utan att deras token ska försvinna från kartan.
+ * `dead`-statusen är samma Foundry-kärnstatus striden redan sätter via
+ * `actor.toggleStatusEffect("dead", ...)` på VERKLIGT besegrade NPC:er.
+ *
+ * Bara GM:s klient utför raderingen (annars skulle varje ansluten spelare
+ * försöka radera samma tokens en gång var) — matchar `deleteActiveEffect`-
+ * hooken ovan.
+ */
+Hooks.on("updateScene", async (scene, changes) => {
+  if (!game.user.isGM) return;
+  if (!("active" in changes)) return;
+  const defeated = scene.tokens.filter((t) => t.actor?.type === "npc" && t.actor?.statuses?.has("dead"));
+  if (!defeated.length) return;
+  const names = defeated.map((t) => t.name).join(", ");
+  await scene.deleteEmbeddedDocuments("Token", defeated.map((t) => t.id));
+  ui.notifications.info(`Rensade ${defeated.length} besegrad(e) NPC-token från "${scene.name}": ${names}.`);
 });
 
 /**

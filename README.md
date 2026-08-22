@@ -6,6 +6,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 
 **System-id:** `drakar-och-demoner-expert`
 **Foundry-kompatibilitet:** minimum v12, verifierad mot v14
+**Klientspråk:** svenska (`lang/sv.json`) och engelska (`lang/en.json`) — spelinnehållet (kompendier, regeltexter) är på svenska oavsett vald klientspråk.
 
 ## Status
 
@@ -72,13 +73,12 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 
 ### Kända begränsningar
 
-- **GM-effekternas skillMod/CL-mod/läkningstakt-lager syns inte som ikoner på token.** GM-effektfönstret (`scripts/apps/gm-effects.mjs`) redigerar person-/scen-/världseffekter lagrade som ren data i en Setting/flagga, inte som riktiga `ActiveEffect`-dokument (embedded färdighets-Items kan inte vara AE-mål, se kodkommentarer) — de påverkar rätt siffra i beräkningarna men ger ingen visuell markering på tokenet. Genuina `ActiveEffect`-baserade buffar (`game.dode.SceneEffects`, utrustning/förmågor) FÅR en ikon på tokenet om anroparen anger en `img`, och DoDE:s två registrerade villkor (Arm obrukbar/Hand upptagen) syns automatiskt via Foundrys egen Token HUD — men periodiska effekter som gift har heller ingen egen ikon i dagsläget, bara en rad i GM-effektfönstrets aktörssektion.
+- **GM-effekternas skillMod/CL-mod/läkningstakt-lager syns inte som ikoner på token.** GM-effektfönstret (`scripts/apps/gm-effects.mjs`) redigerar person-/scen-/världseffekter lagrade som ren data i en Setting/flagga, inte som riktiga `ActiveEffect`-dokument (embedded färdighets-Items kan inte vara AE-mål, se kodkommentarer) — de påverkar rätt siffra i beräkningarna men ger ingen visuell markering på tokenet. Genuina `ActiveEffect`-baserade buffar (`game.dode.SceneEffects`, utrustning/förmågor) FÅR en ikon på tokenet om anroparen anger en `img`, och DoDE:s två registrerade villkor (Arm obrukbar/Hand upptagen) syns automatiskt via Foundrys egen Token HUD. Periodiska effekter (gift/eld/blödning) synkas automatiskt mot Foundrys motsvarande kärn-statusikoner (`poison`/`burning`/`bleeding`) på Token HUD — övriga periodeffekt-källor visas fortfarande bara som en rad i GM-effektfönstrets aktörssektion.
 - **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
 - **De flesta besvärjelser saknar egen bildikon** — 214 av 222 visar sin magiskolas symbol i stället för unik konst.
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**
 - **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.
-- Ingen engelsk lokalisering — bara `lang/sv.json`.
 - Se kodkommentarer märkta `⚠` för specifika, medvetet flaggade regelavvikelser eller förenklingar.
 
 ## Installation

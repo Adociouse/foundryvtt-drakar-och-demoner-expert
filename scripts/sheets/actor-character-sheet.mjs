@@ -20,6 +20,15 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // inte en spärr.
     position: { width: 900, height: 1000 },
     window: { resizable: true },
+    // ⚠ Denna array läses ALDRIG av installerad Foundry-version — ActorSheetV2s
+    // egen `_dragDrop`-getter (foundry.mjs) hårdkodar `dragSelector: ".draggable"`
+    // och ignorerar `options.dragDrop` helt. Live-fynd 2026-08-22 (Johan: "row
+    // dolk or eld does not seem selectable or dragable") — draget hade ALDRIG
+    // fungerat för någon, GM inkluderat, oavsett `_canDragStart`-behörighet.
+    // Den faktiska drag-aktiveringen sker via `class="draggable"` på raden i
+    // character-sheet.hbs, inte via denna config. Kvar här bara som dokumentation
+    // av vad som INTE styr draget — ta inte bort utan att först dubbelkolla att
+    // en nyare Foundry-version inte återinför array-baserad config.
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: "form" }],
     actions: {
       rollSkill: DoDECharacterSheet.#onRollSkill,
@@ -855,6 +864,20 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (!item) return;
     const { default: DoDESpellDialog } = await import("../apps/spell-dialog.mjs");
     new DoDESpellDialog(this.actor, { item }).render(true);
+  }
+
+  /**
+   * ApplicationV2:s egen bas-`_canDragStart` (foundry.mjs) defaultar till
+   * `game.user.isGM` — okommenterat, lätt att missa. Utan denna override kan
+   * INGEN spelare dra NÅGOT från sitt eget ägda ark (vapen till hotbaren,
+   * utrustning till en annan aktör) — bara SL kan, eftersom draget aldrig
+   * ens startar (`DragDrop#bind` sätter `draggable` bara om detta returnerar
+   * sant). Live-fynd 2026-08-22: Johan rapporterade att varken namn, ikon
+   * eller shift/ctrl-drag fungerade från Sylvies eget, ägda ark.
+   * @override
+   */
+  _canDragStart(selector) {
+    return game.user.isGM || this.actor.isOwner;
   }
 
   /** @override */

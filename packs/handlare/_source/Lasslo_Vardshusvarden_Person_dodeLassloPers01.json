@@ -1,0 +1,88 @@
+{
+  "name": "Lasslo Värdshusvärden",
+  "type": "npc",
+  "_id": "dodeLassloPers01",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 10
+      },
+      "sto": {
+        "value": 12
+      },
+      "fys": {
+        "value": 11
+      },
+      "smi": {
+        "value": 9
+      },
+      "int": {
+        "value": 11
+      },
+      "psy": {
+        "value": 10
+      },
+      "kar": {
+        "value": 13
+      }
+    },
+    "hp": {
+      "value": 12,
+      "max": 12
+    },
+    "abs": 0,
+    "damageBonus": "",
+    "movement": 8,
+    "moral": 12,
+    "count": "1",
+    "habitat": "Den Trötta Draken, Utkanten",
+    "rarity": "Unik",
+    "skills": "Köpslå, Lyssna, Bluffa — en värdshusvärd som hört allt två gånger",
+    "attacks": [],
+    "special": "<p>Fridsam värdshusvärd — inga anfall som standard. Lägg till en anfallsrad här om en scen kräver att Lasslo försvarar sig.</p>",
+    "biography": "<p>Samma godmodiga Lasslo som driver Den Trötta Draken (se den separata handlar-aktören för hans butiksdisk och lager). Det här är hans PERSON-token — placera den bakom disken för dialog/roleplay, medan butiksdisk-token sköter köp.</p>"
+  },
+  "prototypeToken": {
+    "name": "Lasslo Värdshusvärden",
+    "displayName": 30,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "sight": {
+      "enabled": false
+    },
+    "disposition": 1,
+    "displayBars": 30
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787340000000,
+    "modifiedTime": 1787340000000,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!dodeLassloPers01"
+}
