@@ -1233,6 +1233,38 @@ Mappdokument använder `!folders!<id>` och posterna pekar på dem via sitt `fold
 
 ---
 
+### 8.7 Trelagers NPC-/aktörsarkitektur för flera äventyr i samma kampanj — designförslag (2026-08-22)
+
+> **PROPOSAL, inte implementerat.** Skriven på Johans begäran när kampanjmodulen "De brutna sigillens krönika" börjar växa förbi sitt första äventyr (fas 7.1 Dimön klart, fas 7.2+ fler äventyr pågår) — §8.3 löste bara TVÅ nivåer ("systemet" kontra "ett enskilt äventyr"), och saknar en plats för figurer som lever LÄNGRE än ett äventyr men INTE är generiska nog för systemet.
+
+**Bakgrund:** Johans exakta ord fångar tre skilda livslängder som redan finns eller kommer behövas: *"Some NPCs will follow the whole campaign. Some will be between campaigns. monsters from monster book can pop out any time."* §8.3 hanterar redan ändarna (systemgenerisk `monster`/`handlare`, och ett enskilt äventyres `Adventure`-dokument) men har ingen plats för en återkommande skurk, beskyddare, eller hemvist-figur som en spelgrupp möter i äventyr 2 och sedan igen i äventyr 4.
+
+**Avgörande testfråga för var ett innehåll hör hemma:** *skulle det fortfarande vara meningsfullt i en SL:s värld om hen aldrig installerar någon kampanjmodul alls?* Ett "ja" betyder Nivå 1 (systemet); ett "nej, men det överlever flera äventyr inom SAMMA kampanj" betyder Nivå 2; ett "nej, bara det HÄR äventyret" betyder Nivå 3.
+
+#### Tre nivåer
+
+| Nivå | Var det bor | Vad | Exempel | Importlivscykel |
+|---|---|---|---|---|
+| **1 — System** | Det här repot (`packs/monster`, `packs/handlare`, `packs/scener`) | Sant kampanjoberoende innehåll — mekaniskt återanvändbara varelser, generiska figurer, OCH namngivna PLATSER som ska finnas i varje installation oavsett vilken kampanj som spelas | Monsterbokens 14 varelser, Lasslo Värdshusvärden, hela Utkanten-scenen | Skeppas med systemet, alltid närvarande |
+| **2 — Kampanj** (NY) | Kampanjmodulens eget repo, EGET pack (t.ex. `packs/kampanj-figurer`), INTE ett `Adventure`-dokument | Figurer som överlever ett enskilt äventyr men bara är meningsfulla inom DEN HÄR kampanjen — återkommande skurkar, beskyddare, hemvist-figurer mellan äventyr | En Dimön-skurk som dyker upp igen i äventyr 3 | Importeras EN gång, behålls genom hela kampanjen |
+| **3 — Äventyr** | Kampanjmodulens `Adventure`-pack (redan §8.3/§8.6) | Engångsfigurer, scenspecifikt innehåll som hör till ETT äventyrs handling | De flesta av Dimöns NPC:er/monster | Importeras/nollställs som EN atomisk enhet per äventyr |
+
+**Utkanten som gränsdragningsexempel (Johan, 2026-08-22): "Utkanten is an exception as it comes with the system and always will be there."** Först ett skenbart undantag — det ÄR trots allt en specifik PLATS, inte en abstrakt spelmekanik som ett monster — men testfrågan löser det rent: en färsk installation utan någon kampanjmodul alls ska fortfarande ha en fungerande startby att spela i, så Utkanten hör hemma i Nivå 1 tillsammans med `monster`/`handlare`, inte i Nivå 2 eller 3. Skiljelinjen är alltså inte "generiskt kontra specifikt" utan **"skulle det fortfarande vara meningsfullt utan någon kampanjmodul installerad."** En Dimön-beskyddare eller återkommande skurk klarar inte det testet (meningslös utan just den kampanjen) — Nivå 2.
+
+**Bokkälla för kampanjinnehåll — modulen registrerar sina egna, systemet förblir orört.** `CONFIG.DODE.books` (`config.mjs`) listar bara officiella regelböcker idag (RP, SL, SB, KH, HH, MB1, MB2, m.fl.) — att hårdkoda ett äventyrsnamn där hade brutit §8.3 princip 3 ("systemet bär bara det varje kampanj delar"), eftersom det skulle förorena systemets config för varje annat bord som kör en ANNAN kampanj på samma system. Lösningen är standard Foundry-modulutökningsbarhet: kampanjmodulen lägger till sina egna bokposter i `CONFIG.DODE.books` via sin EGEN `Hooks.once("init", ...)` (t.ex. `Object.assign(CONFIG.DODE.books, { dimon: { label: "Äventyret Dimön", short: "Dimön" } })`) — samma mönster vilken Foundry-modul som helst redan använder för att utöka värdsystemets CONFIG, inget nytt att uppfinna. `source.book`-fältet (redan byggt, se `fields-source.mjs`) fungerar sedan identiskt för kampanjinnehåll som för officiella böcker, utan schemaändring.
+
+**⚠ Känd fälla vid gränsen mellan nivåerna — samma spöktoken-bugg som redan hittats för Utkanten/Lasslo, men på en ny yta.** En Nivå 3-scen (ett äventyrs egen scen) som placerar en token länkad till en Nivå 2-aktör (kampanjfiguren) löser INTE tokenreferensen om bara äventyret importeras — exakt samma mekanism som redan dokumenterats i §2:s "Generisk Utkanten-scen"-rad (`game.actors.importFromCompendium`/`game.scenes.importFromCompendium` måste köras för BÅDA sidorna, Foundry löser inte det automatiskt vid ett enda `Adventure`-import). Kampanjmodulens README måste säga: **importera `kampanj-figurer` FÖRE första äventyret**, annars ett spöktoken första gången en återkommande figur dyker upp i en scen.
+
+**Föreslagen arbetsordning (inte påbörjad):**
+1. Skapa `packs/kampanj-figurer` (eller motsvarande namn) i `de-brutna-sigillens-kronika`-modulens repo, `Actor`-typ, samma `ownership`-mönster som systemets `handlare`/`monster` (GM-only som standard, per figur).
+2. Modulens egen `Hooks.once("init", ...)` som utökar `CONFIG.DODE.books` med kampanjens/äventyrens bokposter.
+3. Flytta ev. redan identifierade återkommande Dimön-figurer dit när fas 7.2 faktiskt introducerar en figur som återkommer.
+4. Dokumentera importordningen (kampanj-figurer FÖRE äventyr) i modulens README.
+
+Ingen kod i DETTA repo (systemet) berörs av stegen ovan — allt hör hemma i kampanjmodulens eget repo, i linje med §8.3 princip 3.
+
+---
+
 ## 9. Stridssystemets arkitektur - designforslag (2026-07-29)
 
 Johans fraga: *"check our complete battle system flow architecture and how we
