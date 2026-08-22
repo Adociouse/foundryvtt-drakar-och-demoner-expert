@@ -60,7 +60,7 @@
     "skills": "",
     "biography": "",
     "source": {
-      "book": "mb1",
+      "book": "mb2",
       "page": ""
     }
   },
@@ -180,7 +180,7 @@
         "hardToParry": false,
         "natural": true,
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": "<p>GC 75%</p>"
@@ -229,7 +229,7 @@
         "bonus": 0,
         "costTier": "primar",
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": ""
@@ -275,7 +275,7 @@
         "hardToParry": false,
         "natural": true,
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": "<p>GC 75%</p>"
@@ -324,7 +324,7 @@
         "bonus": 0,
         "costTier": "primar",
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": ""
@@ -370,7 +370,7 @@
         "hardToParry": false,
         "natural": true,
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": "<p>GC 65%</p>"
@@ -419,7 +419,7 @@
         "bonus": 0,
         "costTier": "primar",
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": ""
@@ -462,7 +462,7 @@
         "price": 0,
         "natural": true,
         "source": {
-          "book": "mb1",
+          "book": "mb2",
           "page": ""
         },
         "description": ""

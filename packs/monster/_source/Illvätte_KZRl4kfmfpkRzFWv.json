@@ -1,46 +1,52 @@
 {
-  "name": "Alfin (Alvkatt)",
+  "name": "Illvätte",
   "type": "npc",
   "system": {
     "attributes": {
       "sty": {
-        "value": 4
-      },
-      "fys": {
-        "value": 5
+        "value": 10
       },
       "sto": {
-        "value": 2
+        "value": 5
+      },
+      "fys": {
+        "value": 11
       },
       "smi": {
-        "value": 24
+        "value": 11
       },
       "int": {
-        "value": 8
+        "value": 11
       },
       "psy": {
         "value": 13
       },
       "kar": {
-        "value": 10
+        "value": 5
       }
     },
     "abs": 0,
-    "damageBonus": "-1d4",
-    "movement": "L12",
-    "moral": 15,
-    "count": "Varierar (lever med alvfolk)",
-    "habitat": "Med alvfolk",
-    "rarity": "",
+    "damageBonus": "",
+    "movement": "L10",
+    "moral": null,
+    "count": "Varierar",
+    "habitat": "8",
+    "rarity": "Mycket sällsynt",
     "attacks": [
       {
-        "name": "Bett",
-        "fv": 10,
-        "damage": "1d2",
-        "note": "GC 50%"
+        "name": "2 Nävar",
+        "fv": 4,
+        "damage": "1d3",
+        "note": "generiskt obeväpnat fallback"
+      },
+      {
+        "name": "Spark",
+        "fv": 4,
+        "damage": "1d6",
+        "note": "generiskt obeväpnat fallback"
       }
     ],
-    "special": "<p>Kameleonthud — anpassar pälsfärg efter omgivning. Åldras inte, precis som alvfolket de lever med. Naturlig spiritus familiarus för alvfolksmagiker. Ägs aldrig av icke-alvfolksvarelser — aldrig till salu.</p>",
+    "special": "<p>Mycket känsliga ögon och perfekt mörkersyn. Solljus är direkt dödande — 1T6 KP/minut i solljus. Regenererar skador (ej solljus) med 1 KP/SR. 3–4 av 100 illvättar har en demonisk förmåga och vördas som överstepräster.</p>",
     "hp": {
       "value": null,
       "max": 0
@@ -48,21 +54,21 @@
     "skills": "",
     "biography": "",
     "source": {
-      "book": "mb2",
-      "page": ""
+      "book": "mbx2",
+      "page": "47"
     }
   },
-  "_id": "QslCxc64dPVZCWjb",
-  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/alfin-alvkatt.png",
+  "_id": "KZRl4kfmfpkRzFWv",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/illvatte.png",
   "prototypeToken": {
-    "name": "Alfin (Alvkatt)",
+    "name": "Illvätte",
     "displayName": 0,
     "actorLink": false,
     "width": 1,
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/alfin-alvkatt.png",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/illvatte.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -148,30 +154,30 @@
   },
   "items": [
     {
-      "name": "Bett",
+      "name": "Vågdolk",
       "type": "vapen",
-      "_id": "gknQSSyIxsfEpi7Z",
-      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "_id": "Dt48lyhb4MMLT2ID",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/vagdolk.png",
       "system": {
         "schemaVersion": 1,
         "equipped": true,
         "grip": "1H",
         "styGroup": 1,
-        "damage": "1d2",
+        "damage": "1d4+1",
         "length": 0,
         "weight": 0,
-        "baseValue": 0,
+        "baseValue": 9,
         "weaponType": "latt",
         "category": "narstrid",
         "range": "",
-        "price": 0,
+        "price": 20,
         "hardToParry": false,
-        "natural": true,
+        "natural": false,
         "source": {
-          "book": "mb2",
-          "page": ""
+          "book": "mbx2",
+          "page": "47"
         },
-        "description": "<p>GC 50%</p>"
+        "description": "<p>Stor dolk med vågformigt blad — alla vuxna illvättar bär en. ⚠ Boken ger bara ett generiskt FV för \"Ett närstridsvapen\"/\"Ett avståndsvapen\" utan att fixera vapentyp — vapenvalet nedan är en tolkning (Johan/Claude, 2026-08-22), inte en bokfixerad detalj. Byt fritt.</p>"
       },
       "effects": [],
       "folder": null,
@@ -184,25 +190,25 @@
         "coreVersion": "14.365",
         "systemId": "drakar-och-demoner-expert",
         "systemVersion": "0.1.0",
-        "createdTime": 1787170912770,
-        "modifiedTime": 1787170912770,
-        "lastModifiedBy": "MigrateMonsterItems00",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "_key": "!actors.items!QslCxc64dPVZCWjb.gknQSSyIxsfEpi7Z"
+      "_key": "!actors.items!KZRl4kfmfpkRzFWv.Dt48lyhb4MMLT2ID"
     },
     {
-      "name": "Bett",
+      "name": "Vågdolk",
       "type": "fardighet",
-      "_id": "kgwxvF2OIqs9IU7x",
-      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "_id": "WPmpfcobfsSgPZLY",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/vagdolk.png",
       "system": {
         "schemaVersion": 1,
         "attribute": "sty",
         "category": "a",
-        "skillKey": "bett",
+        "skillKey": "vagdolk",
         "weaponGroup": "",
         "twoWeaponCombo": {
           "primaryWeaponKey": "",
@@ -213,12 +219,12 @@
           "earned": 0,
           "spent": 0
         },
-        "fv": 10,
+        "fv": 4,
         "bonus": 0,
         "costTier": "primar",
         "source": {
-          "book": "mb2",
-          "page": ""
+          "book": "mbx2",
+          "page": "47"
         },
         "description": ""
       },
@@ -233,14 +239,14 @@
         "coreVersion": "14.365",
         "systemId": "drakar-och-demoner-expert",
         "systemVersion": "0.1.0",
-        "createdTime": 1787170912770,
-        "modifiedTime": 1787170912770,
-        "lastModifiedBy": "MigrateMonsterItems00",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "_key": "!actors.items!QslCxc64dPVZCWjb.kgwxvF2OIqs9IU7x"
+      "_key": "!actors.items!KZRl4kfmfpkRzFWv.WPmpfcobfsSgPZLY"
     }
   ],
   "effects": [],
@@ -254,12 +260,12 @@
     "coreVersion": "14.365",
     "systemId": "drakar-och-demoner-expert",
     "systemVersion": "0.1.0",
-    "createdTime": 1784391938148,
-    "modifiedTime": 1784391938156,
-    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "createdTime": 1787408406079,
+    "modifiedTime": 1787408406079,
+    "lastModifiedBy": "GenSvartfolkMBX2001",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!actors!QslCxc64dPVZCWjb"
+  "_key": "!actors!KZRl4kfmfpkRzFWv"
 }

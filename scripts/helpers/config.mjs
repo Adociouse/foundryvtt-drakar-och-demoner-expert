@@ -58,7 +58,14 @@ DODE.books = {
   svartfolk:   { label: "Svartfolk", short: "SF" },
   tl:          { label: "Tjuvar och Lönnmördare", short: "T&L" },
   mb1:         { label: "Monsterboken 1", short: "MB1" },
-  mb2:         { label: "Monsterboxen II — De humanoida raserna", short: "MB2" },
+  // ⚠ RÄTTAD 2026-08-22: nyckeln "mb2" hade fel label ("Monsterboxen II —
+  // De humanoida raserna") trots att nyckeln själv antyder "Monsterboken 2" —
+  // två helt olika böcker. Grep bekräftade 0 källposter använde "mb2" innan
+  // rättelsen, så ingen befintlig data behövde migreras. mbx2/mbx4 är de
+  // riktiga Monsterboxen-nycklarna, konsekvent med mb1/mb2 = Monsterboken-serien.
+  mb2:         { label: "Monsterboken 2", short: "MB2" },
+  mbx2:        { label: "Monsterboxen II — De humanoida raserna", short: "MBX2" },
+  mbx4:        { label: "Monsterboxen IV — Legendariska varelser", short: "MBX4" },
   eget:        { label: "Eget innehåll (ingen bokkälla)", short: "—" }
 };
 

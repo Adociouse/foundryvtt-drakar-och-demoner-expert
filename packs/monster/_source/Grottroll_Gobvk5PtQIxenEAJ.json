@@ -1,52 +1,52 @@
 {
-  "name": "Grottlejon",
+  "name": "Grottroll",
   "type": "npc",
   "system": {
     "attributes": {
       "sty": {
-        "value": 29
-      },
-      "fys": {
-        "value": 14
+        "value": 25
       },
       "sto": {
-        "value": 18
+        "value": 25
+      },
+      "fys": {
+        "value": 13
       },
       "smi": {
-        "value": 16
+        "value": 10
       },
       "int": {
-        "value": 5
+        "value": 7
       },
       "psy": {
         "value": 11
       },
       "kar": {
-        "value": 10
+        "value": 3
       }
     },
-    "abs": 3,
-    "damageBonus": "0",
-    "movement": "L20",
-    "moral": 10,
-    "count": "1",
-    "habitat": "4 & 5",
-    "rarity": "Ovanlig",
+    "abs": 4,
+    "damageBonus": "1d6",
+    "movement": "L12",
+    "moral": null,
+    "count": "1-5",
+    "habitat": "8",
+    "rarity": "Sällsynt",
     "attacks": [
       {
-        "name": "2 Klor",
-        "fv": 14,
-        "damage": "1d6",
-        "note": "GC 70%"
+        "name": "2 Nävar",
+        "fv": 9,
+        "damage": "1d3",
+        "note": "generiskt obeväpnat fallback"
       },
       {
-        "name": "Bett",
-        "fv": 14,
-        "damage": "1d8",
-        "note": "GC 70%"
+        "name": "Spark",
+        "fv": 4,
+        "damage": "1d6",
+        "note": "generiskt obeväpnat fallback"
       }
     ],
-    "special": "<p>Lever ensamt i bergsgrotta. Ungefär lika stor som en nutida tiger. Jagar hästar och stäppdjur.</p>",
+    "special": "<p>Den vanligaste trollrasen. Blir omedelbart förstenade av rena solstrålar (disigt/dimmigt/molnigt räcker inte för att skada dem) — vistas därför aldrig utomhus i dagsljus. Regenererar 3 KP/SR (ej skador från magi, eld eller magiska vapen). Sprider skräck (PSY-kontroll inom 15 meter) och en fruktansvärd stank (FYS-kontroll inom 5 meter eller spy och borta 1T3 SR). Halverade färdighetsvärden dagtid. Kan aldrig lära sig magi.</p>",
     "hp": {
       "value": null,
       "max": 0
@@ -54,21 +54,21 @@
     "skills": "",
     "biography": "",
     "source": {
-      "book": "mb2",
-      "page": ""
+      "book": "mbx2",
+      "page": "52"
     }
   },
-  "_id": "3HKzDDEuno6UXtED",
-  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/grottlejon.png",
+  "_id": "Gobvk5PtQIxenEAJ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/grottroll.png",
   "prototypeToken": {
-    "name": "Grottlejon",
+    "name": "Grottroll",
     "displayName": 0,
     "actorLink": false,
     "width": 1,
     "height": 1,
     "depth": 1,
     "texture": {
-      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/grottlejon.png",
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/grottroll.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "fit": "contain",
@@ -156,103 +156,8 @@
     {
       "name": "2 Klor",
       "type": "vapen",
-      "_id": "c6U0agEj5qGoh4BX",
+      "_id": "4HfxxtBrm3vCSL02",
       "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
-      "system": {
-        "schemaVersion": 1,
-        "equipped": true,
-        "grip": "1H",
-        "styGroup": 1,
-        "damage": "1d6",
-        "length": 0,
-        "weight": 0,
-        "baseValue": 0,
-        "weaponType": "latt",
-        "category": "narstrid",
-        "range": "",
-        "price": 0,
-        "hardToParry": false,
-        "natural": true,
-        "source": {
-          "book": "mb2",
-          "page": ""
-        },
-        "description": "<p>GC 70%</p>"
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {},
-      "_stats": {
-        "coreVersion": "14.365",
-        "systemId": "drakar-och-demoner-expert",
-        "systemVersion": "0.1.0",
-        "createdTime": 1787170913120,
-        "modifiedTime": 1787170913120,
-        "lastModifiedBy": "MigrateMonsterItems00",
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "_key": "!actors.items!3HKzDDEuno6UXtED.c6U0agEj5qGoh4BX"
-    },
-    {
-      "name": "2 Klor",
-      "type": "fardighet",
-      "_id": "b6bTNDuo1DVgrYJy",
-      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
-      "system": {
-        "schemaVersion": 1,
-        "attribute": "sty",
-        "category": "a",
-        "skillKey": "2-klor",
-        "weaponGroup": "",
-        "twoWeaponCombo": {
-          "primaryWeaponKey": "",
-          "offWeaponKey": ""
-        },
-        "ep": {
-          "ticked": false,
-          "earned": 0,
-          "spent": 0
-        },
-        "fv": 14,
-        "bonus": 0,
-        "costTier": "primar",
-        "source": {
-          "book": "mb2",
-          "page": ""
-        },
-        "description": ""
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {},
-      "_stats": {
-        "coreVersion": "14.365",
-        "systemId": "drakar-och-demoner-expert",
-        "systemVersion": "0.1.0",
-        "createdTime": 1787170913120,
-        "modifiedTime": 1787170913120,
-        "lastModifiedBy": "MigrateMonsterItems00",
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
-      },
-      "_key": "!actors.items!3HKzDDEuno6UXtED.b6bTNDuo1DVgrYJy"
-    },
-    {
-      "name": "Bett",
-      "type": "vapen",
-      "_id": "MnMIMvRdxLuKbxbr",
-      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
       "system": {
         "schemaVersion": 1,
         "equipped": true,
@@ -269,10 +174,10 @@
         "hardToParry": false,
         "natural": true,
         "source": {
-          "book": "mb2",
-          "page": ""
+          "book": "mbx2",
+          "page": "52"
         },
-        "description": "<p>GC 70%</p>"
+        "description": ""
       },
       "effects": [],
       "folder": null,
@@ -285,19 +190,114 @@
         "coreVersion": "14.365",
         "systemId": "drakar-och-demoner-expert",
         "systemVersion": "0.1.0",
-        "createdTime": 1787170913120,
-        "modifiedTime": 1787170913120,
-        "lastModifiedBy": "MigrateMonsterItems00",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "_key": "!actors.items!3HKzDDEuno6UXtED.MnMIMvRdxLuKbxbr"
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.4HfxxtBrm3vCSL02"
+    },
+    {
+      "name": "2 Klor",
+      "type": "fardighet",
+      "_id": "sC6EkKTpggbbTmZT",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-klor",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 7,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "52"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.sC6EkKTpggbbTmZT"
+    },
+    {
+      "name": "Bett",
+      "type": "vapen",
+      "_id": "WLOf0a8jAujtrAmK",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "52"
+        },
+        "description": "<p>+halv skadebonus (avrundat nedåt), källans egen anteckning.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.WLOf0a8jAujtrAmK"
     },
     {
       "name": "Bett",
       "type": "fardighet",
-      "_id": "VyZtDNxRVhebgw7F",
+      "_id": "DatvTCiGHBR7UJx7",
       "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
       "system": {
         "schemaVersion": 1,
@@ -314,12 +314,12 @@
           "earned": 0,
           "spent": 0
         },
-        "fv": 14,
+        "fv": 5,
         "bonus": 0,
         "costTier": "primar",
         "source": {
-          "book": "mb2",
-          "page": ""
+          "book": "mbx2",
+          "page": "52"
         },
         "description": ""
       },
@@ -334,19 +334,114 @@
         "coreVersion": "14.365",
         "systemId": "drakar-och-demoner-expert",
         "systemVersion": "0.1.0",
-        "createdTime": 1787170913120,
-        "modifiedTime": 1787170913120,
-        "lastModifiedBy": "MigrateMonsterItems00",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "_key": "!actors.items!3HKzDDEuno6UXtED.VyZtDNxRVhebgw7F"
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.DatvTCiGHBR7UJx7"
+    },
+    {
+      "name": "Trästav",
+      "type": "vapen",
+      "_id": "j3DixytljINZZSiL",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/trastav.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "2d4",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 9,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "mbx2",
+          "page": "52"
+        },
+        "description": "<p>Improviserat vapen. ⚠ Boken ger bara ett generiskt FV för \"Ett närstridsvapen\"/\"Ett avståndsvapen\" utan att fixera vapentyp — vapenvalet nedan är en tolkning (Johan/Claude, 2026-08-22), inte en bokfixerad detalj. Byt fritt.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.j3DixytljINZZSiL"
+    },
+    {
+      "name": "Trästav",
+      "type": "fardighet",
+      "_id": "OhvZYTo70tB46g8I",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/trastav.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "trastav",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "52"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.OhvZYTo70tB46g8I"
     },
     {
       "name": "Tjockt skinn",
       "type": "rustning",
-      "_id": "KnvLswHl5iTtXYb3",
+      "_id": "JSnFHi8lh2Pq2mts",
       "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/naturlig-rustning.png",
       "system": {
         "schemaVersion": 1,
@@ -356,13 +451,13 @@
         "styGroup": 0,
         "coverage": [],
         "armourGroup": "",
-        "abs": 3,
+        "abs": 4,
         "weight": 0,
         "price": 0,
         "natural": true,
         "source": {
-          "book": "mb2",
-          "page": ""
+          "book": "mbx2",
+          "page": "52"
         },
         "description": ""
       },
@@ -377,14 +472,14 @@
         "coreVersion": "14.365",
         "systemId": "drakar-och-demoner-expert",
         "systemVersion": "0.1.0",
-        "createdTime": 1787170913120,
-        "modifiedTime": 1787170913120,
-        "lastModifiedBy": "MigrateMonsterItems00",
+        "createdTime": 1787408406079,
+        "modifiedTime": 1787408406079,
+        "lastModifiedBy": "GenSvartfolkMBX2001",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "_key": "!actors.items!3HKzDDEuno6UXtED.KnvLswHl5iTtXYb3"
+      "_key": "!actors.items!Gobvk5PtQIxenEAJ.JSnFHi8lh2Pq2mts"
     }
   ],
   "effects": [],
@@ -398,12 +493,12 @@
     "coreVersion": "14.365",
     "systemId": "drakar-och-demoner-expert",
     "systemVersion": "0.1.0",
-    "createdTime": 1784391938147,
-    "modifiedTime": 1784391938154,
-    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "createdTime": 1787408406079,
+    "modifiedTime": 1787408406079,
+    "lastModifiedBy": "GenSvartfolkMBX2001",
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null
   },
-  "_key": "!actors!3HKzDDEuno6UXtED"
+  "_key": "!actors!Gobvk5PtQIxenEAJ"
 }
