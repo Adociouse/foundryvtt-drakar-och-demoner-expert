@@ -386,7 +386,11 @@ Hooks.once("init", () => {
       const spell = actor.items.find((i) => ["besvarjelse", "minibesvarjelse"].includes(i.type) && i.name === spellName);
       if (!spell) return ui.notifications.warn(`${actor.name} kan inte "${spellName}".`);
       return game.dode.openSpellDialog(actor, { item: spell });
-    }
+    },
+    // Manuell SL-städning av besegrade NPC-token — se full motivering vid
+    // funktionsdefinitionen nedan (dode.mjs). Konsol/makro: game.dode.clearDefeatedTokens()
+    // (default: aktuell scen) eller game.dode.clearDefeatedTokens(annanScen).
+    clearDefeatedTokens
   };
 });
 
@@ -682,32 +686,46 @@ Hooks.on("canvasReady", (canvas) => {
 });
 
 /**
- * Besegrade NPC-token städas automatiskt bort vid scenbyte (load/unload) —
- * Johans beslut 2026-08-22, efter att döda skelett/Malakor-tokens legat kvar
- * på "Värdshuset — Utkanten" efter en avslutad strid ("Looks like you have
- * ghosts.. thought we said we always clear the map on every load/unload
- * after a fight?"). Nyckeln `updateScene`s `active`-fält fyrar EN gång per
- * scenbyte, både för scenen som lämnas (`active:false`) och den som blir
- * aktiv (`active:true`) — att sopa vid BÅDA hållen täcker "load" och
- * "unload" utan att behöva jaga ett separat unload-event Foundry inte har.
+ * Besegrade NPC-token — manuell SL-städning, INTE automatisk vid scenbyte.
+ * ⚠ RÄTTELSE 2026-08-22, samma dag: byggdes först som en `updateScene`-hook
+ * som auto-raderade vid VARJE `active`-växling (både när scenen lämnas OCH
+ * när den blir aktiv igen). Johan identifierade själv problemet innan det
+ * hann orsaka skada: en fleravåningsdungeon där spelarna växlar mellan
+ * scener (våning 1 → våning 2 → tillbaka) skulle tömma våning 1:s lik VARJE
+ * gång SL bytte bort från den — även om gruppen bara var borta en stund och
+ * tänkte återvända för att plundra eller fortsätta striden. "Removing
+ * monsters/npc on scene unload is bad... probable need to be SL performed."
+ * Bytt till en ren, manuell funktion (nedan) + en kontextmenyrad på scenen
+ * i Scene Directory — SL avgör NÄR ett lik verkligen är klart att försvinna,
+ * scenbyte i sig säger ingenting om det.
  *
  * Bara `type:"npc"` — en spelares egen rollperson kan bära `dead`-statusen
  * av dramatiska skäl utan att deras token ska försvinna från kartan.
- * `dead`-statusen är samma Foundry-kärnstatus striden redan sätter via
- * `actor.toggleStatusEffect("dead", ...)` på VERKLIGT besegrade NPC:er.
- *
- * Bara GM:s klient utför raderingen (annars skulle varje ansluten spelare
- * försöka radera samma tokens en gång var) — matchar `deleteActiveEffect`-
- * hooken ovan.
  */
-Hooks.on("updateScene", async (scene, changes) => {
-  if (!game.user.isGM) return;
-  if (!("active" in changes)) return;
+async function clearDefeatedTokens(scene = canvas.scene) {
+  if (!scene) return ui.notifications.warn("Ingen scen vald.");
   const defeated = scene.tokens.filter((t) => t.actor?.type === "npc" && t.actor?.statuses?.has("dead"));
-  if (!defeated.length) return;
+  if (!defeated.length) return ui.notifications.info(`Inga besegrade NPC-token att rensa på "${scene.name}".`);
   const names = defeated.map((t) => t.name).join(", ");
   await scene.deleteEmbeddedDocuments("Token", defeated.map((t) => t.id));
   ui.notifications.info(`Rensade ${defeated.length} besegrad(e) NPC-token från "${scene.name}": ${names}.`);
+}
+
+/** Kontextmenyrad i Scene Directory (högerklick på en scen) — bara synlig när scenen faktiskt har något att rensa. */
+Hooks.on("getSceneContextOptions", (app, options) => {
+  options.push({
+    name: "Rensa besegrade NPC-token",
+    icon: '<i class="fa-solid fa-skull-crossbones"></i>',
+    condition: (li) => {
+      if (!game.user.isGM) return false;
+      const scene = game.scenes.get(li.dataset?.entryId ?? li.data?.("entryId"));
+      return !!scene?.tokens.some((t) => t.actor?.type === "npc" && t.actor?.statuses?.has("dead"));
+    },
+    callback: (li) => {
+      const scene = game.scenes.get(li.dataset?.entryId ?? li.data?.("entryId"));
+      if (scene) clearDefeatedTokens(scene);
+    }
+  });
 });
 
 /**
