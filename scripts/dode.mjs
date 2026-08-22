@@ -97,24 +97,35 @@ Hooks.once("init", () => {
     formaga: DoDEFormagaData
   });
 
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("drakar-och-demoner-expert", DoDECharacterSheet, {
+  // v13 flyttade sheet-registrering från globalerna Actors/Items/ActorSheet/
+  // ItemSheet (loggar "removed in Version 15" på varje anrop) till en
+  // namnrymdad static — Actors.registerSheet(...) är i den installerade
+  // klienten bara en tunn bakåtkompatibel shim som vidarebefordrar hit
+  // (foundry.mjs: `static registerSheet(...args) { DocumentSheetConfig.
+  // registerSheet(getDocumentClass(this.documentName), ...args); }`).
+  // Byt inte tillbaka utan att först dubbelkolla att en nyare Foundry-
+  // version inte flyttat API:t vidare igen.
+  const { DocumentSheetConfig } = foundry.applications.apps;
+  const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+
+  DocumentSheetConfig.unregisterSheet(Actor, "core", ActorSheet);
+  DocumentSheetConfig.registerSheet(Actor, "drakar-och-demoner-expert", DoDECharacterSheet, {
     types: ["character"],
     makeDefault: true,
     label: "DODE.Sheet.Character"
   });
-  Actors.registerSheet("drakar-och-demoner-expert", DoDENpcSheet, {
+  DocumentSheetConfig.registerSheet(Actor, "drakar-och-demoner-expert", DoDENpcSheet, {
     types: ["npc"],
     makeDefault: true,
     label: "DODE.Sheet.Npc"
   });
-  Actors.registerSheet("drakar-och-demoner-expert", DoDEHandlareSheet, {
+  DocumentSheetConfig.registerSheet(Actor, "drakar-och-demoner-expert", DoDEHandlareSheet, {
     types: ["handlare"],
     makeDefault: true,
     label: "DODE.Sheet.Handlare"
   });
 
-  Items.unregisterSheet("core", ItemSheet);
+  DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
   const itemSheets = [
     ["fardighet", DoDEFardighetSheet],
     ["ras", DoDERasSheet],
@@ -127,7 +138,7 @@ Hooks.once("init", () => {
     ["formaga", DoDEFormagaSheet]
   ];
   for (const [type, sheetClass] of itemSheets) {
-    Items.registerSheet("drakar-och-demoner-expert", sheetClass, {
+    DocumentSheetConfig.registerSheet(Item, "drakar-och-demoner-expert", sheetClass, {
       types: [type],
       makeDefault: true,
       label: `TYPES.Item.${type}`
