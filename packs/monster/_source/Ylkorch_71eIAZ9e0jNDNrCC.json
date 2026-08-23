@@ -1,0 +1,602 @@
+{
+  "name": "Ylkorch",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 18
+      },
+      "sto": {
+        "value": 14
+      },
+      "fys": {
+        "value": 13
+      },
+      "smi": {
+        "value": 10
+      },
+      "int": {
+        "value": 8
+      },
+      "psy": {
+        "value": 10
+      },
+      "kar": {
+        "value": 9
+      }
+    },
+    "abs": 0,
+    "damageBonus": "+1d2",
+    "movement": "L10",
+    "moral": null,
+    "count": "Varierar",
+    "habitat": "Varierar",
+    "rarity": "Ovanlig",
+    "bodyPlan": "humanoid",
+    "resistances": [],
+    "attacks": [],
+    "special": "<p><strong>Guden Ylkaurs orch — störst och aggressivast av orchraserna.</strong> Ylkaur hade en vision om en stark, muskulös och uthållig varelse gjord för krig och strapatser, med en högt utvecklad överlevnadsinstinkt. Den orchras som för första gången såg dagens förhatliga solljus var i sanning en <strong>monstruös varelse</strong> — stor, reslig, stark och kraftfull, vars utseende ingav avsky och fruktan hos de andra varelserna.</p><p>Men det var inte ylkorchens fysik som kom att bli det kännetecknande, utan <strong>dess sinnelag</strong>: Ylkaurs svarta medvetande och onda väsen präglades in i dennes orch under skapelseprocessen. Som alltid tar det skapade form efter den skapande.</p><p>⚠ <strong>Mordisk och lynnig i sinnet</strong>, hatisk mot sin omvärld och med ett outsläckligt förakt gentemot allt som de andra gudarna skapat. Den ondska som genomsyrar dem gör att <strong>även andra svartfolk känner fruktan och gärna drar sig undan</strong> för dessa.</p><p>Deras metoder och dödsföraktande sätt i strid har gjort dem till arvfiender hos många folkslag. ⚠ <strong>Vissa dvärgriken ser det som ett heligt uppdrag att utradera ylkorchen från världens yta</strong> — vilket kan förklara varför denna starkare gren av orchens släktträd inte vuxit sig stor i fråga om antal. En annan anledning är de ständiga striderna mellan ylkorcher och kraukhorcher; de två raserna har ett förhållande baserat på deras gudars hat till varandra, och de föredrar av naturliga skäl att bo åtskilda och undviker varandra i möjligaste mån.</p><p><strong>Orchernas ursprung (s.68):</strong> gudarna <strong>Kraukh</strong> och <strong>Ylkaur</strong> inledde tillsammans skapandet av en ny ras genom att omdana <em>raukken</em>. Kraukh ansåg att Ylkaurs idéer om en orchras var för simpla och brutala; oenigheten ledde till att gudarna gick var sin väg och skapade var sin orchras till avbild av sig själva. De bittra fejderna mellan kraukhorcher och ylkorcher har sedan dess hållit svartfolkens samlade styrka nere på en nivå som gett övriga folkstammar ett visst lugn.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "svartfolk",
+      "page": "70"
+    }
+  },
+  "_id": "71eIAZ9e0jNDNrCC",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/ylkorch.png",
+  "prototypeToken": {
+    "name": "Ylkorch",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/ylkorch.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "hidden": false
+  },
+  "items": [
+    {
+      "name": "2 Nävar",
+      "type": "vapen",
+      "_id": "jvphgmToMsZvx34r",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d3",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": "<p>Källans FV 6 används rakt av — Svartfolk-supplementet anger redan T20-FV, ingen ÷5-konvertering.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.jvphgmToMsZvx34r"
+    },
+    {
+      "name": "2 Nävar",
+      "type": "fardighet",
+      "_id": "vHbjI51dNyn8CJDU",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-navar",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.vHbjI51dNyn8CJDU"
+    },
+    {
+      "name": "1 Spark",
+      "type": "vapen",
+      "_id": "PPLe5P1addT9YlrP",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": "<p>Källans FV 6 används rakt av — Svartfolk-supplementet anger redan T20-FV, ingen ÷5-konvertering.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.PPLe5P1addT9YlrP"
+    },
+    {
+      "name": "1 Spark",
+      "type": "fardighet",
+      "_id": "crUWrZ1QtYkiWNVQ",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "1-spark",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.crUWrZ1QtYkiWNVQ"
+    },
+    {
+      "name": "Smyga",
+      "type": "fardighet",
+      "_id": "c9Fvso5MrPtApf2M",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "smyga",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.c9Fvso5MrPtApf2M"
+    },
+    {
+      "name": "Gömma sig",
+      "type": "fardighet",
+      "_id": "2WtNkT4k6vcAW2IS",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "gomma-sig",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 5,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.2WtNkT4k6vcAW2IS"
+    },
+    {
+      "name": "Upptäcka fara",
+      "type": "fardighet",
+      "_id": "V5vwcgRJKUJbqfHa",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "upptacka-fara",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.V5vwcgRJKUJbqfHa"
+    },
+    {
+      "name": "Klättra",
+      "type": "fardighet",
+      "_id": "4PELvkH39M3Msosk",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "klattra",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 7,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.4PELvkH39M3Msosk"
+    },
+    {
+      "name": "Lyssna",
+      "type": "fardighet",
+      "_id": "3RBTRPeGSqZPusr7",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "lyssna",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 7,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "70"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787494554955,
+        "modifiedTime": 1787494554955,
+        "lastModifiedBy": "GenSvartfolkBok1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!71eIAZ9e0jNDNrCC.3RBTRPeGSqZPusr7"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787494554955,
+    "modifiedTime": 1787494554955,
+    "lastModifiedBy": "GenSvartfolkBok1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!71eIAZ9e0jNDNrCC"
+}
