@@ -8,6 +8,28 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 **Foundry-kompatibilitet:** minimum v12, verifierad mot v14
 **Klientspråk:** svenska (`lang/sv.json`) och engelska (`lang/en.json`) — spelinnehållet (kompendier, regeltexter) är på svenska oavsett vald klientspråk.
 
+## Kom igång
+
+**Förutsättning:** en installerad Foundry VTT v12 eller senare (verifierad mot v14).
+
+1. **Hämta systemet.** Klona repot direkt in i din Foundry-datamapps `systems/`-katalog:
+
+   ```bash
+   git clone https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert.git drakar-och-demoner-expert
+   ```
+
+   Mappen måste heta exakt `drakar-och-demoner-expert` (samma som system-id:t i `system.json`), annars hittar inte Foundry systemet. Var `systems/`-katalogen ligger ser du i Foundrys egen **Configuration → User Data Path** (typiskt `%LOCALAPPDATA%\FoundryVTT\Data\systems\` på Windows, `~/.local/share/FoundryVTT/Data/systems/` på Linux).
+
+   *Alternativt:* ladda ner repot som ZIP och packa upp det på samma plats. Något byggsteg behövs inte — systemet är rena ES-moduler som Foundry laddar direkt. (`npm install` behövs bara om du tänker bygga om kompendierna, se [Kompendiebyggnad](#kompendiebyggnad).)
+
+2. **Starta om Foundry** och skapa en ny värld (**Game Worlds → Create World**) med **Drakar och Demoner Expert** som system.
+
+3. **Importera det innehåll du vill ha.** Kompendierna följer med systemet och syns direkt i världens kompendiefönster — inget behöver importeras för att spela, men allt går att dra in i världen.
+
+> ⚠ **Scener måste importeras i två steg.** Foundry löser INTE automatiskt en importerad scens tokens: importerar du bara scenen `Värdshuset — Utkanten` får du en tom karta utan figurer. Importera **först** de aktörer scenen använder (från `handlare`- och `monster`-kompendierna), **sedan** själva scenen. Det här är en begränsning i Foundry, inte i systemet.
+
+4. **Skapa en rollperson.** Skapa en Actor av typen `character` och klicka **Öppna rollpersonsskaparen** på arket — guiden tar dig genom alla 19 stegen (se nedan).
+
 ## Status
 
 | Del | Status |
@@ -15,7 +37,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
 | FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
-| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 222 besvärjelser, 179 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna — se nedan) |
+| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 222 besvärjelser, 205 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna — se nedan) |
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
 | GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
@@ -63,7 +85,7 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 | `yrken` | 36 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 25 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
 | `vapen-utrustning` | 339 poster: 23 vapen, 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
 | `besvarjelser` | 222 besvärjelser |
-| `monster` | 179 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus Monsterboxen II:s Svartfolk) |
+| `monster` | 205 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
 | `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna |
@@ -75,16 +97,12 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 
 - **GM-effekternas skillMod/CL-mod/läkningstakt-lager syns inte som ikoner på token.** GM-effektfönstret (`scripts/apps/gm-effects.mjs`) redigerar person-/scen-/världseffekter lagrade som ren data i en Setting/flagga, inte som riktiga `ActiveEffect`-dokument (embedded färdighets-Items kan inte vara AE-mål, se kodkommentarer) — de påverkar rätt siffra i beräkningarna men ger ingen visuell markering på tokenet. Genuina `ActiveEffect`-baserade buffar (`game.dode.SceneEffects`, utrustning/förmågor) FÅR en ikon på tokenet om anroparen anger en `img`, och DoDE:s två registrerade villkor (Arm obrukbar/Hand upptagen) syns automatiskt via Foundrys egen Token HUD. Periodiska effekter (gift/eld/blödning) synkas automatiskt mot Foundrys motsvarande kärn-statusikoner (`poison`/`burning`/`bleeding`) på Token HUD — övriga periodeffekt-källor visas fortfarande bara som en rad i GM-effektfönstrets aktörssektion.
 - **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
-- **Bestiaryn täcker 179 av cirka 264 katalogförda varelser** över fyra källböcker — Monsterboken 1 och 2 är nu KOMPLETTA. Det som återstår är Monsterboxen II:s icke-Svartfolk-kapitel (~30) och hela Monsterboxen IV — Legendariska varelser (56). En full revision av alla fyra böckerna finns dokumenterad, resten byggs i omgångar.
+- **Bestiaryn täcker 205 av cirka 261 katalogförda varelser** över fyra källböcker — Monsterboken 1, Monsterboken 2 och Monsterboxen II är nu KOMPLETTA. Det enda som återstår är Monsterboxen IV — Legendariska varelser (56 poster, inga byggda). En full revision av alla fyra böckerna finns dokumenterad.
 - **De flesta besvärjelser saknar egen bildikon** — 214 av 222 visar sin magiskolas symbol i stället för unik konst.
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**
 - **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.
 - Se kodkommentarer märkta `⚠` för specifika, medvetet flaggade regelavvikelser eller förenklingar.
-
-## Installation
-
-Lägg systemmappen i din Foundry-installations `Data/systems/`-katalog (eller installera via manifest-URL när paketet publicerats i Foundrys paketlista). Inget byggsteg krävs — systemet är rena ES-moduler som Foundry laddar direkt.
 
 ## Arkitektur
 

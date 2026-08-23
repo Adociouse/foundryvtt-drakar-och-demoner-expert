@@ -10,6 +10,28 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 
 > **Note:** the game content (compendiums, rules) is in Swedish only, regardless of the chosen client language — this is a translation of the project README, not of the system's game data. See "Known limitations" below.
 
+## Getting started
+
+**Prerequisite:** an installed Foundry VTT v12 or later (verified against v14).
+
+1. **Get the system.** Clone the repository straight into your Foundry user data directory's `systems/` folder:
+
+   ```bash
+   git clone https://github.com/Adociouse/foundryvtt-drakar-och-demoner-expert.git drakar-och-demoner-expert
+   ```
+
+   The folder must be named exactly `drakar-och-demoner-expert` (matching the system id in `system.json`), or Foundry will not find the system. Foundry shows where `systems/` lives under **Configuration → User Data Path** (typically `%LOCALAPPDATA%\FoundryVTT\Data\systems\` on Windows, `~/.local/share/FoundryVTT/Data/systems/` on Linux).
+
+   *Alternatively:* download the repository as a ZIP and extract it to the same place. No build step is needed — the system is plain ES modules that Foundry loads directly. (`npm install` is only required if you intend to rebuild the compendiums; see [Building compendiums](#building-compendiums).)
+
+2. **Restart Foundry** and create a new world (**Game Worlds → Create World**) with **Drakar och Demoner Expert** as its system.
+
+3. **Import whatever content you want.** The compendiums ship with the system and appear in the world's compendium sidebar immediately — nothing has to be imported in order to play, but everything can be dragged into the world.
+
+> ⚠ **Scenes must be imported in two steps.** Foundry does NOT automatically resolve an imported scene's tokens: import only the `Värdshuset — Utkanten` scene and you get an empty map with no figures. Import **first** the actors the scene uses (from the `handlare` and `monster` compendiums), **then** the scene itself. This is a Foundry limitation, not a system one.
+
+4. **Create a character.** Create an Actor of type `character` and click **Öppna rollpersonsskaparen** on its sheet — the wizard walks through all 19 steps (see below).
+
 ## Status
 
 | Area | Status |
@@ -17,7 +39,7 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 | Base attributes, derived values (HP, PSY, damage bonus, movement, carry capacity) | Done |
 | Skill-value-based skill rolls (critical-success/fumble confirmation) | Done |
 | Guided character wizard (19 steps, book-accurate BP/EP economy, point-buy attributes) | Done, see details below |
-| Compendiums: 13 races, 36 professions, 339 weapons/equipment, 222 spells, 179 monsters | Done (art coverage, weapon roster, and bestiary coverage against the source books all still have gaps — see below) |
+| Compendiums: 13 races, 36 professions, 339 weapons/equipment, 222 spells, 205 monsters | Done (art coverage, weapon roster, and bestiary coverage against the source books all still have gaps — see below) |
 | Weapon system: weapon groups, dual-wielding, weapon techniques/academies, unarmed combat styles | Done, with one deliberate simplification (see below) |
 | GM effects (actor/scene/world), status conditions, periodic effects (poison etc.) | Done, with its own GM effects window (`scripts/apps/gm-effects.mjs`) |
 | Training economy (post-creation skill purchases), earning XP in play | Done, own `ApplicationV2` view |
@@ -65,7 +87,7 @@ A finished character can keep training in play through a dedicated training view
 | `yrken` | 36 professions: 11 base professions (Bard, Healer, Warrior, Sage, Assassin, Mage, Monk, Knight, Seafarer, Thief, Frontier Scout) + 25 specializations, each profession carrying a structured skill list for automatic skill assignment and, where the source material provides it, mechanically wired profession abilities |
 | `vapen-utrustning` | 339 entries: 23 weapons, 45 armor pieces (per body part), 271 general equipment — purchasable in the wizard's equipment step |
 | `besvarjelser` | 222 spells |
-| `monster` | 179 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus Monsterboxen II's Svartfolk chapter) |
+| `monster` | 205 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus all of Monsterboxen II) |
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
 | `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks |
@@ -77,17 +99,13 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 
 - **GM effects' skillMod/CL-mod/recovery-rate layer doesn't show as a token icon.** The GM effects window (`scripts/apps/gm-effects.mjs`) edits actor/scene/world effects stored as plain data in a Setting/flag, not as real `ActiveEffect` documents (embedded skill Items can't be AE targets, see code comments) — they affect the right number in calculations but carry no visual marker on the token. Genuine `ActiveEffect`-based buffs (`game.dode.SceneEffects`, equipment/abilities) DO get a token icon if the caller supplies an `img`, and DoDE's two registered conditions (Arm Disabled/Hand Occupied) show automatically via Foundry's own Token HUD. Periodic effects (poison/fire/bleeding) auto-sync to Foundry's matching core status icons (`poison`/`burning`/`bleeding`) on the Token HUD — other periodic-effect sources still only show as a row in the GM effects window's actor section.
 - **The weapon roster covers 23 of the Player's Handbook's ~52 weapons.** The weapon-group system is built for the full table, but not every entry has been transcribed into the compendium yet.
-- **The bestiary covers 179 of roughly 264 catalogued creatures** across four source books — Monsterboken 1 and 2 are now COMPLETE. What remains is Monsterboxen II's non-Svartfolk chapters (~30) and all of Monsterboxen IV — Legendary Creatures (56). A full audit of all four books exists, the rest is being built in batches.
+- **The bestiary covers 205 of roughly 261 catalogued creatures** across four source books — Monsterboken 1, Monsterboken 2 and Monsterboxen II are now COMPLETE. All that remains is Monsterboxen IV — Legendary Creatures (56 entries, none built). A full audit of all four books exists.
 - **Most spells lack their own icon** — 214 of 222 show their magic school's symbol instead of unique art.
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
 - **The Svartfolk (Dark Folk) supplement hasn't been started.**
 - **Heroic abilities (HH p.20/46-48) can't be spent yet.** The heroic-deeds table (HH p.6-7) already rolls during character creation and correctly accumulates heroic points as a currency — but the separate 18-row table that currency is meant to be spent against, plus a UI for doing so, aren't built.
 - The UI chrome has an English translation (`lang/en.json`), but the game content itself (compendiums, rules text) is Swedish-only regardless of the chosen client language.
 - See code comments marked `⚠` for specific, deliberately flagged rule deviations or simplifications.
-
-## Installation
-
-Place the system folder in your Foundry installation's `Data/systems/` directory (or install via manifest URL once published to Foundry's package list). No build step required — the system is plain ES modules that Foundry loads directly.
 
 ## Architecture
 

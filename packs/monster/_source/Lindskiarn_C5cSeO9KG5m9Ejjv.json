@@ -1,0 +1,383 @@
+{
+  "name": "Lindskiarn",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 21
+      },
+      "sto": {
+        "value": 18
+      },
+      "fys": {
+        "value": 18
+      },
+      "smi": {
+        "value": 11
+      },
+      "int": {
+        "value": 11
+      },
+      "psy": {
+        "value": 18
+      },
+      "kar": {
+        "value": 10
+      }
+    },
+    "abs": 0,
+    "damageBonus": "+1d6",
+    "movement": "",
+    "moral": null,
+    "count": "Varierar",
+    "habitat": "Varierar",
+    "rarity": "Mycket sällsynt",
+    "bodyPlan": "humanoid",
+    "resistances": [
+      {
+        "damageType": "fire",
+        "reduction": "immun",
+        "overcomeE": null
+      },
+      {
+        "damageType": "cold",
+        "reduction": "immun",
+        "overcomeE": null
+      },
+      {
+        "damageType": "acid",
+        "reduction": "immun",
+        "overcomeE": null
+      },
+      {
+        "damageType": "poison",
+        "reduction": "immun",
+        "overcomeE": null
+      },
+      {
+        "damageType": "lightning",
+        "reduction": "immun",
+        "overcomeE": null
+      }
+    ],
+    "attacks": [],
+    "special": "<p>Ett folk av okänt ursprung, även om de flesta som forskat om dem anser att de har <strong>magiskt ursprung</strong>. Mycket aggressiva och skickliga krigare, fruktade varhelst de dyker upp.</p><p>⚠ <strong>Tar INGEN skada av vanlig eld, kyla, syra, gift eller elektricitet (blixtar)</strong> — inlagt som fem immuniteter i <code>resistances</code>.</p><p>⚠ <strong>Tar bara HALV skada av alla övriga besvärjelser.</strong> Detta går ännu inte att uttrycka i <code>resistances</code>-schemat (som saknar både \"halv\"-reduktion och en samlad magi-skadetyp) — <strong>tillämpas manuellt av SL</strong>.</p><p>⚠ <strong>Alla lindskiarnar kommunicerar telepatiskt sinsemellan.</strong></p><p>⚠ <strong>Far mycket illa av kontakt med järn</strong> — använder bara sådana järnvapen de erövrat, och då med tjocka handskar. Slåss huvudsakligen med <strong>tvåhandssvärd i brons</strong> eller erövrade pålvapen.</p><p>175–225 cm långa, ca <strong>200 kg</strong>, gulvit och mycket len hud som är segare och beständigare än koläder. Inget hår alls på kroppen, vilket bidrar till motståndskraften mot eld. Fötterna och underbenen påminner om en elefants och ger låg tyngdpunkt; lillfingrarna har dragits ned mot handlederna och bildat en <strong>andra tumme</strong>.</p><p><strong>Dyrkar striden som en gudom</strong> och anfaller allt de ser oavsett vilka odds de har emot sig — bokens egen formulering är att detta är deras enda svaghet.</p><p>⚠ Källan trycker varken förflyttning eller naturligt skydd för lindskiarnen, trots att texten beskriver huden som segare än koläder.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": 17
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "mbx2",
+      "page": "64"
+    }
+  },
+  "_id": "C5cSeO9KG5m9Ejjv",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/lindskiarn.png",
+  "prototypeToken": {
+    "name": "Lindskiarn",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/lindskiarn.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "hidden": false
+  },
+  "items": [
+    {
+      "name": "2 Nävar",
+      "type": "vapen",
+      "_id": "YtgEAm46YcBdzSgc",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "64"
+        },
+        "description": "<p>Källans FV 8 används rakt av — Monsterboxen II anger redan T20-FV, ingen ÷5-konvertering (se DODE_Monsterboxen2_Ovriga_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787478640265,
+        "modifiedTime": 1787478640265,
+        "lastModifiedBy": "GenMonsterbox2x1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!C5cSeO9KG5m9Ejjv.YtgEAm46YcBdzSgc"
+    },
+    {
+      "name": "2 Nävar",
+      "type": "fardighet",
+      "_id": "fZJdVnWisqUCmBib",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-navar",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 8,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787478640265,
+        "modifiedTime": 1787478640265,
+        "lastModifiedBy": "GenMonsterbox2x1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!C5cSeO9KG5m9Ejjv.fZJdVnWisqUCmBib"
+    },
+    {
+      "name": "1 Spark",
+      "type": "vapen",
+      "_id": "1qF3jduJEgf4QkFe",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d8",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "64"
+        },
+        "description": "<p>Källans FV 10 används rakt av — Monsterboxen II anger redan T20-FV, ingen ÷5-konvertering (se DODE_Monsterboxen2_Ovriga_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787478640265,
+        "modifiedTime": 1787478640265,
+        "lastModifiedBy": "GenMonsterbox2x1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!C5cSeO9KG5m9Ejjv.1qF3jduJEgf4QkFe"
+    },
+    {
+      "name": "1 Spark",
+      "type": "fardighet",
+      "_id": "xS27feaADOi115sw",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "1-spark",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 10,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787478640265,
+        "modifiedTime": 1787478640265,
+        "lastModifiedBy": "GenMonsterbox2x1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!C5cSeO9KG5m9Ejjv.xS27feaADOi115sw"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787478640265,
+    "modifiedTime": 1787478640265,
+    "lastModifiedBy": "GenMonsterbox2x1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!C5cSeO9KG5m9Ejjv"
+}
