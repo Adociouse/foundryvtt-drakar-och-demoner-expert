@@ -16,7 +16,7 @@
         "value": 16
       },
       "int": {
-        "value": 5
+        "value": 8
       },
       "psy": {
         "value": 11
@@ -33,7 +33,7 @@
     "habitat": "2, 5 & 11",
     "rarity": "Sällsynt",
     "attacks": [],
-    "special": "<p>Större och mer aggressiv än vanlig varg. Jagar i flock. Angriper bundna hästar vid läger.</p>",
+    "special": "<p>Större och mer aggressiv än vanlig varg. Jagar i flock. Angriper bundna hästar vid läger.</p><p>⚠ <strong>Källkonflikt avgjord 2026-08-23: Svartfolk-supplementet gäller på siffror.</strong> Monsterboken 1 anger INT 5 för ulven; Svartfolk-supplementet (s.80) trycker <strong>INT 8</strong>. Beslut: supplementet är specialistboken om svartfolken och deras \"fyrbenta bröder\", och dess högre INT är dessutom förenlig med dess egen text — <em>\"det som framför allt skiljer ulven från vargen är den psykiska medvetenheten\"</em>, och att svartalfernas ulvryttare kan <strong>koppla samman sina medvetanden</strong> med riddjuret i en form av telepatisk förmåga. INT 8 gäller.</p>",
     "hp": {
       "value": null,
       "max": 0
