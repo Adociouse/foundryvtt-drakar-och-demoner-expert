@@ -28,6 +28,39 @@ export default class DoDECombatTracker extends foundry.applications.sidebar.tabs
     }
   };
 
+  /**
+   * ⚠ Skydd mot en BUGG I FOUNDRYS EGEN KÄRNA, inte mot något i det här systemet.
+   *
+   * `CombatTracker#_onRender` (client/applications/sidebar/tabs/combat-tracker.mjs,
+   * verifierad i den installerade v14-klienten) gör:
+   *
+   *     let data = {};
+   *     if ( Array.isArray(renderData) ) data = renderData.find(d => d._id === this.viewed?.id);
+   *     if ( ... && ("turn" in data) ) { ...rulla aktiv combatant till synlighet... }
+   *
+   * Om `renderData` ÄR en array men `.find()` inte matchar något — t.ex. när den
+   * visade striden just raderats, eller när flera Combat-dokument finns och det
+   * uppdaterade inte är det visade — blir `data` `undefined`, och `"turn" in
+   * undefined` kastar `TypeError: Cannot use 'in' operator to search for 'turn'`.
+   *
+   * Konsekvensen är begränsad (ett konsolfel, och kärnans autoskroll till aktiv
+   * combatant hoppas över för just den renderingen), men projektets stående
+   * verifieringskrav är NOLL konsolfel — och brus döljer riktiga fel. Eftersom vi
+   * ändå äger en subklass normaliseras `renderData` här innan kärnan får se den:
+   * finns ingen post som matchar den visade striden skickas `undefined` vidare i
+   * stället för arrayen. Då slår kärnans `Array.isArray`-gren aldrig till, `data`
+   * förblir `{}`, och `"turn" in data` blir ett ofarligt `false`.
+   *
+   * Rapportvärt uppströms; ta bort den här overriden när kärnan rättat det.
+   */
+  async _onRender(context, options) {
+    const renderData = options?.renderData;
+    if (Array.isArray(renderData) && !renderData.some((d) => d._id === this.viewed?.id)) {
+      options = { ...options, renderData: undefined };
+    }
+    return super._onRender(context, options);
+  }
+
   /** @override */
   async _prepareTurnContext(combat, combatant, index) {
     const turn = await super._prepareTurnContext(combat, combatant, index);

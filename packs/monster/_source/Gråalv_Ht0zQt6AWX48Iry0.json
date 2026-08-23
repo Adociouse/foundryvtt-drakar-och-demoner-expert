@@ -1,0 +1,841 @@
+{
+  "name": "Gråalv",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 8
+      },
+      "sto": {
+        "value": 12
+      },
+      "fys": {
+        "value": 13
+      },
+      "smi": {
+        "value": 12
+      },
+      "int": {
+        "value": 14
+      },
+      "psy": {
+        "value": 11
+      },
+      "kar": {
+        "value": 13
+      }
+    },
+    "abs": 0,
+    "damageBonus": "",
+    "movement": "L10/S8",
+    "moral": null,
+    "count": "50–200",
+    "habitat": "12, 13",
+    "rarity": "Sällsynt",
+    "bodyPlan": "humanoid",
+    "resistances": [],
+    "attacks": [],
+    "special": "<p><strong>Havens nomader.</strong> Gråalverna lever långt ute till havs, ombord på <strong>flytande öar</strong> och väldiga segelfartyg. Mycket skickliga sjöfarare, skeppsbyggare och navigatörer som sällan lämnar sina flytande boningar.</p><p>Öarna består av en mängd sammanflätade <strong>havslindar</strong> — ett träd som lever ute till havs av saltvattensplankton. Ungefär fem sjättedelar av träden är rötter under havsytan; bara den tio meter höga stammen och den yviga kronan sticker upp. Genom att spänna upp segel mellan havslindarnas stammar kan man styra öarnas förflyttning.</p><p>Grått hår och grå ögon, ganska mörkhyade, men ser trots det bistra klimatet inte det minsta väderbitna ut. Välimpregnerade skinnkläder.</p><p>Söker inte sällskap; lämnar land utom ett par gånger om året, då de lägger till i hamn med sina stora, långa, smäckra oceangående skepp för att handla. Inte särskilt pratsamma och undviker all uppmärksamhet.</p><p><strong>Simma B5.</strong> Inga speciella förmågor utöver älvfolkets gemensamma.</p><p><strong>Älvfolkets gemensamma drag (MBX2 s.18):</strong> odödliga såtillvida att de inte åldras vidare när de nått vuxen ålder, och <strong>immuna mot alla slags sjukdomar och infektioner</strong> — men kan dö av yttre skador, gift eller magi. Mycket god syn och hörsel; synskärpan räcker ungefär <strong>dubbelt så långt som människors</strong> och de ser hyfsat mitt i natten. ⚠ <strong>I absolut mörker är de dock lika blinda som människor.</strong> Ovala pupiller som hos katter; saknar skäggväxt.</p><p>⚠ <strong>Den här posten är NPC-statblocket</strong> ur Monsterboxen II, avsett för varelsen som MOTSTÅNDARE eller SLP på kartan. Samma folkslag finns också som <strong>spelbar ras</strong> i kompendiet <code>raser</code> (Item-typen <code>ras</code>), som är rollpersonsskaparens byggsten — de två är olika dokumenttyper för olika syften och ersätter inte varandra.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "mbx2",
+      "page": "22"
+    }
+  },
+  "_id": "Ht0zQt6AWX48Iry0",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/graalv.png",
+  "prototypeToken": {
+    "name": "Gråalv",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/graalv.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "hidden": false
+  },
+  "items": [
+    {
+      "name": "2 Nävar",
+      "type": "vapen",
+      "_id": "3kE5k0UTzYAQ7xdj",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d3",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": "<p>Källans FV 4 används rakt av — Monsterboxen II anger redan T20-FV, ingen ÷5-konvertering.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.3kE5k0UTzYAQ7xdj"
+    },
+    {
+      "name": "2 Nävar",
+      "type": "fardighet",
+      "_id": "8lvixg1kNQ3TPM3W",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-navar",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.8lvixg1kNQ3TPM3W"
+    },
+    {
+      "name": "1 Spark",
+      "type": "vapen",
+      "_id": "gka6YwSOrlui1FvA",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": "<p>Källans FV 4 används rakt av — Monsterboxen II anger redan T20-FV, ingen ÷5-konvertering.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.gka6YwSOrlui1FvA"
+    },
+    {
+      "name": "1 Spark",
+      "type": "fardighet",
+      "_id": "hNjnfBvQh5Itbvac",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "1-spark",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.hNjnfBvQh5Itbvac"
+    },
+    {
+      "name": "Båge",
+      "type": "vapen",
+      "_id": "J2lEEfLqBvhwnWrO",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": "<p>Källans FV 4 används rakt av — Monsterboxen II anger redan T20-FV, ingen ÷5-konvertering.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.J2lEEfLqBvhwnWrO"
+    },
+    {
+      "name": "Båge",
+      "type": "fardighet",
+      "_id": "CwbSIPWXeJGbTQWg",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "bage",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.CwbSIPWXeJGbTQWg"
+    },
+    {
+      "name": "Svärd",
+      "type": "vapen",
+      "_id": "zz5wnci5wWLzI9Qs",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": "<p>Källans FV 4 används rakt av — Monsterboxen II anger redan T20-FV, ingen ÷5-konvertering.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.zz5wnci5wWLzI9Qs"
+    },
+    {
+      "name": "Svärd",
+      "type": "fardighet",
+      "_id": "ZC7Dj0PsppBUYlLp",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "svard",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.ZC7Dj0PsppBUYlLp"
+    },
+    {
+      "name": "Smyga",
+      "type": "fardighet",
+      "_id": "MdmgTctRd3pKDUGZ",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "smyga",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.MdmgTctRd3pKDUGZ"
+    },
+    {
+      "name": "Gömma sig",
+      "type": "fardighet",
+      "_id": "WbYNvLccCdhAy4JG",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "gomma-sig",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 4,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.WbYNvLccCdhAy4JG"
+    },
+    {
+      "name": "Upptäcka fara",
+      "type": "fardighet",
+      "_id": "7Ws4M1J73JJQ1RND",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "upptacka-fara",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 10,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.7Ws4M1J73JJQ1RND"
+    },
+    {
+      "name": "Klättra",
+      "type": "fardighet",
+      "_id": "Ip7hikmkniGiQ1eM",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "klattra",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 14,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.Ip7hikmkniGiQ1eM"
+    },
+    {
+      "name": "Segla & navigera",
+      "type": "fardighet",
+      "_id": "PxmkFoJXNpbrPS9c",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "segla-navigera",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 15,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.PxmkFoJXNpbrPS9c"
+    },
+    {
+      "name": "Spå väder",
+      "type": "fardighet",
+      "_id": "Bq35sMOLq5UpD7Ac",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "spa-vader",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 15,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mbx2",
+          "page": "22"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787489646220,
+        "modifiedTime": 1787489646220,
+        "lastModifiedBy": "GenMbx2Raser0001",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!Ht0zQt6AWX48Iry0.Bq35sMOLq5UpD7Ac"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787489646220,
+    "modifiedTime": 1787489646220,
+    "lastModifiedBy": "GenMbx2Raser0001",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!Ht0zQt6AWX48Iry0"
+}
