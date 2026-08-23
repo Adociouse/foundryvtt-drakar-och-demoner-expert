@@ -1,0 +1,740 @@
+{
+  "name": "Ulvryttare (svartalf)",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 11
+      },
+      "sto": {
+        "value": 7
+      },
+      "fys": {
+        "value": 13
+      },
+      "smi": {
+        "value": 13
+      },
+      "int": {
+        "value": 9
+      },
+      "psy": {
+        "value": 9
+      },
+      "kar": {
+        "value": 7
+      }
+    },
+    "abs": 2,
+    "damageBonus": "",
+    "movement": "L11",
+    "moral": null,
+    "count": "1",
+    "habitat": "Skog och berg",
+    "rarity": "—",
+    "bodyPlan": "humanoid",
+    "resistances": [],
+    "attacks": [],
+    "special": "<p><strong>Svartalfernas elitkrigare</strong> — tränade från unga år att rida och slåss från ulvryggen. I weurgiska legender sägs att guden Baawk skänkte dem ulven som riddjur och kamrat. ⚠ Paras lämpligen med en <strong>Ulv</strong> ur samma kompendium; ulvryttaren och ulven kan <strong>koppla samman sina medvetanden</strong> i en form av telepatisk förmåga.</p><p><strong>Allmänt uppträdande (bokens egen vägledning):</strong> mycket snabba och lättrörliga, agerar gärna i grupp genom att göra <strong>snabba räder mot fiendens flanker och bakre linjer</strong>. Medvetna om sin elitstatus. ⚠ <strong>Ger upp eller flyr ENDAST om ulven blivit dödad — och då endast ca 50 % chans.</strong></p><p>⚠ <strong>Arketyp, inte en namngiven individ.</strong> Källans kapitel <em>Arketyper</em> (s.65–67) ger färdiga svartfolkstyper som SL kan placera ut direkt: <em>\"Då ingen SL ska behöva göra en detaljerad lista över alla svartfolksindivider är det enklast att skapa en lista med standardvarelser som med några enkla knep kan fås individuella.\"</em> Rubriken <strong>Allmänt uppträdande</strong> nedan är bokens egen vägledning för hur figuren beter sig i strid.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "svartfolk",
+      "page": "66"
+    }
+  },
+  "_id": "xYLMhfNIMkxC5P31",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/ulvryttare-svartalf.png",
+  "prototypeToken": {
+    "name": "Ulvryttare (svartalf)",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/ulvryttare-svartalf.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "hidden": false
+  },
+  "items": [
+    {
+      "name": "Djurträning",
+      "type": "fardighet",
+      "_id": "OXqI2zyBc5eSPlTM",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "djurtraning",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 9,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.OXqI2zyBc5eSPlTM"
+    },
+    {
+      "name": "Djurhelning",
+      "type": "fardighet",
+      "_id": "KKW0K6vqMEY0mMM1",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "djurhelning",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 9,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.KKW0K6vqMEY0mMM1"
+    },
+    {
+      "name": "Lyssna",
+      "type": "fardighet",
+      "_id": "0kG43Uw1EiMYs5BU",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "lyssna",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 12,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.0kG43Uw1EiMYs5BU"
+    },
+    {
+      "name": "1 Närstridsvapen",
+      "type": "vapen",
+      "_id": "VArFWQDJhtGHuRNG",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": "<p>Källans FV 13 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"1 Närstridsvapen\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.VArFWQDJhtGHuRNG"
+    },
+    {
+      "name": "1 Närstridsvapen",
+      "type": "fardighet",
+      "_id": "oteiZ3lBfN06vQAs",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "1-narstridsvapen",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 13,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.oteiZ3lBfN06vQAs"
+    },
+    {
+      "name": "1 Avståndsvapen",
+      "type": "vapen",
+      "_id": "O43OKQmD0kMt1isS",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": "<p>Källans FV 13 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"1 Avståndsvapen\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.O43OKQmD0kMt1isS"
+    },
+    {
+      "name": "1 Avståndsvapen",
+      "type": "fardighet",
+      "_id": "YnXQ0Ui7MpIPO6c6",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "1-avstandsvapen",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 13,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.YnXQ0Ui7MpIPO6c6"
+    },
+    {
+      "name": "Liten sköld",
+      "type": "vapen",
+      "_id": "nAnHl9SB0LVOFbob",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": "<p>Källans FV 6 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"Liten sköld\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.nAnHl9SB0LVOFbob"
+    },
+    {
+      "name": "Liten sköld",
+      "type": "fardighet",
+      "_id": "DqgpsOHeZQg96PUH",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "liten-skold",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.DqgpsOHeZQg96PUH"
+    },
+    {
+      "name": "Rida Ulv",
+      "type": "fardighet",
+      "_id": "sH969c7v5gxWe7zf",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "rida-ulv",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 17,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.sH969c7v5gxWe7zf"
+    },
+    {
+      "name": "Spåra",
+      "type": "fardighet",
+      "_id": "WvuUR2EVH0UY1cjY",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "spara",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 12,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.WvuUR2EVH0UY1cjY"
+    },
+    {
+      "name": "Läderrustning",
+      "type": "rustning",
+      "_id": "eryMq0V1STLx4DC2",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/naturlig-rustning.png",
+      "system": {
+        "schemaVersion": 1,
+        "slot": "kropp",
+        "equipped": true,
+        "baseValue": 0,
+        "styGroup": 0,
+        "coverage": [],
+        "armourGroup": "",
+        "abs": 2,
+        "weight": 0,
+        "price": 0,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "66"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!xYLMhfNIMkxC5P31.eryMq0V1STLx4DC2"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787515059393,
+    "modifiedTime": 1787515059393,
+    "lastModifiedBy": "GenSvartfolkSLP1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!xYLMhfNIMkxC5P31"
+}

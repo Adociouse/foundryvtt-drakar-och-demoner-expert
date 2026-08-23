@@ -1,0 +1,553 @@
+{
+  "name": "Yrgass Blodshämnare",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 48
+      },
+      "sto": {
+        "value": 32
+      },
+      "fys": {
+        "value": 16
+      },
+      "smi": {
+        "value": 15
+      },
+      "int": {
+        "value": 2
+      },
+      "psy": {
+        "value": 13
+      },
+      "kar": {
+        "value": 3
+      }
+    },
+    "abs": 0,
+    "damageBonus": "2d6",
+    "movement": "L12",
+    "moral": null,
+    "count": "1",
+    "habitat": "Skogar",
+    "rarity": "Unik",
+    "bodyPlan": "humanoid",
+    "resistances": [],
+    "attacks": [],
+    "special": "<p><strong>Rese, 22 år, bärsärk.</strong> Yrgass Blodshämnare är troligtvis <strong>den största och dummaste rese som någonsin avlats</strong>. Han är dessutom en av de få som förunnats att inte ens kunna uttala sitt namn ordentligt utan att ha tänkt efter ett par minuter. ⚠ <strong>Faktum är att han inte ens vet om att han kallas Blodshämnare av andra.</strong></p><p>Hans karriär började när han som 4-åring lämnades hjälplös övergiven att dö i en vargrik skog; hans moder hade tröttnat på att mata sin 4-årige valp med små matsmulor. <strong>Senare på kvällen hade Yrgass lärt sig äta själv efter att ha nedlagt en hel vargflock med bara händerna.</strong> Han levde sedan ett par-tre år i skogen, lyckligt ovetandes om att civilisationens existens och tvärtom. Vid 7 års ålder stötte han på sin första by men blev ivägjagad av vassa spjut — och sedan den dagen har han bemött civilisationen på det enda sätt han känner till, med brutal och våldsam strid.</p><p><strong>Utseende:</strong> en enorm kropp med svällande muskler utan ett uns fett. Hans nävar är mycket stora och ständigt fläckade. Huden är täckt av stora som små ärr både gamla och nya och är dessutom mycket nedsmutsad. Han bär inga kläder eller liknande. I proportion till kroppen kan det normalstora huvudet se komiskt litet ut. Ögonen är små och röda och syns knappt under de överskjutande ögonbrynen. Munnen är stor och tre tänder sticker ut som små betar.</p><p><strong>Karaktär:</strong> ⚠ <em>\"När Yrgass är hungrig jagar Yrgass och äter. När Yrgass är ledsen slår Yrgass. När Yrgass är glad slår Yrgass. När Yrgass är arg slår Yrgass.\"</em> Han tenderar att tänka med sina känslor och muskler. ⚠ <strong>Han känner ingen rädsla för något — han förstår inte vad rädsla är — och skräms vare sig av magi, skräckattacker eller skräckbesvärjelser.</strong></p><p><strong>Utrustning:</strong> ingen. När Yrgass blir hungrig äter han bara något eller någon. Han har mycket svårt att förstå sig på besynnerligheter som kläder, matbestick, vapen och allt annat.</p><p>⚠ <strong>FV 24 på flera färdigheter är källans tryckta värden</strong> och avsiktliga — över T20-taket, samma klass som Monsterboken 1:s legendariska varelser (Rock, Urgammal drake, Dödsängel). Ingen konverteringsbugg; boken beskriver en varelse som i praktiken alltid lyckas.</p><p><strong>Äventyrsuppslag (bokens eget):</strong> det troligaste sättet rollpersonerna stiftar bekantskap med denna best är genom rykten och/eller en direkt konfrontation. Någonstans ute i skogen står han bara där och blockerar rollpersonernas färd. Naturligtvis är han hungrig, arg, ledsen eller glad — vilket leder till att han försöker klubba ned dem.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "svartfolk",
+      "page": "64"
+    }
+  },
+  "_id": "SMBpUOZxNja7BRug",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/yrgass-blodshamnare.png",
+  "prototypeToken": {
+    "name": "Yrgass Blodshämnare",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 2,
+    "height": 2,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/yrgass-blodshamnare.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "hidden": false
+  },
+  "items": [
+    {
+      "name": "Bärsärk",
+      "type": "vapen",
+      "_id": "w1XCeJ6LIzoEu3BQ",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": "<p>Källans FV 24 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"Bärsärk\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.w1XCeJ6LIzoEu3BQ"
+    },
+    {
+      "name": "Bärsärk",
+      "type": "fardighet",
+      "_id": "buNMBHd5FzKJ2y5J",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "barsark",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 24,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.buNMBHd5FzKJ2y5J"
+    },
+    {
+      "name": "Första hjälpen",
+      "type": "fardighet",
+      "_id": "bRbKmMgha6Wknbbs",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "forsta-hjalpen",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 12,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.bRbKmMgha6Wknbbs"
+    },
+    {
+      "name": "Slagsmål",
+      "type": "vapen",
+      "_id": "2V29KRReUxqIg2Fp",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": "<p>Källans FV 24 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"Slagsmål\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.2V29KRReUxqIg2Fp"
+    },
+    {
+      "name": "Slagsmål",
+      "type": "fardighet",
+      "_id": "M15Ye4YxoxZGoaB0",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "slagsmal",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 24,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.M15Ye4YxoxZGoaB0"
+    },
+    {
+      "name": "Hoppa",
+      "type": "fardighet",
+      "_id": "0afk05jNnh6vZb9m",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "hoppa",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 24,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.0afk05jNnh6vZb9m"
+    },
+    {
+      "name": "Klättra",
+      "type": "fardighet",
+      "_id": "UEdtizzRQSgEEPHp",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "klattra",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 24,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.UEdtizzRQSgEEPHp"
+    },
+    {
+      "name": "Överlevnad",
+      "type": "fardighet",
+      "_id": "E2n8VE74qkV6Z7Vv",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "overlevnad",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 24,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "64"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!SMBpUOZxNja7BRug.E2n8VE74qkV6Z7Vv"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787515059393,
+    "modifiedTime": 1787515059393,
+    "lastModifiedBy": "GenSvartfolkSLP1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!SMBpUOZxNja7BRug"
+}

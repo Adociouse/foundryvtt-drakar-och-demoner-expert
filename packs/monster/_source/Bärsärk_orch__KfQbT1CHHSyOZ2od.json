@@ -1,0 +1,495 @@
+{
+  "name": "Bärsärk (orch)",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 17
+      },
+      "sto": {
+        "value": 15
+      },
+      "fys": {
+        "value": 12
+      },
+      "smi": {
+        "value": 12
+      },
+      "int": {
+        "value": 6
+      },
+      "psy": {
+        "value": 11
+      },
+      "kar": {
+        "value": 6
+      }
+    },
+    "abs": 2,
+    "damageBonus": "1d2",
+    "movement": "L11",
+    "moral": null,
+    "count": "1",
+    "habitat": "Orchstam",
+    "rarity": "—",
+    "bodyPlan": "humanoid",
+    "resistances": [],
+    "attacks": [],
+    "special": "<p><strong>Stammens bärsärk</strong> — hålls ofta fastkedjad av de övriga för att inte slita sig och göra skada innan striden börjat.</p><p><strong>Allmänt uppträdande:</strong> boken hänvisar till rese-bräckaren — fullständigt skoningslös, slåss tills han eller motståndarna är oskadliggjorda.</p><p>⚠ <strong>Arketyp, inte en namngiven individ.</strong> Källans kapitel <em>Arketyper</em> (s.65–67) ger färdiga svartfolkstyper som SL kan placera ut direkt: <em>\"Då ingen SL ska behöva göra en detaljerad lista över alla svartfolksindivider är det enklast att skapa en lista med standardvarelser som med några enkla knep kan fås individuella.\"</em> Rubriken <strong>Allmänt uppträdande</strong> nedan är bokens egen vägledning för hur figuren beter sig i strid.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "svartfolk",
+      "page": "65"
+    }
+  },
+  "_id": "KfQbT1CHHSyOZ2od",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/barsark-orch.png",
+  "prototypeToken": {
+    "name": "Bärsärk (orch)",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/barsark-orch.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false,
+    "hidden": false
+  },
+  "items": [
+    {
+      "name": "Slagsmål",
+      "type": "vapen",
+      "_id": "k1kihtMlhgbsDNV1",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": "<p>Källans FV 18 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"Slagsmål\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.k1kihtMlhgbsDNV1"
+    },
+    {
+      "name": "Slagsmål",
+      "type": "fardighet",
+      "_id": "vqiYrzr444u0Ibuf",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "slagsmal",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 18,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.vqiYrzr444u0Ibuf"
+    },
+    {
+      "name": "Bärsärk",
+      "type": "vapen",
+      "_id": "A5STkJRJFlALkQVA",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": "<p>Källans FV 18 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"Bärsärk\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.A5STkJRJFlALkQVA"
+    },
+    {
+      "name": "Bärsärk",
+      "type": "fardighet",
+      "_id": "U3GzBLDodR8h7DaR",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "barsark",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 18,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.U3GzBLDodR8h7DaR"
+    },
+    {
+      "name": "1 Närstridsvapen",
+      "type": "vapen",
+      "_id": "xDXEmJQGRSUxBvHQ",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": "<p>Källans FV 12 används rakt av — Svartfolk anger redan T20-FV. ⚠ Källan namnger inte vapentypen exakt (\"1 Närstridsvapen\") och anger ingen skada; SL väljer ett konkret vapen ur <code>vapen-utrustning</code> och för över dess skada.</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.xDXEmJQGRSUxBvHQ"
+    },
+    {
+      "name": "1 Närstridsvapen",
+      "type": "fardighet",
+      "_id": "z16rp8txfp1MXzKu",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "1-narstridsvapen",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 12,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.z16rp8txfp1MXzKu"
+    },
+    {
+      "name": "Läderrustning",
+      "type": "rustning",
+      "_id": "9gBMhspFjEdV2oRv",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/naturlig-rustning.png",
+      "system": {
+        "schemaVersion": 1,
+        "slot": "kropp",
+        "equipped": true,
+        "baseValue": 0,
+        "styGroup": 0,
+        "coverage": [],
+        "armourGroup": "",
+        "abs": 2,
+        "weight": 0,
+        "price": 0,
+        "natural": false,
+        "source": {
+          "book": "svartfolk",
+          "page": "65"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787515059393,
+        "modifiedTime": 1787515059393,
+        "lastModifiedBy": "GenSvartfolkSLP1",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!KfQbT1CHHSyOZ2od.9gBMhspFjEdV2oRv"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787515059393,
+    "modifiedTime": 1787515059393,
+    "lastModifiedBy": "GenSvartfolkSLP1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!KfQbT1CHHSyOZ2od"
+}
