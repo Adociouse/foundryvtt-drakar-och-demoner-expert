@@ -1,0 +1,734 @@
+{
+  "name": "Örnman",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 15
+      },
+      "sto": {
+        "value": 8
+      },
+      "fys": {
+        "value": 10
+      },
+      "smi": {
+        "value": 13
+      },
+      "int": {
+        "value": 13
+      },
+      "psy": {
+        "value": 11
+      },
+      "kar": {
+        "value": 15
+      }
+    },
+    "abs": 0,
+    "damageBonus": "",
+    "movement": "L10 (örnform F48/L2)",
+    "moral": null,
+    "count": "1",
+    "habitat": "5",
+    "rarity": "Mycket sällsynt",
+    "attacks": [],
+    "special": "<p><strong>Metamorf, alltid av manskön</strong>, som kan anta formen av en <strong>mycket stor kungsörn</strong>; formbytet tar en SR och egenskaper/färdigheter är desamma i båda formerna. Bettet lägger halv skadebonus.</p><p><strong>Alla örnar är vänligt inställda</strong> till honom och han kan <strong>kontrollera dem inom 100 meter med telepati</strong>.</p><p>⚠ <strong>Mer stridsbenägen än andra metamorfer.</strong> Lider av cellskräck och drar sig till det yttersta för att gå under jorden. Normalt jägare.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "mb2",
+      "page": "75"
+    }
+  },
+  "_id": "A99VhAtj0cGTH32q",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/ornman.png",
+  "prototypeToken": {
+    "name": "Örnman",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/ornman.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "name": "2 Nävar",
+      "type": "vapen",
+      "_id": "ntifgcJTyRShV3Hm",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d3",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": "<p>Källans GC 30% → FV 6 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.ntifgcJTyRShV3Hm"
+    },
+    {
+      "name": "2 Nävar",
+      "type": "fardighet",
+      "_id": "PqMIWCkHEhR9mOn8",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-navar",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.PqMIWCkHEhR9mOn8"
+    },
+    {
+      "name": "Spark",
+      "type": "vapen",
+      "_id": "PhOqRkj9STf1eQko",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": "<p>Källans GC 30% → FV 6 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.PhOqRkj9STf1eQko"
+    },
+    {
+      "name": "Spark",
+      "type": "fardighet",
+      "_id": "7jzoI4eiW94KvSsf",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "spark",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.7jzoI4eiW94KvSsf"
+    },
+    {
+      "name": "Bett",
+      "type": "vapen",
+      "_id": "5SBxHlpYdfuKRNfz",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": "<p>Källans GC 10% → FV 2 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.5SBxHlpYdfuKRNfz"
+    },
+    {
+      "name": "Bett",
+      "type": "fardighet",
+      "_id": "iKh9Bf3ajBt4dJBL",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/bett.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "bett",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 2,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.iKh9Bf3ajBt4dJBL"
+    },
+    {
+      "name": "2 Klor",
+      "type": "vapen",
+      "_id": "Md8hUVmQl1g2nDk8",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": "<p>Källans GC 30% → FV 6 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.Md8hUVmQl1g2nDk8"
+    },
+    {
+      "name": "2 Klor",
+      "type": "fardighet",
+      "_id": "TcZ9hJIU2Bx9tGxf",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-klor",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.TcZ9hJIU2Bx9tGxf"
+    },
+    {
+      "name": "2 Vingslag",
+      "type": "vapen",
+      "_id": "NxmbaLHDUympkLbA",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d3",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": "<p>Källans GC 30% → FV 6 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.NxmbaLHDUympkLbA"
+    },
+    {
+      "name": "2 Vingslag",
+      "type": "fardighet",
+      "_id": "CK6rFzMbkSlLXg55",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-vingslag",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 6,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.CK6rFzMbkSlLXg55"
+    },
+    {
+      "name": "Flyga",
+      "type": "vapen",
+      "_id": "iEjppfz0E1vLnRv1",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": "<p>Källans GC 100% → FV 20 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.iEjppfz0E1vLnRv1"
+    },
+    {
+      "name": "Flyga",
+      "type": "fardighet",
+      "_id": "Ye5KkAKN8jNEhxhI",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/navar.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "flyga",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 20,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "75"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!A99VhAtj0cGTH32q.Ye5KkAKN8jNEhxhI"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787434269156,
+    "modifiedTime": 1787434269156,
+    "lastModifiedBy": "GenMonsterbok2x01",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!A99VhAtj0cGTH32q"
+}

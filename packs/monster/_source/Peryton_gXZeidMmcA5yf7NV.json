@@ -1,0 +1,259 @@
+{
+  "name": "Peryton",
+  "type": "npc",
+  "system": {
+    "attributes": {
+      "sty": {
+        "value": 32
+      },
+      "sto": {
+        "value": 11
+      },
+      "fys": {
+        "value": 0
+      },
+      "smi": {
+        "value": 21
+      },
+      "int": {
+        "value": 6
+      },
+      "psy": {
+        "value": 21
+      },
+      "kar": {
+        "value": 0
+      }
+    },
+    "abs": 0,
+    "damageBonus": "1d6",
+    "movement": "F36/L4",
+    "moral": null,
+    "count": "1 eller 1T6",
+    "habitat": "12, 13",
+    "rarity": "Mycket sällsynt",
+    "attacks": [],
+    "special": "<p>Odöda vålnader efter <strong>sjömän som dött en neslig eller grym död</strong> och stannat kvar för att få hämnd; uppträder ibland i grupp. Gamskropp med hjorthuvud, grön och blå fjäderdräkt, små horn.</p><p>⚠ <strong>Kastar skuggan av den person perytonen var i livet.</strong></p><p>⚠ <strong>Kroppen är osårbar mot normala vapen, normal eld och andra former av fysiskt våld</strong> — kan endast skadas av magi eller magiska vapen.</p><p>Drivs av hämndlystnad, vistas nära sin dödsplats och anfaller mördaren omedelbart; <strong>lyckas den dräpa sin baneman lyfter den och lämnar världen</strong>.</p><p>⚠ <strong>Förvridna sinnen gör bedömningsförmågan urusel</strong> — en peryton kan angripa någon som bara LIKNAR mördaren och lämna världen övertygad om att den fått sin hämnd.</p>",
+    "hp": {
+      "value": null,
+      "max": 0,
+      "maxOverride": null
+    },
+    "skills": "",
+    "biography": "",
+    "source": {
+      "book": "mb2",
+      "page": "99"
+    }
+  },
+  "_id": "gXZeidMmcA5yf7NV",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/peryton.png",
+  "prototypeToken": {
+    "name": "Peryton",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/drakar-och-demoner-expert/assets/tokens/monster/peryton.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": null
+    },
+    "bar2": {
+      "attribute": null
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "items": [
+    {
+      "name": "2 Klor",
+      "type": "vapen",
+      "_id": "muiq3WOa82MrdLQh",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
+      "system": {
+        "schemaVersion": 1,
+        "equipped": true,
+        "grip": "1H",
+        "styGroup": 1,
+        "damage": "1d6",
+        "length": 0,
+        "weight": 0,
+        "baseValue": 0,
+        "weaponType": "latt",
+        "category": "narstrid",
+        "range": "",
+        "price": 0,
+        "hardToParry": false,
+        "natural": true,
+        "source": {
+          "book": "mb2",
+          "page": "99"
+        },
+        "description": "<p>Källans GC 55% → FV 11 (÷5, se DODE_Monsterboken2_STATBLOCK.md).</p>"
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!gXZeidMmcA5yf7NV.muiq3WOa82MrdLQh"
+    },
+    {
+      "name": "2 Klor",
+      "type": "fardighet",
+      "_id": "vAOCyYXw8R5q3Mjh",
+      "img": "systems/drakar-och-demoner-expert/assets/tokens/naturliga-vapen/klor.png",
+      "system": {
+        "schemaVersion": 1,
+        "attribute": "sty",
+        "category": "a",
+        "skillKey": "2-klor",
+        "weaponGroup": "",
+        "twoWeaponCombo": {
+          "primaryWeaponKey": "",
+          "offWeaponKey": ""
+        },
+        "ep": {
+          "ticked": false,
+          "earned": 0,
+          "spent": 0
+        },
+        "fv": 11,
+        "bonus": 0,
+        "costTier": "primar",
+        "source": {
+          "book": "mb2",
+          "page": "99"
+        },
+        "description": ""
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1787434269156,
+        "modifiedTime": 1787434269156,
+        "lastModifiedBy": "GenMonsterbok2x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!gXZeidMmcA5yf7NV.vAOCyYXw8R5q3Mjh"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787434269156,
+    "modifiedTime": 1787434269156,
+    "lastModifiedBy": "GenMonsterbok2x01",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!actors!gXZeidMmcA5yf7NV"
+}

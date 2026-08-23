@@ -15,7 +15,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
 | FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
-| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 222 besvärjelser, 100 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna — se nedan) |
+| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 222 besvärjelser, 179 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna — se nedan) |
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
 | GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
@@ -63,7 +63,7 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 | `yrken` | 36 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 25 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
 | `vapen-utrustning` | 339 poster: 23 vapen, 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
 | `besvarjelser` | 222 besvärjelser |
-| `monster` | 100 varelser för NPC/monster-actortypen (hela Monsterboken 1 + Monsterboxen II:s Svartfolk) |
+| `monster` | 179 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus Monsterboxen II:s Svartfolk) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
 | `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna |
@@ -75,7 +75,7 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 
 - **GM-effekternas skillMod/CL-mod/läkningstakt-lager syns inte som ikoner på token.** GM-effektfönstret (`scripts/apps/gm-effects.mjs`) redigerar person-/scen-/världseffekter lagrade som ren data i en Setting/flagga, inte som riktiga `ActiveEffect`-dokument (embedded färdighets-Items kan inte vara AE-mål, se kodkommentarer) — de påverkar rätt siffra i beräkningarna men ger ingen visuell markering på tokenet. Genuina `ActiveEffect`-baserade buffar (`game.dode.SceneEffects`, utrustning/förmågor) FÅR en ikon på tokenet om anroparen anger en `img`, och DoDE:s två registrerade villkor (Arm obrukbar/Hand upptagen) syns automatiskt via Foundrys egen Token HUD. Periodiska effekter (gift/eld/blödning) synkas automatiskt mot Foundrys motsvarande kärn-statusikoner (`poison`/`burning`/`bleeding`) på Token HUD — övriga periodeffekt-källor visas fortfarande bara som en rad i GM-effektfönstrets aktörssektion.
 - **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
-- **Bestiaryn täcker 100 av cirka 273 katalogförda varelser** över fyra källböcker (Monsterboken 1/2, Monsterboxen II/IV) — en full revision av alla fyra böckerna finns dokumenterad, resten byggs i omgångar.
+- **Bestiaryn täcker 179 av cirka 264 katalogförda varelser** över fyra källböcker — Monsterboken 1 och 2 är nu KOMPLETTA. Det som återstår är Monsterboxen II:s icke-Svartfolk-kapitel (~30) och hela Monsterboxen IV — Legendariska varelser (56). En full revision av alla fyra böckerna finns dokumenterad, resten byggs i omgångar.
 - **De flesta besvärjelser saknar egen bildikon** — 214 av 222 visar sin magiskolas symbol i stället för unik konst.
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**

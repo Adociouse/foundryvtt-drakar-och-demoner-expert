@@ -30,7 +30,34 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
       }),
       hp: new fields.SchemaField({
         value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
-        max: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        max: new fields.NumberField({ required: true, integer: true, initial: 0 }),
+        // ⚠ Explicit KP som ÖVERSTYR båda härledningsformlerna nedan. Behövs för
+        // varelser vars källa anger KP på ett sätt ingen formel kan uttrycka.
+        // `null` = använd den vanliga härledningen. Tre skilda fall i dag:
+        //
+        // 1. EGEN FORMEL I KÄLLAN. Monsterboken 2:s gastar (Dödsgast s.89,
+        //    Kummelgast s.90, Mörkgast s.91) trycker "KP = PSY", eftersom PSY
+        //    ÄR deras kropp och all skada dras därifrån — utan fältet hade en
+        //    dödsgast fått 16 KP i stället för bokens 33. Varulven (MB1 s.34)
+        //    anger ett TREvägsmedel av STY, STO och FYS = 20, inte tvåvägs 14.
+        //
+        // 2. AVSIKTLIG NOLLA. Spöket (MB1 s.91) är immateriellt och kan inte
+        //    skadas av vapen eller skadevållande magi alls; en härledd KP hade
+        //    felaktigt antytt en kropp att slå på. Samma mönster som svärmarna,
+        //    som redan bär KP 0 direkt ur källan.
+        //
+        // 3. KÄLLAN FÖLJER INTE SIN EGEN FORMEL. Vid en maskinell jämförelse av
+        //    alla 179 poster 2026-08-22 stämde 163 exakt; resten trycker ett KP
+        //    som avviker från bokens egen formel trots korrekt transkriberade
+        //    grundegenskaper (Barracuda 6/10, Syrödla 15/13, Brachiosaurus
+        //    178/176, Dödsängel 200/108, Jättespindel ung 13/12, plus ,5-fallen
+        //    Onaqui 17, Eldhäst 37, Urgammal drake 131). ⚠ Bokens avrundning
+        //    vid exakt ,5 är INKONSEKVENT — Skuggbest och Gasthäst går uppåt,
+        //    Eldhäst nedåt — så ingen avrundningsregel går att härleda. Det
+        //    TRYCKTA värdet gäller; varje sådan post bär en synlig ⚠-notis i
+        //    `special` om vad formeln annars hade gett. Se de kurerade
+        //    extrakten DODE_Monsterboken1/2_STATBLOCK.md i Roll20-projektet.
+        maxOverride: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true })
       }),
       // Kroppsbyggnad — styr träffområdestabellen (RP s.48-50). ⚠ Dolt värde:
       // spelarna ska inte behöva veta att en varelse är bevingad för att systemet
@@ -100,10 +127,15 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
     // FYS === 0 är den enda markören som behövs: ingen levande varelse i
     // källmaterialet har FYS 0, och boken använder just "ingen FYS" som sin
     // egen definition av odöd. Ingen ny schemaflagga krävs alltså.
+    // ⚠ Samma FYS === 0-gren täcker BÅDA de källor som säger "ingen FYS":
+    // odöda (MB1 s.89/90/93/95, MB2 s.84) och magiska varelser (MB2 s.100,
+    // Skuggbest/Eldhäst/Frostvarg/Djinn) — båda anger KP som medelvärdet av
+    // STY och STO. Stickprov mot boken: Baneman 16, Dödsriddare 18, Skuggbest
+    // 33, Djinn 25, Mara 25, Gasthäst 38 — alla exakta.
     const isUndead = a.fys.value === 0;
-    this.hp.max = isUndead
+    this.hp.max = this.hp.maxOverride ?? (isUndead
       ? Math.round((a.sto.value + a.sty.value) / 2)
-      : Math.round((a.sto.value + a.fys.value) / 2);
+      : Math.round((a.sto.value + a.fys.value) / 2));
     this.hp.value = this.hp.value === null || this.hp.value === undefined
       ? this.hp.max
       : Math.min(this.hp.value, this.hp.max);

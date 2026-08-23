@@ -33,10 +33,11 @@
     "habitat": "Varierar",
     "rarity": "Mycket sällsynt",
     "attacks": [],
-    "special": "<p>Ungefärlig ålder 10000 år. ⚠ <strong>FV långt över 20 är avsiktligt</strong> (källans GC 230% ÷5 = 46) — bokens intention är en varelse som träffar vad den vill.</p><p><strong>Eldkvast:</strong> kon, längd FYS meter (63 m), <strong>FYS poäng skada</strong>, max FYS laddningar (en per dygn).</p><p><strong>Drakegenskaper:</strong> immun mot eld, mörkersyn, känsla för ont uppsåt, frätande blod (1T10) + stänkrisk.</p><p>Fjällpansar: överdelen 15, underdelen 7. <strong>95% chans till skattpansar</strong> (underdelen +4 ABS).</p>",
+    "special": "<p>Ungefärlig ålder 10000 år. ⚠ <strong>FV långt över 20 är avsiktligt</strong> (källans GC 230% ÷5 = 46) — bokens intention är en varelse som träffar vad den vill.</p><p><strong>Eldkvast:</strong> kon, längd FYS meter (63 m), <strong>FYS poäng skada</strong>, max FYS laddningar (en per dygn).</p><p><strong>Drakegenskaper:</strong> immun mot eld, mörkersyn, känsla för ont uppsåt, frätande blod (1T10) + stänkrisk.</p><p>Fjällpansar: överdelen 15, underdelen 7. <strong>95% chans till skattpansar</strong> (underdelen +4 ABS).</p><p>⚠ <strong>KP 131 är källans tryckta värde</strong> (MB1 s.64) och sätts explicit. Bokens egen KP-formel ur varelsens grundegenskaper hade gett 132 — källan följer alltså inte sin egen formel här. Det tryckta värdet gäller.</p>",
     "hp": {
       "value": null,
-      "max": 0
+      "max": 0,
+      "maxOverride": 131
     },
     "skills": "",
     "biography": "",
