@@ -1,0 +1,38 @@
+{
+  "name": "Tillkalla varelse",
+  "type": "besvarjelse",
+  "_id": "gBQ6QLZ3GhCy7vjA",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 2,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "S/4 km",
+    "description": "<p>Tillkallar 20 poäng STO av varelser per effektgrad ur den rätta gruppen som finns inom räckvidden. ⚠ Varelserna är inte fientligt inställda till magikern, som kan specificera vilka varelser han vill kalla till sig; han behöver inte övervinna varelsernas PSY för att få dem att komma. <strong>Grupper:</strong> däggdjur · fåglar · kräldjur · groddjur · fiskar · insekter och spindlar · skaldjur · maskar · blötdjur · växter (endast KONTROLLERA).</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "11"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!gBQ6QLZ3GhCy7vjA"
+}

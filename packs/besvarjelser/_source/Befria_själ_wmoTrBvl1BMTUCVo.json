@@ -1,0 +1,38 @@
+{
+  "name": "Befria själ",
+  "type": "besvarjelse",
+  "_id": "wmoTrBvl1BMTUCVo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Animisten kan befria en persons själ som blivit fångad i något föremål eller liknande. När själen befrias återvänder den genast till sin gamla kropp, eller till dödsriket om kroppen är död. ⚠ För att ritualen ska fungera måste personen vars själ befrias vara villig till det. Är den inte det och magikern ändå utför ritualen (om man kanske inte vet om att personen inte vill bli befriad) kan själen helt enkelt vägra att lämna sitt \"hem\". ⚠ Man kan inte befria några odöda själar (till exempel en benman) med BEFRIA SJÄL. Ibland kan ritualen vara osäker och lyckas inte trots att magikern har utfört den rätt — SL avgör.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "8"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!wmoTrBvl1BMTUCVo"
+}

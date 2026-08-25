@@ -1,0 +1,38 @@
+{
+  "name": "Repväx",
+  "type": "besvarjelse",
+  "_id": "iIEeOn47ccqxgWXz",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Får ett rep att bli längre utan att det blir tunnare eller försvagat. Kräver ett minst en meter långt rep av organiskt material. För varje effektgrad blir repet tio meter längre.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "6"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!iIEeOn47ccqxgWXz"
+}

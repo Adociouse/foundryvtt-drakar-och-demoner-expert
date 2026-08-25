@@ -1,0 +1,38 @@
+{
+  "name": "Örtrankor",
+  "type": "besvarjelse",
+  "_id": "ZvNxBZf5zLWqDoej",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx1 SR",
+    "range": "Särskild",
+    "description": "<p>Magikern frambringar ett knippe frön som kastas iväg mot ett mål ((STY+SMI)/2 rutor bort). Knippet träffar automatiskt det han siktar på, och fröna växer på någon sekund ut i tunna grenar som snärjer in offret. ⚠ Det krävs en effektgrad per 10 STO hos offret för att snärja in det helt. En insnärjd varelse kan varje SR försöka bryta sig loss: dess STY mot rankornas motståndspoäng (E×10 − offrets STO). Har den en dolk eller kort eggvapen i handen läggs 5 till STY i utbrytningsförsöket.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "6"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZvNxBZf5zLWqDoej"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Trädförbannelse",
+  "type": "besvarjelse",
+  "_id": "eIN0INpF0ffycJuX",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 19,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "S/2 rutor",
+    "description": "<p>Kan endast kastas på en levande varelse som står på jord med sådan tjocklek och bördighet att träd kan växa där. Om animisten lyckas förhäxa sitt mål omvandlas dess kropp omedelbart till ett träd, medan dess ägodelar faller till marken. Trädet har samma STO och KP som varelsen, medan animisten avgör arten. ⚠ Medan varelsen är i trädform befinner den sig i koma och kan inte uppfatta någonting av vad som sker omkring den. Den är också immun mot förgiftning. ⚠ Alla skador som varelsen får medan den är i trädform kommer den att ha kvar när den återfår sin normala form.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "9"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!eIN0INpF0ffycJuX"
+}

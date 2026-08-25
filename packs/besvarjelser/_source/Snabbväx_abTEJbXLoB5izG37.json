@@ -1,0 +1,38 @@
+{
+  "name": "Snabbväx",
+  "type": "besvarjelse",
+  "_id": "abTEJbXLoB5izG37",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Får en växt att utvecklas till sin fulla prakt och maximala storlek på ett dygn. Varje extra effektgrad påverkar ytterligare en växt. ⚠ Växten måste kunna växa fritt åt alla håll — man kan inte frammana en ek ur en blomkruka. Magikern bestämmer i vilket tillstånd frukter, blommor och andra detaljer ska befinna sig. En extra effektgrad kan förvränga växtens naturliga rytm så att den till exempel får både frukt och blommor samtidigt — något som Moder Jords anhängare ser som en styggelse.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "9"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!abTEJbXLoB5izG37"
+}

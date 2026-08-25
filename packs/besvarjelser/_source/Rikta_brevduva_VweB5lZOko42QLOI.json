@@ -1,0 +1,38 @@
+{
+  "name": "Rikta brevduva",
+  "type": "besvarjelse",
+  "_id": "VweB5lZOko42QLOI",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 5,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>Påverkar en brevduva så att en annan plats blir \"hemma\". Platsen måste vara ett ställe magikern har besökt personligen och vet var det ligger och hur det ser ut, och får inte vara rörlig (båtar är alltså inte möjliga). Varje extra effektgrad förtrollar ytterligare en duva.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "5"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!VweB5lZOko42QLOI"
+}

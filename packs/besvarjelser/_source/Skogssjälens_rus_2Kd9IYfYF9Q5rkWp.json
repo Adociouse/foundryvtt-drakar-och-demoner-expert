@@ -1,0 +1,38 @@
+{
+  "name": "Skogssjälens rus",
+  "type": "besvarjelse",
+  "_id": "2Kd9IYfYF9Q5rkWp",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Varierar",
+    "range": "Beröring",
+    "description": "<p>Kan kastas var som helst, men för att uppnå den önskade effekten måste det ske i vildmark. ⚠ Magikern vidrör den förhäxades panna och reciterar en ramsa; själen som allt levande delar manas till närvaro och besätter den förhäxade. När själen tagit över grips den förhäxade av ett vansinne, kastar av sig alla kläder och springer som en vettlös genom skogen till midnatt, dock minst ett dygn. Därefter faller han samman utmattad och somnar. ⚠ Under besvärjelsen får den förhäxade övermänsklig styrka, fysik och smidighet (cirka 10T6+50) — 100 meter på mindre än fem sekunder. Den förhäxade skadar inte medvetet någon. När han vaknar minns han bara suddigt vad som hänt, och är naken, förmodligen frusen, glupande hungrig och antagligen fullständigt vilse.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "8"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2Kd9IYfYF9Q5rkWp"
+}

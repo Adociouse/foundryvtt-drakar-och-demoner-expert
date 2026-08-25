@@ -1,0 +1,38 @@
+{
+  "name": "Regenerera",
+  "type": "besvarjelse",
+  "_id": "8new5N86lzbu6DKj",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 20,
+    "kvick": false,
+    "duration": "Se beskrivning",
+    "range": "Beröring",
+    "description": "<p>Ritual som får en avhuggen arm, vinge eller ben att växa ut med en takt av en centimeter per dygn och återställas i ursprungligt skick. ⚠ Ritualen påverkar en kroppsdel per effektgrad.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "10"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8new5N86lzbu6DKj"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Regnkontroll",
+  "type": "besvarjelse",
+  "_id": "2ZyAt8ZoRx0SVXU4",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "S/4 km",
+    "description": "<p>Får alla moln inom räckvidden att börja ge ifrån sig tätt regn, eller stoppar regn som redan faller. ⚠ Vill kastaren påverka en redan kastad REGNKONTROLL måste han utkämpa en vanlig effektgradsstrid. Moln ligger normalt på 1T3×500 m höjd.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "7"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!2ZyAt8ZoRx0SVXU4"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Skogens sällhet",
+  "type": "besvarjelse",
+  "_id": "13eLQtaZvwu08mEw",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "Varierar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade genomsyras av ett underbart lugn: motstridiga känslor sköljs bort, all smärta dövas, alla tvivel bleknar, alla hemska upplevelser lindras och trycks undan i minnet, all stress hävs och all ilska dämpas. ⚠ Är personen mycket uppjagad, skadad eller deprimerad kan förändringen resultera i en chock — personen svimmar. Effekten stannar kvar några timmar efteråt. Varje extra effektgrad lugnar ytterligare en person; en extra effektgrad spenderad på en person kan i stället göra upplevelsen så underbar och omslutande att personen somnar.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "8"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!13eLQtaZvwu08mEw"
+}

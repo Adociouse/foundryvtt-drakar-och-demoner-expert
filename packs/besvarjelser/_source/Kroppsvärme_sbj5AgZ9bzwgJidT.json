@@ -1,0 +1,38 @@
+{
+  "name": "Kroppsvärme",
+  "type": "besvarjelse",
+  "_id": "sbj5AgZ9bzwgJidT",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 11,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade har alltid rätt kroppstemperatur oberoende av yttre temperatur eller klädsel. ⚠ Skyddar inte mot alltför extrema temperaturer riktade direkt mot den förhäxade, t.ex. ELD och FROST, eller mot att stå mitt i en eldsvåda.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "6"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!sbj5AgZ9bzwgJidT"
+}

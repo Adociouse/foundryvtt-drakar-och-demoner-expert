@@ -1,0 +1,38 @@
+{
+  "name": "Livskraftens förbannelse",
+  "type": "besvarjelse",
+  "_id": "ZGkfOptoB4fNZj3q",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 22,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Forskades i urtiden fram av alvgeniet Anderion med syftet att bekämpa odöda och nekromantiker. Fungerar på tre olika sätt beroende på målet: <strong>1. Odöda med kropp</strong> (kroppsliga odöda, magiska odöda, likätare) — de magiska energier som binder samman den odödes kropp frigörs, kroppen \"exploderar\" till ett moln av stoft och den odöde är permanent förintad. ⚠ Ingen effekt på Dödsängeln. <strong>2. Andra odöda</strong> (andar, gastar) — den odöde skingras och beger sig till Dödsriket. <strong>3. Nekromantiker</strong> (någon levande varelse med FV i Nekromanti) — drabbas av en kraftig psykisk \"burn-out\": slå omedelbart en gång på skräcktabellen med +2 per effektgrad på tärningen, INT reduceras permanent med lika många poäng som effektgraden, och han kan inte kasta besvärjelser eller använda någon annan magi under lika många minuter som effektgraden.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "10"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZGkfOptoB4fNZj3q"
+}

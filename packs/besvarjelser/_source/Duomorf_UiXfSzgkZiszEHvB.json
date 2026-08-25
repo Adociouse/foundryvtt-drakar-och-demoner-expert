@@ -1,0 +1,38 @@
+{
+  "name": "Duomorf",
+  "type": "besvarjelse",
+  "_id": "UiXfSzgkZiszEHvB",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 20,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Beröring",
+    "description": "<p>Ritualen skänker målpersonen förmågan att förändra form. Innan ritualen utförs kommer magikern och målpersonen överens om vilken annan form den förhäxade vill ha. ⚠ Formen måste tillhöra en ointelligent varelse av samma typ som målpersonen (dvs. däggdjur för människa och de flesta andra humanoider), och båda måste känna till varelsen. Lyckas ritualen kan målpersonen i framtiden byta form närhelst han önskar. Slå STY, STO, FYS, SMI och KAR för den nya varelsen; INT och PSY behålls, själen förändras inte. ⚠ Målpersonen får alla förmågor som hör till varelsen — blir en människa pegas kan hon flyga — och behåller sina egna färdigheter, men många av dem går inte att använda i den nya formen.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "10"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!UiXfSzgkZiszEHvB"
+}

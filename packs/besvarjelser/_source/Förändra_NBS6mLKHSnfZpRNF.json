@@ -1,0 +1,38 @@
+{
+  "name": "Förändra",
+  "type": "besvarjelse",
+  "_id": "NBS6mLKHSnfZpRNF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 12,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Sx2 rutor",
+    "description": "<p>Förvandlar föremål och varelser. Varje grad räcker till att förvandla tre poäng STO, och man måste lägga tillräckligt hög grad för att påverka hela målets STO. ⚠ Den nya formen måste vara av samma huvudtyp som det som förvandlas — djur, växt eller mineral. Ett troll kan inte FÖRÄNDRAs till en svamp, men det kan FÖRÄNDRAs till en groda; grodan får dock samma grundegenskaper som trollet, inklusive STO. Formeln ändrar bara målets form, inte dess grundegenskaper — den kan alltså inte användas för att förändra bly till guld. ⚠ En levande varelse kan inte använda det nya föremålets speciella övernaturliga förmågor.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "7"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NBS6mLKHSnfZpRNF"
+}

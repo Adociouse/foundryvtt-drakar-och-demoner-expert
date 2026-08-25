@@ -1,0 +1,38 @@
+{
+  "name": "Nedkalla åskvigg",
+  "type": "besvarjelse",
+  "_id": "n8AGnafMtxtVCG2S",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx10 rutor",
+    "description": "<p>Nedkallar en åskvigg från ett regnmoln och riktar den mot ett utvalt mål inom räckvidden. ⚠ Molnets regn måste falla både på animisten och målet. Vållar skada på samma sätt som elementarbesvärjelsen BLIXT.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "5"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!n8AGnafMtxtVCG2S"
+}

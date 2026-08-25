@@ -1,0 +1,38 @@
+{
+  "name": "Väderkontroll",
+  "type": "besvarjelse",
+  "_id": "ilHvOz70rbzvHGwF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 19,
+    "kvick": false,
+    "duration": "Special",
+    "range": "Sx1 km",
+    "description": "<p>Ritual som påverkar vädrets alla aspekter. Magikern bestämmer vilket väder han vill ha och utför sedan sin ritual. ⚠ För varje timme ritualen utförs varar det önskade vädret i sex timmar — ett undantag från de vanliga reglerna om utförandetid. ⚠ Det önskade vädret måste passa ihop med årstiden; det går inte att framkalla en snöstorm under sommaren. En timme efter ritualen slår SL dolt om den lyckas och står i harmoni med naturen; misslyckas slaget inser rollpersonen att den inte fungerar. Det nya vädret uppstår gradvis under sex timmar. Magikern orkar utföra ritualen i högst FYS/2 timmar, varefter han är fullständigt utmattad.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "10"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ilHvOz70rbzvHGwF"
+}

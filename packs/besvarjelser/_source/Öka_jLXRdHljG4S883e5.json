@@ -1,0 +1,38 @@
+{
+  "name": "Öka",
+  "type": "besvarjelse",
+  "_id": "jLXRdHljG4S883e5",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "S/4 minuter",
+    "range": "Beröring",
+    "description": "<p>Varje effektgrad ökar den förhäxades STY, FYS, STO, KAR eller SMI med en poäng. Ökningen berör också de färdigheter som är baserade på grundegenskaperna.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "6"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!jLXRdHljG4S883e5"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Naturens röst",
+  "type": "besvarjelse",
+  "_id": "80ZQCNyGynhqBeRd",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Varierande",
+    "range": "Personlig",
+    "description": "<p>Kan kastas på alla platser där magikern är omgiven på alla sidor av naturlig växtlighet (en park eller gräsmatta duger; en enskild växt eller grupp av växter gör det inte). Magikern lägger sig ned och slappnar av; kroppen lämnas bakom och hamnar i koma medan han blir en del av omgivningens själ. ⚠ Han kan nu dela alla växters och djurs känslor och sinnesintryck och utbyta tankar med dem, och kan uppfylla upp till 1000 m²/S. Uppmärksamheten kan inte vara överallt samtidigt men förflyttas fritt utan tidsåtgång. ⚠ Kan upprätthållas hur länge som helst, men magikerns kropp behöver näring och kommer till slut att dö.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "7"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!80ZQCNyGynhqBeRd"
+}

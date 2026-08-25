@@ -1,0 +1,38 @@
+{
+  "name": "Finna vatten",
+  "type": "besvarjelse",
+  "_id": "JvYchS1p1tkbtNNo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 1,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "S/4 rutor",
+    "description": "<p>Magikern får reda på avstånd och riktning till alla drickbara källor och vattensamlingar inom räckvidden. Drickbart vatten kan vara smutsigt och motbjudande. ⚠ Fungerar inte när det regnar — regndropparna stör magikern alldeles för mycket.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "4"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!JvYchS1p1tkbtNNo"
+}

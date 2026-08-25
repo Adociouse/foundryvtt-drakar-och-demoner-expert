@@ -1,0 +1,38 @@
+{
+  "name": "Gräsmat",
+  "type": "besvarjelse",
+  "_id": "TpALLDpXs2lBwsGx",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 3,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Beröring",
+    "description": "<p>Påverkar offrets ämnessammansättning så att det kan smälta cellulosa utöver sin vanliga föda — levande varelser kan äta gräs och blad och tillgodogöra sig näringen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "4"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!TpALLDpXs2lBwsGx"
+}

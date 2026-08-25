@@ -1,0 +1,38 @@
+{
+  "name": "Besätta ryggradsdjur",
+  "type": "besvarjelse",
+  "_id": "Z8mzOvFgjtuDatwN",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "system": {
+    "school": "animism",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "S/2 rutor",
+    "description": "<p>Animisten förhäxar ett ointelligent ryggradsdjur (däggdjur, fågel, reptil, amfibie, fisk) och tar säte i djuret under besvärjelsens varaktighet. Gäller även legendjur ur dessa fyla, dock inte sådana som har magiska förmågor (t.ex. basilisk) eller fågel rock. ⚠ Magikern kan utnyttja alla sina lärdoms- och uppfattningsfärdigheter och alla färdigheter och förmågor som djuret äger, men kan inte kasta besvärjelser eller använda hjälteförmågor när hans själ är i djurkroppen. ⚠ Magikerns egen kropp ligger försänkt i djup koma. Skulle djurkroppen dödas återvänder själen omedelbart till magikerns egen kropp — upplevelsen är så traumatisk att magikern permanent förlorar en poäng PSY.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "9"
+    }
+  },
+  "effects": [],
+  "folder": "R8oaopxZZs7ntDKl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787669522043,
+    "modifiedTime": 1787669522043,
+    "lastModifiedBy": "GenAnimismFormel",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Z8mzOvFgjtuDatwN"
+}
