@@ -61,6 +61,35 @@ export default class DoDEMagicTrainingApp extends DoDETrainingBase {
     return item?.system.total ?? 0;
   }
 
+  /** Rollpersonens högsta skolvärde, oavsett skola. */
+  bestSchoolFv() {
+    return this.actor.items
+      .filter((i) => i.type === "fardighet" && i.system.skillKey?.startsWith("magiskola-"))
+      .reduce((best, i) => Math.max(best, i.system.total ?? 0), 0);
+  }
+
+  /**
+   * Kostnadsgrundande skolvärde för en besvärjelse.
+   *
+   * ⚠ "allman" är ingen skola man kan lära sig — Formelbokens "Allmänna
+   * besvärjelser" (tryckt s.1-4) kan läras av vilken magiker som helst oavsett
+   * skoltillhörighet. Beslut: de ska kunna väljas av ALLA skolor. Ett uppslag
+   * på `magiskola-allman` hade alltid gett 0 och därmed blockerat dem för alla,
+   * så för dem används i stället rollpersonens HÖGSTA skolvärde — hen behöver
+   * kunna någon skola, men det spelar ingen roll vilken.
+   */
+  spellSchoolFv(item) {
+    return item.system.school === "allman"
+      ? this.bestSchoolFv()
+      : this.schoolFv(item.system.school);
+  }
+
+  /** Etikett för besvärjelsens skola — "allman" saknar post i DODE.magicSchools. */
+  spellSchoolLabel(item) {
+    if (item.system.school === "allman") return "Allmän besvärjelse (högsta skolvärdet)";
+    return game.i18n.localize(CONFIG.DODE.magicSchools[item.system.school]);
+  }
+
   describeRow(item) {
     const int = this.actor.system.attributes?.int?.total ?? 0;
 
@@ -88,7 +117,7 @@ export default class DoDEMagicTrainingApp extends DoDETrainingBase {
     }
 
     // Besvärjelse.
-    const schoolFv = this.schoolFv(item.system.school);
+    const schoolFv = this.spellSchoolFv(item);
     const s = item.system.sValue;
     const hasCodex = !!item.system.hasCodex;
     const soloTarget = spellSoloTarget(int);
@@ -112,8 +141,10 @@ export default class DoDEMagicTrainingApp extends DoDETrainingBase {
         blocked: !schoolFv,
         canTrainInMode: !blockedSolo && !schoolTooLow,
         note: schoolFv
-          ? `${game.i18n.localize(CONFIG.DODE.magicSchools[item.system.school])} FV ${schoolFv} → grundkostnad ${CONFIG.DODE.spellBaseCost(schoolFv)}`
-          : "⚠ Rollpersonen saknar färdighet i besvärjelsens skola — ingen kostnadsgrund",
+          ? `${this.spellSchoolLabel(item)} FV ${schoolFv} → grundkostnad ${CONFIG.DODE.spellBaseCost(schoolFv)}`
+          : (item.system.school === "allman"
+              ? "⚠ Rollpersonen kan ingen magiskola alls — allmänna besvärjelser kräver minst en skola"
+              : "⚠ Rollpersonen saknar färdighet i besvärjelsens skola — ingen kostnadsgrund"),
         trainNote: blockedSolo
           ? "⚠ Ensamträning kräver en magisk kodex för besvärjelsen (SB s.7)"
           : (solo && soloTarget <= 0 ? `⚠ INT ${int} ger måltal ${soloTarget} — ensamträning omöjlig` : "")

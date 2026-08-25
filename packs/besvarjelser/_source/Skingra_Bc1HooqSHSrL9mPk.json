@@ -1,0 +1,38 @@
+{
+  "name": "Skingra",
+  "type": "besvarjelse",
+  "_id": "Bc1HooqSHSrL9mPk",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx10 rutor",
+    "description": "<p>Omintetgör effekterna av andra formler, t.ex. LYFT, FÖRTROLLA VAPEN, FÖRBANNA VAPEN, BESKYDDARE. ⚠ Liksom ANTIMAGI måste den först övervinna den andra besvärjelsens effektgrad genom tärningsslag på motståndstabellen. Kan användas för att förstöra en elementar. ⚠ Måste riktas mot en viss annan besvärjelse, men om trollkarlen inte vet exakt vad den avsedda besvärjelsen heter kan det räcka med att tänka t.ex. \"Tag bort den besvärjelse som får Robustus att gå som en zombie!\" ⚠ Om målet skyddas av ANTIMAGI måste SKINGRINGen först ta sig igenom det skyddet på vanligt sätt innan den kan börja verka. Kan också användas för att hindra en fientlig trollkarl från att få iväg den besvärjelse han just håller på att utföra — då slår man på motståndstabellen mot den andra besvärjelsens effektgrad, och lyckas det omintetgörs den angripna besvärjelsen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "1"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Bc1HooqSHSrL9mPk"
+}

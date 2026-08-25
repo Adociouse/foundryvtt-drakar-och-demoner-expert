@@ -1,0 +1,23 @@
+{
+  "name": "Allmänna besvärjelser",
+  "type": "Item",
+  "_id": "aLLmAnBesvarjeL1",
+  "description": "",
+  "folder": null,
+  "sorting": "a",
+  "sort": 0,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!folders!aLLmAnBesvarjeL1"
+}

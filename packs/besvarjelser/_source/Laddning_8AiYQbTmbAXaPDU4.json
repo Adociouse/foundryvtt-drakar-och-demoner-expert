@@ -1,0 +1,38 @@
+{
+  "name": "Laddning",
+  "type": "besvarjelse",
+  "_id": "8AiYQbTmbAXaPDU4",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>Ritualen gör det möjligt att lagra PSY i ett magiskt föremål som i ett batteri. Magikern kan ta PSY från sitt psyke och lägga det i föremålet; han återvinner sedan PSY från naturen till sitt psyke precis som om han hade kastat en besvärjelse. ⚠ Varje effektgrad hos LADDNINGEN kan lagra fem poäng PSY. ⚠ Ett föremål kan bara förses med LADDNING en gång. Vanliga föremål är stavar och smycken.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "3"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8AiYQbTmbAXaPDU4"
+}

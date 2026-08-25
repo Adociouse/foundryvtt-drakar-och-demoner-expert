@@ -1,0 +1,38 @@
+{
+  "name": "Antimagi",
+  "type": "besvarjelse",
+  "_id": "zE9UE78k0AFl1nQY",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "S/4 minuter",
+    "range": "Sx10 rutor",
+    "description": "<p>Placerar en magisk sköld omkring målet. Skölden skyddar mot magi och kan placeras både på levande varelser och föremål. ⚠ Om någon försöker använda magi mot ett föremål eller en varelse som skyddas av ANTIMAGI måste den inkommande magins effektgrad först övervinna ANTIMAGIns effektgrad med ett tärningsslag på motståndstabellen. Lyckas det inte studsar magin tillbaka mot den anfallande trollkarlen och drabbar honom i stället i den mån detta låter sig göras. ⚠ En formel som riktas mot en varelse måste också övervinna dennes PSY för att få avsedd effekt. Kan skydda föremål med en volym på maximalt 125 kubikmeter. ⚠ Om man vill använda ANTIMAGI på någon som redan fått SKYDD lagt på sig måste ANTIMAGIns effektgrad först övervinna SKYDDets effektgrad på motståndstabellen; lyckas det fungerar formlerna tillsammans.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "1"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!zE9UE78k0AFl1nQY"
+}

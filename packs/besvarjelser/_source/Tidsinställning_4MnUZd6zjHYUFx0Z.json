@@ -1,0 +1,38 @@
+{
+  "name": "Tidsinställning",
+  "type": "besvarjelse",
+  "_id": "4MnUZd6zjHYUFx0Z",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Tills den aktiveras",
+    "range": "Beröring",
+    "description": "<p>Fungerar som SIGILL, men i stället för att utlösas när ett bestämt villkor infrias utlöses den efter det att en viss tid har förflutit. ⚠ Denna tidsperiod får högst omfatta 240 timmar.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "4"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!4MnUZd6zjHYUFx0Z"
+}

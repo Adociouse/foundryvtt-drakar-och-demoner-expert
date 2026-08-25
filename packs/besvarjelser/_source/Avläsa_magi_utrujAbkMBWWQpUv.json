@@ -1,0 +1,38 @@
+{
+  "name": "Avläsa magi",
+  "type": "besvarjelse",
+  "_id": "utrujAbkMBWWQpUv",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 16,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Ritualen kan endast användas på ett föremål eller en varelse åt gången. ⚠ Magikern måste övervinna antalet grader som finns i föremålet med summan av sitt SV i ritualen och ritualens grad. Framgång innebär att magikern har lyckats identifiera alla besvärjelser som är lagda på föremålet eller varelsen, och vilka grader de har. ⚠ När en person vet vilka besvärjelser som finns i ett föremål kan han försöka harmoniera sitt psyke med det för att lära sig hantera dess magiska egenskaper: han måste meditera över föremålet en hel dag, och vid dagens slut ska han försöka övervinna summan av föremålets alla effektgrader med sin PSY. Lyckas slaget har personen fått kontroll över föremålet och kan använda det obehindrat i framtiden. Misslyckas slaget kan han försöka igen efter att ha sovit en natt. ⚠ Flera personer kan använda samma magiska föremål, och det är inte nödvändigt att de själva är magiker — dock måste den magiker som avläste magin i föremålet vara närvarande för att kunna agera som kanal mellan föremålet och den icke magikunnige. ⚠ Har man en gång lärt sig hur man använder ett magiskt föremål krävs det att man förlorar minnet för det tidsavsnittet för att man ska tappa förmågan att använda föremålet.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "3"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!utrujAbkMBWWQpUv"
+}

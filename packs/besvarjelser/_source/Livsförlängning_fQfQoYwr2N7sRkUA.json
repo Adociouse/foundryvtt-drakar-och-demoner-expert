@@ -1,0 +1,38 @@
+{
+  "name": "Livsförlängning",
+  "type": "besvarjelse",
+  "_id": "fQfQoYwr2N7sRkUA",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Special",
+    "range": "Personlig",
+    "description": "<p>För att bli en skicklig och duglig magiker krävs mer tid för studier och forskning än vad en vanlig mänsklig livslängd kan erbjuda. Efter omfattande studier och experiment lyckades man utveckla en ritual som numera lärs ut av alla magiskolor. ⚠ Ritualen är synnerligen omfattande och kräver magikerns fulla ansträngningar under en månad per effektgrad. Varje dag måste han förtära en dos stjärnedryck och en dos sarasso, vilket gör det till en dyrbar akt, och ritualen måste utföras ostörd av yttre ting. ⚠ Lyckas ritualen hejdas magikerns åldrande under 1T4+4 år per effektgrad (SL slår dolt, och när ritualens effekt upphör verkar han informera spelaren om detta). ⚠ <strong>Ritualen kan på intet sätt föryngra magikern.</strong> Misslyckas ritualen finns det chans att han har skadats under processen: slå ett normalt PSY-slag — misslyckas det minskas magikerns FYS permanent med ett. Fumlar magikern drabbas han av de vanliga snedtändningseffekterna. Dessutom åldras han ett år av påfrestningen.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "2"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fQfQoYwr2N7sRkUA"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Formelförbannelse",
+  "type": "besvarjelse",
+  "_id": "GhajMETO7P7y4rIt",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 19,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>Ritual som hjälper magikern att hålla obehöriga borta från sin käraste ägodel: formelsamlingen. ⚠ Om någon annan än magikern själv vidrör samlingen får denne en kraftig chock, inte olik en elchock, från boken. Chocken ger fem KP och ett PSY i skada per effektgrad, och för att ha modet att röra vid boken igen måste man klara ett mycket svårt PSY-slag. ⚠ Det är omöjligt att hålla fast i boken på grund av chocken om man inte är förberedd på den och då klarar ett svårt PSY-slag. Lyckas man kan man hålla i boken utan att få några nya chocker — men om man sedan försöker öppna den får man en ny chock och måste då göra ett nytt PSY-slag. En oförberedd chock eller ett misslyckat slag innebär att man genast tappar boken.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "3"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!GhajMETO7P7y4rIt"
+}

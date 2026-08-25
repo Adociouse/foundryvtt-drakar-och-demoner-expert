@@ -1,0 +1,38 @@
+{
+  "name": "Varseblivning",
+  "type": "besvarjelse",
+  "_id": "B0Q0SAwQLwfwM7O5",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx10 rutor",
+    "description": "<p>Magikern specificerar först något han vill leta efter — en fälla, en hemlig dörr, en trappa, guld, främmande tankar. Besvärjelsen ger sedan magikerns riktning och avstånd till det föremål av den valda typen som ligger närmast. ⚠ Varje grad låter magikern få reda på riktningen till en sak till. <em>Exempel: en andra gradens VARSEBLIVNING ger riktningen till de två närmaste fällorna.</em> ⚠ Man måste avgöra vad man ska varsebli innan man kastar besvärjelsen. Om en magiker tillverkar ett magiskt föremål med VARSEBLIVNING, PERMANENS och NEXUS kan han välja att tillämpa magin på ett lite annorlunda sätt: när den tillverkas kan han besluta att VARSEBLIVNINGen ska vara ständigt aktiv, men då måste han vid tillverkningen ange vad som ska varseblivas. ⚠ Här gäller det att se upp — en felaktigt uttänkt VARSEBLIVNING kan göra det magiska föremålet näst intill värdelöst.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "2"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!B0Q0SAwQLwfwM7O5"
+}

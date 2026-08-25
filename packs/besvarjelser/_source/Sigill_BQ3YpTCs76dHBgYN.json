@@ -1,0 +1,38 @@
+{
+  "name": "Sigill",
+  "type": "besvarjelse",
+  "_id": "BQ3YpTCs76dHBgYN",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Tills den aktiveras",
+    "range": "Beröring",
+    "description": "<p>Varje effektgrad av denna formel binder en effektgrad hos en annan valfri formel till sig. ⚠ SIGILLet placeras vid en bestämd punkt genom att magikern tecknar ett pentagram med fingrarna över den. Det behövs ingen synlig substans och inget ut­över pentagrammet får tecknas vid denna tidpunkt. Därefter bestäms det krav som ska bryta SIGILLet och utlösa den bundna besvärjelsen (t.ex. att någon vidrör pentagrammet, eller att någon försöker kasta en besvärjelse som påverkar det). ⚠ En SIGILLformel kan inte upptäckas med blotta ögat (om magikern inte har ritat pentagrammet så att det ska synas). Den kan dock kännas genom färdigheten Upptäcka fara eller VARSEBLIVNING, eftersom den lämnar ett astralt avtryck i de magiska energierna i universum. ⚠ Ett SIGILL bryts då dess aktiveringskrav uppfylls, eller om det övervinns av ÖPPNA eller SKINGRA (ÖPPNA utlöser samtidigt besvärjelsens effekter). Ett vanligt SIGILL upphör att existera när det bryts (se dock PERMANENS).</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "3"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BQ3YpTCs76dHBgYN"
+}

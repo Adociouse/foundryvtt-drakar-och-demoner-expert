@@ -16,6 +16,23 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         required: true,
         initial: "elementarmagi",
         choices: [
+          // ⚠ "allman" är INTE en magiskola man kan lära sig — den finns inte i
+          // DODE.magicSchools och går därför inte att välja i rollpersonsskaparens
+          // magiskolesteg. Den märker de besvärjelser Formelboken listar under
+          // rubriken "Allmänna besvärjelser" (tryckt s.1-4): Antimagi, Skingra,
+          // Varseblivning, Beskyddare, Föryngra, Transfer, Livsförlängning,
+          // Formelförbannelse samt magiska föremåls-ritualerna Laddning, Avläsa
+          // magi, Sigill, Tidsinställning, Skingringsritual, Permanens och Nexus.
+          //
+          // Beslut: dessa ska kunna väljas av ALLA skolor. En magiker som kan en
+          // godtycklig skola kan alltså lära sig dem — se magic-training.mjs
+          // #schoolFvFor(), som för "allman" använder rollpersonens HÖGSTA
+          // skolvärde i stället för att slå upp en skola som inte finns.
+          //
+          // ⚠ Permanens och Nexus låg tidigare under "elementarmagi" med en
+          // förklarande notis i beskrivningen — en kringgång av att värdet
+          // saknades. De är flyttade hit.
+          "allman",
           "alkemi", "animism", "demonologi", "elementarmagi", "harmonism", "haxkonster",
           "illusionism", "mentalism", "nekromanti", "rostmagi", "spiritism", "stavmagi", "symbolism"
         ]

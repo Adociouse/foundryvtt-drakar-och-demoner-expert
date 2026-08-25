@@ -1,0 +1,38 @@
+{
+  "name": "Skingringsritual",
+  "type": "besvarjelse",
+  "_id": "ShjVrWB5Z0fIQGwT",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Tre gånger ritualens effektgrad ska övervinna summan av de magiska effektgrader som finns i föremålet. ⚠ Lyckas slaget är magin skingrad för all framtid. Misslyckas slaget får magikern slå en gång för snedtändning. Fumlar slaget ska han slå två gånger på snedtändningstabellen.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "4"
+    }
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787671658406,
+    "modifiedTime": 1787671658406,
+    "lastModifiedBy": "GenAllmanFormel1",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ShjVrWB5Z0fIQGwT"
+}
