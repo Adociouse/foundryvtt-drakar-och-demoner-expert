@@ -1,0 +1,38 @@
+{
+  "name": "Skrän",
+  "type": "besvarjelse",
+  "_id": "0XxLzRAHsqJ0YqNL",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 5,
+    "kvick": true,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Besvärjaren skapar en hög, skärande ton som kan påverka alla levande varelser inom räckvidden. En förhäxad varelse är oförmögen att använda några som helst färdigheter. ⚠ Förhäxade OINTELLIGENTA varelser flyr ut ur besvärjelsens område. Förhäxade INTELLIGENTA varelser kan välja mellan att stanna kvar eller fly — stannar de kvar är förflyttning och färdigheter halverade.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "27"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!0XxLzRAHsqJ0YqNL"
+}

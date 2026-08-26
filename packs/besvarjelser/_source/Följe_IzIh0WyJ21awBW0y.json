@@ -1,0 +1,38 @@
+{
+  "name": "Följe",
+  "type": "besvarjelse",
+  "_id": "IzIh0WyJ21awBW0y",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 9,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern riktar besvärjelsen mot en viss levande intelligent varelse inom räckvidden. Om han blir förhäxad glömmer han vad han håller på med och följer efter källan till musiken på några stegs avstånd. Om magikern står kvar ställer sig den förhäxade inom räckvidden, alldeles tyst, och lyssnar. Besvärjelsen bryts om offret utsätts för angrepp eller våld.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "29"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!IzIh0WyJ21awBW0y"
+}

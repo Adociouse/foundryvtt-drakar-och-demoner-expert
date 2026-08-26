@@ -1,0 +1,38 @@
+{
+  "name": "Sammetsröst",
+  "type": "besvarjelse",
+  "_id": "6kTqHTcfgIGQ5ZB6",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "1T3 minuter",
+    "range": "Hörhåll",
+    "description": "<p>Allt som magikern säger verkar klokt och förnuftigt. Den som har INT 11 eller mer får slå ett kritiskt INT-slag, och om det lyckas blir den inte påverkad. Alla andra lyder magikern om det inte åsamkar dem fysisk skada och smärta. ⚠ När varaktigheten är över tar bara förmågan att påverka slut — resultatet av besvärjelsen står kvar.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6kTqHTcfgIGQ5ZB6"
+}

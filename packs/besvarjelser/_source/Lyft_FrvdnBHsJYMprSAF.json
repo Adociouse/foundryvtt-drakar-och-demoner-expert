@@ -1,0 +1,38 @@
+{
+  "name": "Lyft",
+  "type": "besvarjelse",
+  "_id": "FrvdnBHsJYMprSAF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx10 rutor",
+    "description": "<p>Magikern kan lyfta föremål och personer upp i luften och förflytta dem svävande. ⚠ Besvärjelsen fungerar precis som Mentalismens besvärjelse med samma namn, förutom att räckvidden är mindre.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!FrvdnBHsJYMprSAF"
+}

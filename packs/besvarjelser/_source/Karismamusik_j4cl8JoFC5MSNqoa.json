@@ -1,0 +1,38 @@
+{
+  "name": "Karismamusik",
+  "type": "besvarjelse",
+  "_id": "j4cl8JoFC5MSNqoa",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "S/2 rutor",
+    "description": "<p>Harmonisten spelar behaglig bakgrundsmusik medan en annan person talar. Musiken höjer talarens KAR med åtta poäng.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "29"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!j4cl8JoFC5MSNqoa"
+}

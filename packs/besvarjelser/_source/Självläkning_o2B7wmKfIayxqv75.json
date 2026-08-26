@@ -1,0 +1,38 @@
+{
+  "name": "Självläkning",
+  "type": "besvarjelse",
+  "_id": "o2B7wmKfIayxqv75",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Personlig",
+    "description": "<p>Med hjälp av denna besvärjelse kan magikern kanalisera magisk energi in i sin kropp för att läka skador på sig själv. För varje minut som magikern utför besvärjelsen kan han läka lika många KP som effektgraden.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!o2B7wmKfIayxqv75"
+}

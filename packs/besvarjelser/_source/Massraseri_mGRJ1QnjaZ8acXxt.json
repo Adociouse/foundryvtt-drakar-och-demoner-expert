@@ -1,0 +1,38 @@
+{
+  "name": "Massraseri",
+  "type": "besvarjelse",
+  "_id": "mGRJ1QnjaZ8acXxt",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Besvärjelsen påverkar alla levande varelser inom räckvidden. De som förhäxas uppfylls av ett våldsamt raseri och börjar gå bärsärk. De förhäxade angriper vettlöst närmaste fiende de ser (utom magikern) och fortsätter sin bärsärkagång så länge besvärjelsen varar eller tills alla fiender har flytt eller försatts ur stridbart skick. ⚠ Besvärjelsen får alla att angripa varandra oavsett vilka känslor de hyste för varandra innan.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "31"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mGRJ1QnjaZ8acXxt"
+}

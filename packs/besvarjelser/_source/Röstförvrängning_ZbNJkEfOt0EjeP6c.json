@@ -1,0 +1,34 @@
+{
+  "name": "Röstförvrängning",
+  "type": "minibesvarjelse",
+  "_id": "ZbNJkEfOt0EjeP6c",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "psyCost": 1,
+    "source": {
+      "book": "formelboken",
+      "page": "27"
+    },
+    "description": "<p>Harmonisten kan förvränga sin röst, få den ihålig, ändra ton- och röstläge, etc. ⚠ Röstförvrängning kan inte användas tillsammans med andra besvärjelser.</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZbNJkEfOt0EjeP6c"
+}

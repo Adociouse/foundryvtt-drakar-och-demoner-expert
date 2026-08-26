@@ -1,0 +1,38 @@
+{
+  "name": "Dansande vapen",
+  "type": "besvarjelse",
+  "_id": "6uh4xOSCrUlRvUkr",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 8,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx10 rutor",
+    "description": "<p>Magikern kan med den här snabba och mycket omväxlande musiken få ett närstridsvapen att sväva fritt i luften, från marken upp till besvärjelsens räckvidd. Han kan få vapnet att dansa omkring och styra det som han vill med hjälp av musiken, och utnyttja det i strid medan han själv befinner sig på säkert avstånd (dock inom räckvidden). ⚠ Detta kräver att magikern har färdighet i det aktuella vapnet, och han måste använda färdigheten när han styr det. Om besvärjelsen bryts faller vapnet till marken; detsamma händer om vapnet skulle gå sönder. ⚠ Vapnet som besvärjelsen läggs på får inte vara av järn.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!6uh4xOSCrUlRvUkr"
+}

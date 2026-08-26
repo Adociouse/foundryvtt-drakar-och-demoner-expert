@@ -1,0 +1,38 @@
+{
+  "name": "Häva förstening",
+  "type": "besvarjelse",
+  "_id": "51pczuiWGAzdLOvo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Med hjälp av denna besvärjelses sköna musik kan magikern återställa en levande varelse som förvandlats till sten (t.ex. av en basilisk eller genom FÖRSTENA) till sitt naturliga skick. ⚠ Om det gäller att häva en FÖRSTENA måste HÄVA FÖRSTENINGens effektgrad övervinna FÖRSTENAns på motståndstabellen. Det räcker dock inte med bara musik — magikern måste också utföra en rituell dans.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "31"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!51pczuiWGAzdLOvo"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Reptrick",
+  "type": "besvarjelse",
+  "_id": "TGLRLCzz3UbR0Nz9",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 4,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Beröring",
+    "description": "<p>Magikern kan få en repsektion med en längd på 2×E meter att resa sig från marken med en hastighet av en meter per sekund och stå lodrätt. ⚠ Sektionen står stabilt och blir lika hård och styv som stål — ett utmärkt klätterredskap.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "27"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!TGLRLCzz3UbR0Nz9"
+}

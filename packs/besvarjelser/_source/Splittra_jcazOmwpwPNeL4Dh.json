@@ -1,0 +1,38 @@
+{
+  "name": "Splittra",
+  "type": "besvarjelse",
+  "_id": "jcazOmwpwPNeL4Dh",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 9,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "S/2 rutor",
+    "description": "<p>Magikern skapar en hög, skärande ton. Alla ting av glas, lergods, keramik och porslin inom räckvidden splittras omedelbart. ⚠ Magiska föremål av dessa material har en chans att klara sig — de splittras bara om SPLITTRAns effektgrad övervinner summan av effektgraderna i föremålet.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "29"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!jcazOmwpwPNeL4Dh"
+}

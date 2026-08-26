@@ -1,0 +1,38 @@
+{
+  "name": "Regenererande musik",
+  "type": "besvarjelse",
+  "_id": "uwFg7yJpcnoDlH9x",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Special",
+    "range": "Beröring",
+    "description": "<p>Med denna besvärjelse kan harmonisten få en förlorad kroppsdel, t.ex. en avhuggen arm eller vinge, att växa ut igen. En kroppsdel per effektgrad påverkas. ⚠ Kräver ett helt dygns spelande, och både magikern och målet måste vara koncentrerade under hela tiden. Kroppsdelen/-delarna växer successivt fram under spelandet för att efter ett dygn vara helt återställda. Besvärjelsen kan också få förtvinade eller bortruttnade muskler och senor i en kroppsdel att fullt återställas.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "31"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!uwFg7yJpcnoDlH9x"
+}

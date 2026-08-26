@@ -1,0 +1,38 @@
+{
+  "name": "Obemärkt",
+  "type": "besvarjelse",
+  "_id": "kWQ8lCCegBj10ohg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 8,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Besvärjelsen påverkar alla levande varelser inom räckvidden. De som förhäxas kan inte uppfatta magikern med hjälp av syn, hörsel eller luktsinne — de hör inte ens hans besvärjelse. ⚠ En förhäxad varelse kan däremot uppfatta magikern med känselsinnet, och om så sker bryts förhäxningen för den varelsen omedelbart.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!kWQ8lCCegBj10ohg"
+}

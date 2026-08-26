@@ -1,0 +1,38 @@
+{
+  "name": "Fruktan",
+  "type": "besvarjelse",
+  "_id": "VxpTzQ74xwCJ0N8n",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern riktar besvärjelsen mot en viss levande intelligent varelse inom räckvidden. Om han förhäxas måste han slå en gång på Skräcktabellen. Varelsen ska bara slå en gång under besvärjelsens varaktighet.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!VxpTzQ74xwCJ0N8n"
+}

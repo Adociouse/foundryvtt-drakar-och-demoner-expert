@@ -1,0 +1,38 @@
+{
+  "name": "Massmod",
+  "type": "besvarjelse",
+  "_id": "HM8TFmEZMGvnudES",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Besvärjelsen påverkar alla levande varelser inom räckvidden, inklusive magikern. Så länge som magikern utför denna besvärjelse behöver de förhäxade varelserna inte slå på Skräcktabellen av några som helst orsaker.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "30"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!HM8TFmEZMGvnudES"
+}

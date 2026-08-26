@@ -1,0 +1,38 @@
+{
+  "name": "Själatröst",
+  "type": "besvarjelse",
+  "_id": "NKa63jkij1S4YNRt",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Beröring",
+    "description": "<p>Alla som sitter och koncentrerar sig på musiken känner hur de uppfylls av ro och lugn. Efter en liten stund uppgår de i en trans där de inte är medvetna om vad som händer med dem. För att väcka dem måste man vidröra ansiktet, ge dem en örfil, kyssa dem eller stryka dem över kinden. ⚠ Alla som blir förhäxade och ostört uppgår i trans renas sedan från allt påfrestande i sina själar: besvärjelser som verkar negativt på dem skingras, förbannelser och fobier upplöses, skador som drabbat sinne och själ läks och renas. Är sinnet fördystrat av sorg hjälper besvärjelsen till att bära sorgen — den påverkar också de förhäxade så att de för några timmar framåt inte minns hemska upplevelser och tunga sorger, men tvingar inte bort dem för alltid.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "31"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NKa63jkij1S4YNRt"
+}

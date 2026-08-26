@@ -1,0 +1,38 @@
+{
+  "name": "Mod",
+  "type": "besvarjelse",
+  "_id": "JBGSEqkTEfj7COQj",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Personlig",
+    "description": "<p>Så länge som magikern utför denna besvärjelse behöver han inte slå på Skräcktabellen av några som helst orsaker.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "28"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!JBGSEqkTEfj7COQj"
+}

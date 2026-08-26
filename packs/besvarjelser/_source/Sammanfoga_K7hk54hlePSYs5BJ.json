@@ -1,0 +1,38 @@
+{
+  "name": "Sammanfoga",
+  "type": "besvarjelse",
+  "_id": "K7hk54hlePSYs5BJ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Se beskrivning",
+    "range": "Beröring",
+    "description": "<p>Denna vackra musik, som sägs vara en del av de äldsta gudarnas skapelsehymn, återställer formen hos mindre, tillverkade föremål som spräckts, förvridits eller på annat sätt gått sönder. ⚠ De föremål som ska återställas måste en gång ha haft den form de ska återställas till. Effektgraden påverkar massan hos: E1 — dolk (10 minuters spel); E2 — långsvärd (20 minuters spel); E3 — 2H-svärd (en timmes spel); E4 — rustning (en halv dags spel); E5 — mindre vagn (en hel dags spel + en dags vila).</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "30"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!K7hk54hlePSYs5BJ"
+}

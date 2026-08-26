@@ -1,0 +1,38 @@
+{
+  "name": "Botande musik",
+  "type": "besvarjelse",
+  "_id": "BZVsd5j81EZF8b9N",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 16,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Beröring",
+    "description": "<p>Besvärjelsens musik botar en av magikern utvald varelse från en sjukdom per effektgrad och per timme som harmonisten spelar (en effektgrad och en timmes spelande botar en sjukdom, två effektgrader och två timmars spelande botar två sjukdomar osv). ⚠ Svårare sjukdomar, t.ex. pest och polio, kan kräva en eller flera extra effektgrader. Besvärjelsen botar även varelsen från de permanenta kroppsliga eller själsliga skador som sjukdomen redan hunnit orsaka.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "31"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BZVsd5j81EZF8b9N"
+}

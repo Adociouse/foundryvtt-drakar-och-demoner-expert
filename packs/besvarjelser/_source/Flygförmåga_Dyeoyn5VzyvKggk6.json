@@ -1,0 +1,38 @@
+{
+  "name": "Flygförmåga",
+  "type": "besvarjelse",
+  "_id": "Dyeoyn5VzyvKggk6",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 6,
+    "kvick": true,
+    "duration": "Konc",
+    "range": "Personlig",
+    "description": "<p>Magikern kan flyga med en hastighet av 4×E rutor per SR. Han kan bära högst 2×E BEP last.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "27"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Dyeoyn5VzyvKggk6"
+}

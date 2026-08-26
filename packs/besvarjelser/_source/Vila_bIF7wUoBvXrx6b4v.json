@@ -1,0 +1,38 @@
+{
+  "name": "Vila",
+  "type": "besvarjelse",
+  "_id": "bIF7wUoBvXrx6b4v",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 8,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Sx2 rutor",
+    "description": "<p>Denna underskönа besvärjelse vederkvicker alla koncentrerade åhörare så att två timmars lyssnande helt ersätter en hel natts sömn. Besvärjelsen verkar även på magikern själv. ⚠ Förmår inte genomtränga svartfolkens och stenfolkens tjocka skallar, vilka alltså inte kan påverkas av besvärjelsen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "29"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bIF7wUoBvXrx6b4v"
+}

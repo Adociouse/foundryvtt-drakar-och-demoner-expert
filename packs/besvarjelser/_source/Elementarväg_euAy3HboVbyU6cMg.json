@@ -1,0 +1,38 @@
+{
+  "name": "Elementarväg",
+  "type": "besvarjelse",
+  "_id": "euAy3HboVbyU6cMg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "system": {
+    "school": "harmonism",
+    "sValue": 20,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Personlig",
+    "description": "<p>Medan magikern spelar den här besvärjelsens musik är han helt skyddad från skada av de naturliga elementen — han kan varken få brännskador eller köldskador. Han kan gå på vatten om han vill, och får också förmågan att andas under vatten (luft, om det är en vattenlevande varelse). Vindarna påverkar honom inte, och han kan utan problem gå i de starkaste stormbyar. Han kan passera genom all materia utom järn och bly, med en hastighet av tre rutor per SR, och kan sväva i luften cirka två meter över marken med en hastighet av två rutor per SR per effektgrad. Han kan heller inte bländas av ljus och kan se i mörker. ⚠ Allt detta gäller bara NATURLIGA element — inga rena element framkallade på magisk väg.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "31"
+    }
+  },
+  "effects": [],
+  "folder": "RIMgmAlELKcOeHG3",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787777451947,
+    "modifiedTime": 1787777451947,
+    "lastModifiedBy": "GenHarmonism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!euAy3HboVbyU6cMg"
+}
