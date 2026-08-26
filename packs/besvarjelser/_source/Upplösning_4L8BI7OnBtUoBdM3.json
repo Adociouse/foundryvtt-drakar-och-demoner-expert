@@ -1,0 +1,38 @@
+{
+  "name": "Upplösning",
+  "type": "besvarjelse",
+  "_id": "4L8BI7OnBtUoBdM3",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "S/4 timmar",
+    "range": "Beröring",
+    "description": "<p>Kastaren upplöser ett helt föremål på max ett BEP per effektgrad, så att det verkar upphöra att existera. ⚠ I själva verket bär magikern nu föremålet i sitt medvetande. När magikern så önskar, när varaktigheten går ut, eller om han blir medvetslös, materialiseras föremålet på högst armlängds avstånd framför magikern. ⚠ Att förvara ett föremål i sitt medvetande kräver en viss koncentration hela tiden: magikern kan inte få tillbaka de använda PSY-poängen förrän föremålet har kallats fram igen, och han kan heller inte lägga några andra besvärjelser under tiden.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!4L8BI7OnBtUoBdM3"
+}

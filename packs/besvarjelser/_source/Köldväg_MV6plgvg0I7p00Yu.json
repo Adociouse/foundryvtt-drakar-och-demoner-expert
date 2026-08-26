@@ -1,0 +1,38 @@
+{
+  "name": "Köldväg",
+  "type": "besvarjelse",
+  "_id": "MV6plgvg0I7p00Yu",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade påverkas inte av naturlig kyla på något sätt. ⚠ En Glacials kyla är inte naturlig. All utrustning han bär på kroppen är också skyddad.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "25"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MV6plgvg0I7p00Yu"
+}

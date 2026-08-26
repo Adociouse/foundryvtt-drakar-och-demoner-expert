@@ -1,0 +1,38 @@
+{
+  "name": "Jordstöt",
+  "type": "besvarjelse",
+  "_id": "YBaD8nmfnoZ19xIF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern markerar inom ett område med honom själv som mittpunkt och räckvidden som radie att skaka till rejält en gång. ⚠ Alla föremål som inte är fast förankrade i marken välter eller rasar. Levande varelser, inklusive magikern, måste slå ett svårt SMI-kast för att stå kvar på benen. ⚠ Om man använder denna besvärjelse i underjorden är det ca 10 % chans per effektgrad att ett ras förorsakas — effekterna av detta ras får SL bedöma, men generellt sett kan man säga att ju lägre tärningsslaget är, desto värre är raset. ⚠ Fast förankrade föremål, t.ex. träd och byggnader, påverkas inte i någon större utsträckning av jordstöten.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!YBaD8nmfnoZ19xIF"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Stenvägg",
+  "type": "besvarjelse",
+  "_id": "HdBSDsaSeTu1pMzZ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 3,
+    "kvick": false,
+    "duration": "S/4 minuter",
+    "range": "S/2 rutor",
+    "description": "<p>Drar upp en vägg ur marken eller ett stengolv. Väggen kan dras fram var som helst inom 12 m och är rätblocksformad med måtten 1×3×3 m. ⚠ Varje grad över den första lägger till en meter på valfri led. Väggen har tio KP per kubikmeter.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!HdBSDsaSeTu1pMzZ"
+}

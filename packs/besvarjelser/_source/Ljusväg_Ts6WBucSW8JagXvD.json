@@ -1,0 +1,38 @@
+{
+  "name": "Ljusväg",
+  "type": "besvarjelse",
+  "_id": "Ts6WBucSW8JagXvD",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade förvandlas till en liten (fem cm i diameter) kula av vitt ljus som färdas i en bestämd riktning med en hastighet av 150 rutor per SR. ⚠ Enda sättet att ändra riktning är genom att studsa mot en reflekterande yta. Han kan färdas genom alla fasta ämnen som släpper igenom ljus (till exempel glas), alla klara vätskor och alla gaser. ⚠ Om han stöter emot en matt yta stannar han omedelbart och återfår sin egen skepnad. I annat fall färdas han tills varaktigheten tagit slut. Om man en gång har färdats från en punkt till en annan kan man göra om samma resa. Man lär sig vilken riktning man ska ha. ⚠ En del trollkarlar använder avancerade riktinstrument för att inte fara in i någon bergvägg. ⚠ Om någon lägger en MÖRKER på ljuskulan och lyckas förhäxa den person som utgör kulan, blir den förhäxade förintad — just i detta speciella fall räknas MÖRKER inte som en fysisk manifestation.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Ts6WBucSW8JagXvD"
+}

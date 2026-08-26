@@ -1,0 +1,38 @@
+{
+  "name": "Förstärka",
+  "type": "besvarjelse",
+  "_id": "JQNhe5qO7tljqixo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 6,
+    "kvick": true,
+    "duration": "Sx1 minuter",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern kan förstärka ett eller flera föremål. Ett vapen, en sköld eller en rustningsdel — men lika gärna en dörr, en stol, ett bord eller en kista — kan få sitt BV/ABS ökat med ett per effektgrad. ⚠ Det krävs en effektgrad per KP per kubikmeter. Med extra effektgrader kan man förhäxa flera föremål.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "20"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!JQNhe5qO7tljqixo"
+}

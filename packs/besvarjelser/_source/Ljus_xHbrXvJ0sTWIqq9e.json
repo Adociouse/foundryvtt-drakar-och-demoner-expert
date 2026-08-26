@@ -1,0 +1,38 @@
+{
+  "name": "Ljus",
+  "type": "besvarjelse",
+  "_id": "xHbrXvJ0sTWIqq9e",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 2,
+    "kvick": false,
+    "duration": "Sx4 minuter",
+    "range": "Sx10 rutor",
+    "description": "<p>Får en del av ett föremål (ungefär 50 kubikcentimeter) att bli självlysande. Ljuset räcker till att lysa upp allt inom tre meter från den lysande delen av föremålet. ⚠ För varje grad utöver den första kan man öka ljusstyrkan så att ljuset räcker tre meter till, eller utöka varaktigheten med fem minuter.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "18"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!xHbrXvJ0sTWIqq9e"
+}

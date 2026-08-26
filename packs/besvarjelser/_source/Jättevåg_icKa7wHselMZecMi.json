@@ -1,0 +1,38 @@
+{
+  "name": "Jättevåg",
+  "type": "besvarjelse",
+  "_id": "icKa7wHselMZecMi",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 12,
+    "kvick": true,
+    "duration": "Sx1 SR",
+    "range": "Sx10 rutor",
+    "description": "<p>En magiker som befinner sig på öppet vatten kan åstadkomma en hög och kraftig våg på valfri plats inom räckvidden oberoende av hur vädret är i övrigt. ⚠ Vågens höjd är ca fem meter per effektgrad. Om vågen kastas mot en båt, ett skepp eller liknande gör den 1T10/E i skada på farkosten. Om den är tillräckligt hög för att kunna kastas över ett skeppsdäck kan den, förutom skadan, också svepa bort alla mindre, lösa föremål. ⚠ Större lösa föremål, till exempel livbåtar, måste jämföra sin STO mot JÄTTEVÅGens STY (STY är lika med 10×E) på motståndstabellen för att se om de spolas överbord. Personer ombord måste jämföra JÄTTEVÅGENS STY mot lämplig grundegenskap (STY om man håller sig fast i masten, STO eller SMI om man bara står på däck). Den som misslyckas spolas överbord.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "25"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!icKa7wHselMZecMi"
+}

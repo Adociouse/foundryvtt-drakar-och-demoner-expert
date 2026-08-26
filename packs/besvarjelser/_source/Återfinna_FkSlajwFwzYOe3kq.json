@@ -1,0 +1,38 @@
+{
+  "name": "Återfinna",
+  "type": "besvarjelse",
+  "_id": "FkSlajwFwzYOe3kq",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Trollkarlen kan hitta ett föremål som har varit i hans ägo under minst ett dygn. ⚠ Om trollkarlen lyckas med besvärjelsen, och föremålet befinner sig inom räckvidden, kommer han att känna avstånd och riktning till det. För en extra effektgrad kan trollkarlen söka efter ytterligare ett föremål.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "25"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!FkSlajwFwzYOe3kq"
+}

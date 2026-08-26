@@ -1,0 +1,38 @@
+{
+  "name": "Förstena",
+  "type": "besvarjelse",
+  "_id": "bAAwux1NLT9TmsFN",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 19,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "S/2 rutor",
+    "description": "<p>Magikern kan förändra en levande varelses kropp till att bli massiv sten. ⚠ Alla kläder och ägodelar som varelsen har på sig förstenas också. Stenen är mycket hård och är näst intill oförstörbar — de värsta skador som kan åstadkommas är små skrapor. ⚠ Medan varelsen är förstenad befinner den sig i fullständig koma och kan inte uppfatta eller påverka något som sker runt omkring. När besvärjelsens varaktighet löpt ut återgår varelsen till sitt vanliga skick. ⚠ Man kan också befria en förstenad genom HÄVA FÖRSTENING om dess effektgrad övervinner FÖRSTENANs på motståndstabellen. ⚠ En förstenad varelse fastnar inte i marken på något sätt utan är fullt möjlig att flytta runt (om man nu orkar) — hon väger ungefär tre gånger sin normalvikt.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "26"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bAAwux1NLT9TmsFN"
+}

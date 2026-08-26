@@ -1,0 +1,38 @@
+{
+  "name": "Explosion",
+  "type": "besvarjelse",
+  "_id": "z5XsihAwaD7Zx2kT",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 11,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "Sx10 rutor",
+    "description": "<p>Framkallar en eld- och ljusexplosion på valfri plats inom räckvidden. ⚠ EXPLOSIONen ger fem i skada per effektgrad (dras från totala KP) på alla som står inom E meter från EXPLOSIONens centrum. För de som står längre bort minskar skadan med ett för varje ruta. ⚠ Även magikern kan komma att drabbas av skador. Alla som ser explosionen (inklusive magikern) blir, om de inte skyddar sig, tillfälligt förblindade nästa SR. En förblindad person behandlas som om han befann sig i mörker.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "25"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!z5XsihAwaD7Zx2kT"
+}

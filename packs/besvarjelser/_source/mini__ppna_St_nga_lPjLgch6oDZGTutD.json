@@ -2,9 +2,9 @@
   "name": "Öppna/Stänga",
   "type": "minibesvarjelse",
   "_id": "lPjLgch6oDZGTutD",
-  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
   "system": {
-    "school": "animism",
+    "school": "allman",
     "psyCost": 1,
     "source": {
       "book": "magi",
@@ -13,7 +13,7 @@
     "description": "<p>Öppnar eller stänger ett litet lås eller enkelt mekaniskt fäste</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
   },
   "effects": [],
-  "folder": null,
+  "folder": "aLLmAnBesvarjeL1",
   "sort": 0,
   "ownership": {
     "default": 2

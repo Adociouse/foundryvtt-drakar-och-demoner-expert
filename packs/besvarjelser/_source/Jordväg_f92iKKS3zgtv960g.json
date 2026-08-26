@@ -1,0 +1,38 @@
+{
+  "name": "Jordväg",
+  "type": "besvarjelse",
+  "_id": "f92iKKS3zgtv960g",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Gör det möjligt att röra sig genom alla former av icke-magisk fast materia, utom järn och bly, med en högsta fart av tre rutor per SR. Den förhäxade kan bära med sig all utrustning han har på kroppen och bestämmer i vilken riktning han vill röra sig så länge han koncentrerar sig på detta. ⚠ Om koncentrationen störs eller avbryts av annan anledning sjunker han neråt med en hastighet av en ruta per SR.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "24"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!f92iKKS3zgtv960g"
+}

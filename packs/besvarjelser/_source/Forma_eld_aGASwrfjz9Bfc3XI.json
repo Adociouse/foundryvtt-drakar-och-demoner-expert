@@ -1,0 +1,38 @@
+{
+  "name": "Forma eld",
+  "type": "besvarjelse",
+  "_id": "aGASwrfjz9Bfc3XI",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 11,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "S/2 rutor",
+    "description": "<p>Magikern kan forma en eld så att den liknar en figur av något slag, till exempel en hand eller en varelse. Magikern bestämmer själv hur han vill forma den. ⚠ Elden måste befinna sig inom räckvidden och kan vara av vilken storlek som helst, från en tändstickslåga till en stor eldsvåda, men den måste vara naturlig. Man kan även forma en eld av magiskt ursprung om FORMA ELDens effektgrad övervinner den magiska eldens (har den ingen kan SL bestämma ett lämpligt värde). ⚠ Drakeld är en typ som på grund av sin starka magi inte kan formas.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "25"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!aGASwrfjz9Bfc3XI"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "Minilyft",
+  "type": "minibesvarjelse",
+  "_id": "UHgYMt3G9RjXIRxJ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/allman.png",
+  "system": {
+    "school": "allman",
+    "psyCost": 1,
+    "source": {
+      "book": "formelboken",
+      "page": "1"
+    },
+    "description": "<p>Lyfter ett föremål som väger högst 20 gram till önskad plats inom högst fem meter från besvärjaren. ⚠ Magikern måste se föremålet.</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+  },
+  "effects": [],
+  "folder": "aLLmAnBesvarjeL1",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787676044741,
+    "modifiedTime": 1787676044741,
+    "lastModifiedBy": "FixMinimagiSkola",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!UHgYMt3G9RjXIRxJ"
+}

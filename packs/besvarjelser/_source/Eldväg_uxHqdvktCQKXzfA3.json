@@ -1,0 +1,38 @@
+{
+  "name": "Eldväg",
+  "type": "besvarjelse",
+  "_id": "uxHqdvktCQKXzfA3",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
+  "system": {
+    "school": "elementarmagi",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade kan vistas i naturlig eld utan att ta skada. ⚠ Drakeld är dock inte naturlig eld. All utrustning den förhäxade bär på kroppen är också skyddad.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "24"
+    }
+  },
+  "effects": [],
+  "folder": "GYHnhvls5MdcpM7L",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787687982204,
+    "modifiedTime": 1787687982204,
+    "lastModifiedBy": "GenElementarmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!uxHqdvktCQKXzfA3"
+}

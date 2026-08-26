@@ -35,6 +35,14 @@ export default class DoDEMinibesvarjelseData extends foundry.abstract.TypeDataMo
         required: true,
         initial: "animism",
         choices: [
+          // ⚠ "allman" är ingen lärbar magiskola — se item-besvarjelse.mjs.
+          // Formelboken s.1 listar tolv minibesvärjelser under rubriken
+          // "Allmänna besvärjelser / Minimagi" som varje magiker har tillgång
+          // till oavsett skola: Ljusspel, Bläddra, Knäppa, Tryckvåg, Kyla/Värme,
+          // Minilyft, Putsa/Smutsa, Vindpust, Smaksätt, Vissling, Väldoft,
+          // Öppna/Stänga. Varje skola har DESSUTOM sin egen minimagi (animismens
+          // är Bevara, Identifiera, Lugna och Natura, s.4).
+          "allman",
           "alkemi", "animism", "demonologi", "elementarmagi", "harmonism", "haxkonster",
           "illusionism", "mentalism", "nekromanti", "rostmagi", "spiritism", "stavmagi", "symbolism"
         ]
