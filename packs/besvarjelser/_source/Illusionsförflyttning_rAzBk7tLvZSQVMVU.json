@@ -1,0 +1,38 @@
+{
+  "name": "Illusionsförflyttning",
+  "type": "besvarjelse",
+  "_id": "rAzBk7tLvZSQVMVU",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
+  "system": {
+    "school": "illusionism",
+    "sValue": 3,
+    "kvick": false,
+    "duration": "1T6 SR",
+    "range": "Beröring",
+    "description": "<p>Besvärjelsen får den förhäxade att se ut som om han flimrade snabbt fram och tillbaka, något som ger −3 på chansen att träffa honom med ett vapen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "36"
+    }
+  },
+  "effects": [],
+  "folder": "U06x1PcA5ANHV5qk",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788261600375,
+    "modifiedTime": 1788261600375,
+    "lastModifiedBy": "GenIllusionism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!rAzBk7tLvZSQVMVU"
+}

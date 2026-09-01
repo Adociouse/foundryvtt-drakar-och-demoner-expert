@@ -1,0 +1,38 @@
+{
+  "name": "Dunkel",
+  "type": "besvarjelse",
+  "_id": "p92fkkeoJY7toORo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
+  "system": {
+    "school": "illusionism",
+    "sValue": 4,
+    "kvick": false,
+    "duration": "S/4 minuter",
+    "range": "Beröring",
+    "description": "<p>Besvärjelsen gör att man blir svårare att urskilja — man verkar bli suddig och diffus. ⚠ För varje grad får en angripare −1 på alla CL för närstridsvapen, −2 på CL för avståndsvapen och −2 på CL för Finna dolda ting när man söker efter den förhäxade.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "37"
+    }
+  },
+  "effects": [],
+  "folder": "U06x1PcA5ANHV5qk",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788261600375,
+    "modifiedTime": 1788261600375,
+    "lastModifiedBy": "GenIllusionism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!p92fkkeoJY7toORo"
+}

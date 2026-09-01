@@ -1,0 +1,38 @@
+{
+  "name": "Illusionskopia",
+  "type": "besvarjelse",
+  "_id": "azHa8Vt9YWBFR2MC",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
+  "system": {
+    "school": "illusionism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx1 SR",
+    "range": "Personlig",
+    "description": "<p>Magikern skapar en exakt kopia av sig själv för varje effektgrad. Motståndaren kan inte skilja den riktiga magikern från kopiorna. ⚠ Alla kopiorna kan röra sig och prata, men kan inte påverka något fysiskt. En kopia försvinner om någon vidrör den på något sätt.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "37"
+    }
+  },
+  "effects": [],
+  "folder": "U06x1PcA5ANHV5qk",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788261600375,
+    "modifiedTime": 1788261600375,
+    "lastModifiedBy": "GenIllusionism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!azHa8Vt9YWBFR2MC"
+}

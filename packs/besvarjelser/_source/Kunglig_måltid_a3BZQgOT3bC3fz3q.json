@@ -1,0 +1,38 @@
+{
+  "name": "Kunglig måltid",
+  "type": "besvarjelse",
+  "_id": "a3BZQgOT3bC3fz3q",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
+  "system": {
+    "school": "illusionism",
+    "sValue": 3,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "S/2 rutor",
+    "description": "<p>Besvärjelsen får en måltid att smaka på det sätt som magikern önskar. Den utnyttjas främst när det gäller fältproviant. ⚠ Den här besvärjelsen påverkar även magikerns eget smaksinne om han vill.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "36"
+    }
+  },
+  "effects": [],
+  "folder": "U06x1PcA5ANHV5qk",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788261600375,
+    "modifiedTime": 1788261600375,
+    "lastModifiedBy": "GenIllusionism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!a3BZQgOT3bC3fz3q"
+}
