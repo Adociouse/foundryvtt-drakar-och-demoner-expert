@@ -5,7 +5,7 @@
     "school": "illusionism",
     "sValue": 13,
     "kvick": false,
-    "duration": "¼ dygn",
+    "duration": "S/4 dygn",
     "range": "Beröring",
     "description": "<p>Föremål fångar info inom 5m och sänder 200m bort: E1=känsla, E2=+ljud, E3=+bild, E4=+lukt, E5=+temp</p>",
     "ritual": false,

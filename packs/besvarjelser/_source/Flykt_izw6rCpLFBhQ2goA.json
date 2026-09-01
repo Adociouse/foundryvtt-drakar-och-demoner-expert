@@ -1,0 +1,38 @@
+{
+  "name": "Flykt",
+  "type": "besvarjelse",
+  "_id": "izw6rCpLFBhQ2goA",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 4,
+    "kvick": false,
+    "duration": "Sx1 SR",
+    "range": "Sx10 rutor",
+    "description": "<p>Besvärjelsen kan riktas mot ett offer per effektgrad. Offren flyr i panik tills häxan är utom synhåll.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "32"
+    }
+  },
+  "effects": [],
+  "folder": "h3DXV1Kz6bJ5dUGn",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787845006365,
+    "modifiedTime": 1787845006365,
+    "lastModifiedBy": "GenHaxkonster",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!izw6rCpLFBhQ2goA"
+}

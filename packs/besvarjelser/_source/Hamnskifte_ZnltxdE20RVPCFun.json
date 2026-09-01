@@ -1,0 +1,38 @@
+{
+  "name": "Hamnskifte",
+  "type": "besvarjelse",
+  "_id": "ZnltxdE20RVPCFun",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 22,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Personlig",
+    "description": "<p>Ritualen ger häxan förmåga att byta skepnad. ⚠ För att inleda ritualen krävs att en varelse, vars skepnad ska kunna antas, offras av besvärjaren (en per offer vid flera skepnader samtidigt, offrade i snabb följd vid ritualens början). Häxan måste vid varje förvandling lyckas med ett omodifierat slag för besvärjelsen (en SR, kostar 1 PSY) — lyckas slaget sker förvandlingen på en SR, ljudlöst, utan gester eller ord, men häxan måste minnas den önskade gestalten. I förvandlat tillstånd har häxan varelsens speciella sinnen och förmågor, men INTE dess färdighetsvärden — dessa måste tränas upp separat. ⚠ Vid fummel på ett gestaltbyteslag fängslas häxan i en av sina gestalter (slumpmässig) tills någon utför en SKINGRINGSRITUAL vars effektgrad övervinner HAMNSKIFTEts. Kan användas på valfri varelse UTOM de som saknar hjärta eller hjärna — även en drake, om häxan lyckas dräpa en i ritualens inledning. En häxa som redan förtrollat sig kan komplettera med fler varelser: den nya ritualens effektgrad måste överstiga den gamlas med lika många grader som det nya offret krävt, och sedan övervinna den gamla på motståndstabellen för att ta över.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "35"
+    }
+  },
+  "effects": [],
+  "folder": "h3DXV1Kz6bJ5dUGn",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787845006365,
+    "modifiedTime": 1787845006365,
+    "lastModifiedBy": "GenHaxkonster",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ZnltxdE20RVPCFun"
+}

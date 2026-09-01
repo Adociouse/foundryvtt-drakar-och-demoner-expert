@@ -37,7 +37,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
 | FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
-| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 339 besvärjelser, 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och besvärjelsekatalogens fullständighet — se nedan) |
+| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 345 besvärjelser, 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och besvärjelsekatalogens fullständighet — se nedan) |
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
 | GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
@@ -84,7 +84,7 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 | `raser` | 13 raser: 7 grundraser (Människa, Alv, Halvalv, Halvlängdsman, Dvärg, Halvork, Anka) + 6 alvsläkten (Alver s.22) |
 | `yrken` | 36 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 25 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
 | `vapen-utrustning` | 339 poster: 23 vapen, 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
-| `besvarjelser` | 339 besvärjelser (294 besvärjelser + 45 minibesvärjelser) — Formelbokens katalogkomplettering pågår, ~9 av 13 magiskolor kvarstår |
+| `besvarjelser` | 345 besvärjelser (300 besvärjelser + 45 minibesvärjelser, minibesvärjelserna samlade i en egen "Minimagi"-mapp) — Formelbokens katalogkomplettering pågår, ~8 av 13 magiskolor kvarstår |
 | `monster` | 241 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
@@ -99,8 +99,8 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 - **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
 - **Bestiaryn täcker 241 varelser** ur Monsterboken 1, Monsterboken 2, Monsterboxen II och Svartfolk-supplementet — alla fyra KOMPLETTA, inklusive Svartfolks namngivna spelledarpersoner och färdiga svartfolks-arketyper att placera ut direkt. ⚠ Täckningsgraden mot det samlade källmaterialet är dock **inte** fastställd: utöver Monsterboxen IV (56 poster, inga byggda) finns ytterligare tre böcker med varelsestatblock som ännu inte reviderats — *Monster och Man i Ereb Altor*, *Drakar* och *Svartfolk*-supplementet (skilt från Monsterboxen II:s Svartfolk-kapitel, som är byggt).
 - **Spelbara raser finns även som stridbara NPC:er.** Alv-släktena, dvärg, anka, halvlängdsman, halvalv och halvorch har både en `ras`-post i `raser` (rollpersonsbyggsten) och ett fullständigt stridsstatblock i `monster` — så ett högalvsgarde eller en dvärgpatrull kan placeras ut som motståndare direkt.
-- **De flesta besvärjelser saknar egen bildikon** — 331 av 339 visar sin magiskolas symbol i stället för unik konst.
-- **Besvärjelsekatalogen är inte fullständig mot Formelboken.** Allmänna besvärjelser, Animism, Elementarmagi och Harmonism är kompletta (transkriberade skola för skola, se `docs/DESIGN_DECISIONS.md` §2); ~9 av 13 skolor (Illusionism, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Häxkonster, Demonologi) har fortfarande luckor mot boken.
+- **De flesta besvärjelser saknar egen bildikon** — 337 av 345 visar sin magiskolas symbol i stället för unik konst.
+- **Besvärjelsekatalogen är inte fullständig mot Formelboken.** Allmänna besvärjelser, Animism, Elementarmagi, Harmonism och Häxkonster är kompletta (transkriberade skola för skola, se `docs/DESIGN_DECISIONS.md` §2); ~8 av 13 skolor (Illusionism, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Demonologi) har fortfarande luckor mot boken.
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**
 - **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.

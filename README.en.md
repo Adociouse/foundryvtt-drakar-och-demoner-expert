@@ -39,7 +39,7 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 | Base attributes, derived values (HP, PSY, damage bonus, movement, carry capacity) | Done |
 | Skill-value-based skill rolls (critical-success/fumble confirmation) | Done |
 | Guided character wizard (19 steps, book-accurate BP/EP economy, point-buy attributes) | Done, see details below |
-| Compendiums: 13 races, 36 professions, 339 weapons/equipment, 339 spells, 241 monsters | Done (art coverage, weapon roster, bestiary coverage against the source books, and spell catalogue completeness all still have gaps — see below) |
+| Compendiums: 13 races, 36 professions, 339 weapons/equipment, 345 spells, 241 monsters | Done (art coverage, weapon roster, bestiary coverage against the source books, and spell catalogue completeness all still have gaps — see below) |
 | Weapon system: weapon groups, dual-wielding, weapon techniques/academies, unarmed combat styles | Done, with one deliberate simplification (see below) |
 | GM effects (actor/scene/world), status conditions, periodic effects (poison etc.) | Done, with its own GM effects window (`scripts/apps/gm-effects.mjs`) |
 | Training economy (post-creation skill purchases), earning XP in play | Done, own `ApplicationV2` view |
@@ -86,7 +86,7 @@ A finished character can keep training in play through a dedicated training view
 | `raser` | 13 races: 7 base races (Human, Elf, Half-elf, Halfling, Dwarf, Half-orc, Duck) + 6 elf lineages |
 | `yrken` | 36 professions: 11 base professions (Bard, Healer, Warrior, Sage, Assassin, Mage, Monk, Knight, Seafarer, Thief, Frontier Scout) + 25 specializations, each profession carrying a structured skill list for automatic skill assignment and, where the source material provides it, mechanically wired profession abilities |
 | `vapen-utrustning` | 339 entries: 23 weapons, 45 armor pieces (per body part), 271 general equipment — purchasable in the wizard's equipment step |
-| `besvarjelser` | 339 spells (294 spells + 45 mini-spells) — Formelboken catalogue completion in progress, ~9 of 13 magic schools still incomplete |
+| `besvarjelser` | 345 spells (300 spells + 45 mini-spells, mini-spells grouped in their own "Minimagi" folder) — Formelboken catalogue completion in progress, ~8 of 13 magic schools still incomplete |
 | `monster` | 241 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus all of Monsterboxen II — including combat statblocks for the peoples that also exist as playable races) |
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
@@ -101,8 +101,8 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 - **The weapon roster covers 23 of the Player's Handbook's ~52 weapons.** The weapon-group system is built for the full table, but not every entry has been transcribed into the compendium yet.
 - **The bestiary covers 241 creatures** from Monsterboken 1, Monsterboken 2, Monsterboxen II and the Svartfolk supplement — all four COMPLETE, including Svartfolk's named NPCs and its ready-to-drop svartfolk archetypes. ⚠ Coverage against the full source material is **not** established, however: besides Monsterboxen IV (56 entries, none built), three further books containing creature statblocks have not yet been audited — *Monster och Man i Ereb Altor*, *Drakar*, and the *Svartfolk* supplement (distinct from Monsterboxen II's Svartfolk chapter, which is built).
 - **Playable races also exist as fightable NPCs.** The elf lineages, dwarf, duck, halfling, half-elf and half-orc each have both a `ras` entry in `raser` (character-creation building block) and a full combat statblock in `monster` — so a high-elf guard patrol or a dwarf warband can be fielded as opposition directly.
-- **Most spells lack their own icon** — 331 of 339 show their magic school's symbol instead of unique art.
-- **The spell catalogue is not yet complete against Formelboken.** General spells, Animism, Elementarmagi, and Harmonism are complete (transcribed school by school, see `docs/DESIGN_DECISIONS.md` §2); ~9 of 13 schools (Illusionism, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Häxkonster, Demonologi) still have gaps against the book.
+- **Most spells lack their own icon** — 337 of 345 show their magic school's symbol instead of unique art.
+- **The spell catalogue is not yet complete against Formelboken.** General spells, Animism, Elementarmagi, Harmonism, and Häxkonster are complete (transcribed school by school, see `docs/DESIGN_DECISIONS.md` §2); ~8 of 13 schools (Illusionism, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Demonologi) still have gaps against the book.
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
 - **The Svartfolk (Dark Folk) supplement hasn't been started.**
 - **Heroic abilities (HH p.20/46-48) can't be spent yet.** The heroic-deeds table (HH p.6-7) already rolls during character creation and correctly accumulates heroic points as a currency — but the separate 18-row table that currency is meant to be spent against, plus a UI for doing so, aren't built.

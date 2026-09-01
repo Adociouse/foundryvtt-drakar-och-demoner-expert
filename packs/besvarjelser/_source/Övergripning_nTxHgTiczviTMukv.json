@@ -1,0 +1,38 @@
+{
+  "name": "Övergripning",
+  "type": "besvarjelse",
+  "_id": "nTxHgTiczviTMukv",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Sx1 timme",
+    "range": "Beröring",
+    "description": "<p>ÖVERGRIPNING är en formel som används för att förändra ett föremål till något annorlunda, men framförallt något besynnerligt. Det ÖVERGRIPNA föremålet får den egenskap häxan önskar men också en som är helt slumpartad. Varje effektgrad som läggs speciellt på detta ger en önskad och en slumpartad egenskap till. Dessutom förvanskas utseendet på något sätt som fullständigt bryter mot de flesta naturlagar. ⚠ Därutöver krävs ytterligare effektgrader ju kraftfullare (fysiskt större/dyrbarare) föremålet är: E1 smycke/dolk/bläckhorn/pergament · E2 kungakrona/svärd/spade/pall · E3 tron/rustning/sadel/säng/plog · E4 vagn/fiskbåt · E5 kastmaskin/mindre båt · E6 litet-medelstort hus · E7 större hus/kogg · E8 borg. En rustning som ÖVERGRIPS och får två nya egenskaper kräver alltså ÖVERGRIPA E5 (två för egenskaperna, tre för storleken). ⚠ Det går inte att bara lägga en effektgrad på ett föremål, och föremålet som får en ny egenskap måste ha någon sorts anknytning till den (en pall kan bli en klubba, inte ett svärd — men svärdet kan bli en plog). För att utföra besvärjelsen måste häxan rita på föremålet vad hon vill att det ska kunna göra, med en särskild krita insmord med svingalla vid midnatt en höst- eller vårdagjämning då fullmånen lyst.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "34"
+    }
+  },
+  "effects": [],
+  "folder": "h3DXV1Kz6bJ5dUGn",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787845006365,
+    "modifiedTime": 1787845006365,
+    "lastModifiedBy": "GenHaxkonster",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!nTxHgTiczviTMukv"
+}

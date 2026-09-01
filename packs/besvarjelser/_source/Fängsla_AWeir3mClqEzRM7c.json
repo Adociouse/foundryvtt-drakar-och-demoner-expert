@@ -1,0 +1,38 @@
+{
+  "name": "Fängsla",
+  "type": "besvarjelse",
+  "_id": "AWeir3mClqEzRM7c",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
+  "system": {
+    "school": "haxkonster",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Sx2 rutor",
+    "description": "<p>För att kunna utföra denna ritual måste man först ha lyckats med en ORÖRLIGHET, en per offer. Man bestämmer sedan ett område, minst 50 och högst 500 kvadratmeter stort, som offret sedan inte under några villkor kan förmås att lämna av egen kraft. ⚠ Försöker man släpa ut den förhäxade med våld gör han motstånd. Väl utanför området bryts besvärjelsens effekt. Om ORÖRLIGHETen upphör innan ritualen är avslutad misslyckas den automatiskt, och om ritualen misslyckas upphör även ORÖRLIGHETens verkan.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "35"
+    }
+  },
+  "effects": [],
+  "folder": "h3DXV1Kz6bJ5dUGn",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1787845006365,
+    "modifiedTime": 1787845006365,
+    "lastModifiedBy": "GenHaxkonster",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AWeir3mClqEzRM7c"
+}
