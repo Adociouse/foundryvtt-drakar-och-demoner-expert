@@ -1,0 +1,38 @@
+{
+  "name": "Vattensyn",
+  "type": "besvarjelse",
+  "_id": "c5wviB956eoPD1DW",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 2,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Besvärjelsen skapar en genomskinlig hinna över ögonen som gör det möjligt att se under vattnet utan att på något sätt irritera eller skada ögonen. ⚠ Besvärjelsen går även att använda i gasmoln och i andra otrevliga miljöer.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!c5wviB956eoPD1DW"
+}

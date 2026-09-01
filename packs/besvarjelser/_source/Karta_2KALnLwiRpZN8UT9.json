@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
-    "description": "<p>\"Karta\" av omgivningen; E3+ avslöjar position och storlek på alla föremål/varelser (STO ≥ 1)</p>",
+    "description": "<p>Magikern kan sträcka ut sina sinnen och omedelbart få en bild av hur omgivningen inom räckvidden ser ut. Om magikern lägger en E3 kan han också uppfatta alla föremål och varelser som har STO 1 eller mer. Han kan inte identifiera exakt vad eller vem/vilka det är, men han ser var de befinner sig och ungefär hur stora de är.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

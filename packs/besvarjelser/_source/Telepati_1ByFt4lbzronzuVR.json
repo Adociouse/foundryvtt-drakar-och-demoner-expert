@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 minuter",
     "range": "Special",
-    "description": "<p>Telepatisk kontakt med känd person (obegränsat avstånd); +1 person/extra E</p>",
+    "description": "<p>Magikern kan kommunicera i tanken med en annan intelligent varelse, oavsett hur långt från magikern denne befinner sig. Magikern måste dock känna till namnet för att kunna upprätta kontakten. För varje extra effektgrad kan magikern ha kontakt med ytterligare en person. ⚠ De personer som magikern kommunicerar med kan inte kommunicera med varandra — all kommunikation måste gå via magikern, som fungerar som en telepatisk telefonväxel.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

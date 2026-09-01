@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar + special",
     "range": "Beröring",
-    "description": "<p>Rör föremål + person; kommandoord kallar sedan föremålet till personens hand automatiskt</p>",
+    "description": "<p>Besvärjelsen ger den förhäxade förmåga att se föremål eller varelser som naturligt är osynliga (till exempel älvor) eller som har blivit osynliga på grund av magi (till exempel OSYNLIGHET eller MÖRKERVÄG). Den ger också immunitet mot besvärjelser som försämrar synförmågan. ⚠ Formeln gör det möjligt att kalla till sig ett föremål: när mentalisten lägger besvärjelsen måste han vidröra både den förhäxade och föremålet. Besvärjelsen ligger sedan inaktiv, tills den utlöses genom ett kommandoord av den förhäxade. Föremålet flyger då omedelbart med en hastighet av F50 till valfri hand hos honom. Därefter upphör besvärjelsen att verka. Tillkallaren måste se föremålet när han uttalar kommandot — avståndet till föremålet har ingen betydelse. Om föremålet sitter fast eller hålls fast, rycks det loss om 2×E övervinner motståndets STY på motståndstabellen. Magiker vars vapen inte innehåller järn använder gärna denna besvärjelse för att kunna dra vapnet omedelbart — i denna situation avgörs turordningen för strid på normalt sätt, trots att personen startade med vapnet i skidan.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

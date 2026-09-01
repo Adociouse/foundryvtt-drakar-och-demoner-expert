@@ -1,0 +1,38 @@
+{
+  "name": "Motståndskraft",
+  "type": "besvarjelse",
+  "_id": "ERYdADn2cBLBYKVp",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 3,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Formeln skyddar mot ELD, FROST och andra skador genom hetta eller kyla. För varje grad reduceras den skada man skulle fått av hettan/kylan med ett poäng. ⚠ Om man träffas av flera värme- eller köldbaserade attacker under samma SR tar MOTSTÅNDSKRAFTen bort en poäng per grad från skadan från VARJE anfall (inte en gång totalt). Exempel: Zot träffas under en SR av en Salamander (5 skada), en sjupoängs FROST och drakflammor (10 skada) — totalt 22 KP. Med en tredje gradens MOTSTÅNDSKRAFT blir var och en av de tre skadorna tre poäng mindre, och Zot förlorar bara 13 KP.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ERYdADn2cBLBYKVp"
+}

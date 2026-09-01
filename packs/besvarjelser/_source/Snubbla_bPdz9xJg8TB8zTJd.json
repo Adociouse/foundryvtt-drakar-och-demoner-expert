@@ -1,0 +1,38 @@
+{
+  "name": "Snubbla",
+  "type": "besvarjelse",
+  "_id": "bPdz9xJg8TB8zTJd",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 6,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Om trollkarlen förhäxar offret snubblar det omedelbart och faller pladask till marken. Magikern bestämmer i vilken riktning offret ska falla.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bPdz9xJg8TB8zTJd"
+}

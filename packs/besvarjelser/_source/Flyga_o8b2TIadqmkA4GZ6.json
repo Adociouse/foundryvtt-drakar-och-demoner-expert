@@ -1,0 +1,38 @@
+{
+  "name": "Flyga",
+  "type": "besvarjelse",
+  "_id": "o8b2TIadqmkA4GZ6",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 8,
+    "kvick": false,
+    "duration": "S/4 timmar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade får förmågan att flyga fritt i luften med en hastighet av Ex5 rutor. ⚠ Det krävs en effektgrad för varje 20 STO hos den förhäxade utöver de första 20 STO.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!o8b2TIadqmkA4GZ6"
+}

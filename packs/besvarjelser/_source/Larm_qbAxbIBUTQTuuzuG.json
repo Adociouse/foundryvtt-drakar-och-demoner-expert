@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 dygn",
     "range": "Beröring",
-    "description": "<p>Sätter E villkor; magikern varnas omedelbart (obegränsat avstånd) när villkor uppfylls</p>",
+    "description": "<p>Besvärjelsen låter magikern känna om ett villkor har uppfyllts på en speciell plats. Magikern får ställa ett villkor per effektgrad när han lägger besvärjelsen. Villkoret måste vara exakt definierat och baserat på fysiska händelser som inträffar inom en ruta, för varje effektgrad som lagts undan för detta ändamål, från den punkt besvärjelsen lades på. När villkoret uppfylls får magikern veta det omedelbart, oavsett hur långt bort han är. ⚠ Tillåtna villkor: en varelse av viss typ kommer inom räckvidden, en viss person kommer inom räckvidden, någon flyttar eller rör vid ett visst föremål. ⚠ Otillåtna villkor: sådant som kräver tolkning av avsikt (t.ex. \"om en person med fientliga avsikter kommer inom räckvidden\") — fientliga avsikter är inte en fysisk händelse.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

@@ -1,0 +1,38 @@
+{
+  "name": "Snabbsömn",
+  "type": "besvarjelse",
+  "_id": "SC4yZllJHEKeH5JN",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Magikern kastar besvärjelsen på en person som ska somna. Förhäxas offret behöver personen bara sova hälften så länge som normalt för att bli utvilad.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!SC4yZllJHEKeH5JN"
+}

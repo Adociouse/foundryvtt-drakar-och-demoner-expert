@@ -1,0 +1,38 @@
+{
+  "name": "Tankeöverföring",
+  "type": "besvarjelse",
+  "_id": "PxmXDXFoS4ymDcd2",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx1 SR",
+    "range": "Sx10 rutor",
+    "description": "<p>Varje grad låter målet kommunicera med en varelse som kan vara intelligent eller inte (det är inte ett krav). ⚠ Endast ytliga tankar och känslor kan överföras av besvärjelsen. Kommunikationen sker helt ljudlöst.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!PxmXDXFoS4ymDcd2"
+}

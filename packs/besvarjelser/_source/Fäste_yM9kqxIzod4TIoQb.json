@@ -1,0 +1,38 @@
+{
+  "name": "Fäste",
+  "type": "besvarjelse",
+  "_id": "yM9kqxIzod4TIoQb",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade får fäste överallt med händer och fötter, t.o.m. på släta lodräta väggar eller undersidan av tak. ⚠ Han måste ha bara händer och fötter. Det krävs en effektgrad per fem STO hos den förhäxade.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "40"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!yM9kqxIzod4TIoQb"
+}

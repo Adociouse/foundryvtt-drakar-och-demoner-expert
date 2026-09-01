@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 SR",
     "range": "Personlig",
-    "description": "<p>Fokuserar krafter: +3 CL/E på alla egenskapskast (ej Självskraft)</p>",
+    "description": "<p>Mentalisten kan fokusera sin själs krafter och utnyttja dem för att uppnå ökad skicklighet. CL ökar för alla magikerns färdighets-, besvärjelse- och grundegenskapskast med +3 per effektgrad (detta gäller dock inte SJÄLSKRAFT självt).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

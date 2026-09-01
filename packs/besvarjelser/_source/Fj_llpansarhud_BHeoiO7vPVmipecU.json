@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 timmar",
     "range": "Personlig",
-    "description": "<p>Huden blir hård och fjällig (silveraktig); +4 abs; KAR −4 under varaktigheten</p>",
+    "description": "<p>Magikern kan förändra sin hud så att den blir hård, lite fjällig och antar en silveraktig färg, vilket ger honom ett naturligt skydd på fyra poäng. Om han redan har något slags skydd adderas det skyddets abs med FJÄLLPANSARHUDens. Om magikern redan har ett naturligt skydd blir huden hårdare och fjällig men ändrar inte färg. ⚠ På grund av de kosmetiska förändringarna minskar besvärjelsen magikerns KAR med fyra poäng under varaktigheten.</p>",
     "ritual": false,
     "targetMode": "self",
     "battleRelevant": true,

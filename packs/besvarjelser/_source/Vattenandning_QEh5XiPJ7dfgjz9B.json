@@ -1,0 +1,38 @@
+{
+  "name": "Vattenandning",
+  "type": "besvarjelse",
+  "_id": "QEh5XiPJ7dfgjz9B",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade kan andas under vatten utan problem. Han kan dyka hur djupt som helst utan problem och riskerar inte att drabbas av dykarsjuka. ⚠ Han kan fortfarande andas luft.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!QEh5XiPJ7dfgjz9B"
+}

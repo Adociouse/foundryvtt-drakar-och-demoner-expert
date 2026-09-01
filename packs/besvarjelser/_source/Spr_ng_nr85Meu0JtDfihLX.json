@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "S/4 SR",
     "range": "Beröring",
-    "description": "<p>Jättesprång utan ansats: 4m vågrätt/2m lodrätt per E; SMI-kast för landning</p>",
+    "description": "<p>Den förhäxade kan ta ett jättesprång utan ansats. Han kan hoppa upp till fyra meter vågrätt och två meter lodrätt per effektgrad. ⚠ När han landar måste han klara ett SMI-kast för att inte förlora balansen.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

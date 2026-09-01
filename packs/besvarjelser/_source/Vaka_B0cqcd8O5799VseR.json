@@ -1,0 +1,38 @@
+{
+  "name": "Vaka",
+  "type": "besvarjelse",
+  "_id": "B0cqcd8O5799VseR",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade kan vara vaken under varaktigheten trots att han normalt skulle ha varit tvungen att sova på grund av sin kropps behov. ⚠ När besvärjelsens varaktighet löper ut faller offret omedelbart i djup sömn och måste sova vad som motsvarar ett normalt dygnsbehov för att bli återställd. Besvärjelsen SNABBSÖMN kan dock minska behovet.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!B0cqcd8O5799VseR"
+}

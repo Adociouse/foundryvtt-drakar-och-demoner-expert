@@ -1,0 +1,38 @@
+{
+  "name": "Lungfilter",
+  "type": "besvarjelse",
+  "_id": "ISFUVQ5Gdf0wOYSF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Besvärjelsen gör det möjligt för den förhäxade att kunna andas i vilken atmosfär som helst som innehåller tillräckligt med fritt syre för att hålla honom vid liv, oavsett vilka giftgaser som finns i luften.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "40"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ISFUVQ5Gdf0wOYSF"
+}

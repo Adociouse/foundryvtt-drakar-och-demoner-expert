@@ -1,0 +1,38 @@
+{
+  "name": "Balans",
+  "type": "besvarjelse",
+  "_id": "NcvwgX59sescDEaV",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 4,
+    "kvick": false,
+    "duration": "S/4 timmar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade får perfekt balansförmåga. Han tappar inte balansen, och skulle han falla landar han med fötterna först. Han blir också immun mot SNUBBLA. ⚠ Han kan till exempel gå på lina utan problem. Om han använder SPRÅNG landar han utan att riskera att förlora balansen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "39"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NcvwgX59sescDEaV"
+}

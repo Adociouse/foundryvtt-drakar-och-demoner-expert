@@ -1,0 +1,38 @@
+{
+  "name": "Hörsel",
+  "type": "besvarjelse",
+  "_id": "BQpb284jX0awhEhh",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 5,
+    "kvick": false,
+    "duration": "S/4 timmar",
+    "range": "Beröring",
+    "description": "<p>Besvärjelsen förbättrar hörseln med +2 på CL per grad. Se färdigheten Lyssna.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "40"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BQpb284jX0awhEhh"
+}

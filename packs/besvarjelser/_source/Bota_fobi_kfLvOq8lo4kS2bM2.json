@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Beröring",
-    "description": "<p>Botar E fobier (slumpmässig om flera); offret ligger ner, magikern bakom; självbehandling med spegel</p>",
+    "description": "<p>Magikern kan bota en fobi som har drabbat honom själv eller någon annan. För varje grad kan magikern avhjälpa en fobi. Har den som förhäxas flera fobier bestäms slumpmässigt vilken eller vilka som tas bort. ⚠ För att ritualen ska kunna genomföras måste den förhäxade ligga ner i en lugn miljö. Magikern sitter på en stol bakom den förhäxade så att denne kan höra magikern men inte se honom. Om magikern ska förhäxa sig själv sätter han sig istället och stirrar in i en spegel.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",

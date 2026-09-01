@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 SR",
     "range": "Personlig",
-    "description": "<p>Clairvoyance: ser/hör i känt område (120m); obekant: 30m; +1 dag bakåt/extra E; vidrör föremål: se historia</p>",
+    "description": "<p>Magikern kan se vad som händer i något område han/hon är bekant med och som befinner sig inom 120 m. Magikern kan se och höra allt som försiggår inom området i fråga. Om magikern inte känner till området måste det befinna sig inom 30 m. ⚠ För varje grad utöver den första kan trollkarlen se en dag bakåt i tiden. Om magikern vidrör ett föremål kan han/hon mottaga en syn som visar tidigare ägare eller hur man använder föremålet — varje grad låter magikern se ytterligare en ägare eller ett sätt att använda föremålet, och ger även 10% chans att få reda på de magiska ord som aktiverar ett magiskt föremål (bara en gång per föremål, tills SYNens förmåga stigit).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

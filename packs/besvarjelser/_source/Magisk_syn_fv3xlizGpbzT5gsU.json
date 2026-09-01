@@ -1,0 +1,38 @@
+{
+  "name": "Magisk syn",
+  "type": "besvarjelse",
+  "_id": "fv3xlizGpbzT5gsU",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>⚠ Ingen beskrivningstext hittades i källan (Formelboken s.44) — varken i PDF-sidbilden eller råtextextraktet. S-värde/räckvidd/varaktighet är sourcade och säkra, men brödtexten kräver en annan utgåva eller SL-tolkning tills vidare.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "44"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fv3xlizGpbzT5gsU"
+}

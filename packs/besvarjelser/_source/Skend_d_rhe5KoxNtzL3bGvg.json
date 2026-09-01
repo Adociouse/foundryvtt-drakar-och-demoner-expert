@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 timmar",
     "range": "Personlig",
-    "description": "<p>Djup dvala; verkar dead; VARSEBLIVNING måste övervinna E; förbrukar ej syre/vatten/näring</p>",
+    "description": "<p>Magikern kan försänka sig i en djup dvala. För utomstående uppvisar han då inga livstecken och är synbarligen död. Om magikern undersöks av magi (t.ex. VARSEBLIVNING) måste besvärjelsens effektgrad övervinna SKENDÖDens effektgrad för att man ska kunna upptäcka närvaron av magi eller liv hos magikern. ⚠ Magikern är fullständigt omedveten om vad som försiggår omkring honom när han ligger i koma. Han kan tillfogas skada på vanligt sätt och dödas på riktigt medan han är i detta tillstånd. I dvalan förbrukar magikern inget syre, vatten eller näring, och kan heller inte återvinna några PSY-poäng. Mentalisten kan väckas med VÄCKA under förutsättning att VÄCKAns effektgrad övervinner SKENDÖDens på motståndstabellen.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

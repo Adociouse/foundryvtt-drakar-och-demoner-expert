@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Personlig",
-    "description": "<p>Kan exakt avgöra avstånd, areor och volymer med bara ögonen (kräver att man ser föremålet)</p>",
+    "description": "<p>Kastaren kan exakt avgöra avstånd, areor och volymer enbart genom att använda ögonen. Några mätredskap behövs inte. ⚠ För att klara av detta måste man kunna se det som ska bedömas — det är till exempel inte möjligt att bedöma vattenvolymen i en sjö genom att stå på stranden och se ut över vattnet, eftersom man inte ser hur sjöbottnen ser ut. Däremot kan man utan problem avgöra hur stor sjöns yta är om alla stränder är synliga.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

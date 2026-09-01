@@ -1,0 +1,38 @@
+{
+  "name": "Lyft",
+  "type": "besvarjelse",
+  "_id": "WPXoG3H4cxoQIMIF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 6,
+    "kvick": true,
+    "duration": "Sx1 minuter",
+    "range": "Sx4 rutor",
+    "description": "<p>Varje grad av den här besvärjelsen påverkar tre poäng STO hos målet. Om besvärjelsen är tillräckligt stark för att påverka hela målets STO, kan trollkarlen lyfta föremålet och förflytta det genom luften — föremålet flyger med två rutor per SR, och varje grad utöver den första ökar föremålets maxfart med en ruta per SR. Trollkarlen kan även lägga formeln på sig själv och använda den för att flyga. Om målet är en levande varelse som inte vill LYFTas måste trollkarlen övervinna dess PSY på motståndstabellen. ⚠ Formeln kan också användas för att bromsa upp ett fallande föremål — även om det är för stort för att LYFT ska kunna lyfta det. För varje grad som fattas blir fallhöjden tre meter i stället; formeln har ingen effekt alls om det fattas mer än fyra grader (exempel: ett STO 13-föremål som faller tio meter bromsat av en 4:e gradens LYFT — det fattas en grad, så föremålet faller som om höjden vore tre meter). LYFT kan förflytta fordon (vagnar, slädar) på marken om en grad används per sex poängs STO av fordonet.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "40"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!WPXoG3H4cxoQIMIF"
+}

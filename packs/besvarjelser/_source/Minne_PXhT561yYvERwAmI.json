@@ -1,0 +1,38 @@
+{
+  "name": "Minne",
+  "type": "besvarjelse",
+  "_id": "PXhT561yYvERwAmI",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade minns allt in i minsta detalj som har tilldragit sig under en viss tidsperiod (ett dygn per effektgrad). ⚠ Den återställer inte minnesförluster som orsakats av magi. Besvärjelsen påverkar inte heller inlärningsförmågan.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "44"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!PXhT561yYvERwAmI"
+}

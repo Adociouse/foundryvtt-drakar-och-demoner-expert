@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 SR",
     "range": "Sx4 rutor",
-    "description": "<p>Kontrollerar E humanoider (PSY vs PSY); styr kroppsrörelser; ej magi/självständigt tänkande; konc</p>",
+    "description": "<p>Trollkarlen kan kontrollera en intelligent, humanoid varelse (inte djur) per effektgrad. Han måste först övervinna offrets/offrens PSY på motståndstabellen. Han kan få varelsen att utföra alla kroppsrörelser som den normalt kan göra. ⚠ Dock kan han inte få den att utföra självständiga handlingar som kräver att varelsen tänker själv — han kan inte få en annan trollkarl att använda magi, och kan inte få en KONTROLLERAd varelse att begå självmord. Så snart trollkarlen vill att varelsen ska göra annat än bara falla ihop måste han koncentrera sig på den hela tiden — han kan då inte samtidigt använda andra formler eller springa. Om hans koncentration bryts (t.ex. av att han måste slåss eller blir skadad) faller offren i djup sömn. Ett insomnat offer vaknar och återfår sin självkontroll så snart han lyckas slå sin FYS eller lägre med 1T100 (ett slag får göras per SR).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 minuter",
     "range": "Personlig",
-    "description": "<p>Visar rätt vägval (korsningar, dörrar etc.); en fråga/casting</p>",
+    "description": "<p>Med hjälp av denna besvärjelse kan magikern välja rätt väg i alla valsituationer han ställs inför, t.ex. vägkorsningar. Magikern ställer en fråga, till exempel \"Om jag ska förfölja den flyende tjuven, vilken väg ska jag då välja?\" och besvärjelsen ger rätt svar. Vid misslyckande får man inget svar. ⚠ Kom dock ihåg att rätt väg inte behöver vara vare sig ofarlig eller bekväm.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

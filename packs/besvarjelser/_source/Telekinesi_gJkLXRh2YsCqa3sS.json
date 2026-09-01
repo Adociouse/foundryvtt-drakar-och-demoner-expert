@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 SR",
     "range": "S/4 km",
-    "description": "<p>Rör 1 BEP med tankekraft vid 10 rutor/SR, 1m höjd; extra E = +BEP, +hastighet eller +höjd</p>",
+    "description": "<p>Magikern kan förflytta ett föremål med hjälp av tankekraft. Första effektgraden räcker till att lyfta ett föremål på ett BEP och föra det i en hastighet av tio rutor per SR en meter över marken. Varje ytterligare effektgrad ökar antingen storleken med ett BEP, hastigheten med tio rutor per SR eller svävhöjden med en meter. ⚠ Om föremålet hamnar utanför besvärjelsens räckvidd avbryts magikerns kontroll och det faller till marken. Det föremål som ska lyftas måste vara känt av magikern och han måste veta var det befinner sig inom räckvidden.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

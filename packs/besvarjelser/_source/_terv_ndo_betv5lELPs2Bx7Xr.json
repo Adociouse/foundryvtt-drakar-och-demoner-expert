@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Personlig",
-    "description": "<p>Teleporterar till förinvigd hemplats (1 dag invigning); räckvidd E1=10km, E2=100km osv; S15→1 plats, S≥16→2+</p>",
+    "description": "<p>Med hjälp av en ceremoni kan magikern inviga ett antal platser som hans återkomstställe. Ritualen tar en dag och lyckas alltid. När sedan magikern kastar besvärjelsen teleporteras han till platsen. ⚠ Räckvidden beror på graden: 1=10 km, 2=100 km, 3=1.000 km, 4=10.000 km osv. Antal platser som kan invigas beror på magikerns skicklighetsvärde: 1–5→1, 6–10→2, 11–15→3, 16–20→4, osv.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",

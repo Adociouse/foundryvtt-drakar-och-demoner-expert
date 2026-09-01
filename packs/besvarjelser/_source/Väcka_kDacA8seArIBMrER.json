@@ -1,0 +1,38 @@
+{
+  "name": "Väcka",
+  "type": "besvarjelse",
+  "_id": "kDacA8seArIBMrER",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 7,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Denna ljudlösa besvärjelse väcker sovande varelser, en per effektgrad. En varelse som är sövd genom magi eller droger kräver två effektgrader. Den som förhäxas blir inte yrvaken — han är omedelbart vid sina sinnens fulla bruk. ⚠ Detta gäller dock inte en person som är sövd genom droger: han är vaken men omtöcknad (halverad SMI, INT och de färdigheter som baseras på dessa, avrundade uppåt) under hela den tid drogen skulle ha hållit honom sovande.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "41"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!kDacA8seArIBMrER"
+}

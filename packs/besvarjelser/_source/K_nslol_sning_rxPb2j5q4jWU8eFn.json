@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 SR",
     "range": "Sx2 rutor",
-    "description": "<p>Avläser en varelses känslostämningar utan att varelsen märker det (ej mot HJÄRNBLANK)</p>",
+    "description": "<p>Med denna besvärjelse kan magikern, under varaktigheten, avläsa en annan varelses känslor och känslostämningar utan att varelsen behöver vara medveten om det. Besvärjelsen fungerar inte på en varelse som är belagd med HJÄRNBLANK.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

@@ -3,11 +3,11 @@
   "type": "besvarjelse",
   "system": {
     "school": "mentalism",
-    "sValue": 11,
+    "sValue": 12,
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
-    "description": "<p>Planterar en enkel tanke i offrets sinne; offret tror det tänkte tanken själv</p>",
+    "description": "<p>Mentalisten kan sända iväg en enkel tanke till en annan intelligent varelse inom räckvidden och få denne att tro att den själv tänkte tanken. Hur sedan tanken påverkar mottagaren avgör SL. Besvärjelsen kan inte övervinna en varelses sunda förnuft — om tanken t.ex. är \"Nu hoppar jag utför stupet\" skulle det antagligen inte fungera om inte varelsen är så oerhört dum och impulsiv att den alltid handlar efter det första den tänker. En något smart/malintelligent varelse skulle antagligen skjuta undan en dylik tanke som något tokigt infall och inte bry sig om den mer.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

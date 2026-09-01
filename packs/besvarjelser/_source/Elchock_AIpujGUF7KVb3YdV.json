@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Beröring",
-    "description": "<p>1T4/E elskada vid beröring; metallrustningar absorberar bara hälften</p>",
+    "description": "<p>Magikern presterar en elektrisk urladdning som skadar alla som magikern berör eller som rör vid magikern. Elchocken ger 1T4 i skada per effektgrad. ⚠ Skadan absorberas normalt av icke-metalliska rustningar, medan metallrustningar bara absorberar hälften mot normalt.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

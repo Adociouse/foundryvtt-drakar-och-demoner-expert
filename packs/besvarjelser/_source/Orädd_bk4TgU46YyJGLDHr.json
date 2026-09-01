@@ -1,0 +1,38 @@
+{
+  "name": "Orädd",
+  "type": "besvarjelse",
+  "_id": "bk4TgU46YyJGLDHr",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Beröring",
+    "description": "<p>Den förhäxade behöver inte slå på skräcktabellen, oavsett vad han möter eller om någon använder nekromantins olika skräckbesvärjelser mot honom.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "45"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bk4TgU46YyJGLDHr"
+}

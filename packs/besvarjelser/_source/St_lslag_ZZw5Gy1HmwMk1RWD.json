@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S1 SR",
     "range": "Personlig",
-    "description": "<p>Naturliga vapen: skada =(E+1)T (tärning), CL +1/E; vapnen är hårda (skadar ej vid träff på rustning)</p>",
+    "description": "<p>Den skada magikern förorsakar med sina naturliga vapen, t.ex. händer och fötter, förbättras. Magikern ska slå lika många tärningar som effektgraden plus ett. En STÅLSLAG E2 medför alltså att en människas slag gör 3T3 och spark 3T6. Till detta adderas sedan eventuell skadebonus. ⚠ Vidare förbättras de naturliga vapnens CL med +1 per effektgrad. Besvärjelsen gör också de naturliga vapnen hårda, så att de inte skadas när de träffar hårda mål, t.ex. rustningar.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

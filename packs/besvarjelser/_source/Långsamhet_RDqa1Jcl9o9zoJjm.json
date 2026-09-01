@@ -1,0 +1,38 @@
+{
+  "name": "Långsamhet",
+  "type": "besvarjelse",
+  "_id": "RDqa1Jcl9o9zoJjm",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
+  "system": {
+    "school": "mentalism",
+    "sValue": 5,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Sx2 rutor",
+    "description": "<p>Besvärjelsen sänker den förhäxades förflyttningsförmåga, SMI och SMI-baserade färdigheter med två per grad.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "40"
+    }
+  },
+  "effects": [],
+  "folder": "jAaX0JH0rKlJYw9n",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788262593586,
+    "modifiedTime": 1788262593586,
+    "lastModifiedBy": "GenMentalism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!RDqa1Jcl9o9zoJjm"
+}

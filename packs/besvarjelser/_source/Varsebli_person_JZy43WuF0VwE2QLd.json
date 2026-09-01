@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 veckor",
     "range": "Sx1 km",
-    "description": "<p>Känner alltid avstånd/riktning till en person (behöver hårlock etc.); E1=1000m exakt, E4=exakt position</p>",
+    "description": "<p>Magikern kan hela tiden känna avstånd och riktning till en viss person. För ritualen behövs något från personens kropp, t.ex. en hårlock. Om personen kommer inom räckvidden känner magikern personens position med en exakthet som beror på effektgraden: E1=1000 m, E2=100 m, E3=10 m, E4 ger exakt position.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",
