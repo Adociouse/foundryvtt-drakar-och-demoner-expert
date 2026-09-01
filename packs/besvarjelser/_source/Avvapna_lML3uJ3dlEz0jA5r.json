@@ -1,5 +1,5 @@
 {
-  "name": "Avvapna",
+  "name": "Avväpna",
   "type": "besvarjelse",
   "system": {
     "school": "stavmagi",
@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
-    "description": "<p>Staven i marken attraherar 5×E metallvapen (BEP×4 vs stavmagikers färdighet)</p>",
+    "description": "<p>Stöter stavmagikern staven i marken med denna besvärjelse attraherar staven fem metallvapen per effektgrad (stavmagikern väljer själv vilka) till sig, ungefär som om staven hade varit magnetisk. ⚠ Vapnen får ett motståndsslag på sin BEPx4 mot stavmagikerns skicklighetsvärde.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

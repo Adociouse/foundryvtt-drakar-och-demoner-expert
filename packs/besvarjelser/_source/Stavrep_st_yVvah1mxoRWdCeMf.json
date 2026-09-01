@@ -1,0 +1,38 @@
+{
+  "name": "Stavrep",
+  "type": "besvarjelse",
+  "_id": "yVvah1mxoRWdCeMf",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 2,
+    "kvick": false,
+    "duration": "Konc",
+    "range": "Beröring",
+    "description": "<p>Staven förvandlas till ett rep av önskad längd (maximalt stavens dubbla längd x effektgraden), och förblir i repform så länge magikern håller i det och koncentrerar sig. ⚠ Hugger någon av repet, sätter eld på det eller dylikt, förvandlas det omedelbart till stav igen i magikerns hand.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59"
+    }
+  },
+  "effects": [],
+  "folder": "RaAf2E20nFWC4mKE",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788289801509,
+    "modifiedTime": 1788289801509,
+    "lastModifiedBy": "GenStavmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!yVvah1mxoRWdCeMf"
+}

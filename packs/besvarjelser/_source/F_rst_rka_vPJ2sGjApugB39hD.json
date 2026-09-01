@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Konc",
     "range": "Beröring",
-    "description": "<p>Fördubblar ett föremåls (ej levande varelse) KP, BEP, STY, svårighetsgrad</p>",
+    "description": "<p>Genom att sätta staven mot ett föremål (ej en levande varelse, däremot t.ex. en växt) fördubblar stavmagikern dess KP, BEP, STY, svårighetsgrad eller motsvarande sålänge han koncentrerar sig. ⚠ Exempel på när denna besvärjelse kan användas är när stavmagikern sitter uppflugen i ett träd som hans fiender försöker hugga ned, eller när han står bakom en dörr som hans fiender försöker slå in.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

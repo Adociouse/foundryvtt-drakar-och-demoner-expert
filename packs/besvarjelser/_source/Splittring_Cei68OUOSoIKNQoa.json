@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Beröring",
-    "description": "<p>Klyvar/förstör föremål med STO ≤ E²×3; magiska föremål påverkas ej</p>",
+    "description": "<p>Genom att stöta staven mot ett föremål eller t.ex. en bro kan han få detta/denna att splittras. Föremålets STO kan vara maximalt effektgraden x effektgraden x 3. En SPLITTRING E4 kan alltså splittra föremål med STO 48 (4x4x3). ⚠ Magiska föremål kan inte splittras på detta sätt.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

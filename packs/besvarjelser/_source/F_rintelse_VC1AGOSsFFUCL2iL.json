@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Beröring",
-    "description": "<p>Förtorkar 4 STO/E i varelse/växt; delpåverkan ger KP-skada = STO som torkar ut</p>",
+    "description": "<p>Stavmagikern får en varelse eller växt att förstöras genom att den omedelbart torkar ut. Besvärjelsen förtorkar fyra poäng STO per effektgrad. ⚠ Om effektgraden bara delvis torkar ut den förhäxade får denne lika många KP i skada som STO som torkar ut.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

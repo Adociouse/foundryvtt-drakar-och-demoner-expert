@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
-    "description": "<p>Staven återvänder automatiskt till magikern (SPLITTRA via staven om hinder)</p>",
+    "description": "<p>Stavmagikern kan få sin stav att återvända till honom. Om stavens flyktväg är begränsad av fysiska hinder kan stavmagikern försöka kasta en SPLITTRA via staven. ⚠ Denna andra besvärjelse är svårare att utföra ju längre bort staven befinner sig (−1 CL per 10 m). PSY-poängen som krävs för denna (dessa) besvärjelser dras från stavmagikern själv.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

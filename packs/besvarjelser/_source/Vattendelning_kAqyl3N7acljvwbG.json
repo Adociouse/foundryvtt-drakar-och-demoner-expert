@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx10 minuter",
     "range": "Sx10 rutor",
-    "description": "<p>Klyvar vattenmassa: bred E³m, djup E²m, passage E²/2m bred</p>",
+    "description": "<p>Stavmagikern slår sin stav i en vattenmassa och får den att klyvas i två delar. Effektgraden (E) avgör hur mäktig besvärjelsen är. Vattenmassan (floden, sjön) som delas kan vara ExExE m bred på den ledd som den ska delas på, ExE m djup, och vägen över botten som uppstår blir ExE/2 m bred. En VATTENDELNING E3 kan alltså skapa en 4,5 meter bred passage genom ett vattendrag som är 27 meter brett och 9 meter djupt. ⚠ Stavmagikern kan få besvärjelsen att upphöra närhelst han vill, och den upphör automatiskt om han dör.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

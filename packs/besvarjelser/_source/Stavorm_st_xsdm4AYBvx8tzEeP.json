@@ -1,0 +1,38 @@
+{
+  "name": "Stavorm",
+  "type": "besvarjelse",
+  "_id": "xsdm4AYBvx8tzEeP",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 5,
+    "kvick": true,
+    "duration": "Sx2 SR",
+    "range": "Särskild",
+    "description": "<p>Staven kastas upp till magikerns STY meter från stavmagikern och förvandlas till en orm som är lika stor som staven. Ormen får följande egenskaper beroende på effektgraden (E): Förflyttning (L) = Ex4; CL hugg = Ex3; skada = 1T3 + E; giftstyrka = Ex3, abs = E. Giftet har bara att verka om ett hugg träffar. ⚠ När ormen tar mer än Ex2 KP i skada krälar den tillbaka till magikern med dubbel hastighet och återgår till stavform. Skulle den ta mer än Ex5 KP i skada förvandlas den omedelbart till stav igen och ligger still — magikern tar därvid 2T6 KP i skada.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59"
+    }
+  },
+  "effects": [],
+  "folder": "RaAf2E20nFWC4mKE",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788289801509,
+    "modifiedTime": 1788289801509,
+    "lastModifiedBy": "GenStavmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!xsdm4AYBvx8tzEeP"
+}

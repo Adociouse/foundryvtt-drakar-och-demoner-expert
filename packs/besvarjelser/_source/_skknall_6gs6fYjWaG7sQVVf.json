@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Personlig",
-    "description": "<p>Blixtknall; varelser 0–2 rutor bort immuna; varelser upp till 10 rutor bort tar 2T6 KP</p>",
+    "description": "<p>Stavmagikern åstadkommer en plötslig och omskakande knall som om en blixt hade slagit ned i honom. Stavmagikern och de som befinner sig högst två rutor bort från honom är immuna mot smällen, men varelser upp till tio rutor bort tar 2T6 poäng i skada.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx1 rutor",
-    "description": "<p>Staven kastas mot mål; utlöser SPLITTRA/FÖRINTELSE (organiskt/oorganiskt); annars 1T6/E; staven återvänder</p>",
+    "description": "<p>Staven sänds iväg mot ett mål inom räckvidden. När staven träffar utlöses en SPLITTRA eller FÖRINTELSE (om magikern behärskar dessa), beroende på om målet är oorganiskt eller organiskt. Behärskar inte magikern någon av dessa två besvärjelser gör staven 1T6 i skada per effektgrad. ⚠ Staven återvänder automatiskt till stavmagikern.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Konc",
     "range": "Personlig",
-    "description": "<p>Snurrande stav skapar sfär: besvärjelser måste övervinna E; projektiler −3 CL/E; 1 nä.stridsvapen/E pareras auto</p>",
+    "description": "<p>Om stavmagikern är beredd på att bli anfallen kan han börja snurra staven omkring sig vilket ger upphov till en skyddande sfär sålänge han utför rörelsen. Effekten blir att besvärjelser som slungas mot SFÄREN måste övervinna dess effektgrad på motståndstabellen för att ha någon effekt. Inkommande projektiler får −3 på att träffa per effektgrad. ⚠ Ett närstridsvapen per effektgrad pareras som om stavmagikern utförde normal parering med sin stav.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

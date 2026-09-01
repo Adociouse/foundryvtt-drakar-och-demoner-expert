@@ -1,0 +1,38 @@
+{
+  "name": "Stavklyvning",
+  "type": "besvarjelse",
+  "_id": "AhYHHm6qUzPdbEX7",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 11,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "S/2 rutor",
+    "description": "<p>Denna besvärjelse används för att klyva (och oåterkalleligen förstöra) en stav inom räckvidden (även stavmagikerns egen). Framgången avgörs genom att sätta den aktive besvärjarens stavs PSY mot den angripna stavens PSY på motståndstabellen. Varje effektgrad utöver den första ökar CL med 5% (exempelvis skulle en STAVKLYVNING E2 kastad mot den egna staven ha en 55% chans att lyckas). ⚠ Denna besvärjelse används högst sporadiskt av stavmagiker mot varandra, eftersom magikern tvingas slå på snedtändningstabellen en gång om han misslyckas — två gånger om han fumlar.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "60"
+    }
+  },
+  "effects": [],
+  "folder": "RaAf2E20nFWC4mKE",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788289801509,
+    "modifiedTime": 1788289801509,
+    "lastModifiedBy": "GenStavmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AhYHHm6qUzPdbEX7"
+}

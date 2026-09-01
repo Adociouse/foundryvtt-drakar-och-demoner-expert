@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Sx1 SR",
     "range": "Beröring",
-    "description": "<p>Paralyse vid beröring med staven (PSY vs PSY)</p>",
+    "description": "<p>Stavmagikern vidrör en person med sin stav och om han lyckas förlamas denne så att han inte kan röra sig.</p>",
     "ritual": false,
     "targetMode": "touch",
     "battleRelevant": true,

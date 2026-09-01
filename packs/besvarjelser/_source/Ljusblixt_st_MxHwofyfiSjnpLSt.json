@@ -1,0 +1,38 @@
+{
+  "name": "Ljusblixt",
+  "type": "besvarjelse",
+  "_id": "MxHwofyfiSjnpLSt",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 7,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Stavmagikern får staven att blixtra till. Alla som har ögonen öppna (utom besvärjaren) inom räckvidden måste slå under sin PSY eller bli bländade under 1T4 + effektgraden SR. ⚠ Bländningen ger −10 CL på att träffa och halverar förflyttningen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "60"
+    }
+  },
+  "effects": [],
+  "folder": "RaAf2E20nFWC4mKE",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788289801509,
+    "modifiedTime": 1788289801509,
+    "lastModifiedBy": "GenStavmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!MxHwofyfiSjnpLSt"
+}

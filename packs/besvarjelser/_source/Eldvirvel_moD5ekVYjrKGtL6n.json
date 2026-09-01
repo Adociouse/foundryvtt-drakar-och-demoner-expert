@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
-    "description": "<p>Eldvirvel i 3m radie ger 1 KP/SR skada på allt; brännbart förbränns</p>",
+    "description": "<p>Stavmagikern orsakar en eldvirvel som ger en KP skada per SR på allt inom en cirkel med radien tre m när han lägger denna besvärjelse. ⚠ Allt lätt brännbart inom effektarean förbränns (ex papper).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

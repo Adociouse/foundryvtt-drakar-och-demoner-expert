@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
-    "description": "<p>Blixt slår ned på önskad plats; 1T6/E KP skada på allt inom 1 ruta</p>",
+    "description": "<p>En blixt slår ner där stavmagikern önskar, som ger 1T6 KP skada per effektgrad på allt inom en ruta från nedslaget. ⚠ Stavmagikern måste befinna sig utomhus för att kunna lägga besvärjelsen.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

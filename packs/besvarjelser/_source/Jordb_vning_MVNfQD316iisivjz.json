@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx5 rutor",
-    "description": "<p>Lokalt skalv; levande varelser slår SMI eller faller + 1T4+E KP; byggnadsskade-% per SL</p>",
+    "description": "<p>Stavmagikern stöter staven i marken och orsakar ett mindre skalv med sig själv som centrum och räckvidden som radie. Levande varelser måste slå under sin SMI för att inte falla omkull och ta 1T4+effektgraden KP i skada. ⚠ Träd och små träbyggnader löper 20% risk per effektgrad att rasa, medelstora träbyggnader samt mindre stenbyggnader löper 10% risk per effektgrad, och stora träbyggnader samt medelstora stenbyggnader löper 5% risk per effektgrad. Läggs besvärjelsen under jorden är rasrisken 15% per effektgrad (slå 1T100). En liten byggnad motsvarar hydda/uthus/vakttorn, medelstor är vanligt bostadshus/befäst torn och stor motsvarar trevånings stadshus eller litet jaktslott. Övriga effekter och gränsdragningar för vad som skakar sönder i ett större slott är helt upp till SL.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

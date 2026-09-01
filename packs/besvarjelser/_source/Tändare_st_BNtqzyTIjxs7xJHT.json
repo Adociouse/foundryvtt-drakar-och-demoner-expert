@@ -1,0 +1,38 @@
+{
+  "name": "Tändare",
+  "type": "besvarjelse",
+  "_id": "BNtqzyTIjxs7xJHT",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
+  "system": {
+    "school": "stavmagi",
+    "sValue": 1,
+    "kvick": true,
+    "duration": "Sx5 minuter",
+    "range": "Beröring",
+    "description": "<p>En kraftig låga tänds vid stavänden. Behandla den som en fackeleld.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59"
+    }
+  },
+  "effects": [],
+  "folder": "RaAf2E20nFWC4mKE",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788289801509,
+    "modifiedTime": 1788289801509,
+    "lastModifiedBy": "GenStavmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BNtqzyTIjxs7xJHT"
+}

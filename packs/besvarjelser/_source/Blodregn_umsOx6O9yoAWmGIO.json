@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "1 minut",
     "range": "Sx50 rutor",
-    "description": "<p>Blodregn i (3×E)² rutor kvadrat; PSY vs 15+E eller slå på Skräcktabellen</p>",
+    "description": "<p>Genom att stöta sin stav i marken skapar stavmagikern ett regn av blod i ett kvadratiskt område med en sida av tre rutor per effektgrad. Alla varelser som står i detta område måste övervinna 15+effektgraden med sin PSY på motståndstabellen eller tvingas slå på skräcktabellen.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",
