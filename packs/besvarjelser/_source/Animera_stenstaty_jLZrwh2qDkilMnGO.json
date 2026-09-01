@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx2 SR (aktiv)",
     "range": "Sx2 rutor",
-    "description": "<p>Animerar stenskulptur med KRAFTsymbol: 5 STO/E; STY 4/E, STO 5/E, FYS 7/E, SMI 2/E, INT 2, abs 1/E; kräver Stenskulptering B2+</p>",
+    "description": "<p>Varje effektgrad kan aktivera 5 STO-poäng hos en stenskulptur. När man vill att stenstatyn ska aktiveras kan den vara igång högst Sx2 SR medan den kan stå inaktiv hur länge som helst. I KRAFTsymbolen ska magikern skriva in vilket/vilka villkor som ska uppfyllas för att statyn ska aktiveras. Under den tid som statyn är aktiverad förbrukar den ett PSY varje SR. Dessa poäng dras i första hand från KRAFTsymbolen, i andra hand från statyns PSY och i sista hand från magikern. Ingen av dessa PSY-källor kan dock sänkas lägre än ett PSY — om detta har inträffat med alla källor upphör statyn att fungera. Är magikern död fortsätter statyn att fungera så länge övriga källor har PSY-poäng kvar. PSY-överföringen kan i vanliga fall ske över hur stora avstånd som helst, men inte över två skilda universum. Magikern känner när statyn aktiveras, när den blir inaktiv och när den blir förstörd. Han kan när som helst deaktivera statyn, men då stängs den av för alltid och faller sönder i sandkorn. ⚠ Rutinerade symbolister brukar därför placera en LADDNING på stenstatyn — då dras PSY-kostnaden därifrån allra först. Grundegenskaper: STY 4/E, STO 5/E, FYS 7/E, SMI 2/E, INT 2, PSY = ANIMERA STENSTATYns E + KRAFTsymbolens E, KP = STO+FYS/2. Förflyttning L8. Naturligt skydd 1 p/E. Naturliga vapen enligt konstruktion. Kräver STATYsymbol, KRAFTsymbol samt lite skicklighet i Stenskulptering (B2+).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

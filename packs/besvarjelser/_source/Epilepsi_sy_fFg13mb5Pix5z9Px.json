@@ -1,0 +1,38 @@
+{
+  "name": "Epilepsi",
+  "type": "besvarjelse",
+  "_id": "fFg13mb5Pix5z9Px",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 12,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>De offer som drabbas faller medvetslösa till marken. Deras kroppar skakar av kramper och konvulsioner. ⚠ Besvärjelsen förorsakar inga skador.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "62"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fFg13mb5Pix5z9Px"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Sanning",
+  "type": "besvarjelse",
+  "_id": "8E5le5b7U3QOIqo8",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 11,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>Denna symbol tvingar de varelser som ser den och blir förhäxade att svara sanningsenligt på alla frågor som andra ställer under varaktigheten. Symbolen undertrycker inte på något sätt varelsens tankeförmåga — det innebär alltså att även om varelsen är tvungen att tala sanning kan han med intelligenta ordlekar och knep förvrida sanningen utan att för den skull ljuga. ⚠ Symbolen har ingen verkan mot andra symbolister eller varelser som känner till symbolen och dess effekter. Om smycket på något sätt skulle förstöras medan magikern bär det förlorar det också sin kraft.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "62"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8E5le5b7U3QOIqo8"
+}

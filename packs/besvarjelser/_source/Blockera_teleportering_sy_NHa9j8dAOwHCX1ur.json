@@ -1,0 +1,38 @@
+{
+  "name": "Blockera teleportering",
+  "type": "besvarjelse",
+  "_id": "NHa9j8dAOwHCX1ur",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>Denna symbol kallas på symbolistslang för TELEBLOCK. Symbolisten tecknar symbolen på en byggnad, ett ihåligt träd med någon slags \"dörr\" (det räcker med ett skynke) eller annan sluten företeelse. Den förhindrar sedan att någon använder besvärjelsen TELEPORTERA för att ta sig in — den som ska TELEPORTERAs står kvar på sin utgångsplats, medan magikern som kastade besvärjelsen förlorar PSY-poäng som vanligt. ⚠ Det krävs en effektgrad per 1.000 kubikmeter volym hos det skyddade föremålet.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "63"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NHa9j8dAOwHCX1ur"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Väktare",
+  "type": "besvarjelse",
+  "_id": "zVc1yqW7NOM8888I",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 20,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>Denna symbol är ett slags inbrottslarm. Symbolisten bygger upp en modell i skala 1:100 av den byggnad det gäller och dess omgivningar. Modellen är den magiska symbolen; den placeras inuti byggnaden och står då i magisk förbindelse med den. ⚠ VÄKTARE fungerar på ett annat sätt än vanliga symboler — den innehåller sin egen KRAFTsymbol, som sålunda inte behöver tecknas separat. När symbolisten bygger modellen bestämmer han under vilka villkor (ett per effektgrad) VÄKTAREn kommer att aktiveras. Villkoren måste vara exakt definierade och grundas på fysiska händelser som måste inträffa inom 20 meter från byggnaden. Genom välformulerade definitioner kan man gå runt besvärjelser som HJÄRNBLANK och SINNESMASK, eftersom dessa bara maskerar sinnet, inte kroppen. När symbolen aktiveras ger den ifrån sig en kort ljudsignal, samtidigt som en lysande punkt tänds på den plats på modellen som motsvarar platsen i byggnaden där villkoret utlöstes — punkten följer sedan det utlösande tinget så länge det är inom 20 meter från byggnaden. Om modellen är försedd med löstagbara tak-/väggsektioner eller är gjord av glas kan man alltså följa inträngningens väg genom byggnaden. När inträngaren lämnat räckvidden upphör symbolen att fungera. Många magiker har gjort VÄKTARE försedda med PERMANENS och NEXUS för att bevaka sina boningar — dessa är extra svåra att besegra eftersom de inte deaktiveras efter en användning. Endast en VÄKTARE kan fungera i en byggnad vid en given tidpunkt.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "64"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!zVc1yqW7NOM8888I"
+}

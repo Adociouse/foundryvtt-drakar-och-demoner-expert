@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Special",
-    "description": "<p>Batterisymbol kopplad till annan symbol; aktiverar den vid exakt definierat fysiskt villkor; urladdas sen</p>",
+    "description": "<p>KRAFTsymbolen har särskilda egenskaper. Den fungerar som ett batteri laddat med PSY för en annan symbol, och kan aktivera den utan att symbolisten behöver göra något. En KRAFTsymbol innehåller lika många poäng PSY som sin egen effektgrad. När symbolisten tecknar symbolen skriver han in villkoret för att den ska aktiveras. Villkoret måste vara exakt definierat, och vara grundat på fysiska händelser. Händelsen måste också inträffa inom synhåll från KRAFTsymbolen. ⚠ Man kan koppla hur många KRAFTsymboler som helst till en annan symbol — sådana KRAFTsymboler måste ha olika aktiveringsvillkor, men de måste vara sammanskrivna med symbolen de ska aktivera. När en KRAFTsymbols aktiveringsvillkor inträffar flödar dess energi över till den andra symbolen och aktiverar den på sedvanligt sätt. KRAFTsymbolen är sedan urladdad och kan inte återanvändas.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

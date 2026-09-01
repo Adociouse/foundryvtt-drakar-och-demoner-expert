@@ -1,0 +1,38 @@
+{
+  "name": "Andeskydd",
+  "type": "besvarjelse",
+  "_id": "WHA9B6ptBQVk6dx6",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>Denna symbol används för att skicka tillbaka andar och gastar till sina hemplan. Om en gast eller ande av något slag ser symbolen måste symbolens effektgrad övervinna gastens eller andens PSY-grupp på motståndstabellen. Om detta lyckas försvinner anden/gasten.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "63"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!WHA9B6ptBQVk6dx6"
+}

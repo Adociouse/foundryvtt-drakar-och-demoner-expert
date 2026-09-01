@@ -1,0 +1,38 @@
+{
+  "name": "Vägvisare",
+  "type": "besvarjelse",
+  "_id": "lR5k5fZzRDXTvBN7",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 12,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>Symbolisten kan leda in den som drabbas i den gång, genom den dörr, etc, som han vill. Om symbolisten lagt besvärjelsen i syfte att leda en person på fel väg och denne använder RÄTT VÄG måste VÄGVISARens grad övervinna RÄTT VÄG på motståndstabellen. ⚠ Symbolen kan tecknas på både väggar och golv. Till skillnad från LOCKELSE rör sig inte offren mot själva symbolen, vilket gör att den kan placeras så att den i första hand syns.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "62"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!lR5k5fZzRDXTvBN7"
+}

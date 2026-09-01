@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Permanent (bärs)",
     "range": "Special",
-    "description": "<p>Symbolen görs i metall/ben/trä/sten som synligt smycke; ger KAR-ökning; verkar ej mot symbolister</p>",
+    "description": "<p>Detta är en ganska speciell symbolistbesvärjelse. Symbolen måste tillverkas i någon metall som magi fungerar i (t.ex. mithril), i ben, trä eller sten. Den måste dessutom bäras som ett synligt smycke, t.ex. ett halsband, pannsmycke eller diadem. När symbolisten har smycket på sig ökar hans KAR med åtta poäng. Besvärjelsen har permanent varaktighet så länge magikern bär symbolen på sig, men så snart han eller någon annan tar av honom bryts besvärjelsen och kan inte återupptas med just den symbolen. ⚠ För att symbolen ska fungera enligt önskemål måste den bäras fullt synlig. Symbolen har ingen verkan mot andra symbolister eller varelser som känner till symbolen och dess effekter. Om smycket på något sätt skulle förstöras medan magikern bär det förlorar det också sin kraft.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

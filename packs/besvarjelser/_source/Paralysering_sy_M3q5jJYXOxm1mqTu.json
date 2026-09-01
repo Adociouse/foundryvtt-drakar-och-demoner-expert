@@ -1,0 +1,38 @@
+{
+  "name": "Paralysering",
+  "type": "besvarjelse",
+  "_id": "M3q5jJYXOxm1mqTu",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>De intelligenta varelser som ser den här symbolen blir helt paralyserade och kan inte röra sig under varaktigheten. ⚠ Paralyseringen bryts om varelsen utsätts för fysiskt våld.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "61"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!M3q5jJYXOxm1mqTu"
+}

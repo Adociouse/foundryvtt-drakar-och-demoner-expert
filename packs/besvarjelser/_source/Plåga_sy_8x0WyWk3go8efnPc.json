@@ -1,0 +1,38 @@
+{
+  "name": "Plåga",
+  "type": "besvarjelse",
+  "_id": "8x0WyWk3go8efnPc",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>De som ser symbolen drabbas genast av våldsamma smärtor som gör det omöjligt att utföra några handlingar. Offren ligger bara och vrider sig. ⚠ Smärtan ger ingen skada när varaktigheten är över.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "63"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8x0WyWk3go8efnPc"
+}

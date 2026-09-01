@@ -1,0 +1,38 @@
+{
+  "name": "Försvar",
+  "type": "besvarjelse",
+  "_id": "c0LOHpS8oI74VknR",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/symbolism.png",
+  "system": {
+    "school": "symbolism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Särskild",
+    "description": "<p>Symbolen sänder ut en sorts osynliga stötar, chockvågor, som ger de varelser som ser den 1T3 poäng per effektgrad i skador (dras från totala KP).</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "63"
+    }
+  },
+  "effects": [],
+  "folder": "pSpWWYPUCR1Q3Fdg",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788291428067,
+    "modifiedTime": 1788291428067,
+    "lastModifiedBy": "GenSymbolism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!c0LOHpS8oI74VknR"
+}
