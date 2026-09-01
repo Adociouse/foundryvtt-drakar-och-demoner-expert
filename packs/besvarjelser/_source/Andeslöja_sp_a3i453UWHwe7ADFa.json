@@ -1,0 +1,38 @@
+{
+  "name": "Andeslöja",
+  "type": "besvarjelse",
+  "_id": "a3i453UWHwe7ADFa",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
+  "system": {
+    "school": "spiritism",
+    "sValue": 10,
+    "kvick": true,
+    "duration": "Sx1 minuter",
+    "range": "Personlig",
+    "description": "<p>Besvärjelsen gör att man inte kan upptäckas eller observeras på något sätt av andar och de kan heller inte angripa honom. ⚠ Men det omvända gäller för spiritisten; han kan inte observera eller angripa andar på något sätt.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "56"
+    }
+  },
+  "effects": [],
+  "folder": "1zkCUjd5C8SmqAcs",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788280870253,
+    "modifiedTime": 1788280870253,
+    "lastModifiedBy": "GenSpiritism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!a3i453UWHwe7ADFa"
+}

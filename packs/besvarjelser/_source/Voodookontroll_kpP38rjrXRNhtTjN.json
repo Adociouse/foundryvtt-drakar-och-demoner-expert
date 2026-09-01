@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 dygn",
     "range": "Special",
-    "description": "<p>Full kontroll via vaxdocka+offrets föremål; räckvidd 10m/E×10; offret handlingspasivt utom räckvidd; bryts om dockan förstörs</p>",
+    "description": "<p>Till denna besvärjelse behöver magikern en vaxdocka som föreställer offret. Vid dockan fästs något som tillhör offret, precis som vid en vanlig voodooritual. Om VOODOOKONTROLLen lyckas står offret under magikerns fullständiga kontroll. Denna kontroll eliminerar inte offrets tankeförmåga, utan dess fria vilja. Magikern kan istället styra offret genom telepati och få denne att göra allt han normalt kan klara av, inklusive att kasta besvärjelser. ⚠ Magikern kan emellertid inte förmå den kontrollerade att begå självmord eller att utföra handlingar som är uppenbart skadliga för den kontrollerade. Räckvidden är tio meter för E1, 100 meter för E2, 1000 meter för E3, osv. Om offret kommer utanför räckvidden stannar det och blir helt passivt tills magikern kommer inom räckvidden igen. Kontrollen bryts omedelbart om voodoodockan förstörs.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",

@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 dygn",
     "range": "Beröring",
-    "description": "<p>Flyttar gjäl till kropp utan gjäl (5–10 min död/SJÄALAFALLA); sjäalen tar INT/PSY/KAR/fäardigheter</p>",
+    "description": "<p>Magikern kan flytta en intelligent varelses själ från dess kropp till en annan intelligent varelses kropp. Den sistnämnda kroppen måste sakna själ, t.ex. genom att döden inträdde inom de senaste tio minuterna eller genom SJÄLAFÄLLA, och dess huvud måste vara oskadat. Själen tar med sig sin INT, PSY, KAR och alla sina färdigheter till den nya kroppen och får den nya kroppens STY, STO, SMI och FYS. ⚠ När besvärjelsens varaktighet löper ut återvänder själen till sin ursprungliga kropp. Om den inte har någon kropp att återvända till blir den ett spöke. När den själ som äger den lånade kroppen återvänder medan kroppen är under den främmande själens kontroll, t.ex. därför att den SJÄLAFÄLLA som höll själen fången upphör, omvandlas den ursprungliga ägarens själ till ett spöke.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

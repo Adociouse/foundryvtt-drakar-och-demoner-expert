@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Beröring",
-    "description": "<p>Offrets PSY minskar permanent med 1T3+E; vid PSY=0 inträder döden</p>",
+    "description": "<p>Denna besvärjelse kan riktas mot alla varelser som har PSY. Besvärjelsen angriper och försvagar offrets psyke. Speltekniskt visas detta genom att offret permanent förlorar 1T3+E poäng PSY. ⚠ När PSY når noll inträder döden.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

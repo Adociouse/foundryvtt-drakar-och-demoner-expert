@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 minut",
     "range": "Personlig",
-    "description": "<p>Skydd mot andar/gasters attacker (PSY vs andens PSY); −(5+E) på Skräcktabellen; −E on grundegenskapsminskning</p>",
+    "description": "<p>Denna besvärjelse förstärker spiritistens skydd mot alla andars och gastars attacker om spiritistens PSY övervinner andens. ⚠ Besvärjelsen kan användas mot hur många andar och/eller gaster som helst under en SR. Alla slag på skräcktabellen minskas med 5+E, alla grundegenskapsminskningar som förorsakas av anden eller gasten minskas med 1×E poäng, och skadan från alla attacker från anden eller gasten minskas med 1×E poäng. Om magikern lägger ANDEBESKYDD E6 och övervinner andens PSY behöver han inte slå på skräcktabellen och han kan inte skadas eller få grundegenskaper minskade av anden.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

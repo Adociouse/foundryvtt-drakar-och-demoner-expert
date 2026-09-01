@@ -1,0 +1,38 @@
+{
+  "name": "Spökdråp",
+  "type": "besvarjelse",
+  "_id": "NdSUXtF9dZJycxbB",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
+  "system": {
+    "school": "spiritism",
+    "sValue": 27,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Om denna besvärjelse kastas på en intelligent varelse inom en minut från det att den dött och då lyckas förhäxa varelsen, tvingas dess själ att stanna kvar på dödsplatsen och hemsöka den som ett spöke. ⚠ Besvärjelsen måste innehålla ett villkor som kan uppfyllas av en levande varelse av samma slag som spöket. Om detta uppfylls får spöket dö och lämna världen. Denna version av besvärjelsen finns även, med identisk text, i Nekromanti-kapitlet (S27) — boken ger uppenbarligen ritualen till båda dödsrelaterade skolorna.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "59"
+    }
+  },
+  "effects": [],
+  "folder": "1zkCUjd5C8SmqAcs",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788280870253,
+    "modifiedTime": 1788280870253,
+    "lastModifiedBy": "GenSpiritism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!NdSUXtF9dZJycxbB"
+}

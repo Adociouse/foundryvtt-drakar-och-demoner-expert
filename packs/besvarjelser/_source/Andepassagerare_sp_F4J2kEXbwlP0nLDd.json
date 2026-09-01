@@ -1,0 +1,38 @@
+{
+  "name": "Andepassagerare",
+  "type": "besvarjelse",
+  "_id": "F4J2kEXbwlP0nLDd",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
+  "system": {
+    "school": "spiritism",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Beröring",
+    "description": "<p>Magikern kan flytta en intelligent varelses själ från dess egen kropp till en annan intelligent varelses kropp. Den själ som flyttas blir då som en passagerare hos den andre, som behåller herravälde över sin egen kropp. Passageraren upplever allt hans \"värd\" upplever med sina sinnen, och kan kommunicera med denne medelst tankeöverföring. ⚠ Värden kan dock bara kommunicera med sin passagerare så att han själv hör. En person kan vara värd åt hur många passagerare åt gången som helst. Han är inte automatiskt medveten om sina passagerare.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "56"
+    }
+  },
+  "effects": [],
+  "folder": "1zkCUjd5C8SmqAcs",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788280870253,
+    "modifiedTime": 1788280870253,
+    "lastModifiedBy": "GenSpiritism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!F4J2kEXbwlP0nLDd"
+}

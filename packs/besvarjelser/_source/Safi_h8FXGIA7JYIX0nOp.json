@@ -1,5 +1,5 @@
 {
-  "name": "Safi",
+  "name": "Själafälla",
   "type": "besvarjelse",
   "system": {
     "school": "spiritism",
@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 veckor",
     "range": "Sx2 rutor",
-    "description": "<p>Fångar gjäl i ädelsten (diamant/rubin/smaragd/topas ≥0,2g); kroppen lever i koma; evig med PERMANENS+SIGILL</p>",
+    "description": "<p>Med denna besvärjelse kan magikern försöka binda en intelligent persons själ i en ädelsten. Ädelstenen måste vara en diamant, rubin, smaragd eller topas, och väga minst 0,2 gram (1 carat). Vidare måste magikern känna personens namn. ⚠ Om ädelstenen skulle krossas under varaktigheten kan själen fly och återvända till sin kropp. Om stenen förses med PERMANENS och SIGILL fängslas själen tills stenen krossas. Om magikern misslyckas med besvärjelsen när han ska kasta den smulas ädelstenen samman till stoft. Den fängslad persons kropp fortsätter att leva, men den är i koma och kan inte klara sig själv. Andra personer måste mata den och se till att den inte kommer till skada. Om kroppen skulle dö medan själen är fängslad befrias själen omedelbart och beger sig till Dödsriket eller, om det är en älvfolksjäl, söker upp sin nästa kropp.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

@@ -1,0 +1,38 @@
+{
+  "name": "Restitution",
+  "type": "besvarjelse",
+  "_id": "gMMjk3HjkEQjIsex",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
+  "system": {
+    "school": "spiritism",
+    "sValue": 16,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>Varje effektgrad återställer en grundegenskapspoäng som har förlorats permanent genom en attack av en ande eller en gast. ⚠ Om rollpersonen har förlorat en eller flera poäng väljer spiritisten ut vilken eller vilka som ska återställas.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "58"
+    }
+  },
+  "effects": [],
+  "folder": "1zkCUjd5C8SmqAcs",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788280897972,
+    "modifiedTime": 1788280897972,
+    "lastModifiedBy": "GenSpiritism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!gMMjk3HjkEQjIsex"
+}

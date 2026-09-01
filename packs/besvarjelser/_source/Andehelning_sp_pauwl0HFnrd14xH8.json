@@ -1,0 +1,38 @@
+{
+  "name": "Andehelning",
+  "type": "besvarjelse",
+  "_id": "pauwl0HFnrd14xH8",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
+  "system": {
+    "school": "spiritism",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Spiritisten tillkallar en ande med läkeförmåga. Anden manifesterar sig inte fysiskt, det gör läkeandar aldrig, men är ändå närvarande. Magikern kan sedan be anden att hela honom eller en annan person som magikern berör. För att anden ska göra detta måste spiritisten lova att aldrig mer störa anden i dess vila. Om anden accepterar detta förslag, vilket den i regel gör då läkeandar vanligtvis är vänligt sinnade, kommer den att lägga en HELA på den person som magikern utsett. Anden behärskar besvärjelsen med S=1T6+12. ⚠ En läkeande skulle aldrig hela en onaqui, nekromantiker eller liknande. Om en spiritist skulle råka tillkalla samma läkeande en gång till (chansen att det skulle hända varierar mellan 0-3 %, SL avgör beroende på hur länge det var sedan spiritisten lade besvärjelsen sist, hur ofta han lägger den, med mera) blir anden mycket vred och kommer att bestraffa magikern genom att ta en permanent PSY-poäng från honom för att han inte höll sitt löfte.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "57"
+    }
+  },
+  "effects": [],
+  "folder": "1zkCUjd5C8SmqAcs",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788280870253,
+    "modifiedTime": 1788280870253,
+    "lastModifiedBy": "GenSpiritism",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!pauwl0HFnrd14xH8"
+}

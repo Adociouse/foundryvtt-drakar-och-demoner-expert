@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Sx2 rutor",
-    "description": "<p>Exorcism av spöke/lyktgubbe/ande; dansar runt platsen; vid lyckat PSY-slag: permanent exorcism</p>",
+    "description": "<p>Med hjälp av denna ritual kan magikern fördriva ett spöke, en lyktgubbe eller en annan ande. Det krävs en effektgrad per varje femtal PSY hos den odöde. Magikern måste dansa runt den plats där anden håller till. Medan han utför ritualen är han immun mot skräckattacker och liknande mentala anfall. När ritualen fullbordas ska magikern försöka förhäxa den odöde. Om detta lyckas fördrivs den odöde från världen för evigt. ⚠ Om försöket däremot misslyckas måste magikern omedelbart slå en gång på skräcktabellen. Denna besvärjelse är en slags exorcism.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",

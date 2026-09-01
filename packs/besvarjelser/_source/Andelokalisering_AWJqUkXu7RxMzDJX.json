@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
-    "description": "<p>E effektgrader anger riktningen till en ande var inom räckvidden (slumpmässig ande)</p>",
+    "description": "<p>Varje effektgrad anger riktningen till en ande inom räckvidden. Vilken ande som lokaliseras avgörs slumpmässigt.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

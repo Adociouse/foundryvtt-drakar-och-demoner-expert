@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "S/2 rutor",
-    "description": "<p>Skadar andar/gastar: −1 PSY permanent/E; vid PSY=0 förintas anden</p>",
+    "description": "<p>Spiritisten kan skada andar och gastar. Varje effektgrad minskar målets PSY permanent med ett, och när PSY når noll är det förintat.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

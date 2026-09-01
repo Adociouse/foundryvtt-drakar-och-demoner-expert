@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "S/4 minuter",
     "range": "Personlig",
-    "description": "<p>Astralkropp kan röra sig fritt (+5 CL Kamouflage); kan ej skadas men kan förhäxas av andbesvärjelser</p>",
+    "description": "<p>Spiritisten försätter sig i trans, varefter hans själ lämnar kroppen som en diffus astralkeppnad. Man kan se astralkroppen, men den har +5 på CL för Kamouflage och Gömma sig, eftersom den är så pass otydlig. Astralkroppen räknas som en ande och kan röra sig genom alla former av materia och behöver inte andas. Den kan inte påverka några materiella föremål och kan inte heller kasta några besvärjelser. ⚠ Astralkroppen kan inte skadas, men den kan fördrivas med SKINGRA och förhäxas av besvärjelser som påverkar andar. När varaktigheten tar slut teleporteras astralkroppen omedelbart tillbaka till magikerns kropp. Om magikerns kropp skadas upphör genast besvärjelsen att fungera och astralkroppen återvänder.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",
