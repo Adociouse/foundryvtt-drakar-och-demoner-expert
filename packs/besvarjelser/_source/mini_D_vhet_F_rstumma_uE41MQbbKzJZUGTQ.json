@@ -1,16 +1,20 @@
 {
-  "name": "Dövhet/Förstumma",
-  "type": "minibesvarjelse",
+  "name": "Dövhet",
+  "type": "besvarjelse",
   "_id": "uE41MQbbKzJZUGTQ",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
   "system": {
     "school": "nekromanti",
-    "psyCost": 1,
+    "sValue": 4,
+    "kvick": false,
+    "duration": "Sx1 SR",
+    "range": "Sx2 rutor",
+    "description": "<p>Offret förlorar hörseln under varaktigheten. ⚠ Denna besvärjelse är särskilt besvärande för varelser utrustade med sonar.</p>",
+    "ritual": false,
     "source": {
-      "book": "magi",
-      "page": "23"
-    },
-    "description": "<p>Sx2 rutor, Sx1 SR — offret förlorar hörseln eller talförmågan</p><p><em>⚠ Källan flaggar posten som osäker (OCR).</em></p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+      "book": "formelboken",
+      "page": "46"
+    }
   },
   "effects": [],
   "folder": "MJPHi5YSpE3GBBDE",

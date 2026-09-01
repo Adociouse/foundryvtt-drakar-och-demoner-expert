@@ -1,5 +1,5 @@
 {
-  "name": "GMI (gnistan)",
+  "name": "Spökljus",
   "type": "minibesvarjelse",
   "_id": "mMAMcxbzlFHdPqu7",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
@@ -10,7 +10,7 @@
       "book": "magi",
       "page": "23"
     },
-    "description": "<p>Nekromantikern lyser svagt i handflatsstorlek; räcker för att läsa en bok i mörker</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+    "description": "<p>Nekromantikern får en liten yta, ca 30x30 cm, att självlysa med ett svagt blekt och sjukligt sken. ⚠ Spökljuset räcker inte till att illuminera andra föremål i närheten, men räcker till att läsa en bok i mörker.</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
   },
   "effects": [],
   "folder": "MJPHi5YSpE3GBBDE",

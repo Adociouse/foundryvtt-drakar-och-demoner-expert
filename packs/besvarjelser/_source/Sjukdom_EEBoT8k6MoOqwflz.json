@@ -1,0 +1,38 @@
+{
+  "name": "Sjukdom",
+  "type": "besvarjelse",
+  "_id": "EEBoT8k6MoOqwflz",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 12,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Nekromantikern kan besla någon med sjukdom. Vilken sjukdom det gäller är valfritt. Sjukdomen har lika hög LET som antalet effektgrader, det vill säga att det går att smitta någon med pest vars LET är ett i stället för det normala 20. ⚠ Offret kan inte föra smittan vidare. Nekromantikern själv smittas inte av sjukdomen eller starta en massepidemi.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "49"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!EEBoT8k6MoOqwflz"
+}

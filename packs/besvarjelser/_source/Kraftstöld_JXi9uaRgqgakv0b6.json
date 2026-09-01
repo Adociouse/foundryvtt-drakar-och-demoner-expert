@@ -1,0 +1,38 @@
+{
+  "name": "Kraftstöld",
+  "type": "besvarjelse",
+  "_id": "JXi9uaRgqgakv0b6",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 24,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Denna besvärjelse är en mycket kraftfull variant av LIVSUTTÖMNING. Skillnaden är att PSY-poängen som magikern tar från sitt offer läggs till nekromantikerns eget PSY och han förlorar dem sedan inte. ⚠ En begränsning är att nekromantikern inte kan suga ut mer än 1/10 av offrets PSY.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!JXi9uaRgqgakv0b6"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Massa",
+  "type": "besvarjelse",
+  "_id": "iPElwToo7Sq0YiDO",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Beröring",
+    "description": "<p>Med hjälp av denna makabra nekromantibesvärjelse kan en magiker få en hög med lik (som inte får vara äldre än en månad) att flyta samman och bli en stor, äcklig, slemmig, grå massa. Han kan sedan aktivera MASSAn. Order till den kontrollerar alla dess aktiviteter fullständigt, men dessa kan bara delas ut när den befinner sig inom hör- och synavstånd. I alla andra situationer utför den sin senaste order. När en order är given fortsätter den att utföra den tills uppgiften är slutförd eller tills den blir beordrad på nytt. SL får styra MASSAn och se till att den följer sina order enligt dessa ordalydelse. MASSAns grundegenskaper beror både på hur många lik den består av, vilka grundegenskaper liken hade när de levde och på MASSAns effektgrad (se närmare på grundegenskapstabellen nedan). Att aktivera en MASSA kostar, förutom allt annat, en grad per 20 STO hos MASSAn. MASSAn har inga färdigheter men har en attack som går ut på att den kastar sig över en motståndare och helt enkelt kväver honom. Attacken har bara en CL på fyra på grund av MASSAns långsamhet. En person som attackeras har dessutom en viss chans att klara sig undan om han klarar ett svårt SMI-slag. Om MASSAn lyckas med en attack har den lagt sig ovanpå sin motståndare och ligger kvar där offret är kvävt eller tills den får andra order av sin mästare. En person som håller på att kvävas kan räddas genom att man tar död på MASSAn, den stelnar då och kan rullas bort från sitt offer. En MASSA räknas som en lägre odöd utan själ.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "51"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!iPElwToo7Sq0YiDO"
+}

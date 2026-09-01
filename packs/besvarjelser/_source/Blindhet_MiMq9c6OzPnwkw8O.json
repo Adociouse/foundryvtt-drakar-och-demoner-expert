@@ -3,11 +3,11 @@
   "type": "besvarjelse",
   "system": {
     "school": "nekromanti",
-    "sValue": 10,
+    "sValue": 6,
     "kvick": false,
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
-    "description": "<p>Offret förlorar synförmågan.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "description": "<p>Offret förlorar synförmågan under varaktigheten.</p>",
     "ritual": false,
     "statusEffect": "blind",
     "targetMode": "single",

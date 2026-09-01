@@ -1,0 +1,38 @@
+{
+  "name": "Animera tupilak",
+  "type": "besvarjelse",
+  "_id": "OWvW1JZgtPsuHq85",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Beröring",
+    "description": "<p>Detta är en variant av besvärjelsen ANIMERA DÖD. En tupilak är en zombie som består av delar från många olika slags kroppar. Nekromantikern samlar in likdelarna och sätter ihop dem på det sätt han önskar innan han utför ritualen. ⚠ För att tupilaken ska fungera på ett vettigt sätt krävs att likdelarna kommer från varelser med ungefär samma STO. Om man sätter en råtthuvud på en elefantkropp blir resultatet enbart löjeväckande. SL måste själv bedöma vad som är rimligt och orimligt. Tupilaken fungerar som en vanlig zombie, men grundegenskaperna måste fastställas kroppsdel för kroppsdel, eftersom de varierar mycket mellan olika varelser. Dess hastighet kan inte överstiga 80% av förflyttningsförmågan hos den varelse som stod till tjänst med de extremiteter som sköter förflyttningen, t ex fenor, ben eller vingar.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!OWvW1JZgtPsuHq85"
+}

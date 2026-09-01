@@ -1,0 +1,38 @@
+{
+  "name": "Huggtänder",
+  "type": "besvarjelse",
+  "_id": "79dn0PgQPVajvDGh",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Personlig",
+    "description": "<p>Nekromantikern kan få sina hörntänder att växa ut och bli långa och farliga. Förvandlingen tar ett dygn. Ett bett av magikerns huggtänder ger 1T8+SB i skada. ⚠ För att magikern ska kunna använda sina huggtänder fullt ut måste han lära sig en ny stridsfärdighet: Bett. När besvärjelsens varaktighet löper ut börjar huggtänderna smulas sönder och efter 1T10+10 dagar har tänderna återfått sin ursprungliga storlek.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "49"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!79dn0PgQPVajvDGh"
+}

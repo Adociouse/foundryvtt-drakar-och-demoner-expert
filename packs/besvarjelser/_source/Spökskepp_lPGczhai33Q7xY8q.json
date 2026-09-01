@@ -1,0 +1,38 @@
+{
+  "name": "Spökskepp",
+  "type": "besvarjelse",
+  "_id": "lPGczhai33Q7xY8q",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 19,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "S/4 kilometer",
+    "description": "<p>Nekromantikern kan lyfta ett sjunket skepp från havets botten och animera detta och dess besättning. När nekromantikern utför ritualen kommer det närmaste skeppsvraket inom räckvidden att stiga upp till ytan. Det ser ut ungefär som det gjorde när det var nytt, men det är omgivet av en kall, blåskimrande dimma. All nödvändig utrustning, t.ex. åror, segel och rep finns ombord. Skeppet fungerar precis som det gjorde innan det gick under. Dess skrov är en blandning av magiska energier och vrakrester och det kan fortfarande skadas. ⚠ Sådana nya skador kan inte repareras. Efter att spökskeppet har manats fram påverkas dess existens inte längre av avståndet till magikern. För varje effektgrad utöver den första kan nekromantikern animera en besättningsman. En sådan besättningsman blir en havsgast. En havsgast måste kallas fram med samma besvärjelse som frammanade skeppet; det går inte att försöka animera en havsgast som hör till det skeppet med en senare SPÖKSKEPP. Vidare tjänar en havsgast endast ombord på sitt eget skepp. Givetvis kan man inte frammana fler havsgastar än skeppets ursprungliga besättning. Havsgasten blir nekromantikerns lydiga slav under besvärjelsens varaktighet. En havsgast lyder endast direkta order från nekromantikern. Alla andra order ignoreras. Den har heller ingen egen initiativförmåga, vilket innebär att nekromantikern måste ha färdigheten Sjökunnighet för att kunna ge de rätta orderna. Om skeppet inte har tillräckligt många skeppsgastar för att kunna segla måste det också bemannas av levande besättningsmän. Ett skepp kan endast bli ett spökskepp en gång. När besvärjelsens varaktighet löper ut faller skeppet samman till stoft.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "52"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!lPGczhai33Q7xY8q"
+}

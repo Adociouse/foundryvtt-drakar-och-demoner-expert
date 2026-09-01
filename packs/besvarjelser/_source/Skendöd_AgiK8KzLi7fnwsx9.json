@@ -1,0 +1,38 @@
+{
+  "name": "Skendöd",
+  "type": "besvarjelse",
+  "_id": "AgiK8KzLi7fnwsx9",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 12,
+    "kvick": true,
+    "duration": "S/4 timmar",
+    "range": "Personlig",
+    "description": "<p>Magikern kan försänka sig i en djup dvala. För utomstående uppvisar han då inga livstecken och är synbarligen död. Om magikern undersöks med hjälp av magi, t.ex. VARSEBLIVNING, måste besvärjelsens effektgrad övervinna SKENDÖDens effektgrad för att man ska kunna upptäcka närvaron av magi eller liv hos den skendöde. ⚠ Nekromantikern är fullständigt omedveten om vad som försiggår omkring honom när han är skendöd. Han kan tillfogas skada på vanligt sätt och dödas på riktigt medan han är i detta tillstånd. I dvalan förbrukar magikern inget syre, vatten eller näring. Han kan heller inte återvinna PSY-poäng. Magikern kan väckas med VÄCKA under förutsättning att VÄCKAns effektgrad övervinner SKENDÖDens på motståndstabellen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "49"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!AgiK8KzLi7fnwsx9"
+}

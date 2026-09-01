@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Sx1 minuter",
     "range": "Sx2 rutor",
-    "description": "<p>Den förhäxade blir helt paralyserad och kan inte röra sig. Det krävs en effektgrad per 20 STO hos offret.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "description": "<p>Den som blir förhäxad blir helt paralyserad och kan inte röra sig. ⚠ Det krävs en effektgrad per 20 STO hos offret.</p>",
     "ritual": false,
     "statusEffect": "paralysis",
     "targetMode": "single",

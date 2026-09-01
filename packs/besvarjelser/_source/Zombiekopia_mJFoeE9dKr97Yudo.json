@@ -1,0 +1,38 @@
+{
+  "name": "Zombiekopia",
+  "type": "besvarjelse",
+  "_id": "mJFoeE9dKr97Yudo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 26,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Beröring",
+    "description": "<p>Med hjälp av denna ritual kan en nekromantiker skapa en zombie som är en kopia av en annan person. För att kunna utföra ritualen måste magikern ha ett lik som är maximalt 48 timmar gammalt och någonting från kroppen hos den person som ska kopieras, t.ex. hårstrån eller hudavskrap. ⚠ Om ritualen lyckas får zombien ett utseende som är exakt kopierat. Däremot får zombien grundegenskaper som baseras på vad den själv hade i levande livet och modifierade för effektgrad på samma sätt som gäller för vanliga zombier. Den kan inte tala och sprider liklukt omkring sig, vilket starkt begränsar dess användning.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "53"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!mJFoeE9dKr97Yudo"
+}

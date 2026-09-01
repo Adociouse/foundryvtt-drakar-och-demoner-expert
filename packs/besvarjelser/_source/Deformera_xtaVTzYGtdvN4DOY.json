@@ -1,0 +1,38 @@
+{
+  "name": "Deformera",
+  "type": "besvarjelse",
+  "_id": "xtaVTzYGtdvN4DOY",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Sx2 rutor",
+    "description": "<p>Denna besvärjelse kan riktas mot en intelligent varelse. Om han förhäxas blir hans kropp deformerad och förvriden. Hans STY, SMI, KAR, de färdigheter som är baserade på dessa tre grundegenskaper och förflyttningsförmågan halveras (alla avrundade uppåt) på grund av deformationen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!xtaVTzYGtdvN4DOY"
+}

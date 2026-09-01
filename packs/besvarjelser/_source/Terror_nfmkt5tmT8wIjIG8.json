@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
-    "description": "<p>Liknar de övriga skräckbesvärjelserna men är mycket kraftfullare. Alla varelser inom räckvidden kan bli förhäxade. De som misslyckas med ett svårt stridsmoralslag slår på Skräcktabellen med +10 på tärningen. De som klarar slaget är nervösa i 1T20 SR. Gäller även spelarrollpersoner. Ingen effekt på varelser som saknar INT. Lägre odöda måste slå ett svårt PSY-slag för att undvika att fly, högre odöda ett normalt. Andar är immuna.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "description": "<p>Den här besvärjelsen liknar de övriga skräckbesvärjelserna men har en mycket kraftigare effekt. Alla varelser som finns inom räckvidden kan bli förhäxade. De förhäxade som misslyckas med ett svårt stridsmoralslag måste slå på skräcktabellen med +10 på tärningen. De som klarar stridsmoralslaget är nervösa (se RÄDSLA ovan) i 1T20 SR. ⚠ Allt detta gäller även effekt på varelser som saknar INT. Lägre odöda måste slå ett svårt PSY-slag för att undvika att fly. Högre odöda måste slå ett normalt PSY-slag för att slippa fly (se PANIK ovan). Andar är immuna mot besvärjelsen.</p>",
     "ritual": false,
     "source": {
       "book": "magi",

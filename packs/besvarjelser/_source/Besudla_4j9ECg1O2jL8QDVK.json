@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Beröring",
-    "description": "<p>Magikern besudlar 1 liter vätska eller fast materia så att den blir oanvändbar eller skadlig för levande varelser. Vanligast är att göra färsk mat skämd eller friskt vatten odrickbart.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "description": "<p>Magikern besudlar en liter vätska eller fast materia på ett sådant sätt att den blir oanvändbar eller skadlig för levande varelser. ⚠ Det vanligaste är att göra färsk mat skämd eller friskt vatten odrickbart.</p>",
     "ritual": false,
     "source": {
       "book": "magi",

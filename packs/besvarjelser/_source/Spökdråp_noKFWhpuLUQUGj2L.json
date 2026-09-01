@@ -1,0 +1,38 @@
+{
+  "name": "Spökdråp",
+  "type": "besvarjelse",
+  "_id": "noKFWhpuLUQUGj2L",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 27,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Beröring",
+    "description": "<p>Om denna besvärjelse kastas på en intelligent varelse inom en minut från det att den dött och då lyckas förhäxa varelsen, tvingas dess själ att stanna kvar på dödsplatsen och hemsöka den som ett spöke. ⚠ Besvärjelsen måste innehålla ett villkor som kan uppfyllas av en levande varelse av samma slag som spöket. Om detta uppfylls får spöket dö och lämna världen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!noKFWhpuLUQUGj2L"
+}

@@ -1,16 +1,20 @@
 {
   "name": "Besmutsa",
-  "type": "minibesvarjelse",
+  "type": "besvarjelse",
   "_id": "yJwPaENSxhW7vdF2",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
   "system": {
     "school": "nekromanti",
-    "psyCost": 1,
+    "sValue": 2,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx2 rutor",
+    "description": "<p>Om magikern lyckas förhäxa sitt offer, som måste vara en levande varelse, blir denne genast smutsig och illaluktande. Effekten kvarstår tills offret har tvättat sig ordentligt med tvål och vatten.</p>",
+    "ritual": false,
     "source": {
-      "book": "magi",
-      "page": "23"
-    },
-    "description": "<p>Offret blir genast smutsigt och illaluktande; varar tills ordentligt tvättat</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+      "book": "formelboken",
+      "page": "46"
+    }
   },
   "effects": [],
   "folder": "MJPHi5YSpE3GBBDE",

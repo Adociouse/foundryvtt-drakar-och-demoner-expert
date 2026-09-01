@@ -10,7 +10,7 @@
       "book": "magi",
       "page": "23"
     },
-    "description": "<p>Zombifierar en insekt (STO <1) i 1T10 timmar; lydiga order max 3 ord/20 bokstäver</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+    "description": "<p>Nekromantikern kan zombiefiera en insekt (varaktighet 1T10 timmar) som lyder dennes order. ⚠ Dessa order måste formuleras med tre ord med högst 20 bokstäver totalt. Den zombiefierade insekten verkar fortfarande som en vanlig insekt. Endast insekter med STO mindre än ett kan zombiefieras med denna besvärjelse (det vill säga inga köttbitare eller bärbaggar!).</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
   },
   "effects": [],
   "folder": "MJPHi5YSpE3GBBDE",

@@ -1,0 +1,38 @@
+{
+  "name": "Krypande hand",
+  "type": "besvarjelse",
+  "_id": "ykYV7Ad0u9VzhhOA",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Personlig",
+    "description": "<p>En nekromantiker lägger den här besvärjelsen på sin huvudhand och den lossnar då från armen, kvar blir bara en armstump som ser ut som den var amputerad där handen suttit. Nekromantikern kan sedan styra handen hur han vill inom räckvidden, som är lika med besvärjelsens effektgrad i kilometer. ⚠ Handen styrs av nekromantikerns tankar och med sin armstump med vilken han måste följa handens rörelser. Han kan i sitt inre se vad som finns runt handen precis som om handen hade ögon. Handen har samma STY som nekromantikern men får SMIx1,5. STO varierar men är för de flesta varelser ett. Förflyttningen är nekromantikerns x2, men handen förflyttar sig istället flygande. Krypande förflyttar den sig med en hastighet av nekromantikerns förflyttning/4. När varaktigheten löpt ut eller när magikern frivilligt avbryter besvärjelsen återvänder handen genast och sätter sig åter fast på magikerns arm. Om handen skulle \"dö\" blir magikern utan handen för evigt om ingen lägger en REGENERERING på honom (men vilken animist skulle göra det?). Om nekromantikern själv skulle dö under besvärjelsens varaktighet faller handen livlös till marken.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "51"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ykYV7Ad0u9VzhhOA"
+}

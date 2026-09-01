@@ -7,11 +7,11 @@
     "kvick": false,
     "duration": "Konc",
     "range": "Sx2 rutor",
-    "description": "<p>Kontrollerar en ande (spöke, lyktgubbe) om spiritistens PSY övervinner andens</p>",
+    "description": "<p>Spiritisten kan, under den tid han koncentrerar sig, kontrollera en ande (spöke, lyktgubbe) som han lyckats förhäxa. Om anden redan skulle stå under en annan magikers kontroll måste spiritistens PSY övervinna den andre magikerns PSY på motståndstabellen. Att kontrollera en ande innebär att magikern styr dess handlingar.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",
-      "page": "55-59"
+      "page": "57"
     }
   },
   "_id": "uxoxcvrHEwDOqRWn",

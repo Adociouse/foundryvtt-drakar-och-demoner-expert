@@ -1,0 +1,38 @@
+{
+  "name": "Förtvina tunga",
+  "type": "besvarjelse",
+  "_id": "aeNAD4NU6Op6ko3p",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "S/2 rutor",
+    "description": "<p>Om förhäxningen lyckas förtvinar offrets tunga och blir fullständigt obrukbar. Om det rör sig om en varelse med talförmåga går denna förlorad. ⚠ En förtvinad tunga kan återställas med REGENERERING.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!aeNAD4NU6Op6ko3p"
+}

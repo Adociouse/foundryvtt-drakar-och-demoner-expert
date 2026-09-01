@@ -1,0 +1,38 @@
+{
+  "name": "Ormskott",
+  "type": "besvarjelse",
+  "_id": "fLCuU0yhczOQqwwu",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Sx1 SR",
+    "range": "Beröring",
+    "description": "<p>När magikern kastar denna besvärjelse på en orm (längd ca 100 cm) omvandlas ormen till en pil. Om ormpilen avfyras under besvärjelsens varaktighet och träffar ett mål vållar den normal skada och ger dessutom målet en injektion av ormens gift. ⚠ SL får bestämma ormens exakta grundegenskaper förutom INT som är tre och PSY som är lika med besvärjelsens effektgrad. Ormens bett har ett gift som har styrka=effektgraden. Under varaktigheten kan magikern ge enkla små order om vad den ska göra, t.ex. åt vilket håll den ska krypa eller vem den ska bita, i övrigt handlar ormen den själv vill. När varaktigheten löpt ut blir ormen en vanlig pinne, det samma händer om ormen skulle dödas.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "48"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!fLCuU0yhczOQqwwu"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Stupiditet",
+  "type": "besvarjelse",
+  "_id": "bT6hgdAp7wZ4AlBw",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Sx2 rutor",
+    "description": "<p>Denna besvärjelse riktas mot en levande intelligent varelse inom räckvidden. Under varaktigheten sänks offrets INT till 1, något som givetvis drabbar alla INT-baserade färdigheter. ⚠ När en rollperson drabbas av besvärjelsen krävs det ett gott rollspelande från rollpersonens spelare. Spelledaren bör se till att detta sker och rekommenderas att belöna de spelare som klarar av det.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!bT6hgdAp7wZ4AlBw"
+}

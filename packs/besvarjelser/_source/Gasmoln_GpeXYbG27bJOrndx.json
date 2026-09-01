@@ -1,0 +1,38 @@
+{
+  "name": "Gasmoln",
+  "type": "besvarjelse",
+  "_id": "GpeXYbG27bJOrndx",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 5,
+    "kvick": false,
+    "duration": "Sx1 minuter",
+    "range": "Sx10 rutor",
+    "description": "<p>Med denna besvärjelse kan man frammana gasmoln av fyra olika slag. Det krävs ett visst antal effektgrader för att få fram den önskade gastypen (se tabellen). När man har satsat så många effektgrader framträder ett moln på 100 kubikmeter och en effektgrad på 1T4. Varje extra effektgrad ökar molnets volym med ytterligare 100 kubikmeter eller giftstyrkan med 1T4. ⚠ Gastyper: Äcklande (E1, grön) — illamående, luktsinnet ur spel i molnet och 2T6 SR efter, kräkningar tvingar att stå stilla och spy under 1T4 SR. Irriterande (E3, gul) — ögonen tåras, -10 på CL för uppmärksamhetsfärdigheter i molnet och 2T6 SR efter, temporär blindhet i molnet och 2T6+6 SR efter, våldsam klåda tills man tagit av alla kläder och torkat kroppen (halverar SMI-baserade färdigheter under tiden). Sövande (E7, vit) — yrsel som sänker SMI och SMI-baserade färdigheter till 1 i molnet och 2T6 SR efter, förflyttningsförmåga halveras samma tid (sömn under 1T4+1 timmar). Gift (E10, gråblå) — effekt beskriven i texten (varje offers FYS prövas mot gasens giftstyrka på motståndstabellen; övervinns gasen tar offret halv giftstyrka i skada avrundat nedåt, övervinns FYS tar offret hela giftstyrkan i skada — dras från totala KP).</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "46"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!GpeXYbG27bJOrndx"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Giftbett",
+  "type": "besvarjelse",
+  "_id": "i70TprME25ccbRl7",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Personlig",
+    "description": "<p>Denna besvärjelse förutsätter att magikern har huggtänder. Om dessa har skapats genom magi eller är naturliga spelar ingen roll. Magikern kan skapa ett gift som gör hans bett farligare. Om bettet gör skada injiceras en dos gift i offret. En första gradens GIFTBETT har en styrka på sex. ⚠ För varje effektgrad utöver den första ökar styrkan med tre poäng (dock inte över 21).</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!i70TprME25ccbRl7"
+}

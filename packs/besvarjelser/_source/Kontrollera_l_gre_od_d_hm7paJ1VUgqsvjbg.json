@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Konc.",
     "range": "Sx2 rutor",
-    "description": "<p>Ger kontroll över en skelett, zombie eller likätare; varje extra effektgrad ger ytterligare en odöd. Varar så länge trollkarlen koncentrerar sig. Kan också användas för att bryta en annan trollkarls kontroll — då måste den egna PSY först övervinna den kontrollerande magikerns PSY. Genom att först ta kontroll och sedan förhäxa den odöde en gång till kommenderas denne till gravens vila, fullständigt och för all framtid.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "description": "<p>Besvärjelsen gör det möjligt att ta kontroll över en av följande odöda: baneman, dödmanshand, gasthäst, skelett, zombie och likätare (för detaljer, se de båda Monsterböckerna). ⚠ För varje extra effektgrad kan man ta kontroll över ytterligare en odöd. Besvärjelsen varar så länge som trollkarlen koncentrerar sig på den. Det är även möjligt för en trollkarl att försöka bryta kontrollen för en annan trollkarl som kontrollerar odöda — i ett sådant fall måste trollkarlens PSY först övervinna den kontrollerande magikerns PSY. Med hjälp av besvärjelsen kan man kommendera den odöde till gravens vila: magikern ska först ta kontroll, därefter ska han förhäxa den odöde igen med samma besvärjelse, som då deaktiveras fullständigt och för all framtid. ⚠ Besvärjelsen har ingen effekt på odöda varelser eller på varelser som saknar INT. Även en spelarrollperson måste slå moralslag.</p>",
     "ritual": false,
     "source": {
       "book": "magi",

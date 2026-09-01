@@ -2,22 +2,22 @@
   "name": "Tala med död",
   "type": "besvarjelse",
   "system": {
-    "school": "nekromanti",
+    "school": "spiritism",
     "sValue": 11,
     "kvick": false,
-    "duration": "särskild",
+    "duration": "Special",
     "range": "S/2 rutor",
-    "description": "<p>Gör det möjligt att kommunicera med de döda. Trollkarlen måste befinna sig där varelsen dog eller ligger begraven, känna till den dödes namn och tala det språk varelsen gjorde för att kunna kalla på själen. Själen uppenbarar sig som en svagt skimrande gestalt. Per effektgrad får trollkarlen ställa en fråga; varje fråga besvaras med ja eller nej, eller med en gåta eller ett rim. Man kan inte kommunicera med odöda genom denna besvärjelse.</p><p><em>Källa: D&DE 0_Magi (Magi-regelboken) s.22-25.</em></p>",
+    "description": "<p>Besvärjelsen gör det möjligt att kommunicera med de döda. Trollkarlen måste befinna sig på den plats där varelsen dog eller ligger begravd för att han ska kunna kalla på den dödes själ. Dessutom måste trollkarlen känna till den dödes namn och kunna tala samma språk som varelsen för att det ska lyckas. Om besvärjaren lyckas uppenbarar sig själen som en svagt skimrande gestalt. För varje effektgrad får trollkarlen ställa en fråga. Varje fråga besvaras antingen med ett ja eller nej eller genom en gåta eller ett rim av den dödes själ. ⚠ Man kan inte kommunicera med odöda genom denna besvärjelse.</p>",
     "ritual": false,
     "source": {
-      "book": "magi",
-      "page": "22-25"
+      "book": "formelboken",
+      "page": "58"
     }
   },
   "_id": "OCZIghEWzWwvvS1m",
-  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
   "effects": [],
-  "folder": "kOmGN3hJL3XgcSMV",
+  "folder": "1zkCUjd5C8SmqAcs",
   "sort": 0,
   "ownership": {
     "default": 2

@@ -1,0 +1,38 @@
+{
+  "name": "Spindelböld",
+  "type": "besvarjelse",
+  "_id": "5ZIQu6MxheccLG8q",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Särskild",
+    "range": "Beröring",
+    "description": "<p>Nekromantikern vidrör offret varvid, efter E antal timmar, E antal bölder uppstår. ⚠ Bölderna verkar vara ofarliga trots sin blåsvart uppenbarelse. Bölderna sväller efter 20-S antal dagar (dock minst en dag) till hönsäggstorlek för att slutligen spricka. När detta händer tar offret en poäng i skada per böld. Ut ur den spruckna bölden kravlar sedan en stor svart (dock ej giftig) spindel. Denna besvärjelse framforskades av den illa beryktade nekromantikern Farengadd av Helsing, som älskade smått perversa skämt och practical jokes.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "47"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!5ZIQu6MxheccLG8q"
+}

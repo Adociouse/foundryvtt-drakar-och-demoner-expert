@@ -1,0 +1,38 @@
+{
+  "name": "Förstening",
+  "type": "besvarjelse",
+  "_id": "cpt65CKqYQGnXpMk",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 20,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern kan förvandla en levande varelse till sten. Försteningen innefattar även allt offret bär på sig, som vapen och kläder. ⚠ Det krävs en effektgrad per fem STO hos varelsen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "52"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!cpt65CKqYQGnXpMk"
+}

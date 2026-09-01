@@ -1,0 +1,38 @@
+{
+  "name": "Fobi",
+  "type": "besvarjelse",
+  "_id": "a8BjgQs8kYtQp7HG",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 8,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Beröring",
+    "description": "<p>Denna besvärjelse kan riktas mot ett bestämt, levande offer. Om förhäxningen lyckas får offret en fobi per effektgrad. Slå på fobitabellen för att se vilken det blir. Om samma fobi kommer upp flera gånger, slå om!</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "47"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!a8BjgQs8kYtQp7HG"
+}

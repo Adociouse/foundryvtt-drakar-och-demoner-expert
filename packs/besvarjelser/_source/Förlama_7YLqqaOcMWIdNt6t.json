@@ -1,0 +1,38 @@
+{
+  "name": "Förlama",
+  "type": "besvarjelse",
+  "_id": "7YLqqaOcMWIdNt6t",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "S/4 veckor",
+    "range": "Sx2 rutor",
+    "description": "<p>Med denna besvärjelse kan magikern förlama ett valfritt offer inom räckvidden. Det krävs en effektgrad per kroppsdel som magikern vill förlama. ⚠ För att besvärjelsen ska fungera krävs att offret har grundegenskapen FYS; därmed kan odöda påverkas. Kroppsdelarna som ska drabbas måste fastställas för kroppsdel, eftersom de varierar mycket mellan olika varelser — spelledaren bör se till att detta sker och rekommenderas att belöna de spelare som klarar av det, spelande från rollpersonens spelare.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "49"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!7YLqqaOcMWIdNt6t"
+}

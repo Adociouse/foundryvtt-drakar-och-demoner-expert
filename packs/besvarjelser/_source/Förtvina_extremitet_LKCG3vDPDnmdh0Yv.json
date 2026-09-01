@@ -1,0 +1,38 @@
+{
+  "name": "Förtvina extremitet",
+  "type": "besvarjelse",
+  "_id": "LKCG3vDPDnmdh0Yv",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
+  "system": {
+    "school": "nekromanti",
+    "sValue": 17,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern kan försöka förhäxa en levande varelse med denna besvärjelse. Med dess hjälp kan han få en eller flera av offrets extremiteter (arm, ben, vinge) att förtvina och bli fullständigt obrukbara. E1 drabbar en kroppsdel, E4 två, E9 tre, E16 fyra, E25 fem osv. Magikern bestämmer själv vilken eller vilka kroppsdelar som ska drabbas när han lägger besvärjelsen. ⚠ Den förtvinade kroppsdelen kan återställas med hjälp av REGENERERING.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "51"
+    }
+  },
+  "effects": [],
+  "folder": "kOmGN3hJL3XgcSMV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788264093930,
+    "modifiedTime": 1788264093930,
+    "lastModifiedBy": "GenNekromanti",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!LKCG3vDPDnmdh0Yv"
+}

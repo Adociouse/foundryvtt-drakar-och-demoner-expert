@@ -1,16 +1,20 @@
 {
   "name": "Ondblick",
-  "type": "minibesvarjelse",
+  "type": "besvarjelse",
   "_id": "x7vC2XAG5bFmedvL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
   "system": {
     "school": "nekromanti",
-    "psyCost": 1,
+    "sValue": 4,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Personlig",
+    "description": "<p>En nekromantiker kan få intelligenta varelser att undvika att anfalla honom. Nekromantikern stirrar en person som är på väg att anfalla honom rakt i ögonen och använder besvärjelsen, och om anfallaren blir förhäxad måste han klara ett svårt PSY-slag för att kunna fullfölja attacken. ⚠ När en person som råkat ut för ONDBLICK och misslyckats vill anfalla samma magiker en gång till, måste han först klara ett medelsvårt PSY-slag för att överhuvudtaget våga göra det.</p>",
+    "ritual": false,
     "source": {
-      "book": "magi",
-      "page": "23"
-    },
-    "description": "<p>Stirrar motståndare i ögonen; offret måste klara ett svårt PSY-slag för att kunna fullfölja anfallet</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+      "book": "formelboken",
+      "page": "46"
+    }
   },
   "effects": [],
   "folder": "MJPHi5YSpE3GBBDE",
