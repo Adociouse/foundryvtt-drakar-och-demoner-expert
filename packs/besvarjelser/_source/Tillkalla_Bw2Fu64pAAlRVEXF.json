@@ -1,0 +1,38 @@
+{
+  "name": "Tillkalla",
+  "type": "besvarjelse",
+  "_id": "Bw2Fu64pAAlRVEXF",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",
+  "system": {
+    "school": "rostmagi",
+    "sValue": 1,
+    "kvick": true,
+    "duration": "Omedelbar",
+    "range": "Sx10 rutor",
+    "description": "<p>Alla inom räckvidden som känner magikern till namnet vet omedelbart exakt var han befinner sig.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53"
+    }
+  },
+  "effects": [],
+  "folder": "jjtnfKTBdaPM42Nl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788274855699,
+    "modifiedTime": 1788274855699,
+    "lastModifiedBy": "GenRostmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Bw2Fu64pAAlRVEXF"
+}

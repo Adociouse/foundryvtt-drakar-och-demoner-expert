@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
-    "description": "<p>Dövar alla inom räckvidden (inkl. magikern ej) i 1T4 timmar</p>",
+    "description": "<p>Röstmagikern kan frambringa ett högt skärande skrik som gör att alla som befinner sig inom räckvidden blir helt döva i 1T4 timmar. Magikern är skyddad från besvärjelsens effekter. ⚠ Om rollpersoner skulle drabbas av BEDÖVAD får spelarna inte kommunicera muntligt. Om man skyddar sina öron med t.ex. mossa eller med fingrarna dämpas skriket så pass mycket att man bara blir döv i 1T20 minuter. Observera att en varelse som är döv inte kan påverkas av några andra röstmagi- eller harmonistbesvärjelser så länge han är döv (detta gäller dock med vissa undantag, t.ex. TRYCKVÅG).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

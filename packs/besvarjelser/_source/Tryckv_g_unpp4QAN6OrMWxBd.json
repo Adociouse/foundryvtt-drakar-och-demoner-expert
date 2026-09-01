@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "S/2 rutor",
-    "description": "<p>Tryckvåg med 10×E STY slagkraft knockar bakåt/omkull allt inom räckvidden</p>",
+    "description": "<p>Besvärjaren riktar en kraftig ljudvåg mot ett mål; detta kan vara en varelse eller ett föremål av valfri storlek. Med 10×E försöker besvärjaren övervinna målets STO på motståndstabellen. Om försöket lyckas har målet kastats omkull. ⚠ Om besvärjelsen riktas mot en stängd dörr måste den övervinna dörrens STY för att slå upp den.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

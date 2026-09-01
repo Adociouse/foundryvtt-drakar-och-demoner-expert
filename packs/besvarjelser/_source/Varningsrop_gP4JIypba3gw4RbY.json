@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Obegränsad",
-    "description": "<p>Skickar ett enkelt varningsmeddelande till en känd persons sinne omedelbart</p>",
+    "description": "<p>Detta skrik kan en röstmagiker använda när han vill varna någon för något. När magikern skriker måste han tänka på personen som ska ta emot varningen, han måste också känna till personens namn. Denne kommer omedelbart att höra magikerns rop och förstå vad det är som magikern vill varna honom för. ⚠ Räckvidden för besvärjelsen är obegränsad inom en viss värld — den kan alltså inte nå andra världar än den magikern befinner sig i. För varje extra effektgrad kan VARNINGSROPet nå ytterligare en mottagare till (dock inte fler än magikerns INT).</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

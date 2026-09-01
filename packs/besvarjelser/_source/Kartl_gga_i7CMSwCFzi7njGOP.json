@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx10 rutor",
-    "description": "<p>Sonarliknande kartläggning av omgivningen (alla väggar, hinder, vägar)</p>",
+    "description": "<p>Magikern kan med ett rop och dess eko omedelbart få en bild av hur det ser ut omkring honom, ungefär på samma sätt som med sonar. Han uppfattar alla föremål och varelser med STO 1 eller mer, även om han inte kan identifiera exakt vad eller vilka de är. ⚠ Han får däremot klart för sig exakt var de befinner sig och hur stora de är.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

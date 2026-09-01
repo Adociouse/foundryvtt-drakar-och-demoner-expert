@@ -1,5 +1,5 @@
 {
-  "name": "Gästskrik",
+  "name": "Gastskrik",
   "type": "besvarjelse",
   "system": {
     "school": "rostmagi",
@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
-    "description": "<p>Vidrigt skrik; alla inom räckvidden slår på Skräcktabellen; TYSTNAD motverkar (E vs E)</p>",
+    "description": "<p>Magikern kan skrämmas med ett vidrigt skrik. Alla inom räckvidden måste slå på skräcktabellen. ⚠ Om TYSTNAD har lagts över området måste GASTSKRIKET övervinna TYSTNADens effektgrad på motståndstabellen för att verka.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

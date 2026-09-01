@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Sx1 SR",
     "range": "Sx2 rutor",
-    "description": "<p>Allierade: +5 CL i strid, behöver ej slå moralslag under varaktigheten</p>",
+    "description": "<p>Om en magiker utstöter detta skrik i en strid kommer modet och stridslusten bland kämparna på magikerns sida som befinner sig inom räckvidden att öka. Kämparna, och magikern själv, kommer under varaktigheten inte att behöva slå några stridsmoralslag och CL i deras stridsfärdigheter ökar med +5.</p>",
     "ritual": false,
     "targetMode": "multi",
     "battleRelevant": true,

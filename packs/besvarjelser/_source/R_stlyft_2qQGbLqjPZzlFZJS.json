@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Sx1 SR",
     "range": "S/2 rutor",
-    "description": "<p>Lyfter föremål upp till E×1 BEP via röstens kraft</p>",
+    "description": "<p>Besvärjaren kan lyfta mindre föremål med hjälp av vibrationer i luften. Han kan lyfta maximalt Ex1 BEP med en hastighet av Sx1 meter per SR.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

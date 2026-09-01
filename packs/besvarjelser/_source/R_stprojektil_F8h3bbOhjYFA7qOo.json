@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Sx2 rutor",
-    "description": "<p>Auto-träff; 1T6+E KP skada (sound-baserad attack)</p>",
+    "description": "<p>Magikern skapar en projektil av ljudvågor som sänds mot ett synligt mål. Lyckas besvärjelsen har magikern automatiskt träffat. Stötvågen gör 1T6+E i skada. Den träffar en särskild kroppsdel och rustningar skyddar normalt. ⚠ Eftersom projektilen består av ljudvågor syns den inte och kan inte uppfattas förrän den når fram. Offret upplever den som en kraftig knall och kastas undan som av en ordentlig smocka.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

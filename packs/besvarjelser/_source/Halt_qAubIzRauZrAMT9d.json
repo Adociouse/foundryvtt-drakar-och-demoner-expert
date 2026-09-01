@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "1 SR",
     "range": "S/2 rutor",
-    "description": "<p>Paralyserar offret (1 E krävs per 20 STO) i 1 SR</p>",
+    "description": "<p>Besvärjelsen riktar sig mot ett offer. Om det förhäxas blir det helt paralyserat och kan inte göra någonting. ⚠ Det krävs en effektgrad per 20 STO hos offret.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

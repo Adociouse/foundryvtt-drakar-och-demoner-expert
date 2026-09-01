@@ -1,0 +1,38 @@
+{
+  "name": "Kraftrop",
+  "type": "besvarjelse",
+  "_id": "Aif7UjexQp30Fc82",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",
+  "system": {
+    "school": "rostmagi",
+    "sValue": 2,
+    "kvick": true,
+    "duration": "1T4 SR",
+    "range": "Personlig",
+    "description": "<p>Besvärjaren fokuserar sina inre krafter med ett rop och ökar på detta sätt sin STY med Ex5.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "53"
+    }
+  },
+  "effects": [],
+  "folder": "jjtnfKTBdaPM42Nl",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788274855699,
+    "modifiedTime": 1788274855699,
+    "lastModifiedBy": "GenRostmagi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Aif7UjexQp30Fc82"
+}

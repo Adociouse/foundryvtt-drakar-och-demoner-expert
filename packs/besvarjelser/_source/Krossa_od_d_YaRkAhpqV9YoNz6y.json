@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "S/2 rutor",
-    "description": "<p>1T10×E KP skada på korporala odöda (skelett, zombier)</p>",
+    "description": "<p>Besvärjelsen kan riktas mot en odöd. Den fungerar endast mot odöda som har riktiga kroppar, t.ex. likätare, zombie, vampyrer och dödsriddare. ⚠ Den påverkar alltså inte andar och gastar. Besvärjelsen angriper de energier som håller samman den odödes kropp och river den odödes kropp och vållar 1T10 i skada per effektgrad. Dessa skador drabbar totala KP.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

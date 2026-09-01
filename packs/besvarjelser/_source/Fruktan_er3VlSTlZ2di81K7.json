@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "1T4 SR",
     "range": "S/2 rutor",
-    "description": "<p>Alla inom räckvidden flyr i panik eller kryper ihop av skräck; återhämtar sig direkt vid varaktighetens slut</p>",
+    "description": "<p>Denna besvärjelse drabbar alla varelser med hörsel inom räckvidden, dock inte odöda. De som blir förhäxade måste fly bort från magikern under varaktigheten. Kan en varelse inte fly kryper den samman av skräck och kan inte göra någonting aktivt. ⚠ När besvärjelsen har upphört att verka återhämtar sig alla förhäxade omedelbart.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",

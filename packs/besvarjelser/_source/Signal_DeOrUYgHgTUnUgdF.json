@@ -7,7 +7,7 @@
     "kvick": true,
     "duration": "Omedelbar",
     "range": "Obegränsad",
-    "description": "<p>Skickar platsinformation (position, riktning) till en känd persons sinne</p>",
+    "description": "<p>När magikern utstöter sitt rop tänker han på en person som han känner till namnet. Denne kommer då att omedelbart höra magikerns rop och förstå exakt var någonstans magikern befinner sig. ⚠ Räckvidden är obegränsad inom en viss värld, men når inte andra världar. För varje extra effektgrad kan SIGNALen nå ytterligare en mottagare.</p>",
     "ritual": false,
     "source": {
       "book": "formelboken",
