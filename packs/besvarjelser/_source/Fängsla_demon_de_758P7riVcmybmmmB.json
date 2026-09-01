@@ -1,0 +1,38 @@
+{
+  "name": "Fängsla demon",
+  "type": "besvarjelse",
+  "_id": "758P7riVcmybmmmB",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Special",
+    "range": "Sx2 rutor",
+    "description": "<p>Magikern kan försöka fängsla en demon i ett föremål eller på en plats. Under varaktigheten kontrolleras sedan demonens speciella förmågor av demonologen. Om ett SIGILL placeras på föremålet eller platsen förlängs varaktigheten tills SIGILLet bryts. Om PERMANENS placeras på SIGILLet blir demonen för evigt bunden till föremålet eller platsen. ⚠ Om demonologen misslyckas med FÄNGSLA DEMON kvarhåller han ändock sin kontroll över demonen. Om han å andra sidan fumlar tappar han kontrollen — och vid det laget lär demonen vara rätt förbannad.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "13"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!758P7riVcmybmmmB"
+}

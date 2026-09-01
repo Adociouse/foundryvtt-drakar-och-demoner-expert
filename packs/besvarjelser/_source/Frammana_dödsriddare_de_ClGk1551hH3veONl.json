@@ -1,0 +1,38 @@
+{
+  "name": "Frammana dödsriddare",
+  "type": "besvarjelse",
+  "_id": "ClGk1551hH3veONl",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 24,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>När denna ritual framgångsrikt kastas på en persons skelett återvänder personen från Dödsriket. Om personen vill kan han återigen bosätta sig i sitt skelett och vandra i världen som en Dödsriddare. Om personen inte är intresserad av detta återvänder han frivilligt till Dödsriket. ⚠ Denna ritual finns även, med ordagrant identisk text, i Nekromanti-kapitlet (S22) — boken ger uppenbarligen samma ritual till både Nekromanti och Demonologi.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "13"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ClGk1551hH3veONl"
+}

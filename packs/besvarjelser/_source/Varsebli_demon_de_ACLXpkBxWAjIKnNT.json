@@ -1,0 +1,38 @@
+{
+  "name": "Varsebli demon",
+  "type": "besvarjelse",
+  "_id": "ACLXpkBxWAjIKnNT",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 11,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Special",
+    "description": "<p>Besvärjelsen gör det möjligt för magikern att känna av en demons närvaro utan att i bokstavlig mening se den. Det är SL som avgör hur väl besvärjelsen lyckas. Om demonen befinner sig mer än en kilometer från magikern kan denne förnimma närvaron av den men inte bestämma var den befinner sig. Om demonen är närmare kan magikern med absolut säkerhet peka ut riktning och avstånd. ⚠ På samma sätt kan besvärjelsen användas för att finna dimensionsportaler. En magiker med FV över 20 kan automatiskt känna energiurladdningarna då en demon inträder i världen.</p>",
+    "ritual": false,
+    "source": {
+      "book": "formelboken",
+      "page": "12"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ACLXpkBxWAjIKnNT"
+}

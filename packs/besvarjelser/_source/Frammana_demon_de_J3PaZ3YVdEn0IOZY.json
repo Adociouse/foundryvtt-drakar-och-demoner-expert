@@ -1,0 +1,38 @@
+{
+  "name": "Frammana demon",
+  "type": "besvarjelse",
+  "_id": "J3PaZ3YVdEn0IOZY",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": null,
+    "kvick": false,
+    "duration": "Special",
+    "range": "Sx2 rutor",
+    "description": "<p>⚠ S-värde saknas i källan — enda besvärjelsen i hela boken utan ett synligt siffervärde, flaggat i stället för gisset. Denna besvärjelse förflyttar demonen från sitt eget plan till besvärjarens. Då varje enskild demon har egna ritualer skiljer de sig från varandra ifråga om utförande och längd. Demonen stannar i världen tills den blir tillbaka- eller vidaresänd, eller av egen kraft korsar dimensionsbarriärerna.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "12"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!J3PaZ3YVdEn0IOZY"
+}

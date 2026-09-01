@@ -1,0 +1,38 @@
+{
+  "name": "Frammana/skicka bort demonisk tjänare",
+  "type": "besvarjelse",
+  "_id": "FWbObllvyVjgebRn",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "S/2 rutor",
+    "description": "<p>Demonologen frammanar en liten demon som kan sköta värdsliga göromål. När tjänardemonen har frammanats måste demonologen binda denne till sin tjänst genom att övervinna demonens PSY med sin egen på motståndstabellen. Lyckas försöket blir tjänardemonen demonologens lydige tjänare tills varaktigheten tar slut, då den försvinner tillbaka till sitt hemplan. ⚠ Misslyckas försöket får inget nytt göras av demonologen, som istället blir föremål för den frammanade demonens hyss tills den beger sig tillbaka till sitt hemplan. Tjänardemonen har 1T3 i STY och STO per E, 1 poäng FYS per E, 1T6+6 i INT och PSY samt 3T6 i SMI. Den har 1T6 händer som naturliga vapen, som ger 1T3 i skada och har (STY+SMI+INT)/5 i CL, samt en förflyttning på L=1T6+E. Inga viktigare färdigheter och inga demoniska förmågor. Dess utseende är upp till SL att bestämma.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "12"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!FWbObllvyVjgebRn"
+}

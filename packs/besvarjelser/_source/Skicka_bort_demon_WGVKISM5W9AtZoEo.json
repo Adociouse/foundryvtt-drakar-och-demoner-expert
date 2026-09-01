@@ -7,7 +7,7 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Sx10 rutor",
-    "description": "<p>Förvisar en demon permanent till demonplanet; ritual</p>",
+    "description": "<p>Demonen tvingas återvända till sin egen dimension. Lyckas besvärjelsen kan demonen inte värja sig på något sätt. ⚠ För att kunna lägga besvärjelsen måste magikern först ha lyckats med att KONTROLLERA eller FÄNGSLA demonen.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",

@@ -1,0 +1,38 @@
+{
+  "name": "Frammana gast",
+  "type": "besvarjelse",
+  "_id": "BAG2SsXO9Z9QuSn3",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 27,
+    "kvick": false,
+    "duration": "Permanent",
+    "range": "Beröring",
+    "description": "<p>När denna ritual framgångsrikt kastas på en persons döda kropp eller skelett återvänder personen från Dödsriket. Om personen vill kan han manifestera sig i världen som en gast. SL ska slå 1T100 och jämföra mot gastens PSY i levande skick + gastens FV i Nekromanti. Om resultatet är 01-50 blir det en kummelgast, 51-75 en mörkergast och 76 eller mer en dödsgast. Om personen inte är intresserad av att bli gast återvänder han frivilligt till Dödsriket. ⚠ Denna ritual finns även, med i det närmaste identisk text, i Nekromanti-kapitlet (S25) — samma delade ritual som Frammana dödsriddare ovan.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "13"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BAG2SsXO9Z9QuSn3"
+}

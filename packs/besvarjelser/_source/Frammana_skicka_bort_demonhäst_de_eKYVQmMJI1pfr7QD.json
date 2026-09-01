@@ -1,0 +1,38 @@
+{
+  "name": "Frammana/skicka bort demonhäst",
+  "type": "besvarjelse",
+  "_id": "eKYVQmMJI1pfr7QD",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 9,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "S/2 rutor",
+    "description": "<p>Denna besvärjelse lyder under i stort sett samma regler som FRAMMANA DEMON. Besvärjelsen manar fram en demonisk häst, en varelse som är hästliknande i grundformen. Den har samma grundegenskaper som en medelstor häst enligt Monsterboken, men STY, STO, FYS och PSY ökar med ett per E. Hästen har inga demoniska förmågor. ⚠ Förflyttningen är L26+E. Det naturliga skyddet är ett poäng per E. Demonhästen lyder demonologen under hela varaktigheten och behöver inte stängas in i ett pentagram.</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "12"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!eKYVQmMJI1pfr7QD"
+}

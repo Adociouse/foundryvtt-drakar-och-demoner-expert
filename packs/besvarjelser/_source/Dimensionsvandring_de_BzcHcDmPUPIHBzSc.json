@@ -1,0 +1,38 @@
+{
+  "name": "Dimensionsvandring",
+  "type": "besvarjelse",
+  "_id": "BzcHcDmPUPIHBzSc",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Special",
+    "description": "<p>Den som förhäxas av denna besvärjelse kastas genom tid och rum till en annan dimension. Magikern kan, genom att nämna dimensionens namn, bestämma vilken dimension som är målet. Varje individ som ska förflyttas kostar en effektgrad. Alla som ska transfereras måste vara i kroppskontakt med besvärjaren i överföringsögonblicket. Överföring från världen till demonplanet tar ingen mätbar tid. För att lämna den nya dimensionen krävs det en ny besvärjelse eller en dimensionsportal. ⚠ Misslyckas ritualen sker ingen transferering. Fumlar besvärjelsen kommer resenärerna till helt fel ställe. Besvärjelsen är inte samma sak som TRANSFER, då den bara kan användas för att nå demondimensionerna, som av demonologerna skämtsamt brukar kallas för \"Källardimensionerna\".</p>",
+    "ritual": true,
+    "source": {
+      "book": "formelboken",
+      "page": "13"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788292470527,
+    "modifiedTime": 1788292470527,
+    "lastModifiedBy": "GenDemonologi",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!BzcHcDmPUPIHBzSc"
+}
