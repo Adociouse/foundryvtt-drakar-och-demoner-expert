@@ -45,14 +45,20 @@ export class DoDEFardighetSheet extends DoDEItemSheetBase {
 }
 
 export class DoDERasSheet extends DoDEItemSheetBase {
-  static DEFAULT_OPTIONS = { position: { width: 480, height: 560 } };
+  // Bredare/högre än basdefaulten (480x560) — attributgrid + STO-intervall +
+  // förmågelista + en ProseMirror-beskrivningseditor gör 480x560 för trångt
+  // för att läsa utan att manuellt dra ut fönstret varje gång (Johan, 2026-09-02).
+  static DEFAULT_OPTIONS = { position: { width: 600, height: 700 } };
   static PARTS = {
     form: { template: "systems/drakar-och-demoner-expert/templates/item/item-ras-sheet.hbs" }
   };
 }
 
 export class DoDEYrkeSheet extends DoDEItemSheetBase {
-  static DEFAULT_OPTIONS = { position: { width: 480, height: 560 } };
+  // Bredare/högre än basdefaulten (480x560) — förmågelista + TVÅ ProseMirror-
+  // editorer (färdighetslista + beskrivning) är mer innehåll än övriga item-ark;
+  // 480x560 krävde ett manuellt fönsterdrag varje gång (Johan, 2026-09-02).
+  static DEFAULT_OPTIONS = { position: { width: 640, height: 760 } };
   static PARTS = {
     form: { template: "systems/drakar-och-demoner-expert/templates/item/item-yrke-sheet.hbs" }
   };
