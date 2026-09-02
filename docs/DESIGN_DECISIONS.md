@@ -1081,6 +1081,8 @@ A useful consequence: "should this secret spell go in the system's `besvarjelser
 | `vapen-utrustning` | system | `OBSERVER` | wizard equipment shop — **mundane items only** |
 | `magiska-foremal` | system | `NONE` | magic/unique treasure; home for future found items |
 | `monster` | system | `NONE` | stat blocks; nothing at chargen reads this pack |
+| `handlare`, `sl-regler` | system | `NONE` | GM-run shop actors / SL-only rules text; no player self-service use case |
+| `scener` | system | `NONE` (fixed 2026-09-02, was `OBSERVER`) | players never browse the raw Scene compendium — they only ever see the scene the GM activates on the canvas, a completely separate mechanism. Opening a compendium scene as a player renders Foundry's own `SceneConfig` looking fully editable (core Foundry doesn't disable the form for non-owners) even though any save is correctly rejected server-side — confusing UI on top of a pack that had no self-service reason to be player-visible in the first place. Johan: *"Behöver spelare se platser menyn... men det kanske är måste så SL ser det?"* Moved into the `Spelledare` packFolder to match. |
 | `adventures` | campaign module | `NONE` | spoilers; reaches play via Adventure import |
 | `dimon-*` | world (`dode-test`) | `NONE` | temporary test packs |
 
