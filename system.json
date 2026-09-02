@@ -136,7 +136,7 @@
     },
     {
       "name": "journaler",
-      "label": "Skolreferenser",
+      "label": "Magiskolreferenser",
       "path": "packs/journaler",
       "type": "JournalEntry",
       "system": "drakar-och-demoner-expert",
