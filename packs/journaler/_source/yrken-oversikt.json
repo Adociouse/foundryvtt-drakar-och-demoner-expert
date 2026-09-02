@@ -1,0 +1,214 @@
+{
+  "name": "Yrken — Översikt",
+  "_id": "Cddq4n0XoeoC8oZh",
+  "pages": [
+    {
+      "_id": "G8XYJOppNw8z6zB1",
+      "name": "Grundyrken",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Grundyrken</h2><p>De elva grundyrkena. Riddare grupperas här i källmaterialet men är i systemet en krigarspecialisering (se Krigarspecialiseringar) — se <em>docs/DESIGN_DECISIONS.md</em> för beslutet.</p><h4>Bard</h4><p><em>Tjuvar och Lönnmördare anger ett TILLÄGG till grundreglernas lista (\"Se Drakar och Demoners regelböcker, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><table><tbody><tr><th>Krav</th><td>SMI 12, KAR 14</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala max 2 språk, Läsa/Skriva 1 språk, Administration, Akrobatik, Buktala, Dans, Djurträning, Dolk, Förfalskning, Geografi, Gycklekonster, Hantverk (1 typ), Hasardspel, Heraldik, Historia, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Målning, Schack &amp; Brädspel, Simma, Skådespeleri, Spela instrument, Språkkunskap, Trästav, Dölja, Spåkonst, Provsmaka, Förföra, Förklädnad, Ljuga, Utbrytarkonst, Allmänkunskap, Imitera röster</td></tr><tr><th>Yrkesförmågor</th><td><strong>Sång och spel</strong> <p>Sjunger eller spelar minst 1 minut och klarar ett färdighetsslag → åhörare uppfattar barden som KAR +5 högre; KAR-baserade färdigheter (Övertala, Muta, Bluffa, Skådespeleri) får +5 CL i en timme.</p></td></tr></tbody></table><h4>Helare</h4><table><tbody><tr><th>Krav</th><td>INT 12, PSY 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Tala max 2 språk, Läsa/Skriva 1 språk, Alkemi, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk (1 typ), Hypnotisera, Kulturkännedom, Kunskap om demoner, Kunskap om magi, Kunskap om odöda, Läkekonst, Massage, Orientering, Simma, Trästav, Zoologi, Örtkunskap, Överlevnad</td></tr><tr><th>Yrkesförmågor</th><td><strong>Handpåläggning</strong> <p>Handpåläggning: läker 1 KP per SR för 1 PSY per KP återhämtat. Kan även fördriva sjukdom och neutralisera gift (PSY/2 mot svårighetsgraden).</p></td></tr></tbody></table><h4>Krigare</h4><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Alla vapenfärdigheter, Tala 1 språk, Avväpna, Bärsärkagång, Dra vapen, Dolk, Geografi, Hantverk (1 typ), Hasardspel, Kulturkännedom, Simma, Trästav, Två vapen, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Krigarens grundförmåga</strong> <p>+5 på alla initiativslag. Grunden för alla krigarspecialiseringar i Krigarens Handbok.</p></td></tr></tbody></table><h4>Lärd man</h4><table><tbody><tr><th>Krav</th><td>INT 16</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Tala max 4 språk, Läsa/Skriva max 4 språk, Administration, Alkemi, Astrologi, Dolk, Drogkunskap, Förfalskning, Geografi, Geologi, Giftkunskap, Hasardspel, Heraldik, Historia, Kulturkännedom, Kunskap om demoner, Kunskap om magi, Kunskap om odöda, Räkning, Schack &amp; Brädspel, Simma, Språkkunskap, Trästav, Zoologi, Örtkunskap</td></tr><tr><th>Yrkesförmågor</th><td><strong>Orädd</strong> <p>−5 på alla slag på Skräcktabellen.</p></td></tr></tbody></table><h4>Lönnmördare</h4><p><em>Tjuvar och Lönnmördare anger ett TILLÄGG till grundreglernas lista (\"Se Drakar och Demoners regelböcker, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><table><tbody><tr><th>Krav</th><td>SMI 14, PSY 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala 1 språk, Administration, Akrobatik, Dra vapen, Dolk, Förfalskning, Geografi, Giftkunskap, Hantera fällor, Hasardspel, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Muta, Simma, Skådespeleri, Stavhopp, Teckenspråk, Trästav, Undre världen, Änterhake, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Strid i mörker, Dölja, Tortyr, Förhöra, Ljuga, Provsmaka, Fly, Skugga, Förklädnad, Utbrytarkonst, Fingerfärdighet, Spela död, Allmänkunskap, Dubbeltunga, Imitera röster, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Bakhugg</strong> <p>Bakhugg efter lyckad Smyga mot offer som missar Upptäcka fara: lyckat anfall ×2 skada, perfekt ×4 skada (ingen skadebonus tillkommer). Fungerar bara mot humanoider max 2 m längre än lönnmördaren.</p></td></tr></tbody></table><h4>Magiker</h4><table><tbody><tr><th>Krav</th><td>INT 12, PSY 14</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Magi</th><td>full</td></tr><tr><th>Yrkesfärdigheter</th><td>Tala max 3 språk, Läsa/Skriva max 3 språk, Alkemi, Astrologi, Djurhelning, Djurträning, Drogkunskap, Geografi, Giftkunskap, Kulturkännedom, Kunskap om demoner, Kunskap om magi, Kunskap om odöda, Magisk kanalisering, En valfri magiskola, Räkning, Simma, Språkkunskap, Trästav, Zoologi, Örtkunskap</td></tr><tr><th>Yrkesförmågor</th><td><strong>Magianvändning från start</strong> <p>Lär och kastar besvärjelser från dag ett. Väljer bara 9 (inte 12) yrkesfärdigheter. Måste ta en magiskola (Animism/Elementarmagi/Mentalism) som yrkesfärdighet.</p></td></tr></tbody></table><h4>Munk</h4><table><tbody><tr><th>Krav</th><td>INT 12, PSY 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Tala max 3 språk, Läsa/Skriva max 3 språk, Avväpna, Djurhelning, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk (1 typ), Heraldik, Historia, Knopar, Kulturkännedom, Kunskap om demoner, Kunskap om magi, Kunskap om odöda, Läkekonst, Massage, Målning, Räkning, Simma, Spela max 2 instrument, Språkkunskap, Trästav, Zoologi, Örtkunskap, Astrologi, Orientering, Schack &amp; Brädspel, Judo, Karate, Teckenspråk, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Meditation</strong> <p>Meditation: 1 SR per +1 FV, kumulativt upp till max dubbelt ursprungligt FV, gäller ett enda slag inom en minut efter meditationen.</p></td></tr></tbody></table><h4>Riddare <em>(krigarspecialisering)</em></h4><p><em>Krigarens Handbok s.7 anger ett TILLÄGG till grundreglernas riddarlista (\"Se Grundreglerna, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>Riddaren är ett GRUNDYRKE i RP — KH s.7 anger bara ett TILLÄGG till grundreglernas lista. Posterna här är alltså tillägget, inte hela listan.</em></p><p><em>⚠ Avsteg från RP: Riddare är i grundreglerna ett eget grundyrke (RP s.20). Här grupperas det som en <strong>krigarspecialisering</strong> — Johans beslut 2026-07-28, tolkning av KH s.4 där riddaren beskrivs som mallen de nya krigaryrkena är specialiserade efter. Endast grupperingen ändras; krav och färdigheter är oförändrade. Se CLAUDE.md \"Beslutade avsteg\".</em></p><p><em>⚠ En felaktig rad med det platta namnet \"Vapentekniker\" (finns inte som en egen färdighet — se DODE.vapentekniker, ~26 separata tekniker) togs bort 2026-08-06. Bara Vapenmästaren har halvprisrabatt på vapentekniker (KH s.38, docs/VAPENAKADEMIER.md, \"den enda yrkesgruppen\") — Riddare kan fortfarande få en teknik utdelad post-skapande via \"+Ny färdighet\", till fullt pris.</em></p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12, PSY 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Max 5 vapenfärdigheter, Tala 1 språk, Läsa/Skriva 1 språk, Administration, Avväpna, Dans, Djurträning, Dra vapen, Dolk, Geografi, Heraldik, Historia, Kulturkännedom, Kunskap om magi, Kunskap om odöda, Målning, Räkning, Schack &amp; brädspel, Simma, Spela max 2 instrument, Språkkunskap, Trästav, Två vapen, Bryta grepp, Duellera, Fallteknik, Härskri, Slå medvetslös, Slåss till häst, Strategi, Strid i luften, Strid i mörker, Taktik, Vagnsförare</td></tr><tr><th>Yrkesförmågor</th><td><strong>Perfekt träff eller maxskada</strong> <p>Spendera 5 PSY för att antingen träffa valfri kroppsdel utan CL-avdrag, eller göra maximal vapenskada inkl. max skadebonus.</p></td></tr></tbody></table><h4>Sjöfarare</h4><table><tbody><tr><th>Krav</th><td>FYS 12, SMI 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Max 3 vapenfärdigheter, Tala max 3 språk, Läsa/Skriva 1 språk, Akrobatik, Dans, Dolk, Geografi, Gycklekonster, Hantverk (1 typ), Hasardspel, Knopar, Kulturkännedom, Muta, Navigation, Orientering, Schack &amp; brädspel, Simma, Sjökunnighet, Spela max 2 instrument, Spå väder, Stavhopp, Trästav, Undre världen, Änterhake</td></tr><tr><th>Yrkesförmågor</th><td><strong>Elementresistens</strong> <p>+5 på FYS/STO/STY mot alla motståndsslag mot besvärjelser eller naturkrafter som rör elementen.</p></td></tr></tbody></table><h4>Tjuv</h4><p><em>Tjuvar och Lönnmördare anger ett TILLÄGG till grundreglernas lista (\"Se Drakar och Demoners regelböcker, med följande tillägg\") — de posterna är tillagda här, RP-listan är kvar.</em></p><table><tbody><tr><th>Krav</th><td>SMI 16</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Yrkesfärdigheter</th><td>Max 2 vapenfärdigheter, Tala 1 språk, Administration, Akrobatik, Buktala, Dra vapen, Dolk, Drogkunskap, Förfalskning, Geografi, Giftkunskap, Gyckelkonster, Hypnotisera, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Simma, Skådespeleri, Spela max 2 instrument, Stavhopp, Teckenspråk, Trästav, Undre världen, Änterhake, Judo, Slagsmål, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Strid i mörker, Dölja, Förhöra, Ljuga, Provsmaka, Fly, Kunskap om takvägar, Skugga, Förklädnad, Fingerfärdighet, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Tjuvens grundförmåga</strong> <p>Spendera 1 PSY = +1 CL på valfri färdighet, max +3 (3 PSY). Max 2 gånger per sovperiod (8 tim, alver 4 tim).</p></td></tr></tbody></table><h4>Utbygdsjägare</h4><table><tbody><tr><th>Krav</th><td>FYS 12, SMI 12, PSY 12</td></tr><tr><th>Källa</th><td>Rollpersonen s.11-22</td></tr><tr><th>Magi</th><td>limited; skolor: animism; max FV 12</td></tr><tr><th>Yrkesfärdigheter</th><td>Max 3 vapenfärdigheter, Tala 1 språk, Animism, Djurhelning, Djurträning, Dolk, Drogkunskap, Geografi, Geologi, Giftkunskap, Hantverk (1 typ), Hantera fällor, Knopar, Kulturkännedom, Orientering, Simma, Spå väder, Zoologi, Örtkunskap, Överlevnad, Smyga</td></tr><tr><th>Yrkesförmågor</th><td><strong>Animism som yrkesfärdighet</strong> <p>Magiskolan Animism räknas som yrkesfärdighet; kan lära alla besvärjelser med skolvärde ≤ 12, men kan inte lära besvärjelser från start — måste tränas upp under spel.</p></td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Cddq4n0XoeoC8oZh.G8XYJOppNw8z6zB1"
+    },
+    {
+      "_id": "xIfTxXuD0KIEwqlH",
+      "name": "Krigarspecialiseringar",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Krigarspecialiseringar</h2><h4>Barbar <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.4).</p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 15</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.4</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt fem valfria vapenfärdigheter, Tala ett valfritt främmande språk, Anfall bakifrån, Brottas med djur, Bryta grepp, Bärsärkagång, Dolk, Dra vapen, Fallteknik, Geografi, Hantera fällor, Härskri, Kamouflage, Marschera, Orientering, Simma, Slå medvetslös, Slåss till häst, Spå väder, Strid i luften, Strid i mörker, Trästav, Vagnsförare, Zoologi, Örtkunskap, Överlevnad</td></tr><tr><th>Yrkesförmågor</th><td><strong>Vildmarkstema</strong> <p>Urfolk-/vildmarkstema. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4.</p><p><em>Källa: KH s.4</em></p></td></tr></tbody></table><h4>Gladiator <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.4-5).</p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12, SMI 12</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.4-5</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt sex valfria vapenfärdigheter, Tala maximalt två valfria främmande språk, Anfall bakifrån, Avväpna, Brottas med djur, Bryta grepp, Bärsärkagång, Djurträning, Dolk, Dra vapen, Duellera, Fallteknik, Geografi, Hasardspel, Härskri, Kulturkännedom, Läkekonst, Muta, Simma, Skådespeleri, Slå medvetslös, Strid i mörker, Trästav, Två vapen, Vagnsförare, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Arenakrigare</strong> <p>Arenakrigare. ⚠ Exakt förmåga är inte verifierad mot originalet — kontrollera KH s.4-5.</p><p><em>Källa: KH s.4-5</em></p></td></tr></tbody></table><h4>Krigarmunk <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.5).</p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12, SMI 16, PSY 15, INT 11</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.5</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt en valfri vapenfärdighet, Tala maximalt två valfria främmande språk, Läsa/skriva maximalt ett valfritt främmande språk, Akrobatik, Anfall bakifrån, Avväpna, Bryta grepp, Drogkunskap, Duellera, Fallteknik, Geografi, maximalt ett valfritt Hantverk, Historia, Härskri, Kamouflage, Kulturkännedom, Läkekonst, Massage, Simma, Slå medvetslös, Strid i mörker, Trästav, Örtkunskap, Överlevnad, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Billiga stridskonster</strong> <p>Köper stridskonsttekniker (se REGLER_STRID.md) för <strong>halva grundkostnaden</strong>.</p><p><em>Källa: KH s.5</em></p></td></tr></tbody></table><h4>Paladin <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.5-6).</p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.6 — eventuella poster efter \"Vagnsförare\" är inte inlästa och kan saknas.</em></p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.6 — eventuella poster efter \"Vagnsförare\" är inte inlästa och kan saknas.</em></p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.6 — eventuella poster efter \"Vagnsförare\" är inte inlästa och kan saknas.</em></p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.6 — eventuella poster efter \"Vagnsförare\" är inte inlästa och kan saknas.</em></p><table><tbody><tr><th>Krav</th><td>STY 15, FYS 12, PSY 14, INT 12</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.5-6</td></tr><tr><th>Magi</th><td>limited; skolor: mentalism; max FV 12</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt fyra valfria vapenfärdigheter, Tala maximalt två valfria främmande språk, Läsa/skriva maximalt två valfria främmande språk, Avväpna, Bryta grepp, Dolk, Djurträning, Dra vapen, Duellera, Fallteknik, Geografi, Heraldik, Historia, Härskri, Kulturkännedom, Kännedom om demoner, Kännedom om magi, Kännedom om odöda, Magiskola: Mentalism, Schack och brädspel, Simma, Slå medvetslös, Slåss till häst, Spela ett valfritt instrument, Strategi, Strid i luften, Strid i mörker, Taktik, Trästav, Två vapen, Vagnsförare</td></tr><tr><th>Yrkesförmågor</th><td><strong>Mentalism och gudens krav</strong> <p>Lär Mentalism som yrkesfärdighet (skolvärde ≤ 12, ej allmänna besvärjelser); max 1/3 av EP får läggas på besvärjelser. Förlorar sina förmågor om gudens krav bryts.</p></td></tr></tbody></table><h4>Prisjägare <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.6-7).</p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.7 — eventuella poster efter \"Undre världen\" är inte inlästa och kan saknas.</em></p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.7 — eventuella poster efter \"Undre världen\" är inte inlästa och kan saknas.</em></p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.7 — eventuella poster efter \"Undre världen\" är inte inlästa och kan saknas.</em></p><p><em>⚠ Listan fortsätter förbi en sidbrytning i KH s.7 — eventuella poster efter \"Undre världen\" är inte inlästa och kan saknas.</em></p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12, SMI 14</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.6-7</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt fyra valfria vapenfärdigheter, Tala maximalt två valfria främmande språk, Läsa/skriva maximalt ett valfritt främmande språk, Anfall bakifrån, Avväpna, Bryta grepp, Dolk, Dra vapen, Drogkunskap, Fallteknik, Förfalskning, Geografi, Hasardspel, Historia, Hypnos, Härskri, Kamouflage, Knopar, Kulturkännedom, Låsdyrkning, Marschera, Muta, Simma, Slå medvetslös, Slåss till häst, Strid i luften, Strid i mörker, en valfri Stridskonst, Trästav, Undre världen</td></tr><tr><th>Yrkesförmågor</th><td><strong>Sjätte sinne</strong> <p>Har automatiskt minst <strong>CL 17</strong> i Upptäcka fara — ett sjätte sinne för all fysisk fara.</p><p><em>Källa: KH s.6-7</em></p></td></tr></tbody></table><h4>Soldat <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.7-8).</p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.7-8</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt fem valfria vapenfärdigheter, Tala ett valfritt främmande språk, Administration, Anfall bakifrån, Avväpna, Bryta grepp, Djurträning, Dolk, Dra vapen, Fallteknik, Geografi, ett valfritt Hantverk, Hasardspel, Heraldik, Historia, Härskri, Kamouflage, Kulturkännedom, Marschera, Muta, Orientering, Räkning, Simma, Slå medvetslös, Slåss till häst, Strategi, Strid i luften, Strid i mörker, Taktik, Trästav, Två vapen, Vagnsförare, Överlevnad</td></tr><tr><th>Yrkesförmågor</th><td><strong>Kontakter i armén</strong> <p>Goda kontakter i armén: KAR/4 gånger per år kan soldaten kalla på hjälp. Grad väljs vid skapandet: Menig (0 BP) 1T3 vänner, Sergeant (10 BP) 1T6, Kapten (20 BP) 2T6, Överste (30 BP) 3T10.</p><p><em>Källa: KH s.7-8</em></p></td></tr></tbody></table><h4>Sprätthök <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.8).</p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12, SMI 15</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.8</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt tre valfria vapenfärdigheter, Tala maximalt tre valfria främmande språk, Läsa/skriva maximalt två valfria främmande språk, Avväpna, Bryta grepp, Buktala, Dans, Dolk, Dra vapen, Duellera, Fallteknik, Förfalskning, Geografi, Hasardspel, Historia, Härskri, Kulturkännedom, Låsdyrkning, Muta, Simma, Skådespeleri, Slå medvetslös, Strid i mörker, Trästav, Två vapen, Undre världen</td></tr><tr><th>Yrkesförmågor</th><td><strong>Dramatisk tur</strong> <p>Heroisk och dramatisk — SL kan låta sprätthöken lyckas med nästan vad som helst om det är tillräckligt spektakulärt.</p><p><em>Källa: KH s.8</em></p></td></tr></tbody></table><h4>Vapenmästare <em>(krigarspecialisering)</em></h4><p>Specialisering av grundyrket Krigare (KH s.8-9).</p><p><em>⚠ Vapenfärdigheten anges i boken som \"maximalt en (två) valfri(a) vapenfärdighet(er)*\" — fotnoten: antingen ett vapen och en sköld, två enhandsvapen i kombination (kräver dessutom rätt Två vapen-färdighet), eller ett tvåhandsvapen. Den valfria andra vapenfärdigheten väljs i guiden via kryssrutan \"Slåss med två vapen\" på detta steg (2026-08-04).</em></p><p><em>⚠ Vapenmästaren är den enda yrkesgrupp som får lära vapentekniker som yrkesfärdighet, till halva priset (KH s.38, docs/VAPENAKADEMIER.md) — men en tidigare, felaktig rad här listade bara ett enda platt namn \"Vapentekniker\" (finns inte som en egen färdighet, se DODE.vapentekniker — det är ~26 separata tekniker). Raden togs bort 2026-08-06; halvprisrabatten kräver den inte (DODE.secondarySkillBaseOverrideFor läser rollpersonens yrke, inte NÄR färdigheten delades ut) — SL delar ut önskad teknik via arkets \"+Ny färdighet\" precis som vanligt, rabatten slår in automatiskt.</em></p><table><tbody><tr><th>Krav</th><td>STY 14, FYS 12, SMI 15, PSY 12</td></tr><tr><th>Källa</th><td>Krigarens Handbok s.8-9</td></tr><tr><th>Yrkesfärdigheter</th><td>Maximalt en valfri vapenfärdighet, Tala maximalt tre valfria främmande språk, Läsa/skriva maximalt tre valfria främmande språk, Anfall bakifrån, Avväpna, Bryta grepp, Dans, Dolk, Dra vapen, Duellera, Fallteknik, Geografi, Historia, Härskri, Kulturkännedom, Simma, Slå medvetslös, Slåss till häst, Strategi, Strid i luften, Strid i mörker, Taktik, Trästav, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Extra parering eller attack</strong> <p>Spendera <strong>5 PSY</strong> för en extra parering <em>eller</em> en extra attack per stridsrunda.</p><p><em>Källa: KH s.8-9</em></p></td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Cddq4n0XoeoC8oZh.xIfTxXuD0KIEwqlH"
+    },
+    {
+      "_id": "KTCRzWR5T6ng4idT",
+      "name": "Tjuvspecialiseringar",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Tjuvspecialiseringar</h2><h4>Ficktjuv</h4><p>Specialisering av grundyrket Tjuv (T&L s.12).</p><table><tbody><tr><th>Krav</th><td>SMI 16</td></tr><tr><th>Källa</th><td>tl s.12</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala ett valfritt främmande språk, Administration, Dolk, Dra vapen, Geografi, Hantverk, Hasardspel, Knopar, Kulturkännedom, Låsdyrkning, Muta, Teckenspråk (tjuv), Trästav, Undre världen, Kamouflage, Slå medvetslös, Tigga, Dölja, Ljuga, Provsmaka, Fly, Skugga, Fingerfärdighet, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Skicklig tjuv</strong> <p>Stjäla föremål lyckas med CL <strong>minst 5</strong>, om det är fysiskt möjligt.</p><p><em>Källa: T&L s.12</em></p></td></tr></tbody></table><h4>Fixare</h4><p>Specialisering av grundyrket Tjuv (T&L s.13).</p><table><tbody><tr><th>Krav</th><td>SMI 16, INT 9, KAR 12</td></tr><tr><th>Källa</th><td>tl s.13</td></tr><tr><th>Yrkesfärdigheter</th><td>Två valfria vapenfärdigheter, Tala ett valfritt främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Dolk, Förfalskning, Geografi, Giftkunskap, Hantverk, Hasardspel, Heraldik, Historia, Kulturkännedom, Kunskap om magi, Läppläsning, Muta, Räkning, Schack &amp; brädspel, Simma, Språkkunskap, Teckenspråk (tjuv), Undre världen, Slå medvetslös, Dölja, Förhöra, Förföra, Ljuga, Provsmaka, Fly, Kunskap om takvägar, Allmänkunskap, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Kontakter i undre världen</strong> <p>Spendera 6 PSY för att ordna saker och kontakter via undre världen.</p><p><em>Källa: T&L s.13</em></p></td></tr></tbody></table><h4>Gentlemannatjuv</h4><p>Specialisering av grundyrket Tjuv (T&L s.13).</p><table><tbody><tr><th>Krav</th><td>SMI 16</td></tr><tr><th>Källa</th><td>tl s.13</td></tr><tr><th>Yrkesfärdigheter</th><td>Två valfria vapenfärdigheter, Tala tre valfria främmande språk, Läsa/skriva två valfria främmande språk, Administration, Akrobatik, Avväpna, Dans, Djurträning, Dolk, Dra vapen, Geografi, Hantera fällor, Hasardspel, Heraldik, Historia, Knopar, Kulturkännedom, Kunskap om magi, Låsdyrkning, Massage, Muta, Målning, Räkning, Schack &amp; brädspel, Simma, Spela instrument, Språkkunskap, Stavhopp, Trästav, Två vapen, Undre världen, Änterhake, Fallteknik, Fly, Kamouflage, Slå medvetslös, Strid i mörker, Förhöra, Förföra, Provsmaka, Skugga, Förklädnad, Kunskap om takvägar</td></tr><tr><th>Yrkesförmågor</th><td><strong>Fummelskydd</strong> <p>Spendera 3 PSY vid ett fummel → det räknas istället som en vanlig miss.</p><p><em>Källa: T&L s.13</em></p></td></tr></tbody></table><h4>Gillrare</h4><p>Specialisering av grundyrket Tjuv (T&L s.14).</p><table><tbody><tr><th>Krav</th><td>SMI 16, INT 16</td></tr><tr><th>Källa</th><td>tl s.14</td></tr><tr><th>Yrkesfärdigheter</th><td>Två valfria vapenfärdigheter, Tala ett valfritt främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Dolk, Geografi, Geologi, Hantera fällor, Hantverk, Knopar, Kulturkännedom, Kunskap om magi, Låsdyrkning, Muta, Orientering, Räkning, Schack &amp; brädspel, Teckenspråk (tjuv), Undre världen, Kamouflage, Dölja, Förhöra, Ljuga, Provsmaka, Fly, Kunskap om takvägar, Utbrytarkonst, Fingerfärdighet, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Fällsinne</strong> <p>+1 CL per spenderad PSY (max +3) i Hantera fällor, Låsdyrkning, Finsmide, Finna dolda ting och Knopar.</p><p><em>Källa: T&L s.14</em></p></td></tr></tbody></table><h4>Gravplundrare</h4><p>Specialisering av grundyrket Tjuv (T&L s.12).</p><table><tbody><tr><th>Krav</th><td>SMI 16</td></tr><tr><th>Källa</th><td>tl s.12</td></tr><tr><th>Yrkesfärdigheter</th><td>Två valfria vapenfärdigheter, Tala ett valfritt främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Dolk, Förfalskning, Geografi, Giftkunskap, Hantera fällor, Hantverk, Historia, Heraldik, Knopar, Kulturkännedom, Kunskap om odöda, Låsdyrkning, Muta, Orientering, Räkning, Teckenspråk (tjuv), Undre världen, Trästav, Kamouflage, Slå medvetslös, Strid i mörker, Ljuga, Provsmaka, Fly, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Sjukdomsresistens</strong> <p><strong>+5 FYS</strong> på motståndsslag mot sjukdomar.</p><p><em>Källa: T&L s.12</em></p></td></tr></tbody></table><h4>Hantlangare</h4><p>Specialisering av grundyrket Tjuv (T&L s.15).</p><table><tbody><tr><th>Krav</th><td>STY 14, SMI 16</td></tr><tr><th>Källa</th><td>tl s.15</td></tr><tr><th>Yrkesfärdigheter</th><td>Tre valfria vapenfärdigheter, Tala ett valfritt främmande språk, Administration, Avväpna, Dolk, Dra vapen, Bärsärkagång, Geografi, Hantverk, Hasardspel, Knopar, Kulturkännedom, Muta, Simma, Stavhopp, Teckenspråk (tjuv), Trästav, Två vapen, Undre världen, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Strid i mörker, Tortyr, Förhöra, Ljuga, Provsmaka, Fly, Kunskap om takvägar, Skugga, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Krigarens yrkesförmåga</strong> <p>Har även <strong>krigarens yrkesförmåga</strong> (+5 på initiativ).</p><p><em>Källa: T&L s.15</em></p></td></tr></tbody></table><h4>Stråtrövare</h4><p>Specialisering av grundyrket Tjuv (T&L s.15).</p><table><tbody><tr><th>Krav</th><td>SMI 16</td></tr><tr><th>Källa</th><td>tl s.15</td></tr><tr><th>Yrkesfärdigheter</th><td>Tre valfria vapenfärdigheter, Tala ett valfritt främmande språk, Djurhelning, Djurträning, Dolk, Geografi, Geologi, Giftkunskap, Hantera fällor, Hantverk, Knopar, Kulturkännedom, Muta, Orientering, Simma, Spå väder, Teckenspråk (jägare), Trästav, Undre världen, Zoologi, Örtkunskap, Överlevnad, Överleva i skogstrakter, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Förhöra, Provsmaka, Fly, Ljuga, Skugga</td></tr><tr><th>Yrkesförmågor</th><td><strong>Skogsvana</strong> <p>Minst <strong>CL 10</strong> i Överleva i skog; +1 CL i Gömma sig, Orientering, Kamouflage, Smyga och Spåra när det sker i skog.</p><p><em>Källa: T&L s.15</em></p></td></tr></tbody></table><h4>Tiggare</h4><p>Specialisering av grundyrket Tjuv (T&L s.15-16).</p><table><tbody><tr><th>Krav</th><td>SMI 16</td></tr><tr><th>Källa</th><td>tl s.15-16</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala ett valfritt främmande språk, Administration, Dolk, Dra vapen, Geografi, Hasardspel, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Spå väder, Spåkonst, Teckenspråk (Tiggare), Trästav, Undre världen, Kamouflage, Slå medvetslös, Tigga, Dölja, Ljuga, Provsmaka, Fly, Skugga, Fingerfärdighet, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Förklädnad</strong> <p>Kan förställa sitt utseende (PSY mot offrets INT). Startar alltid egendomslös.</p><p><em>Källa: T&L s.15-16</em></p></td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 300000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Cddq4n0XoeoC8oZh.KTCRzWR5T6ng4idT"
+    },
+    {
+      "_id": "gmGKrbxYC8GC8Lno",
+      "name": "Lönnmördarspecialiseringar",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Lönnmördarspecialiseringar</h2><h4>Giftmästare</h4><p>Specialisering av grundyrket Lonnmordare (T&L s.10).</p><table><tbody><tr><th>Krav</th><td>SMI 14, PSY 12</td></tr><tr><th>Källa</th><td>tl s.10</td></tr><tr><th>Yrkesfärdigheter</th><td>Två valfria vapenfärdigheter, Tala två valfria främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Alkemi, Astrologi, Dolk, Drogkunskap, Geografi, Giftkunskap, Hantverk, Hypnotisera, Kulturkännedom, Läkekonst, Räkning, Teckenspråk (lönnmördare), Undre världen, Zoologi, Örtkunskap, Anfall bakifrån, Strid i mörker, Tortyr, Förhöra, Ljuga, Provsmaka, Allmänkunskap, Dubbeltunga, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Giftkonst</strong> <p>Lyckat INT-slag → skapa gift av tillgängliga medel. Har dessutom giftresistens.</p><p><em>Källa: T&L s.10</em></p></td></tr></tbody></table><h4>Kultist</h4><p>Specialisering av grundyrket Lonnmordare (T&L s.11).</p><table><tbody><tr><th>Krav</th><td>SMI 14, PSY 12</td></tr><tr><th>Källa</th><td>tl s.11</td></tr><tr><th>Yrkesfärdigheter</th><td>Vapenfärdigheter, Tala två valfria främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Avväpna, Bärsärkagång, Dolk, Dra vapen, Geografi, Giftkunskap, Hypnotisera, Knopar, Kulturkännedom, Kunskap om demoner, Kunskap om magi, Låsdyrkning, Simma, Stavhopp, Teckenspråk (kultist), Trästav, Två vapen, Överlevnad, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Strid i mörker, Dölja, Tortyr, Förhöra, Ljuga, Provsmaka, Fly, Skugga, Förklädnad, Utbrytarkonst, Fingerfärdighet, Spela död, Dubbeltunga, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Smärttålighet</strong> <p>CL i strid <strong>+2</strong>. Ignorerar smärta (−1 KP och SP per träff).</p><p><em>Källa: T&L s.11</em></p></td></tr></tbody></table><h4>Kunskapare</h4><p>Specialisering av grundyrket Lonnmordare (T&L s.10).</p><table><tbody><tr><th>Krav</th><td>SMI 14, INT 12, PSY 12, KAR 12</td></tr><tr><th>Källa</th><td>tl s.10</td></tr><tr><th>Yrkesfärdigheter</th><td>Vapenfärdigheter, Tala två valfria främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Akrobatik, Avväpna, Dans, Dolk, Dra vapen, Förfalskning, Geografi, Hantera fällor, Hantverk, Hasardspel, Historia, Heraldik, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Orientering, Schack &amp; brädspel, Simma, Skådespeleri, Spela instrument, Språkkunskap, Stavhopp, Teckenspråk (tjuv, lönnmördare), Två vapen, Trästav, Undre världen, Änterhake, Överlevnad, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Strid i mörker, Dölja, Tortyr, Förhöra, Förföra, Ljuga, Provsmaka, Fly, Skugga, Förklädnad, Utbrytarkonst, Fingerfärdighet, Allmänkunskap, Dubbeltunga, en valfri Stridskonst</td></tr><tr><th>Yrkesförmågor</th><td><strong>Bardens yrkesförmåga</strong> <p>Får även <strong>bardens yrkesförmåga</strong>.</p><p><em>Källa: T&L s.10</em></p></td></tr></tbody></table><h4>Spelaren</h4><p>Specialisering av grundyrket Lonnmordare (T&L s.9).</p><p><em>⚠ Boken listar yrket som <strong>Spelare</strong> under BARDYRKEN (T&L s.6-8), inte bland lönnmördaryrkena. baseProfession rättad från \"lonnmordare\" till \"bard\" 2026-07-28.</em></p><table><tbody><tr><th>Krav</th><td>SMI 14, PSY 12</td></tr><tr><th>Källa</th><td>tl s.9</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala ett valfritt främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Avväpna, Dolk, Geografi, Hantverk, Förfalskning, Hasardspel, Heraldik, Historia, Hypnotisera, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Schack &amp; brädspel, Skådespeleri, Teckenspråk (tjuv), Undre världen, Slå medvetslös, Dölja, Ljuga, Provsmaka, Fly, Skugga, Fingerfärdighet, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Hasardspelstalang</strong> <p>+1 CL per spenderad PSY (max +3) i Hasardspel, Brädspel och Bluffa.</p><p><em>Källa: T&L s.9</em></p></td></tr></tbody></table><h4>Spion</h4><p>Specialisering av grundyrket Lonnmordare (T&L s.11).</p><table><tbody><tr><th>Krav</th><td>SMI 14, INT 14, PSY 14, KAR 14</td></tr><tr><th>Källa</th><td>tl s.11</td></tr><tr><th>Yrkesfärdigheter</th><td>Vapenfärdigheter, Tala tre valfria främmande språk, Läsa/skriva två valfria främmande språk, Administration, Avväpna, Dans, Dolk, Dra vapen, Drogkunskap, Förfalskning, Geografi, Hantera fällor, Hantverk, Hasardspel, Historia, Heraldik, Knopar, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Orientering, Schack &amp; brädspel, Simma, Skådespeleri, Spela instrument, Språkkunskap, Teckenspråk (tjuv, lönnmördare), Två vapen, Trästav, Undre världen, Överlevnad, Anfall bakifrån, Fallteknik, Kamouflage, Slå medvetslös, Strid i mörker, Dölja, Tortyr, Förhöra, Förföra, Ljuga, Provsmaka, Fly, Skugga, Förklädnad, Utbrytarkonst, Fingerfärdighet, Allmänkunskap, Dubbeltunga</td></tr><tr><th>Yrkesförmågor</th><td><strong>Underrättelser</strong> <p>Spendera 5 PSY → SL avslöjar information om en vald person.</p><p><em>Källa: T&L s.11</em></p></td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 400000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Cddq4n0XoeoC8oZh.gmGKrbxYC8GC8Lno"
+    },
+    {
+      "_id": "whUBzi9mGPX93PiI",
+      "name": "Bardspecialiseringar",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Bardspecialiseringar</h2><h4>Bedragare</h4><p>Specialisering av grundyrket Bard (T&L s.7).</p><table><tbody><tr><th>Krav</th><td>SMI 12, KAR 14</td></tr><tr><th>Källa</th><td>tl s.7</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala två valfria främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Alkemi, Astrologi, Buktala, Dolk, Förfalskning, Geografi, Hantverk, Hasardspel, Heraldik, Historia, Hypnotisera, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Skådespeleri, Spå väder, Teckenspråk (tjuv), Undre världen, Slå medvetslös, Tigga, Dölja, Spåkonst, Förföra, Ljuga, Provsmaka, Fly, Förklädnad, Allmänkunskap, Imitera röster</td></tr><tr><th>Yrkesförmågor</th><td><strong>Social manipulation</strong> <p>+5 CL i <strong>en</strong> av Bluffa, Köpslå eller Övertala, max <strong>2 gånger per sovperiod</strong>.</p><p><em>Källa: T&L s.7</em></p></td></tr></tbody></table><h4>Fingerkonstnär</h4><p>Specialisering av grundyrket Bard (T&L s.8).</p><table><tbody><tr><th>Krav</th><td>SMI 12, KAR 14</td></tr><tr><th>Källa</th><td>tl s.8</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala ett valfritt främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Avväpna, Dolk, Dra vapen, Geografi, Gyckelkonster, Hantera fällor, Hantverk, Hasardspel, Knopar, Låsdyrkning, Läppläsning, Muta, Simma, Skådespeleri, Teckenspråk (tjuv), Trästav, Undre världen, Änterhake, Dölja, Spåkonst, Ljuga, Provsmaka, Fly, Utbrytarkonst, Fingerfärdighet, Häleri</td></tr><tr><th>Yrkesförmågor</th><td><strong>Minimagi</strong> <p>Kan använda en begränsad mängd minimagi.</p><p><em>Källa: T&L s.8</em></p></td></tr></tbody></table><h4>Gycklare</h4><p>Specialisering av grundyrket Bard (T&L s.8).</p><table><tbody><tr><th>Krav</th><td>SMI 14, KAR 16</td></tr><tr><th>Källa</th><td>tl s.8</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala två valfria främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Alkemi, Astrologi, Buktala, Dolk, Förfalskning, Geografi, Hantverk, Hasardspel, Heraldik, Historia, Hypnotisera, Kulturkännedom, Låsdyrkning, Läppläsning, Muta, Räkning, Skådespeleri, Spå väder, Teckenspråk (tjuv), Undre världen, Slå medvetslös, Tigga, Dölja, Spåkonst, Förföra, Ljuga, Provsmaka, Fly, Förklädnad, Allmänkunskap, Imitera röster</td></tr><tr><th>Yrkesförmågor</th><td><strong>Gyckelkonst</strong> <p>Spendera 1 PSY + en gyckelkonst → motståndaren blir häpen i <strong>1 SR</strong>.</p><p><em>Källa: T&L s.8</em></p></td></tr></tbody></table><h4>Kurtisan</h4><p>Specialisering av grundyrket Bard (T&L s.9).</p><table><tbody><tr><th>Krav</th><td>SMI 12, KAR 14</td></tr><tr><th>Källa</th><td>tl s.9</td></tr><tr><th>Yrkesfärdigheter</th><td>En valfri vapenfärdighet, Tala ett valfritt främmande språk, Läsa/skriva ett valfritt främmande språk, Administration, Akrobatik, Dans, Djurträning, Dolk, Geografi, Hantverk, Hasardspel, Hypnotisera, Gyckelkonster, Knopar, Kulturkännedom, Massage, Muta, Skådespeleri, Spela instrument, Spåkonst, Teckenspråk (tjuv), Undre världen, Dölja, Förföra, Ljuga, Provsmaka, Fingerfärdighet</td></tr><tr><th>Yrkesförmågor</th><td><strong>Passionsblick</strong> <p>Spendera 5 PSY + KAR mot offrets PSY → offret förblindas av passion i KAR timmar.</p><p><em>Källa: T&L s.9</em></p></td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 500000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Cddq4n0XoeoC8oZh.whUBzi9mGPX93PiI"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "profession-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Cddq4n0XoeoC8oZh"
+}
