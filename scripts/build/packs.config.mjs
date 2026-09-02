@@ -11,6 +11,7 @@ export const PACKS = [
   // Regeltabeller — ett pack per dokumenttyp OCH per publik, se §8.3:
   // `type` är ett enda värde per pack, och ownership sitter på pack-nivå.
   { name: "regler", type: "JournalEntry" },
+  { name: "journaler", type: "JournalEntry" },
   { name: "tabeller", type: "RollTable" },
   { name: "sl-regler", type: "JournalEntry" },
   // Generiska platser — se DESIGN_DECISIONS.md §7.3: systemnivå betyder

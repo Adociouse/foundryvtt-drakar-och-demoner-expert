@@ -1,0 +1,66 @@
+{
+  "name": "Stavmagi — Besvärjelseförteckning",
+  "_id": "wlYoiDdZS915tG0n",
+  "pages": [
+    {
+      "_id": "gNmHhSiKhsJihttL",
+      "name": "Stavmagi",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Stavmagi</h2><p><em>[Skolbeskrivning — fylls i senare från Formelboken]</em></p><h3>Besvärjelser</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Räckvidd</th><th>Varaktighet</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Avväpna</td><td>S12 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Stöter stavmagikern staven i marken med denna besvärjelse attraherar staven fem…</td></tr><tr><td>Blixtnedslag</td><td>S8</td><td>Sx2 rutor</td><td>Omedelbar</td><td>En blixt slår ner där stavmagikern önskar, som ger 1T6 KP skada per effektgrad…</td></tr><tr><td>Blodregn</td><td>S13</td><td>Sx50 rutor</td><td>1 minut</td><td>Genom att stöta sin stav i marken skapar stavmagikern ett regn av blod i ett…</td></tr><tr><td>Eldvirvel</td><td>S14</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Stavmagikern orsakar en eldvirvel som ger en KP skada per SR på allt inom en…</td></tr><tr><td>Förintelse</td><td>S18 (kvick)</td><td>Beröring</td><td>Omedelbar</td><td>Stavmagikern får en varelse eller växt att förstöras genom att den omedelbart…</td></tr><tr><td>Förlamning</td><td>S5 (kvick)</td><td>Beröring</td><td>Sx1 SR</td><td>Stavmagikern vidrör en person med sin stav och om han lyckas förlamas denne så…</td></tr><tr><td>Förstärka</td><td>S6 (kvick)</td><td>Beröring</td><td>Konc</td><td>Genom att sätta staven mot ett föremål (ej en levande varelse, däremot t.ex. en…</td></tr><tr><td>Jordbävning</td><td>S22 (kvick)</td><td>Sx5 rutor</td><td>Omedelbar</td><td>Stavmagikern stöter staven i marken och orsakar ett mindre skalv med sig själv…</td></tr><tr><td>Ljusblixt</td><td>S7 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Stavmagikern får staven att blixtra till. Alla som har ögonen öppna (utom…</td></tr><tr><td>Sfär</td><td>S4</td><td>Personlig</td><td>Konc</td><td>Om stavmagikern är beredd på att bli anfallen kan han börja snurra staven…</td></tr><tr><td>Spindelväv</td><td>S6</td><td>Sx1 rutor</td><td>Sx1 minuter</td><td>Från staven kastas en onaturligt tjock och klibbig spindelväv ut åt det håll…</td></tr><tr><td>Splittring</td><td>S13 (kvick)</td><td>Beröring</td><td>Omedelbar</td><td>Genom att stöta staven mot ett föremål eller t.ex. en bro kan han få…</td></tr><tr><td>Stavflykt</td><td>S6 (kvick)</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Stavmagikern kan få sin stav att återvända till honom. Om stavens flyktväg är…</td></tr><tr><td>Stavklyvning</td><td>S11 (kvick)</td><td>S/2 rutor</td><td>Omedelbar</td><td>Denna besvärjelse används för att klyva (och oåterkalleligen förstöra) en stav…</td></tr><tr><td>Stavorm</td><td>S5 (kvick)</td><td>Särskild</td><td>Sx2 SR</td><td>Staven kastas upp till magikerns STY meter från stavmagikern och förvandlas…</td></tr><tr><td>Stavprojektil</td><td>S6 (kvick)</td><td>Sx1 rutor</td><td>Omedelbar</td><td>Staven sänds iväg mot ett mål inom räckvidden. När staven träffar utlöses en…</td></tr><tr><td>Stavrep</td><td>S2</td><td>Beröring</td><td>Konc</td><td>Staven förvandlas till ett rep av önskad längd (maximalt stavens dubbla längd x…</td></tr><tr><td>Tändare</td><td>S1 (kvick)</td><td>Beröring</td><td>Sx5 minuter</td><td>En kraftig låga tänds vid stavänden. Behandla den som en fackeleld.</td></tr><tr><td>Vattendelning</td><td>S16</td><td>Sx10 rutor</td><td>Sx10 minuter</td><td>Stavmagikern slår sin stav i en vattenmassa och får den att klyvas i två delar.…</td></tr><tr><td>Åskknall</td><td>S10 (kvick)</td><td>Personlig</td><td>Omedelbar</td><td>Stavmagikern åstadkommer en plötslig och omskakande knall som om en blixt hade…</td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!wlYoiDdZS915tG0n.gNmHhSiKhsJihttL"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "school-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!wlYoiDdZS915tG0n"
+}

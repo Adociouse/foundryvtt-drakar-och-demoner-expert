@@ -1,0 +1,66 @@
+{
+  "name": "Nekromanti — Besvärjelseförteckning",
+  "_id": "bBS9H3cYGO4yClwC",
+  "pages": [
+    {
+      "_id": "huEyg3D5MEmf8KJQ",
+      "name": "Nekromanti",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Nekromanti</h2><p><em>[Skolbeskrivning — fylls i senare från Formelboken]</em></p><h3>Besvärjelser</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Räckvidd</th><th>Varaktighet</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Animera död</td><td>S12 (ritual)</td><td>Beröring</td><td>S/4 veckor (mumier P)</td><td>Nekromantikern kan aktivera ett lik för att skapa en odöd slav. Det finns tre…</td></tr><tr><td>Animera tupilak</td><td>S15 (ritual)</td><td>Beröring</td><td>S/4 veckor</td><td>Detta är en variant av besvärjelsen ANIMERA DÖD. En tupilak är en zombie som…</td></tr><tr><td>Besmutsa</td><td>S2</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Om magikern lyckas förhäxa sitt offer, som måste vara en levande varelse, blir…</td></tr><tr><td>Besudla</td><td>S2</td><td>Beröring</td><td>Omedelbar</td><td>Magikern besudlar en liter vätska eller fast materia på ett sådant sätt att den…</td></tr><tr><td>Blindhet</td><td>S6</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Offret förlorar synförmågan under varaktigheten.</td></tr><tr><td>Chock</td><td>S8 (kvick)</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Den förhäxade blir chockad, förstelnad och förstummad av de syner som…</td></tr><tr><td>Deformera</td><td>S15</td><td>Sx2 rutor</td><td>S/4 dygn</td><td>Denna besvärjelse kan riktas mot en intelligent varelse. Om han förhäxas blir…</td></tr><tr><td>Dödshand</td><td>S16</td><td>Sx10 rutor</td><td>särskild</td><td>Trollkarlen kan på avstånd försöka klösa sig in till sitt offers hjärta.…</td></tr><tr><td>Dövhet</td><td>S4</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Offret förlorar hörseln under varaktigheten. ⚠ Denna besvärjelse är särskilt…</td></tr><tr><td>Epidemi</td><td>S18 (ritual)</td><td>Sx4 kilometer</td><td>Special</td><td>Se besvärjelsen SJUKDOM. Med denna ritual kan nekromantikern skapa en smittsam…</td></tr><tr><td>Fobi</td><td>S8</td><td>Beröring</td><td>S/4 veckor</td><td>Denna besvärjelse kan riktas mot ett bestämt, levande offer. Om förhäxningen…</td></tr><tr><td>Frammana dödsriddare</td><td>S22 (ritual)</td><td>Beröring</td><td>Permanent</td><td>När denna ritual framgångsrikt kastas på en persons skelett återvänder personen…</td></tr><tr><td>Frammana gast</td><td>S25 (ritual)</td><td>Beröring</td><td>Permanent</td><td>När denna ritual framgångsrikt kastas på en persons döda kropp eller skelett…</td></tr><tr><td>Förlama</td><td>S14</td><td>Sx2 rutor</td><td>S/4 veckor</td><td>Med denna besvärjelse kan magikern förlama ett valfritt offer inom räckvidden.…</td></tr><tr><td>Förruttnelse</td><td>S21 (kvick)</td><td>Beröring</td><td>Omedelbar</td><td>Om besvärjelsens effektgrad övervinner motståndarens FYS på motståndstabellen…</td></tr><tr><td>Förstening</td><td>S20</td><td>Sx2 rutor</td><td>Permanent</td><td>Magikern kan förvandla en levande varelse till sten. Försteningen innefattar…</td></tr><tr><td>Förstumma</td><td>S5</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Offret förlorar talförmågan under varaktigheten.</td></tr><tr><td>Förtvina extremitet</td><td>S17</td><td>Sx2 rutor</td><td>Permanent</td><td>Magikern kan försöka förhäxa en levande varelse med denna besvärjelse. Med dess…</td></tr><tr><td>Förtvina tunga</td><td>S14</td><td>S/2 rutor</td><td>Permanent</td><td>Om förhäxningen lyckas förtvinar offrets tunga och blir fullständigt obrukbar.…</td></tr><tr><td>Gasmoln</td><td>S5</td><td>Sx10 rutor</td><td>Sx1 minuter</td><td>Med denna besvärjelse kan man frammana gasmoln av fyra olika slag. Det krävs…</td></tr><tr><td>Giftbett</td><td>S14</td><td>Personlig</td><td>S/4 dygn</td><td>Denna besvärjelse förutsätter att magikern har huggtänder. Om dessa har skapats…</td></tr><tr><td>Huggtänder</td><td>S13</td><td>Personlig</td><td>S/4 veckor</td><td>Nekromantikern kan få sina hörntänder att växa ut och bli långa och farliga.…</td></tr><tr><td>Klohand</td><td>S11</td><td>Personlig</td><td>S/4 veckor</td><td>När nekromantikern lägger denna besvärjelse på en av sina händer börjar dess…</td></tr><tr><td>Kontrollera högre odöd</td><td>S17</td><td>Sx2 rutor</td><td>Konc.</td><td>Denna besvärjelse gör det möjligt att ta kontroll över en av de högre odöda…</td></tr><tr><td>Kontrollera lägre odöd</td><td>S8</td><td>Sx2 rutor</td><td>Konc.</td><td>Besvärjelsen gör det möjligt att ta kontroll över en av följande odöda:…</td></tr><tr><td>Kraftstöld</td><td>S24</td><td>Beröring</td><td>Omedelbar</td><td>Denna besvärjelse är en mycket kraftfull variant av LIVSUTTÖMNING. Skillnaden…</td></tr><tr><td>Krypande hand</td><td>S18</td><td>Personlig</td><td>S/4 veckor</td><td>En nekromantiker lägger den här besvärjelsen på sin huvudhand och den lossnar…</td></tr><tr><td>Livsuttömning</td><td>S18</td><td>Beröring</td><td>Omedelbar</td><td>Om en intelligent varelse blir förhäxad kan magikern suga livsenergi ur den.…</td></tr><tr><td>Massa</td><td>S18 (ritual)</td><td>Beröring</td><td>S/4 veckor</td><td>Med hjälp av denna makabra nekromantibesvärjelse kan en magiker få en hög med…</td></tr><tr><td>Ondblick</td><td>S4</td><td>Personlig</td><td>Omedelbar</td><td>En nekromantiker kan få intelligenta varelser att undvika att anfalla honom.…</td></tr><tr><td>Ormskott</td><td>S10</td><td>Beröring</td><td>Sx1 SR</td><td>När magikern kastar denna besvärjelse på en orm (längd ca 100 cm) omvandlas…</td></tr><tr><td>Panik</td><td>S13</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Den förhäxade måste slå på skräcktabellen om han misslyckas med ett svårt…</td></tr><tr><td>Paralysering</td><td>S7</td><td>Sx2 rutor</td><td>Sx1 minuter</td><td>Den som blir förhäxad blir helt paralyserad och kan inte röra sig. ⚠ Det krävs…</td></tr><tr><td>Rädsla</td><td>S9 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Den förhäxade måste slå på skräcktabellen om han misslyckas med ett normalt…</td></tr><tr><td>Sinnesbedövning</td><td>S13</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Om offret förhäxas sätts ett per effektgrad av dess sinnen, utvalt av…</td></tr><tr><td>Sjukdom</td><td>S12</td><td>Beröring</td><td>Omedelbar</td><td>Nekromantikern kan besla någon med sjukdom. Vilken sjukdom det gäller är…</td></tr><tr><td>Skendöd</td><td>S12 (kvick)</td><td>Personlig</td><td>S/4 timmar</td><td>Magikern kan försänka sig i en djup dvala. För utomstående uppvisar han då inga…</td></tr><tr><td>Smärta</td><td>S14</td><td>Sx10 rutor</td><td>Sx1 SR</td><td>Besvärjelsen ger den förhäxade svåra smärtor i hela kroppen. Effekten av…</td></tr><tr><td>Spindelböld</td><td>S6</td><td>Beröring</td><td>Särskild</td><td>Nekromantikern vidrör offret varvid, efter E antal timmar, E antal bölder…</td></tr><tr><td>Spökdråp</td><td>S27</td><td>Beröring</td><td>Omedelbar</td><td>Om denna besvärjelse kastas på en intelligent varelse inom en minut från det…</td></tr><tr><td>Spökskepp</td><td>S19 (ritual)</td><td>S/4 kilometer</td><td>S/4 veckor</td><td>Nekromantikern kan lyfta ett sjunket skepp från havets botten och animera detta…</td></tr><tr><td>Stupiditet</td><td>S15</td><td>Sx2 rutor</td><td>S/4 dygn</td><td>Denna besvärjelse riktas mot en levande intelligent varelse inom räckvidden.…</td></tr><tr><td>Terror</td><td>S15</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Den här besvärjelsen liknar de övriga skräckbesvärjelserna men har en mycket…</td></tr><tr><td>Träorm</td><td>S11</td><td>Beröring</td><td>Sx1 SR</td><td>En nekromantiker lägger denna besvärjelse på en träpinne (den får vara högst en…</td></tr><tr><td>Voodooritual</td><td>S18 (ritual)</td><td>special</td><td>Konc.</td><td>Magikern skapar i ritualen en docka av vax, som föreställer en bestämd person.…</td></tr><tr><td>Zombiekopia</td><td>S26 (ritual)</td><td>Beröring</td><td>S/4 veckor</td><td>Med hjälp av denna ritual kan en nekromantiker skapa en zombie som är en kopia…</td></tr></tbody></table><h3>Minimagi</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Animera död insekt</td><td>1 PSY</td><td>Nekromantikern kan zombiefiera en insekt (varaktighet 1T10 timmar) som lyder…</td></tr><tr><td>Gnisslande gångjärn</td><td>1 PSY</td><td>Nekromantikern får ett gångjärn att permanent gnissla och ge ifrån sig…</td></tr><tr><td>Kalla kårar</td><td>1 PSY</td><td>Nekromantikern injagar en känsla av att en mycket kall vind sveper omkring de…</td></tr><tr><td>Olustig skepnad</td><td>1 PSY</td><td>Nekromantikern frammanar en känsla av olust hos alla (fem offer per PSY) inom…</td></tr><tr><td>Spökljus</td><td>1 PSY</td><td>Nekromantikern får en liten yta, ca 30x30 cm, att självlysa med ett svagt blekt…</td></tr><tr><td>Svartnagel</td><td>1 PSY</td><td>Nekromantikern kan få ett offers naglar att svartna för att strax därpå falla…</td></tr><tr><td>Ögonvita</td><td>1 PSY</td><td>Nekromantikerns ögon förändras tillfälligt så att endast ögonvitan finns kvar…</td></tr><tr><td>Örfil</td><td>1 PSY</td><td>Nekromantikern kan ge någon en smärtsam örfil utan att nedlåta sig till att…</td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!bBS9H3cYGO4yClwC.huEyg3D5MEmf8KJQ"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "school-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!bBS9H3cYGO4yClwC"
+}

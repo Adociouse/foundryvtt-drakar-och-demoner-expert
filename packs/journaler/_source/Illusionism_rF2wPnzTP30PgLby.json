@@ -1,0 +1,66 @@
+{
+  "name": "Illusionism — Besvärjelseförteckning",
+  "_id": "rF2wPnzTP30PgLby",
+  "pages": [
+    {
+      "_id": "u9KR8uNColzydePN",
+      "name": "Illusionism",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Illusionism</h2><p><em>[Skolbeskrivning — fylls i senare från Formelboken]</em></p><h3>Besvärjelser</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Räckvidd</th><th>Varaktighet</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Aura</td><td>S7</td><td>Beröring</td><td>S/4 timme</td><td>Den förhäxade omges av kraftaura; PSY-grupp vs E för att utföra fientlig…</td></tr><tr><td>Avbild</td><td>S3</td><td>Sx2 rutor</td><td>Sx1 minuter</td><td>Skapar avbild av varelse/föremål/ljud/lukt; försvinner vid beröring; +4/extra E…</td></tr><tr><td>Avlyssning</td><td>S13</td><td>Beröring</td><td>S/4 dygn</td><td>Föremål fångar info inom 5m och sänder 200m bort: E1=känsla, E2=+ljud,…</td></tr><tr><td>Distraktion</td><td>S2 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Alla inom räckvidden riktar ovillkorligt uppmärksamheten mot en bestämd punkt</td></tr><tr><td>Dunkel</td><td>S4</td><td>Beröring</td><td>S/4 minuter</td><td>Besvärjelsen gör att man blir svårare att urskilja — man verkar bli suddig och…</td></tr><tr><td>Falsktal</td><td>S12 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Intelligent varelse tvingas säga en mening (max 6 ord) bestämd av magikern</td></tr><tr><td>Färglöshet</td><td>S3</td><td>Sx2 rutor</td><td>S/4 minut</td><td>Alla i räckvidden förlorar sin färg; medelsvårt INT-slag eller −5 CL på alla…</td></tr><tr><td>Färgskifte</td><td>S11</td><td>Sx2 rutor</td><td>S/4 veckor</td><td>E döda föremål byter färg enligt önskemål</td></tr><tr><td>Försköna/Förfula</td><td>S1</td><td>Sx2 rutor</td><td>Sx1 timmar</td><td>Förskönar ett fult/skadat föremål eller varelse, eller tvärtom</td></tr><tr><td>Förtrollad sömn</td><td>S11</td><td>Sx10 rutor</td><td>Sx1 timmar</td><td>Sövar E varelser (1E/varelse, +1E/20 extra STO); kan ej väckas normalt</td></tr><tr><td>Förvirra</td><td>S9</td><td>Sx10 rutor</td><td>S/4 minut</td><td>Offret förlorar förmågan att tänka klart; står still; försvarar sig om det…</td></tr><tr><td>Illusion</td><td>S16</td><td>Sx2 rutor</td><td>Sx1 minuter</td><td>Som Avbild men försvinner ej vid beröring; kan faktiskt skada; har egna…</td></tr><tr><td>Illusionsförflyttning</td><td>S3</td><td>Beröring</td><td>1T6 SR</td><td>Besvärjelsen får den förhäxade att se ut som om han flimrade snabbt fram och…</td></tr><tr><td>Illusionskopia</td><td>S6</td><td>Personlig</td><td>Sx1 SR</td><td>Magikern skapar en exakt kopia av sig själv för varje effektgrad. Motståndaren…</td></tr><tr><td>Knackning</td><td>S1</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Skapar knackljud på dörr/port/liknande (intensitet valfri)</td></tr><tr><td>Kunglig måltid</td><td>S3</td><td>S/2 rutor</td><td>Sx1 timmar</td><td>Besvärjelsen får en måltid att smaka på det sätt som magikern önskar. Den…</td></tr><tr><td>Röra sig ljudlöst</td><td>S5</td><td>Beröring</td><td>S/4 minuter</td><td>Besvärjelsen ger förmågan att röra sig helt ljudlöst, oavsett vad man gör. ⚠…</td></tr><tr><td>Sinnesmask</td><td>S1</td><td>Sx2 rutor</td><td>Sx1 timmar</td><td>Maskerar sinnet; verkar tillhöra annan varelsetyp vid…</td></tr><tr><td>Skrik</td><td>S9 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Fruktansvärt skrik; medelsvårt PSY-slag eller förlora 1 PSY/E +…</td></tr><tr><td>Spökmusik</td><td>S4 (kvick)</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Frammanar musik från valfritt instrument; kan låta den ljuda var som helst inom…</td></tr><tr><td>Spökröst</td><td>S3 (kvick)</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Förändrar rösten till oigenkännlighet; kan låta rösten ljuda från valfri punkt</td></tr><tr><td>Tystnad</td><td>S11</td><td>Sx2 rutor</td><td>S/4 minut</td><td>1 ruta/E fullständigt tyst; omöjliggör röstbaserade besvärjelser och…</td></tr><tr><td>Utseendeförändring</td><td>S10</td><td>Personlig</td><td>Sx1 timmar</td><td>Förändrar magikerns utseende (hudfärg, anletsdrag, röst) valfritt; ej…</td></tr></tbody></table><h3>Minimagi</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Bild</td><td>1 PSY</td><td>Skapar en tvådimensionell bild mot en plan yta (kräver ljus men ej direkt…</td></tr><tr><td>Glimt</td><td>1 PSY</td><td>Offer skymtar en valfri syn i ögonvrån (reflexmässigt vänder de på huvudet och…</td></tr><tr><td>Individuell distraktion</td><td>1 PSY</td><td>Som Distraktion (S2) men påverkar bara en person Minibesvärjelse — ingen…</td></tr><tr><td>Osynliggöra litet föremål</td><td>1 PSY</td><td>Gör ett dött föremål (≤1 dm i diameter) osynligt i 6 SR Minibesvärjelse — ingen…</td></tr><tr><td>Vag skepnad</td><td>1 PSY</td><td>Magikerns ansikte uppfattas olika av varje person (1 PSY per person, var och en…</td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!rF2wPnzTP30PgLby.u9KR8uNColzydePN"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "school-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!rF2wPnzTP30PgLby"
+}

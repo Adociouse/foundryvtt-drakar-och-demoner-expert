@@ -89,6 +89,7 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
 | `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna |
+| `journaler` | 14 auto-genererade skolreferenssidor (13 magiskolor + Allmänna besvärjelser), en per skola, med en besvärjelse-/minimagitabell sammanställd ur `besvarjelser`-kompendiet. Skolbeskrivningstexten är ännu bara en platshållare — fylls i från Formelboken senare |
 | `scener` | Färdiga scener, bl.a. rollpersonsskaparens egen bakgrundsscen |
 
 Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompileras till det LevelDB-format Foundry faktiskt läser — se "Kompendiebyggnad" nedan.

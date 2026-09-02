@@ -1,0 +1,66 @@
+{
+  "name": "Elementarmagi — Besvärjelseförteckning",
+  "_id": "7FZoh7BeYCEjAXXI",
+  "pages": [
+    {
+      "_id": "OiPSfW6adqZkEpxd",
+      "name": "Elementarmagi",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Elementarmagi</h2><p><em>[Skolbeskrivning — fylls i senare från Formelboken]</em></p><h3>Besvärjelser</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Räckvidd</th><th>Varaktighet</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Astralvapen</td><td>S10</td><td>S/2 rutor</td><td>Sx1 SR</td><td>Frammanar ett vapen av valfri typ, uppbyggt av blåskimrande magisk energi. ⚠…</td></tr><tr><td>Blindskydd</td><td>S6</td><td>Beröring</td><td>Sx1 minuter</td><td>Immunitet mot bländning; bländande besvärjelser måste övervinna med E</td></tr><tr><td>Blixt</td><td>S6 (kvick)</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Blixt mot närmaste mål framför magikern; 1T6 skada per effektgrad. Ingen…</td></tr><tr><td>Bländning</td><td>S12 (kvick)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Alla varelser som tittar mot trollkarlen när besvärjelsen läggs måste lyckas…</td></tr><tr><td>Bro</td><td>S10</td><td>Sx2 rutor</td><td>Sx1 minuter</td><td>Från besvärjarens fötter skapas en bro av blåskimrande magisk energi, lika lång…</td></tr><tr><td>Dela vattensamling</td><td>S6</td><td>Sx2 rutor</td><td>1T3+2 min</td><td>1m bred korridor genom vatten (max 5m djup); +längd eller ×2 djup/E</td></tr><tr><td>Eld</td><td>S6</td><td>Sx10 rutor</td><td></td><td>Temperaturhöjning i 1 m sfär vid målet; 1T6 skada per effektgrad (alternativt E…</td></tr><tr><td>Eldväg</td><td>S10</td><td>Beröring</td><td>Sx1 minuter</td><td>Den förhäxade kan vistas i naturlig eld utan att ta skada. ⚠ Drakeld är dock…</td></tr><tr><td>Elementarmantel</td><td>S6</td><td>Sx10 rutor</td><td>Sx1 minuter</td><td>Elementarmantel runt mål; +1 abs/E; visuell avskräckningseffekt (ej verklig)</td></tr><tr><td>Energistråle</td><td>S6</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Magisk ljusstråle; 1T6/E skada (1T3/E alt.); rustning/Skydd absorberar</td></tr><tr><td>Explosion</td><td>S11 (kvick)</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Framkallar en eld- och ljusexplosion på valfri plats inom räckvidden. ⚠…</td></tr><tr><td>Flammande hand</td><td>S4</td><td>Personlig</td><td>1T3 min</td><td>Handen flammar; +1T3/E extra skada på slag; antänder brännbart</td></tr><tr><td>Forma eld</td><td>S11</td><td>S/2 rutor</td><td>Sx1 minuter</td><td>Magikern kan forma en eld så att den liknar en figur av något slag, till…</td></tr><tr><td>Forma föremål</td><td>S7</td><td>S/2 rutor</td><td>Sx1 minuter</td><td>Omformar ett icke-levande föremål till ny form (hantverkskvalitet FV B1/E)</td></tr><tr><td>Frammana/Skicka bort elementar</td><td>S9</td><td>Sx10 rutor</td><td>Sx1 SR</td><td>Frammanar en elementar…</td></tr><tr><td>Frost</td><td>S6</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Köldsfär; 1T6/E skada (alt. E sfärer); rustning/Skydd absorberar</td></tr><tr><td>Förbanna vapen</td><td>S6</td><td>Sx10 rutor</td><td>Sx1 minuter</td><td>Vapen: −1 CL/E och −1 skada/E; motverkas av Förtrolla vapen</td></tr><tr><td>Försegla</td><td>S3</td><td>Beröring</td><td>S/4 min (+15 min/E)</td><td>Binder ihop kanter på två passande icke-levande föremål; +20 KP var</td></tr><tr><td>Förstena</td><td>S19</td><td>S/2 rutor</td><td>S/4 veckor</td><td>Magikern kan förändra en levande varelses kropp till att bli massiv sten. ⚠…</td></tr><tr><td>Förstärka</td><td>S6 (kvick)</td><td>Sx2 rutor</td><td>Sx1 minuter</td><td>Magikern kan förstärka ett eller flera föremål. Ett vapen, en sköld eller en…</td></tr><tr><td>Förtrolla vapen</td><td>S6</td><td>Sx10 rutor</td><td>Sx1 minuter</td><td>Vapnet får +1 CL per effektgrad och +1 skada per effektgrad. Kan skada varelser…</td></tr><tr><td>Häva förstening</td><td>S18 (ritual)</td><td>Beröring</td><td>Omedelbar</td><td>Häver förstening av levande varelse (E vs förstening-E)</td></tr><tr><td>Identifikation</td><td>S8</td><td>Personlig</td><td>Omedelbar</td><td>Identifierar alla döda material (metaller, ädelstenar) i ett vidrört föremål</td></tr><tr><td>Jordstöt</td><td>S18</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Magikern markerar inom ett område med honom själv som mittpunkt och räckvidden…</td></tr><tr><td>Jordväg</td><td>S10</td><td>Beröring</td><td>Sx1 minuter</td><td>Gör det möjligt att röra sig genom alla former av icke-magisk fast materia,…</td></tr><tr><td>Jättevåg</td><td>S12 (kvick)</td><td>Sx10 rutor</td><td>Sx1 SR</td><td>En magiker som befinner sig på öppet vatten kan åstadkomma en hög och kraftig…</td></tr><tr><td>Kalla handen</td><td>S4 (kvick)</td><td>S/2 rutor</td><td>Omedelbar</td><td>Köldstråle; svårt FYS-slag eller frysningsanfall (förlorar SR); klarat slag: −4…</td></tr><tr><td>Knäcka</td><td>S6 (kvick)</td><td>S/2 rutor</td><td>Omedelbar</td><td>Skadar föremål; −10 BV (E1), +2 BV per extra E; magiska föremål gör motstånd</td></tr><tr><td>Krypande mörker</td><td>S10</td><td>Sx10 rutor</td><td>Sx1 minuter</td><td>Ett kompakt mörker av samma dimensioner som en MÖRKER-besvärjelse, men detta…</td></tr><tr><td>Kyla</td><td>S3</td><td>S/2 rutor</td><td>Sx1 timmar</td><td>Temperaturen sänks med 5° inom räckvidden. ⚠ Läggs besvärjelsen i ett…</td></tr><tr><td>Köldväg</td><td>S10</td><td>Beröring</td><td>Sx1 minuter</td><td>Den förhäxade påverkas inte av naturlig kyla på något sätt. ⚠ En Glacials kyla…</td></tr><tr><td>Ljus</td><td>S2</td><td>Sx10 rutor</td><td>Sx4 minuter</td><td>Får en del av ett föremål (ungefär 50 kubikcentimeter) att bli självlysande.…</td></tr><tr><td>Ljushand</td><td>S3</td><td>Personlig</td><td>Sx1 minuter</td><td>Ena handen lyser med gult sken; lyser upp Ex10 meter</td></tr><tr><td>Ljusväg</td><td>S13</td><td>Beröring</td><td>Sx1 minuter</td><td>Den förhäxade förvandlas till en liten (fem cm i diameter) kula av vitt ljus…</td></tr><tr><td>Luftstråle</td><td>S4 (kvick)</td><td>S/2 rutor</td><td>Omedelbar</td><td>Luftstråle blåser bort skräp och småföremål</td></tr><tr><td>Luftväg</td><td>S10</td><td>Beröring</td><td>Sx1 minuter</td><td>Den förhäxade kan röra sig fritt i luften med en förflyttning av två rutor per…</td></tr><tr><td>Låga</td><td>S2 (kvick)</td><td>Personlig</td><td></td><td>Skapar en liten låga vid tummen när magikern knäpper; tänder brännbart material.</td></tr><tr><td>Mörker</td><td>S3</td><td>Sx10 rutor</td><td>4 min (+5 min/E)</td><td>Avlägsnar allt ljus i 6m sfär (+3m/E); LJUS måste övervinna</td></tr><tr><td>Mörkerväg</td><td>S10</td><td>Beröring</td><td>Sx1 minuter</td><td>Den förhäxade smälter samman med mörkret och rör sig osedd. ⚠ Inte ens varelser…</td></tr><tr><td>Rost</td><td>S4 (kvick)</td><td>S/2 rutor</td><td>Permanent</td><td>Omvandlar E² dm³ järn till rost vid pekat mål</td></tr><tr><td>Sköld</td><td>S3 (kvick)</td><td>Personlig</td><td>Omedelbar</td><td>Luftsköld parerar automatiskt ett anfall (Abs 4, +2 per extra effektgrad).</td></tr><tr><td>Stenvägg</td><td>S3</td><td>S/2 rutor</td><td>S/4 minuter</td><td>Drar upp en vägg ur marken eller ett stengolv. Väggen kan dras fram var som…</td></tr><tr><td>Störtvind</td><td>S6</td><td>S/2 rutor</td><td>1–2 sek</td><td>Vindstorm åt alla håll; blåser bort varelser med STO ≤ 2×E (base STO ≤ 6)</td></tr><tr><td>Upplösning</td><td>S18</td><td>Beröring</td><td>S/4 timmar</td><td>Kastaren upplöser ett helt föremål på max ett BEP per effektgrad, så att det…</td></tr><tr><td>Vattenstråle</td><td>S5 (kvick)</td><td>Personlig</td><td>Omedelbar</td><td>100L vattenstråle 5+E meter; STY 5/E; kan slå omkull (STY vs STY)</td></tr><tr><td>Vattenväg</td><td>S10</td><td>Beröring</td><td>Sx1 minuter</td><td>Den som förhäxas kan gå på vatten som om det vore fast och stabil mark. ⚠ Den…</td></tr><tr><td>Viggfångare</td><td>S7</td><td>Personlig</td><td>Omedelbar</td><td>Under åskoväder: E×höjd% träffs av blixt; 5T6 skada men 8+4/E om till PSY</td></tr><tr><td>Virvelsköld</td><td>S8</td><td>Personlig</td><td>Sx1 SR</td><td>Magikern skapar en kraftig luftvirvel omkring sig, ca 75 cm i diameter. Om…</td></tr><tr><td>Värme</td><td>S3</td><td>S/2 rutor</td><td>Sx1 timmar</td><td>Höjer temperaturen med 5° (dubbel varaktighet i isolerat rum)</td></tr><tr><td>Återfinna</td><td>S10</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Trollkarlen kan hitta ett föremål som har varit i hans ägo under minst ett…</td></tr><tr><td>Öppna</td><td>S6</td><td>Beröring</td><td>Omedelbar</td><td>Öppnar låsta dörrar/kistor; häver magisk Försegling (E vs E)</td></tr></tbody></table><h3>Minimagi</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Kalla kårar (elementarmagi)</td><td>1 PSY</td><td>Åstadkommer en mycket kall vind omkring de inom räckvidden som magikern väljer…</td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!7FZoh7BeYCEjAXXI.OiPSfW6adqZkEpxd"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "school-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!7FZoh7BeYCEjAXXI"
+}

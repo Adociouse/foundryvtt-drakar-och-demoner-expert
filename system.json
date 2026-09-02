@@ -135,6 +135,17 @@
       }
     },
     {
+      "name": "journaler",
+      "label": "Skolreferenser",
+      "path": "packs/journaler",
+      "type": "JournalEntry",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
       "name": "tabeller",
       "label": "Tabeller (slagbara)",
       "path": "packs/tabeller",
@@ -208,7 +219,8 @@
       "color": "#4a5c6b",
       "packs": [
         "regler",
-        "tabeller"
+        "tabeller",
+        "journaler"
       ]
     },
     {

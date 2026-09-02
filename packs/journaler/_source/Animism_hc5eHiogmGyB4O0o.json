@@ -1,0 +1,66 @@
+{
+  "name": "Animism — Besvärjelseförteckning",
+  "_id": "hc5eHiogmGyB4O0o",
+  "pages": [
+    {
+      "_id": "hRxR6v7c7rP3Evy3",
+      "name": "Animism",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Animism</h2><p><em>[Skolbeskrivning — fylls i senare från Formelboken]</em></p><h3>Besvärjelser</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Räckvidd</th><th>Varaktighet</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Befria själ</td><td>S17 (ritual)</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Animisten kan befria en persons själ som blivit fångad i något föremål eller…</td></tr><tr><td>Besätta ryggradsdjur</td><td>S18</td><td>S/2 rutor</td><td>Sx1 minuter</td><td>Animisten förhäxar ett ointelligent ryggradsdjur (däggdjur, fågel, reptil,…</td></tr><tr><td>Bota fobi</td><td>S16 (ritual)</td><td>Beröring</td><td>Permanent</td><td>Botar E fobier</td></tr><tr><td>Bota varulv</td><td>S18</td><td>Beröring</td><td>Permanent</td><td>Botar en permanent varulvsförbannelse</td></tr><tr><td>Dimma</td><td>S15</td><td>Sx10 rutor</td><td>S/4 timmar</td><td>Framkallar en dimbank som täcker hela området inom räckvidden. Sikten inne i…</td></tr><tr><td>Duomorf</td><td>S20 (ritual)</td><td>Beröring</td><td>S/4 veckor</td><td>Ritualen skänker målpersonen förmågan att förändra form. Innan ritualen utförs…</td></tr><tr><td>Finna vatten</td><td>S1</td><td>S/4 rutor</td><td>Omedelbar</td><td>Magikern får reda på avstånd och riktning till alla drickbara källor och…</td></tr><tr><td>Fördrivning</td><td>S16 (ritual)</td><td>Sx2 rutor</td><td>Permanent</td><td>Ritual som fördriver ett spöke, en lyktgubbe eller en annan ande. ⚠ Det krävs…</td></tr><tr><td>Förändra</td><td>S12</td><td>Sx2 rutor</td><td>Sx1 minuter</td><td>Förvandlar föremål och varelser. Varje grad räcker till att förvandla tre poäng…</td></tr><tr><td>Gräsmat</td><td>S3</td><td>Beröring</td><td>S/4 dygn</td><td>Påverkar offrets ämnessammansättning så att det kan smälta cellulosa utöver sin…</td></tr><tr><td>Hela</td><td>S12</td><td>Beröring</td><td>Omedelbar</td><td>Helar E KP hos offret.</td></tr><tr><td>Häva förstening</td><td>S18</td><td>Beröring</td><td>Omedelbar</td><td>Häver förstening orsakad av elementarmagi eller naturvarelse</td></tr><tr><td>Impregnera</td><td>S4</td><td>Beröring</td><td>S/4 veckor</td><td>Impregnerar ett föremål av organiskt material (tyg, papper, läder) så att det…</td></tr><tr><td>Kamouflage</td><td>S7</td><td>Personlig</td><td></td><td>Kamouflagerar mot naturlig bakgrund — ger +E×5 CL för Gömma sig.</td></tr><tr><td>Kontrollera varelse</td><td>S10</td><td>Sx10 rutor</td><td>Sx1 SR</td><td>Behärskar fullständigt 20 STO varelser ur rätt grupp per effektgrad, och…</td></tr><tr><td>Kroppsvärme</td><td>S11</td><td>Beröring</td><td>Sx1 timmar</td><td>Den förhäxade har alltid rätt kroppstemperatur oberoende av yttre temperatur…</td></tr><tr><td>Kurera sjukdom</td><td>S20 (ritual)</td><td>Beröring</td><td>Permanent</td><td>Botar alla typer av sjukdomar permanent</td></tr><tr><td>Känna fiendskap</td><td>S12</td><td>Sx2 rutor</td><td>Omedelbar</td><td>Läggs över en annan intelligent varelse; magikern känner om denne på något sätt…</td></tr><tr><td>Livskraftens förbannelse</td><td>S22</td><td>Beröring</td><td>Omedelbar</td><td>Forskades i urtiden fram av alvgeniet Anderion med syftet att bekämpa odöda och…</td></tr><tr><td>Minska</td><td>S6</td><td>Beröring</td><td>S/4 minuter</td><td>Varje effektgrad minskar den förhäxades STY, FYS, STO, KAR eller SMI med ett…</td></tr><tr><td>Naturens röst</td><td>S13</td><td>Personlig</td><td>Varierande</td><td>Kan kastas på alla platser där magikern är omgiven på alla sidor av naturlig…</td></tr><tr><td>Nedkalla åskvigg</td><td>S6</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Nedkallar en åskvigg från ett regnmoln och riktar den mot ett utvalt mål inom…</td></tr><tr><td>Neutralisera gift</td><td>S15</td><td>Beröring</td><td>Omedelbar</td><td>Neutraliserar ett aktivt gift i offrets kropp</td></tr><tr><td>Regenerera</td><td>S20 (ritual)</td><td>Beröring</td><td>Se beskrivning</td><td>Ritual som får en avhuggen arm, vinge eller ben att växa ut med en takt av en…</td></tr><tr><td>Regnkontroll</td><td>S13</td><td>S/4 km</td><td>Sx1 minuter</td><td>Får alla moln inom räckvidden att börja ge ifrån sig tätt regn, eller stoppar…</td></tr><tr><td>Rena</td><td>S3</td><td>Beröring</td><td>Omedelbar</td><td>Renar 1 liter vätska, gas eller fast materia per effektgrad från alla ämnen…</td></tr><tr><td>Repväx</td><td>S7</td><td>Beröring</td><td>Sx1 minuter</td><td>Får ett rep att bli längre utan att det blir tunnare eller försvagat. Kräver…</td></tr><tr><td>Rikta brevduva</td><td>S5</td><td>Beröring</td><td>Permanent</td><td>Påverkar en brevduva så att en annan plats blir \"hemma\". Platsen måste vara ett…</td></tr><tr><td>Sannform</td><td>S10</td><td>S/2 rutor</td><td>Omedelbar</td><td>Kastas på en varulv, varråtta eller liknande varelse (dock inte metamorf) när…</td></tr><tr><td>Skogens sällhet</td><td>S15</td><td>Beröring</td><td>Varierar</td><td>Den förhäxade genomsyras av ett underbart lugn: motstridiga känslor sköljs…</td></tr><tr><td>Skogssjälens rus</td><td>S17</td><td>Beröring</td><td>Varierar</td><td>Kan kastas var som helst, men för att uppnå den önskade effekten måste det ske…</td></tr><tr><td>Snabbväx</td><td>S17</td><td>Beröring</td><td>Omedelbar</td><td>Får en växt att utvecklas till sin fulla prakt och maximala storlek på ett…</td></tr><tr><td>Spårlös</td><td>S4</td><td>Beröring</td><td>S/4 minuter</td><td>En varelse kan vandra fram i naturen utan att lämna några spår efter sig, inte…</td></tr><tr><td>Stigfinnare</td><td>S6</td><td>Personlig</td><td>Sx1 timmar</td><td>Magikern går aldrig vilse i skog eller djungel. Han vet vilken väg som är…</td></tr><tr><td>Tala med varelse</td><td>S5</td><td>Personlig</td><td>Sx1 minuter</td><td>Kommunicerar med en varelse ur rätt grupp, muntligt eller med tecken. Varje…</td></tr><tr><td>Tillkalla varelse</td><td>S2</td><td>S/4 km</td><td>Omedelbar</td><td>Tillkallar 20 poäng STO av varelser per effektgrad ur den rätta gruppen som…</td></tr><tr><td>Trädförbannelse</td><td>S19</td><td>S/2 rutor</td><td>S/4 veckor</td><td>Kan endast kastas på en levande varelse som står på jord med sådan tjocklek och…</td></tr><tr><td>Träeld</td><td>S2 (kvick)</td><td>Beröring</td><td>Omedelbar</td><td>Antänder ett stycke torrt, dött trä; när trästycket väl flammat upp brinner det…</td></tr><tr><td>Vindkontroll</td><td>S11</td><td>Sx1 km</td><td>Sx1 timmar</td><td>Kastaren kan förändra vinden inom räckvidden. Förändringen är maximalt lika med…</td></tr><tr><td>Vindpil</td><td>S6</td><td>Sx2 rutor</td><td>Sx1 SR</td><td>Läggs med beröring på en träpil med spets av annat material än järn. Pilen…</td></tr><tr><td>Väderförutsägelse</td><td>S8</td><td>Sx1 km</td><td>Omedelbar</td><td>Förutspår vädret E×24 timmar framåt med hög precision.</td></tr><tr><td>Väderkontroll</td><td>S19 (ritual)</td><td>Sx1 km</td><td>Special</td><td>Ritual som påverkar vädrets alla aspekter. Magikern bestämmer vilket väder han…</td></tr><tr><td>Växtkunskap</td><td>S5</td><td>Beröring</td><td>Omedelbar</td><td>Identifierar en växt och dess egenskaper (giftig, ätlig, medicinska)</td></tr><tr><td>Öka</td><td>S6</td><td>Beröring</td><td>S/4 minuter</td><td>Varje effektgrad ökar den förhäxades STY, FYS, STO, KAR eller SMI med en poäng.…</td></tr><tr><td>Örtrankor</td><td>S6</td><td>Särskild</td><td>Sx1 SR</td><td>Magikern frambringar ett knippe frön som kastas iväg mot ett mål ((STY+SMI)/2…</td></tr></tbody></table><h3>Minimagi</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Bevara</td><td>1 PSY</td><td>Läggs på en enhet organisk substans (t.ex. en frukt eller ett köttstycke) och…</td></tr><tr><td>Identifiera</td><td>1 PSY</td><td>Genom att titta på ett djur eller en växt avgör animisten omedelbart vad det är…</td></tr><tr><td>Lugna</td><td>1 PSY</td><td>Lugnar ett djur eller en liten växt i 1 SR Minibesvärjelse — ingen CL-kontroll,…</td></tr><tr><td>Natura</td><td>1 PSY</td><td>Animisten luktar kåda, torra löv eller någon annan doft ur naturen. ⚠ Smådjur,…</td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!hc5eHiogmGyB4O0o.hRxR6v7c7rP3Evy3"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "school-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!hc5eHiogmGyB4O0o"
+}

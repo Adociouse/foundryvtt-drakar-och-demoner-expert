@@ -1,0 +1,66 @@
+{
+  "name": "Allmänna besvärjelser — Besvärjelseförteckning",
+  "_id": "PO0NNTt8AcMoho0n",
+  "pages": [
+    {
+      "_id": "0kMBhustihIdWibi",
+      "name": "Allmänna besvärjelser",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Allmänna besvärjelser</h2><p><em>[Skolbeskrivning — fylls i senare från Formelboken]</em></p><h3>Besvärjelser</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Räckvidd</th><th>Varaktighet</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Antimagi</td><td>S6</td><td>Sx10 rutor</td><td>S/4 minuter</td><td>Placerar en magisk sköld omkring målet. Skölden skyddar mot magi och kan…</td></tr><tr><td>Avläsa magi</td><td>S16 (ritual)</td><td>Beröring</td><td>Omedelbar</td><td>Ritualen kan endast användas på ett föremål eller en varelse åt gången. ⚠…</td></tr><tr><td>Beskyddare</td><td>S9</td><td>Beröring</td><td>Permanent</td><td>Bildar en skyddande kub runt magikern eller annan person (föremål) som behöver…</td></tr><tr><td>Formelförbannelse</td><td>S19 (ritual)</td><td>Beröring</td><td>Permanent</td><td>Ritual som hjälper magikern att hålla obehöriga borta från sin käraste ägodel:…</td></tr><tr><td>Föryngra</td><td>S14 (ritual)</td><td>Beröring</td><td>S/4 veckor</td><td>En magiker kan tillfälligt föryngra sin egen eller någon annans kropp med E×5…</td></tr><tr><td>Laddning</td><td>S14 (ritual)</td><td>Beröring</td><td>Permanent</td><td>Ritualen gör det möjligt att lagra PSY i ett magiskt föremål som i ett batteri.…</td></tr><tr><td>Livsförlängning</td><td>S17 (ritual)</td><td>Personlig</td><td>Special</td><td>För att bli en skicklig och duglig magiker krävs mer tid för studier och…</td></tr><tr><td>Nexus</td><td>S20 (ritual)</td><td>Beröring</td><td>Permanent</td><td>Kopplar samman besvärjelser; båda aktiveras simultant; krävs för magiska föremål</td></tr><tr><td>Permanens</td><td>S19 (ritual)</td><td>Beröring</td><td>Permanent</td><td>Gör en annan besvärjelses effekt permanent; krävs för magiska föremål</td></tr><tr><td>Sigill</td><td>S17</td><td>Beröring</td><td>Tills den aktiveras</td><td>Varje effektgrad av denna formel binder en effektgrad hos en annan valfri…</td></tr><tr><td>Skingra</td><td>S6</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Omintetgör effekterna av andra formler, t.ex. LYFT, FÖRTROLLA VAPEN, FÖRBANNA…</td></tr><tr><td>Skingringsritual</td><td>S17 (ritual)</td><td>Beröring</td><td>Omedelbar</td><td>Tre gånger ritualens effektgrad ska övervinna summan av de magiska effektgrader…</td></tr><tr><td>Tidsinställning</td><td>S17</td><td>Beröring</td><td>Tills den aktiveras</td><td>Fungerar som SIGILL, men i stället för att utlösas när ett bestämt villkor…</td></tr><tr><td>Transfer</td><td>S16 (ritual)</td><td>Special</td><td>Omedelbar</td><td>Ritual som ger besvärjaren möjlighet att förflytta två levande varelser per…</td></tr><tr><td>Varseblivning</td><td>S6</td><td>Sx10 rutor</td><td>Omedelbar</td><td>Magikern specificerar först något han vill leta efter — en fälla, en hemlig…</td></tr></tbody></table><h3>Minimagi</h3><table><thead><tr><th>Namn</th><th>Kostnad</th><th>Effekt (kort)</th></tr></thead><tbody><tr><td>Bläddra</td><td>1 PSY</td><td>Besvärjaren bläddrar fram önskad sida i en uppslagen bok. Minibesvärjelse —…</td></tr><tr><td>Knäppa</td><td>1 PSY</td><td>Utlöser en snabb tryckvåg som kan döda insekter, välta lätta föremål…</td></tr><tr><td>Kyla/Värme</td><td>1 PSY</td><td>Kyler eller värmer något (mellan noll och hundra grader). Förändringen sker som…</td></tr><tr><td>Ljusspel</td><td>1 PSY</td><td>Frammanar ett ljusspel av färger och skuggor runt omkring sig. Kan vara mycket…</td></tr><tr><td>Minilyft</td><td>1 PSY</td><td>Lyfter ett föremål som väger högst 20 gram till önskad plats inom högst fem…</td></tr><tr><td>Putsa/Smutsa</td><td>1 PSY</td><td>Rensar eller smutsiger ett föremål (kläder, mat, etc.) Minibesvärjelse — ingen…</td></tr><tr><td>Smaksätt</td><td>1 PSY</td><td>Förändrar smaken hos mat eller dryck Minibesvärjelse — ingen CL-kontroll,…</td></tr><tr><td>Tryckvåg</td><td>1 PSY</td><td>Sätter tryck på ett föremål så som man normalt skulle kunna göra med ett mjukt…</td></tr><tr><td>Vindpust</td><td>1 PSY</td><td>Skapar en lätt vindstöt, blåser undan damm/rök Minibesvärjelse — ingen…</td></tr><tr><td>Vissling</td><td>1 PSY</td><td>Frambringar en vissling med önskad volym upp till maximalt 110 decibel.…</td></tr><tr><td>Väldoft</td><td>1 PSY</td><td>Skapar en behaglig doft i närheten Minibesvärjelse — ingen CL-kontroll, lyckas…</td></tr><tr><td>Öppna/Stänga</td><td>1 PSY</td><td>Öppnar eller stänger ett litet lås eller enkelt mekaniskt fäste Minibesvärjelse…</td></tr></tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!PO0NNTt8AcMoho0n.0kMBhustihIdWibi"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "school-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!PO0NNTt8AcMoho0n"
+}
