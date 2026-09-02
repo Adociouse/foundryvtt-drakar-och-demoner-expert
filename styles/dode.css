@@ -72,7 +72,13 @@
  */
 .dode.sheet.character [data-application-part="form"],
 .dode.sheet.npc [data-application-part="form"],
-.dode.sheet.handlare [data-application-part="form"] {
+.dode.sheet.handlare [data-application-part="form"],
+/* 2026-09-02: item-arken (item-sheet.mjs) hade aldrig fått samma fix — bekräftat
+   live (scrollHeight 720 mot clientHeight 262 på ett Yrke-ark, overflow-y:hidden
+   på .window-content) att innehåll som inte fick plats klipptes bort HELT, utan
+   någon scrollbar alls, inte bara "kräver ett bredare fönster". Samma orsak,
+   samma fix, samma selektor-mönster som ovan. */
+.dode.sheet.item [data-application-part="form"] {
   min-height: 0;
   overflow-y: auto;
 }
