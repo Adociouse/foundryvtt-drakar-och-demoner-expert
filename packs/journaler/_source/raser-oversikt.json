@@ -1,0 +1,103 @@
+{
+  "name": "Raser — Översikt",
+  "_id": "yScdCIDjoQuIfwOw",
+  "pages": [
+    {
+      "_id": "9tEu6HO1LgiAj9bx",
+      "name": "Grundraser",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Grundraser</h2><p>De grundläggande spelbara raserna (Rollpersonen s.9-10).</p><h4>Alv</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY -1, SMI +3, INT +3, KAR +2</td></tr>\n<tr><th>Storlek (STO)</th><td>8–14 (normalt 11)</td></tr>\n<tr><th>Rörelseschema</th><td>+1</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>25</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Skärpta sinnen</strong> <p>+4 FV Upptäcka fara, +4 FV Lyssna. Mycket bättre syn och hörsel.</p><strong>Odödlig</strong> <p>Åldras inte, startar alltid som Ung.</p><strong>Sjukdomsimmun</strong> <p>Immun mot sjukdomar.</p><strong>Litet sömnbehov</strong> <p>Sover bara 4 timmar/natt.</p></td></tr>\n</tbody></table><h4>Anka</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY -2, FYS +2, SMI +2, KAR -5</td></tr>\n<tr><th>Storlek (STO)</th><td>3–6 (normalt 5)</td></tr>\n<tr><th>Rörelseschema</th><td>-2</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>10</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Naturlig simförmåga</strong> <p>Automatiskt FV 20 (B5) i Simma.</p><strong>Smygförmåga</strong> <p>Automatiskt FV 4 i Smyga.</p><strong>Social nackdel</strong> <p>KAR −5 är en stark social nackdel (redan reflekterat i egenskapsmodifikationerna).</p></td></tr>\n</tbody></table><h4>Dvärg</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY +3, FYS +2, PSY +2, KAR -3</td></tr>\n<tr><th>Storlek (STO)</th><td>4–9 (normalt 7)</td></tr>\n<tr><th>Rörelseschema</th><td>-2</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>25</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Perfekt mörkersyn</strong> <p>Perfekt mörkersyn.</p><strong>Geologikunskap</strong> <p>+5 FV i Geologi (räknas som primärfärdighet).</p><strong>Rustningsbegränsning</strong> <p>Kan normalt inte bära helrustning utan specialtillverkning.</p></td></tr>\n</tbody></table><h4>Halvalv</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>SMI +2, KAR +1</td></tr>\n<tr><th>Storlek (STO)</th><td>7–16 (normalt 12)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>15</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Skärpta sinnen</strong> <p>+2 FV Upptäcka fara, +2 FV Lyssna. Dubbelt bättre hörsel och syn jämfört med människa.</p><strong>Lång livslängd</strong> <p>Lever längre än människor (dock inte odödliga).</p><strong>Anpassningsbar</strong> <p>Passar alla yrken.</p></td></tr>\n</tbody></table><h4>Halvlängdsman</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY -4, FYS +3, SMI +3, PSY +2</td></tr>\n<tr><th>Storlek (STO)</th><td>3–6 (normalt 5)</td></tr>\n<tr><th>Rörelseschema</th><td>-2</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>15</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Skickliga på att gömma sig</strong> <p>+4 FV i Gömma sig. Svåra att se när de vill gömma sig.</p><strong>Provsmakartalang</strong> <p>+1T3 BC i Provsmaka.</p></td></tr>\n</tbody></table><h4>Halvorch</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY +2, FYS +2, SMI -1, KAR -3</td></tr>\n<tr><th>Storlek (STO)</th><td>8–18 (normalt 13)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>10</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Slagsmålsvana</strong> <p>+4 FV i Slagsmål.</p><strong>Mörkersyn</strong> <p>Mörkersyn.</p><strong>Motbjudande utseende</strong> <p>Motbjudande utseende (redan reflekterat i egenskapsmodifikationerna, KAR −3).</p><strong>Benmagi</strong> <p>Kan lära Benmagi under vissa villkor (Svartfolk-boken).</p></td></tr>\n</tbody></table><h4>Människa</h4><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>Inga (mänsklig norm)</td></tr>\n<tr><th>Storlek (STO)</th><td>8–18 (normalt 13)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>0</td></tr>\n<tr><th>Källa</th><td>Rollpersonen s.9-10</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Ingen särskild förmåga</strong> <p>Inget specifikt. Passar alla yrken. Vanligaste spelbara rasen.</p></td></tr>\n</tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!yScdCIDjoQuIfwOw.9tEu6HO1LgiAj9bx"
+    },
+    {
+      "_id": "zU04r4iAIhPuPbzJ",
+      "name": "Alvsläkten",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Alvsläkten (Alver s.22)</h2><p>Alv är samlingsnamnet på flera undersläkten med egna egenskapsmodifikationer och särskilda förmågor (Alver s.22-24). Grundrasen Alv ovan representerar den vanligaste, halvalv-liknande varianten; släktena nedan är alternativ inom samma folkslag.</p><h4>Grottalv</h4><p><p>Grottalverna lever i naturliga grottsystem under jorden och är skickliga konsthantverkare med ett ofelbart orienteringssinne under jord.</p></p><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY -1, FYS +1, SMI +2, INT +3, PSY +1, KAR +2</td></tr>\n<tr><th>Storlek (STO)</th><td>7–17 (normalt 12)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>25</td></tr>\n<tr><th>Källa</th><td>Alver s.22</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Alvsläktets särskilda förmågor</strong> <p>Underjordiskt alvsläkte. Enligt Alver s.23 kan en grottalv slå fram de släktesegna särskilda förmågorna <em>Metallkänsla</em> (identifierar metaller på syn, lukt och känsel) och <em>Mörkerseende</em> (ser i totalt kolmörker, till skillnad från övriga alver).</p><p>Banemansförmågan gäller för grottalver vanligtvis dvärgar (Alver s.23).</p></td></tr>\n</tbody></table><h4>Gråalv</h4><p><p>Gråalverna lever sitt liv på och vid havet. En gråalv kan inte bli sjösjuk och söker sig ständigt mot nya upplevelser.</p></p><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY -1, FYS +2, SMI +1, INT +3, PSY +1, KAR +2</td></tr>\n<tr><th>Storlek (STO)</th><td>5–15 (normalt 10)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>25</td></tr>\n<tr><th>Källa</th><td>Alver s.22</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Alvsläktets särskilda förmågor</strong> <p>Havsnomadiskt alvsläkte. Enligt Alver s.23 kan en gråalv slå fram de släktesegna särskilda förmågorna <em>Uthållig simmare</em> (simmar i princip hur långt som helst oavsett vattnets temperatur) och <em>Delfinernas vän</em> (telepatisk kontakt med delfiner, som hjälper till i nödsituationer).</p></td></tr>\n</tbody></table><h4>Högalv (SL-godkännande)</h4><p><p>Det äldsta och mäktigaste alvsläktet — maktlystna, och de mest onda av alvraserna. Skickliga magiker.</p></p><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY -2, FYS -3, INT +10, PSY +10, KAR +2</td></tr>\n<tr><th>Storlek (STO)</th><td>13–23 (normalt 18)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>65</td></tr>\n<tr><th>Källa</th><td>Alver s.22</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>SL-godkännande krävs</strong> <p><strong>⚠ Kräver spelledarens godkännande.</strong> Alver s.22 säger uttryckligen: <em>&quot;Högalver är egentligen inte avsedda att användas av spelare som rollpersoner, men om SL tillåter det kan de fungera.&quot;</em></p><p>De extrema INT- och PSY-modifikationerna (+10/+10) och den höga bakgrundspoängskostnaden (65 BP) är bokens egna värden, inte en balansering från detta system.</p></td></tr>\n</tbody></table><h4>Injir</h4><p><p>Injirerna är nomadiska ryttare som klarar temperaturer från −40 °C till +40 °C.</p></p><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>FYS +1, SMI +2, INT +3, KAR +1</td></tr>\n<tr><th>Storlek (STO)</th><td>7–17 (normalt 12)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>25</td></tr>\n<tr><th>Källa</th><td>Alver s.22</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Alvsläktets särskilda förmågor</strong> <p>Nomadiskt ryttarsläkte besläktat med skogsalverna. Enligt Alver s.24 kan en injir slå fram de släktesegna särskilda förmågorna <em>Skicklig ryttare</em> (+4 CL på Rida och Slåss till häst) och <em>Stålsättning</em> (sänker SP-skadan med 2 genom att helt ignorera smärtan).</p><p>Förmågan Härdig mot element ger +20 istället för +15 för injirer (Alver s.23).</p></td></tr>\n</tbody></table><h4>Mörkeralv</h4><p><p>Mörkeralverna är långa och smala, fruktade av ytvärldens folk och ofta ensamma.</p></p><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>STY +2, SMI +1, INT +3, PSY +3, KAR -1</td></tr>\n<tr><th>Storlek (STO)</th><td>7–22 (normalt 15)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>25</td></tr>\n<tr><th>Källa</th><td>Alver s.22</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Alvsläktets särskilda förmåga</strong> <p>Djupunderjordiskt alvsläkte med stark magisk affinitet. Enligt Alver s.24 kan en mörkeralv slå fram den släktesegna särskilda förmågan <em>Blodtörst</em> (+3 CL i strid efter den första KP:n i skada på motståndaren).</p></td></tr>\n</tbody></table><h4>Skogsalv</h4><p><p>Skogsalverna lever i trädkronorna och är det vanligaste alvsläktet bland äventyrare.</p></p><table><tbody>\n<tr><th>Egenskapsmodifikationer</th><td>SMI +3, INT +3, PSY +1, KAR +2</td></tr>\n<tr><th>Storlek (STO)</th><td>8–18 (normalt 13)</td></tr>\n<tr><th>Rörelseschema</th><td>Ingen förändring</td></tr>\n<tr><th>Bakgrundspoäng (BP)</th><td>30</td></tr>\n<tr><th>Källa</th><td>Alver s.22</td></tr>\n<tr><th>Automatiska förmågor</th><td><strong>Alvsläktets särskilda förmåga</strong> <p>Skogslevande alvsläkte (satari). Enligt Alver s.24 kan en skogsalv slå fram den släktesegna särskilda förmågan <em>Utmärkt balanssinne</em> (+5 CL på alla SMI-slag som har med balans att göra).</p></td></tr>\n</tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1798761600000,
+        "modifiedTime": 1798761600000,
+        "lastModifiedBy": "GenJournalScript0",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!yScdCIDjoQuIfwOw.zU04r4iAIhPuPbzJ"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "drakar-och-demoner-expert": {
+      "source": "race-reference"
+    }
+  },
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1798761600000,
+    "modifiedTime": 1798761600000,
+    "lastModifiedBy": "GenJournalScript0",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!yScdCIDjoQuIfwOw"
+}
