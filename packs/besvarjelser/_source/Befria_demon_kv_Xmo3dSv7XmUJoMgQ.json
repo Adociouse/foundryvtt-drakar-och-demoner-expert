@@ -1,0 +1,38 @@
+{
+  "name": "Befria demon",
+  "type": "besvarjelse",
+  "_id": "Xmo3dSv7XmUJoMgQ",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 10,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx1 rutor",
+    "description": "<p>Demonologen befriar en demon från sin materialisationsform i denna värld. Om demonen är ovillig till detta måste demonologen övervinna demonens PSY med sin egen på Motståndstabellen för att BEFRIA den. När demonanden är befriad kommer den antingen att försvinna till sin hemvärld eller försöka besätta demonologen eller någon annan närvarande. Det är upp till SL att avgöra vilket alternativ den väljer. Denna besvärjelse används oftast för att fördriva demoner som besatt andra varelser. Det är betydligt svårare att BEFRIA en demon som redan befinner sig i sin egen ursprungliga kropp. En sådan demon måste antingen gå med på att BEFRIAS, eller tvingas till det genom KONTROLLERA DEMON.</p>",
+    "ritual": false,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "45"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Xmo3dSv7XmUJoMgQ"
+}

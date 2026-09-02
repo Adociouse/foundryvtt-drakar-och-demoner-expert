@@ -66,6 +66,11 @@ DODE.books = {
   mb2:         { label: "Monsterboken 2", short: "MB2" },
   mbx2:        { label: "Monsterboxen II — De humanoida raserna", short: "MBX2" },
   mbx4:        { label: "Monsterboxen IV — Legendariska varelser", short: "MBX4" },
+  // Fristående demonologitillägg (Target Games, 1993) — inte en av de fem
+  // Expert-kärnböckerna (RP/SL/SB/KH/REG), ett specialsupplement som Alver/
+  // Svartfolk/T&L. Se DESIGN_DECISIONS.md "Beslutade avsteg" för Portalmagi-
+  // skolan (byggd härifrån) och namnkrocken med Formelbokens Demonologi-kapitel.
+  kaosvaktare: { label: "Kaos Väktare", short: "KV" },
   eget:        { label: "Eget innehåll (ingen bokkälla)", short: "—" }
 };
 
@@ -242,7 +247,7 @@ DODE.equipmentCategories = {
   diverse: "DODE.EquipmentCategory.Diverse"
 };
 
-// De 13 magiskolorna — MAGI.md (MAG s.8-10)
+// De 13 magiskolorna — MAGI.md (MAG s.8-10) — plus Portalmagi, ett avsteg, se nedan.
 DODE.magicSchools = {
   alkemi: "DODE.MagicSchool.Alkemi",
   animism: "DODE.MagicSchool.Animism",
@@ -256,7 +261,14 @@ DODE.magicSchools = {
   rostmagi: "DODE.MagicSchool.Rostmagi",
   spiritism: "DODE.MagicSchool.Spiritism",
   stavmagi: "DODE.MagicSchool.Stavmagi",
-  symbolism: "DODE.MagicSchool.Symbolism"
+  symbolism: "DODE.MagicSchool.Symbolism",
+  // ⚠ AVSTEG (Johan, 2026-09-02): en 14:e skola utöver MAG s.8-10:s slutna
+  // 13-skole-canon. Boken Kaos Väktare (Target Games, 1993, se
+  // DODE.books.kaosvaktare) kallar Portalmagi uttryckligen "en ny magiskola,
+  // öppen för alla magiker" (s.49) med en egen, fullständig besvärjelselista
+  // (s.49-51) — inte en undergren av Demonologi. Se DESIGN_DECISIONS.md
+  // "Beslutade avsteg" för hela beslutet.
+  portalmagi: "DODE.MagicSchool.Portalmagi"
 };
 
 /**
@@ -1102,8 +1114,12 @@ DODE.secondarySkills = [
   { key: "kulturkannedom", name: "Kulturkännedom", attribute: "int" },
   { key: "kunskap-om-demoner", name: "Kunskap om demoner", attribute: "int" },
   { key: "kunskap-om-magi", name: "Kunskap om magi", attribute: "int" },
+  // Kaos Väktare s.36 (demonologitillägg) — kräver skydd via Grå hallarna/multiversumkännedom.
+  { key: "kunskap-om-multiversum", name: "Kunskap om Multiversum", attribute: "int" },
   { key: "kunskap-om-ododa", name: "Kunskap om odöda", attribute: "int" },
   { key: "lasdyrkning", name: "Låsdyrkning", attribute: "smi" },
+  // Kaos Väktare s.36 — konsten att spåra och jaga utomvärldsliga varelser.
+  { key: "lintropi", name: "Lintropi", attribute: "int" },
   { key: "lakekonst", name: "Läkekonst", attribute: "int" },
   { key: "lapplasning", name: "Läppläsning", attribute: "int" },
   // "Läsa/Skriva språk"/"Tala språk (Kate. B)" (RP s.58, källdokets rader 228/253)
@@ -1123,6 +1139,8 @@ DODE.secondarySkills = [
   { key: "malning", name: "Målning", attribute: "smi" },
   { key: "navigation", name: "Navigation", attribute: "int" },
   { key: "orientering", name: "Orientering", attribute: "int" },
+  // Kaos Väktare s.36 — teckna skyddscirklar/pentagram; grundegenskap PSY i källan.
+  { key: "pentagramritning", name: "Pentagramritning", attribute: "psy" },
   { key: "rakning", name: "Räkning", attribute: "int" },
   { key: "schack-bradspel", name: "Schack & Brädspel", attribute: "int" },
   { key: "simma", name: "Simma", attribute: "fys" },

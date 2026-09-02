@@ -1,0 +1,38 @@
+{
+  "name": "Skapa portal",
+  "type": "besvarjelse",
+  "_id": "ynTYEgv0GBvjBzoB",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/portalmagi.png",
+  "system": {
+    "school": "portalmagi",
+    "sValue": 16,
+    "kvick": false,
+    "duration": "Spec.",
+    "range": "Beröring",
+    "description": "<p>Magikern skapar med denna besvärjelse en Portal mellan två världar, av vilka den ena är den han befinner sig i och den andra vanligtvis är de Grå hallarna. Magikern kan sedan färdas genom portalen. Portalen kan antingen överföra enbart magikern, eller ett sällskap som alla måste träda igenom portalen innan den stängs. Inga extra effektgrader för att föra igenom flera personer behövs — portalen måste dock hållas öppen så länge att alla personer hinner igenom innan den stängs. En person kan färdas genom portalen varje SR. För varje extra effektgrad kan portalens fysiska yta ökas, så att ytterligare en person kan färdas genom öppningen varje SR. En tillfällig portal ser ut som en färgskimrande yta i luften eller mot en vägg. Portalen måste dock hållas öppen så länge att alla personer hinner igenom innan den stängs. Nästa SR krävs ett mycket svårt PSY-slag för att den inte ska stängas. Offrar man fler effektgrader för att hålla Portalen öppen, förlängs varaktigheten enligt tabellen nedan. Magikern kan när som helst välja att stänga Portalen. Man kan konstruera en permanent Portal med hjälp av SIGILL, PERMANENS och NEXUS. Portalens endast öppnas mot en plats där han själv kan öppna eller finna en ny Portal till den värld han önskar komma. En ny ritual krävs, på en ny plats. För att hitta den plats som magikern söker krävs ett lyckat slag för Kunskap om Multiversum. Om man önskar lämna de Grå hallarna kan man använda sig av den gamla portalen, om den är öppen, och då återvänder man till sin egen värld och sin egen kropp. Man kan också gå igenom en annan portal som leder ut i, den samma, eller en annan värld. Denna portal kan antingen finnas i de Grå hallarna sedan tidigare, eller skapas av magikern medan han befinner sig i de Grå hallarna. Portalens endast öppnas mot en plats som är väl känd för magikern, som helst bör ha besökt stället tidigare. Om magikern inte känner till världen han vill färdas till får SL själv avgöra var resenären hamnar. Ett lyckat slag mot INT innebär att magikern materialiseras på önskad plats. Ett misslyckande innebär att SL bestämmer var magikern lämnar de Grå hallarna. Om magikern inte känner till världen han vill färdas till får SL själv avgöra var resenären hamnar. Ett lyckat slag för Kunskap om Multiversum begränsar dock risken att materialiseras på ett riskfyllt ställe, så som i vulkanen eller mitt under en pågående jordbävning. Portalen kommer att vara öppen hela varaktigheten för syn på vem som helst som är på sin sida, oavsett vilka sidan han än befinner sig på, kan kliva Portalen och komma ut i den andra världen. Vissa mäktiga varelser (drakar och demoner, exempelvis) behöver dock ett visst utrymme för att kunna tränga sig genom en portal. Detta utrymme representeras av hur många effektgrader magikern använt för att öka Portalens yta. Med en effektgrad (dvs person per SR) kommer endast demonetter, demonträlar och drakhybrider igenom. Med två effektgrader kommer demoner, paschor och stridsdrakar igenom. För att väktare och högre drakar ska komma igenom krävs tio effektgrader. Mycket skickliga magiker kan försöka öppna en portal som går direkt till en annan värld, utan att ta omvägen via de Grå hallarna. För att lyckas med detta krävs att man lyckas med ett Mycket Svårt slag för Kunskap om Multiversum, för att hitta den exakta vägen. Sedan krävs att magikern lägger en E6 SKAPA PORTAL per SR som portalen ska vara öppen.</p>",
+    "ritual": true,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "51"
+    }
+  },
+  "effects": [],
+  "folder": "RymlAj587ITzWsZD",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ynTYEgv0GBvjBzoB"
+}

@@ -28,7 +28,15 @@ export default class DoDEYrkeData extends foundry.abstract.TypeDataModel {
         required: false,
         initial: "",
         blank: true,
-        choices: ["", "krigare", "tjuv", "lonnmordare", "bard"]
+        // ⚠ Endast 4 av de 10 grundyrkena stod här ursprungligen (samma
+        // "may not be a blank string"-fälla som kommentaren ovan varnar för,
+        // hände igen 2026-09-02 när Kaos Väktares tre nya underyrken tyst
+        // tappade sitt baseProfession-värde — magiker/utbygdsjagare saknades).
+        // Fylld till alla 10 grundyrken (RP) för att stänga hela klassen av bugg.
+        choices: [
+          "", "krigare", "tjuv", "lonnmordare", "bard",
+          "magiker", "utbygdsjagare", "helare", "munk", "sjofarare", "lard-man"
+        ]
       }),
       /**
        * Yrkesförmågor — strukturerad ersättning för det gamla fria

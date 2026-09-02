@@ -1,0 +1,138 @@
+{
+  "name": "Demonkrigare",
+  "type": "yrke",
+  "system": {
+    "requirements": "Krigare (STY 14, FYS 14, PSY 16, INT 11)",
+    "skillList": "<p>Maximalt fem valfria vapenfärdigheter, Tala ett valfritt främmande språk, Avväpna, Bärsärkagång, Dolk, Dra vapen, Geografi, ett valfritt Hantverk, Hasardspel, Kulturkännedom, Kunskap om demoner, Simma, Stridskonster, Två vapen.</p>",
+    "description": "<p>Demonkrigaren är en krigare som bundit en demon i sin kropp. Denna ritual har genomförts tidigare i demonkrigarens liv, och han har vid tiden för äventyrarens start vant sig vid att ha en demon fjättrad vid sig. Man kan säga att krigaren är så pass svag att den snarare är besatt, men det är minst lika ofta tvärtom; demonkrigaren parasiterar på demonen.</p><p>Demonkrigaren kan vara en krigare som utfört ett uppdrag åt en demonolog och fått demonen i belöning. Han kan också vara en ohelig riddare på uppdrag i den mänskliga världen, tjänande mörkrets makter. Demonkrigaren kan inte vara en alltigenom god individ, utan snarare en omoralisk och giftig krigare med ett cyniskt och grymt sinnelag. Men detta behöver inte betyda att han tjänar ondskan, eller strävar efter goda handlingar; mellan onda tankar och onda handlingar finns en värld av skillnad.</p><p>Innan man konstruerar en demonkrigare bör man konsultera SL och det är upp till denne att avgöra om spelaren ska få spela en demonkrigare eller ej.</p><p>Demonkrigaren har slingrande mönster av tatueringar över sin kropp, främst bröstkorgen och armarna. Tatueringarna skimrar svagt i mörker och skiftar i färg mot mörkblått med blodrött. Det är dessa tatueringar som fjättrar demonen.</p>",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonkrigare-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonkrigare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "5 valfria vapenfärdigheter",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Tala 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Avväpna",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Bärsärkagång",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dolk",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Dra vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantverk (1 typ)",
+        "attribute": "smi",
+        "choiceCount": 1,
+        "choicePool": "hantverk"
+      },
+      {
+        "name": "Hasardspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om demoner",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Simma",
+        "attribute": "fys",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Stridskonster",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Två vapen",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "34"
+    },
+    "magic": {
+      "access": "none",
+      "schools": [],
+      "maxSchoolValue": 0,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": true,
+      "epShareMax": 0
+    },
+    "professionAbilities": [
+      {
+        "name": "Demonfjättrad",
+        "description": "<p>Demonkrigaren har en demon fjättrad i sin kropp. Från demonen erhåller demonkrigaren 1T4+1 fördelar (SL slår). SL väljer om fördelarna ska vara grundegenskapsökningar, färdigheter, besvärjelser eller demoniska förmågor. Spelaren får sedan välja vilken av demonens grundegenskaper, färdigheter, förmågor eller besvärjelser han ska ha, men inte veta exakt vilket värde demonen har förrän efter han har valt. När fördelarna är utsatta försöker demonkrigaren övervinna demonens PSY med sin egen på Motståndstabellen. Lyckas demonen med detta måste demonkrigaren slå 1T3+antalet fördelar på nackdelstabellen. Annars sker ingenting.</p>",
+        "effect": null
+      }
+    ],
+    "baseProfession": "krigare"
+  },
+  "_id": "OxDlaRBD5H79q0k8",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonkrigare.png",
+  "effects": [],
+  "folder": "EU1eQvGXuMVmCsU5",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381151241,
+    "modifiedTime": 1788381151241,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!OxDlaRBD5H79q0k8"
+}

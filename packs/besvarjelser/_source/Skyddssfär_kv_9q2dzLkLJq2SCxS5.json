@@ -1,0 +1,38 @@
+{
+  "name": "Skyddssfär",
+  "type": "besvarjelse",
+  "_id": "9q2dzLkLJq2SCxS5",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 6,
+    "kvick": false,
+    "duration": "Sx2 timmar",
+    "range": "Beröring",
+    "description": "<p>Rekvisita: någon form av ritmaterial; målarfärg, bläck, glödande nål. Detta är demonologens viktigaste och mest grundläggande besvärjelse. En SKYDDSSFÄR skyddar demonologen från demoner och demoniska krafter, och ser ut som ett vanligt pentagram inuti en cirkel. En triangel finns vanligtvis också invävt i pentagrammet. SKYDDSSFÄREN fungerar som ett omvänt pentagram, dvs den förhindrar inträde utifrån. Sfären kan antingen tecknas på marken eller andra plana ytor. Pentagrammet som är bundet till SFÄREN kan även tecknas med osynligt bläck, och blir starkt självlysande när det aktiveras. SKYDDSSFÄREN fungerar som en kombination av SKYDD och ANTIMAGI. En SKYDDSSFÄR E1 ger magikern ett SKYDD E25 mot demoner. För varje effektgrad ökar SKYDDET med E5. Dessutom fungerar en SKYDDSSFÄR E1 som ANTIMAGI E5, och denna effekt ökar med två effektgrader för varje extra effektgrad magikern spenderar på SKYDDSSFÄREN. SKYDDET och ANTIMAGIN fungerar enbart mot demoner och demoniska krafter (även mot indirekta sådana — som t.ex. en sten som slungas av en demon mot magikern). Om man tecknar SKYDDSSFÄREN på demoner måste demonerna sig innanför cirkeln innan den kan skada någon som befinner sig i cirkeln. För att göra detta måste demonerna övervinna deras effektgrad (dvs 25 + SKYDDSSFÄRENS effektgrad Ex5-5) med sin egen PSY. Väl innanför cirkeln påverkas demonerna inte av SKYDDET. SFÄRENS räckvidd utgår från pentagrammets mitt och kan maximalt vara lika stor som effektgraden. Om pentagrammet är tecknat på ett föremål eller på demonologens kropp kommer den bara att påverka demonologen, eller den som bär föremålet. SKYDDSSFÄRENS varaktighet gäller bara så länge pentagrammet och cirkeln är intakta. En demon kan inte skingras eller pentagrammet utan att penetrera sfären. En SKYDDSSFÄR kan bara skingras om demonologens PSY plus SKYDDSSFÄRENS effektgrad övervinns av SKINGRARENS PSY på Motståndstabellen. Vad gäller SKYDDSSFÄRENS höjd (dvs hur långt över marken den sträcker sig) så varierar detta med demonologens längd.</p>",
+    "ritual": true,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "44"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!9q2dzLkLJq2SCxS5"
+}

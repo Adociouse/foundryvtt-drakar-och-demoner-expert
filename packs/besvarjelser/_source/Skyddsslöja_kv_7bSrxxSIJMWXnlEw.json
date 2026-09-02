@@ -1,0 +1,38 @@
+{
+  "name": "Skyddsslöja",
+  "type": "besvarjelse",
+  "_id": "7bSrxxSIJMWXnlEw",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 12,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Rekvisita: någon form av ritmaterial; målarfärg, krita, kol el dyl. Demonologen skapar en skyddscirkel, och måste först lyckas med ett färdighetsslag för Pentagramritning. SKYDDSSLÖJA är ingen ritual, utan tar 1T10 minuter att fullborda. Cirkeln döljer allting som finns innanför när besvärjelsen kastas, från såväl vanlig syn, mörkersyn, telepati, hörsel, luktsinne och undersökande besvärjelser. Circkeln kan inte flyttas, och har en maximal radie av E meter. SKYDDSSLÖJAN lurar bara demoner, utan alla varelser. Slöjan kan VARSEBLIS men föremål och varelser som kommer inom SKYDDSSLÖJANS radie efter att besvärjelsen lagts, kommer inte att bli osynliga. Om man kommer i uppenbar fysisk kontakt med något som är dolt av SKYDDSSLÖJAN kommer detta inte att bli synligt, men man kan fysiskt ta på det. Om ett sådant föremål avlägsnas från cirkeln blir det genast synligt och inte längre omfattas av besvärjelsen. SLÖJAN kan hävas innan varaktigheten ifall pentagrammet förstörs.</p>",
+    "ritual": false,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "46"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!7bSrxxSIJMWXnlEw"
+}

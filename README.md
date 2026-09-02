@@ -37,7 +37,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
 | FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
-| Kompendier: 13 raser, 36 yrken, 339 vapen/utrustning, 453 besvärjelser, 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och beskrivningstexternas kvalitet — se nedan). Besvärjelsekatalogens katalogkomplettering mot Formelboken är nu HELT KLAR (alla 13 skolor + Allmänna) |
+| Kompendier: 13 raser, 39 yrken, 339 vapen/utrustning, 475 besvärjelser (14 magiskolor), 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och beskrivningstexternas kvalitet — se nedan). Besvärjelsekatalogens katalogkomplettering mot Formelboken är HELT KLAR; Kaos Väktares demonologitillägg (3 yrken, Portalmagi som 14:e skola) tillagt 2026-09-02 |
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
 | GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
@@ -57,7 +57,7 @@ En guidad, ApplicationV2-baserad rollpersonsskapare (`scripts/apps/character-wiz
 6. **Svärdshand** — höger/vänster/ambidextriös/dubbelhänt, med följdeffekter för Två vapen-mekaniken
 7. **Ålder** — Ung/Mogen/Medelålders/Gammal, ger attributmodifikationer och en kapitalmultiplikator
 8. **Attribut** — **point-buy**, inte tärningsslag (RP s.23 är en explicit köptabell, inte en slagmetod — en tidigare rättad felläsning)
-9. **Yrke** — 36 yrken (11 grundyrken + 25 specialiseringar från Krigarens Handbok/Tjuvar och Lönnmördare)
+9. **Yrke** — 39 yrken (11 grundyrken + 28 specialiseringar från Krigarens Handbok/Tjuvar och Lönnmördare/Kaos Väktare)
 10. **Magiskola** — bara för magianvändande yrken
 11. **Särskilda förmågor** — antal slots styrt av nivå, en sourcad 49-rads slumptabell (`DODE.specialAbilitiesTable`) med en "Slå fram förmåga"-knapp; ras-/yrkesförmågor har egna, strukturerade mekaniska effekter där källmaterialet ger dem
 12. **Socialt stånd** — 2T6 + valfri BP-spend (RP s.27–28, 9-ståndssystemet)
@@ -82,9 +82,9 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 | Kompendie | Innehåll |
 |---|---|
 | `raser` | 13 raser: 7 grundraser (Människa, Alv, Halvalv, Halvlängdsman, Dvärg, Halvork, Anka) + 6 alvsläkten (Alver s.22) |
-| `yrken` | 36 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 25 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
+| `yrken` | 39 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 28 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare, Kaos Väktare — Demonolog/Demonjägare/Demonkrigare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
 | `vapen-utrustning` | 339 poster: 23 vapen, 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
-| `besvarjelser` | 453 besvärjelser (410 besvärjelser + 43 minibesvärjelser, minibesvärjelserna samlade i en egen "Minimagi"-mapp) — Formelbokens katalogkomplettering är KLAR, alla 13 skolor + Allmänna transkriberade |
+| `besvarjelser` | 475 besvärjelser (431 besvärjelser + 44 minibesvärjelser, minibesvärjelserna samlade i en egen "Minimagi"-undermapp per skola) — Formelbokens katalogkomplettering är KLAR (13 skolor + Allmänna), plus Kaos Väktares demonologitillägg (Portalmagi som 14:e skola, 7 besvärjelser + 14 nya/3 ersatta Demonologi-besvärjelser) |
 | `monster` | 241 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
@@ -102,7 +102,7 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 - **Spelbara raser finns även som stridbara NPC:er.** Alv-släktena, dvärg, anka, halvlängdsman, halvalv och halvorch har både en `ras`-post i `raser` (rollpersonsbyggsten) och ett fullständigt stridsstatblock i `monster` — så ett högalvsgarde eller en dvärgpatrull kan placeras ut som motståndare direkt.
 - **De flesta besvärjelser saknar egen bildikon** — de allra flesta visar sin magiskolas symbol i stället för unik konst.
 - **Besvärjelsekatalogens katalogkomplettering mot Formelboken är KLAR.** Samtliga 13 spelbara magiskolor + Allmänna är fullt transkriberade (se `docs/DESIGN_DECISIONS.md` §2). ⚠ Demonologis fyra unikt namngivna demoner (Gollog, Syreb, Ballouq, Nimum) är medvetet INTE byggda som besvärjelser — de har egna fullständiga monsterstatblock i källan och hör hemma i en framtida `monster`-pack-utökning i stället (se backlog 87).
-- **~122 av 453 besvärjelser har bara en komprimerad en-radssammanfattning** i stället för bokens faktiska beskrivningstext (kvar från 2026-07-27-portens första omgång) — uppgraderas skola för skola i samma pass som katalogkompletteringen. Allmänna besvärjelser, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism och Demonologi är helt klara på den punkten; Animism, Elementarmagi, Harmonism, Häxkonster och Illusionism kvarstår (klara på spellista, inte på beskrivningskvalitet).
+- **~122 av 475 besvärjelser har bara en komprimerad en-radssammanfattning** i stället för bokens faktiska beskrivningstext (kvar från 2026-07-27-portens första omgång) — uppgraderas skola för skola i samma pass som katalogkompletteringen. Allmänna besvärjelser, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Demonologi och Portalmagi är helt klara på den punkten; Animism, Elementarmagi, Harmonism, Häxkonster och Illusionism kvarstår (klara på spellista, inte på beskrivningskvalitet).
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**
 - **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.

@@ -1,0 +1,193 @@
+{
+  "name": "Demonjägare",
+  "type": "yrke",
+  "system": {
+    "requirements": "Utbygdsjägare (FYS 16, SMI 12, INT 12, PSY 14)",
+    "skillList": "<p>Tala maximalt tre främmande språk, Läsa/skriva maximalt tre främmande språk, Två valfria vapenfärdigheter, Administration, Akrobatik, Astrologi, Drogkunskap, Geografi, Geologi, Giftkunskap, Hantera fällor, Knopar, Kulturkännedom, Kunskap om demoner, Kunskap om magi, Kunskap om Multiversum, Lintropi, Låsdyrkning, Orientering, Änterhake, Örtkunskap, Överlevnad.</p>",
+    "description": "<p>En demonjägare är en individ som svurit sitt liv till att söka upp och förgöra demoner. Det är ovanligt yrke som man inte söker till om man är rädd om sitt liv i den dödligas värld. Den som väljer att bli demonjägare bär ofta ett starkt personligt hat mot demoner och deras tjänare.</p><p>Demonjägaren är en mångsidig yrkesman som bär på många kompletterande kunskaper för att kunna utföra sitt värv. Jakten på demoner och deras tjänare går över land och genom städer och det kan hända att jakten för jägaren in i andra världar. Därför är det viktigt att besitta anpassningsförmåga och kunskaper för att möta alla hinder och problem som kan uppstå under jakt.</p><p>Demonjägaren arbetar ofta tillsammans med magiker och mäktiga krigare för att det önskade resultatet skall uppnås. Demonjägare är ofta cyniska, hämndlystna och mycket försiktiga. De vet att demoner kan lura var som helst, och det gäller att stålsätta sig och vara beredd på att bli överfallen. De vet också att det dummaste man kan göra när man har med en demon att göra är att kasta sig i kamp med den, innan man känner till hur mäktig den egentligen är. En skicklig demonjägare är tålmodig, förbereder sig väl, och slår sedan till hårt, snabbt och skoningslöst.</p>",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonjagare-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonjagare-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Tala max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "främmande språk"
+      },
+      {
+        "name": "Läsa/skriva max 3 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "2 valfria vapenfärdigheter",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Administration",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Akrobatik",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Astrologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Giftkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hantera fällor",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Knopar",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kulturkännedom",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om demoner",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om Multiversum",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Lintropi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Låsdyrkning",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Orientering",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Änterhake",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Överlevnad",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "33-34"
+    },
+    "magic": {
+      "access": "limited",
+      "schools": [
+        "animism"
+      ],
+      "maxSchoolValue": 12,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": false,
+      "epShareMax": 0
+    },
+    "professionAbilities": [
+      {
+        "name": "Demonresistens",
+        "description": "<p>En demonjägare kan använda sig av sin kunskap och självdisciplin för att motstå den skräck som demoner med sin blotta uppenbarelse ingjuter i alla levande varelser — han har därför alltid −5 på alla slag på Skräcktabellen.</p>",
+        "effect": null
+      },
+      {
+        "name": "Väl utvecklad blick",
+        "description": "<p>En demonjägare har en väl utvecklad blick för detaljer och tecken och har därför alltid +2 i FV i Spåra.</p>",
+        "effect": null
+      }
+    ],
+    "baseProfession": "utbygdsjagare"
+  },
+  "_id": "ilfp0cugiXw3KC7R",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonjagare.png",
+  "effects": [],
+  "folder": "EU1eQvGXuMVmCsU5",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381151241,
+    "modifiedTime": 1788381151241,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!ilfp0cugiXw3KC7R"
+}

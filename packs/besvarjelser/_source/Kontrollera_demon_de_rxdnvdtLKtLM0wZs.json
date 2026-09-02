@@ -7,13 +7,13 @@
     "school": "demonologi",
     "sValue": 12,
     "kvick": false,
-    "duration": "Sx2 timmar",
-    "range": "Sx2 rutor",
-    "description": "<p>Magikern betvingar demonen och kan kontrollera den. Demonen känner sig tvingad att lyda magikern och följa dennes instruktioner. Effekten liknar ett förslavande av varelsen, då den inte förlorar sin tankeverksamhet, men ändock måste underordna sig. ⚠ Medan demonen är förhäxad håller den sig passiv och försöker inte rymma från besvärjaren.</p>",
-    "ritual": true,
+    "duration": "Spec.",
+    "range": "Sx10 rutor",
+    "description": "<p>Med KONTROLLERA DEMON betvingar magikern demonen och kan kontrollera den. För att lyckas måste magikern övervinna demonens PSY med sin egen på Motståndstabellen. Demonen känner sig tvingad att lyda magikern och följa dennes instruktioner, men har inte förlorat sin tankeförmåga. Demonen tar inga egna initiativ utan demonologens godkännande. Besvärjelsens varaktighet beror på demonens styrka. Väktare kan aldrig kontrolleras. Paschor måste man kontrollera en gång i minuten; demoner måste bemästras en gång var sjätte timme och demonträlar en gång per dygn. Demonetter behöver man bara KONTROLLERA en gång i veckan.</p>",
+    "ritual": false,
     "source": {
-      "book": "formelboken",
-      "page": "12"
+      "book": "kaosvaktare",
+      "page": "46"
     }
   },
   "effects": [],

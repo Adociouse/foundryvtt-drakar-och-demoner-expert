@@ -1,0 +1,38 @@
+{
+  "name": "Förgöra portal",
+  "type": "besvarjelse",
+  "_id": "dpOzMnaeakMBkF1w",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/portalmagi.png",
+  "system": {
+    "school": "portalmagi",
+    "sValue": 14,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx1 rutor",
+    "description": "<p>Med denna besvärjelse förstör magikern en existerande portal. Effektgraden hos FÖRGÖRA PORTAL måste övervinna portalens effektgrad på Motståndstabellen för att besvärjelsen ska lyckas. När man ska förgöra en permanent portal måste man dessutom utföra en ritual som tar 1T4 timmar per effektgrad. Man måste dessutom ha tillgång till exakt samma rekvisita som den magiker som skapade portalen — när man lägger denna besvärjelse på denna rekvisita precis framför portalen förgörs den.</p>",
+    "ritual": false,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "RymlAj587ITzWsZD",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!dpOzMnaeakMBkF1w"
+}

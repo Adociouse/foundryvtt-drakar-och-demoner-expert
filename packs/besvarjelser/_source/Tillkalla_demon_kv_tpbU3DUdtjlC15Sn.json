@@ -1,0 +1,38 @@
+{
+  "name": "Tillkalla demon",
+  "type": "besvarjelse",
+  "_id": "tpbU3DUdtjlC15Sn",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 3,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "S/4 km",
+    "description": "<p>Med denna besvärjelse kallar demonologen till sig alla demoner och demonandar inom räckvidden för besvärjelsen. Alla demoner hör kallelsen, men de får själva välja om de vill hörsamma den och bege sig till kallelseplatsen. I kallelsen kan demonologen uttrycka en enkel känsla, såsom 'ondska', 'brännas', 'döda' eller 'lyda'. Vissa demonandar använder sig av denna besvärjelse för att dra till sig fler demoner och på detta vis samlas de fruktade demonhärarna. TILLKALLA DEMON kan ej användas för att tillkalla demoner från andra plan, utan endast demoner som finns på samma plan som man själv befinner sig.</p>",
+    "ritual": false,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "44"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!tpbU3DUdtjlC15Sn"
+}

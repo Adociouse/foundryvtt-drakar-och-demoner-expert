@@ -1,0 +1,38 @@
+{
+  "name": "Hemkalla resenär",
+  "type": "besvarjelse",
+  "_id": "L8iA8haWvFCEj2hG",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/portalmagi.png",
+  "system": {
+    "school": "portalmagi",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Spec.",
+    "description": "<p>Magikern öppnar en kortvarig portal och sliter genom den en varelse som befinner sig i de Grå hallarna. För att hemkalla en person som befinner sig i någon annan dimension än hans hemvärld, vanligtvis E5-E10, krävs högre effektgrader. Denna besvärjelse kan bara användas för att kalla en person tillbaka till hans hemvärld. Magikern måste känna personens namn och namnet på den värld där han vistas, om detta inte är de Grå hallarna.</p>",
+    "ritual": true,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "50"
+    }
+  },
+  "effects": [],
+  "folder": "RymlAj587ITzWsZD",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!L8iA8haWvFCEj2hG"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Forma demon",
+  "type": "besvarjelse",
+  "_id": "IcNfy7JIqSgwl2BO",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 15,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Sx1 rutor",
+    "description": "<p>Varierar, se nedan. Besvärjelsen kan användas på en demon som förmodas ha anlänt till världen genom en NEDKALLA DEMON, eller på annat sätt. Genom att kasta FORMA DEMON på demonen övervinner demonologen varelsens fysiska form och formar den efter eget önskemål. För att lyckas med detta måste man övervinna demonens PSY med sin egen på Motståndstabellen. Vidare besvärjelsen och dess omfattande ritual och rekvisita måste anknyta till den färdiga produkten (alvhår, människolövs och stjärnstoff kan vara rekvisita som demonen skapenden av en alv; dvärghamrad mithril, en bit järnalm, en edelsten och lite glödande lava kan ge demonskepnaden av ett svärd, eller en dvärg, eller en yxa — demonologen måste improvisera för att få fram en så specifik bild som möjligt, och kan givetvis ge instruktioner själv). Under ritualen genomgår demonen en konstant och smärtsam förvandling, och det är därför viktigt att den befinner sig innanför ett fängelsepentagram (FÄNGSLA DEMON) eller under personlig kontroll (KONTROLLERA DEMON) om detta inte är fallet måste demonologen lyckas med ett svårt PSY-slag varje timme ritualen pågår. Ett misslyckande innebär att demonanden försöker fly, och att man måste försöka KONTROLLERA eller FÄNGSLA den. Om detta händer avbryts ritualen. Forma demon i sin nya form. Vid E1 får demonanden i sin nya form ursprungliga PSY samt, INT samt femtedel av de andra grundegenskaperna. Dessutom behåller demonen eventuella magiska och demoniska förmågor. Om magikern vill öka demonens andra grundegenskaper med en femtedel, upp till demonens maximala naturliga grundegenskapsvärde eller de begränsningar den nya formen har. Varje extra effektgrad ökar en grundegenskap med en femtedel, permanent. Demonen behåller sina färdigheter, men med sänkt FV, beroende på hur mycket av de aktuella grundegenskaperna demonen får behålla i den nya skepnaden (en demon med Tvåhandssvärd FV 20 och STY 30 får sin nya form 15 i STY — han får då 10 i FV på Tvåhandssvärd).</p>",
+    "ritual": true,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "47"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!IcNfy7JIqSgwl2BO"
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Skapa kommunikationsportal",
+  "type": "besvarjelse",
+  "_id": "qibfeSVOfai6zRKX",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/portalmagi.png",
+  "system": {
+    "school": "portalmagi",
+    "sValue": 13,
+    "kvick": false,
+    "duration": "Spec.",
+    "range": "Spec.",
+    "description": "<p>Magikern skapar med besvärjelsen en Kommunikationsportal mellan hans värld och en annan. Magikern kan se, höra och tala genom Kommunikationsportalen, men han kan inte färdas eller lägga besvärjelser genom den. Kommunikationsportalen kan antingen riktas mot en speciell varelse, vilket är något svårare, mot en särskild plats. I det första fallet måste magikern känna till varelsens vanliga namn och i vilken dimension han befinner sig. Efter ritualen sätter sig magikern i trans och får telepatisk kontakt med varelsen. Med en E1 kan magikern bara överföra sina egna tankar och motta tankar som varelsen önskar sända. Med en E2 kan magikern dessutom höra allt som varelsen hör, dvs även sådant den berör. Med en E3 kan magikern dessutom se allt varelsen kan se. Varelsen kan, genom att övervinna magikerns PSY med sin egen på Motståndstabellen, hindra magikern från att dela hans syn och hörsel. På samma sätt som magikern kan erfara vad varelsen upplever, kan varelsen höra och se allt magikern hör och ser, vilket vanligtvis inte är särskilt mycket eftersom magikern befinner sig i trans. Varelsen kan också överföra tankar till magikern. Detta kan vara farligt, särskilt om man handskas med demoner. Demonen kan nämligen påverka magikerns undermedvetna med hjälp av sina demoniska krafter och förmågor. Om demonen lyckas med detta kan han sedan tvinga magikern att NEDKALLA honom eller utföra demoniska dåd i hans namn. Med en E4 är Kommunikationsportalen inte bunden till en varelse, utan uppenbarar sig istället som en svagt skimrande bild av magikern eller hans ansikte på den plats han valt att öppna Kommunikationsportalen. Med en E4 kan magikern se, höra och tala som om han själv befann sig på platsen han valt, vilket vanligtvis inte är särskilt mycket eftersom han inte kan dela sin syn och hörsel. Han kan dock inte känna vad man handskas med demoner. När man lägger SKAPA KOMMUNIKATIONSPORTAL genomför man en ritual som innefattar upptecknandet av en cirkel på marken. Under kontakten befinner sig magikern inuti denna cirkel, försatt i trans. Varaktigheten är Konc, dvs så länge cirkeln förstörs, men Kommunikationsportalen kan användas flera gånger. Portalen finns kvar så länge cirkeln finns, men den fungerar bara om magikern aktiverar den, dvs sätter sig inuti cirkeln och koncentrerar sig. Att på detta sätt försätta sig i trans tar 1T6 minuter. Varje gång magikern aktiverar en Kommunikationsportal drar den lika många PSY från magikerns PSY-poäng. En Kommunikationsportal utgör alltid kontakt mellan två i ritualen förutbestämda punkter eller varelser; man kan inte byta punkt eller varelse.</p>",
+    "ritual": true,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "49"
+    }
+  },
+  "effects": [],
+  "folder": "RymlAj587ITzWsZD",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!qibfeSVOfai6zRKX"
+}

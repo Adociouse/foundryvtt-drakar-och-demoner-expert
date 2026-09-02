@@ -8,12 +8,12 @@
     "sValue": 11,
     "kvick": false,
     "duration": "Omedelbar",
-    "range": "Special",
-    "description": "<p>Besvärjelsen gör det möjligt för magikern att känna av en demons närvaro utan att i bokstavlig mening se den. Det är SL som avgör hur väl besvärjelsen lyckas. Om demonen befinner sig mer än en kilometer från magikern kan denne förnimma närvaron av den men inte bestämma var den befinner sig. Om demonen är närmare kan magikern med absolut säkerhet peka ut riktning och avstånd. ⚠ På samma sätt kan besvärjelsen användas för att finna dimensionsportaler. En magiker med FV över 20 kan automatiskt känna energiurladdningarna då en demon inträder i världen.</p>",
+    "range": "S/4 km",
+    "description": "<p>Magikern får omedelbart reda på vilka demoner som befinner sig inom räckvidden. Han får även veta deras ungefärliga geografiska position, makt och materialisationsform. Han får även veta vilka demonandar som finns inom räckvidden. Demoner kan undgå VARSEBLI DEMON med hjälp av speciella besvärjelser och förmågor, till exempel HJÄRNBLANK och SINNESMASK.</p>",
     "ritual": false,
     "source": {
-      "book": "formelboken",
-      "page": "12"
+      "book": "kaosvaktare",
+      "page": "45"
     }
   },
   "effects": [],

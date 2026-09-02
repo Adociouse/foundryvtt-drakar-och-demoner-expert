@@ -1,0 +1,289 @@
+{
+  "name": "Misslyckandetabell för demonologi",
+  "_id": "UMUr4XFNaFlJIJ9B",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "description": "<p>Slås när en demonologisk ritual <strong>misslyckas</strong> (Kaos Väktare s.43: \"Detta bör demonologer, som alla andra magiker, helst undvika. Misslyckanden får svåra följder för både magikern och hans omgivning\").</p><p><strong>Slå 1T10.</strong></p><p>⚠ Skild från vanlig Fummel med en demonologisk besvärjelse — ett FUMLAT (inte bara misslyckat) kast frammanar dessutom en demon av högre rang än väntat plus 1T6 följeslagare av närmast underordnade rang, och kräver även ett separat slag på Snedtändningstabellen (samma pack).</p><p>⚠ Bara draget/visat här — den faktiska mekaniska effekten (demonstatistik, besättningsslag m.m.) är inte automatiserad, SL tillämpar texten manuellt.</p><p><em>Källa: Kaos Väktare (Target Games, 1993) s.43.</em></p>",
+  "results": [
+    {
+      "_id": "eFCEGEU60Z4AqBDA",
+      "type": "text",
+      "name": "Vild kraftabsorption",
+      "img": null,
+      "description": "Demonen suger åt sig de okontrollerade magiska krafterna. Detta ger demonen dubbla värden på alla grundegenskaper. Den försöker omedelbart bryta sig ur skyddscirkeln för att dräpa magikern.",
+      "weight": 1,
+      "range": [
+        1,
+        1
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.eFCEGEU60Z4AqBDA"
+    },
+    {
+      "_id": "y9NSy3rgVEhpoHZs",
+      "type": "text",
+      "name": "Oväntat följe",
+      "img": null,
+      "description": "Demonen åtföljs av 1T6 demoner av lägre rang. Demonetter åtföljs istället av 1T6 bröder.",
+      "weight": 1,
+      "range": [
+        2,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.y9NSy3rgVEhpoHZs"
+    },
+    {
+      "_id": "k9XpwgLYgSnUGTTv",
+      "type": "text",
+      "name": "Slipper undan",
+      "img": null,
+      "description": "Demonen slipper ur besvärjelsens makt och återvänder till Demonicum.",
+      "weight": 1,
+      "range": [
+        3,
+        3
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.k9XpwgLYgSnUGTTv"
+    },
+    {
+      "_id": "Ee4dwqtTZvmjqpnG",
+      "type": "text",
+      "name": "Magisk storm",
+      "img": null,
+      "description": "Demonologen misslyckas med att kanalisera de magiska krafterna så att en demon uppenbarar sig. Istället sveper en magisk storm genom rummet. Stormen ödelägger allt den kommer i kontakt med och stjäl 1T6 PSY från magikern innan den dör ut efter 1T10 SR.",
+      "weight": 1,
+      "range": [
+        4,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.Ee4dwqtTZvmjqpnG"
+    },
+    {
+      "_id": "a7je197738RlwO2d",
+      "type": "text",
+      "name": "Fel placering",
+      "img": null,
+      "description": "Demonen materialiserar sig utanför eventuella skyddscirklar.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.a7je197738RlwO2d"
+    },
+    {
+      "_id": "bXmbzRmIATpXRc8b",
+      "type": "text",
+      "name": "Besätter demonologen",
+      "img": null,
+      "description": "Demonen försöker Besätta demonologen.",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.bXmbzRmIATpXRc8b"
+    },
+    {
+      "_id": "OxRv0uodABCrX7By",
+      "type": "text",
+      "name": "Besätter någon annan",
+      "img": null,
+      "description": "Demonen försöker Besätta någon annan/något annat i närheten av demonologen.",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.OxRv0uodABCrX7By"
+    },
+    {
+      "_id": "Yw16bGluRSTk5WzO",
+      "type": "text",
+      "name": "Hemåt via kommunikationsportal",
+      "img": null,
+      "description": "Demonen återvänder hemåt, men använder sig först av Skapa kommunikationsportal för att kontakta demonologens undermedvetna och ta kontroll över honom.",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.Yw16bGluRSTk5WzO"
+    },
+    {
+      "_id": "XdnAZDKyzv4zaCt1",
+      "type": "text",
+      "name": "Fel demon",
+      "img": null,
+      "description": "Fel demon dyker upp. SL skapar en unik demon, eller använder en som är beskriven i Kaos Väktare.",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.XdnAZDKyzv4zaCt1"
+    },
+    {
+      "_id": "MSfksznx8ewU0cwI",
+      "type": "text",
+      "name": "Inget händer",
+      "img": null,
+      "description": "Ritualen misslyckas utan synbar effekt.",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788381462152,
+        "modifiedTime": 1788381462152,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!UMUr4XFNaFlJIJ9B.MSfksznx8ewU0cwI"
+    }
+  ],
+  "formula": "1d10",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381462152,
+    "modifiedTime": 1788381462152,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!UMUr4XFNaFlJIJ9B"
+}

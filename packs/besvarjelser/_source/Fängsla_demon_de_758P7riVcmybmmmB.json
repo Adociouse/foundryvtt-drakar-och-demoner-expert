@@ -5,15 +5,15 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
   "system": {
     "school": "demonologi",
-    "sValue": 14,
+    "sValue": 6,
     "kvick": false,
-    "duration": "Special",
-    "range": "Sx2 rutor",
-    "description": "<p>Magikern kan försöka fängsla en demon i ett föremål eller på en plats. Under varaktigheten kontrolleras sedan demonens speciella förmågor av demonologen. Om ett SIGILL placeras på föremålet eller platsen förlängs varaktigheten tills SIGILLet bryts. Om PERMANENS placeras på SIGILLet blir demonen för evigt bunden till föremålet eller platsen. ⚠ Om demonologen misslyckas med FÄNGSLA DEMON kvarhåller han ändock sin kontroll över demonen. Om han å andra sidan fumlar tappar han kontrollen — och vid det laget lär demonen vara rätt förbannad.</p>",
+    "duration": "S/4 dygn",
+    "range": "Beröring",
+    "description": "<p>Rekvisita: någon form av ritmaterial; bläck, målarfärg eller krita, går bra. Med FÄNGSLA DEMON förhindrar demonologen att en demon lämnar ett avgränsat område, vanligtvis en cirkel med ett rättvänt pentagram i. För att kunna lägga FÄNGSLA DEMON måste man först lyckas med ett slag för Pentagramritning. Om man lyckas med bägge slagen har man skapat ett fängelse åt en demon. En demonisk varelse som befinner sig inuti ett sådant fängelse måste övervinna fängelsets STY för att kunna ta sig ut. Fängelsets STY är 20 vid E1, och ökar med 5 för varje extra effektgrad (FÄNGSLA DEMON E6 har STY 45). Radien på cirkeln är 1-3 meter; demonologen väljer själv, men demonen måste få plats därinne, annars rämnar fängelsemuren och demonen kan komma ut. Om demonen försöker anfalla magi på någon eller någonting utanför pentagrammets cirkel, måste demonen övervinna fängelsets STY plus objektets PSY med sin egen på Motståndstabellen för att lyckas. Vissa demonologer har permanenta fängelsepentagram i sina salar och torn, där de NEDKALLAR sina demoner. Fängelsets varaktighet är S/4 dygn, men kan bli kortare om pentagrammet eller cirkeln bryts.</p>",
     "ritual": true,
     "source": {
-      "book": "formelboken",
-      "page": "13"
+      "book": "kaosvaktare",
+      "page": "44"
     }
   },
   "effects": [],

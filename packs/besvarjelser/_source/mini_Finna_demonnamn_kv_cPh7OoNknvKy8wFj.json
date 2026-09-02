@@ -1,0 +1,34 @@
+{
+  "name": "Finna demonnamn",
+  "type": "minibesvarjelse",
+  "_id": "cPh7OoNknvKy8wFj",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "psyCost": 1,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "44"
+    },
+    "description": "<p>Denna besvärjelse används ibland av demonologer som har svårt att hitta en demons vanliga namn. Besvärjelsen kan bara användas när demonologen befinner sig inom tio meter från demonen, och ger demonologen demonens tilltalsnamn. Demoners sanna namn går inte att finna med Minimagi.</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!cPh7OoNknvKy8wFj"
+}

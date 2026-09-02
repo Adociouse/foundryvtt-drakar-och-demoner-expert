@@ -39,7 +39,7 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 | Base attributes, derived values (HP, PSY, damage bonus, movement, carry capacity) | Done |
 | Skill-value-based skill rolls (critical-success/fumble confirmation) | Done |
 | Guided character wizard (19 steps, book-accurate BP/EP economy, point-buy attributes) | Done, see details below |
-| Compendiums: 13 races, 36 professions, 339 weapons/equipment, 453 spells, 241 monsters | Done (art coverage, weapon roster, bestiary coverage against the source books, and description text quality still have gaps — see below). The Formelboken catalogue-completion project is now FULLY DONE (all 13 schools + general spells) |
+| Compendiums: 13 races, 39 professions, 339 weapons/equipment, 475 spells (14 magic schools), 241 monsters | Done (art coverage, weapon roster, bestiary coverage against the source books, and description text quality still have gaps — see below). The Formelboken catalogue-completion project is FULLY DONE; Kaos Väktare's demonology supplement (3 professions, Portal Magic as a 14th school) added 2026-09-02 |
 | Weapon system: weapon groups, dual-wielding, weapon techniques/academies, unarmed combat styles | Done, with one deliberate simplification (see below) |
 | GM effects (actor/scene/world), status conditions, periodic effects (poison etc.) | Done, with its own GM effects window (`scripts/apps/gm-effects.mjs`) |
 | Training economy (post-creation skill purchases), earning XP in play | Done, own `ApplicationV2` view |
@@ -59,7 +59,7 @@ A guided, ApplicationV2-based character wizard (`scripts/apps/character-wizard.m
 6. **Sword hand** — right/left/ambidextrous/two-handed, with knock-on effects for the dual-wielding mechanic
 7. **Age** — Young/Adult/Middle-aged/Old, grants attribute modifiers and a starting-capital multiplier
 8. **Attributes** — **point-buy**, not dice rolls (the rulebook's attribute chapter turned out to be an explicit purchase table, not a rolling method — a previously corrected misreading of the source)
-9. **Profession** — 36 professions (11 base professions + 25 specializations from the Warrior's Handbook / Thieves and Assassins supplements)
+9. **Profession** — 39 professions (11 base professions + 28 specializations from the Warrior's Handbook / Thieves and Assassins / Kaos Väktare supplements)
 10. **Magic school** — spellcasting professions only
 11. **Special abilities** — number of slots set by tier, a sourced 49-row random table with a "Roll ability" button; race/profession abilities carry their own structured mechanical effects where the source material supports it
 12. **Social standing** — 2d6 + optional build-point spend (a 9-tier social-class system)
@@ -84,9 +84,9 @@ A finished character can keep training in play through a dedicated training view
 | Compendium | Contents |
 |---|---|
 | `raser` | 13 races: 7 base races (Human, Elf, Half-elf, Halfling, Dwarf, Half-orc, Duck) + 6 elf lineages |
-| `yrken` | 36 professions: 11 base professions (Bard, Healer, Warrior, Sage, Assassin, Mage, Monk, Knight, Seafarer, Thief, Frontier Scout) + 25 specializations, each profession carrying a structured skill list for automatic skill assignment and, where the source material provides it, mechanically wired profession abilities |
+| `yrken` | 39 professions: 11 base professions (Bard, Healer, Warrior, Sage, Assassin, Mage, Monk, Knight, Seafarer, Thief, Frontier Scout) + 28 specializations (Warrior's Handbook, Thieves and Assassins, Kaos Väktare — Demonologist/Demon Hunter/Demon Warrior), each profession carrying a structured skill list for automatic skill assignment and, where the source material provides it, mechanically wired profession abilities |
 | `vapen-utrustning` | 339 entries: 23 weapons, 45 armor pieces (per body part), 271 general equipment — purchasable in the wizard's equipment step |
-| `besvarjelser` | 453 spells (410 spells + 43 mini-spells, mini-spells grouped in their own "Minimagi" folder) — Formelboken catalogue completion is DONE, all 13 schools + general spells transcribed |
+| `besvarjelser` | 475 spells (431 spells + 44 mini-spells, mini-spells grouped in their own per-school "Minimagi" subfolder) — Formelboken catalogue completion is DONE (13 schools + general spells), plus Kaos Väktare's demonology supplement (Portal Magic as a 14th school, 7 spells + 14 new/3 replaced Demonology spells) |
 | `monster` | 241 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus all of Monsterboxen II — including combat statblocks for the peoples that also exist as playable races) |
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
@@ -104,7 +104,7 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 - **Playable races also exist as fightable NPCs.** The elf lineages, dwarf, duck, halfling, half-elf and half-orc each have both a `ras` entry in `raser` (character-creation building block) and a full combat statblock in `monster` — so a high-elf guard patrol or a dwarf warband can be fielded as opposition directly.
 - **Most spells lack their own icon** — the vast majority show their magic school's symbol instead of unique art.
 - **The spell catalogue's Formelboken catalogue completion is DONE.** All 13 playable magic schools + general spells are fully transcribed (see `docs/DESIGN_DECISIONS.md` §2). ⚠ Demonologi's four uniquely named demons (Gollog, Syreb, Ballouq, Nimum) are deliberately NOT built as spells — the source gives them full monster stat blocks, and they belong in a future `monster`-pack extension instead (see backlog 87).
-- **~122 of 453 spells only have a compressed one-line summary** instead of the book's actual description text (left over from the first 2026-07-27 porting pass) — being upgraded school by school in the same pass as catalogue completion. General spells, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, and Demonologi are fully done; Animism, Elementarmagi, Harmonism, Häxkonster, and Illusionism remain (complete on the spell list, not on description quality).
+- **~122 of 475 spells only have a compressed one-line summary** instead of the book's actual description text (left over from the first 2026-07-27 porting pass) — being upgraded school by school in the same pass as catalogue completion. General spells, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Demonologi, and Portal Magic are fully done; Animism, Elementarmagi, Harmonism, Häxkonster, and Illusionism remain (complete on the spell list, not on description quality).
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
 - **The Svartfolk (Dark Folk) supplement hasn't been started.**
 - **Heroic abilities (HH p.20/46-48) can't be spent yet.** The heroic-deeds table (HH p.6-7) already rolls during character creation and correctly accumulates heroic points as a currency — but the separate 18-row table that currency is meant to be spent against, plus a UI for doing so, aren't built.

@@ -1,0 +1,38 @@
+{
+  "name": "Mental barriär",
+  "type": "besvarjelse",
+  "_id": "0sEYbsiPTptbXumo",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/portalmagi.png",
+  "system": {
+    "school": "portalmagi",
+    "sValue": 11,
+    "kvick": false,
+    "duration": "S/4 dygn",
+    "range": "Sx1 rutor",
+    "description": "<p>Med hjälp av denna besvärjelse kan man förhindra icke önskvärd demonisk aktivitet genom en Kommunikationsportal. Besvärjelsen fungerar som LÅSA PORTAL, men används enbart på Kommunikationsportaler. Magikern blir omedelbart varse alla försök att genom kommunikationsportalen påverka och besätta personer, och kan med hjälp av besvärjelsen också förhindra det. MENTAL BARRIÄR upptecknas tillsammans med Kommunikationsportalens cirkel.</p>",
+    "ritual": false,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "49"
+    }
+  },
+  "effects": [],
+  "folder": "RymlAj587ITzWsZD",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!0sEYbsiPTptbXumo"
+}

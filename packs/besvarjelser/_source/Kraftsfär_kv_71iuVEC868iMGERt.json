@@ -1,0 +1,38 @@
+{
+  "name": "Kraftsfär",
+  "type": "besvarjelse",
+  "_id": "71iuVEC868iMGERt",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 18,
+    "kvick": false,
+    "duration": "Sx1 timmar",
+    "range": "Beröring",
+    "description": "<p>Rekvisita: ritmaterial; blod, målarfärg, el dyl. En kristall (fokus), två idegransstavar. Denna mäktiga besvärjelse förstärker en skyddscirkel som man tidigare tecknat med hjälp av Pentagramritning. En KRAFTSFÄR producerar en mycket stor mängd magiska kraftlinjer, som löper genom alla varelser och krafter som befinner sig inuti. Effekten blir att de får enorma krafter när de riktar dem mot demoniska varelser och krafter. En kristall måste krossas i cirkeln, och kraften måste först ledas in i cirkelns mitt genom de två stavarna. Detta är ritualen. Varje individ som helt eller delvis befinner sig innanför cirkeln får följande krafter: Dubblad chans att motstå magi eller mentala demoniska förmågor som demoner använder mot personen. Personen uppfylls av mod, och får −15 på alla slag på Skräcktabellen. Man kan med detta binda dit fria demonandar med hjälp av demonandar (PSY, FV, m.m.). Denna cirkel kallas kraftsfär och finns beskriven bland besvärjelserna.</p>",
+    "ritual": true,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "48"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!71iuVEC868iMGERt"
+}

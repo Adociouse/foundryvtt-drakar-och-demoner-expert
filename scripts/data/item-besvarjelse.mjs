@@ -34,7 +34,14 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
           // saknades. De är flyttade hit.
           "allman",
           "alkemi", "animism", "demonologi", "elementarmagi", "harmonism", "haxkonster",
-          "illusionism", "mentalism", "nekromanti", "rostmagi", "spiritism", "stavmagi", "symbolism"
+          "illusionism", "mentalism", "nekromanti", "rostmagi", "spiritism", "stavmagi", "symbolism",
+          // ⚠ Denna lista är en HANDDUPLICERAD kopia av DODE.magicSchools (config.mjs)
+          // — required:true betyder att en besvärjelse med en skola som saknas här
+          // TYST FALLER UR game.packs helt (0 dokument, inget konsolfel). Hände
+          // 2026-09-02 när Portalmagi (Kaos Väktare, avsteg-skola #14) lades till i
+          // config.mjs men glömdes här. Håll de två listorna i synk för hand tills
+          // fältet görs dynamiskt (choices: () => Object.keys(DODE.magicSchools)).
+          "portalmagi"
         ]
       }),
       // EP-pott intjänad i spel — REG s.45-46. ⚠ EP från äventyr är BUNDET till

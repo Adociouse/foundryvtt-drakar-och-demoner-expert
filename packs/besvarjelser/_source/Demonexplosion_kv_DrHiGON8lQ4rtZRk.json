@@ -1,0 +1,38 @@
+{
+  "name": "Demonexplosion",
+  "type": "besvarjelse",
+  "_id": "DrHiGON8lQ4rtZRk",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "system": {
+    "school": "demonologi",
+    "sValue": 7,
+    "kvick": false,
+    "duration": "Omedelbar",
+    "range": "Sx10 rutor",
+    "description": "<p>En DEMONEXPLOSION framkallar ett klot av vilda demoniska krafter, som exploderar med stor kraft. DEMONEXPLOSIONEN ger 1T6 i skada per effektgrad på alla som står inom E meter från explosionens centrum. För dem som står längre bort minskar skadan med ett för varje ruta.</p>",
+    "ritual": false,
+    "source": {
+      "book": "kaosvaktare",
+      "page": "45"
+    }
+  },
+  "effects": [],
+  "folder": "AYawN5H3twh4yZLp",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381377566,
+    "modifiedTime": 1788381377566,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DrHiGON8lQ4rtZRk"
+}

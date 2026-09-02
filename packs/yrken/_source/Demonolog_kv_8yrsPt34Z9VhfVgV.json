@@ -1,0 +1,171 @@
+{
+  "name": "Demonolog",
+  "type": "yrke",
+  "system": {
+    "requirements": "Magiker (INT 16, PSY 16)",
+    "skillList": "<p>Läsa/skriva ett valfritt främmande språk, Alkemi, Demonologi, Drogkunskap, Geografi, Historia, Hypnotisera, Kunskap om magi, Kunskap om demoner, Kunskap om Multiversum, Magisk kanalisering, Pentagramritning, Portalmagi, Räkning, Schack &amp; brädspel, Språkkunskap, Trästav, Zoologi, Örtkunskap.</p>",
+    "description": "<p>Bland världens alla magiker finns en liten skara som på heltid sysselsätter sig med demoner och demonkunskap. Dessa kallas demonologer. Demonologin är en mycket säregen gren av magin, och kräver mycket uppmärksamhet och koncentration för att en magiker ska kunna använda sig av ens dess enklaste besvärjelser. För att kunna hantera den på ett säkert och korrekt sätt måste man vara mycket skicklig på ett flertal av skolans grundläggande besvärjelser. Demonologer är ofta enstöringar som utvecklar obestämbar skräck och misstro mot allt främmande, något som har med deras insikter om demonologin att göra.</p><p>Demonologen tränas alltid upp av en annan demonolog, som utser honom till sin lärjunge som sedan får mycket lång träning, där han får följa sin mästare på allehanda uppdrag för att bekämpa eller nedkalla demoner. Denna läroperiod är vanligtvis 20–30 år.</p><p>Demonologer har små möjligheter att lära sig någon annan form av magi, utan inriktar sig fullt och fast på Demonologin och den närbeslägtade magiskolan Portalmagi.</p><p><em>Alla demonologer får lära sig besvärjelserna Skyddssfär, Kontrollera demon och Fängsla demon till ett Skicklighetsvärde som överstiger 14 — dessa är demonologins grundläggande besvärjelser, som alla demonologer, oavsett livsfilosofi och inställning, måste besitta höga Skicklighetsvärden i.</em></p>",
+    "imgMan": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonolog-man.png",
+    "imgKvinna": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonolog-kvinna.png",
+    "professionSkills": [
+      {
+        "name": "Läsa/skriva 1 språk",
+        "attribute": "int",
+        "choiceCount": 1,
+        "choicePool": "läsa/skriva främmande språk"
+      },
+      {
+        "name": "Alkemi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Demonologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Drogkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Geografi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Historia",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Hypnotisera",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om magi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om demoner",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Kunskap om Multiversum",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Magisk kanalisering",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Pentagramritning",
+        "attribute": "psy",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Portalmagi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Räkning",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Schack & brädspel",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Språkkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Trästav",
+        "attribute": "smi",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Zoologi",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      },
+      {
+        "name": "Örtkunskap",
+        "attribute": "int",
+        "choiceCount": 0,
+        "choicePool": ""
+      }
+    ],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "32-33, 41-43"
+    },
+    "magic": {
+      "access": "limited",
+      "schools": [
+        "demonologi",
+        "portalmagi"
+      ],
+      "maxSchoolValue": 0,
+      "allowGeneralSpells": true,
+      "canLearnAtCreation": true,
+      "epShareMax": 0
+    },
+    "professionAbilities": [
+      {
+        "name": "Demonologens instinkt",
+        "description": "<p>En demonolog kan känna demonisk närvaro instinktivt. Räckvidden är demonologens PSY meter, och CL är lika stor som hans PSY är för tillfället. Motsvarar ett lyckat slag för Känna magi, specifikt för demoner, demoniska aktiviteter och föremål.</p>",
+        "effect": null
+      }
+    ],
+    "baseProfession": "magiker"
+  },
+  "_id": "8yrsPt34Z9VhfVgV",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/yrken/demonolog.png",
+  "effects": [],
+  "folder": "EU1eQvGXuMVmCsU5",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788381151241,
+    "modifiedTime": 1788381151241,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8yrsPt34Z9VhfVgV"
+}
