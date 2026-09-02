@@ -90,8 +90,8 @@ A finished character can keep training in play through a dedicated training view
 | `monster` | 241 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus all of Monsterboxen II — including combat statblocks for the peoples that also exist as playable races) |
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
-| `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks |
-| `journaler` | 14 auto-generated school reference pages (13 magic schools + Allmänna besvärjelser/General spells), one per school, with a spell/minor-spell table compiled from the `besvarjelser` compendium. The school description text is still just a placeholder — to be filled in from the Formelboken later |
+| `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks. `regler` also holds a Races and a Professions overview page (all races/professions in table form) |
+| `journaler` (shown as "Magiskolreferenser") | 14 auto-generated school reference pages (13 magic schools + General spells), one per school, with a spell/minor-spell table compiled from the `besvarjelser` compendium, plus real description text for 12 of 14 (Universalism/Alkemi/General spells still lack source text) |
 | `scener` | Ready-made scenes, including the character wizard's own backdrop scene |
 
 Compendium content is edited as JSON under `packs/<name>/_source/`, then compiled to the LevelDB format Foundry actually reads — see "Building compendiums" below.

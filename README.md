@@ -88,8 +88,8 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 | `monster` | 241 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
-| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna |
-| `journaler` | 14 auto-genererade skolreferenssidor (13 magiskolor + Allmänna besvärjelser), en per skola, med en besvärjelse-/minimagitabell sammanställd ur `besvarjelser`-kompendiet. Skolbeskrivningstexten är ännu bara en platshållare — fylls i från Formelboken senare |
+| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna. `regler` innehåller även en Raser- och en Yrken-översiktssida (samtliga raser/yrken i tabellform) |
+| `journaler` (visas som "Magiskolreferenser") | 14 auto-genererade skolreferenssidor (13 magiskolor + Allmänna besvärjelser), en per skola, med en besvärjelse-/minimagitabell sammanställd ur `besvarjelser`-kompendiet, plus riktig skolbeskrivningstext för 12 av 14 (Universalism/Alkemi/Allmänna besvärjelser saknar ännu källtext) |
 | `scener` | Färdiga scener, bl.a. rollpersonsskaparens egen bakgrundsscen |
 
 Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompileras till det LevelDB-format Foundry faktiskt läser — se "Kompendiebyggnad" nedan.
