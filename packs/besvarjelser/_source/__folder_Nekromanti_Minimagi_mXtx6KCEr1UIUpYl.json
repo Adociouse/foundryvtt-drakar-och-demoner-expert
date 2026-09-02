@@ -1,8 +1,8 @@
 {
   "name": "Minimagi",
   "type": "Item",
-  "_id": "MJPHi5YSpE3GBBDE",
-  "folder": null,
+  "_id": "mXtx6KCEr1UIUpYl",
+  "folder": "kOmGN3hJL3XgcSMV",
   "sorting": "a",
   "sort": 0,
   "color": "#6b5a3a",
@@ -11,9 +11,9 @@
     "systemId": "drakar-och-demoner-expert",
     "systemVersion": "0.1.0",
     "coreVersion": "14.365",
-    "createdTime": 1787844944165,
-    "modifiedTime": 1787844944165,
+    "createdTime": 1788372685104,
+    "modifiedTime": 1788372685104,
     "lastModifiedBy": "WZKk8GW5BTYns1K8"
   },
-  "_key": "!folders!MJPHi5YSpE3GBBDE"
+  "_key": "!folders!mXtx6KCEr1UIUpYl"
 }
