@@ -16,6 +16,9 @@ packs/*/LOCK
 packs/*/LOG
 packs/*/LOG.old
 
+# === Multi-session coordination (scripts/build/foundry-lock.mjs) ===
+/.foundry-restart.lock
+
 # === AI agent working files ===
 # CLAUDE.md, ACTIVE_TASK.md, memory.md, PLAN_*.md live at the repo root.
 # They're essential for the AI agent but not part of the published system.
