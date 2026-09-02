@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Real school descriptions on 12 of the 14 `journaler` compendium JournalEntry pages, sourced from Magi — Regelbok, replacing the placeholder text left by the initial auto-generated build. Universalism (no source file found), Alkemi and Allmänna besvärjelser remain on the backlog
 - **"Choose 12 of N" profession-skill step** (RP s.11) — a new wizard step where the player picks 12 of the profession's possible skills, 9 for a magiker. Named skills are toggleable chips; the books' optional slots ("Maximalt fem valfria vapenfärdigheter") render as free-text fields with weapon-name suggestions. Previously every listed skill was granted, so a bard received 24 profession skills instead of 12
 - Profession skills for all 25 specialisations from Krigarens Handbok and Tjuvar och Lönnmördare — no profession ships with an empty list any more
 
