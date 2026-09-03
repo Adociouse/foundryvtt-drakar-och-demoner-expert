@@ -74,11 +74,17 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       kvick: new fields.BooleanField({ required: false, initial: false }),
       // Temporär ActiveEffect som besvärjelsen lägger på målet vid kastning.
       // `spellDuration` är i STRIDSRUNDOR (Foundrys duration.rounds). `spellEffect`
-      // är en lista av AE-change-definitioner — riktas alltid mot `.bonus`-fält
-      // (aldrig `.value`), mode 2 = ADD (CONST.ACTIVE_EFFECT_MODES.ADD). Kastlogiken
-      // (DoDEActor#applySpellEffect) skapar en embeddad ActiveEffect på aktören med
-      // flags.<system.id>.source:"spell". Se actor.mjs. Själva "vid träff"-kedjan är stub —
-      // metoden finns och kan anropas, men wire:as inte in i castSpell automatiskt än.
+      // är en lista av AE-change-definitioner — normalt mot `.bonus`-fält, mode 2 =
+      // ADD (CONST.ACTIVE_EFFECT_MODES.ADD), men varken fält eller mode är låst av
+      // schemat. Kastlogiken (DoDEActor#applySpellEffect) skapar en embeddad
+      // ActiveEffect på målet med flags.<system.id>.source:"spell". Se actor.mjs.
+      // ✅ Kopplad in i den RIKTIGA kastvägen sedan Fas 3 (spell-dialog.mjs →
+      // resolveSpellCast/applySpellResult, spell.mjs) — karaktärsarkets "Kasta"-
+      // knapp har aldrig använt den äldre, mål-lösa castSpell() nedan. Rättat
+      // 2026-09-03 (backlog 90) — kommentaren här var föråldrad.
+      // `value` får innehålla en `@E`-formel (samma konvention som
+      // instantEffect.formula, t.ex. "@E*5") — löses upp EN gång vid
+      // kastningstillfället i applySpellEffect, inte vid varje AE-tillämpning.
       spellDuration: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
       spellEffect: new fields.ArrayField(
         new fields.SchemaField({

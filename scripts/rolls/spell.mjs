@@ -206,7 +206,7 @@ export async function applySpellResult(result, { caster, targets = [] }) {
         await created.setFlag(game.system.id, "sourceName", result.item.name);
       }
     }
-    if (pt.spellEffect) await caster.applySpellEffect(result.item, target);
+    if (pt.spellEffect) await caster.applySpellEffect(result.item, target, result.E);
   }
 }
 

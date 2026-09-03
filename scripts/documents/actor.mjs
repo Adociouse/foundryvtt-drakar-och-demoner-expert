@@ -122,26 +122,41 @@ export default class DoDEActor extends Actor {
   /**
    * Lägger en besvärjelses temporära ActiveEffect på ett mål. Skapar en embeddad
    * ActiveEffect med duration.rounds = besvärjelsens spellDuration och flaggorna
-   * flags.<system.id>.source:"spell" + flags.<system.id>.spellName. Changes riktas alltid mot
-   * `.bonus`-fält via mode ADD — schemat (item-besvarjelse.mjs `spellEffect`)
-   * garanterar detta.
+   * flags.<system.id>.source:"spell" + flags.<system.id>.spellName. Changes riktas
+   * normalt mot `.bonus`-fält (samma mönster som ras-/ålders-AE:erna redan
+   * använder, se actor-character.mjs#prepareDerivedData) via mode ADD, men
+   * fältet/moden är fritt — schemat tvingar inget.
    *
-   * STUB: Detta är kopplingspunkten mot en framtida "vid träff"-kedja. Metoden är
-   * fullt körbar (kan anropas manuellt eller från en makro), men wire:as medvetet
-   * INTE in i castSpell() automatiskt än — måltilldelning/träfflogik är fas 6+.
+   * ⚠ **Är nu KOPPLAD in i den riktiga kast-vägen** (spell-dialog.mjs →
+   * resolveSpellCast/applySpellResult, se spell.mjs) — karaktärsarkets "Kasta"-
+   * knapp har använt den vägen sedan Fas 3 (2026-08-21), INTE den enkla
+   * `castSpell()` nedan. Den gamla kommentaren här ("wire:as inte in i
+   * castSpell() automatiskt") var föråldrad och gällde bara den ANDRA,
+   * numera sekundära kastvägen — rättad 2026-09-03 (backlog 90).
+   *
+   * ⚠ **`effektgrad`-tillägg, 2026-09-03 (backlog 90):** metoden tog tidigare
+   * INGEN effektgrad alls — ett `spellEffect`-värde kunde bara vara ett statiskt
+   * tal, aldrig en formel som skalar med kastet (t.ex. Kraftrops "+Ex5 STY").
+   * Foundrys ActiveEffect-changes stöder ingen `@E`-substitution vid
+   * TILLÄMPNINGSTILLFÄLLET (till skillnad från vår egen Roll-baserade
+   * instantEffect-hantering) — lösningen är samma som där: lösa upp formeln
+   * EN gång, HÄR, vid kastningstillfället, och spara det FÄRDIGA talet i
+   * AE:n. Samma `@E`/`@{E}`-konvention som instantEffect.formula redan
+   * använder (se item-besvarjelse.mjs).
    *
    * @param {Item} item En "besvarjelse"-item med spellEffect/spellDuration.
    * @param {Actor} [target=this] Aktören effekten läggs på (default: kastaren själv).
+   * @param {number} [effektgrad=1] Kastets effektgrad — löser upp `@E`-formler i spellEffect.value.
    */
-  async applySpellEffect(item, target = this) {
+  async applySpellEffect(item, target = this, effektgrad = 1) {
     if (!item || item.type !== "besvarjelse") return;
-    const changes = (item.system.spellEffect ?? [])
-      .filter((c) => c.key && c.value !== "")
-      .map((c) => ({
-        key: c.key,
-        mode: c.mode ?? CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: String(c.value)
-      }));
+    const E = Math.max(1, Math.floor(effektgrad) || 1);
+    const changes = [];
+    for (const c of item.system.spellEffect ?? []) {
+      if (!c.key || c.value === "") continue;
+      const roll = await new Roll(c.value, { E }).evaluate();
+      changes.push({ key: c.key, mode: c.mode ?? CONST.ACTIVE_EFFECT_MODES.ADD, value: String(roll.total) });
+    }
     if (!changes.length) return;
 
     const rounds = item.system.spellDuration ?? 0;

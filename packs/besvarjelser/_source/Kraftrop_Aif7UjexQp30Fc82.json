@@ -15,7 +15,15 @@
       "book": "formelboken",
       "page": "53"
     },
-    "battleRelevant": true
+    "battleRelevant": true,
+    "spellEffect": [
+      {
+        "key": "system.attributes.sty.bonus",
+        "mode": 2,
+        "value": "@E*5"
+      }
+    ],
+    "spellDuration": 2
   },
   "effects": [],
   "folder": "jjtnfKTBdaPM42Nl",
