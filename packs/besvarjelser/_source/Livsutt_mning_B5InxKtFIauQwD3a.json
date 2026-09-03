@@ -12,7 +12,15 @@
     "source": {
       "book": "magi",
       "page": "22-25"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@E*2",
+      "resource": "psy"
+    },
+    "damageType": "mental",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "_id": "B5InxKtFIauQwD3a",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

@@ -12,7 +12,8 @@
     "source": {
       "book": "magi",
       "page": "22-25"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "KdpGEF5OS5s1QqgV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",

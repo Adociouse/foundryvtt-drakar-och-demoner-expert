@@ -12,7 +12,10 @@
     "source": {
       "book": "magi",
       "page": "22-25"
-    }
+    },
+    "statusEffect": "paralysis",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "_id": "v2Ezp55sdq3TvsuV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/nekromanti.png",
