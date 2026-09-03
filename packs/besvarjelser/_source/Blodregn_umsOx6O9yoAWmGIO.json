@@ -12,7 +12,13 @@
     "source": {
       "book": "formelboken",
       "page": "59-61"
-    }
+    },
+    "resistedBy": "attribute-save",
+    "saveAttribute": "psy",
+    "saveDifficulty": "svart",
+    "triggersFearTable": true,
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "_id": "umsOx6O9yoAWmGIO",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

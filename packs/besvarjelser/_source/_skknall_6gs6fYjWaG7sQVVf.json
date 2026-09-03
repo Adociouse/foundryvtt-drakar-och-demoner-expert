@@ -12,7 +12,14 @@
     "source": {
       "book": "formelboken",
       "page": "59-61"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "2d6"
+    },
+    "damageType": "physical",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "_id": "6gs6fYjWaG7sQVVf",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

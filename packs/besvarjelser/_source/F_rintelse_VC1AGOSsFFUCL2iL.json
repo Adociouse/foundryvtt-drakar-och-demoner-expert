@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "59-61"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "VC1AGOSsFFUCL2iL",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

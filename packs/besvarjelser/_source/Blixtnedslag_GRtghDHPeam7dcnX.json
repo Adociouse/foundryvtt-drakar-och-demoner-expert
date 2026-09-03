@@ -12,7 +12,14 @@
     "source": {
       "book": "formelboken",
       "page": "59-61"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@{E}d6"
+    },
+    "damageType": "lightning",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "_id": "GRtghDHPeam7dcnX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",

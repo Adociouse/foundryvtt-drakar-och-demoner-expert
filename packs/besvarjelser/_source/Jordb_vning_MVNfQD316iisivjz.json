@@ -12,7 +12,17 @@
     "source": {
       "book": "formelboken",
       "page": "59-61"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "1d4+@E"
+    },
+    "damageType": "physical",
+    "resistedBy": "attribute-save",
+    "saveAttribute": "smi",
+    "saveDifficulty": "normalt",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "_id": "MVNfQD316iisivjz",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/stavmagi.png",
