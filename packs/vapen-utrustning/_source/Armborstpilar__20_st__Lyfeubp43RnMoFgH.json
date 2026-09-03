@@ -1,0 +1,40 @@
+{
+  "name": "Armborstpilar (20 st)",
+  "type": "utrustning",
+  "system": {
+    "category": "ammunition",
+    "quantity": 1,
+    "weight": 1.5,
+    "price": 30,
+    "priceUnit": "sm",
+    "priceNote": "",
+    "equipped": false,
+    "material": "mundane",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    },
+    "description": "<p>20 armborstpilar (bultar) av vanligt trä och järn, avsett för Lätt/Tungt armborst. ⚠ Priset är en uppskattning — ingen bokciterad ammunitionsprislista finns.</p>"
+  },
+  "_id": "Lyfeubp43RnMoFgH",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armborstpilar.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788455279355,
+    "modifiedTime": 1788455279355,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!Lyfeubp43RnMoFgH"
+}

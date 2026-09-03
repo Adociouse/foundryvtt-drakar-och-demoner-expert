@@ -136,6 +136,9 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     } else {
       this.weaponKey = weapon?.id ?? actor.items.find((i) => i.type === "vapen")?.id ?? null;
     }
+    // Ammunition (backlog 104-uppföljning) — satt lazy i _prepareContext (defaultar
+    // till första ägda ammunitionsposten) första gången ett projektilvapen väljs.
+    this.ammoKey = null;
   }
 
   get title() {
@@ -215,6 +218,19 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const category = selectedItem?.system?.category ?? "narstrid";
     const ranged = category === "projektil";
     const isThrown = category === "kast";
+
+    // Ammunition (backlog 104-uppföljning, 2026-09-03) — bara byggd upp när
+    // vapnet faktiskt är ett projektilvapen. `ammoKey` väljer bland ägda
+    // `utrustning`-item med `category:"ammunition"` (se item-utrustning.mjs);
+    // ingen kompatibilitetskontroll mot vapentyp (pil/bult/slungsten) — SL/
+    // spelare avgör vid bordet, samma "fri bedömning" som `mods` redan är.
+    const ammoOptions = ranged
+      ? this.actor.items.filter((i) => i.type === "utrustning" && i.system.category === "ammunition")
+        .map((i) => ({ id: i.id, label: `${i.name} (${i.system.quantity})`, material: i.system.material }))
+      : [];
+    if (ranged && (!this.ammoKey || !ammoOptions.some((a) => a.id === this.ammoKey))) {
+      this.ammoKey = ammoOptions[0]?.id ?? null;
+    }
 
     const targets = this.#targetTokens();
     const multiTarget = targets.length > 1;
@@ -303,10 +319,18 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       // submission, se modulkommentaren om varför.
       targets: targets.map((t) => ({
         name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img,
+        // ⚠ Ammunitionens material (om projektilvapen + en ammo vald) ÖVERORDNAR
+        // vapnets eget — samma princip som resolveAttack()s `ammoMaterial`, se
+        // ammoOptions ovan. Annars hade varningen felaktigt sagt "kräver silver"
+        // trots att spelaren redan skjuter silverpilar.
         targetWarning: t.actor?.type === "npc" && t.actor.system.creatureType
-          ? CONFIG.DODE.creatureWeaponWarning(t.actor.system.creatureType, selectedItem?.system?.material ?? "mundane")
+          ? CONFIG.DODE.creatureWeaponWarning(
+            t.actor.system.creatureType,
+            (ranged ? ammoOptions.find((a) => a.id === this.ammoKey)?.material : null) ?? selectedItem?.system?.material ?? "mundane"
+          )
           : null
       })),
+      ranged, ammoOptions, ammoKey: this.ammoKey,
       multiTarget, multiAutoParryNote, showAimed,
       aimedOptions, modEntries, canParry, parryOptions,
       parryBlockedReason: targetBlocking
@@ -334,6 +358,10 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     super._onRender?.(context, options);
     this.element.querySelector('select[name="weaponKey"]')?.addEventListener("change", (event) => {
       this.weaponKey = event.currentTarget.value;
+      this.render();
+    });
+    this.element.querySelector('select[name="ammoKey"]')?.addEventListener("change", (event) => {
+      this.ammoKey = event.currentTarget.value;
       this.render();
     });
     this.element.querySelector('input[name="targetParries"]')?.addEventListener("change", (event) => {
@@ -408,6 +436,15 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
 
     const category = weapon.system.category ?? "narstrid";
     const ranged = category === "projektil";
+
+    // ⚠ Ammunition (backlog 104-uppföljning, 2026-09-03) — "a bow is just a
+    // bow.. arrows is the ammo". Bara relevant för projektilvapen; läses
+    // FÄRSKT härifrån formuläret (samma "läs vid körning"-disciplin som
+    // attackUnprepared nedan), inte cachat från _prepareContext.
+    const ammoItem = ranged
+      ? this.actor.items.get(form.querySelector('select[name="ammoKey"]')?.value)
+      : null;
+    const ammoMaterial = ammoItem?.system?.material ?? null;
 
     const isThrown = category === "kast";
     const mods = {};
@@ -522,7 +559,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
         attacker: this.actor, weapon, skill, fv,
         target: targetToken.actor, parryItem, parrySkill, parryFv, parryBonus,
         aimedAt, intent, mods, ranged, detailed: true,
-        attackerToken, targetToken: targetToken.document
+        attackerToken, targetToken: targetToken.document, ammoMaterial
       });
 
       if (result.outOfRange) {

@@ -2499,8 +2499,21 @@ DODE.rollResistance = async function (sg, attributeValue) {
  */
 DODE.resolveResistance = function (actor, damageType, incomingE = 0, weaponMaterial = null) {
   const none = { reduction: 0, immune: false, blocked: false, halved: false, doubled: false };
+  const blocked = { ...none, immune: true, blocked: true };
   const entry = (actor?.system?.resistances ?? []).find((r) => r.damageType === damageType);
-  if (!entry) return none;
+  if (!entry) {
+    // ⚠ "sun"/"water" har OMVÄND defaultsemantik — tillagt 2026-09-03, Johan:
+    // "almost ALL creatures are resistant to sun and water.. with a very
+    // few exceptions." De representerar passiv miljöexponering (solljus,
+    // regn), inte ett riktat anfall — till skillnad från fire/cold/poison
+    // m.fl. (där en obesvarad post rimligen betyder "inget skydd, full
+    // skada", eftersom de MOTSVARAR en riktig attack) är "ingen post"
+    // för just dessa två varelsens NORMALA, oberörda tillstånd. En varelse
+    // som FAKTISKT ska ta skada (Illvätte av sol) behöver en UTTALAD
+    // `resistances[]`-post med `reduction` skild från "immun" — se Illvätte.
+    if (damageType === "sun" || damageType === "water") return blocked;
+    return none;
+  }
 
   // ⚠ "Övervunnen" är UNIVERSELL — gäller lika för immun/half/double/flat, inte
   // bara "immun" (Varulv är exakt fallet: `reduction:"half"` MED

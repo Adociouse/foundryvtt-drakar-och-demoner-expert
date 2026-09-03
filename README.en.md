@@ -39,7 +39,7 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 | Base attributes, derived values (HP, PSY, damage bonus, movement, carry capacity) | Done |
 | Skill-value-based skill rolls (critical-success/fumble confirmation) | Done |
 | Guided character wizard (19 steps, book-accurate BP/EP economy, point-buy attributes) | Done, see details below |
-| Compendiums: 13 races, 39 professions, 341 weapons/equipment, 475 spells (14 magic schools), 241 monsters | Done (art coverage, weapon roster, bestiary coverage against the source books, and description text quality still have gaps — see below). The Formelboken catalogue-completion project is FULLY DONE; Kaos Väktare's demonology supplement (3 professions, Portal Magic as a 14th school) added 2026-09-02 |
+| Compendiums: 13 races, 39 professions, 346 weapons/equipment, 475 spells (14 magic schools), 241 monsters | Done (art coverage, weapon roster, bestiary coverage against the source books, and description text quality still have gaps — see below). The Formelboken catalogue-completion project is FULLY DONE; Kaos Väktare's demonology supplement (3 professions, Portal Magic as a 14th school) added 2026-09-02 |
 | Weapon system: weapon groups, dual-wielding, weapon techniques/academies, unarmed combat styles | Done, with one deliberate simplification (see below) |
 | GM effects (actor/scene/world), status conditions, periodic effects (poison etc.) | Done, with its own GM effects window (`scripts/apps/gm-effects.mjs`) |
 | Training economy (post-creation skill purchases), earning XP in play | Done, own `ApplicationV2` view |
@@ -85,7 +85,7 @@ A finished character can keep training in play through a dedicated training view
 |---|---|
 | `raser` | 13 races: 7 base races (Human, Elf, Half-elf, Halfling, Dwarf, Half-orc, Duck) + 6 elf lineages |
 | `yrken` | 39 professions: 11 base professions (Bard, Healer, Warrior, Sage, Assassin, Mage, Monk, Knight, Seafarer, Thief, Frontier Scout) + 28 specializations (Warrior's Handbook, Thieves and Assassins, Kaos Väktare — Demonologist/Demon Hunter/Demon Warrior), each profession carrying a structured skill list for automatic skill assignment and, where the source material provides it, mechanically wired profession abilities |
-| `vapen-utrustning` | 341 entries: 25 weapons (incl. Silverdolk/Silverpilar, `material:"silver"`, 2026-09-03), 45 armor pieces (per body part), 271 general equipment — purchasable in the wizard's equipment step |
+| `vapen-utrustning` | 346 entries: 24 weapons (incl. Silverdolk, `material:"silver"`, 2026-09-03), 45 armor pieces (per body part), 277 general equipment (incl. 6 ammunition entries — Pilar/Silverpilar/Armborstpilar/Silverbultar/Slungstenar/Silverkulor, `category:"ammunition"`, whose `material` field drives the combat resistance check — "the bow is just a bow, the arrow is what's silver") — purchasable in the wizard's equipment step |
 | `besvarjelser` | 475 spells (431 spells + 44 mini-spells, mini-spells grouped in their own per-school "Minimagi" subfolder) — Formelboken catalogue completion is DONE (13 schools + general spells), plus Kaos Väktare's demonology supplement (Portal Magic as a 14th school, 7 spells + 14 new/3 replaced Demonology spells) |
 | `monster` | 241 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus all of Monsterboxen II — including combat statblocks for the peoples that also exist as playable races) |
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |

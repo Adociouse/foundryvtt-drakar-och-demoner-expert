@@ -1,0 +1,40 @@
+{
+  "name": "Silverpilar (20 st)",
+  "type": "utrustning",
+  "system": {
+    "category": "ammunition",
+    "quantity": 1,
+    "weight": 1,
+    "price": 140,
+    "priceUnit": "sm",
+    "priceNote": "",
+    "equipped": false,
+    "material": "silver",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    },
+    "description": "<p>En koger med 20 pilar med silverspetsar, avsett för Långbåge/Liten båge. Det enda som biter fullt på flera odöda och förbannade varelser (varulvar, vampyrer m.fl., se <code>resistances[]</code> på respektive varelse) — <strong>bågen är bara bågen, det är pilen som är av silver</strong> (backlog 104-uppföljning, 2026-09-03).</p><p>⚠ Priset är en uppskattning i linje med kompendiets redan existerande silver-vs-tenn-prisförhållande (~7×) — ingen bokciterad ammunitionsprislista finns.</p>"
+  },
+  "_id": "sg37kOiTLa7VOBy9",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/silverpilar.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788455279355,
+    "modifiedTime": 1788455279355,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!sg37kOiTLa7VOBy9"
+}

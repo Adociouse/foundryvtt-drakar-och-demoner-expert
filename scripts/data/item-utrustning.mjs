@@ -30,10 +30,26 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
         blank: true,
         choices: [
           "verktyg", "kladsel", "behallare", "koksutrustning", "lagerutrustning",
-          "tjuvverktyg", "instrument", "droger", "mat", "riddjur", "fordon", "vardesaker", "diverse"
+          "tjuvverktyg", "instrument", "droger", "mat", "riddjur", "fordon", "vardesaker",
+          "ammunition", "diverse"
         ]
       }),
       quantity: new fields.NumberField({ required: false, integer: true, initial: 1, min: 0 }),
+      // Ammunitionsmaterial — tillagt 2026-09-03 (backlog 104-uppföljning,
+      // Johan: "must be able to buy a quiver of wodden arrows OR silver
+      // arrows.. a bow is just a bow.. arrows is the ammo"). Bara relevant
+      // för `category:"ammunition"`. Systemet spårar inte pilräkning/
+      // förbrukning (samma abstraktion som redan gäller för mundana pilar —
+      // ingen SEPARAT ammo-items fanns alls innan detta), men VILKET
+      // material ammunitionen är av avgör resistanskontrollen i strid: se
+      // `resolveAttack()`s `ammoMaterial`-parameter (attack-dialog.mjs
+      // läser detta fältet och skickar det som ÖVERORDNAR vapnets EGET
+      // `material` — "vapnet är bara vapnet, det är ammunitionen som är av
+      // silver").
+      material: new fields.StringField({
+        required: false, initial: "mundane",
+        choices: ["mundane", "silver", "magical"]
+      }),
       // Vikt i BEP (belastningspoäng), samma enhet som vapen/rustning använder.
       // Källtabellerna anger bråkdelar som 1/4 och 1/2 — lagras som 0.25/0.5.
       weight: new fields.NumberField({ required: false, initial: 0, min: 0 }),

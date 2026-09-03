@@ -41,13 +41,22 @@ export const RANGED_MODS = {
  * Tillämpas ALLTID efter rustningsavdrag — Varulv-textens egen ordning
  * ("...efter att vapnet trängt igenom skinnet").
  *
+ * ⚠ `ammoMaterial` tillagd 2026-09-03 (backlog 104-uppföljning) — ÖVERORDNAR
+ * `weapon.system.material` när den är satt. Johans rättelse: "a bow is just
+ * a bow.. arrows is the ammo" — en Långbåge har inget eget `material` som
+ * spelar roll i strid, det är PILEN (ett separat `utrustning`-item,
+ * `category:"ammunition"`, se item-utrustning.mjs) som avgör om skottet
+ * räknas som silver/magiskt. Bara relevant för `category:"projektil"`-vapen
+ * (attack-dialog.mjs skickar `null` annars).
+ *
  * @param {Actor} target
  * @param {Item|null} weapon
  * @param {number} amount Skada EFTER rustningsavdrag.
+ * @param {string|null} [ammoMaterial=null]
  * @returns {{amount:number, resistance:object}}
  */
-function applyWeaponResistance(target, weapon, amount) {
-  const material = weapon?.system?.material ?? "mundane";
+function applyWeaponResistance(target, weapon, amount, ammoMaterial = null) {
+  const material = ammoMaterial ?? weapon?.system?.material ?? "mundane";
   const strikeType = weapon?.system?.strikeType || null;
   const hasSpecific = strikeType && (target?.system?.resistances ?? []).some((r) => r.damageType === strikeType);
   const damageType = hasSpecific ? strikeType : "weapon";
@@ -190,7 +199,13 @@ export async function resolveAttack({
   attacker, weapon, target, skill = null, fv: fvOverride = null, parryItem = null,
   parrySkill = null, parryFv = null, aimedAt = null,
   intent = "skada", mods = {}, ranged = false, defending = true, detailed = true,
-  parryBonus = 0, attackerToken = null, targetToken = null
+  parryBonus = 0, attackerToken = null, targetToken = null,
+  // ⚠ Backlog 104-uppföljning, 2026-09-03: "a bow is just a bow.. arrows is
+  // the ammo". Överordnar `weapon.system.material` i applyWeaponResistance
+  // — attack-dialog.mjs skickar den valda ammunitionens `material` (ett
+  // `utrustning`-item, `category:"ammunition"`) för `category:"projektil"`-
+  // vapen, annars `null` (då gäller vapnets eget `material` som förut).
+  ammoMaterial = null
 }) {
   // ⚠ Räckvidd mäts med Foundrys egen funktion, inte egen geometri — se
   // tokenDistance(). Kontrollen görs bara när båda tokens skickas med, så
@@ -347,7 +362,7 @@ export async function resolveAttack({
     // Håller skölden (BV > 0) är anfallet slut — ingen skada alls går igenom.
     if (broke && verdict.wearOn === "defender") {
       const abs = armourFor(target, out.location.location);
-      const { amount: applied, resistance } = applyWeaponResistance(target, weapon, Math.max(0, dmg.total - 1 - abs));
+      const { amount: applied, resistance } = applyWeaponResistance(target, weapon, Math.max(0, dmg.total - 1 - abs), ammoMaterial);
       const res = previewLocationDamage(target, out.location.location, applied, { intent, allowHypotheticalLocations: detailed });
       out.damage = {
         roll: dmg, formula: weapon?.system.damage, abs, applied, viaBrokenParry: true, minusOne: true,
@@ -414,7 +429,7 @@ export async function resolveAttack({
   // ⚠ Kreaturstyp-/vapenmaterialmotstånd (backlog 84) — ALLTID efter rustning,
   // ÄVEN vid Perfekt (ignoreArmour gäller bara rustning, inte köttets/
   // andeväsens egen motståndskraft mot vapenmaterial). Se applyWeaponResistance.
-  const { amount: resistedDamage, resistance } = applyWeaponResistance(target, weapon, damage);
+  const { amount: resistedDamage, resistance } = applyWeaponResistance(target, weapon, damage, ammoMaterial);
   damage = resistedDamage;
   out.damage = {
     roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage,

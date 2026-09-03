@@ -29,6 +29,20 @@
     <p class="hint">⚠ Inget matchande färdighets-item hittat för valt vapen — lägg till en färdighetsrad innan anfallet kan slås.</p>
   {{/if}}
 
+  {{#if ranged}}
+    {{#if ammoOptions.length}}
+      <label class="field">Ammunition
+        <select name="ammoKey">
+          {{#each ammoOptions}}
+            <option value="{{this.id}}" {{#if (eq this.id ../ammoKey)}}selected{{/if}}>{{this.label}}</option>
+          {{/each}}
+        </select>
+      </label>
+    {{else}}
+      <p class="hint">⚠ Ingen ammunition (pilar/bultar/stenar) i utrustningen — vapnets eget material används (normalt "mundane").</p>
+    {{/if}}
+  {{/if}}
+
   {{#if showAimed}}
     <label class="field">Riktat träffområde
       <select name="aimedAt">
