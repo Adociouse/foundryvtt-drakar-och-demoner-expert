@@ -3,6 +3,34 @@
 > Framtagen 2026-08-24 på Johans begäran: *"the selection of spells is working as it should in wizard. Then we need to analyze which spells could be used in combat or not and do a plan for how they will be mechanically implemented."*
 >
 > Underlaget är en fullständig genomläsning av samtliga 222 besvärjelser i `packs/besvarjelser/_source`, inte en nyckelordssökning. ⚠ Ett första försök med regex-klassificering taggade bara 95 av 222 och missade uppenbart stridsrelevanta besvärjelser som Blindhet, Förtrollad sömn, Orörlighet, Blixtnedslag och Stavprojektil — mönstren matchade inte källans faktiska formuleringar (`"1T6/E KP skada"` har inte "skada" direkt efter tärningen; `"Sövar"` är inte `"sömn"`; `"förlorar synförmågan"` är inte `"blind"`). Siffrorna nedan bygger därför på läsning, med regexen bara som sorteringshjälp.
+>
+> ⚠ **Katalogen har växt sedan detta skrevs (222 → 475 poster: hela katalogkompletteringen mot Formelboken + Kaos Väktares Demonologi-tillägg + den nya skolan Portalmagi).** Klassificeringssiffrorna nedan (≈85 stridsrelevanta, ≈137 icke-stridsrelevanta, m.fl.) är alltså ett **golv**, inte en aktuell exakt räkning — de beskriver bara de ursprungliga 222. Nya skolors/posters mekaniska behov bedöms vid respektive skolas kureringspass (se §0 nedan), inte genom att lita på att de redan ingår i denna analys.
+
+---
+
+## 0. Per-skola kureringsstatus — LÄS DETTA FÖRST, INNAN EN SKOLA PÅBÖRJAS
+
+**Detta är den enda statustabellen för mekanisk besvärjelsekurering. Kontrollera den HÄR innan du börjar läsa/analysera en skola — annars finns risk för dubbelarbete.** "Kurerad" betyder: skolans alla besvärjelser (stora + mini) genomlästa mot HELA det mekaniska schemat (`instantEffect`/`damageType`/`statusEffect`/`resistedBy`/`saveAttribute`/`saveDifficulty`/`triggersFearTable`/`targetMode`/`battleRelevant`), och fälten satta där de faktiskt tillämpas — INTE bara "har fått en `battleRelevant`-flagga" eller "nämns i klassificeringen nedan". En skola kan bli "klar" utan att någon besvärjelse fick ett enda fält ändrat, om genomläsningen visar att inget i skolan mekaniskt passar schemat (se Allmänna) — "granskad, inget att göra" är ett giltigt, komplett slutresultat, inte ett ofärdigt.
+
+| Skola | Poster (besv+mini) | Status | Datum | Not |
+|---|---|---|---|---|
+| **Allmänna** | 15+12=27 | ✅ Klar | 2026-09-03 | Nästan uteslutande skydd/ritualer/verktyg, inte skade-/statusbesvärjelser. Bara `battleRelevant:true` på Antimagi/Skingra/Beskyddare. Se DESIGN_DECISIONS.md §2 (backlog 78-uppföljning) för hela resonemanget. |
+| Alkemi | 0 | — Inget innehåll | — | Registrerad magiskola (`DODE.magicSchools.alkemi`) men INGA besvärjelser byggda i denna skola ännu — inget att kurera förrän innehåll finns. |
+| Animism | 45+4=49 | ⬜ Ej påbörjad | | |
+| Demonologi | 25+4=29 | ⬜ Ej påbörjad | | Inkluderar Kaos Väktare-tillägget (2026-09-02). |
+| Elementarmagi | 51+1=52 | ⬜ Ej påbörjad | | §1.1 ovan har redan en stor del av skadeklassificeringen (Blixt/Eld/Energistråle/Frost/Flammande hand) — börja där, men bekräfta mot nuvarande `_source` (posterna kan ha ändrats sedan 2026-08-24). |
+| Harmonism | 44+4=48 | ⬜ Ej påbörjad | | §1.1 har redan Hetta klassificerad. |
+| Häxkonster | 23+0=23 | ⬜ Ej påbörjad | | |
+| Illusionism | 23+5=28 | ⬜ Ej påbörjad | | |
+| Mentalism | 63+2=65 | ⬜ Ej påbörjad | | Störst skola. §1.1/§1.3/§1.5 har redan flera Mentalism-poster klassificerade (Elchock, Kontrollera person, Kommando, m.fl.) — börja där. |
+| Nekromanti | 46+8=54 | ⬜ Ej påbörjad | | §1.1 har redan Dödshand/Livsuttömning klassificerade. |
+| Portalmagi | 7+0=7 | ⬜ Ej påbörjad | | Ny skola (Kaos Väktare, 2026-09-02) — fanns inte när denna analys skrevs, ingår inte i §1-7:s klassificering alls. |
+| Röstmagi | 18+0=18 | ⬜ Ej påbörjad | | §1.1 har redan Röstprojektil/Krossa odöd/Tryckvåg klassificerade. |
+| Spiritism | 24+0=24 | ⬜ Ej påbörjad | | §1.1 har redan Andeslag/Själaförvittring/Mental projektil klassificerade. |
+| Stavmagi | 20+0=20 | ⬜ Ej påbörjad | | §1.1 har redan Blixtnedslag/Åskknall/Stavprojektil/Jordbävning/Förintelse/Eldvirvel klassificerade. |
+| Symbolism | 27+4=31 | ⬜ Ej påbörjad | | |
+
+**Arbetsordning:** Johan väljer skola för skola (se ACTIVE_TASK.md för senaste). Poster-antal ovan är från en live-räkning 2026-09-03 (`node`-skript mot `packs/besvarjelser/_source`) — räkna om om det känns fel, `_source` är alltid facit.
 
 ---
 
