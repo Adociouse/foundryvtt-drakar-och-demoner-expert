@@ -16,7 +16,8 @@
       "page": "63"
     },
     "targetMode": "area",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "targetRestriction": "elemental"
   },
   "effects": [],
   "folder": "pSpWWYPUCR1Q3Fdg",

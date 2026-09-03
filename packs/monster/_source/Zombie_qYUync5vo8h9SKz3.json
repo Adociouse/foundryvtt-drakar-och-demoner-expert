@@ -43,7 +43,8 @@
     "source": {
       "book": "mb1",
       "page": "95"
-    }
+    },
+    "creatureType": "undead-corporeal"
   },
   "_id": "qYUync5vo8h9SKz3",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/zombie.png",

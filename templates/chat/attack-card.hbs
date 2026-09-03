@@ -10,6 +10,10 @@
     {{#if intentBedova}}<i class="fa-solid fa-hand-fist" title="Bedövande avsikt"></i>{{/if}}
   </header>
 
+  {{#if targetWarning}}
+    <div class="target-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{targetWarning}}</div>
+  {{/if}}
+
   {{!-- Spelar-anfall-planen, 2026-08-21: en spelare utan skrivbehörighet på
         målet får kortet postat DIREKT (riktiga tärningar, redan uträknat)
         men markerat väntande — SL:s Godkänn skriver bara undan det redan

@@ -44,7 +44,8 @@
     "source": {
       "book": "mb2",
       "page": "93"
-    }
+    },
+    "creatureType": "spirit"
   },
   "_id": "81vBZ7ECXpR4iQss",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/gasthast.png",

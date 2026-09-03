@@ -51,7 +51,8 @@
     "source": {
       "book": "mb2",
       "page": "91"
-    }
+    },
+    "creatureType": "spirit"
   },
   "_id": "zDKZul3fjpTEBbKV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/morkgast.png",

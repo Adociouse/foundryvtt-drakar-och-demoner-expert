@@ -297,7 +297,16 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     return {
       isNpc, weaponOptions, weaponKey: this.weaponKey,
       selectedNoSkill: !!weaponOptions.find((w) => w.key === this.weaponKey)?.noSkill,
-      targets: targets.map((t) => ({ name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img })),
+      // Kreaturstyp+mål-varning, 2026-09-03 — samma icke-blockerande varning
+      // som kortet sedan visar (CONFIG.DODE.creatureWeaponWarning), synlig
+      // HÄR före submit. Samma vapen delas av alla mål i en flermåls-
+      // submission, se modulkommentaren om varför.
+      targets: targets.map((t) => ({
+        name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img,
+        targetWarning: t.actor?.type === "npc" && t.actor.system.creatureType
+          ? CONFIG.DODE.creatureWeaponWarning(t.actor.system.creatureType, selectedItem?.system?.material ?? "mundane")
+          : null
+      })),
       multiTarget, multiAutoParryNote, showAimed,
       aimedOptions, modEntries, canParry, parryOptions,
       parryBlockedReason: targetBlocking

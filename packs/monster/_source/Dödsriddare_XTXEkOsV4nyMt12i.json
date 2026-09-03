@@ -51,7 +51,8 @@
     "source": {
       "book": "mb2",
       "page": "86"
-    }
+    },
+    "creatureType": "undead-corporeal"
   },
   "_id": "XTXEkOsV4nyMt12i",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/dodsriddare.png",

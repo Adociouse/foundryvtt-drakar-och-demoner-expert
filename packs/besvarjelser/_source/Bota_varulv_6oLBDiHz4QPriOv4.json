@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "3-16"
-    }
+    },
+    "targetRestriction": "lycanthrope"
   },
   "_id": "6oLBDiHz4QPriOv4",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",

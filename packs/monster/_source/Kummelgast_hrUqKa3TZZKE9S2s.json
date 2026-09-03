@@ -57,7 +57,8 @@
     "source": {
       "book": "mb2",
       "page": "90"
-    }
+    },
+    "creatureType": "spirit"
   },
   "_id": "hrUqKa3TZZKE9S2s",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/kummelgast.png",

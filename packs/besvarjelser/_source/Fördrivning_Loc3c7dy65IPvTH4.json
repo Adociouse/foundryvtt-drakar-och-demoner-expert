@@ -15,7 +15,8 @@
       "book": "formelboken",
       "page": "8"
     },
-    "battleRelevant": true
+    "battleRelevant": true,
+    "targetRestriction": "spirit"
   },
   "effects": [],
   "folder": "R8oaopxZZs7ntDKl",

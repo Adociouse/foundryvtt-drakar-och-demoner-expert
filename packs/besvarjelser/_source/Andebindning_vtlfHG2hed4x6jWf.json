@@ -14,7 +14,8 @@
       "page": "55-59"
     },
     "targetMode": "single",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "targetRestriction": "spirit"
   },
   "_id": "vtlfHG2hed4x6jWf",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

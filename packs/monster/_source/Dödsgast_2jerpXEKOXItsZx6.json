@@ -57,7 +57,8 @@
     "source": {
       "book": "mb2",
       "page": "89"
-    }
+    },
+    "creatureType": "spirit"
   },
   "_id": "2jerpXEKOXItsZx6",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/dodsgast.png",

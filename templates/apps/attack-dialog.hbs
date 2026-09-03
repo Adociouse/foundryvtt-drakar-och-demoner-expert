@@ -4,7 +4,10 @@
       <span class="target-label">{{#if multiTarget}}Mål ({{targets.length}}){{else}}Mål{{/if}}</span>
       <ul class="target-list">
         {{#each targets}}
-          <li><img src="{{this.img}}" alt="" /><span class="target-name">{{this.name}}</span></li>
+          <li>
+            <img src="{{this.img}}" alt="" /><span class="target-name">{{this.name}}</span>
+            {{#if this.targetWarning}}<span class="target-warning-inline"><i class="fa-solid fa-triangle-exclamation"></i> {{this.targetWarning}}</span>{{/if}}
+          </li>
         {{/each}}
       </ul>
     {{else}}

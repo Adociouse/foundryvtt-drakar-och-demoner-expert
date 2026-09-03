@@ -2464,6 +2464,75 @@ DODE.resolveResistance = function (actor, damageType, incomingE = 0) {
 };
 
 /**
+ * Kreaturstyp + mål-varningssystem — tillagt 2026-09-03. Johans direktiv:
+ * "battle system should give a warning if someone try to throw a spell/
+ * effect/weapon effect/potion/scroll on wrong type of target.. maybe not
+ * block it." Denna omgång bygger BARA besvärjelse- och vapenvarningen (se
+ * planfilens Context för varför potions/scrolls och den faktiska skade-
+ * mattematiken är medvetet avgränsade bort).
+ *
+ * Läsbara etiketter för `creatureType`/`targetRestriction`-värdena, delade
+ * mellan spellTargetWarning/creatureWeaponWarning och UI-mallarna.
+ */
+DODE.creatureTypeLabels = {
+  "normal": "en vanlig varelse",
+  "undead-corporeal": "odöd med kropp",
+  "spirit": "en ande/gast",
+  "demon": "en demon",
+  "elemental": "en elementar",
+  "lycanthrope": "en varulvsvarelse"
+};
+
+/**
+ * Jämför en besvärjelses `targetRestriction` (item-besvarjelse.mjs) mot ett
+ * NPC-måls `creatureType` (actor-npc.mjs). Ren funktion, ingen gating —
+ * anroparen (spell.mjs) kör besvärjelsen fullt ut oavsett resultat, bara
+ * visar varningen på kortet/i dialogen.
+ * @param {string} targetRestriction Besvärjelsens `system.targetRestriction`.
+ * @param {string} [targetCreatureType="normal"] Målets `system.creatureType`.
+ * @returns {string|null}
+ */
+DODE.spellTargetWarning = function (targetRestriction, targetCreatureType = "normal") {
+  if (!targetRestriction) return null;
+  if (targetRestriction === targetCreatureType) return null;
+  const want = DODE.creatureTypeLabels[targetRestriction] ?? targetRestriction;
+  const got = DODE.creatureTypeLabels[targetCreatureType] ?? targetCreatureType;
+  return `Den här besvärjelsen är enligt boken avsedd mot ${want} — målet är ${got}.`;
+};
+
+/**
+ * Sourcat ur monster-`special`-texter (Dödsgast/Kummelgast/Mörkgast: "tar
+ * aldrig skada av rent materiella vapen, bara av magiska vapen, besvärjelser
+ * och eld"; Varulv: "Tar endast halv skada... från vanliga/naturliga
+ * vapen... Silvervapen och magiska vapen gör full skada") — INTE en påhittad
+ * regel. `requiresMaterial` är vad som krävs för FULL effekt, inte hur
+ * mycket skada som faktiskt dras (se `resolveAttack`-kommentaren nedan för
+ * varför skademattematiken medvetet inte rörs här). Kategorier utan ett
+ * sourcat vapenkrav (undead-corporeal/demon/elemental/normal) står avsiktligt
+ * utanför den här tabellen.
+ */
+const CREATURE_TYPE_WEAPON_NOTE = {
+  spirit: { requiresMaterial: "magical", note: "tar bara skada av magiska vapen (samt eld och besvärjelser)" },
+  lycanthrope: { requiresMaterial: "silver", note: "tar bara halv skada av vanliga vapen — silver eller magi krävs för full effekt" }
+};
+
+/**
+ * @param {string} creatureType Målets `system.creatureType`.
+ * @param {string} [weaponMaterial="mundane"] Vapnets `system.material`.
+ * @returns {string|null}
+ */
+DODE.creatureWeaponWarning = function (creatureType, weaponMaterial = "mundane") {
+  const rule = CREATURE_TYPE_WEAPON_NOTE[creatureType];
+  if (!rule) return null;
+  // ⚠ Strikt jämförelse, ingen implicit hierarki — enligt Kummelgast/
+  // Mörkgast-texten uppfyller silver INTE ett "magical"-krav (bara "magiska
+  // vapen" nämns för andar, aldrig silver).
+  if (weaponMaterial === rule.requiresMaterial || weaponMaterial === "magical") return null;
+  const label = DODE.creatureTypeLabels[creatureType] ?? creatureType;
+  return `Målet är ${label} — ${rule.note}.`;
+};
+
+/**
  * Slår upp en namngiven RollTable direkt ur `tabeller`-kompendiet, oavsett om
  * SL råkat importera den till världens `game.tables` eller inte. Delad av
  * `rollFearTable`/`rollSnedtandningstabell`/`rollFobiTable` nedan.

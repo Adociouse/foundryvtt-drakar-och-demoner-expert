@@ -19,7 +19,8 @@
     },
     "damageType": "physical",
     "targetMode": "single",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "targetRestriction": "undead-corporeal"
   },
   "_id": "YaRkAhpqV9YoNz6y",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

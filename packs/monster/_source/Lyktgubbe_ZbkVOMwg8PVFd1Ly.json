@@ -44,7 +44,8 @@
     "source": {
       "book": "mb2",
       "page": "95"
-    }
+    },
+    "creatureType": "spirit"
   },
   "_id": "ZbkVOMwg8PVFd1Ly",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/lyktgubbe.png",

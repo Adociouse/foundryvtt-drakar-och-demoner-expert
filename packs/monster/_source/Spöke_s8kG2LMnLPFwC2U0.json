@@ -51,7 +51,8 @@
     "source": {
       "book": "mb1",
       "page": "91"
-    }
+    },
+    "creatureType": "spirit"
   },
   "_id": "s8kG2LMnLPFwC2U0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/spoke.png",

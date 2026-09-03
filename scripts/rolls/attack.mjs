@@ -255,6 +255,13 @@ export async function resolveAttack({
   if (attackEp) out.pending.attackerEp = { skillId: attackEp.skillId, amount: attackEp.amount };
   if (parryEp) out.pending.defenderEp = { skillId: parryEp.skillId, amount: parryEp.amount };
 
+  // ⚠ Varning, INTE en blockering (Johan, 2026-09-03, kreaturstyp+mål-
+  // varningssystemet) — anfallet slås och skadan beräknas/appliceras
+  // oförändrat oavsett detta. Bara NPC-mål har ett `creatureType`.
+  if (target?.type === "npc" && target.system.creatureType) {
+    out.targetWarning = CONFIG.DODE.creatureWeaponWarning(target.system.creatureType, weapon?.system?.material ?? "mundane");
+  }
+
   // ⚠ Fummeltabell-dragning (Magisystem-planen Fas 6, 2026-08-21) — sker HÄR,
   // i den rena beräkningsfasen, INTE i applyAttackResult: draget är
   // slumpmässigt och ska ALDRIG slås om vid ett ev. SL-godkännande (samma
@@ -486,7 +493,9 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
       fumbled: result.hardParrySelfFumble.fumbled
     } : null,
     // Spelar-anfall-planen, 2026-08-21 — se dode.mjs's renderChatMessageHTML-hook.
-    pendingBanner
+    pendingBanner,
+    // Kreaturstyp+mål-varning, 2026-09-03 — se resolveAttack().
+    targetWarning: result.targetWarning ?? null
   };
 }
 

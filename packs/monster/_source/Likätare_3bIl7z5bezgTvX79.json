@@ -43,7 +43,8 @@
     "source": {
       "book": "mb1",
       "page": "88"
-    }
+    },
+    "creatureType": "undead-corporeal"
   },
   "_id": "3bIl7z5bezgTvX79",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/liketare.png",

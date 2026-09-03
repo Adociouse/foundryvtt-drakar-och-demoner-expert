@@ -165,6 +165,19 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         initial: "single",
         choices: ["self", "touch", "single", "multi", "area", "split"]
       }),
+      // Vilken NPC-`creatureType` (actor-npc.mjs) besvärjelsen enligt boken
+      // FAKTISKT är avsedd mot — tillagt 2026-09-03 (Johan: en varning, INTE
+      // en blockering, se CONFIG.DODE.spellTargetWarning i config.mjs och
+      // spell.mjs#resolveSpellCast). Tomt = ingen restriktion (dagens
+      // beteende, oförändrat). ETT val räcker — varje sourcad restriktion
+      // hittills (Andeslag→spirit, Krossa odöd→undead-corporeal,
+      // Elementarskydd→elemental, Bota varulv→lycanthrope m.fl.) pekar ut EN
+      // kategori, aldrig flera. Rollpersoner har inget `creatureType` och
+      // varnas alltså aldrig av detta fält.
+      targetRestriction: new fields.StringField({
+        required: false, initial: "", blank: true,
+        choices: ["", "undead-corporeal", "spirit", "demon", "elemental", "lycanthrope"]
+      }),
       // Den "stödkolumn för battle" Johan efterfrågade — flaggar besvärjelser
       // som är relevanta att visa/filtrera i en stridssituation, till
       // skillnad från de ~150 rent narrativa/utility-besvärjelserna (Karta,

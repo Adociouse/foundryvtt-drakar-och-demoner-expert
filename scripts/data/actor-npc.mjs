@@ -85,6 +85,22 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
         required: false, initial: "humanoid",
         choices: ["humanoid", "fyrfota", "bevingad-humanoid", "kentaur", "svanmo"]
       }),
+      // Kreaturskategori, tillagd 2026-09-03 (Johan: målrestriktioner + en
+      // varning, inte en blockering — se docs/DESIGN_DECISIONS.md backlog-
+      // uppföljning och CONFIG.DODE.spellTargetWarning/creatureWeaponWarning
+      // i config.mjs). Default "normal" — de allra flesta NPC:er förblir
+      // omärkta tills de faktiskt behöver taggas (samma lata kurering som
+      // hitLocations redan följer). Varje val motsvarar minst en bok-sourcad
+      // restriktion redan hittad i besvärjelse-/monstertexter: Andeslag/
+      // Andebindning/Kontrollera andar/Fördrivning/Andeskydd → "spirit",
+      // Krossa odöd → "undead-corporeal", Elementarskydd → "elemental",
+      // Bota varulv/Sannform → "lycanthrope", Dödsgast/Kummelgast/Mörkgast
+      // (bara magiska vapen) och Varulv (silver/magi mot full skada) → samma
+      // kategorier på vapensidan (se item-vapen.mjs `material`).
+      creatureType: new fields.StringField({
+        required: false, initial: "normal",
+        choices: ["normal", "undead-corporeal", "spirit", "demon", "elemental", "lycanthrope"]
+      }),
       // Träffområdenas KP — ⚠ TOMT tills någon riktar ett anfall mot varelsen.
       // KP per område HÄRLEDS ur Totala KP (DODE.hitLocationKp), så ingenting
       // behöver förberedas: en varelse som hittills varit en påse KP får en

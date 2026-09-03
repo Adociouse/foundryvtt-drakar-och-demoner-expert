@@ -14,7 +14,8 @@
     "source": {
       "book": "formelboken",
       "page": "6"
-    }
+    },
+    "targetRestriction": "lycanthrope"
   },
   "effects": [],
   "folder": "R8oaopxZZs7ntDKl",

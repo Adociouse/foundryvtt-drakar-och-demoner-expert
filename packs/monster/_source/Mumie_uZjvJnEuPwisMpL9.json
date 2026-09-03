@@ -43,7 +43,8 @@
     "source": {
       "book": "mb1",
       "page": "89"
-    }
+    },
+    "creatureType": "undead-corporeal"
   },
   "_id": "uZjvJnEuPwisMpL9",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/mumie.png",

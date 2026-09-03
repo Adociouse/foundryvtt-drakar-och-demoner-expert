@@ -52,6 +52,20 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
       // det ANNAT INTE täckta fallet, "most melee weapons are parryable,
       // some magic weapons might not be".
       parryable: new fields.BooleanField({ required: false, initial: true }),
+      // Vapenmaterial — tillagt 2026-09-03 (Johan: kreaturstyp+varningssystemet,
+      // se CONFIG.DODE.creatureWeaponWarning i config.mjs). Krävs för att
+      // jämföra mot ett NPC-måls `creatureType` (actor-npc.mjs) — Dödsgast/
+      // Kummelgast/Mörkgast tar bara skada av "magiska vapen" (special-text,
+      // packs/monster), Varulv bara full skada av silver/magi. ⚠ Påverkar
+      // INTE skadeberäkningen än — bara varningen. Den faktiska skademate-
+      // matiken (halv skada/immunitet) kräver att `resistances[]` kopplas in
+      // i resolveAttack() överhuvudtaget (görs aldrig idag) plus en
+      // proportionell "halv"-reduktionsform — se docs/DESIGN_DECISIONS.md
+      // backlog 84, medvetet inte del av detta tillägg.
+      material: new fields.StringField({
+        required: false, initial: "mundane",
+        choices: ["mundane", "silver", "magical"]
+      }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })

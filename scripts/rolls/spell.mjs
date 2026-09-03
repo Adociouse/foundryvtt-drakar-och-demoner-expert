@@ -69,6 +69,13 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
     const t = { actorId: target.id, name: target.name, resisted: null, fearDraw: null, instantEffect: null, statusApplied: null, spellEffectApplies: false };
     const pendingT = { actorId: target.id, instantEffect: null, status: null, spellEffect: false };
 
+    // ⚠ Varning, INTE en blockering (Johan, 2026-09-03) — resten av
+    // funktionen körs oförändrat oavsett vad detta ger. Bara NPC-mål har ett
+    // `creatureType` att jämföra mot; rollpersoner varnas aldrig.
+    if (sys.targetRestriction && target.type === "npc") {
+      t.targetWarning = CONFIG.DODE.spellTargetWarning(sys.targetRestriction, target.system.creatureType);
+    }
+
     let saveSucceeded = false;
     if (sys.resistedBy === "attribute-save" && sys.saveAttribute) {
       // Motståndstabellen (SL s.34/RP s.37-38) — se DODE.rollResistance.
@@ -255,7 +262,8 @@ function buildSpellCardContext(result, { caster, targets = [], pendingBanner = f
       } : null,
       statusApplied: t.statusApplied,
       spellEffectApplies: t.spellEffectApplies,
-      fearDraw: t.fearDraw ? { text: t.fearDraw.result.name } : null
+      fearDraw: t.fearDraw ? { text: t.fearDraw.result.name } : null,
+      targetWarning: t.targetWarning ?? null
     })),
     cssClass: result.cast.outcome,
     pendingBanner

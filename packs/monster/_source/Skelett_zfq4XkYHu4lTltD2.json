@@ -43,7 +43,8 @@
     "source": {
       "book": "mb1",
       "page": "90"
-    }
+    },
+    "creatureType": "undead-corporeal"
   },
   "_id": "zfq4XkYHu4lTltD2",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/skelett.png",

@@ -46,7 +46,8 @@
     "source": {
       "book": "svartfolk",
       "page": "65"
-    }
+    },
+    "creatureType": "undead-corporeal"
   },
   "_id": "lislPACoiGA59exi",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/benman-orch.png",

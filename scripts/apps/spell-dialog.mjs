@@ -89,7 +89,16 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       // målsatta tokenet, precis som Anfallsdialogens enda-måls-vy — men
       // visar HELA listan om spelaren råkat målsätta flera, med en
       // förklarande rad, i stället för att tyst ignorera resten.
-      targets: tokens.map((t) => ({ name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img })),
+      // Kreaturstyp+mål-varning, 2026-09-03 — samma icke-blockerande varning
+      // som kortet sedan visar (CONFIG.DODE.spellTargetWarning), men synlig
+      // HÄR, före spelaren ens submittar — mer användbar timing, se
+      // planfilens punkt 6.
+      targets: tokens.map((t) => ({
+        name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img,
+        targetWarning: item?.system?.targetRestriction && t.actor?.type === "npc"
+          ? CONFIG.DODE.spellTargetWarning(item.system.targetRestriction, t.actor.system.creatureType)
+          : null
+      })),
       tooManyTargetsNote: needsTargets && !multiTarget && tokens.length > 1
         ? "Fler än ett mål markerat — bara det första används (enda-måls-besvärjelse)." : null,
       // "split" (Eld m.fl.): en delad tärningspool mellan valda mål, 1

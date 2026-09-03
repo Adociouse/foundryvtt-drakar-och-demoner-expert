@@ -40,6 +40,9 @@
   {{/if}}
 
   {{#each targets}}
+    {{#if this.targetWarning}}
+      <div class="target-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{this.targetWarning}}</div>
+    {{/if}}
     <div class="damage-line spell-target">
       <span class="location">{{this.name}}</span>
       {{#if this.resisted}}

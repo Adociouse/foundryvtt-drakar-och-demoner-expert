@@ -893,6 +893,12 @@
   background: rgba(60,60,120,0.18); font-size: 0.85em; }
 .dode-attack-card .wear-line { font-size: 0.85em; opacity: 0.85; margin-top: 3px; }
 .dode-attack-card .verdict-note { font-size: 0.8em; opacity: 0.7; font-style: italic; margin-top: 3px; }
+/* Kreaturstyp+mål-varning, 2026-09-03 — icke-blockerande, bara en flagga
+   ("maybe not block it"). Amber/orange, skild från effect-line:s röda
+   skadefärg för att INTE läsas som "detta är skada som redan skett". */
+.dode-attack-card .target-warning { margin: 4px 0; padding: 4px 6px; border-radius: 3px;
+  background: rgba(184,134,11,0.18); border-left: 3px solid rgb(184,134,11);
+  font-size: 0.85em; }
 /* Spelar-anfall-planen, 2026-08-21 — väntande kort (SL-godkännande). */
 .dode-attack-card .pending-banner { display: flex; align-items: center; gap: 6px;
   padding: 3px 6px; margin-bottom: 4px; border-radius: 3px; font-size: 0.82em;
@@ -1005,7 +1011,12 @@
 .dode-spell-dialog-body .target-list,
 .dode-attack-dialog-body .target-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
 .dode-spell-dialog-body .target-list li,
-.dode-attack-dialog-body .target-list li { display: flex; align-items: center; gap: 4px; }
+.dode-attack-dialog-body .target-list li { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+/* Kreaturstyp+mål-varning, 2026-09-03 — samma amber/orange som chattkortens
+   .target-warning, men inline i mål-listan (flex-basis:100% = egen rad). */
+.dode-spell-dialog-body .target-warning-inline,
+.dode-attack-dialog-body .target-warning-inline { flex-basis: 100%; font-size: 0.8em;
+  color: rgb(184,134,11); }
 .dode-spell-dialog-body .target-list img { width: 36px; height: 36px; object-fit: cover; border-radius: 4px; border: none; }
 .dode-spell-dialog-body .spell-target.multi .target-list img { width: 24px; height: 24px; }
 .dode-spell-dialog-body .spell-description { font-size: 0.85em; opacity: 0.85; }

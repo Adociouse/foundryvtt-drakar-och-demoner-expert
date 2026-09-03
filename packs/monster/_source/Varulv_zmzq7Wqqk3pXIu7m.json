@@ -44,7 +44,8 @@
     "source": {
       "book": "mb1",
       "page": "34"
-    }
+    },
+    "creatureType": "lycanthrope"
   },
   "_id": "zmzq7Wqqk3pXIu7m",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/varulv.png",
