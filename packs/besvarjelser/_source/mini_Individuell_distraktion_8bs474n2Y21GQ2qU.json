@@ -10,7 +10,9 @@
       "book": "magi",
       "page": "23"
     },
-    "description": "<p>Som Distraktion (S2) men påverkar bara en person</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>"
+    "description": "<p>Som Distraktion (S2) men påverkar bara en person</p><p><em>Minibesvärjelse — ingen CL-kontroll, lyckas alltid, 1 PSY, alltid Kvick (MAG s.23).</em></p>",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "hqN1iicrOKEEuylT",

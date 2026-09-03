@@ -12,7 +12,12 @@
     "source": {
       "book": "formelboken",
       "page": "35-40"
-    }
+    },
+    "resistedBy": "attribute-save",
+    "saveAttribute": "int",
+    "saveDifficulty": "normalt",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "_id": "91mSkpbpg4lEr7v3",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

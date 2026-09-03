@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "35-40"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "854cYRuKzWZ1CY1l",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",
