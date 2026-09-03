@@ -58,7 +58,16 @@
       "book": "mb2",
       "page": "89"
     },
-    "creatureType": "spirit"
+    "creatureType": "spirit",
+    "resistances": [
+      {
+        "damageType": "weapon",
+        "reduction": "half",
+        "overcomeE": null,
+        "overcomeMaterial": "magical",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "2jerpXEKOXItsZx6",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/dodsgast.png",

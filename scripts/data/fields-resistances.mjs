@@ -18,7 +18,40 @@ const fields = foundry.data.fields;
  *    (räddningskast mot rädsla/mental påverkan, se item-besvarjelse.mjs
  *    `resistedBy`) — två verkliga mekaniker, inte samma primitiv återanvänd fel.
  *
- * Konsumeras av CONFIG.DODE.resolveResistance (scripts/helpers/config.mjs).
+ * **Utökat 2026-09-03 (backlog 84), tre tillägg — Lindskiarnen (MBX2 s.64,
+ * "tar bara HALV skada av alla övriga besvärjelser") och en bred genomläsning
+ * av redan transkriberade monster-special-texter (Varulv/Dödsgast/Kummelgast/
+ * Mörkgast/Vampyr) blottade tre saknade uttrycksformer, inte bara en:**
+ *  - `reduction:"half"` — proportionell reduktion, avrundat NEDÅT (samma
+ *    konvention Varulv-texten själv anger: "avrundat nedåt"). `reduction:
+ *    "double"` — samma primitiv åt andra hållet, en SÅRBARHET (Irrbloss:
+ *    "tar dubbel skada av köldattacker").
+ *  - `damageType` fick två nya poster: `"magic"` (en samlad "ren kraftskada"-
+ *    kategori för besvärjelser som inte passar något grundelement — Johans
+ *    ursprungliga backlog-anteckning) och `"weapon"` — **ett eget, medvetet
+ *    SKILT spår från de fysikaliska skadetyperna.** Anledningen: Lindskiarnens
+ *    regel gäller uttryckligen bara "besvärjelser" (magi), INTE vapen — hade
+ *    `damageType:"physical"` återanvänts för BÅDE ett vapenhugg (attack.mjs)
+ *    OCH en fysisk besvärjelse (spell.mjs) hade Lindskiarnens spell-bara
+ *    halvering av misstag även halverat vanliga svärdshugg. `"weapon"` matchas
+ *    ENDAST av `resolveAttack()` (aldrig av en besvärjelses egna `damageType`,
+ *    som saknar `"weapon"` i sin choices-lista, se item-besvarjelse.mjs) — de
+ *    två kanalerna kan aldrig kollidera.
+ *  - `overcomeMaterial`/`overcomeReduction` — samma "övervinnbar immunitet"-
+ *    mönster som `overcomeE` redan har, fast för VAPENMATERIAL i stället för
+ *    effektgrad (Varulv/Vampyr: silver ELLER magi övervinner; Dödsgast/
+ *    Kummelgast/Mörkgast: ENDAST magi övervinner — silver räknas INTE, se
+ *    `resolveResistance`s asymmetriska jämförelse, samma regel som
+ *    `creatureWeaponWarning` i config.mjs redan kodar). `overcomeReduction`
+ *    (default `"0"` = full skada) täcker Dödsängelns sammansatta regel
+ *    ("Endast magiska vapen kan skada den, och de gör bara halv skada") —
+ *    en fallback-reduktion som gäller NÄR villkoret väl är övervunnet, i
+ *    stället för att anta att övervunnen immunitet alltid betyder full skada.
+ *
+ * Konsumeras av CONFIG.DODE.resolveResistance (scripts/helpers/config.mjs) —
+ * vapenanfall (attack.mjs) skickar alltid `damageType:"weapon"` + vapnets
+ * `material`; besvärjelseskada (spell.mjs) skickar besvärjelsens egen
+ * `damageType`, aldrig `"weapon"`.
  */
 export function resistancesField() {
   return new fields.ArrayField(
@@ -26,13 +59,21 @@ export function resistancesField() {
       damageType: new fields.StringField({
         required: true,
         initial: "physical",
-        choices: ["physical", "fire", "cold", "acid", "lightning", "poison", "mental"]
+        choices: ["physical", "fire", "cold", "acid", "lightning", "poison", "mental", "magic", "weapon"]
       }),
-      // Antingen ett tal (flat reduktion) eller "immun" — sparat som sträng
-      // eftersom fields.NumberField inte kan uttrycka en number|"immun"-union;
+      // "immun" | "half" | "double" | ett flat tal (som sträng) — sparat som
+      // sträng eftersom fields.NumberField inte kan uttrycka den unionen;
       // tolkas av resolveResistance.
       reduction: new fields.StringField({ required: true, initial: "0" }),
-      overcomeE: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true, min: 0 })
+      overcomeE: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true, min: 0 }),
+      // Vapenmaterial som övervinner `reduction:"immun"`/`"half"` — tomt (default)
+      // = inget material övervinner alls (t.ex. Spökets totala vapenimmunitet).
+      // Bara relevant för damageType:"weapon". Se moduldoc-kommentaren ovan.
+      overcomeMaterial: new fields.StringField({ required: false, initial: "", blank: true, choices: ["", "silver", "magical"] }),
+      // Vad som gäller NÄR overcomeE/overcomeMaterial är uppfyllt — default
+      // "0" (full skada, dagens beteende oförändrat). Kan sättas till "half"
+      // för Dödsängelns "magiska vapen gör ändå bara halv skada"-mönster.
+      overcomeReduction: new fields.StringField({ required: false, initial: "0" })
     })
   );
 }

@@ -95,6 +95,10 @@
       <span class="location">{{locationLabel}}</span>
       <span class="dmg">{{damage.rolled}}{{#if damage.maximised}} (max){{/if}}</span>
       {{#if damage.abs}}<span class="abs">− {{damage.abs}} abs</span>{{/if}}
+      {{#if damage.resistanceBlocked}}<span class="abs">immun (vapenmaterial)</span>{{/if}}
+      {{#if damage.resistanceReduction}}<span class="abs">− {{damage.resistanceReduction}} motstånd</span>{{/if}}
+      {{#if damage.resistanceHalved}}<span class="abs">halverad (vapenmaterial)</span>{{/if}}
+      {{#if damage.resistanceDoubled}}<span class="abs">dubblad (sårbarhet)</span>{{/if}}
       <strong class="applied">{{damage.applied}} KP</strong>
     </div>
     <div class="total-line">Totala KP kvar: <strong>{{totalAfter}}</strong>{{#if pulled}} <em>(slaget hölls tillbaka)</em>{{/if}}</div>

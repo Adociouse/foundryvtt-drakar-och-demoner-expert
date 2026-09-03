@@ -24,6 +24,31 @@ export const RANGED_MODS = {
 };
 
 /**
+ * Löser ett måls `resistances[]` mot ETT vapenanfall — backlog 84, 2026-09-03.
+ * Skickar alltid `damageType:"weapon"` (aldrig ett element) och vapnets
+ * `material` — se fields-resistances.mjs för varför det är en egen, från
+ * besvärjelseskada SKILD kanal (Lindskiarnens halvering gäller uttryckligen
+ * bara besvärjelser, inte vapen; skulle `"physical"` återanvänts för båda
+ * hade den halveringen läckt in i vanliga svärdshugg).
+ *
+ * Tillämpas ALLTID efter rustningsavdrag — Varulv-textens egen ordning
+ * ("...efter att vapnet trängt igenom skinnet").
+ *
+ * @param {Actor} target
+ * @param {Item|null} weapon
+ * @param {number} amount Skada EFTER rustningsavdrag.
+ * @returns {{amount:number, resistance:object}}
+ */
+function applyWeaponResistance(target, weapon, amount) {
+  const resistance = CONFIG.DODE.resolveResistance(target, "weapon", 0, weapon?.system?.material ?? "mundane");
+  if (resistance.blocked) return { amount: 0, resistance };
+  let out = Math.max(0, amount - resistance.reduction);
+  if (resistance.halved) out = Math.floor(out / 2);
+  if (resistance.doubled) out *= 2;
+  return { amount: out, resistance };
+}
+
+/**
  * Vilken av de fyra fummeltabellerna (config.mjs `rollWeaponFummelTable`)
  * som gäller för ett ANFALL — vald efter VAPENTYP, se
  * docs/extracts/DODE_Spelarboken_FUMMELTABELLER.md. Inget vapen alls
@@ -311,9 +336,12 @@ export async function resolveAttack({
     // Håller skölden (BV > 0) är anfallet slut — ingen skada alls går igenom.
     if (broke && verdict.wearOn === "defender") {
       const abs = armourFor(target, out.location.location);
-      const applied = Math.max(0, dmg.total - 1 - abs);
+      const { amount: applied, resistance } = applyWeaponResistance(target, weapon, Math.max(0, dmg.total - 1 - abs));
       const res = previewLocationDamage(target, out.location.location, applied, { intent, allowHypotheticalLocations: detailed });
-      out.damage = { roll: dmg, formula: weapon?.system.damage, abs, applied, viaBrokenParry: true, minusOne: true };
+      out.damage = {
+        roll: dmg, formula: weapon?.system.damage, abs, applied, viaBrokenParry: true, minusOne: true,
+        resistance: (resistance.blocked || resistance.reduction || resistance.halved || resistance.doubled) ? resistance : null
+      };
       out.effect = res.effect;
       out.totalAfter = res.totalAfter;
       out.pending.damage = { location: out.location.location, amount: applied, intent, detailed };
@@ -372,7 +400,15 @@ export async function resolveAttack({
   // nästan verkningslöst. ⚠ Behöver Johans beslut — se DESIGN_DECISIONS.md.
   const abs = verdict.ignoreArmour ? 0 : armourFor(target, out.location.location);
   damage = Math.max(0, damage - abs);
-  out.damage = { roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage };
+  // ⚠ Kreaturstyp-/vapenmaterialmotstånd (backlog 84) — ALLTID efter rustning,
+  // ÄVEN vid Perfekt (ignoreArmour gäller bara rustning, inte köttets/
+  // andeväsens egen motståndskraft mot vapenmaterial). Se applyWeaponResistance.
+  const { amount: resistedDamage, resistance } = applyWeaponResistance(target, weapon, damage);
+  damage = resistedDamage;
+  out.damage = {
+    roll: dmgRoll, formula, abs, applied: damage, maximised: !!verdict.maxDamage,
+    resistance: (resistance.blocked || resistance.reduction || resistance.halved || resistance.doubled) ? resistance : null
+  };
 
   // ⚠ `ensureHitLocations`s skrivning OCH själva skadeskrivningen skjuts upp
   // till `applyAttackResult` — se `out.pending.damage`. Förhandsvisningen
@@ -473,7 +509,12 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
     locationLabel: result.location?.label,
     damage: result.damage?.roll ? {
       rolled: result.damage.roll.total, abs: result.damage.abs,
-      applied: result.damage.applied, maximised: result.damage.maximised
+      applied: result.damage.applied, maximised: result.damage.maximised,
+      // Kreaturstyp-/vapenmaterialmotstånd (backlog 84) — se resolveAttack().
+      resistanceBlocked: result.damage.resistance?.blocked ?? false,
+      resistanceReduction: result.damage.resistance?.reduction ?? 0,
+      resistanceHalved: result.damage.resistance?.halved ?? false,
+      resistanceDoubled: result.damage.resistance?.doubled ?? false
     } : null,
     totalAfter: result.totalAfter, pulled: result.pulled,
     effect: result.effect, wear: result.wear, cleanKnockout: result.cleanKnockout,

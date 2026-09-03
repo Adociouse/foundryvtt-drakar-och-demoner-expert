@@ -58,7 +58,16 @@
       "book": "mb2",
       "page": "90"
     },
-    "creatureType": "spirit"
+    "creatureType": "spirit",
+    "resistances": [
+      {
+        "damageType": "weapon",
+        "reduction": "immun",
+        "overcomeE": null,
+        "overcomeMaterial": "magical",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "hrUqKa3TZZKE9S2s",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/kummelgast.png",

@@ -44,7 +44,16 @@
       "book": "mb1",
       "page": "93"
     },
-    "creatureType": "undead-corporeal"
+    "creatureType": "undead-corporeal",
+    "resistances": [
+      {
+        "damageType": "weapon",
+        "reduction": "immun",
+        "overcomeE": null,
+        "overcomeMaterial": "silver",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "IC7XcX9ts0lf1IFc",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/vampyr.png",

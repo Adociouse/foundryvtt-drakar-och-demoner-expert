@@ -58,10 +58,31 @@
         "damageType": "lightning",
         "reduction": "immun",
         "overcomeE": null
+      },
+      {
+        "damageType": "physical",
+        "reduction": "half",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
+      },
+      {
+        "damageType": "mental",
+        "reduction": "half",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
+      },
+      {
+        "damageType": "magic",
+        "reduction": "half",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
       }
     ],
     "attacks": [],
-    "special": "<p>Ett folk av okänt ursprung, även om de flesta som forskat om dem anser att de har <strong>magiskt ursprung</strong>. Mycket aggressiva och skickliga krigare, fruktade varhelst de dyker upp.</p><p>⚠ <strong>Tar INGEN skada av vanlig eld, kyla, syra, gift eller elektricitet (blixtar)</strong> — inlagt som fem immuniteter i <code>resistances</code>.</p><p>⚠ <strong>Tar bara HALV skada av alla övriga besvärjelser.</strong> Detta går ännu inte att uttrycka i <code>resistances</code>-schemat (som saknar både \"halv\"-reduktion och en samlad magi-skadetyp) — <strong>tillämpas manuellt av SL</strong>.</p><p>⚠ <strong>Alla lindskiarnar kommunicerar telepatiskt sinsemellan.</strong></p><p>⚠ <strong>Far mycket illa av kontakt med järn</strong> — använder bara sådana järnvapen de erövrat, och då med tjocka handskar. Slåss huvudsakligen med <strong>tvåhandssvärd i brons</strong> eller erövrade pålvapen.</p><p>175–225 cm långa, ca <strong>200 kg</strong>, gulvit och mycket len hud som är segare och beständigare än koläder. Inget hår alls på kroppen, vilket bidrar till motståndskraften mot eld. Fötterna och underbenen påminner om en elefants och ger låg tyngdpunkt; lillfingrarna har dragits ned mot handlederna och bildat en <strong>andra tumme</strong>.</p><p><strong>Dyrkar striden som en gudom</strong> och anfaller allt de ser oavsett vilka odds de har emot sig — bokens egen formulering är att detta är deras enda svaghet.</p><p>⚠ Källan trycker varken förflyttning eller naturligt skydd för lindskiarnen, trots att texten beskriver huden som segare än koläder.</p>",
+    "special": "<p>Ett folk av okänt ursprung, även om de flesta som forskat om dem anser att de har <strong>magiskt ursprung</strong>. Mycket aggressiva och skickliga krigare, fruktade varhelst de dyker upp.</p><p>⚠ <strong>Tar INGEN skada av vanlig eld, kyla, syra, gift eller elektricitet (blixtar)</strong> — inlagt som fem immuniteter i <code>resistances</code>.</p><p>⚠ <strong>Tar bara HALV skada av alla övriga besvärjelser.</strong> Inlagt som tre \"half\"-poster (physical/mental/magic) i <code>resistances</code> sedan 2026-09-03 (backlog 84) — mekaniskt genomdrivet, inte längre en SL-manuell regel.</p><p>⚠ <strong>Alla lindskiarnar kommunicerar telepatiskt sinsemellan.</strong></p><p>⚠ <strong>Far mycket illa av kontakt med järn</strong> — använder bara sådana järnvapen de erövrat, och då med tjocka handskar. Slåss huvudsakligen med <strong>tvåhandssvärd i brons</strong> eller erövrade pålvapen.</p><p>175–225 cm långa, ca <strong>200 kg</strong>, gulvit och mycket len hud som är segare och beständigare än koläder. Inget hår alls på kroppen, vilket bidrar till motståndskraften mot eld. Fötterna och underbenen påminner om en elefants och ger låg tyngdpunkt; lillfingrarna har dragits ned mot handlederna och bildat en <strong>andra tumme</strong>.</p><p><strong>Dyrkar striden som en gudom</strong> och anfaller allt de ser oavsett vilka odds de har emot sig — bokens egen formulering är att detta är deras enda svaghet.</p><p>⚠ Källan trycker varken förflyttning eller naturligt skydd för lindskiarnen, trots att texten beskriver huden som segare än koläder.</p>",
     "hp": {
       "value": null,
       "max": 0,

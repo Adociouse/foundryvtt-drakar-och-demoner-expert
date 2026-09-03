@@ -114,11 +114,16 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // Skadetyp för instantEffect.kind:"damage" — matchas mot en aktörs
       // `resistances[]` (actor-character.mjs/actor-npc.mjs) via
       // CONFIG.DODE.resolveResistance (fas 2). "none" = ingen resistans möjlig
-      // (t.ex. rent mentala effekter utan en fysisk skadekälla).
+      // (t.ex. rent mentala effekter utan en fysisk skadekälla). "magic"
+      // tillagd 2026-09-03 (backlog 84) — en samlad "ren kraftskada"-kategori
+      // för besvärjelser som inte passar något grundelement (Lindskiarnen,
+      // MBX2 s.64). ⚠ INTE samma kanal som vapenanfallens `"weapon"`-typ (se
+      // fields-resistances.mjs) — en besvärjelse kan aldrig deklarera
+      // `damageType:"weapon"`, choices-listan saknar den medvetet.
       damageType: new fields.StringField({
         required: false,
         initial: "none",
-        choices: ["none", "physical", "fire", "cold", "acid", "lightning", "poison", "mental"]
+        choices: ["none", "physical", "fire", "cold", "acid", "lightning", "poison", "mental", "magic"]
       }),
       // Foundry-kärnans egen status-id (samma sex som attack-dialog.mjs:s
       // PARRY_BLOCKING_STATUSES + t.ex. "blind") att toggla vid lyckad

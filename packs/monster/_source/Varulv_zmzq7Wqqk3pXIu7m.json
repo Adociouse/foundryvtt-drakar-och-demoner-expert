@@ -45,7 +45,16 @@
       "book": "mb1",
       "page": "34"
     },
-    "creatureType": "lycanthrope"
+    "creatureType": "lycanthrope",
+    "resistances": [
+      {
+        "damageType": "weapon",
+        "reduction": "half",
+        "overcomeE": null,
+        "overcomeMaterial": "silver",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "zmzq7Wqqk3pXIu7m",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/varulv.png",

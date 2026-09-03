@@ -60,6 +60,8 @@
           <span class="abs">immun</span>
         {{else}}
           {{#if this.instantEffect.reduction}}<span class="abs">− {{this.instantEffect.reduction}} motstånd</span>{{/if}}
+          {{#if this.instantEffect.halved}}<span class="abs">halverad (motstånd)</span>{{/if}}
+          {{#if this.instantEffect.doubled}}<span class="abs">dubblad (sårbarhet)</span>{{/if}}
           <strong class="applied">{{this.instantEffect.applied}} {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} {{#if (eq this.instantEffect.kind "heal")}}läkt{{else}}skada{{/if}}</strong>
         {{/if}}
       </div>

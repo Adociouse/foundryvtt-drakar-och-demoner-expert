@@ -106,7 +106,14 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
           ? roll.terms.filter((t) => t.faces).reduce((a, t) => a + t.number * t.faces, 0)
             + roll.terms.filter((t) => typeof t.number === "number" && !t.faces).reduce((a, t) => a + t.number, 0)
           : roll.total;
-        const appliedAmount = resistance.blocked ? 0 : Math.max(0, rollTotal - resistance.reduction);
+        // ⚠ half/double tillagt 2026-09-03 (backlog 84) — tillämpas EFTER en
+        // ev. flat reduktion, avrundat nedåt vid halvering (samma konvention
+        // som Varulv-textens egna "avrundat nedåt"). En bok-post kombinerar
+        // aldrig flat+half/double i praktiken, men ordningen är definierad
+        // för att vara förutsägbar om det någonsin händer.
+        let appliedAmount = resistance.blocked ? 0 : Math.max(0, rollTotal - resistance.reduction);
+        if (!resistance.blocked && resistance.halved) appliedAmount = Math.floor(appliedAmount / 2);
+        if (!resistance.blocked && resistance.doubled) appliedAmount *= 2;
 
         // ⚠ Resursval tillagt 2026-09-03 (Andeslag/Själaförvittring/Skrik
         // skadar PSY, inte KP) — samma "delta mot aktuellt värde"-princip
@@ -257,6 +264,8 @@ function buildSpellCardContext(result, { caster, targets = [], pendingBanner = f
         maximised: t.instantEffect.maximised,
         blocked: t.instantEffect.resistance.blocked,
         reduction: t.instantEffect.resistance.reduction,
+        halved: t.instantEffect.resistance.halved,
+        doubled: t.instantEffect.resistance.doubled,
         applied: t.instantEffect.appliedAmount,
         totalAfter: t.instantEffect.totalAfterPreview
       } : null,

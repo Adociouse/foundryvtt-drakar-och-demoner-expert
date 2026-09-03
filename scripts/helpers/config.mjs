@@ -2437,8 +2437,10 @@ DODE.rollResistance = async function (sg, attributeValue) {
 
 /**
  * Löser motstånd/immunitet mot en skadetyp för en instant-effekt
- * (scripts/rolls/spell.mjs, Fas 2) — se fields-resistances.mjs för de tre
- * bokmönstren (Motståndskraft/Syraskydd/Blindskydd) den tolkar.
+ * (scripts/rolls/spell.mjs, Fas 2) ELLER ett vapenanfall (scripts/rolls/
+ * attack.mjs, backlog 84, 2026-09-03) — se fields-resistances.mjs för
+ * bokmönstren (Motståndskraft/Syraskydd/Blindskydd/Halv skada/Sårbarhet/
+ * Vapenmaterial-immunitet) den tolkar.
  *
  * ⚠ `incomingE` (kastarens effektgrad) används bara för `overcomeE`-fallet,
  * och avgörs med en RAK TALJÄMFÖRELSE — inget slag. Det är medvetet skilt
@@ -2446,21 +2448,51 @@ DODE.rollResistance = async function (sg, attributeValue) {
  * inte "slå ett motståndsslag", så en slumpkomponent hade varit fel mekanik,
  * inte bara en annan implementation av samma mekanik.
  *
+ * ⚠ `weaponMaterial` (backlog 84) fungerar likadant men för `overcomeMaterial`
+ * — en ASYMMETRISK jämförelse, INTE en hierarki: `overcomeMaterial:"silver"`
+ * övervinns av BÅDE silver- och magiska vapen (Varulv/Vampyr, "Silvervapen
+ * och magiska vapen gör full skada"), men `overcomeMaterial:"magical"`
+ * övervinns ENDAST av magiska vapen — ett silvervapen räcker INTE (Dödsgast/
+ * Kummelgast/Mörkgast, "bara av magiska vapen"). Samma asymmetri som
+ * `creatureWeaponWarning` nedan redan kodar för varningssystemet.
+ *
  * @param {Actor} actor Mottagaren — läser `actor.system.resistances`.
- * @param {string} damageType
- * @param {number} [incomingE=0]
- * @returns {{reduction:number, immune:boolean, blocked:boolean}} `blocked` är
- *   det fältet att kolla för "ska effekten utebli helt" — `immune` speglar
- *   samma sak, kvar som ett separat, mer läsbart namn för anroparen.
+ * @param {string} damageType Besvärjelsens egen `damageType`, ELLER den
+ *   fasta strängen `"weapon"` för alla vapenanfall (attack.mjs) — se
+ *   fields-resistances.mjs för varför de två aldrig får blandas ihop.
+ * @param {number} [incomingE=0] Bara relevant för `overcomeE`. Vapenanfall
+ *   skickar alltid 0 (ingen effektgrad i strid).
+ * @param {string|null} [weaponMaterial=null] Bara relevant för
+ *   `overcomeMaterial`. Besvärjelser skickar alltid `null`.
+ * @returns {{reduction:number, immune:boolean, blocked:boolean, halved:boolean, doubled:boolean}}
+ *   `blocked` är fältet att kolla för "ska effekten utebli helt" — `immune`
+ *   speglar samma sak, kvar som ett separat, mer läsbart namn för anroparen.
+ *   `halved`/`doubled` gäller EFTER ev. flat `reduction` är avdragen —
+ *   anroparen avrundar NEDÅT vid halvering (Varulv-textens egen konvention).
  */
-DODE.resolveResistance = function (actor, damageType, incomingE = 0) {
+DODE.resolveResistance = function (actor, damageType, incomingE = 0, weaponMaterial = null) {
+  const none = { reduction: 0, immune: false, blocked: false, halved: false, doubled: false };
   const entry = (actor?.system?.resistances ?? []).find((r) => r.damageType === damageType);
-  if (!entry) return { reduction: 0, immune: false, blocked: false };
-  if (entry.reduction === "immun") {
-    const blocked = entry.overcomeE == null || incomingE <= entry.overcomeE;
-    return { reduction: 0, immune: blocked, blocked };
-  }
-  return { reduction: Number(entry.reduction) || 0, immune: false, blocked: false };
+  if (!entry) return none;
+
+  // ⚠ "Övervunnen" är UNIVERSELL — gäller lika för immun/half/double/flat, inte
+  // bara "immun" (Varulv är exakt fallet: `reduction:"half"` MED
+  // `overcomeMaterial:"silver"` — ett silvervapen ska ge FULL skada, inte
+  // fortsatt halverad). Live-verifierat 2026-09-03: en tidigare version som
+  // bara kollade overcome inuti "immun"-grenen lät Varulvs "half" ignorera
+  // silver helt — hittat och rättat under samma liveverifiering som resten
+  // av backlog 84.
+  const eOvercome = entry.overcomeE != null && incomingE > entry.overcomeE;
+  const materialOvercome = !!entry.overcomeMaterial && (
+    weaponMaterial === entry.overcomeMaterial
+    || (entry.overcomeMaterial === "silver" && weaponMaterial === "magical")
+  );
+  const kind = (eOvercome || materialOvercome) ? (entry.overcomeReduction || "0") : entry.reduction;
+
+  if (kind === "immun") return { ...none, immune: true, blocked: true };
+  if (kind === "half") return { ...none, halved: true };
+  if (kind === "double") return { ...none, doubled: true };
+  return { ...none, reduction: Number(kind) || 0 };
 };
 
 /**

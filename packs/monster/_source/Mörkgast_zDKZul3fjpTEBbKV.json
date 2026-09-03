@@ -52,7 +52,16 @@
       "book": "mb2",
       "page": "91"
     },
-    "creatureType": "spirit"
+    "creatureType": "spirit",
+    "resistances": [
+      {
+        "damageType": "weapon",
+        "reduction": "immun",
+        "overcomeE": null,
+        "overcomeMaterial": "magical",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "zDKZul3fjpTEBbKV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/morkgast.png",
