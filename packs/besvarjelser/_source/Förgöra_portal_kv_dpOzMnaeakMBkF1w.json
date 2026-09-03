@@ -14,7 +14,8 @@
     "source": {
       "book": "kaosvaktare",
       "page": "50"
-    }
+    },
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "RymlAj587ITzWsZD",
