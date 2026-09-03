@@ -14,7 +14,13 @@
       "page": "55-59"
     },
     "targetMode": "single",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@E",
+      "resource": "psy"
+    },
+    "damageType": "mental"
   },
   "_id": "9gXa08EyFQcyqJXI",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",

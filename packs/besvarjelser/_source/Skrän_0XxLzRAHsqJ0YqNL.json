@@ -16,7 +16,8 @@
       "page": "27"
     },
     "targetMode": "area",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "statusEffect": "stun"
   },
   "effects": [],
   "folder": "RIMgmAlELKcOeHG3",

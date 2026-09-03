@@ -16,7 +16,8 @@
       "page": "27"
     },
     "targetMode": "area",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "statusEffect": "deaf"
   },
   "effects": [],
   "folder": "RIMgmAlELKcOeHG3",

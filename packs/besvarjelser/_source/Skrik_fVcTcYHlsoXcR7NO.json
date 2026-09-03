@@ -17,7 +17,13 @@
     "saveAttribute": "psy",
     "saveDifficulty": "normalt",
     "targetMode": "single",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@E",
+      "resource": "psy"
+    },
+    "damageType": "mental"
   },
   "_id": "fVcTcYHlsoXcR7NO",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

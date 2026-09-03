@@ -96,7 +96,14 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // instant-HP-delta-primitiv (UC-M1/M3/M11/M12).
       instantEffect: new fields.SchemaField({
         kind: new fields.StringField({ required: false, initial: "none", choices: ["none", "damage", "heal"] }),
-        formula: new fields.StringField({ required: false, initial: "" })
+        formula: new fields.StringField({ required: false, initial: "" }),
+        // Vilken resurs kind:"damage"/"heal" påverkar. Tillagt 2026-09-03
+        // (Johan, efter en direkt fråga om Andeslag/Själaförvittring/Skriks
+        // PSY-förlust): innan detta fanns bara ETT mål-attribut (KP/hp),
+        // hårdkodat i spell.mjs — besvärjelser som "skadar" PSY i stället
+        // för KP (Spiritisms Andeslag/Själaförvittring, Illusionisms Skrik)
+        // kunde alltså inte uttryckas alls, bara flaggas battleRelevant.
+        resource: new fields.StringField({ required: false, initial: "hp", choices: ["hp", "psy"] })
       }),
       // Skadetyp för instantEffect.kind:"damage" — matchas mot en aktörs
       // `resistances[]` (actor-character.mjs/actor-npc.mjs) via

@@ -14,7 +14,8 @@
       "page": "53-56"
     },
     "targetMode": "area",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "statusEffect": "deaf"
   },
   "_id": "0qNQYoI58BpPEhGA",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",

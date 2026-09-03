@@ -14,7 +14,8 @@
       "page": "35-40"
     },
     "targetMode": "single",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "statusEffect": "stun"
   },
   "_id": "iP5sepiVnl5ZLUHY",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/illusionism.png",

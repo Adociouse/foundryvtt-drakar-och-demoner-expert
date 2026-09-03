@@ -101,14 +101,22 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
           : roll.total;
         const appliedAmount = resistance.blocked ? 0 : Math.max(0, rollTotal - resistance.reduction);
 
-        const currentHp = target.system.hp?.value ?? target.system.hp?.max ?? 0;
-        const maxHp = target.system.hp?.max ?? currentHp;
+        // ⚠ Resursval tillagt 2026-09-03 (Andeslag/Själaförvittring/Skrik
+        // skadar PSY, inte KP) — samma "delta mot aktuellt värde"-princip
+        // gäller oavsett resurs, se applySpellResult.
+        const resource = sys.instantEffect.resource === "psy" ? "psy" : "hp";
+        const currentVal = resource === "psy"
+          ? (target.system.resources?.psy?.value ?? target.system.resources?.psy?.max ?? 0)
+          : (target.system.hp?.value ?? target.system.hp?.max ?? 0);
+        const maxVal = resource === "psy"
+          ? (target.system.resources?.psy?.max ?? currentVal)
+          : (target.system.hp?.max ?? currentVal);
         const previewAfter = sys.instantEffect.kind === "heal"
-          ? Math.min(maxHp, currentHp + appliedAmount)
-          : currentHp - appliedAmount; // ⚠ Ej klampat vid 0 — samma konvention som tickPeriodicEffect (config.mjs).
+          ? Math.min(maxVal, currentVal + appliedAmount)
+          : currentVal - appliedAmount; // ⚠ Ej klampat vid 0 — samma konvention som tickPeriodicEffect (config.mjs).
 
-        t.instantEffect = { kind: sys.instantEffect.kind, roll, resistance, appliedAmount, totalAfterPreview: previewAfter, maximised: maximise };
-        pendingT.instantEffect = { kind: sys.instantEffect.kind, amount: appliedAmount };
+        t.instantEffect = { kind: sys.instantEffect.kind, resource, roll, resistance, appliedAmount, totalAfterPreview: previewAfter, maximised: maximise };
+        pendingT.instantEffect = { kind: sys.instantEffect.kind, resource, amount: appliedAmount };
       }
       if (sys.statusEffect) {
         t.statusApplied = sys.statusEffect;
@@ -161,12 +169,18 @@ export async function applySpellResult(result, { caster, targets = [] }) {
     if (!target) continue;
 
     if (pt.instantEffect) {
-      const current = target.system.hp?.value ?? target.system.hp?.max ?? 0;
-      const maxHp = target.system.hp?.max ?? current;
+      const resource = pt.instantEffect.resource === "psy" ? "psy" : "hp";
+      const path = resource === "psy" ? "system.resources.psy.value" : "system.hp.value";
+      const current = resource === "psy"
+        ? (target.system.resources?.psy?.value ?? target.system.resources?.psy?.max ?? 0)
+        : (target.system.hp?.value ?? target.system.hp?.max ?? 0);
+      const maxVal = resource === "psy"
+        ? (target.system.resources?.psy?.max ?? current)
+        : (target.system.hp?.max ?? current);
       const next = pt.instantEffect.kind === "heal"
-        ? Math.min(maxHp, current + pt.instantEffect.amount)
+        ? Math.min(maxVal, current + pt.instantEffect.amount)
         : current - pt.instantEffect.amount;
-      await target.update({ "system.hp.value": next });
+      await target.update({ [path]: next });
     }
     if (pt.status) {
       // ⚠ Live-fynd 2026-08-21 (Johan): när en statuseffekt applicerad av en
@@ -231,6 +245,7 @@ function buildSpellCardContext(result, { caster, targets = [], pendingBanner = f
       } : null,
       instantEffect: t.instantEffect ? {
         kind: t.instantEffect.kind,
+        resource: t.instantEffect.resource,
         rolled: t.instantEffect.roll.total,
         maximised: t.instantEffect.maximised,
         blocked: t.instantEffect.resistance.blocked,

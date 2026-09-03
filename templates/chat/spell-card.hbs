@@ -57,11 +57,11 @@
           <span class="abs">immun</span>
         {{else}}
           {{#if this.instantEffect.reduction}}<span class="abs">− {{this.instantEffect.reduction}} motstånd</span>{{/if}}
-          <strong class="applied">{{this.instantEffect.applied}} {{#if (eq this.instantEffect.kind "heal")}}KP läkt{{else}}KP skada{{/if}}</strong>
+          <strong class="applied">{{this.instantEffect.applied}} {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} {{#if (eq this.instantEffect.kind "heal")}}läkt{{else}}skada{{/if}}</strong>
         {{/if}}
       </div>
       {{#unless this.instantEffect.blocked}}
-        <div class="total-line">Totala KP efter: <strong>{{this.instantEffect.totalAfter}}</strong></div>
+        <div class="total-line">Totala {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} efter: <strong>{{this.instantEffect.totalAfter}}</strong></div>
       {{/unless}}
     {{/if}}
     {{#if this.statusApplied}}<div class="wear-line"><i class="fa-solid fa-circle-exclamation"></i> {{this.statusApplied}}</div>{{/if}}

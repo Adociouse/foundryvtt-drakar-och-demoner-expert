@@ -16,7 +16,8 @@
       "page": "32"
     },
     "targetMode": "multi",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "statusEffect": "fear"
   },
   "effects": [],
   "folder": "h3DXV1Kz6bJ5dUGn",
