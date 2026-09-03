@@ -12,7 +12,14 @@
     "source": {
       "book": "formelboken",
       "page": "39-46"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@{E}d4"
+    },
+    "damageType": "lightning",
+    "targetMode": "touch",
+    "battleRelevant": true
   },
   "_id": "AIpujGUF7KVb3YdV",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

@@ -12,7 +12,9 @@
     "source": {
       "book": "formelboken",
       "page": "39-46"
-    }
+    },
+    "targetMode": "multi",
+    "battleRelevant": true
   },
   "_id": "SCbjXWSDIugBKdCa",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",
