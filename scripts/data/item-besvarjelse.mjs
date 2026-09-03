@@ -73,11 +73,11 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       ritual: new fields.BooleanField({ required: false, initial: false }),
       kvick: new fields.BooleanField({ required: false, initial: false }),
       // Temporär ActiveEffect som besvärjelsen lägger på målet vid kastning.
-      // `spellDuration` är i STRIDSRUNDOR (Foundrys duration.rounds). `spellEffect`
-      // är en lista av AE-change-definitioner — normalt mot `.bonus`-fält, mode 2 =
-      // ADD (CONST.ACTIVE_EFFECT_MODES.ADD), men varken fält eller mode är låst av
-      // schemat. Kastlogiken (DoDEActor#applySpellEffect) skapar en embeddad
-      // ActiveEffect på målet med flags.<system.id>.source:"spell". Se actor.mjs.
+      // `spellEffect` är en lista av AE-change-definitioner — normalt mot
+      // `.bonus`-fält, mode 2 = ADD (CONST.ACTIVE_EFFECT_MODES.ADD), men varken
+      // fält eller mode är låst av schemat. Kastlogiken (DoDEActor#applySpellEffect)
+      // skapar en embeddad ActiveEffect på målet med flags.<system.id>.source:"spell".
+      // Se actor.mjs.
       // ✅ Kopplad in i den RIKTIGA kastvägen sedan Fas 3 (spell-dialog.mjs →
       // resolveSpellCast/applySpellResult, spell.mjs) — karaktärsarkets "Kasta"-
       // knapp har aldrig använt den äldre, mål-lösa castSpell() nedan. Rättat
@@ -85,7 +85,23 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // `value` får innehålla en `@E`-formel (samma konvention som
       // instantEffect.formula, t.ex. "@E*5") — löses upp EN gång vid
       // kastningstillfället i applySpellEffect, inte vid varje AE-tillämpning.
-      spellDuration: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+      //
+      // ⚠ `spellDuration` — RESULTAT I STRIDSRUNDOR (Foundrys duration.rounds),
+      // men FÄLTET SJÄLVT är en Roll-FORMEL-sträng sedan 2026-09-03 (backlog
+      // 90/96/97-uppföljning), inte längre ett statiskt heltal. Samma
+      // "lös upp EN gång vid kastningstillfället"-mönster som `spellEffect.value`
+      // — löser BÅDE Kraftrops ursprungliga approximationsproblem (boken har
+      // "1T4 SR", ett riktigt slumpslag, tidigare tvunget avrundat till en fast
+      // "2") OCH E-skalande durationer i sekundtext som "Sx1 minuter" (Snabbhet/
+      // Långsamhet, MAG s.40 — "S" i bokens durationstext = kastets effektgrad,
+      // samma konvention som "per effektgrad"-skadeformlerna). ⚠ Enheten är
+      // FORTFARANDE bara stridsrundor — minut-/timbaserade durationer måste
+      // fortfarande manuellt konverteras till rundor vid kurering (SECONDS_PER_
+      // ROUND, config.mjs, avgör omräkningen; ingen egen minut/timme-enhet i
+      // schemat än, se backlog 97, medvetet INTE löst av detta tillägg).
+      // Tomt/"0" = ingen effekt (`ActiveEffect.duration` blir `{}`, samma
+      // "till manuellt borttagen"-beteende som innan).
+      spellDuration: new fields.StringField({ required: false, initial: "0" }),
       spellEffect: new fields.ArrayField(
         new fields.SchemaField({
           key: new fields.StringField({ required: true, initial: "system.attributes.sty.bonus" }),

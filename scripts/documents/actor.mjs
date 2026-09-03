@@ -144,9 +144,20 @@ export default class DoDEActor extends Actor {
    * AE:n. Samma `@E`/`@{E}`-konvention som instantEffect.formula redan
    * använder (se item-besvarjelse.mjs).
    *
+   * ⚠ **`spellDuration`-formeltillägg, 2026-09-03 (backlog 90/96/97-uppföljning,
+   * "curate more buff spells"):** samma "lös upp EN gång här"-princip som
+   * `spellEffect.value` ovan — `spellDuration` är sedan detta datum en Roll-
+   * formel-STRÄNG (t.ex. `"1T4"` för Kraftrops verkliga slumpade duration,
+   * eller `"@E*12"` för Snabbhet/Långsamhets "S×1 minuter", omräknat till
+   * rundor vid kurering eftersom schemat fortfarande bara uttrycker rundor,
+   * se item-besvarjelse.mjs). Tidigare var fältet ett statiskt heltal —
+   * Kraftrop fick då approximeras till en fast "2" i stället för sin riktiga
+   * "1T4 SR". Bakåtkompatibelt: ett rent tal som sträng ("2") fungerar
+   * fortfarande identiskt (Roll("2") = 2).
+   *
    * @param {Item} item En "besvarjelse"-item med spellEffect/spellDuration.
    * @param {Actor} [target=this] Aktören effekten läggs på (default: kastaren själv).
-   * @param {number} [effektgrad=1] Kastets effektgrad — löser upp `@E`-formler i spellEffect.value.
+   * @param {number} [effektgrad=1] Kastets effektgrad — löser upp `@E`-formler i spellEffect.value/spellDuration.
    */
   async applySpellEffect(item, target = this, effektgrad = 1) {
     if (!item || item.type !== "besvarjelse") return;
@@ -159,7 +170,9 @@ export default class DoDEActor extends Actor {
     }
     if (!changes.length) return;
 
-    const rounds = item.system.spellDuration ?? 0;
+    const durationFormula = item.system.spellDuration || "0";
+    const durationRoll = await new Roll(durationFormula, { E }).evaluate();
+    const rounds = Math.max(0, Math.floor(durationRoll.total));
     return target.createEmbeddedDocuments("ActiveEffect", [
       buildTemporaryEffectData(item, changes, { sourceKind: "spell", duration: rounds > 0 ? { rounds } : {} })
     ]);

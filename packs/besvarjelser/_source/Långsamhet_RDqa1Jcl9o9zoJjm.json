@@ -16,7 +16,15 @@
       "page": "40"
     },
     "targetMode": "single",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "spellEffect": [
+      {
+        "key": "system.attributes.smi.bonus",
+        "mode": 2,
+        "value": "-@E*2"
+      }
+    ],
+    "spellDuration": "@E*12"
   },
   "effects": [],
   "folder": "jAaX0JH0rKlJYw9n",
