@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "32-37"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "3ZIGtWbTBZWeUIiT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",

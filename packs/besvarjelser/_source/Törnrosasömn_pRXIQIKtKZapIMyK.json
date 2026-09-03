@@ -14,7 +14,10 @@
     "source": {
       "book": "formelboken",
       "page": "35"
-    }
+    },
+    "statusEffect": "sleep",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "h3DXV1Kz6bJ5dUGn",

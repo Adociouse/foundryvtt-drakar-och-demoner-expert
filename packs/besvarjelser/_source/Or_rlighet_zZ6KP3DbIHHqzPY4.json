@@ -12,7 +12,10 @@
     "source": {
       "book": "formelboken",
       "page": "32-37"
-    }
+    },
+    "statusEffect": "paralysis",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "_id": "zZ6KP3DbIHHqzPY4",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/haxkonster.png",
