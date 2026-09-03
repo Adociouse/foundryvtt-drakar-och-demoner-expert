@@ -14,7 +14,9 @@
     "source": {
       "book": "formelboken",
       "page": "54"
-    }
+    },
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "jjtnfKTBdaPM42Nl",

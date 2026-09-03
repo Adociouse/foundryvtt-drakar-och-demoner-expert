@@ -12,7 +12,14 @@
     "source": {
       "book": "formelboken",
       "page": "53-56"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@{E}d10"
+    },
+    "damageType": "physical",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "_id": "YaRkAhpqV9YoNz6y",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/rostmagi.png",
