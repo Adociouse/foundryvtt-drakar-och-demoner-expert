@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "12-18"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "0LPHIKrHxiEDSEoT",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
