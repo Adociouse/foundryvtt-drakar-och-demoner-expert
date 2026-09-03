@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "3-16"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "RlyvBspu2X1hXCkX",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/besvarjelser/kamouflage.png",

@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "3-16"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "jS50FrOz4QlLTYpr",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/animism.png",
