@@ -48,10 +48,32 @@ const fields = foundry.data.fields;
  *    en fallback-reduktion som gäller NÄR villkoret väl är övervunnet, i
  *    stället för att anta att övervunnen immunitet alltid betyder full skada.
  *
+ * **Utökat igen 2026-09-03 (backlog 100), samma dag — vapnens SLAGKATEGORI
+ * fick tre egna `damageType`-poster i stället för att bara vara ett gap i
+ * `"weapon"`.** Skelettets statblock (MB1 s.91) har fyra OLIKA regler för
+ * fyra olika vapentyper under samma "vapen"-paraply — `"weapon"` som en enda
+ * monolitisk hink kan inte uttrycka det. Lösning: `"piercing"` (pilar/
+ * stick/stöt — identisk effekt hos Skelettet, slås ihop), `"slashing"`
+ * (hugg) och `"blunt"` (kross) är nu egna `damageType`-värden, matchande
+ * `item-vapen.mjs`s nya `strikeType`-fält. `resolveAttack()` slår upp
+ * `strikeType` FÖRST; bara om målet saknar en post för just den kategorin
+ * faller den tillbaka på den generiska `"weapon"`-typen (Varulv/Vampyr/
+ * Dödsgast/Kummelgast/Mörkgast — kategorilösa, rent materialstyrda regler,
+ * ingen omkurering av dem behövdes). Johans egen observation samma session,
+ * efter att ha sett både detta OCH spelens `damageType` bredvid varandra:
+ * *"Seems like 'damage type' is the consistent architecture?"* — bekräftat:
+ * samma delade vokabulär täcker nu vapenslag, besvärjelseelement OCH lämnar
+ * plats för en framtida MILJÖ-skadekälla (t.ex. `"water"`/`"sun"` för
+ * Irrblossets vattenkontaktskada/Illvättens solskada, se backlog 84:s 100-
+ * serie) — ingen ny arkitektur behövs för det, bara nya `damageType`-värden
+ * OCH en ännu obyggd triggermekanik (ingen UI/hook för "SL applicerar
+ * miljöskada" finns idag, ett eget designpass krävs, se backlog).
+ *
  * Konsumeras av CONFIG.DODE.resolveResistance (scripts/helpers/config.mjs) —
- * vapenanfall (attack.mjs) skickar alltid `damageType:"weapon"` + vapnets
- * `material`; besvärjelseskada (spell.mjs) skickar besvärjelsens egen
- * `damageType`, aldrig `"weapon"`.
+ * vapenanfall (attack.mjs) skickar `weapon.system.strikeType` (fallback
+ * `"weapon"`) + vapnets `material`; besvärjelseskada (spell.mjs) skickar
+ * besvärjelsens egen `damageType`, aldrig ett strikeType-värde eller
+ * `"weapon"`.
  */
 export function resistancesField() {
   return new fields.ArrayField(
@@ -59,7 +81,10 @@ export function resistancesField() {
       damageType: new fields.StringField({
         required: true,
         initial: "physical",
-        choices: ["physical", "fire", "cold", "acid", "lightning", "poison", "mental", "magic", "weapon"]
+        choices: [
+          "physical", "fire", "cold", "acid", "lightning", "poison", "mental", "magic",
+          "weapon", "piercing", "slashing", "blunt"
+        ]
       }),
       // "immun" | "half" | "double" | ett flat tal (som sträng) — sparat som
       // sträng eftersom fields.NumberField inte kan uttrycka den unionen;

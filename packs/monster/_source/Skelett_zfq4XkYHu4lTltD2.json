@@ -44,7 +44,23 @@
       "book": "mb1",
       "page": "90"
     },
-    "creatureType": "undead-corporeal"
+    "creatureType": "undead-corporeal",
+    "resistances": [
+      {
+        "damageType": "piercing",
+        "reduction": "immun",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
+      },
+      {
+        "damageType": "slashing",
+        "reduction": "half",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "zfq4XkYHu4lTltD2",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/skelett.png",

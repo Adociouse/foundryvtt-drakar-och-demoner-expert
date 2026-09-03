@@ -53,18 +53,33 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
       // some magic weapons might not be".
       parryable: new fields.BooleanField({ required: false, initial: true }),
       // Vapenmaterial — tillagt 2026-09-03 (Johan: kreaturstyp+varningssystemet,
-      // se CONFIG.DODE.creatureWeaponWarning i config.mjs). Krävs för att
-      // jämföra mot ett NPC-måls `creatureType` (actor-npc.mjs) — Dödsgast/
-      // Kummelgast/Mörkgast tar bara skada av "magiska vapen" (special-text,
-      // packs/monster), Varulv bara full skada av silver/magi. ⚠ Påverkar
-      // INTE skadeberäkningen än — bara varningen. Den faktiska skademate-
-      // matiken (halv skada/immunitet) kräver att `resistances[]` kopplas in
-      // i resolveAttack() överhuvudtaget (görs aldrig idag) plus en
-      // proportionell "halv"-reduktionsform — se docs/DESIGN_DECISIONS.md
-      // backlog 84, medvetet inte del av detta tillägg.
+      // se CONFIG.DODE.creatureWeaponWarning i config.mjs). Jämförs mot ett
+      // NPC-måls `creatureType`/`resistances[]` (actor-npc.mjs) — Dödsgast/
+      // Kummelgast/Mörkgast tar bara skada av magiska vapen, Varulv/Vampyr av
+      // silver ELLER magi. Sedan backlog 84 (samma dag) driver detta även den
+      // FAKTISKA skademattematiken, inte bara varningen — se resolveAttack().
       material: new fields.StringField({
         required: false, initial: "mundane",
         choices: ["mundane", "silver", "magical"]
+      }),
+      // Vapnets skadeKATEGORI — tillagt 2026-09-03 (backlog 100, Johan: "All
+      // weapons need to have categories"). Skilt från `material` (VAD vapnet
+      // är gjort av) — det här är HUR det skadar. Delar `damageType`-
+      // vokabulären med `resistances[]` (fields-resistances.mjs) och
+      // besvärjelsers egen `damageType` — samma arkitektur genomgående, som
+      // Johan själv observerade: "Seems like 'damage type' is the consistent
+      // architecture?" `resolveAttack()` slår upp en `resistances[]`-post
+      // för DENNA specifika kategori FÖRST, och faller bara tillbaka på den
+      // generiska `"weapon"`-typen (Varulv/Vampyr m.fl., material-styrd,
+      // kategorilös) om målet saknar en kategorispecifik post — se
+      // `applyWeaponResistance()`s egen kommentar. Sourcat ur Skelettets
+      // statblock (MB1 s.91): "tar INGEN skada av pilar, stickvapen (dolk)
+      // eller stötvapen (spjut); endast HALV skada av huggvapen (svärd);
+      // krossvapen (klubbor) ger normal skada" — pil/stick/stöt har IDENTISK
+      // effekt och slås samman till en enda kategori, `"piercing"`.
+      strikeType: new fields.StringField({
+        required: true, initial: "slashing",
+        choices: ["piercing", "slashing", "blunt"]
       }),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),

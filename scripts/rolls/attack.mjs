@@ -24,12 +24,19 @@ export const RANGED_MODS = {
 };
 
 /**
- * Löser ett måls `resistances[]` mot ETT vapenanfall — backlog 84, 2026-09-03.
- * Skickar alltid `damageType:"weapon"` (aldrig ett element) och vapnets
- * `material` — se fields-resistances.mjs för varför det är en egen, från
- * besvärjelseskada SKILD kanal (Lindskiarnens halvering gäller uttryckligen
- * bara besvärjelser, inte vapen; skulle `"physical"` återanvänts för båda
- * hade den halveringen läckt in i vanliga svärdshugg).
+ * Löser ett måls `resistances[]` mot ETT vapenanfall — backlog 84, 2026-09-03,
+ * utökad 2026-09-03 (backlog 100) med vapnets slagkategori (`strikeType`).
+ * Skickar aldrig ett besvärjelseelement — se fields-resistances.mjs för varför
+ * vapen- och besvärjelsekanalerna är medvetet SKILDA (Lindskiarnens halvering
+ * gäller uttryckligen bara besvärjelser; skulle `"physical"` återanvänts för
+ * båda hade den läckt in i vanliga svärdshugg).
+ *
+ * **Två-stegs uppslagning (backlog 100):** kollar FÖRST en post för vapnets
+ * specifika `strikeType` (piercing/slashing/blunt — Skelettets fyra olika
+ * regler för fyra vapentyper, MB1 s.91, kräver detta), och faller bara
+ * tillbaka på den generiska `"weapon"`-typen om målet saknar en sådan post
+ * (Varulv/Vampyr/Dödsgast/Kummelgast/Mörkgast — kategorilösa, rent material-
+ * styrda regler som inte bryr sig om vapnets slagtyp alls).
  *
  * Tillämpas ALLTID efter rustningsavdrag — Varulv-textens egen ordning
  * ("...efter att vapnet trängt igenom skinnet").
@@ -40,7 +47,11 @@ export const RANGED_MODS = {
  * @returns {{amount:number, resistance:object}}
  */
 function applyWeaponResistance(target, weapon, amount) {
-  const resistance = CONFIG.DODE.resolveResistance(target, "weapon", 0, weapon?.system?.material ?? "mundane");
+  const material = weapon?.system?.material ?? "mundane";
+  const strikeType = weapon?.system?.strikeType || null;
+  const hasSpecific = strikeType && (target?.system?.resistances ?? []).some((r) => r.damageType === strikeType);
+  const damageType = hasSpecific ? strikeType : "weapon";
+  const resistance = CONFIG.DODE.resolveResistance(target, damageType, 0, material);
   if (resistance.blocked) return { amount: 0, resistance };
   let out = Math.max(0, amount - resistance.reduction);
   if (resistance.halved) out = Math.floor(out / 2);
