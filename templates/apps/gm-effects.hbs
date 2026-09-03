@@ -38,7 +38,7 @@
         <ul class="effect-list periodic-list">
           {{#each periodicEffects}}
             <li data-effect-id="{{this.id}}">
-              <span class="label">{{this.label}}</span>
+              <span class="label">{{this.label}}{{#if this.damageType}} ({{this.damageType}}){{/if}}</span>
               <span class="kind">{{this.amount}} / {{this.cadence}} mot {{this.target}}</span>
               <span class="value">{{this.ticksRemaining}} kvar</span>
               <button type="button" data-action="removePeriodicEffect" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
@@ -63,6 +63,19 @@
           <option value="poison">Gift</option>
           <option value="eld">Eld</option>
           <option value="blodning">Blödning</option>
+        </select>
+        <select name="damageType" title="Skadetyp för resistanskontroll — bara relevant om mål = hp">
+          <option value="">Ingen (generisk, ingen resistanskontroll)</option>
+          <option value="physical">Fysisk</option>
+          <option value="fire">Eld</option>
+          <option value="cold">Kyla</option>
+          <option value="acid">Syra</option>
+          <option value="lightning">Blixt</option>
+          <option value="poison">Gift</option>
+          <option value="mental">Mental</option>
+          <option value="magic">Magi</option>
+          <option value="water">Vatten</option>
+          <option value="sun">Solljus</option>
         </select>
         <label class="mod-check apply-to-targets">
           <input type="checkbox" name="applyToTargets" />

@@ -62,18 +62,18 @@ const fields = foundry.data.fields;
  * ingen omkurering av dem behövdes). Johans egen observation samma session,
  * efter att ha sett både detta OCH spelens `damageType` bredvid varandra:
  * *"Seems like 'damage type' is the consistent architecture?"* — bekräftat:
- * samma delade vokabulär täcker nu vapenslag, besvärjelseelement OCH lämnar
- * plats för en framtida MILJÖ-skadekälla (t.ex. `"water"`/`"sun"` för
- * Irrblossets vattenkontaktskada/Illvättens solskada, se backlog 84:s 100-
- * serie) — ingen ny arkitektur behövs för det, bara nya `damageType`-värden
- * OCH en ännu obyggd triggermekanik (ingen UI/hook för "SL applicerar
- * miljöskada" finns idag, ett eget designpass krävs, se backlog).
+ * samma delade vokabulär täcker nu vapenslag, besvärjelseelement OCH,
+ * sedan backlog 104 (samma dag), en tredje MILJÖ-skadekälla: `"water"`
+ * (Irrbloss, "vatten ger 1T3 skada per liter") och `"sun"` (Illvätte,
+ * "1T6 i skada per minut i solljus") — kurerade på Irrbloss (fire/cold)
+ * som proof case, se `resolveResistance`/`tickPeriodicEffect` i config.mjs
+ * och SL-formuläret i `scripts/apps/gm-effects.mjs`.
  *
  * Konsumeras av CONFIG.DODE.resolveResistance (scripts/helpers/config.mjs) —
  * vapenanfall (attack.mjs) skickar `weapon.system.strikeType` (fallback
- * `"weapon"`) + vapnets `material`; besvärjelseskada (spell.mjs) skickar
- * besvärjelsens egen `damageType`, aldrig ett strikeType-värde eller
- * `"weapon"`.
+ * `"weapon"`) + vapnets `material`; besvärjelseskada (spell.mjs) OCH
+ * periodiska SL-lagda effekter (`tickPeriodicEffect`, backlog 104) skickar
+ * ett vanligt elementvärde, aldrig ett strikeType-värde eller `"weapon"`.
  */
 export function resistancesField() {
   return new fields.ArrayField(
@@ -83,7 +83,7 @@ export function resistancesField() {
         initial: "physical",
         choices: [
           "physical", "fire", "cold", "acid", "lightning", "poison", "mental", "magic",
-          "weapon", "piercing", "slashing", "blunt"
+          "water", "sun", "weapon", "piercing", "slashing", "blunt"
         ]
       }),
       // "immun" | "half" | "double" | ett flat tal (som sträng) — sparat som

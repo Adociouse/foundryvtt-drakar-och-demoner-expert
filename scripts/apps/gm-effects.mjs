@@ -238,7 +238,12 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     // hårdkodad till "gm" här, vilket gjorde att GM-tillagda effekter ALDRIG
     // tände Token HUD-ikonen även för gift/eld. Fixad i samma veva.
     const source = form.querySelector('[name="source"]')?.value || "gm";
-    return { label, cadence, target: targetField, amount, ticksRemaining, source };
+    // Skadetyp för resistanskontroll — tillagd 2026-09-03 (backlog 104).
+    // Blankt (default) = ingen kontroll alls, reproducerar dagens beteende.
+    // Bara relevant när target==="hp"; ignoreras tyst av tickPeriodicEffect
+    // annars (se config.mjs) — inget behov av att dölja fältet dynamiskt.
+    const damageType = form.querySelector('[name="damageType"]')?.value || "";
+    return { label, cadence, target: targetField, amount, ticksRemaining, source, damageType };
   }
 
   static async #onAddPeriodicEffect(event, target) {

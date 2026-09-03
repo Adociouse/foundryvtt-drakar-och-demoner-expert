@@ -2180,7 +2180,16 @@ DODE.canDualWieldWithoutTraining = function (actor) {
  * sedan sluta" — ActiveEffect-lägen (ADD/MULTIPLY) är statiska/kontinuerliga.
  *
  * Radform: {id, label, cadence:"round"|"hour"|"day", target:"hp"|skillKey,
- *   amount, ticksRemaining, source, onsetAt (worldTime periodens aktivering)}
+ *   amount, ticksRemaining, source, onsetAt (worldTime periodens aktivering),
+ *   damageType (valfri, backlog 104, 2026-09-03)}
+ *
+ * ⚠ `damageType` tillagd 2026-09-03 (backlog 104) — bara relevant för
+ * `target:"hp"`-rader, konsulteras av `tickPeriodicEffect` mot
+ * `CONFIG.DODE.resolveResistance`. HELT VALFRITT fält, ingen SchemaField
+ * (det här är bara en flagg-array, inget dokumentschema) — en saknad/tom
+ * nyckel (ALLA periodeffekter som fanns INNAN detta datum, gift/eld/
+ * blödning inräknat) betyder "ingen resistanskontroll alls", exakt samma
+ * beteende som innan tillägget. Ingen migrering behövs eller görs.
  */
 DODE.PERIODIC_EFFECTS_FLAG = "periodicEffects";
 
@@ -2297,9 +2306,21 @@ DODE.tickPeriodicEffect = async function (actor, effect, count = 1) {
       : currentEffects.map((e) => (e.id === latest.id ? { ...e, ticksRemaining: remaining } : e));
 
     if (latest.target === "hp") {
+      // ⚠ Resistanskontroll tillagd 2026-09-03 (backlog 104) — PER TICK, sedan
+      // multiplicerad med `applied`, så halverings-/dubblingssemantiken blir
+      // identisk oavsett om EN runda eller flera (advanceTime-batchning) löses
+      // upp i ett hopp. `latest.damageType` saknas/tomt = ingen kontroll alls,
+      // exakt dagens beteende — se PERIODIC_EFFECTS_FLAG-kommentaren ovan.
+      let perTick = latest.amount;
+      if (latest.damageType) {
+        const r = DODE.resolveResistance(actor, latest.damageType);
+        perTick = r.blocked ? 0 : Math.max(0, perTick - r.reduction);
+        if (!r.blocked && r.halved) perTick = Math.floor(perTick / 2);
+        if (!r.blocked && r.doubled) perTick *= 2;
+      }
       const hp = actor.system.hp ?? {};
       await actor.update({
-        "system.hp.value": (hp.value ?? hp.max ?? 0) - latest.amount * applied,
+        "system.hp.value": (hp.value ?? hp.max ?? 0) - perTick * applied,
         [`flags.${game.system.id}.${DODE.PERIODIC_EFFECTS_FLAG}`]: nextEffects
       });
     } else {
@@ -2387,6 +2408,12 @@ DODE.applyPoisonEffect = async function (actor, { severity, poisonSty, amount = 
     amount,
     ticksRemaining: ticks,
     source: "poison",
+    // ⚠ Tillagt 2026-09-03 (backlog 104) — en UTTALAD beteendeändring, inte en
+    // tyst bieffekt: gifttickar respekterar nu en redan kurerad
+    // resistances[]-post för damageType:"poison" (i dag EN varelse i hela
+    // kompendiet, Lindskiarnen). `applyPoisonEffect` anropas inte från något
+    // UI ännu (konsol/makro), så blast radius är i praktiken noll.
+    damageType: "poison",
     onsetDelay: { value, unit: onset.unit }
   });
 };

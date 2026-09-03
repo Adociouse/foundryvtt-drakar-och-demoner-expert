@@ -40,7 +40,7 @@
         "note": "Antänder och skadar som vanlig eld"
       }
     ],
-    "special": "<p>Litet älvfolk som svävar <strong>inuti ett genomskinligt, flygande eldklot</strong> (klotet har STO 2).</p><p>Klotet står helt under irrblossets kontroll, som kan variera dess <strong>ljusstyrka och hetta från stearinljus till svetslåga</strong>, och det <strong>kan aldrig släckas medan irrblosset lever</strong> — det är sammankopplat med varelsens livskraft.</p><p>⚠ <strong>Helt immuna mot all hetta och eld</strong> och kan inte bländas av starkt ljus, men tar <strong>dubbel skada av köldattacker</strong>; <strong>vatten ger 1T3 skada per liter</strong> som träffar.</p><p>Spelar skogsvandrare spratt men är inte illasinnade.</p>",
+    "special": "<p>Litet älvfolk som svävar <strong>inuti ett genomskinligt, flygande eldklot</strong> (klotet har STO 2).</p><p>Klotet står helt under irrblossets kontroll, som kan variera dess <strong>ljusstyrka och hetta från stearinljus till svetslåga</strong>, och det <strong>kan aldrig släckas medan irrblosset lever</strong> — det är sammankopplat med varelsens livskraft.</p><p>⚠ <strong>Helt immuna mot all hetta och eld</strong> och kan inte bländas av starkt ljus, men tar <strong>dubbel skada av köldattacker</strong>; <strong>vatten ger 1T3 skada per liter</strong> som träffar. Eld-/kyleffekten inlagd som två <code>resistances</code>-poster sedan 2026-09-03 (backlog 104) — mekaniskt genomdrivet. Vattenkontaktskadan har ingen egen mekanism (kontakt-/exponeringsskada, inte ett anfall) — tillämpas manuellt av SL.</p><p>Spelar skogsvandrare spratt men är inte illasinnade.</p>",
     "hp": {
       "value": null,
       "max": 0,
@@ -51,7 +51,23 @@
     "source": {
       "book": "mb2",
       "page": "79"
-    }
+    },
+    "resistances": [
+      {
+        "damageType": "fire",
+        "reduction": "immun",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
+      },
+      {
+        "damageType": "cold",
+        "reduction": "double",
+        "overcomeE": null,
+        "overcomeMaterial": "",
+        "overcomeReduction": "0"
+      }
+    ]
   },
   "_id": "6frZkLpU1Ngexdzg",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/monster/irrbloss.png",

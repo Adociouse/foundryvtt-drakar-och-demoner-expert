@@ -37,7 +37,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
 | FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
-| Kompendier: 13 raser, 39 yrken, 339 vapen/utrustning, 475 besvärjelser (14 magiskolor), 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och beskrivningstexternas kvalitet — se nedan). Besvärjelsekatalogens katalogkomplettering mot Formelboken är HELT KLAR; Kaos Väktares demonologitillägg (3 yrken, Portalmagi som 14:e skola) tillagt 2026-09-02 |
+| Kompendier: 13 raser, 39 yrken, 341 vapen/utrustning, 475 besvärjelser (14 magiskolor), 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och beskrivningstexternas kvalitet — se nedan). Besvärjelsekatalogens katalogkomplettering mot Formelboken är HELT KLAR; Kaos Väktares demonologitillägg (3 yrken, Portalmagi som 14:e skola) tillagt 2026-09-02 |
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
 | GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
@@ -83,7 +83,7 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 |---|---|
 | `raser` | 13 raser: 7 grundraser (Människa, Alv, Halvalv, Halvlängdsman, Dvärg, Halvork, Anka) + 6 alvsläkten (Alver s.22) |
 | `yrken` | 39 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 28 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare, Kaos Väktare — Demonolog/Demonjägare/Demonkrigare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
-| `vapen-utrustning` | 339 poster: 23 vapen, 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
+| `vapen-utrustning` | 341 poster: 25 vapen (inkl. Silverdolk/Silverpilar, `material:"silver"`, 2026-09-03), 45 rustningsdelar (per kroppsdel, SB s.27), 271 övrig utrustning — köpbara i guidens utrustningssteg |
 | `besvarjelser` | 475 besvärjelser (431 besvärjelser + 44 minibesvärjelser, minibesvärjelserna samlade i en egen "Minimagi"-undermapp per skola) — Formelbokens katalogkomplettering är KLAR (13 skolor + Allmänna), plus Kaos Väktares demonologitillägg (Portalmagi som 14:e skola, 7 besvärjelser + 14 nya/3 ersatta Demonologi-besvärjelser) |
 | `monster` | 241 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
