@@ -14,7 +14,14 @@
     "source": {
       "book": "formelboken",
       "page": "63"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@{E}d3"
+    },
+    "damageType": "physical",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "pSpWWYPUCR1Q3Fdg",

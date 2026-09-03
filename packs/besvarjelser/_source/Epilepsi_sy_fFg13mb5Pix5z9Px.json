@@ -14,7 +14,10 @@
     "source": {
       "book": "formelboken",
       "page": "62"
-    }
+    },
+    "statusEffect": "unconscious",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "pSpWWYPUCR1Q3Fdg",

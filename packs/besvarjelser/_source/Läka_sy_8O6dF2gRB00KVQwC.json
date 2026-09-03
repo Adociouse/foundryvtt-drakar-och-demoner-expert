@@ -14,7 +14,13 @@
     "source": {
       "book": "formelboken",
       "page": "62"
-    }
+    },
+    "instantEffect": {
+      "kind": "heal",
+      "formula": "@E"
+    },
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "pSpWWYPUCR1Q3Fdg",
