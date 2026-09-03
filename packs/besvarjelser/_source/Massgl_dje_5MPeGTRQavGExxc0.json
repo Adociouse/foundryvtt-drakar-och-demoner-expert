@@ -12,7 +12,9 @@
     "source": {
       "book": "formelboken",
       "page": "26-34"
-    }
+    },
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "_id": "5MPeGTRQavGExxc0",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
