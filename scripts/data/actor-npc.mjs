@@ -59,6 +59,25 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
         //    extrakten DODE_Monsterboken1/2_STATBLOCK.md i Roll20-projektet.
         maxOverride: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true })
       }),
+      // ⚠ Deplomerbar PSY-resurs, tillagd 2026-09-03 (Johan: "Build NPC/Monster
+      // PSY like KP to manage PSY spells"). Innan detta hade NPC:er bara
+      // `attributes.psy.value` — en platt attributpoäng utan aktuell/max-
+      // uppdelning — så en PSY-skadebesvärjelse (Andeslag, Själaförvittring,
+      // Skrik) hade ingenstans att skriva för ett NPC-mål (se backlog 92).
+      // Samma value/max-mönster som `hp` ovan: `value:null` betyder "full",
+      // `max` härleds i prepareDerivedData() direkt från `attributes.psy.value`
+      // (till skillnad från HP finns ingen formel att avvika från — psy-
+      // attributet ÄR redan det auktorerade grundtalet, ingen maxOverride
+      // behövs). Låga PSY-varelser (skorpioner/spindlar PSY 1, svärmar PSY 0
+      // i dagens kompendium) töms alltså nästan omedelbart av även en svag
+      // PSY-besvärjelse — samma "överkill mot ett lågt HP-mål"-dynamik som
+      // redan gäller KP-skada, inget särskilt undantag behövs.
+      resources: new fields.SchemaField({
+        psy: new fields.SchemaField({
+          value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
+          max: new fields.NumberField({ required: true, integer: true, initial: 0 })
+        })
+      }),
       // Kroppsbyggnad — styr träffområdestabellen (RP s.48-50). ⚠ Dolt värde:
       // spelarna ska inte behöva veta att en varelse är bevingad för att systemet
       // ska slå rätt träffområde. Default humanoid, vilket täcker de flesta.
@@ -139,5 +158,12 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
     this.hp.value = this.hp.value === null || this.hp.value === undefined
       ? this.hp.max
       : Math.min(this.hp.value, this.hp.max);
+
+    // PSY-resurs — se schemafältets kommentar ovan. Max är rakt av
+    // attributvärdet (ingen formel, ingen maxOverride-flykt behövs).
+    this.resources.psy.max = a.psy.value;
+    this.resources.psy.value = this.resources.psy.value === null || this.resources.psy.value === undefined
+      ? this.resources.psy.max
+      : Math.min(this.resources.psy.value, this.resources.psy.max);
   }
 }
