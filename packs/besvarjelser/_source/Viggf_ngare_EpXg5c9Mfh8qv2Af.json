@@ -12,7 +12,8 @@
     "source": {
       "book": "formelboken",
       "page": "18-26"
-    }
+    },
+    "battleRelevant": true
   },
   "_id": "EpXg5c9Mfh8qv2Af",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

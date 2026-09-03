@@ -14,7 +14,13 @@
     "source": {
       "book": "formelboken",
       "page": "25"
-    }
+    },
+    "resistedBy": "attribute-save",
+    "saveAttribute": "psy",
+    "saveDifficulty": "svart",
+    "statusEffect": "blind",
+    "targetMode": "area",
+    "battleRelevant": true
   },
   "effects": [],
   "folder": "GYHnhvls5MdcpM7L",

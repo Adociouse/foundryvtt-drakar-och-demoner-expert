@@ -18,7 +18,7 @@
 | Alkemi | 0 | — Inget innehåll | — | Registrerad magiskola (`DODE.magicSchools.alkemi`) men INGA besvärjelser byggda i denna skola ännu — inget att kurera förrän innehåll finns. |
 | Animism | 45+4=49 | ⬜ Ej påbörjad | | |
 | Demonologi | 25+4=29 | ⬜ Ej påbörjad | | Inkluderar Kaos Väktare-tillägget (2026-09-02). |
-| Elementarmagi | 51+1=52 | ⬜ Ej påbörjad | | §1.1 ovan har redan en stor del av skadeklassificeringen (Blixt/Eld/Energistråle/Frost/Flammande hand) — börja där, men bekräfta mot nuvarande `_source` (posterna kan ha ändrats sedan 2026-08-24). |
+| **Elementarmagi** | 51+1=52 | ✅ Klar | 2026-09-03 | 5 skadebesvärjelser (`instantEffect`, Blixt/Eld redan kurerade sedan 2026-08-21, Frost/Energistråle/Explosion nya), 3 räddningsslag (`resistedBy`), 3 statuseffekter (`statusEffect`), 26 till fick bara `battleRelevant:true` (vapenbuffar/item-BV/rörelse-immunitet/auto-parering — inget fält passar, se skriptets kommentarer), 16 rörda inte alls. Terse beskrivningar (backlog 86, ej ännu uppgraderade till full boktext) — kurering byggd på de befintliga kompakta raderna, korsverifierad mot §1.1:s tidigare full-textklassificering där de överlappar. |
 | Harmonism | 44+4=48 | ⬜ Ej påbörjad | | §1.1 har redan Hetta klassificerad. |
 | Häxkonster | 23+0=23 | ⬜ Ej påbörjad | | |
 | Illusionism | 23+5=28 | ⬜ Ej påbörjad | | |

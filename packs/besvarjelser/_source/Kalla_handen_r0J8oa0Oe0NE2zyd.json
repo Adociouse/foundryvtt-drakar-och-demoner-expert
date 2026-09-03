@@ -12,7 +12,11 @@
     "source": {
       "book": "formelboken",
       "page": "18-26"
-    }
+    },
+    "resistedBy": "attribute-save",
+    "saveAttribute": "fys",
+    "saveDifficulty": "svart",
+    "battleRelevant": true
   },
   "_id": "r0J8oa0Oe0NE2zyd",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",

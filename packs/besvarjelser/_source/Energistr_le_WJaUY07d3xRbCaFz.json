@@ -12,7 +12,14 @@
     "source": {
       "book": "formelboken",
       "page": "18-26"
-    }
+    },
+    "instantEffect": {
+      "kind": "damage",
+      "formula": "@{E}d6"
+    },
+    "damageType": "physical",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "_id": "WJaUY07d3xRbCaFz",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
