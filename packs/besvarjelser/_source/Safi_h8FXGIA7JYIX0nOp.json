@@ -12,7 +12,10 @@
     "source": {
       "book": "formelboken",
       "page": "55-59"
-    }
+    },
+    "statusEffect": "unconscious",
+    "targetMode": "single",
+    "battleRelevant": true
   },
   "_id": "h8FXGIA7JYIX0nOp",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/spiritism.png",
