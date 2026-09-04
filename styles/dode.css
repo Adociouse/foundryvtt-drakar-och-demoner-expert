@@ -1031,3 +1031,14 @@
 }
 .dode-quick-attack { color: var(--color-text-light-highlight, inherit); }
 
+/* ---- Actor-katalogens "Skapa ny rollperson"-genväg (dode.mjs) ---- */
+.dode-create-new-character {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+

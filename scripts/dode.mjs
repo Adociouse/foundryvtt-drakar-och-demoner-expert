@@ -791,6 +791,25 @@ Hooks.on("renderActorDirectory", (app, html) => {
     gmButton.addEventListener("click", () => game.dode.openGmEffects());
     header.appendChild(gmButton);
   }
+
+  // Uttrycklig "skapa ny"-genväg, längst till höger i raden (appended sist —
+  // den generiska knappen ovan är medvetet kontextkänslig,
+  // openCharacterWizard i dode.mjs: en spelare som redan äger EXAKT en
+  // rollperson hoppar rakt in i redigeringsläge för DEN, ingen väljare visas
+  // (se metodens egen kommentar, "ingen anledning att fråga"). Det lämnar
+  // ingen självbetjänad väg att starta en ANDRA rollperson förrän man redan
+  // äger två. Denna knapp kringgår hela den kontextkänsliga logiken och
+  // öppnar guiden i tomt skapaläge rakt av, oavsett hur många man äger.
+  if (!header.querySelector(".dode-create-new-character")) {
+    const createButton = document.createElement("button");
+    createButton.type = "button";
+    createButton.classList.add("dode-create-new-character");
+    createButton.innerHTML = '<i class="fa-solid fa-plus"></i>';
+    createButton.title = "Skapa ny rollperson";
+    createButton.setAttribute("aria-label", "Skapa ny rollperson");
+    createButton.addEventListener("click", () => new DoDECharacterWizard({}).render(true));
+    header.appendChild(createButton);
+  }
 });
 
 /**
