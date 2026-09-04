@@ -15,7 +15,11 @@
       "book": "formelboken",
       "page": "5"
     },
-    "battleRelevant": true
+    "battleRelevant": true,
+    "spellEffect": [
+      { "key": "system.attributes.$CHOICE.bonus", "mode": 2, "value": "-@E", "choiceOptions": ["sty", "fys", "sto", "kar", "smi"], "floorAtOne": true }
+    ],
+    "spellDuration": "@E*3"
   },
   "effects": [],
   "folder": "R8oaopxZZs7ntDKl",

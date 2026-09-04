@@ -55,6 +55,10 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     // targetMode:"weapon"-kast väljs, samma mönster som attack-dialog.mjs:s
     // ammoKey.
     this.weaponItemId = null;
+    // Per-kast attributval (backlog 98, 2026-09-04) — Öka/Minska. Satt lazy i
+    // _prepareContext (förvalt: första tillåtna alternativet) första gången
+    // en besvärjelse med "$CHOICE" i sin spellEffect.key väljs.
+    this.chosenAttribute = null;
   }
 
   get title() {
@@ -93,6 +97,20 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       this.weaponItemId = weaponOptions.find((w) => w.equipped)?.id ?? weaponOptions[0]?.id ?? null;
     }
 
+    // Per-kast attributval (backlog 98) — bara relevant om NÅGON spellEffect-
+    // post bär "$CHOICE" i sin key (Öka/Minska). Restriktionen (choiceOptions)
+    // hämtas från den FÖRSTA matchande posten — samma val gäller alla poster
+    // med "$CHOICE" på samma besvärjelse, se resolveChoiceKey (actor.mjs).
+    const choiceEntry = item?.system?.spellEffect?.find((c) => c.key?.includes("$CHOICE"));
+    const needsAttributeChoice = !!choiceEntry;
+    const attributeChoiceOptions = needsAttributeChoice
+      ? (choiceEntry.choiceOptions?.length ? choiceEntry.choiceOptions : Object.keys(CONFIG.DODE.attributes))
+        .map((key) => ({ key, label: game.i18n.localize(CONFIG.DODE.attributes[key]) }))
+      : [];
+    if (needsAttributeChoice && (!this.chosenAttribute || !attributeChoiceOptions.some((a) => a.key === this.chosenAttribute))) {
+      this.chosenAttribute = attributeChoiceOptions[0]?.key ?? null;
+    }
+
     const psy = this.actor.system.resources?.psy ?? {};
 
     return {
@@ -104,6 +122,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       isWeaponTarget, weaponOptions, weaponItemId: this.weaponItemId,
       noWeaponsNote: isWeaponTarget && tokens.length && !weaponOptions.length
         ? "Målet äger inga vapen-Items att förtrolla." : null,
+      needsAttributeChoice, attributeChoiceOptions, chosenAttribute: this.chosenAttribute,
       // Enda-mål-läget (self/touch/single) använder bara det FÖRSTA
       // målsatta tokenet, precis som Anfallsdialogens enda-måls-vy — men
       // visar HELA listan om spelaren råkat målsätta flera, med en
@@ -140,6 +159,9 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     this.element.querySelector('input[name="effektgrad"]')?.addEventListener("change", () => this.#recomputePreview());
     this.element.querySelector('select[name="weaponItemId"]')?.addEventListener("change", (event) => {
       this.weaponItemId = event.currentTarget.value;
+    });
+    this.element.querySelector('select[name="chosenAttribute"]')?.addEventListener("change", (event) => {
+      this.chosenAttribute = event.currentTarget.value;
     });
     this.#recomputePreview();
   }
@@ -198,7 +220,18 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       return;
     }
 
-    const result = await resolveSpellCast({ caster: this.actor, item, effektgrad, targets: targetActors, weaponTarget });
+    // Per-kast attributval (backlog 98) — samma "$CHOICE" i spellEffect.key-
+    // kontroll som _prepareContext redan gjorde, oberoende av targetMode.
+    const needsAttributeChoice = item.system.spellEffect?.some((c) => c.key?.includes("$CHOICE"));
+    const chosenAttribute = needsAttributeChoice
+      ? (form.querySelector('select[name="chosenAttribute"]')?.value ?? null)
+      : null;
+    if (needsAttributeChoice && !chosenAttribute) {
+      ui.notifications.warn("Ingen grundegenskap vald.");
+      return;
+    }
+
+    const result = await resolveSpellCast({ caster: this.actor, item, effektgrad, targets: targetActors, weaponTarget, chosenAttribute });
 
     // ⚠ HELA kastningen (alla mål) delar ETT ägarskapsbeslut — se
     // klassens modulkommentar för varför, till skillnad från

@@ -28,6 +28,19 @@ function buildTemporaryEffectData(item, changes, { sourceKind, duration = {} }) 
   };
 }
 
+/**
+ * Löser upp "$CHOICE"-platshållaren i en AE-change-key mot ett spelarvalt
+ * attribut (t.ex. "system.attributes.$CHOICE.bonus" → "system.attributes.sty.bonus").
+ * Delad mellan `consumeItem` och `applySpellEffect` — identisk substitution,
+ * bara skillnaden VAR valet görs (en DialogV2 vid applicering för konsumerbara
+ * föremål, en <select> i kast-dialogen för besvärjelser, se spell-dialog.mjs).
+ * @param {string} key
+ * @param {string|null} chosenAttribute
+ */
+function resolveChoiceKey(key, chosenAttribute) {
+  return key.includes("$CHOICE") && chosenAttribute ? key.replaceAll("$CHOICE", chosenAttribute) : key;
+}
+
 export default class DoDEActor extends Actor {
   /** @param {Item} item En "fardighet"-item ägd av denna actor. */
   async rollSkill(item) {
@@ -158,15 +171,31 @@ export default class DoDEActor extends Actor {
    * @param {Item} item En "besvarjelse"-item med spellEffect/spellDuration.
    * @param {Actor} [target=this] Aktören effekten läggs på (default: kastaren själv).
    * @param {number} [effektgrad=1] Kastets effektgrad — löser upp `@E`-formler i spellEffect.value/spellDuration.
+   * @param {string|null} [chosenAttribute=null] Backlog 98 — spelarvalt attribut för
+   *   spellEffect-poster vars `key` innehåller "$CHOICE" (Öka/Minska). Valt i
+   *   kast-dialogen (spell-dialog.mjs), inte här — se resolveChoiceKey ovan.
    */
-  async applySpellEffect(item, target = this, effektgrad = 1) {
+  async applySpellEffect(item, target = this, effektgrad = 1, chosenAttribute = null) {
     if (!item || item.type !== "besvarjelse") return;
     const E = Math.max(1, Math.floor(effektgrad) || 1);
     const changes = [];
     for (const c of item.system.spellEffect ?? []) {
       if (!c.key || c.value === "") continue;
+      const key = resolveChoiceKey(c.key, chosenAttribute);
       const roll = await new Roll(c.value, { E }).evaluate();
-      changes.push({ key: c.key, mode: c.mode ?? CONST.ACTIVE_EFFECT_MODES.ADD, value: String(roll.total) });
+      let delta = roll.total;
+      // Backlog 98 — Minskas bokflagga: "omöjligt att minska en grundegenskap
+      // till ett värde lägre än 1". Klampar mot MÅLETS LEVANDE attributstotal
+      // (reflekterar redan aktiva tidigare Minska-AE:er, alltså stapel-medveten
+      // utan separat räkning) — bara när denna post explicit är flaggad, se
+      // item-besvarjelse.mjs. Math.min(0,...) hindrar en redan-under-golvet
+      // situation från att av misstag vändas till en ökning.
+      if (c.floorAtOne && delta < 0) {
+        const attr = key.match(/^system\.attributes\.(\w+)\.bonus$/)?.[1];
+        const currentTotal = attr ? (target.system.attributes?.[attr]?.total ?? null) : null;
+        if (currentTotal !== null) delta = Math.min(0, Math.max(delta, 1 - currentTotal));
+      }
+      changes.push({ key, mode: c.mode ?? CONST.ACTIVE_EFFECT_MODES.ADD, value: String(delta) });
     }
     if (!changes.length) return;
 
@@ -264,7 +293,7 @@ export default class DoDEActor extends Actor {
           </div>`
       });
       if (!result) return; // avbrutet — föremålet förbrukas inte
-      changes = changes.map((c) => ({ ...c, key: c.key.replaceAll("$CHOICE", result.attribute) }));
+      changes = changes.map((c) => ({ ...c, key: resolveChoiceKey(c.key, result.attribute) }));
     }
 
     await this.createEmbeddedDocuments("ActiveEffect", [

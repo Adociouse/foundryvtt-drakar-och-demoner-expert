@@ -59,6 +59,18 @@
       {{/if}}
     {{/if}}
 
+    {{#if needsAttributeChoice}}
+      <label class="field">Grundegenskap
+        <select name="chosenAttribute">
+          {{#each attributeChoiceOptions}}
+            <option value="{{this.key}}" {{#if (eq this.key ../chosenAttribute)}}selected{{/if}}>
+              {{this.label}}
+            </option>
+          {{/each}}
+        </select>
+      </label>
+    {{/if}}
+
     <button type="button" data-action="submitCast" class="submit-cast">
       <i class="fa-solid fa-hand-sparkles"></i> Kasta
     </button>

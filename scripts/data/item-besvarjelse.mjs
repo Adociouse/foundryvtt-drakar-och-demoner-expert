@@ -106,7 +106,27 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         new fields.SchemaField({
           key: new fields.StringField({ required: true, initial: "system.attributes.sty.bonus" }),
           mode: new fields.NumberField({ required: true, integer: true, initial: 2 }),
-          value: new fields.StringField({ required: true, initial: "" })
+          value: new fields.StringField({ required: true, initial: "" }),
+          // Backlog 98, 2026-09-04 — per-kast attributval (Öka/Minska, Formelboken
+          // s.5-6: kastaren väljer VILKEN grundegenskap varje kastning). `key` bär
+          // platshållaren "$CHOICE" (t.ex. "system.attributes.$CHOICE.bonus"),
+          // löst upp i kast-DIALOGEN (spell-dialog.mjs, inte en popup vid
+          // applicering — samma skäl som backlog 99:s vapenväljare: applySpellResult
+          // kan köras av en ANNAN klient än kastaren i SL-godkännande-flödet).
+          // Återanvänder consumeItem()s redan byggda "$CHOICE"-mönster (actor.mjs).
+          // Tomt = erbjud alla sju grundegenskaper (samma default som consumeItem).
+          choiceOptions: new fields.ArrayField(
+            new fields.StringField({ choices: ["sty", "sto", "fys", "smi", "int", "psy", "kar"] }),
+            { required: false, initial: [] }
+          ),
+          // Bara relevant för minskande värden. Minska (s.5) har en egen bokflagga
+          // — "omöjligt att minska en grundegenskap till ett värde lägre än 1" —
+          // som applySpellEffect (actor.mjs) genomdriver genom att klampa den
+          // resolverade deltan mot målets LEVANDE attributstotal. Explicit
+          // opt-in per spellEffect-post, INTE ett universellt motorbeteende —
+          // Kraftrop/Snabbhet/Långsamhet (redan liveverifierade utan golv) rörs
+          // medvetet inte av detta.
+          floorAtOne: new fields.BooleanField({ required: false, initial: false })
         })
       ),
       // Vapen-Item-riktad besvärjelse (Förtrolla/Förbanna vapen, backlog 99,

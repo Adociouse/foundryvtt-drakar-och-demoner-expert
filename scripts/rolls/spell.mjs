@@ -29,8 +29,12 @@ import { classifiedRoll } from "./attack.mjs";
  *   specifika vapen-Item (ägt av `targets[0]`) som besvärjelsen förtrollar.
  *   Ett REN Document, inget id — samma "riktiga objekt in, JSON-säker pending
  *   ut"-princip som resten av funktionen.
+ * @param {string|null} [o.chosenAttribute=null] Backlog 98, 2026-09-04 — bara
+ *   relevant när `item.system.spellEffect` har en post med "$CHOICE" i sin
+ *   `key` (Öka/Minska). Valt i kast-dialogen INNAN detta anrop (spell-dialog.mjs)
+ *   — se DoDEActor#applySpellEffect (actor.mjs) för var substitutionen faktiskt sker.
  */
-export async function resolveSpellCast({ caster, item, effektgrad = 1, targets = [], weaponTarget = null }) {
+export async function resolveSpellCast({ caster, item, effektgrad = 1, targets = [], weaponTarget = null, chosenAttribute = null }) {
   const E = Math.max(1, Math.floor(effektgrad) || 1);
   const cl = item.system.sValue - 2 * (E - 1);
   const cast = await classifiedRoll(cl);
@@ -162,6 +166,7 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
       if (sys.spellEffect?.length) {
         t.spellEffectApplies = true;
         pendingT.spellEffect = true;
+        pendingT.chosenAttribute = chosenAttribute;
       }
       if (sys.triggersFearTable) {
         t.fearDraw = await CONFIG.DODE.rollFearTable();
@@ -236,7 +241,7 @@ export async function applySpellResult(result, { caster, targets = [] }) {
         await created.setFlag(game.system.id, "sourceName", result.item.name);
       }
     }
-    if (pt.spellEffect) await caster.applySpellEffect(result.item, target, result.E);
+    if (pt.spellEffect) await caster.applySpellEffect(result.item, target, result.E, pt.chosenAttribute ?? null);
     // ⚠ Backlog 99, 2026-09-04 — vapnet slås upp FÄRSKT ur målets ägda items
     // här (skrivtillfället), inte buret genom `pending` som ett Document —
     // `pending` är JSON-säker data (bara id:t sparades), samma disciplin som
