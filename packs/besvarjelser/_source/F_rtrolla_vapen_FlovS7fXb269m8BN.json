@@ -13,7 +13,14 @@
       "book": "formelboken",
       "page": "18-26"
     },
-    "battleRelevant": true
+    "battleRelevant": true,
+    "targetMode": "weapon",
+    "weaponEffect": {
+      "clBonus": "@E",
+      "damageBonus": "@E",
+      "materialOverride": "magical"
+    },
+    "spellDuration": "@E*12"
   },
   "_id": "FlovS7fXb269m8BN",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/besvarjelser/fortrolla-vapen.png",

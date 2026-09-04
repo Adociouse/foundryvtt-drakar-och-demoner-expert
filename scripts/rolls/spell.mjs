@@ -24,8 +24,13 @@ import { classifiedRoll } from "./attack.mjs";
  * @param {number} [o.effektgrad=1]
  * @param {Actor[]} [o.targets=[]] Tomt = besvärjelsen påverkar ingen (rent
  *   CL/PSY-kast, samma som castSpell() redan gör).
+ * @param {Item|null} [o.weaponTarget=null] Bara relevant när
+ *   `item.system.targetMode==="weapon"` (backlog 99, 2026-09-04) — det
+ *   specifika vapen-Item (ägt av `targets[0]`) som besvärjelsen förtrollar.
+ *   Ett REN Document, inget id — samma "riktiga objekt in, JSON-säker pending
+ *   ut"-princip som resten av funktionen.
  */
-export async function resolveSpellCast({ caster, item, effektgrad = 1, targets = [] }) {
+export async function resolveSpellCast({ caster, item, effektgrad = 1, targets = [], weaponTarget = null }) {
   const E = Math.max(1, Math.floor(effektgrad) || 1);
   const cl = item.system.sValue - 2 * (E - 1);
   const cast = await classifiedRoll(cl);
@@ -74,6 +79,24 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
     // `creatureType` att jämföra mot; rollpersoner varnas aldrig.
     if (sys.targetRestriction && target.type === "npc") {
       t.targetWarning = CONFIG.DODE.spellTargetWarning(sys.targetRestriction, target.system.creatureType);
+    }
+
+    // ⚠ Vapen-Item-riktad besvärjelse (backlog 99, 2026-09-04) — HELT annan
+    // gren, ingen av de vanliga instantEffect/statusEffect/spellEffect-fälten
+    // är meningsfulla mot ett vapen. `weaponTarget` måste vara satt (dialogen
+    // garanterar det innan anrop); saknas det appliceras ingenting alls för
+    // detta mål, men kastet/PSY-kostnaden räknas ändå (samma "kastet lyckades,
+    // effekten uteblev av ett separat skäl"-princip som t.ex. ett blockerat
+    // spellTargetWarning-fall).
+    if (sys.targetMode === "weapon") {
+      if (weaponTarget) {
+        t.weaponEnchantApplies = true;
+        t.weaponName = weaponTarget.name;
+        pendingT.weaponEnchant = { weaponItemId: weaponTarget.id };
+      }
+      out.perTarget.push(t);
+      out.pending.targets.push(pendingT);
+      continue;
     }
 
     let saveSucceeded = false;
@@ -214,6 +237,14 @@ export async function applySpellResult(result, { caster, targets = [] }) {
       }
     }
     if (pt.spellEffect) await caster.applySpellEffect(result.item, target, result.E);
+    // ⚠ Backlog 99, 2026-09-04 — vapnet slås upp FÄRSKT ur målets ägda items
+    // här (skrivtillfället), inte buret genom `pending` som ett Document —
+    // `pending` är JSON-säker data (bara id:t sparades), samma disciplin som
+    // resten av filen.
+    if (pt.weaponEnchant) {
+      const weaponItem = target.items.get(pt.weaponEnchant.weaponItemId);
+      if (weaponItem) await caster.applyWeaponEnchantment(result.item, weaponItem, target, result.E);
+    }
   }
 }
 
@@ -271,6 +302,9 @@ function buildSpellCardContext(result, { caster, targets = [], pendingBanner = f
       } : null,
       statusApplied: t.statusApplied,
       spellEffectApplies: t.spellEffectApplies,
+      // Backlog 99, 2026-09-04 — Förtrolla/Förbanna vapen.
+      weaponEnchantApplies: t.weaponEnchantApplies ?? false,
+      weaponName: t.weaponName ?? null,
       fearDraw: t.fearDraw ? { text: t.fearDraw.result.name } : null,
       targetWarning: t.targetWarning ?? null
     })),

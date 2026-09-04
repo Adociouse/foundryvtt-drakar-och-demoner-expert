@@ -50,6 +50,11 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     super();
     this.actor = actor;
     this.itemId = item?.id ?? actor.items.find((i) => i.type === "besvarjelse")?.id ?? null;
+    // Vapen-Item-riktad besvärjelse (backlog 99, 2026-09-04) — satt lazy i
+    // _prepareContext (förvalt: målets utrustade vapen) första gången ett
+    // targetMode:"weapon"-kast väljs, samma mönster som attack-dialog.mjs:s
+    // ammoKey.
+    this.weaponItemId = null;
   }
 
   get title() {
@@ -74,8 +79,19 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     const targetMode = item?.system?.targetMode ?? "single";
     const needsTargets = targetMode !== "self";
     const isSplit = targetMode === "split";
+    const isWeaponTarget = targetMode === "weapon";
     const multiTarget = targetMode === "multi" || targetMode === "area" || isSplit;
     const tokens = needsTargets ? this.#targetTokens() : [];
+
+    // Vapen-väljare (backlog 99) — bara meningsfull med EXAKT ett mål (samma
+    // "enda-mål"-begränsning som touch/single redan har). Listar målets ägda
+    // vapen-Items, förvalt: det utrustade.
+    const weaponOptions = isWeaponTarget && tokens[0]?.actor
+      ? tokens[0].actor.items.filter((i) => i.type === "vapen").map((i) => ({ id: i.id, label: i.name, equipped: !!i.system.equipped }))
+      : [];
+    if (isWeaponTarget && (!this.weaponItemId || !weaponOptions.some((w) => w.id === this.weaponItemId))) {
+      this.weaponItemId = weaponOptions.find((w) => w.equipped)?.id ?? weaponOptions[0]?.id ?? null;
+    }
 
     const psy = this.actor.system.resources?.psy ?? {};
 
@@ -85,6 +101,9 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       itemDescription: item?.system?.description ?? "",
       sValue: item?.system?.sValue ?? 0,
       needsTargets, multiTarget, isSplit,
+      isWeaponTarget, weaponOptions, weaponItemId: this.weaponItemId,
+      noWeaponsNote: isWeaponTarget && tokens.length && !weaponOptions.length
+        ? "Målet äger inga vapen-Items att förtrolla." : null,
       // Enda-mål-läget (self/touch/single) använder bara det FÖRSTA
       // målsatta tokenet, precis som Anfallsdialogens enda-måls-vy — men
       // visar HELA listan om spelaren råkat målsätta flera, med en
@@ -119,6 +138,9 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       this.render();
     });
     this.element.querySelector('input[name="effektgrad"]')?.addEventListener("change", () => this.#recomputePreview());
+    this.element.querySelector('select[name="weaponItemId"]')?.addEventListener("change", (event) => {
+      this.weaponItemId = event.currentTarget.value;
+    });
     this.#recomputePreview();
   }
 
@@ -165,7 +187,18 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
         : multiTarget ? tokens.map((t) => t.actor) : [tokens[0].actor];
     }
 
-    const result = await resolveSpellCast({ caster: this.actor, item, effektgrad, targets: targetActors });
+    // Vapen-Item-riktad besvärjelse (backlog 99) — löser upp det VALDA
+    // vapen-Itemet ur MÅLETS ägda items (inte kastarens — Förtrolla vapen kan
+    // riktas mot en bundsförvants vapen på räckhåll, inte bara det egna).
+    const weaponTarget = targetMode === "weapon"
+      ? (targetActors[0]?.items.get(form.querySelector('select[name="weaponItemId"]')?.value) ?? null)
+      : null;
+    if (targetMode === "weapon" && !weaponTarget) {
+      ui.notifications.warn("Inget vapen att förtrolla på målet.");
+      return;
+    }
+
+    const result = await resolveSpellCast({ caster: this.actor, item, effektgrad, targets: targetActors, weaponTarget });
 
     // ⚠ HELA kastningen (alla mål) delar ETT ägarskapsbeslut — se
     // klassens modulkommentar för varför, till skillnad från
@@ -180,7 +213,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     // ("Misslyckade kast ska inte behöva godkännande") — inte en säkerhetsfråga,
     // bara en onödig extra kö-post. Bara kastningar som FAKTISKT vill skriva
     // något på ett oägt mål (instant-effekt/status/spellEffect) går längre.
-    const hasTargetWrites = result.pending.targets.some((t) => t.instantEffect || t.status || t.spellEffect);
+    const hasTargetWrites = result.pending.targets.some((t) => t.instantEffect || t.status || t.spellEffect || t.weaponEnchant);
     const canApplyDirectly = game.user.isGM || !hasTargetWrites || targetActors.every((a) => a.isOwner);
     if (canApplyDirectly) {
       await applySpellResult(result, { caster: this.actor, targets: targetActors });

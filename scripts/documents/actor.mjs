@@ -179,6 +179,53 @@ export default class DoDEActor extends Actor {
   }
 
   /**
+   * Lägger en vapen-Item-riktad besvärjelse (Förtrolla vapen/Förbanna vapen,
+   * backlog 99, 2026-09-04) på ETT specifikt vapen som `target` äger.
+   *
+   * ⚠ **Varför AE:n läggs på AKTÖREN, inte vapnet** — se moduldoc-kommentaren
+   * på `item-besvarjelse.mjs`s `weaponEffect`-fält: Foundry har ingen mekanism
+   * för att ett Item ska applicera sina egna effects på sig självt, så en AE
+   * på vapnet skulle aldrig göra något. I stället bär AE:n (på `target`s
+   * aktör) bonusarna som RENA FLAGGOR, taggade med vilket vapen-Item de gäller
+   * (`flags.<id>.enchantedWeaponId`) — `changes` lämnas medvetet TOM. Foundrys
+   * egen `duration.rounds`-expiry sköter "när klingar det av" gratis, exakt
+   * samma bevisade mekanism som `applySpellEffect` ovan redan använder.
+   * `CONFIG.DODE.activeWeaponEnchantment` (config.mjs) läser tillbaka
+   * flaggorna vid anfallstillfället — se attack-dialog.mjs.
+   *
+   * @param {Item} item En "besvarjelse"-item med `weaponEffect`/`spellDuration`.
+   * @param {Item} weaponItem Vapen-itemet som förtrollas (ägt av `target`).
+   * @param {Actor} [target=this] Aktören som äger vapnet (default: kastaren själv).
+   * @param {number} [effektgrad=1] Kastets effektgrad — löser upp `@E`-formler.
+   */
+  async applyWeaponEnchantment(item, weaponItem, target = this, effektgrad = 1) {
+    if (!item || item.type !== "besvarjelse" || !weaponItem) return;
+    const E = Math.max(1, Math.floor(effektgrad) || 1);
+    const we = item.system.weaponEffect ?? {};
+    const clBonus = we.clBonus ? (await new Roll(we.clBonus, { E }).evaluate()).total : 0;
+    const damageBonus = we.damageBonus ? (await new Roll(we.damageBonus, { E }).evaluate()).total : 0;
+    if (!clBonus && !damageBonus && !we.materialOverride) return;
+
+    const durationRoll = await new Roll(item.system.spellDuration || "0", { E }).evaluate();
+    const rounds = Math.max(0, Math.floor(durationRoll.total));
+    return target.createEmbeddedDocuments("ActiveEffect", [{
+      name: `${item.name}: ${weaponItem.name}`,
+      img: item.img,
+      changes: [], // ⚠ Medvetet tomt — se metodens egen kommentar.
+      duration: rounds > 0 ? { rounds } : {},
+      origin: item.uuid,
+      transfer: false,
+      disabled: false,
+      [`flags.${game.system.id}.source`]: "weaponEnchant",
+      [`flags.${game.system.id}.sourceName`]: item.name,
+      [`flags.${game.system.id}.enchantedWeaponId`]: weaponItem.id,
+      [`flags.${game.system.id}.clBonus`]: clBonus,
+      [`flags.${game.system.id}.damageBonus`]: damageBonus,
+      [`flags.${game.system.id}.materialOverride`]: we.materialOverride || ""
+    }]);
+  }
+
+  /**
    * Konsumerar ett engångsföremål (`system.consumable`, t.ex. en drickbar
    * drog) — backlogpost 7, testat med "Drakpotion". Samma mönster som
    * applySpellEffect ovan: en tillfällig, aktörsägd ActiveEffect med

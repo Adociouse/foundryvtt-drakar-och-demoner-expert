@@ -109,6 +109,30 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
           value: new fields.StringField({ required: true, initial: "" })
         })
       ),
+      // Vapen-Item-riktad besvärjelse (Förtrolla/Förbanna vapen, backlog 99,
+      // 2026-09-03/04) — bara relevant när targetMode:"weapon" (nedan). Skilt
+      // från spellEffect ovan av ETT tekniskt skäl: Foundry har ingen inbyggd
+      // mekanism för att ett Item ska applicera sina egna embeddade
+      // ActiveEffects på sig SJÄLVT (`Actor#applyActiveEffects` finns bara på
+      // Actor, bekräftat i den installerade klienten — Item saknar
+      // motsvarigheten helt). `spellEffect[].key` löser mot AKTÖRENS eget
+      // schema och kan därför ALDRIG rikta sig mot ett specifikt vapen-Items
+      // `system.damage` etc. — se DoDEActor#applyWeaponEnchantment (actor.mjs)
+      // för hur bonusarna i praktiken bärs (som flaggor på en aktörs-AE,
+      // aldrig som en mutation av vapnets egna data).
+      // `clBonus`/`damageBonus` är Roll-formler (samma `@E`-konvention som
+      // spellEffect.value) — t.ex. Förtrolla vapens "+1 CL/E, +1 skada/E" blir
+      // `clBonus:"@E"`, `damageBonus:"@E"`. `materialOverride` uttrycker
+      // "kan skada varelser som kräver magiska vapen" — återanvänder EXAKT
+      // samma `material`-vokabulär och `ammoMaterial`-mekanism som backlog
+      // 105 redan byggde för ammunition, se attack.mjs.
+      weaponEffect: new fields.SchemaField({
+        clBonus: new fields.StringField({ required: false, initial: "" }),
+        damageBonus: new fields.StringField({ required: false, initial: "" }),
+        materialOverride: new fields.StringField({
+          required: false, initial: "", blank: true, choices: ["", "silver", "magical"]
+        })
+      }),
       // Momentan HP-förändring vid kastning (skada/läkning) — separat från
       // spellEffect ovan, som bara kan skapa varaktiga .bonus-ActiveEffects.
       // `formula` följer samma tärningsformel-konvention som item-vapen.mjs:s
@@ -187,10 +211,15 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // hur många tokens spelaren målsatt, tärningar/mål = E - N + 1 (N=1
       // ger samma resultat som innan detta fält fanns, bakåtkompatibelt).
       // Se spell.mjs#resolveSpellCast för beräkningen.
+      // "weapon" tillagd 2026-09-04 (backlog 99) — besvärjelsen riktar sig
+      // mot ETT av måltokenets vapen-Items i stället för aktörens egna
+      // schema. Konsumeras av spell-dialog.mjs (visar en vapen-väljare efter
+      // mål-valet) och spell.mjs (grenar till applyWeaponEnchantment i
+      // stället för instantEffect/statusEffect/spellEffect).
       targetMode: new fields.StringField({
         required: false,
         initial: "single",
-        choices: ["self", "touch", "single", "multi", "area", "split"]
+        choices: ["self", "touch", "single", "multi", "area", "split", "weapon"]
       }),
       // Vilken NPC-`creatureType` (actor-npc.mjs) besvärjelsen enligt boken
       // FAKTISKT är avsedd mot — tillagt 2026-09-03 (Johan: en varning, INTE

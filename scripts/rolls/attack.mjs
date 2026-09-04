@@ -205,7 +205,13 @@ export async function resolveAttack({
   // — attack-dialog.mjs skickar den valda ammunitionens `material` (ett
   // `utrustning`-item, `category:"ammunition"`) för `category:"projektil"`-
   // vapen, annars `null` (då gäller vapnets eget `material` som förut).
-  ammoMaterial = null
+  ammoMaterial = null,
+  // ⚠ Backlog 99, 2026-09-04 — Förtrolla vapen/Förbanna vapen. attack-dialog.mjs
+  // slår upp CONFIG.DODE.activeWeaponEnchantment() innan anropet och skickar
+  // med det här om vapnet är förtrollat; `{}` (default) = ingen effekt,
+  // exakt dagens beteende. `materialOverride` hanteras INTE här — den skickas
+  // redan via `ammoMaterial` ovan (samma mekanism, återanvänd rakt av).
+  weaponEnchantment: { clBonus: enchantClBonus = 0, damageBonus: enchantDamageBonus = 0 } = {}
 }) {
   // ⚠ Räckvidd mäts med Foundrys egen funktion, inte egen geometri — se
   // tokenDistance(). Kontrollen görs bara när båda tokens skickas med, så
@@ -242,7 +248,11 @@ export async function resolveAttack({
     : 0;
   const baseFv = (skill ? skill.system.total + attackerBonus : null) ?? fvOverride ?? 0;
   if (!baseFv) throw new Error("resolveAttack: skicka `skill` (fardighet-Item) eller `fv` — vapnet bär inget FV.");
-  const modTotal = Object.values(mods).reduce((a, b) => a + b, 0) + (aimedAt ? -5 : 0);
+  // ⚠ Vapenförtrollningens CL-bonus (backlog 99) räknas in HÄR, inte i `mods`
+  // — den kommer från en aktiv AE, inte en fri SL-modifierare, och ska synas
+  // separat på kortet (se buildAttackCardContext) i stället för att smälta
+  // in bland de vanliga situationsmodifikationerna.
+  const modTotal = Object.values(mods).reduce((a, b) => a + b, 0) + (aimedAt ? -5 : 0) + enchantClBonus;
   const fv = Math.max(1, baseFv + modTotal);
 
   const atk = await classifiedRoll(fv);
@@ -298,6 +308,9 @@ export async function resolveAttack({
   const out = {
     fv, modTotal, mods, attack: atk, parry: par, verdict,
     attackEp, parryEp, hardParrySelfFumble,
+    // Vapenförtrollning (backlog 99) — bara satt när attack-dialog.mjs faktiskt
+    // hittade en aktiv enchantment; annars båda 0, kortet visar ingen rad.
+    enchantment: (enchantClBonus || enchantDamageBonus) ? { clBonus: enchantClBonus, damageBonus: enchantDamageBonus } : null,
     aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null,
     // ⚠ Skrivningar som ANNARS skulle ske här skjuts upp till `applyAttackResult`
     // — se Spelar-anfall-planen, 2026-08-21. Fylls i av grenarna nedan.
@@ -405,8 +418,13 @@ export async function resolveAttack({
   if (verdict.result !== "traff") return out;
 
   // --- Träff: skada → rustning → träffområde + Totala KP -------------------
-  const formula = combineDamageFormula(weapon?.system.damage || "1d6",
-    ranged ? "" : (attacker.system.damageBonus ?? ""));
+  // ⚠ Vapenförtrollningens skadebonus (backlog 99) kedjas in EFTER attackerns
+  // egen STY-baserade skadebonus — två oberoende additiva termer, ingen
+  // särbehandling behövs, combineDamageFormula hanterar "0"/tomt redan.
+  const formula = combineDamageFormula(
+    combineDamageFormula(weapon?.system.damage || "1d6", ranged ? "" : (attacker.system.damageBonus ?? "")),
+    enchantDamageBonus ? String(enchantDamageBonus) : ""
+  );
   const dmgRoll = await new Roll(formula).evaluate();
   let damage = verdict.maxDamage
     // Perfekt: automatiskt maximal skada med maximal skadebonus (SLB s.18).
@@ -509,6 +527,9 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
     label: k, value: v, positive: v > 0
   }));
   if (result.aimed) parts.push({ label: "riktat", value: -5, positive: false });
+  if (result.enchantment?.clBonus) {
+    parts.push({ label: "förtrollning", value: result.enchantment.clBonus, positive: result.enchantment.clBonus > 0 });
+  }
 
   return {
     attackerName: attacker.name,

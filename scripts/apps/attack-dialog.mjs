@@ -319,14 +319,17 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       // submission, se modulkommentaren om varför.
       targets: targets.map((t) => ({
         name: t.actor?.name ?? t.name, img: t.document?.texture?.src ?? t.actor?.img,
-        // ⚠ Ammunitionens material (om projektilvapen + en ammo vald) ÖVERORDNAR
-        // vapnets eget — samma princip som resolveAttack()s `ammoMaterial`, se
-        // ammoOptions ovan. Annars hade varningen felaktigt sagt "kräver silver"
-        // trots att spelaren redan skjuter silverpilar.
+        // ⚠ Ammunitionens material (om projektilvapen + en ammo vald), sedan en
+        // aktiv vapenförtrollnings materialOverride (backlog 99), sedan vapnets
+        // eget — samma prioritetsordning som #onSubmitAttack faktiskt använder.
+        // Annars hade varningen felaktigt sagt "kräver silver" trots att
+        // spelaren redan skjuter silverpilar/bär ett förtrollat vapen.
         targetWarning: t.actor?.type === "npc" && t.actor.system.creatureType
           ? CONFIG.DODE.creatureWeaponWarning(
             t.actor.system.creatureType,
-            (ranged ? ammoOptions.find((a) => a.id === this.ammoKey)?.material : null) ?? selectedItem?.system?.material ?? "mundane"
+            (ranged ? ammoOptions.find((a) => a.id === this.ammoKey)?.material : null)
+              || (selectedItem ? CONFIG.DODE.activeWeaponEnchantment(this.actor, selectedItem.id)?.materialOverride : null)
+              || selectedItem?.system?.material || "mundane"
           )
           : null
       })),
@@ -444,7 +447,21 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const ammoItem = ranged
       ? this.actor.items.get(form.querySelector('select[name="ammoKey"]')?.value)
       : null;
-    const ammoMaterial = ammoItem?.system?.material ?? null;
+
+    // ⚠ Vapenförtrollning (backlog 99, 2026-09-04) — INGEN egen UI-interaktion
+    // krävs här, förtrollningen är redan aktiv sedan kastningstillfället
+    // (Förtrolla/Förbanna vapen). Bara ett uppslag mot en riktig, icke-utgången
+    // AE på anfallarens aktör, flaggad med DETTA vapnets id.
+    const enchantment = CONFIG.DODE.activeWeaponEnchantment(this.actor, weapon.id);
+    // Prioritet om BÅDE vald ammunition OCH en förtrollning bär ett material:
+    // ammunitionen vinner (en tydlig, förutsägbar regel — se planfilen) —
+    // annars faller förtrollningens materialOverride in. ⚠ `||` inte `??` —
+    // `materialOverride` är `""` (falsy men INTE null/undefined) för en
+    // förtrollning utan materialkomponent (Förbanna vapen), och den tomma
+    // strängen ska falla igenom till "inget override alls", inte bli det
+    // slutgiltiga värdet.
+    const ammoMaterial = ammoItem?.system?.material || enchantment?.materialOverride || null;
+    const weaponEnchantment = enchantment ? { clBonus: enchantment.clBonus, damageBonus: enchantment.damageBonus } : undefined;
 
     const isThrown = category === "kast";
     const mods = {};
@@ -559,7 +576,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
         attacker: this.actor, weapon, skill, fv,
         target: targetToken.actor, parryItem, parrySkill, parryFv, parryBonus,
         aimedAt, intent, mods, ranged, detailed: true,
-        attackerToken, targetToken: targetToken.document, ammoMaterial
+        attackerToken, targetToken: targetToken.document, ammoMaterial, weaponEnchantment
       });
 
       if (result.outOfRange) {

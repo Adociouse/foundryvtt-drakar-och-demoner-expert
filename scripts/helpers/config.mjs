@@ -2536,6 +2536,36 @@ DODE.resolveResistance = function (actor, damageType, incomingE = 0, weaponMater
 };
 
 /**
+ * Läser tillbaka en aktiv vapenförtrollning (Förtrolla vapen/Förbanna vapen,
+ * backlog 99, 2026-09-04) — se `DoDEActor#applyWeaponEnchantment` (actor.mjs)
+ * för varför bonusarna bärs som FLAGGOR på en aktörs-AE i stället för
+ * `changes` mot vapnets egna schema. Anropas av attack-dialog.mjs vid VARJE
+ * anfallsbygge, aldrig cachat — samma "läs färskt"-disciplin som
+ * periodeffekter/`resolveResistance` redan följer.
+ *
+ * ⚠ Kollar BÅDE att en matchande AE hittas OCH att den fortfarande är aktiv
+ * (`isExpired`/`active`) — inte bara att dokumentet existerar. Foundrys
+ * exakta borttagningstajming för en utgången temporär AE vid rundövergång är
+ * inte garanterat omedelbar; säkrare att fråga effekten själv än att anta.
+ *
+ * @param {Actor} actor Vapnets ägare (anfallaren).
+ * @param {string} weaponItemId
+ * @returns {{clBonus:number, damageBonus:number, materialOverride:string}|null}
+ */
+DODE.activeWeaponEnchantment = function (actor, weaponItemId) {
+  const hit = (actor?.effects ?? []).find((e) =>
+    e.getFlag(game.system.id, "enchantedWeaponId") === weaponItemId
+    && e.active !== false
+    && !(typeof e.isExpired === "function" && e.isExpired()));
+  if (!hit) return null;
+  return {
+    clBonus: hit.getFlag(game.system.id, "clBonus") ?? 0,
+    damageBonus: hit.getFlag(game.system.id, "damageBonus") ?? 0,
+    materialOverride: hit.getFlag(game.system.id, "materialOverride") || ""
+  };
+};
+
+/**
  * Kreaturstyp + mål-varningssystem — tillagt 2026-09-03. Johans direktiv:
  * "battle system should give a warning if someone try to throw a spell/
  * effect/weapon effect/potion/scroll on wrong type of target.. maybe not

@@ -43,6 +43,22 @@
       {{/if}}
     </section>
 
+    {{#if isWeaponTarget}}
+      {{#if weaponOptions.length}}
+        <label class="field">Vapen att förtrolla
+          <select name="weaponItemId">
+            {{#each weaponOptions}}
+              <option value="{{this.id}}" {{#if (eq this.id ../weaponItemId)}}selected{{/if}}>
+                {{this.label}}{{#if this.equipped}} (utrustat){{/if}}
+              </option>
+            {{/each}}
+          </select>
+        </label>
+      {{else if noWeaponsNote}}
+        <p class="hint">{{noWeaponsNote}}</p>
+      {{/if}}
+    {{/if}}
+
     <button type="button" data-action="submitCast" class="submit-cast">
       <i class="fa-solid fa-hand-sparkles"></i> Kasta
     </button>

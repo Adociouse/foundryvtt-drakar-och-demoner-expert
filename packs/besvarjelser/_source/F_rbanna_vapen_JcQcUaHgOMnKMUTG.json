@@ -13,7 +13,14 @@
       "book": "formelboken",
       "page": "18-26"
     },
-    "battleRelevant": true
+    "battleRelevant": true,
+    "targetMode": "weapon",
+    "weaponEffect": {
+      "clBonus": "-@E",
+      "damageBonus": "-@E",
+      "materialOverride": ""
+    },
+    "spellDuration": "@E*12"
   },
   "_id": "JcQcUaHgOMnKMUTG",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/elementarmagi.png",
