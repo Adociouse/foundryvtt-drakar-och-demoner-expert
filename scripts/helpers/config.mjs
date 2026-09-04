@@ -2080,10 +2080,18 @@ DODE.removeActorEffect = async function (actor, id) {
 };
 
 /**
- * Namngivna färdighetsmodifierare (skillMod) på scen-/världsnivå, för given
- * aktör. Samma add/multiply-semantik som `skillModifierTotals`
+ * Namngivna färdighetsmodifierare (skillMod) på aktör-/scen-/världsnivå, för
+ * given aktör. Samma add/multiply-semantik som `skillModifierTotals`
  * (actor-character.mjs) — den funktionen är den som faktiskt konsumerar detta,
  * det här är bara den delade uppslagslogiken.
+ *
+ * ⚠ Aktör-scope tillagd 2026-09-04 (CL-breda färdighetsbuffar, Själskraft) —
+ * mirrorar `recoveryModEffects` nedan, som redan slog upp `getActorEffects`
+ * sedan 2026-08-05 (UC-R11, en besvärjelse som ger en tidsbegränsad personlig
+ * bonus som överlever scenbyten — exakt Själskrafts användningsfall). Denna
+ * funktion hade av misstag bara scen+värld — se CLAUDE.md "MUDA"-regeln för
+ * hela historien om varför det upptäcktes och varför det är värt en egen
+ * stående regel, inte bara en enskild fix.
  *
  * @param {Actor} actor
  * @param {Scene|null} scene Aktörens aktuella scen (null = ingen scenmatchning).
@@ -2091,6 +2099,7 @@ DODE.removeActorEffect = async function (actor, id) {
  */
 DODE.namedSkillModEffects = function (actor, scene = null) {
   const effects = [
+    ...(actor ? DODE.getActorEffects(actor) : []),
     ...(scene ? DODE.getSceneEffects(scene) : []),
     ...DODE.getWorldEffects()
   ].filter((e) => e.kind === "skillMod" && e.skillKey);

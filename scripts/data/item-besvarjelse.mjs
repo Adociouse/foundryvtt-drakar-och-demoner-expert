@@ -129,6 +129,24 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
           floorAtOne: new fields.BooleanField({ required: false, initial: false })
         })
       ),
+      // CL-breda färdighetsbuffar (Själskraft m.fl., 2026-09-04) — SKILT från
+      // spellEffect ovan av samma tekniska skäl som weaponEffect nedan:
+      // `skillModifierTotals` (actor-character.mjs) är en LIVE GETTER, aldrig
+      // ett skrivbart schemafält — en AE:s changes[] kan därför aldrig rikta
+      // sig mot den. Löst genom att ÅTERANVÄNDA det redan befintliga
+      // GM-effekt-systemet (DODE.addActorEffect m.fl., config.mjs) i stället
+      // för att bygga en ny parallell mekanism — se CLAUDE.md "MUDA"-regeln
+      // för varför det här är den rätta lösningen och inte ett nytt Item-hack.
+      // skillKey:"*" = ALLA färdigheter (Själskrafts "alla färdighetskast");
+      // ett specifikt skillKey vore samma mekanism för en framtida, smalare
+      // buff. `value` är en Roll-formel (samma @E-konvention som
+      // spellEffect.value) — se DoDEActor#applySkillEffect (actor.mjs).
+      skillEffect: new fields.ArrayField(
+        new fields.SchemaField({
+          skillKey: new fields.StringField({ required: true, initial: "*" }),
+          value: new fields.StringField({ required: true, initial: "" })
+        })
+      ),
       // Vapen-Item-riktad besvärjelse (Förtrolla/Förbanna vapen, backlog 99,
       // 2026-09-03/04) — bara relevant när targetMode:"weapon" (nedan). Skilt
       // från spellEffect ovan av ETT tekniskt skäl: Foundry har ingen inbyggd

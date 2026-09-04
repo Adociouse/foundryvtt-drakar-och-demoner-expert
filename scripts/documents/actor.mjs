@@ -52,7 +52,14 @@ export default class DoDEActor extends Actor {
     // formaga-/utrustningsitem, se actor-character.mjs#prepareDerivedData.
     // Vapengrupper (RP s.60) är samma slags separat lager, se
     // actor-character.mjs#computeWeaponGroupBonus.
-    const modifier = this.system.skillModifierTotals?.[item.system.skillKey] ?? 0;
+    // Wildcard-bucketen "*" (CL-breda färdighetsbuffar, Själskraft m.fl.,
+    // 2026-09-04) — DODE.namedSkillModEffects (config.mjs) lagrar en
+    // GM-effekt med skillKey:"*" som en egen bucket i skillModifierTotals,
+    // precis som vilket annat skillKey som helst. Läggs på ALLTID, ovanpå
+    // en eventuell namngiven träff — ingen kollisionsrisk, ingen riktig
+    // färdighet har någonsin skillKey==="*".
+    const skillMods = this.system.skillModifierTotals ?? {};
+    const modifier = (skillMods[item.system.skillKey] ?? 0) + (skillMods["*"] ?? 0);
     const weaponGroupBonus = this.system.weaponGroupBonusTotals?.[item.system.skillKey] ?? 0;
     return rollFV({ actor: this, label: item.name, fv: item.system.total + modifier + weaponGroupBonus, item });
   }
@@ -216,6 +223,49 @@ export default class DoDEActor extends Actor {
     return target.createEmbeddedDocuments("ActiveEffect", [
       buildTemporaryEffectData(item, changes, { sourceKind: "spell", duration: rounds > 0 ? { rounds } : {} })
     ]);
+  }
+
+  /**
+   * Lägger en CL-bred färdighetsbuff (Själskraft m.fl., 2026-09-04) —
+   * `skillModifierTotals` (actor-character.mjs) är en LIVE GETTER, aldrig ett
+   * skrivbart schemafält, så en ActiveEffect (`applySpellEffect` ovan) kan
+   * aldrig rikta sig mot den. Löser det genom att ÅTERANVÄNDA det redan
+   * befintliga GM-effekt-systemet (`CONFIG.DODE.addActorEffect`, config.mjs)
+   * rakt av — INGEN ny mekanism, inget nytt Item skapas. Se CLAUDE.md
+   * "MUDA"-regeln för varför det här är den rätta lösningen: samma
+   * add/multiply-summering, samma utgångskontroll (`DODE.isEffectExpired`),
+   * och en redan byggd SL-borttagningsknapp i GM-effektfönstret (`gm-effects.mjs`)
+   * kommer alla gratis genom att skriva till samma lagringsflagga
+   * (`DODE.NAMED_EFFECTS_FLAG`) som scen-/världseffekter redan använder
+   * (t.ex. Dimön-äventyrets scen-scopade "PSY×2"-återhämtningseffekt).
+   *
+   * `skillKey:"*"` (Själskrafts "alla färdighetskast") blir en egen bucket i
+   * `skillModifierTotals` — se rollSkill() ovan för wildcard-uppslaget.
+   *
+   * @param {Item} item En "besvarjelse"-item med `skillEffect`/`spellDuration`.
+   * @param {Actor} [target=this] Aktören effekten läggs på (default: kastaren själv).
+   * @param {number} [effektgrad=1] Kastets effektgrad — löser upp `@E`-formler.
+   */
+  async applySkillEffect(item, target = this, effektgrad = 1) {
+    if (!item || item.type !== "besvarjelse") return;
+    const E = Math.max(1, Math.floor(effektgrad) || 1);
+    const durationRoll = await new Roll(item.system.spellDuration || "0", { E }).evaluate();
+    const seconds = Math.max(0, Math.floor(durationRoll.total)) * CONFIG.DODE.SECONDS_PER_ROUND;
+    const records = [];
+    for (const c of item.system.skillEffect ?? []) {
+      if (!c.skillKey || c.value === "") continue;
+      const roll = await new Roll(c.value, { E }).evaluate();
+      records.push(await CONFIG.DODE.addActorEffect(target, {
+        label: item.name,
+        kind: "skillMod",
+        skillKey: c.skillKey,
+        value: roll.total,
+        operation: "add",
+        note: "",
+        duration: seconds > 0 ? { mode: "timed", expiresAt: game.time.worldTime + seconds } : { mode: "manual" }
+      }));
+    }
+    return records;
   }
 
   /**

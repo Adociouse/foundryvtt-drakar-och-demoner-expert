@@ -71,6 +71,7 @@
     {{/if}}
     {{#if this.statusApplied}}<div class="wear-line"><i class="fa-solid fa-circle-exclamation"></i> {{this.statusApplied}}</div>{{/if}}
     {{#if this.weaponEnchantApplies}}<div class="wear-line"><i class="fa-solid fa-wand-sparkles"></i> Förtrollar {{this.weaponName}}</div>{{/if}}
+    {{#if this.skillEffectApplies}}<div class="wear-line"><i class="fa-solid fa-arrow-up-right-dots"></i> Färdighetsboost</div>{{/if}}
     {{#if this.fearDraw}}<div class="effect-line kritisk"><i class="fa-solid fa-face-flushed"></i> {{this.fearDraw.text}}</div>{{/if}}
   {{/each}}
 </div>

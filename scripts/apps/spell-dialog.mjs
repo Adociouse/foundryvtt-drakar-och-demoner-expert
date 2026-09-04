@@ -246,7 +246,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     // ("Misslyckade kast ska inte behöva godkännande") — inte en säkerhetsfråga,
     // bara en onödig extra kö-post. Bara kastningar som FAKTISKT vill skriva
     // något på ett oägt mål (instant-effekt/status/spellEffect) går längre.
-    const hasTargetWrites = result.pending.targets.some((t) => t.instantEffect || t.status || t.spellEffect || t.weaponEnchant);
+    const hasTargetWrites = result.pending.targets.some((t) => t.instantEffect || t.status || t.spellEffect || t.skillEffect || t.weaponEnchant);
     const canApplyDirectly = game.user.isGM || !hasTargetWrites || targetActors.every((a) => a.isOwner);
     if (canApplyDirectly) {
       await applySpellResult(result, { caster: this.actor, targets: targetActors });

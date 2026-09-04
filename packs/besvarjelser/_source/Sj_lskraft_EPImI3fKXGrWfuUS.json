@@ -14,7 +14,11 @@
       "page": "39-46"
     },
     "targetMode": "self",
-    "battleRelevant": true
+    "battleRelevant": true,
+    "skillEffect": [
+      { "skillKey": "*", "value": "@E*3" }
+    ],
+    "spellDuration": "@E"
   },
   "_id": "EPImI3fKXGrWfuUS",
   "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/mentalism.png",

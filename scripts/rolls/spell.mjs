@@ -168,6 +168,10 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
         pendingT.spellEffect = true;
         pendingT.chosenAttribute = chosenAttribute;
       }
+      if (sys.skillEffect?.length) {
+        t.skillEffectApplies = true;
+        pendingT.skillEffect = true;
+      }
       if (sys.triggersFearTable) {
         t.fearDraw = await CONFIG.DODE.rollFearTable();
       }
@@ -242,6 +246,7 @@ export async function applySpellResult(result, { caster, targets = [] }) {
       }
     }
     if (pt.spellEffect) await caster.applySpellEffect(result.item, target, result.E, pt.chosenAttribute ?? null);
+    if (pt.skillEffect) await caster.applySkillEffect(result.item, target, result.E);
     // ⚠ Backlog 99, 2026-09-04 — vapnet slås upp FÄRSKT ur målets ägda items
     // här (skrivtillfället), inte buret genom `pending` som ett Document —
     // `pending` är JSON-säker data (bara id:t sparades), samma disciplin som
@@ -307,6 +312,8 @@ function buildSpellCardContext(result, { caster, targets = [], pendingBanner = f
       } : null,
       statusApplied: t.statusApplied,
       spellEffectApplies: t.spellEffectApplies,
+      // CL-breda färdighetsbuffar (Själskraft m.fl.), 2026-09-04.
+      skillEffectApplies: t.skillEffectApplies ?? false,
       // Backlog 99, 2026-09-04 — Förtrolla/Förbanna vapen.
       weaponEnchantApplies: t.weaponEnchantApplies ?? false,
       weaponName: t.weaponName ?? null,
