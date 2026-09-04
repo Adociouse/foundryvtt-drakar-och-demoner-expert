@@ -141,7 +141,7 @@
     "professionAbilities": [
       {
         "name": "Demonologens instinkt",
-        "description": "<p>En demonolog kan känna demonisk närvaro instinktivt. Räckvidden är demonologens PSY meter, och CL är lika stor som hans PSY är för tillfället. Motsvarar ett lyckat slag för Känna magi, specifikt för demoner, demoniska aktiviteter och föremål.</p>",
+        "description": "<p>En demonolog kan känna demonisk närvaro instinktivt. Räckvidden är demonologens PSY meter, och CL är lika stor som hans PSY är för tillfället. Motsvarar ett lyckat slag för Känna magi, specifikt för demoner, Demonologi, demoniska aktiviteter och föremål.</p>",
         "effect": null
       }
     ],

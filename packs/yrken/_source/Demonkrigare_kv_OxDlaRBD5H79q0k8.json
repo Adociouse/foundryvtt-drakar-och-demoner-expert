@@ -108,7 +108,7 @@
     "professionAbilities": [
       {
         "name": "Demonfjättrad",
-        "description": "<p>Demonkrigaren har en demon fjättrad i sin kropp. Från demonen erhåller demonkrigaren 1T4+1 fördelar (SL slår). SL väljer om fördelarna ska vara grundegenskapsökningar, färdigheter, besvärjelser eller demoniska förmågor. Spelaren får sedan välja vilken av demonens grundegenskaper, färdigheter, förmågor eller besvärjelser han ska ha, men inte veta exakt vilket värde demonen har förrän efter han har valt. När fördelarna är utsatta försöker demonkrigaren övervinna demonens PSY med sin egen på Motståndstabellen. Lyckas demonen med detta måste demonkrigaren slå 1T3+antalet fördelar på nackdelstabellen. Annars sker ingenting.</p>",
+        "description": "<p>Demonkrigaren har en demon fjättrad i sin kropp. Från demonen erhåller demonkrigaren 1T4+1 fördelar (SL slår). SL får sedan konstruera demonen, som är en svag krigardemon. Spelaren får sedan välja om fördelarna ska vara grundegenskapsökningar, färdigheter, besvärjelser eller demoniska förmågor. Spelaren får sedan välja vilken av demonens grundegenskaper, färdigheter, förmågor eller besvärjelser han ska ha, men han får inte veta exakt vilket värde demonen har förrän efter han har valt (se reglerna för att bli Besatt). När fördelarna är utsatta försöker demonen övervinna demonkrigarens PSY med sin egen på Motståndstabellen. Lyckas demonen med detta måste demonkrigaren slå 1T3+antalet fördelar på nackdelstabellen. Annars sker ingenting.</p><p>⚠ Nackdelstabellen (Kaos Väktare s.54, del av det större Besatthet/pakt-delsystemet s.52-58) är inte byggd i systemet ännu — se DESIGN_DECISIONS.md backlog 88. SL får döma fritt tills det delsystemet får ett eget bygge.</p>",
         "effect": null
       }
     ],
