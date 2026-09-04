@@ -200,6 +200,21 @@ Hooks.once("init", () => {
     default: []
   });
 
+  // Engångsflagga: har kärnans slagbara tabeller (Fummeltabeller/Skräcktabellen/
+  // Snedtändningstabellen/Fobitabellen) redan importerats till VÄRLDENS egna
+  // `game.tables`-samling? Motorn (config.mjs, getTabellerTable) läser dem alltid
+  // direkt ur `tabeller`-kompendiet oavsett detta — men Foundrys egen sidopanel
+  // "Rollable Tables" visar bara `game.tables`, som annars förblir helt tom för
+  // en ny SL. Se `ready`-hooken nedan (samma "kör en gång, rör aldrig igen"-
+  // princip som FILES_UPLOAD-behörighetsfixen, för samma anledning: en SL som
+  // senare medvetet tar bort en importerad tabell ska inte få den återimporterad).
+  game.settings.register(SYSTEM_ID, "coreTablesImported", {
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false
+  });
+
   // Hjältedåd-antal per nivå — HUSREGEL, INTE grundregler.
   //
   // ⚠ EJ STANDARDREGLER. HH s.6-7 anger bara "slå 1T6" för hur många gånger en
@@ -763,6 +778,49 @@ Hooks.once("ready", async () => {
     FILES_UPLOAD: [CONST.USER_ROLES.PLAYER, ...upload]
   });
   console.log("DoDE | FILES_UPLOAD-behörigheten sänkt till Spelare (systemstandard, se dode.mjs)");
+});
+
+/**
+ * Förinstallerar kärnans slagbara tabeller (de fyra Fummeltabellerna,
+ * Skräcktabellen, Snedtändningstabellen, Fobitabellen) i VÄRLDENS egna
+ * `game.tables`-samling, en gång, i en tom nyimporterad värld. Johan,
+ * 2026-09-04: "The core DoDE system should have these tables installed
+ * when a new SL imports these into an empty foundry installation."
+ *
+ * ⚠ Motorn (config.mjs, `getTabellerTable`) BEHÖVER inte detta — den läser
+ * alltid tabellerna direkt ur `tabeller`-kompendiet, oavsett om de någonsin
+ * importerats till världen. Det här är RENT för Foundrys egen "Rollable
+ * Tables"-flik i sidopanelen, som annars förblir helt tom (bekräftat live,
+ * 2026-09-04: `game.tables.contents.length === 0` i en redan flera veckor
+ * gammal värld) — en ny SL som öppnar den fliken ska se tabellerna, inte en
+ * tom lista, även om inget i spelmekaniken faktiskt kräver det.
+ *
+ * Samma "kör en gång, rör aldrig igen"-princip som FILES_UPLOAD-fixen ovan,
+ * av samma anledning: en SL som senare medvetet raderar en importerad
+ * tabell ska inte få den återimporterad nästa gång världen laddas.
+ * `clearOwnership:false` + en explicit OBSERVER-default matchar
+ * kompendiets egen `"PLAYER": "OBSERVER"`-policy (system.json) — annars
+ * hade `fromCompendium()`s egen standard (`clearOwnership:true` → NONE)
+ * tyst gjort de importerade världstabellerna osynliga för spelare, till
+ * skillnad från kompendiekopian.
+ */
+Hooks.once("ready", async () => {
+  if (!game.user.isGM) return;
+  if (game.settings.get(SYSTEM_ID, "coreTablesImported")) return;
+  const pack = game.packs.get(`${SYSTEM_ID}.tabeller`);
+  if (!pack) return;
+  const sourceDocs = await pack.getDocuments();
+  const existingNames = new Set(game.tables.contents.map((t) => t.name));
+  const toImport = sourceDocs
+    .filter((d) => !existingNames.has(d.name))
+    .map((d) => {
+      const data = game.tables.fromCompendium(d, { clearOwnership: false });
+      data.ownership = { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER };
+      return data;
+    });
+  if (toImport.length) await RollTable.createDocuments(toImport);
+  await game.settings.set(SYSTEM_ID, "coreTablesImported", true);
+  console.log(`DoDE | ${toImport.length} kärntabeller importerade till världen (${sourceDocs.length - toImport.length} redan fanns)`);
 });
 
 Hooks.on("renderActorDirectory", (app, html) => {
