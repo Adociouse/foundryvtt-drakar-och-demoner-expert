@@ -181,6 +181,17 @@ export default class DoDEActor extends Actor {
     const changes = [];
     for (const c of item.system.spellEffect ?? []) {
       if (!c.key || c.value === "") continue;
+      // Litet hårdnings-tillägg, 2026-09-04 — `choiceOptions` styrde tidigare
+      // BARA vad kast-dialogen erbjöd att välja, inte vad motorn faktiskt
+      // godtog. Ett direkt konsol-/makroanrop kunde alltså kringgå t.ex.
+      // Ökas bok-sourcade STY/FYS/STO/KAR/SMI-begränsning (uttryckligen INTE
+      // INT/PSY) genom att skicka in "psy" som chosenAttribute. Ingen spelbar
+      // väg utnyttjade detta (dialogen är den enda spelarvända ingången), men
+      // motorn bör inte lita blint på anroparen — hoppa över posten i stället.
+      if (c.key.includes("$CHOICE") && c.choiceOptions?.length && !c.choiceOptions.includes(chosenAttribute)) {
+        console.warn(`${game.system.id} | applySpellEffect: "${chosenAttribute}" är inte ett tillåtet val för ${item.name} (${c.choiceOptions.join("/")})`);
+        continue;
+      }
       const key = resolveChoiceKey(c.key, chosenAttribute);
       const roll = await new Roll(c.value, { E }).evaluate();
       let delta = roll.total;
