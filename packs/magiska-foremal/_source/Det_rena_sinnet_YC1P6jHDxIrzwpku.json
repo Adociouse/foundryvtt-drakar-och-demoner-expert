@@ -1,0 +1,39 @@
+{
+  "name": "Det rena sinnet (tatuering)",
+  "type": "formaga",
+  "system": {
+    "origin": "tatuering",
+    "skillModifiers": [],
+    "recoveryModifiers": [],
+    "statModifiers": [],
+    "resistances": [
+      { "damageType": "mental", "reduction": "immun", "overcomeE": null, "overcomeMaterial": "", "overcomeReduction": "0" }
+    ],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "39"
+    },
+    "description": "<p>En magisk tatuering. Tid att utföra: 7 dagar.</p><p>Denna symbol skyddar mot vissa former av demonisk påverkan. Den som har denna symbol tatuerad berörs inte av magi som har med rent psykiska och mentala krafter att göra.</p><p>Illusioner, mentala kommunikationer, mentala avläsningar, varseblivning m.m. är verkningslösa mot bäraren. Den tatuerade kan inte falla offer för demonisk galenskap.</p><p>⚠ Modellerad som full immunitet mot damageType \"mental\" (samma delade skadetypsfält som besvärjelser redan använder) — boken räknar upp specifika exempel (illusioner, mentala avläsningar, demonisk galenskap) snarare än ett tydligt \"all mental magi\"-påstående, så detta är en rimlig men inte ordagrant bekräftad generalisering. Pris: se Eldsköld-notisen.</p>"
+  },
+  "_id": "YC1P6jHDxIrzwpku",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/det-rena-sinnet.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788644156269,
+    "modifiedTime": 1788644156269,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!YC1P6jHDxIrzwpku"
+}

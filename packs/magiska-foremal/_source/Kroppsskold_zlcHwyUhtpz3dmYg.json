@@ -1,0 +1,39 @@
+{
+  "name": "Kroppssköld (tatuering)",
+  "type": "formaga",
+  "system": {
+    "origin": "tatuering",
+    "skillModifiers": [],
+    "recoveryModifiers": [],
+    "statModifiers": [],
+    "resistances": [
+      { "damageType": "weapon", "reduction": "5", "overcomeE": null, "overcomeMaterial": "", "overcomeReduction": "0" }
+    ],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "39"
+    },
+    "description": "<p>En magisk tatuering. Tid att utföra: 15 dagar.</p><p>Den tatuerade får en osynlig kroppssköld som skyddar mot alla fysiska attacker (vapen, klor, slag). Skölden kan absorbera 5 skadepoäng. Magiska attacker, eld och blixt absorberas ej av skölden.</p><p>Skölden kan inte krossas och är alltid verksam.</p><p>⚠ Modellerad med damageType \"weapon\" (samma delade kanal som allt vapenanfall — klor/slag räknas hit, se resolveAttack()) och en flat reduktion på 5, ALDRIG mot besvärjelseskada (samma medvetna vapen/magi-uppdelning som Lindskiarnens motstånd redan etablerar). Pris: se Eldsköld-notisen.</p>"
+  },
+  "_id": "zlcHwyUhtpz3dmYg",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/kroppsskold.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788644156269,
+    "modifiedTime": 1788644156269,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!zlcHwyUhtpz3dmYg"
+}

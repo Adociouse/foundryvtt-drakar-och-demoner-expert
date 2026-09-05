@@ -211,8 +211,8 @@ sequenceDiagram
 
 | Path | What lives there |
 |---|---|
-| `scripts/data/actor-character.mjs` | the two skillModifier getters; attribute bonus aggregation |
-| `scripts/data/item-formaga.mjs` | `skillModifiers` field, "always active" source |
+| `scripts/data/actor-character.mjs` | the two skillModifier getters; attribute bonus aggregation; `effectiveResistances` getter (2026-09-05 — merges the actor's own rarely-used `system.resistances` with resistances carried by owned `formaga` items, same live-getter shape as `skillModifierTotals`) |
+| `scripts/data/item-formaga.mjs` | `skillModifiers` field, "always active" source; `resistances` field (2026-09-05, backlog 88 — Kaos Väktare's magical tattoos, reuses `fields-resistances.mjs`'s shared shape rather than inventing a fourth modifier pipeline) |
 | `scripts/data/item-utrustning.mjs` | `skillModifiers`, `statModifiers` (2026-08-22 — hp.max/psy.max add/multiply, same shape and consumer as `item-formaga.mjs`'s, see below), `chargesRemaining`, `activationSeconds`, `consumable`, `effectChanges` |
 | `scripts/documents/item.mjs` | `DoDeItem` — equip-activation timing hook |
 | `scripts/documents/dode-active-effect.mjs` | `DoDeActiveEffect` — Pipeline A's equip/condition gate |

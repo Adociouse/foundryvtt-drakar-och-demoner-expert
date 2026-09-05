@@ -1,0 +1,37 @@
+{
+  "name": "Duplicering (tatuering)",
+  "type": "formaga",
+  "system": {
+    "origin": "tatuering",
+    "skillModifiers": [],
+    "recoveryModifiers": [],
+    "statModifiers": [],
+    "resistances": [],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "39"
+    },
+    "description": "<p>En magisk tatuering. Tid att utföra: 12–15 dagar.</p><p>Den tatuerade kan med sin blotta tanke \"förlösa\" en exakt dubbelgångare ur sin egen kropp. Dubbelgångaren har samma värden som den som bär tatueringen men kan exempelvis inte skada en motståndare utan slår rakt igenom denne om den försöker anfalla.</p><p>Dubbelgångaren rör sig så den tatuerade önskar tills den upplöses eller tills den förgörs av en motståndare.</p><p>För var femte SR (stridsrunda) som dubbelgångaren är aktiv måste den tatuerade offra två PSY-poäng.</p><p>⚠ Ingen mekanisk automation byggd denna omgång — att skapa en fungerande, harmlös \"dubbelgångar-token\" med samma värden som ägaren, plus en periodisk PSY-kostnad var femte SR, är ett eget litet delsystem (troligen en variant av det redan byggda periodeffekt-/GM-effektlagret, se config.mjs) snarare än en engångstext. SL hanterar för hand tills en framtida session bygger det. Pris: se Eldsköld-notisen.</p>"
+  },
+  "_id": "USP8e24ZdzfFobhB",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/duplicering.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788644156269,
+    "modifiedTime": 1788644156269,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!USP8e24ZdzfFobhB"
+}

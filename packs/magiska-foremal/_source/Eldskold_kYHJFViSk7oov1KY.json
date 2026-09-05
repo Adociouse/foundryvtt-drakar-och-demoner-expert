@@ -1,0 +1,39 @@
+{
+  "name": "Eldsköld (tatuering)",
+  "type": "formaga",
+  "system": {
+    "origin": "tatuering",
+    "skillModifiers": [],
+    "recoveryModifiers": [],
+    "statModifiers": [],
+    "resistances": [
+      { "damageType": "fire", "reduction": "immun", "overcomeE": null, "overcomeMaterial": "", "overcomeReduction": "0" }
+    ],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "39"
+    },
+    "description": "<p>En magisk tatuering. Tid att utföra: 6 dagar.</p><p>Denna symbol skyddar bäraren mot demoners eld. All form av demoneld viker runt den tatuerade som om denne stod inuti ett jättelikt klot av glas.</p><p>⚠ Boken specificerar \"demoners eld\" — motorn har inget begrepp om demon-specifik eld, så detta är byggt som fullständig immunitet mot ALL eld (damageType \"fire\"), en avsiktlig, uttalad förenkling.</p><p>⚠ Pris: boken anger 2.000–10.000 sm som ett intervall för magiska tatueringar generellt, utan ett eget angivet pris per symbol eller en tydlig formel — SL sätter pris inom intervallet. Se docs/extracts/DODE_KaosVaktare_MAGISKA_TATUERINGAR.md (Roll20-projektet) för hela källtexten.</p>"
+  },
+  "_id": "kYHJFViSk7oov1KY",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/eldskold.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788644156269,
+    "modifiedTime": 1788644156269,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!kYHJFViSk7oov1KY"
+}

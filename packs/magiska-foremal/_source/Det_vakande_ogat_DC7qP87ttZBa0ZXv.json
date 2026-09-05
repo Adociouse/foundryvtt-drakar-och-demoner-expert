@@ -1,0 +1,37 @@
+{
+  "name": "Det vakande ögat (tatuering)",
+  "type": "formaga",
+  "system": {
+    "origin": "tatuering",
+    "skillModifiers": [],
+    "recoveryModifiers": [],
+    "statModifiers": [],
+    "resistances": [],
+    "source": {
+      "book": "kaosvaktare",
+      "page": "39"
+    },
+    "description": "<p>En magisk tatuering. Tid att utföra: 5 dagar.</p><p>Denna symbol, ett öga vars lock sytts fast så det aldrig kan stängas, gör bäraren medveten om demoners närvaro. Ingen demon inom 500 meter från bäraren undgår dennes uppmärksamhet.</p><p>Oavsett om den tatuerade kan se demonen eller ej, eller om denne sover, så kommer demonens närvaro att tydligt kunna kännas. När en demon närmar sig den tatuerade får denne en irriterande och illavarslande stickande känsla i nackmuskulaturen.</p><p>⚠ Ren varsebliningsförmåga utan sifferpåverkan — ingen mekanisk detektionsradie/notis är byggd i systemet, SL avgör och beskriver för hand när en demon kommer inom 500 meter. Pris: se Eldsköld-notisen om bokens 2.000–10.000 sm-intervall.</p>"
+  },
+  "_id": "DC7qP87ttZBa0ZXv",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiska-foremal/det-vakande-ogat.png",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788644156269,
+    "modifiedTime": 1788644156269,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!DC7qP87ttZBa0ZXv"
+}

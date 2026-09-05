@@ -1,4 +1,5 @@
 import { sourceField } from "./fields-source.mjs";
+import { resistancesField } from "./fields-resistances.mjs";
 import { SCHEMA_VERSION } from "../helpers/schema-migrations.mjs";
 
 const fields = foundry.data.fields;
@@ -65,6 +66,16 @@ export default class DoDEFormagaData extends foundry.abstract.TypeDataModel {
         operation: new fields.StringField({ required: true, initial: "multiply", choices: ["add", "multiply"] }),
         value: new fields.NumberField({ required: true, initial: 1 })
       })),
+      // Skadetyps-motstånd/immunitet — SAMMA delade fältform som npc/character
+      // redan har på `system.resistances` (fields-resistances.mjs, återanvänd
+      // rakt av, inte omskapad). Tillagd 2026-09-05 (backlog 88, Kaos Väktares
+      // magiska tatueringar — Eldsköld/Kroppssköld är permanenta skydd mot en
+      // specifik skadetyp, strukturellt identiska med hur en NPC:s medfödda
+      // motstånd redan modelleras). Konsumeras via `actor-character.mjs`s
+      // `effectiveResistances`-getter, som slår ihop aktörens EGEN (sällan
+      // använda) `system.resistances` med alla ägda formaga-items resistances
+      // — samma "live-summera, aldrig cacha"-princip som skillModifiers ovan.
+      resistances: resistancesField(),
       // Bok + sida — se fields-source.mjs.
       source: sourceField(),
       description: new fields.HTMLField({ required: false, initial: "" })

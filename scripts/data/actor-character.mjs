@@ -543,6 +543,26 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
   }
 
   /**
+   * Slår ihop aktörens EGEN, sällan ifyllda `system.resistances` (samma flata
+   * fält en NPC har, ärvt av character men i praktiken alltid tomt tills nu)
+   * med resistances-poster från ägda `formaga`-items (backlog 88, Kaos
+   * Väktares magiska tatueringar — Eldsköld/Kroppssköld). Live getter, aldrig
+   * cachad, samma princip som skillModifierTotals — tar en tatuering bort
+   * (Item.delete) försvinner dess skydd omedelbart utan extra städkod.
+   *
+   * Formaga-poster listas FÖRE aktörens egna så en mer specifik, item-buren
+   * post vinner vid en `damageType`-kollision (resolveResistance tar första
+   * träffen) — i praktiken en icke-fråga idag eftersom ingen karaktär någonsin
+   * haft en egen ifylld `system.resistances`-post.
+   */
+  get effectiveResistances() {
+    const fromFormaga = this.parent.items
+      .filter((i) => i.type === "formaga")
+      .flatMap((i) => i.system.resistances ?? []);
+    return [...fromFormaga, ...(this.resistances ?? [])];
+  }
+
+  /**
    * HP-/PSY-återhämtningsmodifierare — docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md.
    * Samma tre källor som skillModifiers (item-burna, via #isModifierItemActive)
    * PLUS aktör-/scen-/världs-GM-effekter (`DODE.recoveryModEffects`, config.mjs)

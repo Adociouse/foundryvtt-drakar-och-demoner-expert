@@ -2509,7 +2509,11 @@ DODE.rollResistance = async function (sg, attributeValue) {
 DODE.resolveResistance = function (actor, damageType, incomingE = 0, weaponMaterial = null) {
   const none = { reduction: 0, immune: false, blocked: false, halved: false, doubled: false };
   const blocked = { ...none, immune: true, blocked: true };
-  const entry = (actor?.system?.resistances ?? []).find((r) => r.damageType === damageType);
+  // character har en effectiveResistances-getter (formaga-tatueringar + egen
+  // system.resistances slagna ihop, se actor-character.mjs); npc saknar den
+  // och faller tillbaka på sin egen raka system.resistances som förut.
+  const entry = (actor?.system?.effectiveResistances ?? actor?.system?.resistances ?? [])
+    .find((r) => r.damageType === damageType);
   if (!entry) {
     // ⚠ "sun"/"water" har OMVÄND defaultsemantik — tillagt 2026-09-03, Johan:
     // "almost ALL creatures are resistant to sun and water.. with a very
