@@ -91,7 +91,7 @@ A finished character can keep training in play through a dedicated training view
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
 | `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks. `regler` also holds a Races and a Professions overview page (all races/professions in table form) |
-| `journaler` (shown as "Magiskolreferenser") | 14 auto-generated school reference pages (13 magic schools + General spells), one per school, with a spell/minor-spell table compiled from the `besvarjelser` compendium, plus real description text for 12 of 14 (Universalism/Alkemi/General spells still lack source text) |
+| `journaler` (shown as "Magiskolreferenser") | 15 auto-generated school reference pages (14 magic schools, including Portalmagi, + General spells), one per school, with a spell/minor-spell table compiled from the `besvarjelser` compendium (regenerated via `scripts/build/generate-journal-summaries.mjs` whenever spells change), plus real description text for 13 of 15 (Alkemi/General spells still lack source text) |
 | `scener` | Ready-made scenes, including the character wizard's own backdrop scene |
 
 Compendium content is edited as JSON under `packs/<name>/_source/`, then compiled to the LevelDB format Foundry actually reads — see "Building compendiums" below.
