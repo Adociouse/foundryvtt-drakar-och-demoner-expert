@@ -9,7 +9,7 @@
     "kvick": false,
     "duration": "Omedelbar",
     "range": "Spec.",
-    "description": "<p>Magikern öppnar en kortvarig portal och sliter genom den en varelse som befinner sig i de Grå hallarna. För att hemkalla en person som befinner sig i någon annan dimension än hans hemvärld, vanligtvis E5-E10, krävs högre effektgrader. Denna besvärjelse kan bara användas för att kalla en person tillbaka till hans hemvärld. Magikern måste känna personens namn och namnet på den värld där han vistas, om detta inte är de Grå hallarna.</p>",
+    "description": "<p>Magikern öppnar en kortvarig portal och sliter genom den en varelse som befinner sig i de Grå hallarna. För att hemkalla en person som befinner sig i någon annan dimension än de Grå hallarna, krävs högre effektgrader, vanligtvis E5-E10. Denna besvärjelse kan bara användas för att kalla en person tillbaka till hans hemvärld. Magikern måste känna personens namn och namnet på den värld där han vistas, om detta inte är de Grå hallarna.</p>",
     "ritual": true,
     "source": {
       "book": "kaosvaktare",
