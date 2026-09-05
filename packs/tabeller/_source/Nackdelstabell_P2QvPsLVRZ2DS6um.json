@@ -1,0 +1,549 @@
+{
+  "name": "Nackdelstabell (Besatthet)",
+  "_id": "P2QvPsLVRZ2DS6um",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "description": "<p>Slås varje gång en besatt person får en fördel av sin demon (Kaos Väktare s.53-55, \"Demoniskt inflytande — Besätthet\"). <strong>Slå 1T10 och lägg till det totala antalet fördelar personen fått hittills</strong> (kumulativt, inte bara denna gångs fördel) innan resultatet läses av — detta system klarar inte en dynamisk modifierare, så slå tärningen separat och slå upp den justerade summan i tabellen för hand.</p><p>Effekterna är INTE kumulativa mellan rader, med två uttalade undantag: <strong>Fördunkling</strong> och <strong>Högre makters förbannelse</strong> ackumuleras med tidigare nivåer av sig själva. I övrigt räknas bara den högsta nivån av en given nackdel personen någonsin slagit — slår man en lägre nivå av en nackdel man redan har på en högre nivå, slå om.</p><p>Hjältar får ett poängs avdrag på detta slag för vartannat HP hjälten inkasserat totalt (Kaos Väktare s.54, \"Hjältar och nackdelar\").</p><p>Nackdelarna försvinner aldrig genom förhandling med demonen (de är oundvikliga så länge demonen är kvar i kroppen) — Utseendeförändring är det enda undantaget, som demonen kan välja att dölja om den gynnar dennes planer.</p><p>⚠ Bara draget/visat här — PSY-avdragen, KAR-sänkningarna och de övriga permanenta ändringarna är inte automatiserade i systemet, SL tillämpar texten och räknar av för hand. Se docs/DESIGN_DECISIONS.md backlog 88 och docs/extracts/DODE_KaosVaktare_BESATTHET_PAKT.md (Roll20-projektet) för hela det omgivande Besätthet/pakt-kapitlet, inklusive fördelssystemet detta slag hör ihop med (inte byggt än).</p><p><em>Källa: Kaos Väktare (Target Games, 1993) s.54-55.</em></p>",
+  "results": [
+    {
+      "_id": "B1LZsVeLDT620Irc",
+      "type": "text",
+      "name": "Inget händer",
+      "img": null,
+      "description": "Inget händer.",
+      "weight": 1,
+      "range": [
+        1,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.B1LZsVeLDT620Irc"
+    },
+    {
+      "_id": "5PGMbTATnLisRS9R",
+      "type": "text",
+      "name": "Fördunkling, nivå 1",
+      "img": null,
+      "description": "Den besatte har lätt att bli deprimerad och börjar bli alltmer öppen för demonens inflytande, även om han inte har några problem med att stå emot dess förslag. Den besattes PSY räknas permanent som ett lägre när det gäller att stå emot demonens försök att ta fullständig kontroll över kroppen.",
+      "weight": 1,
+      "range": [
+        5,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.5PGMbTATnLisRS9R"
+    },
+    {
+      "_id": "xulZHPJfsVEd6oFY",
+      "type": "text",
+      "name": "Fördunkling, nivå 2",
+      "img": null,
+      "description": "Den besattes livsmål och grundläggande idéer och drifter förändras och demonens intressen börjar få inflytande över den besattes handlande (exempel: en elddemon får den besatte att njuta av att se saker brinna). Det är fortfarande den besatte som dominerar sina tankar, och han har inga problem med att stå emot de onda tankarna. Den besattes PSY räknas permanent som två lägre när det gäller att stå emot demonens försök att ta fullständig kontroll över kroppen.",
+      "weight": 1,
+      "range": [
+        6,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.xulZHPJfsVEd6oFY"
+    },
+    {
+      "_id": "sIr6lXI27yPBENVm",
+      "type": "text",
+      "name": "Utseendeförändring, nivå 1",
+      "img": null,
+      "description": "Den besattes ögonvitor blir svagt röda, hans andedräkt blir permanent mycket dålig, och huden bleknar en smula. Det märks inte att den besatte är påverkad av en demon, men hans KAR sjunker med två steg.",
+      "weight": 1,
+      "range": [
+        7,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.sIr6lXI27yPBENVm"
+    },
+    {
+      "_id": "HBRgZOGhlacLZnjX",
+      "type": "text",
+      "name": "Mörk aura, nivå 1",
+      "img": null,
+      "description": "Den besatte utstrålar en svag aura av ondska. Djur och små barn är mycket känsliga och lägger märke till den. En skicklig magiker kan också känna den om han koncentrerar sig på detta. Den besatte kan inte komma i kontakt med djur och barn utan att skrämma dem. Vältränade stridshästar kan tvingas till lydnad med hjälp av våld.",
+      "weight": 1,
+      "range": [
+        8,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.HBRgZOGhlacLZnjX"
+    },
+    {
+      "_id": "Tsq55Uka9ifj3NGD",
+      "type": "text",
+      "name": "Fobi mot heliga platser, nivå 1",
+      "img": null,
+      "description": "Fobin är svag, och kan undertryckas med ett normalt PSY-slag.",
+      "weight": 1,
+      "range": [
+        9,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.Tsq55Uka9ifj3NGD"
+    },
+    {
+      "_id": "V1xIAtF1qB4qWdKN",
+      "type": "text",
+      "name": "Fördunkling, nivå 3",
+      "img": null,
+      "description": "Som Fördunkling nivå 2, fast den besattes PSY räknas som tre lägre.",
+      "weight": 1,
+      "range": [
+        10,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.V1xIAtF1qB4qWdKN"
+    },
+    {
+      "_id": "JXnOSovr9lMx8Ndb",
+      "type": "text",
+      "name": "Utseendeförändring, nivå 2",
+      "img": null,
+      "description": "Den besattes ögonvitor blir helt röda, hyn blir i samma färgton som demonens normala hudfärg, fast något svagare. Det märks att den besatte inte är fullt normal. Hans KAR sjunker med 5.",
+      "weight": 1,
+      "range": [
+        11,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.JXnOSovr9lMx8Ndb"
+    },
+    {
+      "_id": "llAg6DraI6q7yrXY",
+      "type": "text",
+      "name": "Mörk aura, nivå 2",
+      "img": null,
+      "description": "Som nivå 1, fast den besatte utstrålar nu en så stark aura att de flesta lägger märke till den. Barn och djur blir livrädda i den besattes närhet.",
+      "weight": 1,
+      "range": [
+        12,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.llAg6DraI6q7yrXY"
+    },
+    {
+      "_id": "svSTSaFbh87SZqIO",
+      "type": "text",
+      "name": "Fobi mot heliga platser, nivå 2",
+      "img": null,
+      "description": "Fobin är stark, och kan bara undertryckas med ett svårt PSY-slag. Man måste slå varje SR, och kan inte koncentrera sig på något annat flyende. Om man misslyckas ett ögonblick måste man hals över huvud fly platsen.",
+      "weight": 1,
+      "range": [
+        13,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.svSTSaFbh87SZqIO"
+    },
+    {
+      "_id": "GZNzsFZMYHAXsfHx",
+      "type": "text",
+      "name": "Fördunkling, nivå 4",
+      "img": null,
+      "description": "Som Fördunkling nivå 2, fast den besattes PSY räknas som fyra lägre.",
+      "weight": 1,
+      "range": [
+        14,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.GZNzsFZMYHAXsfHx"
+    },
+    {
+      "_id": "5JJc8xprY3b9Kjpu",
+      "type": "text",
+      "name": "Högre makters förbannelse, nivå 1",
+      "img": null,
+      "description": "Den besatte drabbas av en lätt förbannelse, sänd av de högre makterna som en varning. Slå 1T6: 1 — den besatte drar till sig elementarbesvärjelser, minst 50% chans att en fientligt inställd elementarmagiker/elementar väljer att anfalla just den besatte med sin magi; 2 — bråkstake, den besatte hamnar ständigt i slagsmål på värdshus och andra platser (25% risk); 3 — otursförföljd, den besatte utsätts alltid för smärre olyckor, såsom fallande taklampor, falska växelpengar, hål i taket, osv; 4 — fumlig, den besatte fumlar på både 19 och 20 och kan inte göra perfekta slag (1 räknas som vanligt); 5 — närvaro, den besattes fiender känner instinktivt var han befinner sig inom en meter, så länge de befinner sig i samma värld; 6 — förföljd, den besatte är förföljd av de högre makterna att straffa honom, exempelvis en högre drake. Detta tärningsresultat kan man få flera gånger, men man kan inte få samma förbannelse två gånger. Förbannelserna är kumulativa med varandra och med lägre nivåer.",
+      "weight": 1,
+      "range": [
+        15,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.5JJc8xprY3b9Kjpu"
+    },
+    {
+      "_id": "peeLirOtHtV0V8mA",
+      "type": "text",
+      "name": "Utseendeförändring, nivå 3",
+      "img": null,
+      "description": "Ögonen blir helt röda, även pupillerna försvinner (han ser dock fortfarande lika bra). Huden blir starkt missfärgad och mycket sträv. Små taggar och vårtliknande utväxter slår ut över kroppen. Naglarna blir tjocka och spetsiga. Den besatte ser demonisk ut, och hans KAR sjunker till 3.",
+      "weight": 1,
+      "range": [
+        16,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.peeLirOtHtV0V8mA"
+    },
+    {
+      "_id": "s3jFbkGP9sCHv9mP",
+      "type": "text",
+      "name": "Svaghet",
+      "img": null,
+      "description": "Den besatte blir försvagad mot vissa företeelser som stämmer överens med demonens mentalitet. Den besatte tar 1T6 skada per SR av att vidröra någonting som har med dessa företeelser att göra.",
+      "weight": 1,
+      "range": [
+        17,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.s3jFbkGP9sCHv9mP"
+    },
+    {
+      "_id": "0R5r34gWlmKAhAYp",
+      "type": "text",
+      "name": "Mörk aura, nivå 3",
+      "img": null,
+      "description": "Som nivå 2, fast auran gör att konversationer tystnar och folk drar sig undan. Folk runtomkring börjar associera till häxkonster, och den besatte drar demonjägarnas uppmärksamhet till sig.",
+      "weight": 1,
+      "range": [
+        18,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.0R5r34gWlmKAhAYp"
+    },
+    {
+      "_id": "MXY8JEKjfiRnbnVd",
+      "type": "text",
+      "name": "Fördunkling, nivå 5",
+      "img": null,
+      "description": "Som Fördunkling nivå 2, fast den besattes PSY räknas som fem lägre.",
+      "weight": 1,
+      "range": [
+        19,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.MXY8JEKjfiRnbnVd"
+    },
+    {
+      "_id": "OQWyR0XtYPAAxxk8",
+      "type": "text",
+      "name": "Högre makters förbannelse, nivå 2",
+      "img": null,
+      "description": "Den besatte drabbas av en svår förbannelse. Slå 1T6: 1 — magiskt medium, den besatte får halv chans att lyckas motstå förhäxning, och Antimagi fungerar på halv effektgrad (E1 blir E0); 2 — bärsärk, den besatte kan gå bärsärk närhelst som helst (se Grundreglerna), går bärsärk 1T4-1 gånger per dag i 1T20 SR, SL bestämmer när; 3 — mycket otursförföljd, den besatte drabbas ibland av allvarliga olyckor, såsom brister under honom, fallande klippblock, laviner, sjukdomar osv; 4 — fumlig, den besatte fumlar på 19-20 och kan inte göra perfekta slag (1 räknas som vanligt); 5 — närvaro, den besattes fiender känner instinktivt exakt var den besatte befinner sig, så länge de befinner sig i samma värld; 6 — förföljd, den besatte är förföljd av de högre makterna att straffa honom, exempelvis en högre drake. Detta tärningsresultat kan man få flera gånger, men man kan inte få samma förbannelse två gånger. Förbannelserna är kumulativa med varandra och med lägre nivåer.",
+      "weight": 1,
+      "range": [
+        20,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.OQWyR0XtYPAAxxk8"
+    },
+    {
+      "_id": "OIVd4GYCnl0sqGZJ",
+      "type": "text",
+      "name": "Utseendeförändring, nivå 4",
+      "img": null,
+      "description": "Den besattes ögon lyser svagt i mörker (han ser dock fortfarande lika bra). Huden blir svart och starkt missfärgad. Huden blir sprucken och knagglig, med taggar och vårtor överallt. Tänderna blir svarta och spetsiga, naglarna klolika, rösten blir sträv och väsande och skrattet torrt och hånfullt. Den besatte ser inte längre mänsklig ut. Hans KAR blir 1.",
+      "weight": 1,
+      "range": [
+        21,
+        21
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.OIVd4GYCnl0sqGZJ"
+    },
+    {
+      "_id": "blZOXBoRWsyKZG1h",
+      "type": "text",
+      "name": "Mörk aura, nivå 4",
+      "img": null,
+      "description": "Som nivå 3, fast auran blir fysisk och liknar en svart gloria. Det blir kallt (eller hett om det är en elddemon) i den besattes närhet.",
+      "weight": 1,
+      "range": [
+        22,
+        22
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.blZOXBoRWsyKZG1h"
+    },
+    {
+      "_id": "rtmr2cuDIvEaDXcL",
+      "type": "text",
+      "name": "Total sinnesförmörkelse",
+      "img": null,
+      "description": "Demonen tar fullständig kontroll över den besattes kropp och själ.",
+      "weight": 1,
+      "range": [
+        23,
+        999
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788647856936,
+        "modifiedTime": 1788647856936,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!P2QvPsLVRZ2DS6um.rtmr2cuDIvEaDXcL"
+    }
+  ],
+  "formula": "1d10",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788647856936,
+    "modifiedTime": 1788647856936,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!P2QvPsLVRZ2DS6um"
+}
