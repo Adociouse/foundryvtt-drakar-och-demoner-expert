@@ -1,0 +1,18 @@
+# LevelDB compendium pack control/data files must never go through Git's
+# line-ending conversion. `packs/*/CURRENT` is short, plain-ASCII text (just
+# a manifest filename) with no NUL byte, so Git's own binary-detection
+# heuristic does NOT catch it — with `core.autocrlf=true` on a checkout,
+# Git silently rewrites its LF to CRLF on disk. LevelDB's CURRENT-file
+# parser doesn't trim a trailing \r, only \n, so it then tries to open a
+# manifest literally named "MANIFEST-000123\r" and fails outright on
+# Windows (ERROR_INVALID_NAME). Found and fixed for packs/journaler/CURRENT
+# 2026-09-05 (see docs/DESIGN_DECISIONS.md backlog 113); this file is the
+# permanent fix so it can't recur, for this file or any sibling pack file.
+#
+# MANIFEST-*/*.ldb already contain a NUL byte early in the file, so Git's
+# heuristic already treats them as binary — marked here anyway so the
+# protection doesn't rely on that heuristic continuing to hold.
+packs/*/CURRENT -text
+packs/*/MANIFEST-* -text
+packs/*/*.ldb -text
+packs/*/*.log -text
