@@ -150,13 +150,22 @@ function main() {
       const filePath = path.join(journalDir, meta.file);
       const doc = JSON.parse(readFileSync(filePath, "utf-8"));
       const page = doc.pages[0];
-      // Behåll pagens befintliga intro (allt före första <h3>), regenerera bara
-      // tabellerna. Idempotent även om sidan saknar <h3> helt (0 besvärjelser
+      // Behåll pagens befintliga intro (allt före första <h3>) OCH en eventuell
+      // handskriven "appendix" — inslaget i <div class="manual-appendix">…</div>,
+      // t.ex. Demonologis Rekvisita-reagenstabell/Demoner-och-deras-ranger-
+      // avsnitt, som inte kan härledas ur besvärjelser-kompendiet och därför
+      // aldrig ska skrivas över. Ett explicit markörelement i stället för "allt
+      // efter sista </table>" — appendixinnehåll kan själv innehålla tabeller
+      // (t.ex. just Rekvisita-tabellen), vilket skulle förvirra en tabell-
+      // räknande heuristik. Regenerera bara Besvärjelser/Minimagi-tabellerna
+      // mitt emellan. Idempotent även om sidan saknar <h3> helt (0 besvärjelser
       // sedan tidigare) — då är HELA nuvarande innehållet introt, ingen tabell
-      // att skala bort.
+      // att skala bort och inget appendix att bevara.
       const introMatch = page.text.content.match(/^([\s\S]*?)(?=<h3>Besv)/);
       const intro = introMatch ? introMatch[1] : page.text.content;
-      page.text.content = buildSchoolBody(intro, besvarjelser, minibesvarjelser);
+      const appendixMatch = page.text.content.match(/<div class="manual-appendix">[\s\S]*<\/div>/);
+      const appendix = appendixMatch ? appendixMatch[0] : "";
+      page.text.content = buildSchoolBody(intro, besvarjelser, minibesvarjelser) + appendix;
       page._stats.modifiedTime = now;
       // ⚠ _stats.lastModifiedBy MÅSTE vara ett giltigt 16-tecken alfanumeriskt
       // Foundry-ID (DataModel-validering, `new Document(data)`/`.create()` är
