@@ -746,7 +746,10 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // DESIGN_DECISIONS.md §6. Utan väntan hinner arket visa den framslagna
     // förmågan innan tärningarna hunnit landa i Dice So Nice.
     await CONFIG.DODE.waitForDiceAnimation(message);
-    const entry = CONFIG.DODE.rollSpecialAbility(roll.total);
+    // Kaos Väktare-överlagringen (backlog 88) väljs automatiskt för
+    // Demonolog/Demonjägare/Demonkrigare — se DODE.rollSpecialAbility.
+    const professionName = this.actor.items.find((i) => i.type === "yrke")?.name ?? null;
+    const entry = CONFIG.DODE.rollSpecialAbility(roll.total, professionName);
     const effect = entry?.effect ?? null;
 
     let choices = [];

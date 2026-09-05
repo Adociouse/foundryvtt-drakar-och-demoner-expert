@@ -564,9 +564,85 @@ DODE.specialAbilitiesTable = [
   { range: [78, 999], name: "Hamnbytare", description: "Kan förvandla sig till ett djur (slå 1T6): 1 — varg, 2 — björn, 3 — hök, 4 — hjort, 5 — svan, 6 — katt. Verklig förvandling; övertar djurets egenskaper utom INT och INT-baserade färdigheter" }
 ];
 
-// Slår fram en rad ur DODE.specialAbilitiesTable för ett givet 2T20+BP-resultat.
-// Mirrorar DODE.skillCost's funktion-i-config-stil.
-DODE.rollSpecialAbility = function (total) {
+// Kaos Väktare s.34-35 (backlog 88), ordagrant: "Denna tabell ersätter den
+// som finns i Grundreglerna" — men bara för Demonolog/Demonjägare/
+// Demonkrigare, och bara för DE RADER boken faktiskt skriver om. Alla andra
+// intervall citeras bara som "Se Grundreglerna, sid I-25/26/27" — dvs
+// OFÖRÄNDRADE. Modellerat som en GLES override i stället för en fullständig
+// parallelltabell (MUDA — ingen anledning att duplicera ~30 oförändrade
+// rader): DODE.rollSpecialAbility slår upp HÄR FÖRST för de tre yrkena,
+// faller annars tillbaka på DODE.specialAbilitiesTable precis som vanligt.
+//
+// De flesta av de nya raderna saknar `effect` medvetet, av SAMMA skäl som
+// redan gäller ~35 av de 49 ursprungliga raderna (se specialAbilitiesTable
+// ovan och special-ability-effects.mjs's filhuvud): en villkorad bonus
+// ("bara mot demoner", "bara mot demonologi", "bara vid besatthetsförsök")
+// har ingen generisk "situationsbunden CL-bonus"-mekanism i motorn ännu —
+// att tvinga in den som en universell skillBonus skulle FEL-ge bonusen mot
+// ALLA mål, inte bara demoner. Text-only tills en sådan mekanism finns,
+// samma linje som redan dragen för t.ex. "Baneman" (rad 67, bas-tabellen).
+//
+// Tre rader FICK en mekanisk effekt eftersom de är flata, ovillkorade
+// FV-bonusar (samma form som redan byggda skillBonus-rader): Kaotisk
+// uppväxt (9-10, identisk mekanik med bas-tabellens "Bråkig uppväxt",
+// bara omdöpt), Demonkunskapare (25-26) och Diabolisk röst (27-28, CL-
+// bonus på en färdighet tolkas som FV-bonus — CL:t ÄR FV:t vid ett
+// oredigerat färdighetsslag i det här systemet).
+//
+// ⚠ Två rader kunde INTE mappas mot bas-tabellens motsvarande radnummer
+// utan en olöst motsägelse, flaggat men inte gissat: Kaos Väktare anger
+// "77: Hamnbytare" och "78: Snabb uppfattningsförmåga, se Grundreglerna
+// sid I-27" som TVÅ SKILDA rader — men den redan portade
+// DODE.specialAbilitiesTable har "77: God känsla för yrket" och
+// "78-999: Hamnbytare" i stället, och saknar en egen "Snabb
+// uppfattningsförmåga"-rad helt. Antingen skiljer sig utgåvornas
+// radnumrering, eller så missade en tidigare porteringsomgång en rad ur
+// RP:s originaltabell. Överlagringen nedan ersätter ENDAST radintervallet
+// [77,77] (Kaos Väktares egen numrering) med demon-Hamnbytaren; allt över
+// 78 faller igenom till bas-tabellens "Hamnbytare" (djurskepnad) oförändrat
+// — INTE en avsiktlig tolkning av vilken av de två böckerna som har rätt,
+// bara den minst destruktiva platsen att lägga överlagringen tills någon
+// slår upp den faktiska RP-sidan och avgör.
+DODE.specialAbilitiesOverrideDemon = [
+  { range: [9, 10], name: "Kaotisk uppväxt", description: "+3 i FV i Slagsmål",
+    effect: { type: "skillBonus", skills: ["slagsmal"], value: 3 } },
+  { range: [25, 26], name: "Demonkunskapare", description: "+2 i FV på Kunskap om demoner",
+    effect: { type: "skillBonus", skills: ["kunskap-om-demoner"], value: 2 } },
+  { range: [27, 28], name: "Diabolisk röst", description: "Du har en demonisk stämma som får folk att lystra, och ger +3 i CL på Övertala",
+    effect: { type: "skillBonus", skills: ["overtala"], value: 3 } },
+  { range: [31, 32], name: "Nattsyn", description: "Du ser obehindrat i stjärn- eller månljus och får inga minus för strid nattetid. Du ser inte i kolmörker." },
+  { range: [33, 34], name: "Känslig för demonmagi", description: "Du känner omedelbart om någon använder demonologi inom PSYx1 meter." },
+  { range: [37, 38], name: "Kroppsmedvetande", description: "Din själ och din kropp är etsade till varandra. Du får +5 i PSY när det gäller att motstå att bli besatt och kontrollerad av en demon." },
+  { range: [39, 40], name: "Demontjänare", description: "Vare sig du vill det eller ej, så har en demonett fått för sig att du är hans mästare, och följer dig överallt du går." },
+  { range: [41, 42], name: "Gifttålig", description: "Du är resistent mot diaboliska gifter, och får dubbla din FYS när du slår för att motstå gifter." },
+  { range: [43, 44], name: "Namnkunnig", description: "Du kan omedelbart avgöra en demons vanliga namn genom att betrakta den." },
+  { range: [47, 48], name: "Potent demonolog", description: "Du får lägga Demonologi till FV 20. Slå om ifall du är Demonolog." },
+  { range: [58, 58], name: "Demoners herre", description: "Demonetter och demonträlar lyder dig instinktivt om du övervinner deras PSY med din egen på Motståndstabellen." },
+  { range: [60, 60], name: "Accepterad bland demoner", description: "Om du klarar ett Svårt Myndighetslag (KAR) när du möter en demon kommer den inte att agera fientligt mot dig såvida du inte uppträder våldsamt och svekfullt." },
+  { range: [67, 67], name: "Demondräpare", description: "Du har svurit att bekämpa demoner och har alltid +5 i CL vid alla attacker mot demoner." },
+  { range: [75, 75], name: "Immun mot demonologi", description: "Du får +10 i PSY när någon försöker påverka dig med demonologi." },
+  { range: [76, 76], name: "Besatt", description: "Fungerar som Demonkrigarens yrkesförmåga (Demonfjättrad). Slå om ifall du är Demonkrigare." },
+  { range: [77, 77], name: "Hamnbytare (demon)", description: "Du kan när du vill anta skepnaden av en demonisk varelse. SL avgör hur din demoniska skepnad ser ut." },
+  { range: [79, 79], name: "Demonisk förmåga", description: "Du får en lägre demonisk förmåga som SL bestämmer slumpmässigt genom att välja en speciell förmåga." },
+  { range: [80, 80], name: "Demonmästare", description: "Du har alltid +10 i PSY när du ska försvara dig mot demoner och deras magi, eller när du ska påverka demoner." }
+];
+
+// De tre yrken Kaos Väktare (s.34) uttryckligen namnger som mottagare av
+// override-tabellen ovan. Matchat mot yrke-Itemets `name` (se
+// packs/yrken/_source/) — inga andra fält behövs, samma enkla strängmatchning
+// som redan används på andra håll i den här filen.
+DODE.SPECIAL_ABILITIES_DEMON_PROFESSIONS = ["Demonolog", "Demonjägare", "Demonkrigare"];
+
+// Slår fram en rad ur DODE.specialAbilitiesTable (eller, för Demonolog/
+// Demonjägare/Demonkrigare, FÖRST specialAbilitiesOverrideDemon) för ett
+// givet 2T20+BP-resultat. `professionName` är valfri — utelämnas den (eller
+// matchar ingen av de tre) beter sig funktionen precis som innan denna
+// utökning. Mirrorar DODE.skillCost's funktion-i-config-stil.
+DODE.rollSpecialAbility = function (total, professionName = null) {
+  if (professionName && DODE.SPECIAL_ABILITIES_DEMON_PROFESSIONS.includes(professionName)) {
+    const override = DODE.specialAbilitiesOverrideDemon.find((row) => total >= row.range[0] && total <= row.range[1]);
+    if (override) return override;
+  }
   return DODE.specialAbilitiesTable.find((row) => total >= row.range[0] && total <= row.range[1]) ?? null;
 };
 

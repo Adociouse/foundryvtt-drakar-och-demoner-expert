@@ -2402,7 +2402,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const bpInput = this.element.querySelector(`[data-ability-bp-index="${idx}"]`);
     const bpSpent = Math.max(1, Math.min(40, Number(bpInput?.value) || 1));
     const roll = await new Roll(`2d20+${bpSpent}`).evaluate();
-    const result = CONFIG.DODE.rollSpecialAbility(roll.total);
+    // Kaos Väktare-överlagringen (backlog 88) väljs automatiskt för
+    // Demonolog/Demonjägare/Demonkrigare — se DODE.rollSpecialAbility.
+    const result = CONFIG.DODE.rollSpecialAbility(roll.total, this.#selectedProfessionDoc?.name ?? null);
     // Johan 2026-08-02: postade tidigare INGET chattkort — samma "tysta slag"-
     // bugg som socialt stånd/startkapital, nu regel att undvika (§6).
     const message = await roll.toMessage({ flavor: "Särskild förmåga — 2T20+BP" });
