@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/ringbrynjeskjorta.png",
   "system": {
     "abs": 5,
-    "weight": 10,
+    "weight": 30,
     "price": 1500,
     "equipped": false,
     "coverage": [

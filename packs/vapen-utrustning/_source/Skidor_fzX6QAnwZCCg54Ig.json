@@ -4,7 +4,7 @@
   "system": {
     "category": "instrument",
     "quantity": 1,
-    "weight": 2.0,
+    "weight": 6,
     "price": 20,
     "priceUnit": "sm",
     "priceNote": "",

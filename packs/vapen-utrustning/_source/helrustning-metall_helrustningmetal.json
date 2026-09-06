@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/helrustning-metall.png",
   "system": {
     "abs": 8,
-    "weight": 25,
+    "weight": 75,
     "price": 5100,
     "equipped": false,
     "coverage": [

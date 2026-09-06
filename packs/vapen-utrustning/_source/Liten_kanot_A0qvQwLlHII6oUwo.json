@@ -4,7 +4,7 @@
   "system": {
     "category": "fordon",
     "quantity": 1,
-    "weight": 25.0,
+    "weight": 75,
     "price": 300,
     "priceUnit": "sm",
     "priceNote": "",

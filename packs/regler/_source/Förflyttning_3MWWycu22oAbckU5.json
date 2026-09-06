@@ -1,0 +1,62 @@
+{
+  "name": "Förflyttning",
+  "_id": "3MWWycu22oAbckU5",
+  "pages": [
+    {
+      "_id": "gqQiYJ439aHNvyAV",
+      "name": "Förflyttning",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Förflyttningsförmåga</h2><p>Förflyttningsförmågan anger hur många rutor en rollperson kan flytta i en stridsrunda (SR). Slå upp <strong>summan av STO + FYS + SMI</strong> i tabellen nedan.</p><table style=\"width:100%\"><thead><tr><th>STO+FYS+SMI</th><th>Rutor/SR</th></tr></thead><tbody><tr><td>≤ 11</td><td>7</td></tr><tr><td>12 – 20</td><td>8</td></tr><tr><td>21 – 29</td><td>9</td></tr><tr><td>30 – 38</td><td>10</td></tr><tr><td>39 – 47</td><td>11</td></tr><tr><td>48 – 56</td><td>12</td></tr><tr><td>57 – 65</td><td>13</td></tr><tr><td>66 – 74</td><td>14</td></tr><tr><td>75 – 83</td><td>15</td></tr><tr><td>84 – 92</td><td>16</td></tr></tbody></table><p>Över 92: <strong>+1 ruta för varje ytterligare +8.</strong></p><p><em>Källa: Rollpersonen (RP) s.25.</em></p><h2>Rasmodifikationer</h2><table style=\"width:100%\"><thead><tr><th>Ras</th><th>Modifikation</th></tr></thead><tbody><tr><td>Anka</td><td>−2</td></tr><tr><td>Alv</td><td>+1</td></tr><tr><td>Dvärg</td><td>−2</td></tr><tr><td>Halvlängdsman</td><td>−2</td></tr><tr><td>Övriga raser</td><td>±0</td></tr></tbody></table><p><em>Källa: Spelledarboken (SLB) s.32.</em></p><h2>Bördans inverkan</h2><p>Bär rollpersonen mer än sin bärförmåga (STY kg) minskar Förflyttningsförmågan enligt en egen tabell — se den separata regelsidan <strong>\"Bärförmåga &amp; belastning\"</strong>. Samma modifikation drar även ner SMI och CL på SMI-baserade färdigheter.</p><h2>Rutstorlek och tid</h2><p>1 ruta motsvarar <strong>1,5 meter</strong>. En stridsrunda (SR) motsvarar ungefär <strong>fem sekunder</strong>.</p><p><em>Källa: Spelledarboken (SLB) s.15, s.25-26.</em></p><h2>Förflyttning i strid</h2><p>Under en stridsrunda väljer man <strong>en</strong> handling. Hur mycket man får flytta beror på vilken:</p><table style=\"width:100%\"><thead><tr><th>Nivå</th><th>Gräns</th><th>Innebörd</th></tr></thead><tbody><tr><td>Delta i närstrid</td><td>Högst ½ förflyttning</td><td>Får flytta högst hälften av sin modifierade förflyttning <strong>innan</strong> striden (avrundat nedåt) och ändå anfalla/pareras samma SR.</td></tr><tr><td>Full förflyttning</td><td>1× förflyttning</td><td>Får avbrytas för att söka skydd eller parera ett hugg — man stannar där man stod när förflyttningen upphörde.</td></tr><tr><td>Springa</td><td>2× förflyttning</td><td>\"Man får inte göra någonting annat i stridsrundan, inte ens skicka meddelanden. Man är helt omedveten om sin omgivning.\"</td></tr><tr><td>Sprinta</td><td>3× förflyttning</td><td>Kräver att man saknar rustning och ryggsäck, har tomma händer och lämplig klädsel (SL:s bedömning).</td></tr></tbody></table><p><em>Källa: Spelledarboken (SLB) s.15-16.</em></p><h2>Terräng</h2><p>\"En person som vadar i ett träsk … har sin fulla förflyttningsförmåga minskad, men det är SL som avgör hur mycket.\" Böckerna ger ingen egen terrängtabell — SL bedömer försvårande underlag (träsk, djup snö, brant klättring m.m.) från fall till fall vid bordet.</p><p><em>Källa: Spelledarboken (SLB) s.15.</em></p><h2>Monstrens förflyttningskoder</h2><p>I monsterstatblock anges Förflyttningsförmågan som en siffra följd av en bokstavskod som visar HUR varelsen förflyttar sig:</p><table style=\"width:100%\"><thead><tr><th>Kod</th><th>Betyder</th></tr></thead><tbody><tr><td>L</td><td>Land — förflyttning till lands</td></tr><tr><td>F</td><td>Flygande</td></tr><tr><td>S</td><td>Simmande</td></tr><tr><td>B</td><td>Borrande</td></tr><tr><td>A</td><td>Oavsett omgivning</td></tr></tbody></table><p>En varelse kan ha flera koder samtidigt (t.ex. \"F30/L26\" — 30 rutor flygande, 26 rutor till lands).</p><p><em>Källa: Spelledarboken (SLB) s.25-26.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757145600000,
+        "modifiedTime": 1757145600000,
+        "lastModifiedBy": "xiFEAImPcDb2zU7j",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!3MWWycu22oAbckU5.gqQiYJ439aHNvyAV"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1757145600000,
+    "modifiedTime": 1757145600000,
+    "lastModifiedBy": "xiFEAImPcDb2zU7j",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!3MWWycu22oAbckU5"
+}

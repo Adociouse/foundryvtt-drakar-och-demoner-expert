@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/harnesk-tjockt-tyg.png",
   "system": {
     "abs": 1,
-    "weight": 2,
+    "weight": 6,
     "price": 130,
     "equipped": false,
     "coverage": [

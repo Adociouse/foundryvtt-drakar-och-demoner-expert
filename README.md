@@ -35,6 +35,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Del | Status |
 |---|---|
 | Grundegenskaper, härledda värden (KP, PSY, skadebonus, förflyttning, bärförmåga) | Klar |
+| Förflyttning & belastning på kartan — bördetabell (SPB s.44) som faktiskt påverkar förflyttning/SMI/CL, DoD-nivåer på dragningslinjalen (kan anfalla/full förflyttning/springa/sprinta), 3D-höjdmedveten närstridsräckvidd, terräng via Foundrys egna kartregioner | Klar, se detaljer nedan |
 | FV-baserade färdighetsslag (perfekt/fummel-bekräftelse, Dice So Nice-stöd) | Klar |
 | Guidad rollpersonsskapare (19 steg, bokexakt BP/EP-ekonomi, point-buy-attribut) | Klar, se detaljer nedan |
 | Kompendier: 13 raser, 39 yrken, 346 vapen/utrustning, 475 besvärjelser (14 magiskolor), 241 monster | Klar (fortsatt luckor i bildtäckning och vapensortiment, samt i bestiary-täckningen mot källböckerna och beskrivningstexternas kvalitet — se nedan). Besvärjelsekatalogens katalogkomplettering mot Formelboken är HELT KLAR; Kaos Väktares demonologitillägg (3 yrken, Portalmagi som 14:e skola) tillagt 2026-09-02 |
@@ -77,13 +78,17 @@ En färdig rollperson kan sedan tränas vidare i spel via en egen träningsvy (`
 
 **Bakgrundsbild:** Karaktärsarket och guiden delar samma visuella identitet — en mörk läder-/trätextur (`assets/backgrounds/character-sheet-leather.png` som bakgrund, `imagen_20260719_201503_2.png` som träram via `border-image`), se `styles/dode.css`.
 
+### Förflyttning & belastning på kartan
+
+Bördetabellen (`system.encumbrance`, Spelarboken s.44) summerar buren vikt (rustning räknas halvt om utrustad, kläder inte alls) och sätter en riktig konsekvens: vid tillräcklig börda minskar Förflyttningsförmåga, SMI och CL på alla SMI-baserade färdigheter samtidigt (golv 1), och en "Belastad"-statusikon syns automatiskt på tokenet. Under strid färgar en egen linjal (`CONFIG.Token.rulerClass`) draget i DoD:s egna nivåer — kan fortfarande anfalla (≤½×), full förflyttning (1×), Springa (2×), Sprinta (3×) — genom att läsa Foundrys egen `movementHistory`, som nollställs per stridsrunda i stället för Foundrys standard per tur. Rent visuellt/analytiskt, ingen spärr — SL dömer. Höjdskillnader (t.ex. en balkong) mäts nu äkta 3D, så en närstridsattack mellan olika nivåer nekas automatiskt om avståndet överstiger vapnets räckvidd. Terräng (träsk, djup snö) hanteras med Foundrys inbyggda kartregioner, inget eget system.
+
 ### Kompendier
 
 | Kompendie | Innehåll |
 |---|---|
 | `raser` | 13 raser: 7 grundraser (Människa, Alv, Halvalv, Halvlängdsman, Dvärg, Halvork, Anka) + 6 alvsläkten (Alver s.22) |
 | `yrken` | 39 yrken: 11 grundyrken (Bard, Helare, Krigare, Lärd man, Lönnmördare, Magiker, Munk, Riddare, Sjöfarare, Tjuv, Utbygdsjägare) + 28 specialiseringar (Krigarens Handbok, Tjuvar och Lönnmördare, Kaos Väktare — Demonolog/Demonjägare/Demonkrigare), varje yrke med en strukturerad `professionSkills`-lista för den automatiska färdighetstilldelningen och (där källan ger det) mekaniskt kopplade yrkesförmågor |
-| `vapen-utrustning` | 346 poster: 24 vapen (inkl. Silverdolk, `material:"silver"`, 2026-09-03), 45 rustningsdelar (per kroppsdel, SB s.27), 277 övrig utrustning (inkl. 6 ammunitionsposter — Pilar/Silverpilar/Armborstpilar/Silverbultar/Slungstenar/Silverkulor, `category:"ammunition"`, `material`-fält avgör resistanskontrollen i strid — "bågen är bara bågen, det är pilen som är av silver") — köpbara i guidens utrustningssteg |
+| `vapen-utrustning` | 346 poster: 24 vapen (inkl. Silverdolk, `material:"silver"`, 2026-09-03), 45 rustningsdelar (per kroppsdel, SB s.27), 277 övrig utrustning (inkl. 6 ammunitionsposter — Pilar/Silverpilar/Armborstpilar/Silverbultar/Slungstenar/Silverkulor, `category:"ammunition"`, `material`-fält avgör resistanskontrollen i strid — "bågen är bara bågen, det är pilen som är av silver") — köpbara i guidens utrustningssteg. Vikt anges i kg (Spelarboken s.44/s.12, migrerad från Magi-regelbokens BEP-tabell 2026-09-06 — se Kända begränsningar) |
 | `besvarjelser` | 475 besvärjelser (431 besvärjelser + 44 minibesvärjelser, minibesvärjelserna samlade i en egen "Minimagi"-undermapp per skola) — Formelbokens katalogkomplettering är KLAR (13 skolor + Allmänna), plus Kaos Väktares demonologitillägg (Portalmagi som 14:e skola, 7 besvärjelser + 14 nya/3 ersatta Demonologi-besvärjelser) |
 | `monster` | 241 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
@@ -96,6 +101,7 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 
 ### Kända begränsningar
 
+- **Föremålsvikternas BEP→kg-migration (×3) matchar inte Spelarbokens egna kg-prissatta utrustningslistor item-för-item.** Konverteringsfaktorn (1 BEP = 3 kg) är exakt vad Spelarbokens egen errata (s.12) föreskriver, men Magi-regelbokens och Spelarbokens utrustningslistor tycks vara oberoende viktsatta för samma föremål — ett stickprov av 19 poster visade bara 1 träff. Se `docs/DESIGN_DECISIONS.md` backlog 117 för en eventuell framtida post-för-post-avstämning.
 - **GM-effekternas skillMod/CL-mod/läkningstakt-lager syns inte som ikoner på token.** GM-effektfönstret (`scripts/apps/gm-effects.mjs`) redigerar person-/scen-/världseffekter lagrade som ren data i en Setting/flagga, inte som riktiga `ActiveEffect`-dokument (embedded färdighets-Items kan inte vara AE-mål, se kodkommentarer) — de påverkar rätt siffra i beräkningarna men ger ingen visuell markering på tokenet. Genuina `ActiveEffect`-baserade buffar (`game.dode.SceneEffects`, utrustning/förmågor) FÅR en ikon på tokenet om anroparen anger en `img`, och DoDE:s två registrerade villkor (Arm obrukbar/Hand upptagen) syns automatiskt via Foundrys egen Token HUD. Periodiska effekter (gift/eld/blödning) synkas automatiskt mot Foundrys motsvarande kärn-statusikoner (`poison`/`burning`/`bleeding`) på Token HUD — övriga periodeffekt-källor visas fortfarande bara som en rad i GM-effektfönstrets aktörssektion.
 - **Vapensortimentet täcker 23 av Spelarbokens ~52 vapen.** Vapengruppssystemet (`DODE.weaponGroups`) är byggt för hela tabellen, men själva kompendieposterna är inte alla transkriberade än.
 - **Bestiaryn täcker 241 varelser** ur Monsterboken 1, Monsterboken 2, Monsterboxen II och Svartfolk-supplementet — alla fyra KOMPLETTA, inklusive Svartfolks namngivna spelledarpersoner och färdiga svartfolks-arketyper att placera ut direkt. ⚠ Täckningsgraden mot det samlade källmaterialet är dock **inte** fastställd: utöver Monsterboxen IV (56 poster, inga byggda) finns ytterligare tre böcker med varelsestatblock som ännu inte reviderats — *Monster och Man i Ereb Altor*, *Drakar* och *Svartfolk*-supplementet (skilt från Monsterboxen II:s Svartfolk-kapitel, som är byggt).

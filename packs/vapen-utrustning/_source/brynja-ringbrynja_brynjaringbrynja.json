@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/brynja-ringbrynja.png",
   "system": {
     "abs": 5,
-    "weight": 16,
+    "weight": 48,
     "price": 2000,
     "equipped": false,
     "coverage": [

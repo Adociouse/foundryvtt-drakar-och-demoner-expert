@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-tjockt-tyg.png",
   "system": {
     "abs": 1,
-    "weight": 3,
+    "weight": 9,
     "price": 80,
     "equipped": false,
     "coverage": [

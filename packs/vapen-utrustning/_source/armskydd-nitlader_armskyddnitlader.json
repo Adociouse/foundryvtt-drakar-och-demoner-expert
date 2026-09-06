@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armskydd-nitlader.png",
   "system": {
     "abs": 3,
-    "weight": 5,
+    "weight": 15,
     "price": 500,
     "equipped": false,
     "coverage": [

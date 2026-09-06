@@ -62,7 +62,11 @@ export default class DoDEFormagaData extends foundry.abstract.TypeDataModel {
       // INLINE i actor-character.mjs#prepareDerivedData (#applyStatModifiers),
       // inte en live getter — se den kommentaren för varför.
       statModifiers: new fields.ArrayField(new fields.SchemaField({
-        stat: new fields.StringField({ required: true, initial: "hp.max", choices: ["hp.max", "psy.max"] }),
+        // "movement" tillagd 2026-09-06 (förflyttnings-/bärförmågeomgången) — samma
+        // fält, samma #applyStatModifiers-summering i actor-character.mjs, bara ett
+        // tredje möjligt mål. Låter ett formaga-item ge en flat förflyttningsbonus
+        // utan ny maskineri.
+        stat: new fields.StringField({ required: true, initial: "hp.max", choices: ["hp.max", "psy.max", "movement"] }),
         operation: new fields.StringField({ required: true, initial: "multiply", choices: ["add", "multiply"] }),
         value: new fields.NumberField({ required: true, initial: 1 })
       })),

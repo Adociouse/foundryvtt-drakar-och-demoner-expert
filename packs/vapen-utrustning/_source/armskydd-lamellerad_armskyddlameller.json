@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armskydd-lamellerad.png",
   "system": {
     "abs": 6,
-    "weight": 5.5,
+    "weight": 16.5,
     "price": 950,
     "equipped": false,
     "coverage": [

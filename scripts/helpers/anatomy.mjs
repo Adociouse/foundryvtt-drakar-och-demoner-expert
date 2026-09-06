@@ -239,10 +239,23 @@ export async function gmDisableLocation(actor, locationKey) {
  * Returnerar BÅDE `spaces` (rutor — det DoDE:s regler räknar i, SLB s.15) och
  * `distance` (scenens enheter, hos oss meter). ⚠ På ett rutnätslöst underlag är
  * `spaces` 0 och bara `distance` är meningsfull.
+ *
+ * ⚠ **RÄTTAD 2026-09-06 (höjd/"balkongfallet").** Skickade tidigare bara platta
+ * `{x, y}` (via `Token#center`, en canvas-placeable-getare utan höjd) till
+ * `measurePath`, som då tyst mätte avståndet som om alla tokens stod på samma
+ * plan. DoD-böckerna har ingen egen höjdregel (genomsökt — ingen finns), men
+ * Johan: *"'reachability' is an SL aspect and sort of built in to foundry —
+ * if there is a balcony in a bar, melee fight should not be accepted"*.
+ * `TokenDocument#getCenterPoint()` (till skillnad från `Token#center`) ger
+ * redan `{x, y, elevation}`, och `measurePath` räknar äkta 3D-avstånd när den
+ * får den formen (`Coordinates3D`, se common/grid/base.mjs) — ingen egen
+ * höjdregel skrivs här, det är bara den redan tappade datan som återställs.
+ * Detta gör automatiskt att räckviddskontrollen i attack.mjs nekar närstrid
+ * mellan olika våningsplan/höjder, utan en enda ny regelrad.
  */
 export function tokenDistance(a, b) {
-  const from = a?.object?.center ?? { x: a.x, y: a.y };
-  const to = b?.object?.center ?? { x: b.x, y: b.y };
+  const from = a?.getCenterPoint?.() ?? { x: a.x, y: a.y, elevation: a.elevation ?? 0 };
+  const to = b?.getCenterPoint?.() ?? { x: b.x, y: b.y, elevation: b.elevation ?? 0 };
   const path = canvas.grid.measurePath([from, to]);
   return { spaces: path.spaces, distance: path.distance, units: canvas.grid.units };
 }

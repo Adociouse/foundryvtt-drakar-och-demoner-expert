@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/hauberk-forstarkt-ringbrynja.png",
   "system": {
     "abs": 6,
-    "weight": 48,
+    "weight": 144,
     "price": 4500,
     "equipped": false,
     "coverage": [

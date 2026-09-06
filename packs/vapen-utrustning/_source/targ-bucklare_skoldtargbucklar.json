@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/targ-bucklare.png",
   "system": {
     "abs": 0,
-    "weight": 1,
+    "weight": 3,
     "price": 500,
     "equipped": false,
     "coverage": [],

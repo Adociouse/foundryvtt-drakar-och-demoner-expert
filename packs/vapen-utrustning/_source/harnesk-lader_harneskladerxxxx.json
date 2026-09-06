@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/harnesk-lader.png",
   "system": {
     "abs": 2,
-    "weight": 3,
+    "weight": 9,
     "price": 600,
     "equipped": false,
     "coverage": [

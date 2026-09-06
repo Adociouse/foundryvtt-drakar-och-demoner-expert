@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armskydd-hardat-lader.png",
   "system": {
     "abs": 4,
-    "weight": 3,
+    "weight": 9,
     "price": 750,
     "equipped": false,
     "coverage": [

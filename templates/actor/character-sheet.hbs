@@ -81,7 +81,12 @@
       <span>{{localize "DODE.Derived.DamageBonus"}}: {{system.damageBonus}}</span>
       <span>{{localize "DODE.Derived.Abs"}}: {{system.abs}}</span>
       <span>{{localize "DODE.Derived.Movement"}}: {{system.movement}}</span>
-      <span>{{localize "DODE.Derived.CarryCapacity"}}: {{system.carryCapacity}} kg</span>
+      {{!-- Belastning — Spelarboken s.44. system.encumbrance.step 0 = obelastad
+            (±0), 1-5 = tilltagande börda. Se DODE.encumbranceTable, config.mjs. --}}
+      <span class="encumbrance-display{{#if system.encumbrance.step}} encumbrance-active{{/if}}"
+            title="Belastning steg {{system.encumbrance.step}}: {{system.encumbrance.modifier}} på Förflyttning, SMI och CL på SMI-baserade färdigheter{{#if system.encumbrance.noSwimRunSprint}} · Kan inte simma, springa eller sprinta{{/if}}{{#if system.encumbrance.noSmiSkills}} · Inga SMI-baserade färdigheter kan användas{{/if}} (Spelarboken s.44)">
+        {{localize "DODE.Derived.CarryCapacity"}}: {{system.carriedWeight}} / {{system.carryCapacity}} kg
+      </span>
       {{#if system.ep.bonusAvailable}}
         <span title="Fria bonuspoäng från spelledaren — inte bundna till någon färdighet">Fria EP: {{system.ep.bonusAvailable}}</span>
       {{/if}}
@@ -246,7 +251,7 @@
           <button type="button" data-action="castSpell" title="Kasta (öppnar kast-dialogen)"><i class="fa-solid fa-hand-sparkles"></i></button>
         {{else if entry.isUtrustning}}
           {{#if entry.item.system.quantity}}<span class="skill-fv">{{entry.item.system.quantity}} st</span>{{/if}}
-          <span class="skill-fv" title="{{localize 'DODE.Equipment.TotalWeight'}}">{{entry.item.system.totalWeight}} BEP</span>
+          <span class="skill-fv" title="{{localize 'DODE.Equipment.TotalWeight'}}">{{entry.item.system.totalWeight}} kg</span>
           <span class="skill-fv" title="{{localize 'DODE.Equipment.PriceSmHint'}}">{{entry.item.system.priceDisplay}}</span>
         {{/if}}
         {{#if entry.canEquip}}

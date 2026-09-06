@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/oppen-metallhjalm-med-visir.png",
   "system": {
     "abs": 6,
-    "weight": 6,
+    "weight": 18,
     "price": 1500,
     "equipped": false,
     "coverage": [

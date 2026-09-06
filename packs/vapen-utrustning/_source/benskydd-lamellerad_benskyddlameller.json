@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-lamellerad.png",
   "system": {
     "abs": 6,
-    "weight": 6,
+    "weight": 18,
     "price": 1550,
     "equipped": false,
     "coverage": [

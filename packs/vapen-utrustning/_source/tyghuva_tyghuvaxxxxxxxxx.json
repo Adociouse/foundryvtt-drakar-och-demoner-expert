@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/tyghuva.png",
   "system": {
     "abs": 1,
-    "weight": 0.5,
+    "weight": 1.5,
     "price": 25,
     "equipped": false,
     "coverage": [

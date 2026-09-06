@@ -4,7 +4,7 @@
   "system": {
     "category": "ammunition",
     "quantity": 1,
-    "weight": 1,
+    "weight": 3,
     "price": 20,
     "priceUnit": "sm",
     "priceNote": "",

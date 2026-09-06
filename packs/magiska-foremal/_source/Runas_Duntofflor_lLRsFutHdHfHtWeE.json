@@ -4,13 +4,16 @@
   "system": {
     "category": "kladsel",
     "quantity": 1,
-    "weight": 0.5,
+    "weight": 1.5,
     "price": 40,
     "priceUnit": "gm",
     "priceNote": "",
     "equipped": false,
     "skillModifiers": [
-      { "skillKey": "smyga", "value": 5 }
+      {
+        "skillKey": "smyga",
+        "value": 5
+      }
     ],
     "chargesRemaining": 10,
     "activationSeconds": 1800,

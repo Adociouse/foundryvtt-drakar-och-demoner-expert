@@ -50,8 +50,12 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
         required: false, initial: "mundane",
         choices: ["mundane", "silver", "magical"]
       }),
-      // Vikt i BEP (belastningspoäng), samma enhet som vapen/rustning använder.
-      // Källtabellerna anger bråkdelar som 1/4 och 1/2 — lagras som 0.25/0.5.
+      // Vikt i kg, samma enhet som vapen/rustning använder. ⚠ Migrerad
+      // 2026-09-06 från BEP (belastningspoäng) till kg (×3, Spelarboken s.12:s
+      // errata) — se DODE.encumbranceTable (config.mjs) för hela
+      // käll-/migrationsdiskussionen, inklusive den medvetna avvikelsen mot
+      // Spelarbokens egna kg-listor. Källtabellerna anger bråkdelar som 1/4
+      // och 1/2 — lagras som 0.25/0.5.
       weight: new fields.NumberField({ required: false, initial: 0, min: 0 }),
       price: new fields.NumberField({ required: false, initial: 0, min: 0 }),
       priceUnit: new fields.StringField({
@@ -86,7 +90,9 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
       // saknades här, ingen ändring behövdes i själva summeringslogiken.
       // Live-fynd 2026-08-21, Johan: "Malakor med... en stav som ger +3PSY".
       statModifiers: new fields.ArrayField(new fields.SchemaField({
-        stat: new fields.StringField({ required: true, initial: "hp.max", choices: ["hp.max", "psy.max"] }),
+        // "movement" tillagd 2026-09-06 — se item-formaga.mjs's motsvarande
+        // kommentar.
+        stat: new fields.StringField({ required: true, initial: "hp.max", choices: ["hp.max", "psy.max", "movement"] }),
         operation: new fields.StringField({ required: true, initial: "add", choices: ["add", "multiply"] }),
         value: new fields.NumberField({ required: true, integer: true, initial: 0 })
       })),

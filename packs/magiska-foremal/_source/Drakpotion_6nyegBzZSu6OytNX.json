@@ -4,7 +4,7 @@
   "system": {
     "category": "droger",
     "quantity": 1,
-    "weight": 0.25,
+    "weight": 0.75,
     "price": 60,
     "priceUnit": "gm",
     "priceNote": "",
@@ -14,7 +14,11 @@
     "activationSeconds": 3600,
     "consumable": true,
     "effectChanges": [
-      { "key": "system.attributes.$CHOICE.bonus", "mode": 2, "value": "10" }
+      {
+        "key": "system.attributes.$CHOICE.bonus",
+        "mode": 2,
+        "value": "10"
+      }
     ],
     "description": "<p>Ett tjockt, blodrött brygg som luktar svavel och åska. Den som dricker känner en av sina grundegenskaper svälla av draköd kraft i ungefär en timme — men styrkan är lånad, inte lärd, och ebbar sedan lika snabbt ut som den kom.</p><p><em>Testföremål — backlogpost 7/36: bekräftar konsumtionsbara engångsföremål med spelarvalt mål (grundegenskap) och en riktig tidsbegränsad ActiveEffect, samt att en tillfällig attributhöjning INTE smittar av sig på redan satta färdighetsvärden. Ej bokkällat.</em></p>",
     "source": {

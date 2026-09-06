@@ -376,16 +376,53 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // Skadebonus från STY + STO — RP s.25 (⚠ verifiera exakta gränsvärden)
     this.damageBonus = DODE.damageBonus(a.sty.total + a.sto.total);
 
-    // Förflyttning — RP s.25: slå upp SUMMAN STO+FYS+SMI i tabellen, plus rasmodifikation.
+    // Buren vikt & belastning — Spelarboken s.44 (DoD91), se
+    // DODE.encumbranceTable (config.mjs) för hela käll-/migrationsdiskussionen
+    // (Magi-bokens ersatta BEP-tabell vs. den auktoritativa SPB-tabellen i kg).
+    // Summerar ALLA ägda vapen/rustning/utrustning, inte bara `equipped` —
+    // SPB:s egen formulering ("det antal kg man bär med sig") talar för allt
+    // man har på sig, inte bara det som råkar vara aktivt utrustat just nu
+    // (en ryggsäck väger även när den inte är "utrustad").
+    let carriedWeight = 0;
+    for (const item of this.parent?.items ?? []) {
+      if (item.type === "vapen") {
+        carriedWeight += item.system.weight ?? 0;
+      } else if (item.type === "rustning") {
+        // SPB s.44: "Man räknar bara halva vikten av en rustning som man bär
+        // på kroppen" — bara UTRUSTAD rustning får denna rabatt.
+        const w = item.system.weight ?? 0;
+        carriedWeight += item.system.equipped ? w / 2 : w;
+      } else if (item.type === "utrustning" && item.system.category !== "kladsel") {
+        // SPB s.44: "Vanliga kläder räknas inte in vid beräkning av bördan."
+        carriedWeight += item.system.totalWeight ?? 0;
+      }
+    }
+    this.carriedWeight = Math.round(carriedWeight * 100) / 100;
+    // Bärförmåga = STY kg utan att bli nämnvärt uttröttad — Spelarboken s.44.
+    this.carryCapacity = a.sty.total;
+    this.encumbrance = {
+      carried: this.carriedWeight,
+      capacity: this.carryCapacity,
+      ...DODE.encumbranceStep(this.carriedWeight, this.carryCapacity)
+    };
+
+    // Förflyttning — RP s.25: slå upp SUMMAN STO+FYS+SMI i tabellen, plus
+    // rasmodifikation OCH belastningens modifikation (SPB s.44).
     // ⚠ Rättad 2026-07-28: koden delade tidigare summan med 3 och slog upp i en tabell
     // som inte fanns i någon bok. Se DESIGN_DECISIONS.md §3 31C.
+    // ⚠ Belastningsmodifikationen läggs BARA på slutresultatet här (och som en
+    // egen CL-bucket för SMI-baserade färdigheter i #computeSkillModifiers
+    // nedan) — INTE på a.smi.total självt. Att i stället dra av på smi.total
+    // hade dubbelräknat samma modifikation genom movementSum (som redan
+    // summerar in smi.total) — attributets EGNA totalvärde förblir alltså
+    // medvetet orört av börda. SPB:s "SMI minskas" uttrycks som en direkt,
+    // separat CL-effekt på SMI-baserade färdigheter i stället, se nedan.
     const movementSum = a.sto.total + a.fys.total + a.smi.total;
     const raceName = (rasItem?.name ?? "").toLowerCase();
     const movementMod = rasItem?.system?.movementMod ?? DODE.movementRaceMod[raceName] ?? 0;
-    this.movement = Math.max(1, DODE.movement(movementSum) + movementMod);
-
-    // Bärförmåga = STY kg utan att bli nämnvärt uttröttad — REGLER_EGENSKAPER.md
-    this.carryCapacity = a.sty.total;
+    let movementBase = DODE.movement(movementSum) + movementMod + this.encumbrance.modifier;
+    movementBase = this.#applyStatModifiers("movement", movementBase);
+    this.movement = Math.max(1, movementBase);
 
     // PSY-resurs: max = PSY-attributets total. Nuvarande PSY förbrukas vid besvärjelsekastning
     // (MAGI.md) — se DoDEActor#castSpell.
@@ -502,6 +539,24 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
             (sources[comboKey] ??= []).push({ label: item.name, value: mod.value });
           }
         }
+      }
+    }
+
+    // Belastningens CL-avdrag på ALLA SMI-baserade färdigheter (Spelarboken
+    // s.44, se DODE.encumbranceTable) — appliceras per ÄGD fardighet vars
+    // `attribute` är "smi", inte via DODE.skills-katalogen. En spelare kan
+    // äga en fri/anpassad färdighet (t.ex. ett hantverk) som inte finns i
+    // katalogen men ändå har `attribute:"smi"` satt på sitt eget Item — att
+    // läsa attributet direkt av det ägda Itemet täcker båda fallen utan att
+    // katalogen behöver känna till varje möjlig färdighet.
+    const encumbranceMod = this.encumbrance?.modifier ?? 0;
+    if (encumbranceMod) {
+      for (const item of this.parent?.items ?? []) {
+        if (item.type !== "fardighet" || item.system.attribute !== "smi") continue;
+        const key = item.system.skillKey || DODE.skillKey(item.name);
+        if (!key) continue;
+        totals[key] = (totals[key] ?? 0) + encumbranceMod;
+        (sources[key] ??= []).push({ label: "Belastning", value: encumbranceMod });
       }
     }
 

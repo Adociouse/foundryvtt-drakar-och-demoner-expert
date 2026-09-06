@@ -146,6 +146,13 @@
   text-align: center;
 }
 
+/* Belastning, 2026-09-06 (Spelarboken s.44) — samma amber/orange som
+   .target-warning: en flagga, inte ett fel. Bara aktiv (färgad) vid steg ≥1. */
+.dode.sheet .derived-row .encumbrance-active {
+  color: rgb(184, 134, 11);
+  font-weight: 600;
+}
+
 .dode.sheet .social-standing {
   display: flex;
   align-items: center;

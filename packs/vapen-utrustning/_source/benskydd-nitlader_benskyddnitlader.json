@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-nitlader.png",
   "system": {
     "abs": 3,
-    "weight": 6,
+    "weight": 18,
     "price": 750,
     "equipped": false,
     "coverage": [

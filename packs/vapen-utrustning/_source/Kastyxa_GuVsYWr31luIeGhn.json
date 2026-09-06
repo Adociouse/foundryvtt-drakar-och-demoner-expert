@@ -6,7 +6,7 @@
     "grip": "1H",
     "styGroup": 2,
     "damage": "1d6+2",
-    "weight": 1,
+    "weight": 3,
     "baseValue": 11,
     "weaponType": "latt",
     "category": "kast",

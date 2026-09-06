@@ -25,7 +25,8 @@
     },
     "Status": {
       "ArmObrukbar": "Arm obrukbar",
-      "HandUpptagen": "Hand upptagen"
+      "HandUpptagen": "Hand upptagen",
+      "Belastad": "Belastad"
     },
     "WeaponType": {
       "Latt": "Lätt",
@@ -128,7 +129,7 @@
     "Equipment": {
       "Category": "Kategori",
       "Quantity": "Antal",
-      "Weight": "Vikt (BEP)",
+      "Weight": "Vikt (kg)",
       "Price": "Pris",
       "PriceUnit": "Myntslag",
       "PriceNote": "Prisnotering (fritext)",

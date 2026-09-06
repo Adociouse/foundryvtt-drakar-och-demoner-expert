@@ -6,7 +6,7 @@
     "grip": "2H",
     "styGroup": 2,
     "damage": "2d6+2",
-    "weight": 2,
+    "weight": 6,
     "baseValue": 11,
     "weaponType": "tung",
     "category": "projektil",

@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/nitladerhuva.png",
   "system": {
     "abs": 3,
-    "weight": 1,
+    "weight": 3,
     "price": 180,
     "equipped": false,
     "coverage": [

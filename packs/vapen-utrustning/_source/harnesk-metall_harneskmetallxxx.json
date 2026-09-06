@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/harnesk-metall.png",
   "system": {
     "abs": 7,
-    "weight": 12,
+    "weight": 36,
     "price": 1900,
     "equipped": false,
     "coverage": [

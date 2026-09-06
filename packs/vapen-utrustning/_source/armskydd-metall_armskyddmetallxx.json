@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/armskydd-metall.png",
   "system": {
     "abs": 7,
-    "weight": 6,
+    "weight": 18,
     "price": 1350,
     "equipped": false,
     "coverage": [

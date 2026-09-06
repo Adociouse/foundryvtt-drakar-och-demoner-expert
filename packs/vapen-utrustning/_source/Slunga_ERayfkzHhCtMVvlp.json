@@ -6,7 +6,7 @@
     "grip": "1H",
     "styGroup": 1,
     "damage": "1d6",
-    "weight": 0.25,
+    "weight": 0.75,
     "weaponType": "latt",
     "category": "projektil",
     "range": "90 m",

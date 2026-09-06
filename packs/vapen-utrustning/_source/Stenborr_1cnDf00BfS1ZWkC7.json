@@ -4,7 +4,7 @@
   "system": {
     "category": "verktyg",
     "quantity": 1,
-    "weight": 1.0,
+    "weight": 3,
     "price": 50,
     "priceUnit": "sm",
     "priceNote": "",

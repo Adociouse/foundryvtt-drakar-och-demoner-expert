@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/hauberk-ringbrynja.png",
   "system": {
     "abs": 5,
-    "weight": 32,
+    "weight": 96,
     "price": 3500,
     "equipped": false,
     "coverage": [

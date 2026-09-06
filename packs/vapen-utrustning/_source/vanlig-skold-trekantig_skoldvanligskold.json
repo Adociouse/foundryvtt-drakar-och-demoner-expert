@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/vanlig-skold-trekantig.png",
   "system": {
     "abs": 0,
-    "weight": 6,
+    "weight": 18,
     "price": 850,
     "equipped": false,
     "coverage": [],

@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-laminerad.png",
   "system": {
     "abs": 8,
-    "weight": 9,
+    "weight": 27,
     "price": 1600,
     "equipped": false,
     "coverage": [

@@ -1743,6 +1743,61 @@ DODE.movement = function (stoPlusFysPlusSmi) {
   return 16 + Math.ceil((stoPlusFysPlusSmi - 92) / 8);
 };
 
+/**
+ * Bärförmåga & belastning — **Spelarboken s.44** (DoD91), inte Magi-regelbokens
+ * äldre BEP-tabell. Spelarboken s.12 innehåller uttrycklig errata: *"[Magis]
+ * regler ersätts av dessa regler"* och *"En (1) BEP motsvarar i dessa fall 3
+ * kg"* — DoD91 (RP/SLB/SPB) är alltså den auktoritativa utgåvan, och dess
+ * bärförmågetabell är i **kg**, inte BEP.
+ *
+ * Bärförmåga = STY kg (redan `actor.system.carryCapacity`). Bördan mäts i
+ * multipler av STY. Modifikationen gäller ENLIGT BOKEN tre saker samtidigt:
+ * Förflyttningsförmåga, SMI och CL på alla SMI-baserade färdigheter — "Inget
+ * av dessa värden kan bli lägre än 1."
+ *
+ * ⚠ **Migrationsval, medvetet, inte en bugg (2026-09-06):** alla ~242
+ * föremålsvikter i kompendiernas källfiler (vapen/rustning/utrustning)
+ * migrerades ×3 (BEP→kg) enligt errata-omräkningen ovan. Ett stickprov mot
+ * Spelarbokens EGNA kg-prissatta
+ * utrustningslistor (samma bok, s.44 och framåt) visade att `Handyxa` (1 BEP
+ * → 3 kg) matchar ×3 exakt, men de flesta andra INTE gör det (`Hacka` 1×3=3
+ * mot bokens 5 kg, `Spade` 1×3=3 mot bokens 2 kg, `Bärbar smedja` 16×3=48 mot
+ * bokens 26 kg). Detta är inte ett fel i ×3-faktorn — den ÄR exakt vad
+ * erratan föreskriver — utan ett tecken på att Magi-bokens och Spelarbokens
+ * utrustningslistor viktsattes OBEROENDE av varandra för samma föremål. En
+ * fullständig post-för-post-omtranskribering mot Spelarbokens egna tal
+ * skulle blockera hela börda-funktionen på en stor kureringsomgång; ×3
+ * kördes ändå (Johans beslut) som den enda praktiska vägen framåt. Se
+ * backlogposten i DESIGN_DECISIONS.md för en eventuell framtida avstämning.
+ */
+DODE.encumbranceTable = [
+  { maxStyMultiplier: 1, modifier: 0, noSwimRunSprint: false, noSmiSkills: false },
+  { maxStyMultiplier: 2, modifier: -1, noSwimRunSprint: true, noSmiSkills: false },
+  { maxStyMultiplier: 3, modifier: -2, noSwimRunSprint: true, noSmiSkills: false },
+  { maxStyMultiplier: 4, modifier: -4, noSwimRunSprint: true, noSmiSkills: false },
+  { maxStyMultiplier: 5, modifier: -6, noSwimRunSprint: true, noSmiSkills: false },
+  { maxStyMultiplier: 6, modifier: -8, noSwimRunSprint: true, noSmiSkills: true }
+];
+
+/**
+ * Slår upp belastningssteget för en given buren vikt mot bärförmågan (STY kg).
+ * Över STY×6 (tabellens sista rad, ej sourcad högre av boken) klampas mot
+ * samma rad — SL får döma fritt bortom det.
+ * @param {number} carriedKg
+ * @param {number} styKg Bärförmåga (= STY-attributets total).
+ * @returns {{step:number, modifier:number, noSwimRunSprint:boolean, noSmiSkills:boolean}}
+ */
+DODE.encumbranceStep = function (carriedKg, styKg) {
+  if (!styKg || styKg <= 0) return { step: 0, modifier: 0, noSwimRunSprint: false, noSmiSkills: false };
+  const multiplier = carriedKg / styKg;
+  for (let i = 0; i < DODE.encumbranceTable.length; i++) {
+    const row = DODE.encumbranceTable[i];
+    if (multiplier <= row.maxStyMultiplier) return { step: i, ...row };
+  }
+  const last = DODE.encumbranceTable[DODE.encumbranceTable.length - 1];
+  return { step: DODE.encumbranceTable.length - 1, ...last };
+};
+
 /* -------------------------------------------------------------------------- */
 /*  Kroppsbyggnad och träffområden — Rollpersonen s.48-50                      */
 /* -------------------------------------------------------------------------- */

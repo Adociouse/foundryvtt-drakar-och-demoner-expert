@@ -7,7 +7,7 @@
     "styGroup": 2,
     "damage": "1d6+2",
     "length": 1,
-    "weight": 1,
+    "weight": 3,
     "baseValue": 11,
     "weaponType": "latt",
     "category": "narstrid",

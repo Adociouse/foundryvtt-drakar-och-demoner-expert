@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/pavise-bagskytteskold.png",
   "system": {
     "abs": 0,
-    "weight": 16,
+    "weight": 48,
     "price": 900,
     "equipped": false,
     "coverage": [],

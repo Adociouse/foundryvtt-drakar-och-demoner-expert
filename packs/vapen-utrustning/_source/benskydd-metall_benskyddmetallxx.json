@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/benskydd-metall.png",
   "system": {
     "abs": 7,
-    "weight": 7,
+    "weight": 21,
     "price": 1850,
     "equipped": false,
     "coverage": [

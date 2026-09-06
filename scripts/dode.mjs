@@ -13,6 +13,8 @@ import DoDEFormagaData from "./data/item-formaga.mjs";
 import DoDEActor from "./documents/actor.mjs";
 import DoDeActiveEffect from "./documents/dode-active-effect.mjs";
 import DoDeItem from "./documents/item.mjs";
+import DoDECombat from "./documents/combat.mjs";
+import DoDETokenRuler from "./canvas/token-ruler.mjs";
 import SceneEffects from "./utils/scene-effects.mjs";
 import DoDECharacterSheet from "./sheets/actor-character-sheet.mjs";
 import DoDENpcSheet from "./sheets/actor-npc-sheet.mjs";
@@ -52,6 +54,16 @@ Hooks.once("init", () => {
   CONFIG.Actor.documentClass = DoDEActor;
   CONFIG.ActiveEffect.documentClass = DoDeActiveEffect;
   CONFIG.Item.documentClass = DoDeItem;
+  // Nollställer TokenDocument#movementHistory per RUNDA i stället för
+  // Foundrys default (per TUR) — se scripts/documents/combat.mjs filhuvud.
+  CONFIG.Combat.documentClass = DoDECombat;
+  // Färglägger/märker draget i DoD:s egna förflyttningsnivåer i stället för
+  // Foundrys generiska spelarfärg — se scripts/canvas/token-ruler.mjs.
+  // Sätts i init av samma konvention som övriga CONFIG.*.documentClass ovan
+  // (Token#_initializeRuler läser CONFIG.Token.rulerClass först när tokenen
+  // ritas första gången, client/canvas/placeables/token.mjs:1295-1299 — inte
+  // frusen som CONFIG.Token.movement.actions, men init är ändå rätt ställe).
+  CONFIG.Token.rulerClass = DoDETokenRuler;
 
   // DoDE-specifika villkor i Foundrys egen statuseffekt-lista — se
   // docs/dev/GM_EFFEKTFONSTER_ANALYS.md. En gång registrerade dyker de upp i
@@ -70,6 +82,18 @@ Hooks.once("init", () => {
       id: "handUpptagen",
       name: "DODE.Status.HandUpptagen",
       img: "systems/drakar-och-demoner-expert/assets/tokens/statuseffekter/hand-upptagen.png"
+    },
+    // Belastad — Spelarboken s.44, tillagd 2026-09-06 (förflyttnings-/
+    // bärförmågeomgången). Sätts/tas bort automatiskt av
+    // actor-character-sheet.mjs baserat på system.encumbrance.step, INTE
+    // manuellt av spelaren — ren visuell spegling av ett redan härlett
+    // värde, samma "villkorsflagga utan egen mekanik"-princip som de två
+    // ovan (den faktiska CL-/förflyttningseffekten sitter redan i
+    // actor-character.mjs#prepareDerivedData, se DODE.encumbranceTable).
+    {
+      id: "belastad",
+      name: "DODE.Status.Belastad",
+      img: "systems/drakar-och-demoner-expert/assets/tokens/statuseffekter/belastad.png"
     }
   ]) {
     CONFIG.statusEffects.push(status);
@@ -937,3 +961,35 @@ Hooks.on("updateActor", async (actor, changes) => {
     }]);
   }
 });
+
+/**
+ * Belastad-statusen (Spelarboken s.44, se DODE.encumbranceTable) är en REN
+ * spegling av det redan härledda `system.encumbrance.step`
+ * (actor-character.mjs#prepareDerivedData) — synkas HÄR, via hooks som fyra
+ * olika saker som kan ändra bördan, i stället för att skrivas inifrån
+ * prepareDerivedData självt. Anledningen: en statuseffekt är en riktig
+ * ActiveEffect-databasskrivning, och prepareDerivedData körs på VARJE klient
+ * vid VARJE rendering — att skriva därifrån hade gett en skrivstorm (varje
+ * klient som råkar rendera aktören försöker skriva samma status om och om
+ * igen), samma sorts fälla som redan undveks för skillModifierTotals
+ * (se dess getter-kommentar i actor-character.mjs).
+ *
+ * Ingen `game.user.isGM`-spärr — en spelare med ägarskap på sin egen
+ * rollperson ska kunna se statusen uppdateras direkt när hen packar om sin
+ * ryggsäck, utan att vänta på att SL råkar vara inloggad.
+ */
+async function syncEncumbranceStatus(actor) {
+  if (actor?.type !== "character") return;
+  const step = actor.system.encumbrance?.step ?? 0;
+  const shouldBeActive = step >= 1;
+  const isActive = actor.statuses?.has("belastad") ?? false;
+  if (shouldBeActive === isActive) return;
+  await actor.toggleStatusEffect("belastad", { active: shouldBeActive });
+}
+
+for (const eventName of ["createItem", "updateItem", "deleteItem"]) {
+  Hooks.on(eventName, (item) => {
+    if (item.parent instanceof Actor) syncEncumbranceStatus(item.parent);
+  });
+}
+Hooks.on("updateActor", (actor) => syncEncumbranceStatus(actor));

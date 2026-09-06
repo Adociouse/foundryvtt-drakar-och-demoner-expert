@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/harnesk-lamellerad.png",
   "system": {
     "abs": 6,
-    "weight": 10,
+    "weight": 30,
     "price": 1550,
     "equipped": false,
     "coverage": [

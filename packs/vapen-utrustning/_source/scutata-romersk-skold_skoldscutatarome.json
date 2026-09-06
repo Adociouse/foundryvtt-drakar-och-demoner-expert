@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/scutata-romersk-skold.png",
   "system": {
     "abs": 0,
-    "weight": 8,
+    "weight": 24,
     "price": 1100,
     "equipped": false,
     "coverage": [],
