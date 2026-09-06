@@ -1,4 +1,4 @@
-import { resolveAttack, applyAttackResult, postAttackCard, MELEE_MODS, RANGED_MODS } from "../rolls/attack.mjs";
+import { resolveAttack, applyAttackResult, postAttackCard, MELEE_MODS, RANGED_MODS, rangeClPenalty } from "../rolls/attack.mjs";
 
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
@@ -351,7 +351,14 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       suggestedParryFv,
       targetBlind,
       attackerBlindLabel: attackerBlind ? `Blind (dig): ${morker}` : null,
-      baseFv: weaponOptions.find((w) => w.key === this.weaponKey)?.baseFv ?? 0
+      baseFv: weaponOptions.find((w) => w.key === this.weaponKey)?.baseFv ?? 0,
+      // SB s.33 — avstånds-CL:s "rörligt mål"-halvering. Bara meningsfull för
+      // avstånds-/kastvapen; avståndsdelen av samma regel (andel av vapnets
+      // räckvidd) räknas automatiskt i resolveAttack() vid submit — ingen
+      // live förhandsvisning här, den kräver en riktig token-mätning som
+      // dialogen inte gör förrän anfallet faktiskt skickas.
+      isThrown,
+      showTargetMoving: ranged || isThrown
     };
   }
 
@@ -464,6 +471,8 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const weaponEnchantment = enchantment ? { clBonus: enchantment.clBonus, damageBonus: enchantment.damageBonus } : undefined;
 
     const isThrown = category === "kast";
+    // SB s.33 — läst FÄRSKT här, samma disciplin som attackUnprepared nedan.
+    const targetMoving = !!form.querySelector('input[name="targetMoving"]')?.checked;
     const mods = {};
     for (const el of form.querySelectorAll('[data-mod-value]:checked')) mods[el.dataset.modKey] = Number(el.dataset.modValue);
     if (this.actor.statuses?.has("blind")) mods.blind_attacker = this.#morkerFor(ranged, isThrown);
@@ -575,7 +584,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       const result = await resolveAttack({
         attacker: this.actor, weapon, skill, fv,
         target: targetToken.actor, parryItem, parrySkill, parryFv, parryBonus,
-        aimedAt, intent, mods, ranged, detailed: true,
+        aimedAt, intent, mods, ranged, isThrown, targetMoving, detailed: true,
         attackerToken, targetToken: targetToken.document, ammoMaterial, weaponEnchantment
       });
 

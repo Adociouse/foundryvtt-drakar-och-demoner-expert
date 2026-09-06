@@ -24,6 +24,53 @@ export const RANGED_MODS = {
 };
 
 /**
+ * Avstånds-CL — Spelarboken (SB) s.33. Ersätter Grundregelbokens (REG s.57)
+ * rutbaserade avståndstrappa + separata målrörelse-tabell HELT för avstånds-
+ * och kastvapen — inte ett tillägg ovanpå REG:s modell. Projektet beslutade
+ * 2026-09-07, som svar på en uttrycklig `AskUserQuestion` — se CLAUDE.md
+ * "Beslutade avsteg".
+ *
+ * SB:s modell mäter avdraget som ANDEL av vapnets EGEN räckvidd, inte i
+ * absoluta rutor: ≤50% av räckvidden ger inget avdrag, 50–75% ger −5,
+ * 75–100% ger −10, och man kan aldrig skjuta längre än vapnets fulla
+ * räckvidd alls.
+ *
+ * @param {string} rangeText Vapnets `system.range` — antingen "N m" (bågar/
+ *   armborst) eller "GRUNDEGENSKAP×N rutor" (kastvapen, t.ex. "STY×1 rutor").
+ * @param {Actor} actor Anfallaren — bara använd för attributformler.
+ * @returns {number|null} Räckvidd i RUTOR, eller `null` om strängen inte
+ *   gick att tolka (då tillämpas inget avdrag — hellre inget avdrag än ett
+ *   gissat).
+ */
+export function parseWeaponRangeSpaces(rangeText, actor) {
+  if (!rangeText) return null;
+  const meterMatch = rangeText.match(/^(\d+(?:[.,]\d+)?)\s*m$/i);
+  if (meterMatch) return Number(meterMatch[1].replace(",", ".")) / 1.5; // 1 ruta = 1,5 m
+  const attrMatch = rangeText.match(/^(STY|SMI|FYS|INT|PSY|KAR|STO)\s*[×x]\s*(\d+(?:[.,]\d+)?)\s*rutor$/i);
+  if (attrMatch) {
+    const attrTotal = actor?.system?.attributes?.[attrMatch[1].toLowerCase()]?.total ?? 0;
+    return attrTotal * Number(attrMatch[2].replace(",", "."));
+  }
+  return null;
+}
+
+/**
+ * @param {Item|null} weapon
+ * @param {Actor} attacker
+ * @param {number} distanceSpaces Faktiskt avstånd i rutor (Foundrys egen mätning).
+ * @returns {{penalty:number, outOfRange:boolean, fraction:number|null, maxRange:number|null}}
+ */
+export function rangeClPenalty(weapon, attacker, distanceSpaces) {
+  const maxRange = parseWeaponRangeSpaces(weapon?.system?.range, attacker);
+  if (maxRange === null || maxRange <= 0) return { penalty: 0, outOfRange: false, fraction: null, maxRange: null };
+  const fraction = distanceSpaces / maxRange;
+  if (fraction > 1) return { penalty: 0, outOfRange: true, fraction, maxRange };
+  if (fraction > 0.75) return { penalty: -10, outOfRange: false, fraction, maxRange };
+  if (fraction > 0.5) return { penalty: -5, outOfRange: false, fraction, maxRange };
+  return { penalty: 0, outOfRange: false, fraction, maxRange };
+}
+
+/**
  * Löser ett måls `resistances[]` mot ETT vapenanfall — backlog 84, 2026-09-03,
  * utökad 2026-09-03 (backlog 100) med vapnets slagkategori (`strikeType`).
  * Skickar aldrig ett besvärjelseelement — se fields-resistances.mjs för varför
@@ -182,6 +229,11 @@ export function resolveMatrix(attack, parry) {
  * @param {string} [o.intent]      "skada" | "bedova"
  * @param {object} [o.mods]        Fria CL-modifikationer, t.ex. { bakifran: 7 }
  * @param {boolean}[o.ranged]      Avståndsanfall — ⚠ kan aldrig pareras utom kastvapen
+ * @param {boolean}[o.isThrown]    Kastvapen — SB s.33:s avstånds-CL-modell (se
+ *   `rangeClPenalty`) gäller för BÅDE `ranged` och kastvapen, inte bara `ranged`.
+ * @param {boolean}[o.targetMoving] Målet springer eller flyger den här SR:en
+ *   (SB s.33) — halverar CL (avrundat uppåt) INNAN övriga modifikationer
+ *   läggs på. Bara relevant för avstånds-/kastanfall.
  * @param {boolean}[o.defending]   Försvarar sig målet? Styr träfftabellens kolumn
  * @param {boolean}[o.detailed]    Visa/tillämpa träffområdeseffekter
  * @param {number} [o.parryBonus]  Fri SL-satt bonus till FÖRSVARARENS pareringsCL
@@ -198,7 +250,8 @@ export function resolveMatrix(attack, parry) {
 export async function resolveAttack({
   attacker, weapon, target, skill = null, fv: fvOverride = null, parryItem = null,
   parrySkill = null, parryFv = null, aimedAt = null,
-  intent = "skada", mods = {}, ranged = false, defending = true, detailed = true,
+  intent = "skada", mods = {}, ranged = false, isThrown = false, targetMoving = false,
+  defending = true, detailed = true,
   parryBonus = 0, attackerToken = null, targetToken = null,
   // ⚠ Backlog 104-uppföljning, 2026-09-03: "a bow is just a bow.. arrows is
   // the ammo". Överordnar `weapon.system.material` i applyWeaponResistance
@@ -216,16 +269,28 @@ export async function resolveAttack({
   // ⚠ Räckvidd mäts med Foundrys egen funktion, inte egen geometri — se
   // tokenDistance(). Kontrollen görs bara när båda tokens skickas med, så
   // anrop utan karta (tester, SL-fiat) fungerar som förut.
+  // ⚠ Avstånds-/kastvapen (ranged ELLER isThrown) använder SB s.33:s
+  // räckvidds-andel-modell (rangeClPenalty) i stället för meleeReach — se
+  // den funktionens egen kommentar. Ren närstrid är oförändrad.
+  const usesRangeModel = ranged || isThrown;
+  let rangeInfo = null;
   if (attackerToken && targetToken) {
     const d = tokenDistance(attackerToken, targetToken);
-    const reach = ranged ? Infinity : meleeReach(weapon);
-    // ⚠ SLB s.16: avståndsvapen kräver MINST en ruta emellan — man kan inte
-    // skjuta någon som står intill sig.
-    if (ranged && d.spaces < 1) {
-      return { outOfRange: true, distance: d, reason: "Avståndsvapen kräver minst en ruta mellan skytt och mål (SLB s.16)" };
-    }
-    if (!ranged && d.spaces > reach) {
-      return { outOfRange: true, distance: d, reason: `Utom räckhåll — ${d.spaces} rutor, vapnet når ${reach}` };
+    if (usesRangeModel) {
+      // ⚠ SLB s.16: avståndsvapen kräver MINST en ruta emellan — man kan inte
+      // skjuta någon som står intill sig.
+      if (d.spaces < 1) {
+        return { outOfRange: true, distance: d, reason: "Avståndsvapen kräver minst en ruta mellan skytt och mål (SLB s.16)" };
+      }
+      rangeInfo = rangeClPenalty(weapon, attacker, d.spaces);
+      if (rangeInfo.outOfRange) {
+        return { outOfRange: true, distance: d, reason: "Utom vapnets räckvidd (SB s.33)" };
+      }
+    } else {
+      const reach = meleeReach(weapon);
+      if (d.spaces > reach) {
+        return { outOfRange: true, distance: d, reason: `Utom räckhåll — ${d.spaces} rutor, vapnet når ${reach}` };
+      }
     }
   }
 
@@ -252,8 +317,13 @@ export async function resolveAttack({
   // — den kommer från en aktiv AE, inte en fri SL-modifierare, och ska synas
   // separat på kortet (se buildAttackCardContext) i stället för att smälta
   // in bland de vanliga situationsmodifikationerna.
-  const modTotal = Object.values(mods).reduce((a, b) => a + b, 0) + (aimedAt ? -5 : 0) + enchantClBonus;
-  const fv = Math.max(1, baseFv + modTotal);
+  // ⚠ SB s.33: rörligt mål (springer/flyger) halverar CL, avrundat UPPÅT,
+  // och det sker INNAN övriga modifikationer läggs på — därför på `baseFv`
+  // här, inte på slutsumman. Avstånds-CL:t (rangeInfo.penalty) läggs till
+  // som en vanlig situationsmodifikation, precis som `mods`.
+  const targetMovingBase = targetMoving ? Math.ceil(baseFv / 2) : baseFv;
+  const modTotal = Object.values(mods).reduce((a, b) => a + b, 0) + (aimedAt ? -5 : 0) + enchantClBonus + (rangeInfo?.penalty ?? 0);
+  const fv = Math.max(1, targetMovingBase + modTotal);
 
   const atk = await classifiedRoll(fv);
 
@@ -312,6 +382,8 @@ export async function resolveAttack({
     // hittade en aktiv enchantment; annars båda 0, kortet visar ingen rad.
     enchantment: (enchantClBonus || enchantDamageBonus) ? { clBonus: enchantClBonus, damageBonus: enchantDamageBonus } : null,
     aimed: !!aimedAt, intent, damage: null, location: null, effect: null, wear: null,
+    // SB s.33 avstånds-CL (se rangeClPenalty) — null för närstrid.
+    rangeInfo, targetMoving: !!targetMoving,
     // ⚠ Skrivningar som ANNARS skulle ske här skjuts upp till `applyAttackResult`
     // — se Spelar-anfall-planen, 2026-08-21. Fylls i av grenarna nedan.
     pending: { attackerEp: null, defenderEp: null, wear: null, damage: null }
@@ -530,6 +602,11 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
   if (result.enchantment?.clBonus) {
     parts.push({ label: "förtrollning", value: result.enchantment.clBonus, positive: result.enchantment.clBonus > 0 });
   }
+  // SB s.33 avstånds-CL — se rangeClPenalty (rolls/attack.mjs).
+  if (result.rangeInfo?.penalty) {
+    const pct = Math.round((result.rangeInfo.fraction ?? 0) * 100);
+    parts.push({ label: `avstånd (${pct}% av räckvidd)`, value: result.rangeInfo.penalty, positive: false });
+  }
 
   return {
     attackerName: attacker.name,
@@ -544,6 +621,8 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
     aimed: result.aimed,
     intentBedova: result.intent === "bedova",
     fv: result.fv, base: result.fv - result.modTotal, clParts: parts,
+    // SB s.33: målet sprang/flög — basen (INNAN clParts) redan halverad i resolveAttack().
+    targetMoving: !!result.targetMoving,
     attackRoll: result.attack.roll.total,
     attackOutcome: result.attack.outcome,
     attackOutcomeLabel: OUTCOME_LABEL[result.attack.outcome],

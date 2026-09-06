@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/rundskold-stor.png",
   "system": {
     "abs": 0,
-    "weight": 21,
+    "weight": 7,
     "price": 1000,
     "equipped": false,
     "coverage": [],

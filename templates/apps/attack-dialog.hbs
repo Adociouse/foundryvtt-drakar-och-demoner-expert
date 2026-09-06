@@ -74,6 +74,13 @@
     <p class="hint">⚠ {{attackerBlindLabel}} (samma modifierare som Mörker, redan inräknad nedan)</p>
   {{/if}}
 
+  {{#if showTargetMoving}}
+    <label class="mod-check" title="SB s.33 — halverar CL (avrundat uppåt) INNAN övriga modifikationer. Avståndsdelen av samma regel (andel av vapnets räckvidd) räknas automatiskt utifrån tokens faktiska avstånd vid anfallet.">
+      <input type="checkbox" name="targetMoving" />
+      Målet springer eller flyger (halverad CL)
+    </label>
+  {{/if}}
+
   <p class="fv-preview">FV {{baseFv}} (grund {{baseFv}})</p>
 
   <label class="mod-check attack-unprepared">

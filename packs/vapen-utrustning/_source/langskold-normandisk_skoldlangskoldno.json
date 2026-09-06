@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/langskold-normandisk.png",
   "system": {
     "abs": 0,
-    "weight": 18,
+    "weight": 6,
     "price": 900,
     "equipped": false,
     "coverage": [],

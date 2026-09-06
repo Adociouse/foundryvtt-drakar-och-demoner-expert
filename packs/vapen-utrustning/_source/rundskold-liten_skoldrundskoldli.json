@@ -6,7 +6,7 @@
   "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/rundskold-liten.png",
   "system": {
     "abs": 0,
-    "weight": 6,
+    "weight": 2,
     "price": 650,
     "equipped": false,
     "coverage": [],
