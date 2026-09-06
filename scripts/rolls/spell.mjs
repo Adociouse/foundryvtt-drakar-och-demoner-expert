@@ -39,9 +39,17 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
   const cl = item.system.sValue - 2 * (E - 1);
   const cast = await classifiedRoll(cl);
 
+  // ⚠ Misslyckat kast kostar 1 PSY (SB s.8, `docs/extracts/DODE_Grundregelbok_fullextract.md`
+  // §22.3) — tidigare 0 PSY, ett förbisett gap (ingen avstegsanteckning), rättat
+  // 2026-09-06 efter uttrycklig fråga. Se `documents/actor.mjs#castSpell` för
+  // samma fix i den enkla, mål-lösa kastvägen.
+  // ⚠ Perfekt kast: halva PSY-kostnaden avrundas UPPÅT (SB §22.5, ordagrant
+  // "avrunda uppåt, minst 1") — tidigare `Math.floor` (nedåt), samma sorts
+  // förbisett gap, rättat samma dag.
   let psyCost = 0;
-  if (cast.outcome === "perfekt") psyCost = Math.max(1, Math.floor(E / 2));
+  if (cast.outcome === "perfekt") psyCost = Math.max(1, Math.ceil(E / 2));
   else if (cast.outcome === "lyckat" || cast.outcome === "fummel") psyCost = E;
+  else if (cast.outcome === "misslyckat") psyCost = 1;
 
   const out = {
     item, caster, E, cl, cast, psyCost,

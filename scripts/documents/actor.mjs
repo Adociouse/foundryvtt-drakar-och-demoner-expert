@@ -108,9 +108,17 @@ export default class DoDEActor extends Actor {
     const cl = item.system.sValue - 2 * (E - 1);
     const { outcome } = await rollFV({ actor: this, label: `${item.name} (E${E})`, fv: cl });
 
+    // ⚠ Misslyckat kast kostar 1 PSY (SB s.8, `docs/extracts/DODE_Grundregelbok_fullextract.md`
+    // §22.3) — tidigare 0 PSY, ett förbisett gap (ingen avstegsanteckning), rättat
+    // 2026-09-06 efter uttrycklig fråga. Se CLAUDE.md "Beslutade avsteg" — nej,
+    // det här är INGET avsteg, det är boken följd rakt av.
+    // ⚠ Perfekt kast: halva PSY-kostnaden avrundas UPPÅT (SB §22.5, ordagrant
+    // "avrunda uppåt, minst 1") — tidigare `Math.floor` (nedåt), samma sorts
+    // förbisett gap, rättat samma dag.
     let psyCost = 0;
-    if (outcome === "perfekt") psyCost = Math.max(1, Math.floor(E / 2));
+    if (outcome === "perfekt") psyCost = Math.max(1, Math.ceil(E / 2));
     else if (outcome === "lyckat" || outcome === "fummel") psyCost = E;
+    else if (outcome === "misslyckat") psyCost = 1;
 
     if (psyCost > 0) {
       const current = this.system.resources?.psy?.value ?? this.system.resources?.psy?.max ?? 0;
