@@ -406,6 +406,27 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       ...DODE.encumbranceStep(this.carriedWeight, this.carryCapacity)
     };
 
+    // Simförmåga — Rollpersonen s.55, ordagrant: "man kan under inga
+    // omständigheter simma i rustning, inte ens läderrustning." Detta är EN
+    // EGEN, oberoende spärr från SPB s.44:s bördebaserade
+    // `encumbrance.noSwimRunSprint` ovan — en obelastad rollperson i full
+    // rustning kan alltså fortfarande inte simma, och en obeväpnad men
+    // överlastad rollperson kan inte simma trots att hen saknar rustning.
+    // Båda skälen samlas här så arket kan visa EN kombinerad indikator utan
+    // att UI:t behöver känna till två separata bokkällor.
+    // ⚠ Rent visuellt/informativt, samma "Display only, no warnings"-princip
+    // som resten av förflyttningssystemet (Johans AskUserQuestion-svar,
+    // planen "Förflyttning, börda & rörelse på kartan") — ingen handling
+    // spärras mekaniskt, SL avgör.
+    const wornArmor = (this.parent?.items ?? []).find(
+      (item) => item.type === "rustning" && item.system.equipped
+    );
+    this.canSwim = {
+      value: !wornArmor && !this.encumbrance.noSwimRunSprint,
+      armorBlocks: !!wornArmor,
+      loadBlocks: this.encumbrance.noSwimRunSprint
+    };
+
     // Förflyttning — RP s.25: slå upp SUMMAN STO+FYS+SMI i tabellen, plus
     // rasmodifikation OCH belastningens modifikation (SPB s.44).
     // ⚠ Rättad 2026-07-28: koden delade tidigare summan med 3 och slog upp i en tabell

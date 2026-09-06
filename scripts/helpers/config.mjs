@@ -1798,6 +1798,50 @@ DODE.encumbranceStep = function (carriedKg, styKg) {
   return { step: DODE.encumbranceTable.length - 1, ...last };
 };
 
+/**
+ * Tolkar NPC/monster-förflyttning ur källböckernas fritextfält (Spelledarboken
+ * s.25-26: "L = förflyttning till lands. F = flygande. S = simmande.
+ * B = borrande. A = oavsett omgivning.") till en strukturerad
+ * `{land, fly, swim, burrow, any}`-form — se `packs/regler`s "Förflyttning"-
+ * journalsida för hela källcitatet.
+ *
+ * ⚠ **Byggd 2026-09-06 (backlog 118, Steg 2) mot 241 RIKTIGA kompendieposter,
+ * inte mot ett antaget rent format.** En genomsökning av `packs/monster/_source/`
+ * visade att fritextfältet är mycket mindre enhetligt än koderna själva antyder:
+ * kodordningen varierar ("F30/L26" OCH "L6/S10" båda förekommer), en del poster
+ * har en parentetisk tilläggsnot efter koden ("L18 (L80 i max 15 s)", "L10
+ * (hjortform L30)"), några är avsiktligt orörliga ("0 (orörligt)"), och några är
+ * REN FLYKTTEXT UTAN NÅGON KOD ALLS ("Teleportation, obegränsat avstånd",
+ * "Alltid 5 snabbare än snabbaste förföljaren"). Att kräva 100% täckning hade
+ * betytt en fullständig manuell omtranskribering av alla 241 poster — i stället
+ * (samma "perfect is the enemy of good"-princip som resten av
+ * förflyttningspasset) parsar funktionen det EN find:bar `<bokstav><tal>`-mönster
+ * ger, och returnerar `parsed:false` när inget alls hittas. Anroparen (se
+ * `DoDETokenRuler`) ska då tyst avstå från att färglägga linjalen för den token —
+ * INTE gissa eller anta ett värde. Parentetiska tillägg/villkor
+ * ("i max 15 s", "hjortform") är äkta regelnyans som fortfarande bara finns
+ * som text på arket, inte i den strukturerade formen.
+ * @param {string} text
+ * @returns {{land: number|null, fly: number|null, swim: number|null,
+ *   burrow: number|null, any: number|null, parsed: boolean, raw: string}}
+ */
+DODE.parseNpcMovement = function (text) {
+  const raw = text ?? "";
+  const result = { land: null, fly: null, swim: null, burrow: null, any: null, parsed: false, raw };
+  const codeToKey = { L: "land", F: "fly", S: "swim", B: "burrow", A: "any" };
+  // Bara texten FÖRE en ev. första parentes räknas som huvudvärdet — en
+  // parentetisk tilläggsnot ("L18 (L80 i max 15 s)") är ett villkorat
+  // undantag (sprintburst, formskifte m.m.), inte den normala hastigheten,
+  // och ska inte tyst skriva över den.
+  const primary = raw.split("(")[0];
+  const matches = primary.matchAll(/([LFSBA])\s*(\d+(?:[.,]\d+)?)/g);
+  for (const [, code, number] of matches) {
+    result[codeToKey[code]] = Number(number.replace(",", "."));
+    result.parsed = true;
+  }
+  return result;
+};
+
 /* -------------------------------------------------------------------------- */
 /*  Kroppsbyggnad och träffområden — Rollpersonen s.48-50                      */
 /* -------------------------------------------------------------------------- */

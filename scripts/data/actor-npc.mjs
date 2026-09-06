@@ -181,5 +181,16 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
     this.resources.psy.value = this.resources.psy.value === null || this.resources.psy.value === undefined
       ? this.resources.psy.max
       : Math.min(this.resources.psy.value, this.resources.psy.max);
+
+    // Strukturerad förflyttning ur fritextfältet ovan — se
+    // DODE.parseNpcMovement (config.mjs) för hela genomgången av varför detta
+    // är en LIVE tolkning av `movement` och inte en egen lagrad/migrerad
+    // datamodell: källtexten är för oenhetlig (blandad kodordning, villkorade
+    // tillägg, ren flykttext utan kod) för att tvinga in i ett strikt schema
+    // utan en fullständig manuell omtranskribering av alla 241 poster.
+    // Konsumeras av `DoDETokenRuler` för att välja rätt budget per
+    // rörelsetyp (gång/flyg/simning/...) i stället för att (som tidigare)
+    // dela linjalens kostnad med hela strängen "L36" och få NaN.
+    this.movementParsed = DODE.parseNpcMovement(this.movement);
   }
 }

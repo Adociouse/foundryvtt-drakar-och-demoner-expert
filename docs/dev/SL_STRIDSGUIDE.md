@@ -38,3 +38,22 @@
 - **DoD-böckerna har ingen egen höjdregel** (genomsökt — ingen finns). Foundrys egen 3D-mätning används i stället: tokens `elevation`-fält är en riktig del av avståndsberäkningen, inte bara en kosmetisk siffra på arket.
 - **Praktisk konsekvens:** en token på en balkong (`elevation` t.ex. 3) och en token i baren nedanför (`elevation` 0) mäts på RIKTIGT avstånd genom 3D-rymden, inte bara det platta kartavståndet. Är avståndet därmed större än ett närstridsvapens räckvidd nekar `resolveAttack()` (attack.mjs) automatiskt närstridsanfallet — "utom räckhåll".
 - **SL:s ansvar:** sätt `elevation` korrekt på tokens som faktiskt befinner sig på en annan nivå (balkong, tak, en scen med `Level`-våningsplan) — annars uteblir effekten helt eftersom alla tokens annars ligger kvar på elevation 0 och mäts platt som förut. Avståndsvapen (pilbåge, kastspjut) påverkas likaså av det verkliga 3D-avståndet, inte bara det platta.
+
+---
+
+## Monsters rörelselinjal — bara vissa `movement`-texter styr färgen
+
+*Backlog 118, 2026-09-06. `DODE.parseNpcMovement()` (config.mjs), `DoDETokenRuler#movementBudget` (token-ruler.mjs).*
+
+- Ett NPC/monster-actors `system.movement` är alltid fritext ur boken ("L36", "F30/L26", "0 (orörligt)", ibland ren prosa som "Teleportation, obegränsat avstånd"). Linjalen försöker läsa ut ett `<bokstav><tal>`-mönster (L/F/S/B/A, se "Förflyttningsförmåga"-regelsidans "Monstrens förflyttningskoder") och väljer rätt delvärde utifrån VILKEN rörelsetyp draget faktiskt sker som (gång/flyg/simning/...).
+- **Går texten inte att tolka alls (ren prosa, "0 (orörligt)" utan kod) uteblir färgläggningen helt** för den token — linjalen ritas fortfarande, bara utan DoD:s nivåfärger. Inget felmeddelande, inget konsolfel — det är det avsedda, tysta fallback-beteendet (samma "hellre inget än ett gissat värde"-princip som resten av förflyttningspasset).
+- **Parentetiska tillägg efter huvudkoden räknas INTE** — "L18 (L80 i max 15 s)" ger budget 18, inte 80; sprintburstar/formskiften/villkor syns bara i själva textfältet, inte i linjalens siffra. SL som vill visa ett sådant undantag får bedöma det manuellt precis som idag.
+- Kör om `npm run packs:pack` aldrig behövs för detta — `movement` läses live ur redan befintlig kompendiedata, ingen migrering.
+
+## Simma i rustning/börda — synlig indikator, ingen spärr
+
+*Backlog 118, 2026-09-06. `system.canSwim` (actor-character.mjs).*
+
+- Karaktärsarket visar en "Kan inte simma"-rad (samma amber-färg som belastningsindikatorn) när ANTINGEN utrustad rustning (Rollpersonen s.55, gäller oavsett vikt) ELLER börda (Spelarboken s.44, `encumbrance.noSwimRunSprint`) blockerar simning. Två oberoende bokkällor, en kombinerad UI-rad.
+- **Rent informativt — ingen mekanisk spärr**, samma "Display only, no warnings"-princip som resten av förflyttningssystemet. En spelare kan fortfarande försöka simma i rustning; SL avgör konsekvensen (se `docs/dev/SPECIALANFALL_SL_GUIDE.md`s "Drunkning"-avsnitt för de exakta siffrorna).
+- Gäller bara `character`-aktörer — NPC:er har ingen `encumbrance`/`canSwim`-beräkning (bara fritextfältet `movement`, se ovan).

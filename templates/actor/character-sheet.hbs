@@ -87,6 +87,15 @@
             title="Belastning steg {{system.encumbrance.step}}: {{system.encumbrance.modifier}} på Förflyttning, SMI och CL på SMI-baserade färdigheter{{#if system.encumbrance.noSwimRunSprint}} · Kan inte simma, springa eller sprinta{{/if}}{{#if system.encumbrance.noSmiSkills}} · Inga SMI-baserade färdigheter kan användas{{/if}} (Spelarboken s.44)">
         {{localize "DODE.Derived.CarryCapacity"}}: {{system.carriedWeight}} / {{system.carryCapacity}} kg
       </span>
+      {{!-- Simförmåga — Rollpersonen s.55 (rustning, oavsett vikt) + Spelarboken
+            s.44 (börda, se encumbrance ovan). Visas bara när simning INTE går,
+            annars är den tysta standarden "man kan simma" och behöver ingen rad. --}}
+      {{#unless system.canSwim.value}}
+        <span class="encumbrance-display encumbrance-active"
+              title="Kan inte simma:{{#if system.canSwim.armorBlocks}} bär rustning (Rollpersonen s.55, gäller oavsett vikt){{/if}}{{#if system.canSwim.loadBlocks}} överlastad (Spelarboken s.44){{/if}}">
+          Kan inte simma
+        </span>
+      {{/unless}}
       {{#if system.ep.bonusAvailable}}
         <span title="Fria bonuspoäng från spelledaren — inte bundna till någon färdighet">Fria EP: {{system.ep.bonusAvailable}}</span>
       {{/if}}

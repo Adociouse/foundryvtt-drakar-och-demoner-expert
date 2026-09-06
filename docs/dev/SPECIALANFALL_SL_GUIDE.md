@@ -43,6 +43,23 @@ En pisk-bärare kan försöka rycka ett enhandsvapen ur en motståndares hand p�
 - Använd **hästens Skadebonus (SB)** i stället för ryttarens egen — hästens rörelseenergi driver stöten.
 - Om skadan (inkl. hästens SB) övervinner den träffade ryttarens **STO** på Motståndstabellen: ryttaren vräks ur sadeln, kastas **1T4 meter**, och blir liggande.
 
+## Drunkning (SLB s.22)
+
+*Tillagd 2026-09-06, backlog 118 (Steg 2 av förflyttnings-/bördepasset). Fullt sourcad, MEDVETET inte automatiserad — se motiveringen nedan.*
+
+Ordagrant, SLB s.22, "Skada av vatten":
+
+> "Om man hamnar under vatten måste man försöka hålla andan tills man åter kan få luft. Efter cirka två minuter inträder medvetslöshet och efter ytterligare 1T3 minuter dör man av syrebrist. Om man räddas innan dess så drabbas man inte av några skador."
+
+1. **~2 minuter under vatten:** inga skador alls, bara andhållning.
+2. **Vid ~2 minuter:** medvetslös.
+3. **+1T3 minuter till:** dör av syrebrist, om ingen räddar personen dessförinnan.
+4. **Räddas personen när som helst innan döden inträffar:** noll skada, inga men.
+
+Relaterat: **RP s.55** — man kan inte simma i NÅGON rustning (inte ens läder), oavsett buren vikt; i läderrustning håller man sig flytande i högst **FYS/2 minuter** innan den drar en under. ⚠ Boken ger ingen flyttid för tyngre rustningsklasser — outtalat, inte vår tolkning.
+
+**Varför inte automatiserat:** till skillnad från gift/eld/blödning (som redan har en riktig periodeffekt-motor, `tickPeriodicEffect`, config.mjs) är drunkning ett sällsynt, SL-styrt narrativt förlopp snarare än något som normalt behöver tickas i bakgrunden under en pågående scen — samma "perfection is the enemy of the good"-avvägning som resten av förflyttningspasset. SL håller reda på tiden för hand med numren ovan; ingen egen Combat-/worldTime-krok byggd. **Byggd, mekaniskt genomdriven del:** `system.canSwim` (actor-character.mjs) visar redan en tydlig "Kan inte simma"-indikator på arket när rustning eller börda blockerar simning (se `docs/dev/SL_STRIDSGUIDE.md`) — bara själva UNDER VATTEN-nedräkningen är oautomatiserad.
+
 ---
 
 > **Gift/periodiska effekter och HP/PSY-återhämtning utanför strid flyttat till `docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md`** ("SL-rutin: Effekter och återhämtning utanför strid") — det är inte ett specialanfall, det är samma generella tidsflytt-mekanism som all annan återhämtning redan använder, så den hör hemma i återhämtningskatalogen i stället för här.
