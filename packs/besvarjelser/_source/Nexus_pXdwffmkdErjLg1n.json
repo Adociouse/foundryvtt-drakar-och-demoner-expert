@@ -7,11 +7,11 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Beröring",
-    "description": "<p>Kopplar samman besvärjelser; båda aktiveras simultant; krävs för magiska föremål <em></em></p>",
+    "description": "<p>Ritualen skapar ett fokus för naturens magiska flöden och gör det möjligt för föremålet att bli självförsörjande med energi utan att gå omvägen över magikerns PSY. Ett Nexus leder in så mycket kraft i föremålet som det behöver. Det finns normalt ingen risk för att föremålet inte ska fungera på grund av energibrist.</p><p>Ritualen kräver att en magiker (vilken som helst) frivilligt offrar ett poäng PSY per grad permanent för att aktivera det. Nexus måste ha en grad för varje besvärjelse den försörjer. Detta inkluderar Sigill, men inte Permanens och Nexus. Laddning kan inte förses med Nexus. Ett magiskt föremål kan bara innehålla ett Nexus.</p>",
     "ritual": true,
     "source": {
       "book": "formelboken",
-      "page": "1-3"
+      "page": "4"
     }
   },
   "_id": "pXdwffmkdErjLg1n",

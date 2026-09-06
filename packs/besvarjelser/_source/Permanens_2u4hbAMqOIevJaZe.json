@@ -7,11 +7,11 @@
     "kvick": false,
     "duration": "Permanent",
     "range": "Beröring",
-    "description": "<p>Gör en annan besvärjelses effekt permanent; krävs för magiska föremål <em></em></p>",
+    "description": "<p>Ritualen används för att förändra ett Sigill. Den kan förändra lika många grader Sigill som den själv innehåller. Ritualen gör Sigillet permanent — det upphör inte att existera när det aktiveras. När ritualen utförs måste den närvarande magikern permanent offra ett poäng PSY.</p><p><em>Kaos Väktare s.52 (samma besvärjelse, återgiven i den boken för läsare utan tillgång till Magi-regelboken) lägger till en praktisk tillämpning: lägger man Permanens på ett föremål som innehåller ett Sigill med en besvärjelse, blir föremålet permanent magiskt — men varje gång besvärjelsen ska aktiveras åtgår lika många PSY-poäng från aktiveraren som besvärjelsens effektgrad.</em></p>",
     "ritual": true,
     "source": {
       "book": "formelboken",
-      "page": "1-3"
+      "page": "4"
     }
   },
   "_id": "2u4hbAMqOIevJaZe",

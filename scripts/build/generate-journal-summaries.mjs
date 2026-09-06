@@ -22,10 +22,17 @@ const journalDir = path.join(root, "packs", "journaler", "_source");
 
 // Skol-nyckel -> {file, journalId, pageId, displayName}. Filnamn/ID:n måste
 // matcha de BEFINTLIGA dokumenten exakt så regenereringen blir en UPDATE,
-// inte en duplicerad ny post. "Allmänna besvärjelser" (skol-lösa besvärjelser)
-// rörs inte av detta skript — ingen av de spellar som föranledde detta bygge
-// (Kaos Väktare-batchen) är skol-lös.
+// inte en duplicerad ny post.
 const SCHOOL_PAGES = {
+  // "Allmänna besvärjelser" (school:"allman" — skol-lösa/gemensamma
+  // besvärjelser som Sigill/Permanens/Nexus) lades till 2026-09-06 efter att
+  // Nexus/Permanens fick sina beskrivningar rättade (backlog, se
+  // DESIGN_DECISIONS.md) och deras rader på DENNA sida visade sig bli
+  // tysta inaktuella av exakt samma skäl som resten av journaler-sidorna —
+  // ursprungligen medvetet UTELÄMNAD ur SCHOOL_PAGES eftersom ingen av
+  // Kaos Väktare-batchens besvärjelser var skol-lös, men det var aldrig en
+  // permanent gräns, bara att den första byggomgången inte råkade beröra den.
+  allman: { file: "Allmänna_besvärjelser_PO0NNTt8AcMoho0n.json", displayName: "Allmänna besvärjelser" },
   alkemi: { file: "Alkemi_QkyROyprgxHiNNoO.json", displayName: "Alkemi" },
   animism: { file: "Animism_hc5eHiogmGyB4O0o.json", displayName: "Animism" },
   demonologi: { file: "Demonologi_nmSXgAlvrvx4V8Ep.json", displayName: "Demonologi" },
