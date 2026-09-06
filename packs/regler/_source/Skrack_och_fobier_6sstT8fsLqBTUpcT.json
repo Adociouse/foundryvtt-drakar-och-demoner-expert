@@ -1,0 +1,62 @@
+{
+  "name": "Skräck och fobier",
+  "_id": "6sstT8fsLqBTUpcT",
+  "pages": [
+    {
+      "_id": "R9B4YLK92iCtSP8e",
+      "name": "Skräck och fobier",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Skräcktabellen — när den slås</h2><p>Skräcktabellen slås när en varelse utsätts för verklig skräck — bland annat av besvärjelser som Rädsla, Panik och Terror.</p><p>⚠ Varelser som själva förorsakar skräck (t.ex. drakar) eller helt saknar känslor (t.ex. insektoider) slår aldrig på tabellen. Odöda slår heller aldrig på den.</p><p><em>Källa: Magi-Regelboken (MAG) s.25.</em></p><h2>Att slå på tabellen</h2><p>Slå <strong>1T20</strong> och läs av resultatet nedan. Situationsmodifikationer (t.ex. hur fruktansvärd källan är) läggs på tärningsslaget efter SL:s bedömning.</p><ul><li>Har offret flera samtidiga modifikationer gäller bara den HÖGSTA — de läggs inte ihop.</li><li>Slås flera skräckslag samma stridsrunda gäller bara det HÅRDASTE resultatet.</li></ul><p><em>Källa: Magi-Regelboken (MAG) s.25.</em></p><h2>Resultattabellen</h2><table style=\"width:100%\"><thead><tr><th>Slag</th><th>Resultat</th><th>Effekt</th></tr></thead><tbody><tr><td>1–4</td><td>Försiktig</td><td>Offret blir försiktigt: −2 på alla attacker och pareringar under 1T4 SR.</td></tr><tr><td>5</td><td>Bärsärkagång</td><td>Offret går bärsärkagång och rusar rakt mot orsaken till sitt utbrott.</td></tr><tr><td>6–14</td><td>Flykt</td><td>Offret flyr så fort som möjligt från skräckkällan under 3T6 SR.</td></tr><tr><td>15</td><td>Skakningar</td><td>Offret faller till marken, kroppen skakande, tills skräckkällan försvinner. Därefter darrig i 1T4 timmar — SMI och alla SMI-baserade färdigheter halverade.</td></tr><tr><td>16–18</td><td>Paralyserad</td><td>Offret står helt still som paralyserat. Dessutom +1 på alla efterföljande slag på tabellen resten av dagen.</td></tr><tr><td>19</td><td>Hysteri</td><td>Offret blir hysteriskt, står kvar och skriker av skräck tills skräckkällan försvinner och offret lugnas. Dessutom +3 på efterföljande slag resten av dagen.</td></tr><tr><td>20</td><td>Svimning</td><td>Offret svimmar, medvetslöst i 2T8 minuter. Risk för bestående men (se 23–30). Dessutom +3 på efterföljande slag de närmaste 1T3 dagarna.</td></tr><tr><td>21–22</td><td>Långvarig paralys</td><td>Offret står helt paralyserat i 1T4 timmar. Risk för bestående men (se 23–30). Dessutom +3 på efterföljande slag de närmaste 1T4 dagarna.</td></tr><tr><td>23–30</td><td>Hjärtattack</td><td>Offret drabbas av en hjärtattack: slå ett Normalt FYS-slag — misslyckas det dör offret, lyckas det svimmar offret i 1T8 timmar. Bestående men: slå 1T20 per grundegenskap — ett resultat på 19–20 sänker den permanent med 1. Dessutom +5 på efterföljande slag de närmaste 2T4 dagarna.</td></tr></tbody></table><p><em>Källa: Magi-Regelboken (MAG) s.25.</em></p><h2>Fobitabellen</h2><p>Fobitabellen är INTE en direkt konsekvens av ett dåligt Skräcktabell-slag — den nås bara via <strong>Snedtändningstabellens</strong> resultat 20+ (\"Total minnesförlust\"), när en magiker fumlar ett kast. Offret får då den framslagna fobin i 1T8 månader, utöver Snedtändningstabellens övriga effekter.</p><table style=\"width:100%\"><thead><tr><th>1T10</th><th>Fobi</th></tr></thead><tbody><tr><td>1</td><td>Agorafobi — skräck för öppna områden</td></tr><tr><td>2</td><td>Klaustrofobi — skräck för att bli instängd</td></tr><tr><td>3</td><td>Demofobi — skräck för folkmassor</td></tr><tr><td>4</td><td>Ailurofobi — skräck för kattdjur</td></tr><tr><td>5</td><td>Entomofobi — skräck för insekter</td></tr><tr><td>6</td><td>Ofiofobi — skräck för ormar</td></tr><tr><td>7</td><td>Skotofobi — skräck för mörker</td></tr><tr><td>8</td><td>Dendrofobi — skräck för träd</td></tr><tr><td>9</td><td>Talassofobi — skräck för havet</td></tr><tr><td>10</td><td>Xenofobi — skräck för främlingar</td></tr></tbody></table><p>Se \"Att använda magi\" för hela Snedtändningstabellen och när den slås.</p><p><em>Källa: Magi-Regelboken, 0-Magi-utgåvan, s.8.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788729155802,
+        "modifiedTime": 1788729155802,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!6sstT8fsLqBTUpcT.R9B4YLK92iCtSP8e"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 600000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788729155802,
+    "modifiedTime": 1788729155802,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!6sstT8fsLqBTUpcT"
+}
