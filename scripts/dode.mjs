@@ -429,7 +429,14 @@ Hooks.once("init", () => {
     // Manuell SL-städning av besegrade NPC-token — se full motivering vid
     // funktionsdefinitionen nedan (dode.mjs). Konsol/makro: game.dode.clearDefeatedTokens()
     // (default: aktuell scen) eller game.dode.clearDefeatedTokens(annanScen).
-    clearDefeatedTokens
+    clearDefeatedTokens,
+    // Ryttare↔riddjur-länk (backlog 118c) — se full motivering vid
+    // funktionsdefinitionerna nedan (dode.mjs). Konsol/makro:
+    // game.dode.mountToken() (markerad token blir ryttare, targetad token
+    // blir riddjur) eller game.dode.mountToken(riderToken, mountToken)
+    // explicit. game.dode.dismountToken() för att kliva av.
+    mountToken,
+    dismountToken
   };
 });
 
@@ -993,3 +1000,133 @@ for (const eventName of ["createItem", "updateItem", "deleteItem"]) {
   });
 }
 Hooks.on("updateActor", (actor) => syncEncumbranceStatus(actor));
+
+/**
+ * Ryttare↔riddjur-länk (backlog 118, del c — "Förflyttning, börda & rörelse
+ * på kartan", Steg 2). Foundry har ingen inbyggd rider/mount-koppling
+ * (grep:at direkt mot den installerade klienten — `TokenDocument` har inget
+ * `rider`/`mount`/`attachedTo`-fält, se "Kolla Foundrys inbyggda funktioner
+ * FÖRST" i CLAUDE.md). Den relevanta byggstenen är den redan inbyggda
+ * `action:"displace"`-rörelsetypen (`CONFIG.Token.movement.actions.displace`:
+ * `teleport:true, measure:false, costMultiplier:0, canSelect:false` —
+ * kostnad 0, omätt, döljs för spelaren i linjalens egna handling-val) —
+ * exakt den primitiv planen redan pekade ut.
+ *
+ * ⚠ **`action:"displace"` ignorerar INTE väggar på egen hand** — upptäckt
+ * live 2026-09-06 när en testryttare fastnade i Värdshusets riktiga
+ * innerväggar trots `displace`. Samma extra flagga som redan behövdes för
+ * vanliga väggkorsande testdrag i Steg 1-sessionen krävs här också:
+ * `constrainOptions: { ignoreWalls: true, ignoreCost: true }` MÅSTE skickas
+ * explicit till `move()` — `displace`-handlingens egen konfiguration räcker
+ * inte ensam. Se `mountDisplaceOptions()` nedan.
+ *
+ * ⚠ **En tredje gotcha, hittad samtidigt: `move()`s options-OBJEKT får ALDRIG
+ * återanvändas mellan anrop.** `TokenDocument#move` fryser sitt options-objekt
+ * på plats (`Object.defineProperty(move, key, {value: deepFreeze(move[key])})`,
+ * `client/documents/token.mjs`) — ett andra `.move()`-anrop med SAMMA
+ * (redan frysta) objektreferens kastar ett tyst fel inifrån Foundrys egen
+ * kod (`Object.defineProperty` på en redan icke-konfigurerbar egenskap) som
+ * aldrig når uppringaren, bara syns som `completed:false`. Därför en
+ * FABRIKSFUNKTION nedan, inte en delad konstant — varje anrop måste få ett
+ * eget, färskt objekt.
+ *
+ * Modell: en ren FLAGGA på ryttarens TokenDocument
+ * (`flags.drakar-och-demoner-expert.mountedOn`, riddjurstokenets id) — inget
+ * nytt schemafält, ingen ny datamodell. `updateToken`-hooken nedan förflyttar
+ * sedan varje ryttare som pekar på den flyttade tokenen till samma position,
+ * varje gång riddjuret self flyttas.
+ *
+ * ⚠ Ryttaren kan fortfarande flyttas manuellt (t.ex. för att kliva av genom
+ * att bara dra sig bort) — ingen spärr mot det. Bara riddjurets EGNA drag
+ * triggar auto-förflyttningen; ryttarens egen förflyttning påverkar inte
+ * kopplingen. Enkel, förutsägbar v1 — "perfection is the enemy of the good".
+ */
+function mountDisplaceOptions() {
+  return { action: "displace", constrainOptions: { ignoreWalls: true, ignoreCost: true } };
+}
+
+/**
+ * Sätter riddjur-token för en ryttar-token och förflyttar ryttaren till
+ * riddjurets position direkt. Konsol/makro: `game.dode.mountToken()` (ingen
+ * parameter — använder den markerade tokenen som ryttare och den targetade
+ * tokenen som riddjur), eller `game.dode.mountToken(riderToken, mountToken)`
+ * explicit.
+ * @param {Token|TokenDocument} [riderTokenArg]
+ * @param {Token|TokenDocument} [mountTokenArg]
+ */
+async function mountToken(riderTokenArg, mountTokenArg) {
+  const rider = (riderTokenArg ?? canvas.tokens?.controlled[0])?.document ?? riderTokenArg;
+  const mount = (mountTokenArg ?? [...(game.user.targets ?? [])][0])?.document ?? mountTokenArg;
+  if (!rider) return ui.notifications.warn("Ingen ryttartoken vald — markera ryttarens token först.");
+  if (!mount) return ui.notifications.warn('Inget riddjur valt — högerklicka och "Target" riddjurets token.');
+  if (rider.id === mount.id) return ui.notifications.warn("En token kan inte bära sig själv.");
+  await rider.setFlag(SYSTEM_ID, "mountedOn", mount.id);
+  await rider.move({ x: mount.x, y: mount.y, elevation: mount.elevation }, mountDisplaceOptions());
+  ui.notifications.info(`${rider.name} monterar ${mount.name}.`);
+}
+
+/**
+ * Tar bort riddjur-kopplingen för en ryttar-token — ryttaren stannar kvar
+ * där hen befinner sig (kliver av), följer inte längre riddjuret.
+ * @param {Token|TokenDocument} [riderTokenArg]
+ */
+async function dismountToken(riderTokenArg) {
+  const rider = (riderTokenArg ?? canvas.tokens?.controlled[0])?.document ?? riderTokenArg;
+  if (!rider) return ui.notifications.warn("Ingen ryttartoken vald.");
+  await rider.unsetFlag(SYSTEM_ID, "mountedOn");
+  ui.notifications.info(`${rider.name} kliver av.`);
+}
+
+/**
+ * Flyttar alla ryttare kopplade till DEN HÄR tokenen till dess nya position,
+ * varje gång den flyttar. `game.user.isActiveGM`-spärrad — annars skulle
+ * VARJE klient i rummet försöka utföra samma förflyttning samtidigt
+ * (redundanta, icke-idempotenta Document-skrivningar), samma
+ * "en utpekad klient kör det"-mönster Foundrys egen Combat-turordningsmotor
+ * använder för sin `#triggerTurnEvents` (se DoDECombat/token-ruler.mjs).
+ *
+ * ⚠ **Två separata, samtidigt upptäckta Foundry-gotchas här (live, 2026-09-06)
+ * — båda krävdes, ingendera ensam räckte:**
+ *
+ * 1. **`tokenDoc.x`/`.y` är STALE inne i den egna `updateToken`-hooken.**
+ *    `changes.x`/`changes.y` (och `tokenDoc._source.x`/`.y`) visar redan
+ *    rätt nya position när hooken fyrar, men den PREPARERADE gettern
+ *    `tokenDoc.x` visar fortfarande den GAMLA positionen tills något annat
+ *    (t.ex. en explicit `.reset()`, eller bara tid) synkar om den — exakt
+ *    samma "läs `_source`/vänta på `.reset()`"-fälla som redan dokumenterad
+ *    för `elevation` i `anatomy.mjs`s `tokenDistance()`-kommentar (Steg 1-
+ *    sessionen). Läs alltså riktvärdet ur `changes`/`_source`, ALDRIG
+ *    `tokenDoc.x`/`.y` direkt, inne i den här hooken.
+ * 2. **Ryttarens `.move()` avvisas TYST om den körs medan riddjurets EGEN
+ *    rörelse-continuation fortfarande pågår.** Ingen synkron eller
+ *    `setTimeout(0)`-fördröjd anrop fungerar (testat och avvisat live,
+ *    upprepade gånger) — `.move()` resolvar med `completed:false`, inget
+ *    fel kastas. En 500 ms fördröjning har verifierats fungera konsekvent
+ *    i upprepade tester och är vad som faktiskt körs. `"displace"` självt
+ *    (kostnad 0, ingen animation) är INTE boven — det är riddjurets EGEN,
+ *    ofta animerade rörelse (handlingen `"walk"` m.fl.) som behöver tid att
+ *    stänga sin continuation innan en ANNAN token kan flyttas i dess spår.
+ */
+Hooks.on("updateToken", (tokenDoc, changes) => {
+  if (!game.user.isActiveGM) return;
+  if (!("x" in changes || "y" in changes || "elevation" in changes)) return;
+  const riders = tokenDoc.parent?.tokens.filter((t) => t.getFlag(SYSTEM_ID, "mountedOn") === tokenDoc.id) ?? [];
+  if (!riders.length) return;
+  // Läs ur `_source`, inte `tokenDoc.x`/`.y`/`.elevation` — se gotcha 1 ovan.
+  const x = changes.x ?? tokenDoc._source.x;
+  const y = changes.y ?? tokenDoc._source.y;
+  const elevation = changes.elevation ?? tokenDoc._source.elevation;
+  setTimeout(() => {
+    // Färskt options- OCH målobjekt per ryttare — se gotcha 3 ovan, aldrig återanvänd samma referens.
+    for (const rider of riders) {
+      rider.move({ x, y, elevation }, mountDisplaceOptions());
+    }
+  }, 500);
+});
+
+/** Städar bort en föräldralös mount-koppling om riddjurets token tas bort från scenen. */
+Hooks.on("deleteToken", (tokenDoc) => {
+  if (!game.user.isActiveGM) return;
+  const riders = tokenDoc.parent?.tokens.filter((t) => t.getFlag(SYSTEM_ID, "mountedOn") === tokenDoc.id) ?? [];
+  for (const rider of riders) rider.unsetFlag(SYSTEM_ID, "mountedOn");
+});

@@ -1799,6 +1799,69 @@ DODE.encumbranceStep = function (carriedKg, styKg) {
 };
 
 /**
+ * Riddjurs egen bördetabell — Krigarens Handbok s.28, gradvis
+ * rörelseavdrag i KG (inte BEP — KH använder aldrig BEP för riddjur), från
+ * STY×2 (±0, "utan besvär") till STY×8-9 (−21, sista angivna steget).
+ * Se `docs/extracts/DODE_KH_Riddjur.md` (Roll20-projektet) för hela
+ * transkriberingen och `DODE.encumbranceTable` ovan för människors
+ * motsvarande tabell (SPB s.44) — samma lookup-form, medvetet EN separat
+ * tabell eftersom siffrorna (och startpunkten, STY×2 i stället för STY×1)
+ * skiljer sig åt.
+ *
+ * ⚠ **Ingen automatisk beräkning av aktuell börda byggd (2026-09-06).**
+ * KH s.28 säger uttryckligen: "Räkna samman vikten för ryttaren, hans
+ * utrustning och rustning och för hästens eventuella rustning" — alltså
+ * RYTTARENS EGEN KROPPSVIKT räknas in, inte bara utrustningen. DoD91:s
+ * regelverk lagrar ingen kroppsviktsattribut för rollpersoner någonstans
+ * (till skillnad från buren UTRUSTNING, som redan summeras för människor
+ * via `carriedWeight`) — att uppskatta en siffra hade varit att GISSA en
+ * bok-osourcad datapunkt, inte en implementationsdetalj. `mountEncumbranceStep`
+ * är alltså en ren, återanvändbar SLÅ-UPP-funktion (samma form som
+ * `encumbranceStep`) som SL matar in en manuellt uträknad total i, tills en
+ * framtida session löser kroppsviktsluckan.
+ *
+ * ⚠ **Bärförmågans ÖVRE GRÄNS — avstegsbeslut, Johan 2026-09-06.** Magi-
+ * regelbokens "3×STY BEP, vägrar flytta sig överlastad" (s.46) och KH:s
+ * gradvisa tabell (ingen egen övre gräns angiven på s.28) beskrevs länge som
+ * en möjlig sifferkonflikt i backlog 118. Utredning (`DODE_KH_Riddjur.md`s
+ * "Konfliktundersökning") visade att Magi-regelbokens tak, omräknat med den
+ * redan etablerade ×3 BEP→kg-faktorn (SPB s.12), landar nästan exakt på
+ * KH:s egen `STY×8-9`-rad — samma modell sedd från två håll, inte en
+ * motsägelse. Johan bekräftade denna tolkning via `AskUserQuestion`
+ * ("Treat as the same curve") — **KH:s tabell är själva mekaniken, Magi-
+ * regelbokens omräknade tak (`9×STY kg`) är den bortre, absoluta gränsen
+ * där riddjuret vägrar flytta sig alls.** Se CLAUDE.md "Beslutade avsteg".
+ * @param {number} carriedKg
+ * @param {number} styKg Riddjurets bärförmåga i kg (= riddjurets STY-attribut).
+ * @returns {{step:number, modifier:number, refuses:boolean}} `refuses:true`
+ *   betyder att riddjuret är överlastat bortom Magi-regelbokens tak (>9×STY
+ *   kg) och vägrar flytta sig alls — `modifier` är då meningslös.
+ */
+DODE.mountEncumbranceTable = [
+  { maxStyMultiplier: 2, modifier: 0 },
+  { maxStyMultiplier: 3, modifier: -3 },
+  { maxStyMultiplier: 4, modifier: -6 },
+  { maxStyMultiplier: 5, modifier: -9 },
+  { maxStyMultiplier: 6, modifier: -12 },
+  { maxStyMultiplier: 7, modifier: -15 },
+  { maxStyMultiplier: 8, modifier: -18 },
+  { maxStyMultiplier: 9, modifier: -21 }
+];
+
+DODE.mountEncumbranceStep = function (carriedKg, styKg) {
+  if (!styKg || styKg <= 0) return { step: 0, modifier: 0, refuses: false };
+  const multiplier = carriedKg / styKg;
+  for (let i = 0; i < DODE.mountEncumbranceTable.length; i++) {
+    const row = DODE.mountEncumbranceTable[i];
+    if (multiplier <= row.maxStyMultiplier) return { step: i, modifier: row.modifier, refuses: false };
+  }
+  // Bortom STY×9 (Magi-regelbokens 3×STY BEP-tak, omräknat ×3 → 9×STY kg) —
+  // riddjuret "vägrar flytta sig", se filhuvudkommentaren ovan.
+  const last = DODE.mountEncumbranceTable[DODE.mountEncumbranceTable.length - 1];
+  return { step: DODE.mountEncumbranceTable.length - 1, modifier: last.modifier, refuses: true };
+};
+
+/**
  * Tolkar NPC/monster-förflyttning ur källböckernas fritextfält (Spelledarboken
  * s.25-26: "L = förflyttning till lands. F = flygande. S = simmande.
  * B = borrande. A = oavsett omgivning.") till en strukturerad

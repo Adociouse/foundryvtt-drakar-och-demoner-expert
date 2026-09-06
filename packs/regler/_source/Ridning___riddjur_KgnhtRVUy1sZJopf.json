@@ -1,0 +1,62 @@
+{
+  "name": "Ridning & riddjur",
+  "_id": "KgnhtRVUy1sZJopf",
+  "pages": [
+    {
+      "_id": "f2kNJT0YHLCoOomY",
+      "name": "Ridning & riddjur",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Rida-slag i strid</h2><p>Strid till häst styrs av färdigheterna <strong>Rida</strong> och/eller <strong>Slåss till häst</strong>. Varje gång du råkar i strid slår du ett Rida för att hålla dig kvar i sadeln — slaget gäller för HELA striden. Galopperar du i strid måste du i stället slå ett nytt Rida varje stridsrunda.</p><p>Med <strong>Slåss till häst FV 5+</strong> slipper du nästan alltid detta: bara ETT slag i början av en galoppstrid, inte varje runda. Färdigheten låter dig dessutom använda avståndsvapen från hästryggen utan avdrag, och du kan använda antingen Slåss till häst eller Rida för att avgöra manövrer till häst.</p><p><em>Källa: Krigarens Handbok (KH) s.27.</em></p><h2>Riddjurstabellen</h2><p>Strid till häst förutsätter en stridshäst. Sämre riddjur ger avdrag på Rida/Slåss till häst i strid:</p><table style=\"width:100%\"><thead><tr><th>Riddjur</th><th>Avdrag från Rida/Slåss till häst</th></tr></thead><tbody><tr><td>Tung stridshäst</td><td>+5</td></tr><tr><td>Stridshäst</td><td>±0</td></tr><tr><td>God ridhäst</td><td>−5</td></tr><tr><td>Ridhäst</td><td>−10</td></tr><tr><td>Enhörning</td><td>−5</td></tr><tr><td>Grip</td><td>−5</td></tr><tr><td>Kentaur</td><td>±0</td></tr><tr><td>Pegas</td><td>−5</td></tr><tr><td>Drake</td><td>−5</td></tr></tbody></table><p>En ridhäst motsvaras av en liten häst i grundreglerna, en stridshäst av en stor häst. Se den paketerade NPC:n <strong>\"Tung stridshäst\"</strong> i monster-kompendiet för ett fullt statblock.</p><p><em>Källa: KH s.27-28.</em></p><h2>Anfall från galopperande häst</h2><p>Vid alla former av anfall från ryggen på en häst i galopp som tagit sats minst <strong>15 meter</strong> får hästens Skadebonus (SB) användas i stället för din egen — du utnyttjar hästens rörelseenergi. Undantaget är avståndsvapen och vapen kortare än en halv meter (dolkar, kortsvärd).</p><p>Galopperar två ryttare mot varandra läggs BÅDA hästarnas SB till skadan för den/de som lyckas med anfallet.</p><p>Anfall från galopperande häst är svårt: du måste lyckas med ett Rida VARJE stridsrunda du slåss från galopp. Misslyckas du tappar du balansen och förlorar nästa handling. Slåss till häst reducerar detta till ett enda slag i början av striden.</p><p><em>Källa: Spelarboken (SB) s.33 (ursprunglig regel för spjutanfall från galopp) generaliserad av KH s.28 till alla kvalificerande vapen.</em></p><h2>Avståndsvapen från hästryggen</h2><p>Utan Slåss till häst: <strong>−10 CL</strong> med bågskytte/armborst/krutvapen när du anfaller från en GALOPPERANDE häst, <strong>−5 CL</strong> från en TRAVANDE häst. Med Slåss till häst: inget avdrag alls.</p><p><em>Källa: KH s.28.</em></p><h2>Slungas ur sadeln</h2><p>Fyra situationer där du riskerar att kastas av:</p><ul><li>Träffas du av ett vapen som gör MER KP/SP-skada än du har kvar i ett träffområde: slå ett Rida för att hålla dig kvar.</li><li>Träffas du i HUVUD eller BRÖSTKORG av ett anfall som gör mer skada än ditt STO-värde: du slungas av, inget slag hjälper.</li><li>Övervinner skadan din STO på Motståndstabellen: du kastas av, oavsett träffområde.</li><li>Når dina KP/SP 0 i någon kroppsdel: slå ett Rida VARJE stridsrunda för att hålla dig kvar.</li></ul><p><em>Källa: KH s.28.</em></p><h2>Manövrer till häst</h2><p>Kräver i allmänhet ett lyckat Rida (eller Slåss till häst). Vissa kan kombineras med ett anfall/en parering, då normalt med −5 CL på vapnet/skölden.</p><table style=\"width:100%\"><thead><tr><th>Manöver</th><th>Effekt</th></tr></thead><tbody><tr><td>Helomvändning</td><td>Vänder hästen 90°, en stridsrunda. Misslyckat Rida: bara 45°. −5 CL på anfall/parering så länge vändningen pågår.</td></tr><tr><td>Hopp</td><td>En handling, kräver lyckat Rida. Anfall/parering i samma handling: −5 CL.</td></tr><tr><td>Hopp från hästryggen</td><td>Ställ dig upp, kasta dig av och grip tag i något — kräver lyckat Rida, sedan ett Akrobatik.</td></tr><tr><td>Hästen som sköld</td><td>Glid ner på hästens sida, använd den som skydd mot skjutvapen/ryttare. Lyckat Rida krävs; du kan inte göra annat medan du klänger dig fast. Motståndare på andra sidan hästen har −10 CL mot dig.</td></tr><tr><td>Stegra</td><td>Hästen stegrar och skyddar dig med kroppen (den riskerar själv skada). Lyckat Rida, en stridsrunda. Du kan anfalla/parera med −5 CL. Motståndare rakt framför dig har −5 CL.</td></tr><tr><td>Volt</td><td>För hästen i en kort cirkel för att hålla flera motståndare på avstånd. En stridsrunda, lyckat Rida. Anfall/parering som vanligt, inget avdrag.</td></tr></tbody></table><p><em>Källa: KH s.29.</em></p><h2>Hästens träffområden</h2><p>Sju träffområden, samma som andra fyrfota djur. Slår du vilt utan att sikta är det 1 på 6 att du träffar hästen i stället för din motståndare.</p><p><em>Källa: KH s.29.</em></p><h2>Bärförmåga</h2><p>Hästars bärförmåga räknas INTE som människors. En häst bär dubbla sin STY (i kg) utan besvär — en lätt stridshäst (STY 32) bär 64 kg, en tung stridshäst (STY 38) bär 76 kg, motsvarande ungefär seldon och ryttare. Därutöver gäller ett gradvis rörelseavdrag:</p><table style=\"width:100%\"><thead><tr><th>Börda</th><th>Förflyttningsavdrag</th></tr></thead><tbody><tr><td>&lt; STY×2</td><td>±0</td></tr><tr><td>STY×2 – STY×3</td><td>−3</td></tr><tr><td>STY×3 – STY×4</td><td>−6</td></tr><tr><td>STY×4 – STY×5</td><td>−9</td></tr><tr><td>STY×5 – STY×6</td><td>−12</td></tr><tr><td>STY×6 – STY×7</td><td>−15</td></tr><tr><td>STY×7 – STY×8</td><td>−18</td></tr><tr><td>STY×8 – STY×9</td><td>−21</td></tr></tbody></table><p>Räkna samman vikten för ryttaren, hans utrustning och rustning, och hästens eventuella egen rustning.</p><p>⚠ <strong>Avsteg, beslutat av Johan 2026-09-06:</strong> Magi-regelbokens riddjurstabell (s.46, \"maximalt 3×STY BEP, överlastade riddjur vägrar flytta sig\") och KH:s tabell ovan behandlas som SAMMA kurva sedd från två håll, inte en motsägelse — Magi-regelbokens tak, omräknat med den redan beslutade BEP→kg-faktorn (×3, se \"Bärförmåga &amp; belastning\"), landar nästan exakt på STY×9-raden ovan. Ett riddjur lastat bortom STY×9 kg <strong>vägrar flytta sig alls</strong> (kodat: `DODE.mountEncumbranceStep` returnerar `refuses:true`). Se CLAUDE.md \"Beslutade avsteg\" i systemrepot för hela resonemanget.</p><p><em>Källa: KH s.28.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 100000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757174400000,
+        "modifiedTime": 1757174400000,
+        "lastModifiedBy": "GenRiddjurKH27x01",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!KgnhtRVUy1sZJopf.f2kNJT0YHLCoOomY"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 300000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1757174400000,
+    "modifiedTime": 1757174400000,
+    "lastModifiedBy": "GenRiddjurKH27x01",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!KgnhtRVUy1sZJopf"
+}

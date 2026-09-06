@@ -39,6 +39,8 @@ En pisk-bärare kan försöka rycka ett enhandsvapen ur en motståndares hand p�
 
 ## Spjutattack från galopperande häst (SB s.33)
 
+*Generaliserad till ALLA kvalificerande vapen (inte bara spjut) av KH s.28, plus en fullständig mounted-combat-regeluppsättning (Rida-slag, avståndsvapenavdrag, slungas ur sadeln, manövrer, riddjurstabellen) — se den nya regelsidan **"Ridning &amp; riddjur"** i `regler`-kompendiet (backlog 118c, 2026-09-06) för hela bilden. Det här avsnittet står kvar som den ursprungliga, spjutspecifika SB-citeringen.*
+
 - Kräver en ansats på **minst 15 meter**.
 - Använd **hästens Skadebonus (SB)** i stället för ryttarens egen — hästens rörelseenergi driver stöten.
 - Om skadan (inkl. hästens SB) övervinner den träffade ryttarens **STO** på Motståndstabellen: ryttaren vräks ur sadeln, kastas **1T4 meter**, och blir liggande.

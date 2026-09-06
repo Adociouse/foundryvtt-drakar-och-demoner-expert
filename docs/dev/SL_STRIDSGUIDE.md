@@ -57,3 +57,15 @@
 - Karaktärsarket visar en "Kan inte simma"-rad (samma amber-färg som belastningsindikatorn) när ANTINGEN utrustad rustning (Rollpersonen s.55, gäller oavsett vikt) ELLER börda (Spelarboken s.44, `encumbrance.noSwimRunSprint`) blockerar simning. Två oberoende bokkällor, en kombinerad UI-rad.
 - **Rent informativt — ingen mekanisk spärr**, samma "Display only, no warnings"-princip som resten av förflyttningssystemet. En spelare kan fortfarande försöka simma i rustning; SL avgör konsekvensen (se `docs/dev/SPECIALANFALL_SL_GUIDE.md`s "Drunkning"-avsnitt för de exakta siffrorna).
 - Gäller bara `character`-aktörer — NPC:er har ingen `encumbrance`/`canSwim`-beräkning (bara fritextfältet `movement`, se ovan).
+
+---
+
+## Ryttare↔riddjur — auto-följning, ingen spärr
+
+*Backlog 118c, 2026-09-06. `game.dode.mountToken()`/`dismountToken()` (dode.mjs). Se regelsidan "Ridning &amp; riddjur" för de faktiska strid-till-häst-reglerna — det här avsnittet täcker bara det TEKNISKA verktyget.*
+
+- **Montera:** markera ryttarens token, targeta (högerklicka → Target) riddjurets token, kör `game.dode.mountToken()` i konsolen eller via ett hotbar-makro. Ryttaren snäpper direkt till riddjurets position och följer den automatiskt varje gång riddjuret flyttas (kostnadsfri, väggignorerande `"displace"`-förflyttning — syns inte som ett eget drag i rörelselinjalen).
+- **Kliva av:** `game.dode.dismountToken()` (samma tokenval). Ryttaren stannar kvar där hen befinner sig — följer inte längre riddjuret.
+- **Ingen spärr mot att flytta ryttaren manuellt** medan kopplingen är aktiv — SL kan alltså dra av en ryttare från hästryggen (t.ex. slungad ur sadeln, se "Ridning &amp; riddjur") utan att först behöva komma ihåg att kliva av; kopplingen ligger kvar tills den uttryckligen tas bort, men syns inte förrän riddjuret nästa gång flyttas.
+- **Ingen egen UI-knapp/kontextmeny än** — bara konsol-/makrofunktioner, matchar samma mönster som `declareAttackMacro`/`declareSpellCastMacro`. En token-kontextmenyrad vore en trevlig framtida förbättring, inte byggd i denna omgång.
+- Tar bort riddjurets token från scenen (t.ex. via "Rensa besegrade NPC-token") städar automatiskt bort ryttarens koppling.
