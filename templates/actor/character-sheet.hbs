@@ -105,6 +105,21 @@
               byggd än (se DESIGN_DECISIONS.md backlog). --}}
         <span title="Hjältepoäng (HH s.6-7/s.20/46-48) — spenderas på hjälteförmågor, ingen spenderingsvy byggd än">Hjältepoäng: {{system.hjaltepoang}}</span>
       {{/if}}
+      {{!-- SL-beviljade extra attacker/pareringar denna stridsrunda (t.ex.
+            Vapenmästarens PSY-köpta handling, KH s.8-9) — se
+            DODE.getBonusActions/gm-effects.mjs. Ren bokföring, ingen spärr. --}}
+      {{#if bonusActions.attacks}}
+        <span class="encumbrance-display encumbrance-active" title="SL-beviljad extra attack denna stridsrunda">
+          Extra attack: {{bonusActions.attacks}}
+          <a data-action="useBonusAttack" title="Använd en extra attack"><i class="fa-solid fa-check"></i></a>
+        </span>
+      {{/if}}
+      {{#if bonusActions.parries}}
+        <span class="encumbrance-display encumbrance-active" title="SL-beviljad extra parering denna stridsrunda">
+          Extra parering: {{bonusActions.parries}}
+          <a data-action="useBonusParry" title="Använd en extra parering"><i class="fa-solid fa-check"></i></a>
+        </span>
+      {{/if}}
     </div>
     {{!-- Börsen — vad rollpersonen faktiskt bär. Skild från startCapital, som
           är skapandeögonblickets siffra och aldrig minskar. --}}

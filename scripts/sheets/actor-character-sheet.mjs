@@ -51,6 +51,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       openWizardEdit: DoDECharacterSheet.#onOpenWizardEdit,
       rollDamage: DoDECharacterSheet.#onRollDamage,
       declareAttack: DoDECharacterSheet.#onDeclareAttack,
+      useBonusAttack: DoDECharacterSheet.#onUseBonusAttack,
+      useBonusParry: DoDECharacterSheet.#onUseBonusParry,
       castSpell: DoDECharacterSheet.#onCastSpell,
       openTraining: DoDECharacterSheet.#onOpenTraining,
       openMagicTraining: DoDECharacterSheet.#onOpenMagicTraining,
@@ -84,6 +86,9 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     context.actor = this.actor;
     context.system = this.actor.system;
     context.attributes = CONFIG.DODE.attributes;
+    // SL-beviljade extra attacker/pareringar denna stridsrunda (t.ex.
+    // Vapenmästarens PSY-köpta handling) — se DODE.getBonusActions.
+    context.bonusActions = CONFIG.DODE.getBonusActions(this.actor);
     // Härkomst syns på raden — en färdighet som SL delat ut efter träning ska
     // gå att skilja från en som fanns från skapandet.
     // Härkomst syns på raden — en färdighet som SL delat ut efter träning ska
@@ -853,6 +858,33 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (!item) return;
     const { default: DoDEAttackDialog } = await import("../apps/attack-dialog.mjs");
     new DoDEAttackDialog(this.actor, { weapon: item }).render(true);
+  }
+
+  /**
+   * Förbrukar en SL-beviljad extra attack/parering (se `DODE.grantBonusAction`,
+   * beviljas via GM-effektfönstret — t.ex. Vapenmästarens PSY-köpta extra
+   * handling, CLAUDE.md:s avsteg-tabell). Ren bokföring, egen räknare (ingen
+   * handlingsekonomimotor finns, backlog 32) — bara ett meddelande i chatten
+   * så bordet ser att den använts, och en nedräkning.
+   */
+  static async #onUseBonusAttack() {
+    const before = CONFIG.DODE.getBonusActions(this.actor);
+    if (!before.attacks) return ui.notifications.warn("Ingen extra attack tillgänglig.");
+    await CONFIG.DODE.useBonusAction(this.actor, "attack");
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: `<p><strong>${this.actor.name}</strong> använder en SL-beviljad extra attack.</p>`
+    });
+  }
+
+  static async #onUseBonusParry() {
+    const before = CONFIG.DODE.getBonusActions(this.actor);
+    if (!before.parries) return ui.notifications.warn("Ingen extra parering tillgänglig.");
+    await CONFIG.DODE.useBonusAction(this.actor, "parry");
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: `<p><strong>${this.actor.name}</strong> använder en SL-beviljad extra parering.</p>`
+    });
   }
 
   /**

@@ -30,6 +30,20 @@
       </select>
     </label>
     {{#if actor}}
+      <h4>Extra handlingar denna stridsrunda</h4>
+      <p class="hint">T.ex. Vapenmästarens "5 PSY → extra attack eller parering" (KH s.8-9) — SL beviljar/nollställer manuellt, ingen motorspärr. Se CLAUDE.md:s avsteg-tabell.</p>
+      <div class="bonus-actions" data-bonus-actions>
+        <span class="bonus-actions-count">Attacker: <strong>{{bonusActions.attacks}}</strong></span>
+        <span class="bonus-actions-count">Pareringar: <strong>{{bonusActions.parries}}</strong></span>
+        <label class="mod-check">
+          <input type="checkbox" name="deductPsy" checked />
+          Dra av 5 PSY per beviljad handling
+        </label>
+        <button type="button" data-action="grantBonusAttack"><i class="fa-solid fa-plus"></i> Attack</button>
+        <button type="button" data-action="grantBonusParry"><i class="fa-solid fa-plus"></i> Parering</button>
+        <button type="button" data-action="resetBonusActions" title="Nollställ (ny stridsrunda)"><i class="fa-solid fa-rotate-left"></i> Nollställ</button>
+      </div>
+
       {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-list.hbs" effects=actorEffects removeAction="removeActorEffect"}}
       {{> "systems/drakar-och-demoner-expert/templates/apps/gm-effects-form.hbs" addAction="addActorEffect"}}
 

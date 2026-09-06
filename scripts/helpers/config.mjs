@@ -2318,6 +2318,52 @@ DODE.removeActorEffect = async function (actor, id) {
 };
 
 /**
+ * Extra attacker/pareringar SL beviljar en aktör för INNEVARANDE stridsrunda
+ * — t.ex. Vapenmästarens "Spendera 5 PSY för en extra parering eller en
+ * extra attack per stridsrunda" (KH s.8-9, `professionAbilities` i
+ * `vapenmastare_dodeYkrigvapenma.json`, `effect: null` — ren referenstext,
+ * se docs/dev/STRIDSSYSTEM_STATUS.md). En enkel aktörsflagga-räknare, INTE
+ * ett nytt actionekonomi-system (backlog 32 är fortfarande obyggt) — SL
+ * beviljar/nollställer manuellt via GM-effektfönstret, spelaren "använder"
+ * manuellt via en knapp på sitt ark. Ingen kod läser/spärrar mot detta någon
+ * annanstans (t.ex. attack-dialog.mjs) — precis som resten av
+ * handlingsekonomin idag är detta SL:s bordsbedömning, inte en motorspärr.
+ *
+ * ⚠ Projektet beslutade 2026-09-06 (uttrycklig fråga, tolkning av RP s.27:s
+ * "samtidigt"-formulering) att förmågan tolkas OGATAD och BOKSTAVLIGT: ingen
+ * spärr mot att köpa flera gånger (10 PSY → 2 extra osv.) och ingen spärr
+ * mot att kombinera med Ambidextriös/Två vapen-attackerna — se CLAUDE.md
+ * "Beslutade avsteg". PSY-avdraget är därför INTE hårdkodat här (ingen fast
+ * "kostar alltid 5"-logik) — GM-effektfönstrets formulär drar av PSY separat
+ * INNAN detta anrop, som ett eget, valfritt steg SL kan hoppa över.
+ */
+DODE.BONUS_ACTIONS_FLAG = "bonusActions";
+
+DODE.getBonusActions = function (actor) {
+  return actor?.getFlag(game.system.id, DODE.BONUS_ACTIONS_FLAG) ?? { attacks: 0, parries: 0 };
+};
+
+DODE.grantBonusAction = async function (actor, type, amount = 1) {
+  const key = type === "parry" ? "parries" : "attacks";
+  const current = DODE.getBonusActions(actor);
+  const next = { ...current, [key]: Math.max(0, (current[key] ?? 0) + amount) };
+  await actor.setFlag(game.system.id, DODE.BONUS_ACTIONS_FLAG, next);
+  return next;
+};
+
+DODE.useBonusAction = async function (actor, type) {
+  const key = type === "parry" ? "parries" : "attacks";
+  const current = DODE.getBonusActions(actor);
+  const next = { ...current, [key]: Math.max(0, (current[key] ?? 0) - 1) };
+  await actor.setFlag(game.system.id, DODE.BONUS_ACTIONS_FLAG, next);
+  return next;
+};
+
+DODE.resetBonusActions = async function (actor) {
+  await actor.setFlag(game.system.id, DODE.BONUS_ACTIONS_FLAG, { attacks: 0, parries: 0 });
+};
+
+/**
  * Namngivna färdighetsmodifierare (skillMod) på aktör-/scen-/världsnivå, för
  * given aktör. Samma add/multiply-semantik som `skillModifierTotals`
  * (actor-character.mjs) — den funktionen är den som faktiskt konsumerar detta,

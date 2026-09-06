@@ -54,7 +54,10 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
       addActorEffect: DoDEGmEffectsApp.#onAddActorEffect,
       removeActorEffect: DoDEGmEffectsApp.#onRemoveActorEffect,
       addPeriodicEffect: DoDEGmEffectsApp.#onAddPeriodicEffect,
-      removePeriodicEffect: DoDEGmEffectsApp.#onRemovePeriodicEffect
+      removePeriodicEffect: DoDEGmEffectsApp.#onRemovePeriodicEffect,
+      grantBonusAttack: DoDEGmEffectsApp.#onGrantBonusAttack,
+      grantBonusParry: DoDEGmEffectsApp.#onGrantBonusParry,
+      resetBonusActions: DoDEGmEffectsApp.#onResetBonusActions
     }
   };
 
@@ -104,7 +107,8 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
       actors: actors.map((a) => ({ id: a.id, name: a.name, active: a.id === this.selectedActorId })),
       actor,
       actorEffects: actor ? CONFIG.DODE.getActorEffects(actor, { includeExpired: true }).map((e) => this.#decorate(e)) : [],
-      periodicEffects: actor ? CONFIG.DODE.getPeriodicEffects(actor) : []
+      periodicEffects: actor ? CONFIG.DODE.getPeriodicEffects(actor) : [],
+      bonusActions: actor ? CONFIG.DODE.getBonusActions(actor) : { attacks: 0, parries: 0 }
     };
   }
 
@@ -217,6 +221,46 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
     if (!actor) return;
     await CONFIG.DODE.removeActorEffect(actor, target.closest("[data-effect-id]").dataset.effectId);
+    this.render();
+  }
+
+  /**
+   * Extra handlingar (Vapenmästarens PSY-köpta attack/parering m.fl., se
+   * CLAUDE.md:s avsteg-tabell och DODE.grantBonusAction). PSY-avdraget är ett
+   * eget, valfritt steg HÄR (styrt av kryssrutan) — `grantBonusAction` självt
+   * bryr sig inte om kostnaden alls, samma frikoppling som resten av
+   * GM-effektfönstret (SL avgör, motorn bokför).
+   */
+  async #deductPsyIfChecked(actor) {
+    const checkbox = this.element.querySelector('[data-bonus-actions] input[name="deductPsy"]');
+    if (!checkbox?.checked) return;
+    const current = actor.system.resources?.psy?.value ?? actor.system.resources?.psy?.max ?? 0;
+    if (current < 5) {
+      ui.notifications.warn(`${actor.name} har bara ${current} PSY kvar — beviljar ändå, men PSY dras inte under 0.`);
+    }
+    await actor.update({ "system.resources.psy.value": Math.max(0, current - 5) });
+  }
+
+  static async #onGrantBonusAttack(event, target) {
+    const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
+    if (!actor) return ui.notifications.warn("Välj en rollperson.");
+    await this.#deductPsyIfChecked(actor);
+    await CONFIG.DODE.grantBonusAction(actor, "attack");
+    this.render();
+  }
+
+  static async #onGrantBonusParry(event, target) {
+    const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
+    if (!actor) return ui.notifications.warn("Välj en rollperson.");
+    await this.#deductPsyIfChecked(actor);
+    await CONFIG.DODE.grantBonusAction(actor, "parry");
+    this.render();
+  }
+
+  static async #onResetBonusActions(event, target) {
+    const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
+    if (!actor) return;
+    await CONFIG.DODE.resetBonusActions(actor);
     this.render();
   }
 

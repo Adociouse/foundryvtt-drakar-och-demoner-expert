@@ -980,6 +980,14 @@
 .dode-gm-effects-body .effect-form button { font-size: 0.82em; white-space: nowrap; }
 .dode-gm-effects-body .effect-form .apply-to-targets { flex-basis: 100%; display: flex; align-items: center; gap: 4px; font-size: 0.82em; opacity: 0.85; }
 
+.dode-gm-effects-body .bonus-actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 6px; margin-bottom: 8px; border-radius: 4px; background: rgba(0, 0, 0, 0.06); font-size: 0.85em;
+}
+.dode-gm-effects-body .bonus-actions-count { white-space: nowrap; }
+.dode-gm-effects-body .bonus-actions label.mod-check { display: flex; align-items: center; gap: 4px; opacity: 0.85; }
+.dode-gm-effects-body .bonus-actions button { font-size: 0.85em; white-space: nowrap; }
+
 /* ---- Anfallsdialogen (detaljerad strid, SLB s.16-18) ---- */
 .dode-attack-dialog-body { padding: 8px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
 .dode-attack-dialog-body .hidden { display: none; }
