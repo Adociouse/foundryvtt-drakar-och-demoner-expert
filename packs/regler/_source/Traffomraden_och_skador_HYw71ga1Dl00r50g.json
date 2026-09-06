@@ -1,0 +1,62 @@
+{
+  "name": "Träffområden & skador",
+  "_id": "HYw71ga1Dl00r50g",
+  "pages": [
+    {
+      "_id": "jgLLX4p4bq2JRzI9",
+      "name": "Träffområden & skador",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Kroppsbyggnad och träffområdes-KP</h2><p>Har en varelse minst <strong>5 Totala KP</strong> delas kroppen in i egna träffområden, vart och ett med ett eget max-KP härlett direkt ur Totala KP. Under 5 Totala KP delas kroppen inte in alls — riktade anfall är meningslösa mot mycket små varelser.</p><p>Exempel, Humanoid (människor, alver, dvärgar och de flesta andra tvåbenta varelser):</p><table style=\"width:100%\"><thead><tr><th>Totala KP</th><th>Ben (var)</th><th>Mage</th><th>Bröstkorg</th><th>Arm (var)</th><th>Huvud</th></tr></thead><tbody><tr><td>≤7</td><td>3</td><td>3</td><td>4</td><td>2</td><td>3</td></tr><tr><td>8–11</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td></tr><tr><td>12–15</td><td>5</td><td>5</td><td>6</td><td>4</td><td>5</td></tr><tr><td>16–20</td><td>6</td><td>6</td><td>7</td><td>5</td><td>6</td></tr><tr><td>21–25</td><td>7</td><td>7</td><td>8</td><td>6</td><td>7</td></tr><tr><td>26–30</td><td>8</td><td>8</td><td>9</td><td>7</td><td>8</td></tr></tbody></table><p>Över 30 Totala KP: <strong>+1 på varje träffområde per påbörjade 5 poäng</strong> utöver 30.</p><p><em>Källa: Rollpersonen (RP) s.48.</em></p><h2>Kroppsbyggnader</h2><p>Varje kroppsbyggnad har sin egen uppsättning träffområden och egna träfftabeller:</p><table style=\"width:100%\"><thead><tr><th>Kroppsbyggnad</th><th>Används för</th></tr></thead><tbody><tr><td>Humanoid</td><td>Människor, alver, dvärgar och de flesta andra tvåbenta varelser</td></tr><tr><td>Bevingad humanoid</td><td>Tvåbenta varelser med vingar</td></tr><tr><td>Fyrfotadjur</td><td>Hästar, vargar och andra fyrbenta djur</td></tr><tr><td>Kentaur</td><td>Kentaurer</td></tr><tr><td>Svan(mö)</td><td>Svanmöar</td></tr></tbody></table><p><em>Källa: Rollpersonen (RP) s.48-50.</em></p><h2>Träfftabellerna — Kolumn A och B</h2><p>Vilken kolumn som gäller avgörs av försvararens läge, inte av vapentyp:</p><ul><li><strong>Kolumn A</strong> — mot projektilvapen, eller mot en närstridsmotståndare som INTE försvarar sig.</li><li><strong>Kolumn B</strong> — mot en närstridsmotståndare som FÖRSVARAR sig.</li></ul><p>För Humanoid är Kolumn A ett 1T8 och Kolumn B ett 1T10 — en försvarslös motståndare träffas alltså oftare i huvudet (1 chans av 8) än en som försvarar sig (2 av 10).</p><table style=\"width:100%\"><thead><tr><th>Slag</th><th>Kolumn A (1T8)</th><th>Kolumn B (1T10)</th></tr></thead><tbody><tr><td>1</td><td>Höger ben</td><td>Höger ben</td></tr><tr><td>2</td><td>Vänster ben</td><td>Vänster ben</td></tr><tr><td>3</td><td>Mage</td><td>Mage</td></tr><tr><td>4</td><td>Bröstkorg</td><td>Bröstkorg</td></tr><tr><td>5</td><td>Bröstkorg</td><td>Höger arm</td></tr><tr><td>6</td><td>Höger arm</td><td>Höger arm</td></tr><tr><td>7</td><td>Vänster arm</td><td>Vänster arm</td></tr><tr><td>8</td><td>Huvud</td><td>Vänster arm</td></tr><tr><td>9</td><td>—</td><td>Huvud</td></tr><tr><td>10</td><td>—</td><td>Huvud</td></tr></tbody></table><p>Siktar anfallaren i stället på en särskild kroppsdel (−5 CL, se \"Strid\") bestäms träffområdet direkt av valet — ingen tärning slås.</p><p><em>Källa: Rollpersonen (RP) s.49.</em></p><h2>Rustning per träffområde</h2><p>Rustning består av namngivna delar (hjälm, armskydd, benskydd, harnesk med flera), var och en med sin egen täckning. Den bästa buren plåten över just det träffade området gäller — flera rustningsdelar staplas ALDRIG på samma område.</p><p><em>Källa: Spelarboken (SB) s.27.</em></p><h2>Effekter vid noll KP och kritisk skada</h2><p>Två separata trösklar för ett träffområde:</p><ul><li><strong>KP i området når noll</strong> — området blir obrukbart.</li><li><strong>Skadan i en enda träff är minst DUBBLA områdets maxKP</strong> — kritisk skada, oavsett hur mycket KP som redan fanns kvar där.</li></ul><table style=\"width:100%\"><thead><tr><th>Kroppsdel</th><th>Vid noll KP</th><th>Vid kritisk skada</th></tr></thead><tbody><tr><td>Arm eller ben</td><td>Obrukbar — armen hänger slapp, benet viker sig (måste stå på knä)</td><td>Avhuggen eller måste amputeras — blir aldrig normalt användbar igen</td></tr><tr><td>Bröstkorg eller mage</td><td>Faller till marken, oförmögen att göra något tills hjälp anländer</td><td>Omedelbart medvetslös och förblöder inom FYS stridsrundor</td></tr><tr><td>Huvud</td><td>Medvetslös 1T100−FYS minuter (minst 5)</td><td>Krossat eller avhugget — omedelbar död</td></tr></tbody></table><p><em>Källa: Spelledarboken (SLB) s.18, Rollpersonen (RP) s.50.</em></p><h2>Läkning</h2><p>Naturlig läkning vid fullständig vila ger <strong>1 KP per vecka</strong>.</p><p><em>Källa: Spelledarboken (SLB) s.20.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788729910707,
+        "modifiedTime": 1788729910707,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!HYw71ga1Dl00r50g.jgLLX4p4bq2JRzI9"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 450000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788729910707,
+    "modifiedTime": 1788729910707,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!HYw71ga1Dl00r50g"
+}
