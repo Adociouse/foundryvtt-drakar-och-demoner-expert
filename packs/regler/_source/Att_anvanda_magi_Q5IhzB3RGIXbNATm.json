@@ -1,0 +1,62 @@
+{
+  "name": "Att använda magi",
+  "_id": "Q5IhzB3RGIXbNATm",
+  "pages": [
+    {
+      "_id": "HoYWBxgjqYcnCLfR",
+      "name": "Att använda magi",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Att kasta en besvärjelse — grundflödet</h2><p>Att kasta en besvärjelse tar en stridsrunda (SR):</p><ol><li>Välj besvärjelse och <strong>effektgrad (E)</strong> — hur stark den ska bli.</li><li>Slå <strong>1T20 ≤ CL</strong> (Chansen att lyckas, se nedan).</li><li>Lyckas slaget: besvärjelsen får effekt.</li><li>Misslyckas slaget: ingen effekt, men PSY förbrukas ändå (se \"PSY-kostnad\" nedan).</li><li>Fummel: ingen effekt, full PSY-kostnad, och ett slag på Snedtändningstabellen (se nedan).</li></ol><p>Besvärjelser markerade <strong>Kvick</strong> verkar i samma SR de kastas; övriga verkar först nästa SR.</p><p><em>Källa: Spelarboken (SB) s.2-8, Magi-Regelboken (MAG) s.8-10.</em></p><h2>CL, S-värde och effektgrad</h2><p>Chansen att lyckas (CL) för en besvärjelse räknas fram så här:</p><p style=\"text-align:center\"><strong>CL = S − 2 × (effektgrad − 1)</strong></p><p>S är besvärjelsens eget skicklighetsvärde (se \"Skolvärde, FV och S\" nedan). Varje extra effektgrad sänker CL med 2.</p><table style=\"width:100%\"><thead><tr><th>Effektgrad</th><th>CL vid S 12</th></tr></thead><tbody><tr><td>E1</td><td>12</td></tr><tr><td>E2</td><td>10</td></tr><tr><td>E3</td><td>8</td></tr></tbody></table><p><strong>Max effektgrad</strong> för en besvärjelse är lika med rollpersonens FV i besvärjelsens magiskola.</p><p><em>Källa: Magi-Regelboken (MAG) s.8-13.</em></p><h2>PSY-kostnad</h2><table style=\"width:100%\"><thead><tr><th>Utfall</th><th>PSY-kostnad</th></tr></thead><tbody><tr><td>Perfekt</td><td>Halva effektgraden, avrundat UPPÅT (minst 1)</td></tr><tr><td>Lyckat</td><td>Hela effektgraden</td></tr><tr><td>Misslyckat</td><td>1</td></tr><tr><td>Fummel</td><td>Hela effektgraden</td></tr></tbody></table><p><em>Källa: Spelarboken (SB) s.8.</em></p><h2>Perfekt slag och fummel</h2><p>Ett rått 1:a på anfallsslaget prövas mot ett andra slag för att avgöra Perfekt; ett rått 20:a prövas mot ett andra slag för att avgöra Fummel — samma bekräftelseprincip som alla andra färdighetsslag.</p><h3>Snedtändningstabellen</h3><p>Vid fummel: slå <strong>1T20 + effektgraden</strong> och slå upp resultatet:</p><table style=\"width:100%\"><thead><tr><th>Resultat</th><th>Effekt</th></tr></thead><tbody><tr><td>1–5</td><td>Besvärjelsens effektgrad halveras (avrundat uppåt). SL avgör exakt effekt. Träffar avsett mål.</td></tr><tr><td>6–11</td><td>Magisk energi flödar fel. Förlorar KP lika med effektgraden. Medvetslös 1T8 minuter.</td></tr><tr><td>12–15</td><td>En besvärjelse med negativt resultat drabbar magikern själv i stället; annars ingen effekt. Förlorar KP lika med effektgraden. Medvetslös 1T8 minuter och blind 1T8 timmar.</td></tr><tr><td>16–17</td><td>Stum i 1T8 dygn. Kan inte avhjälpas med Hela. Inga besvärjelser kan kastas under tiden.</td></tr><tr><td>18</td><td>Förlamad i 1T8 dygn, kan inte utöva magi. Kan inte avhjälpas med Hela.</td></tr><tr><td>19</td><td>Hjärnskada. INT och alla INT-baserade färdigheter minskas med 1T4, permanent. Kan bara kureras med Hela E6.</td></tr><tr><td>20+</td><td>Total minnesförlust i 1T8 dygn — kan varken använda färdigheter eller magi. Dessutom en fobi (Fobitabellen) i 1T8 månader. Kan inte avhjälpas med Hela.</td></tr></tbody></table><p><em>Källa: Spelarboken (SB) s.8.</em></p><h2>Magiskt motstånd</h2><p>En besvärjelse riktad mot ett motvilligt, levande mål avgörs som ett motståndsslag på <strong>Motståndstabellen</strong> — samma tabell som används för allt motstånd mellan två parter (gift, brottning, med mera). Målet kan alltid frivilligt ta emot effekten utan slag.</p><p style=\"text-align:center\"><strong>Mål på 1T20 = grundegenskapsvärde − svårighetsgrad + 10</strong></p><p>Ett resultat under 1 är ett automatiskt misslyckande för den som gör motstånd; ett resultat på 20 eller mer är automatisk framgång.</p><p><em>Källa: Spelledarboken (SL) s.34, Rollpersonen (RP) s.37-38.</em></p><h2>Minibesvärjelser</h2><p>Minibesvärjelser är enkla, ständigt tillgängliga manipulationer — de första formlerna en novis lär sig.</p><table style=\"width:100%\"><thead><tr><th>Regel</th><th>Detalj</th></tr></thead><tbody><tr><td>PSY-kostnad</td><td>1</td></tr><tr><td>CL-kontroll</td><td>Krävs inte — lyckas alltid</td></tr><tr><td>Hastighet</td><td>Alltid Kvick</td></tr><tr><td>Formelsamling</td><td>Behöver inte vara nedskriven — finns alltid tillgänglig</td></tr></tbody></table><p>En rollperson har automatiskt tillgång till minibesvärjelserna i den magiskola där hen har högst FV — oavsett om hen tillhör den skolan eller ej.</p><p><em>Källa: Magi-Regelboken (MAG) s.23.</em></p><h2>Magiskolorna</h2><p>13 magiskolor, var och en med sina egna besvärjelser och minibesvärjelser:</p><table style=\"width:100%\"><thead><tr><th>Skola</th><th>Fokus</th></tr></thead><tbody><tr><td>Alkemi</td><td>Laboratorietillverkning av elixir — inga vanliga besvärjelser</td></tr><tr><td>Animism</td><td>Natur, levande ting, kommunikation med djur och växter</td></tr><tr><td>Demonologi</td><td>Frammanande och kontroll av demoner</td></tr><tr><td>Elementarmagi</td><td>Eld, vatten, luft, jord, mörker, ljus, köld, värme</td></tr><tr><td>Harmonism</td><td>Sfärernas harmonier — bred användning genom sång/instrument</td></tr><tr><td>Häxkonster</td><td>Animism + nekromanti kombinerat. Lärs bara lärmästare till elev</td></tr><tr><td>Illusionism</td><td>Sinnesmanipulation, bedrägerier, illusioner</td></tr><tr><td>Mentalism</td><td>Kropp och sinne</td></tr><tr><td>Nekromanti</td><td>Döden och de döda</td></tr><tr><td>Röstmagi</td><td>Kraftfulla rop och sång</td></tr><tr><td>Spiritism</td><td>Andevärlden</td></tr><tr><td>Stavmagi</td><td>Kräver en stav — mäktigast av alla skolor, mycket svår att lära</td></tr><tr><td>Symbolism</td><td>Symboler och drakspråk</td></tr></tbody></table><p>⚠ Utöver dessa 13 har systemet en 14:e skola, <strong>Portalmagi</strong> — se dess egen sammanfattningssida i Besvärjelser-kompendiet.</p><p><em>Källa: Magi-Regelboken (MAG) s.8-10.</em></p><h2>Skolvärde, FV och S</h2><table style=\"width:100%\"><thead><tr><th>Term</th><th>Förklaring</th></tr></thead><tbody><tr><td>FV (i magiskolan)</td><td>Bestämmer vilka besvärjelser man kan lära sig och max effektgrad</td></tr><tr><td>S (Skicklighetsvärde)</td><td>Hur bra rollpersonen är på just DEN besvärjelsen — grunden för CL</td></tr><tr><td>Skolvärde</td><td>Besvärjelsens egen svårighetsnivå — kräver minst detta FV i skolan för att läras</td></tr></tbody></table><p>S kan vara högre än FV i skolan — FV begränsar bara vilka besvärjelser man kan lära och max effektgrad, inte hur skicklig man kan bli på dem man redan kan.</p><p><em>Källa: Magi-Regelboken (MAG) s.8-13.</em></p><h2>Räckvidd</h2><table style=\"width:100%\"><thead><tr><th>Beteckning</th><th>Räckvidd</th></tr></thead><tbody><tr><td>Personlig</td><td>Bara magikern själv</td></tr><tr><td>Beröring</td><td>Magikern själv eller något/någon hen rör vid</td></tr><tr><td>Kort</td><td>S/2 rutor (avrundat nedåt)</td></tr><tr><td>Medium</td><td>S×2 rutor</td></tr><tr><td>Lång</td><td>S×10 rutor</td></tr><tr><td>Extrem</td><td>S/4 kilometer (inte avrundat)</td></tr><tr><td>Avlägsen</td><td>S×1 kilometer</td></tr><tr><td>Speciell</td><td>Anges i besvärjelsens egen beskrivning</td></tr></tbody></table><p><em>Källa: Spelarboken (SB) s.2-8.</em></p><h2>Varaktighet</h2><p>Varaktigheter mellan S/4 SR och S/4 veckor kan förlängas genom extra effektgrader avsedda för detta — varje extra effektgrad lägger till en varaktighet lika stor som grundvaraktigheten.</p><table style=\"width:100%\"><thead><tr><th>Beteckning</th><th>Innebörd</th></tr></thead><tbody><tr><td>Omedelbar</td><td>Effekten sker direkt, ingen pågående varaktighet</td></tr><tr><td>Konc.</td><td>Så länge magikern koncentrerar sig oavbrutet</td></tr><tr><td>Permanent</td><td>Varar tills den hävs på annat sätt</td></tr></tbody></table><p><em>Källa: Spelarboken (SB) s.2-8.</em></p><h2>Minnesgräns och formelsamlingen</h2><table style=\"width:100%\"><thead><tr><th>Begränsning</th><th>Regel</th></tr></thead><tbody><tr><td>Max besvärjelser i minnet, totalt</td><td>(INT + PSY) / 4, avrundat nedåt</td></tr><tr><td>Max besvärjelser per skola i minnet</td><td>= FV i den skolan</td></tr><tr><td>Ritual räknas som</td><td>Dubbelt minnesutrymme</td></tr><tr><td>Memorera en besvärjelse</td><td>20 minuter per skolvärdespoäng</td></tr><tr><td>Memorera en ritual</td><td>1 timme per skolvärdespoäng</td></tr></tbody></table><p>Svimmar eller förlorar magikern medvetandet glömmer hen alla formler i minnet (men inte de som bara kräver sömn för att återfås).</p><p><strong>Formelsamlingen</strong> är magikerns viktigaste egendom — besvärjelser som glömts ur minnet finns alltid kvar där. Att läsa en besvärjelse ur boken (utan att ha den i minnet) tar 1T6 SR för en Kvick besvärjelse, annars 1T6 minuter. Förloras formelsamlingen måste alla icke-memorerade besvärjelser läras om, men går då 3× snabbare än normalt.</p><p><em>Källa: Magi-Regelboken (MAG) s.23, s.30-33.</em></p><h2>Ritual och Kvick</h2><h3>Ritual (R)</h3><ul><li>Markeras med (R) i besvärjelsens namn.</li><li>Tar normalt 1T4 timmar per effektgrad att utföra.</li><li>Kräver en lugn, ostörd omgivning — inga avbrott.</li><li>Magikern måste ha minst S1 i besvärjelsen för att utföra ritualen överhuvudtaget.</li></ul><h3>Kvick (K)</h3><ul><li>Markeras med (K).</li><li>Verkar i SAMMA SR som den kastas, inte nästa.</li><li>Att läsa en Kvick-besvärjelse ur formelsamlingen tar 1T6 SR (i stället för 1T6 minuter för en vanlig besvärjelse).</li></ul><p><em>Källa: Magi-Regelboken (MAG) s.30-33.</em></p><h2>Trollkarlar och järn</h2><p>En magiker kan INTE kasta besvärjelser om hen:</p><ul><li>Bär en järnrustning som omsluter kroppen.</li><li>Är i fysisk kontakt med järn på ett omslutande sätt (t.ex. instängd i en järnbur).</li></ul><p>Inga besvärjelser kan läggas på ett föremål som helt består av järn. Besvärjelser som ändå påverkar järnföremål (t.ex. vissa elementarbesvärjelser som rostar metall) gör det med reducerad effekt.</p><p><em>Källa: Magi-Regelboken (MAG) s.17.</em></p><h2>Magiska föremål</h2><p>Magiska föremål lagrar en besvärjelse som kan utlösas av bäraren utan att denne själv är magiker. Föremålet får INTE innehålla järn i någon form — magiska vapen och rustningar är normalt av brons, silver eller mithril.</p><table style=\"width:100%\"><thead><tr><th>Komponent</th><th>Funktion</th></tr></thead><tbody><tr><td>Sigill</td><td>Lagrar en besvärjelse i föremålet. Måste läggas av en magiker som behärskar besvärjelsen; anger effektgrad och utlösningsvillkor.</td></tr><tr><td>Permanens</td><td>Gör sigillet permanent i stället för förbrukat vid aktivering. Kostar extra PSY och tid.</td></tr><tr><td>Nexus</td><td>Kopplar samman flera sigill i samma föremål så de delar PSY-källa.</td></tr><tr><td>Laddning</td><td>Ger föremålet ett antal laddningar — varje aktivering förbrukar en.</td></tr></tbody></table><p>Ett misslyckat färdighetsslag vid något av dessa steg förstör hela det magiska innehållet — arbetet måste börja om från grunden.</p><p><em>Källa: Magi-Regelboken (MAG) s.30-33.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788728380273,
+        "modifiedTime": 1788728380273,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Q5IhzB3RGIXbNATm.HoYWBxgjqYcnCLfR"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 500000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788728380273,
+    "modifiedTime": 1788728380273,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Q5IhzB3RGIXbNATm"
+}
