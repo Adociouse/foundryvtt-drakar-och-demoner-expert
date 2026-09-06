@@ -93,7 +93,7 @@ Bördetabellen (`system.encumbrance`, Spelarboken s.44) summerar buren vikt (rus
 | `monster` | 242 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser — samt ett fullt statblock för "Tung stridshäst", Krigarens Handbok s.27-28) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
-| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna. `regler` innehåller även en Raser- och en Yrken-översiktssida (samtliga raser/yrken i tabellform) |
+| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna. `regler` innehåller även en Raser- och en Yrken-översiktssida (samtliga raser/yrken i tabellform), samt fullständiga regelsidor för Förflyttning, Bärförmåga & belastning, Ridning & riddjur och Strid |
 | `journaler` (visas som "Magiskolreferenser") | 15 auto-genererade skolreferenssidor (14 magiskolor, inklusive Portalmagi, + Allmänna besvärjelser), en per skola, med en besvärjelse-/minimagitabell sammanställd ur `besvarjelser`-kompendiet (regenereras via `scripts/build/generate-journal-summaries.mjs` varje gång besvärjelser ändras), plus riktig skolbeskrivningstext för 13 av 15 (Alkemi/Allmänna besvärjelser saknar ännu källtext) |
 | `scener` | Färdiga scener, bl.a. rollpersonsskaparens egen bakgrundsscen |
 
