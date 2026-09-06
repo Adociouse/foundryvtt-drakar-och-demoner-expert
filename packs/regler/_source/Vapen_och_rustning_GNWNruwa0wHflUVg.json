@@ -1,0 +1,62 @@
+{
+  "name": "Vapen & rustning",
+  "_id": "GNWNruwa0wHflUVg",
+  "pages": [
+    {
+      "_id": "N7fURZE6oTGOHRxP",
+      "name": "Vapen & rustning",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Vapenkategorier</h2><p>Varje vapen tillhör en av tre kategorier, som avgör vilka stridsregler som gäller (se \"Strid\"):</p><table style=\"width:100%\"><thead><tr><th>Kategori</th><th>Innebär</th></tr></thead><tbody><tr><td>Närstrid</td><td>Motståndaren måste normalt stå i rutan intill (se \"Vapenlängd och räckvidd\" nedan). Kan både parera och pareras mot.</td></tr><tr><td>Avstånd (projektil)</td><td>Pilbåge, armborst, slunga, blåsrör. Kan aldrig parera eller pareras mot.</td></tr><tr><td>Kast</td><td>Kastade vapen. Kan pareras om försvararen har en sköld och ser vapnet kastas.</td></tr></tbody></table><p><em>Källa: Spelarboken (SB) s.28-31, Grundregelboken (REG) s.58-59.</em></p><h2>Vapengrupper</h2><p>Vapenfärdigheter är grupperade efter vapentyp. Har rollpersonen redan en tränad färdighet i en grupp får de ÖVRIGA färdigheterna i samma grupp automatiskt ett golv: hälften (avrundat nedåt) av den bästa färdighetens effektiva FV i gruppen. Man behöver alltså aldrig börja helt från noll i ett nytt vapen bara för att man redan är skicklig med ett släktvapen.</p><table style=\"width:100%\"><thead><tr><th>Grupp</th><th>Exempel</th></tr></thead><tbody><tr><td>Dolkar</td><td>Dolk, Parerdolk</td></tr><tr><td>Enhandssvärd</td><td>Kortsvärd, Bredsvärd, Kroksabel, Bastardsvärd</td></tr><tr><td>Enhands krossvapen</td><td>Klubba, Stridshammare, Morgonstjärna, Korpnäbb med flera</td></tr><tr><td>Enhandsyxor</td><td>Handyxa, Stridsyxa, Skäggyxa, Bredyxa</td></tr><tr><td>Tvåhandsvapen</td><td>Tvåhandssvärd, Tvåhandsyxa</td></tr><tr><td>Stickvapen</td><td>Kortspjut, Långspjut, Lans, Treudd, Spetum, Partisan, Glav</td></tr><tr><td>Kättingvapen</td><td>Stridsslaga, Stridsgissel</td></tr><tr><td>Stångvapen</td><td>Trästav, Hillebard, Pålyxa, Pik</td></tr><tr><td>Bågar</td><td>Liten båge, Kortbåge, Långbåge, Sammansatt båge</td></tr><tr><td>Armborst</td><td>Lätt armborst, Tungt armborst, Arbalest</td></tr><tr><td>Slunga</td><td>Slunga, Stavslunga</td></tr><tr><td>Kastvapen</td><td>Kastspjut, Kastkniv, Kastyxa, Kaststjärna</td></tr><tr><td>Piska</td><td>Piska</td></tr><tr><td>Sköldar</td><td>Targ, Bucklare, Rundsköld, Långsköld med flera</td></tr><tr><td>Blåsrör</td><td>Blåsrör</td></tr></tbody></table><p><em>Källa: Rollpersonen (RP) s.60.</em></p><h2>Vapenlängd och räckvidd</h2><p>Normalt måste en närstridsmotståndare stå i rutan intill. Längre vapen når längre, och med dem får man dessutom anfalla genom rutor med andra stridande i:</p><table style=\"width:100%\"><thead><tr><th>Längd</th><th>Vapen</th><th>Räckvidd</th></tr></thead><tbody><tr><td>0</td><td>Dolk, svärd, yxor, klubbor med flera</td><td>1 ruta</td></tr><tr><td>1</td><td>Tvåhandssvärd, tvåhandsyxa, hillebard, partisan, glav, spetum, pålyxa, kortspjut, piska, treudd</td><td>2 rutor</td></tr><tr><td>2</td><td>Långspjut, lans</td><td>3 rutor</td></tr><tr><td>3</td><td>Pik</td><td>4 rutor</td></tr></tbody></table><p><em>Källa: Spelarboken (SB) s.35.</em></p><h2>Skadebonus</h2><p>Skadebonus läggs till skadan vid ett lyckat NÄRSTRIDSANFALL (aldrig avståndsanfall) och beror på STY och STO tillsammans:</p><table style=\"width:100%\"><thead><tr><th>STY + STO</th><th>Skadebonus</th></tr></thead><tbody><tr><td>≤26</td><td>+0</td></tr><tr><td>27–29</td><td>+1</td></tr><tr><td>30–32</td><td>+1T2</td></tr><tr><td>33–40</td><td>+1T4</td></tr><tr><td>41–50</td><td>+1T6</td></tr><tr><td>51–60</td><td>+1T10</td></tr><tr><td>61–80</td><td>+2T6</td></tr><tr><td>81–100</td><td>+3T6</td></tr><tr><td>101–140</td><td>+4T6</td></tr><tr><td>141+</td><td>+5T6</td></tr></tbody></table><p><em>Källa: Rollpersonen (RP) s.25.</em></p><h2>Vapenmaterial och slagtyp</h2><p>Varje vapen har ett MATERIAL (vanligt, silver eller magiskt) och en SLAGTYP (hugg, stick eller kross). Vissa varelser är immuna, halveringsdrabbade eller dubbelt sårbara mot ett specifikt material eller en specifik slagtyp — kontrolleras alltid EFTER att rustningens absorbering dragits av.</p><p>För avståndsvapen är det AMMUNITIONENS material (pilen, bulten, slungstenen) som avgör, inte själva bågen eller armborstet — en silverpil skjuten ur en helt vanlig båge räknas som silver.</p><p><em>Källa: Monsterboken 1 (MB1) s.91 med flera.</em></p><h2>Svårparerade vapen — Kättingvapen och Piska</h2><p>Kättingvapen (t.ex. Stridsslaga, Stridsgissel) och Piska är svåra att kontrollera för både bäraren och den som försöker parera dem:</p><ul><li>Ett rått anfallsslag på 18 eller högre prövas mot ett extra slag — högre än eget FV (eller ett nytt rått 20) räknas som fummel, annars som misslyckat.</li><li>Varje pareringsförsök mot vapnet — med vapen ELLER sköld — har sitt CL HALVERAT.</li></ul><p><em>Källa: Spelarboken (SB) s.33.</em></p><h2>Styrkekrav</h2><ul><li>Vapnets STY-grupp EN nivå för hög för användaren — vapnet kan användas tvåhänt (om fästet tillåter) som en egen färdighet.</li><li>Vapnets STY-grupp TVÅ nivåer eller mer för hög — CL halveras. Tvåhänt hjälper inte.</li><li>Ett vapen märkt \"1-2H\" kräver, för att användas enhänt, en STY-grupp ETT STEG HÖGRE än vapnets angivna krav.</li></ul><p><em>Källa: Grundregelboken (REG) s.58.</em></p><h2>Rustning</h2><p>Rustning ger absorbering (Abs) mot skada. Se \"Träffområden & skador\" för hur absorberingen räknas per kroppsdel, och \"Strid\" för sköldars brytvärde (BV) och vad en sköld ger i handlingar per stridsrunda.</p><p><em>Källa: Spelarboken (SB) s.27, s.38.</em></p><h2>Vapentekniker</h2><p>Utöver den vanliga vapenfärdigheten kan en rollperson lära sig separata vapentekniker — till exempel att bryta en motståndares vapen eller sikta ett avväpnande slag. Varje teknik är en egen sekundär färdighet, skild från själva vapenfärdigheten.</p><p><em>Källa: Krigarens Handbok (KH) s.38-40.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788730874201,
+        "modifiedTime": 1788730874201,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!GNWNruwa0wHflUVg.N7fURZE6oTGOHRxP"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 470000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788730874201,
+    "modifiedTime": 1788730874201,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!GNWNruwa0wHflUVg"
+}
