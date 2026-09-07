@@ -189,7 +189,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
   static async #onSubmitCast(event, target) {
     const form = this.element;
     const item = this.#selectedItem();
-    if (!item) { ui.notifications.warn("Ingen besvärjelse vald."); return; }
+    if (!item) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Spell.NoSpellSelected")); return; }
 
     const effektgrad = Math.max(1, Math.floor(Number(form.querySelector('input[name="effektgrad"]')?.value)) || 1);
     const targetMode = item.system.targetMode ?? "single";
@@ -201,7 +201,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       targetActors = [this.actor];
     } else {
       const tokens = this.#targetTokens().filter((t) => t?.actor);
-      if (!tokens.length) { ui.notifications.warn("Inget mål valt — hovra en token och tryck T."); return; }
+      if (!tokens.length) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Spell.NoTarget")); return; }
       // "split": max lika många sfärer som effektgrad — extra målsatta
       // tokens utöver det ignoreras (spelaren kan sänka E i stället om fler
       // mål önskas, se splitNote i dialogen).
@@ -216,7 +216,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       ? (targetActors[0]?.items.get(form.querySelector('select[name="weaponItemId"]')?.value) ?? null)
       : null;
     if (targetMode === "weapon" && !weaponTarget) {
-      ui.notifications.warn("Inget vapen att förtrolla på målet.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Spell.NoWeaponToEnchant"));
       return;
     }
 
@@ -227,7 +227,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       ? (form.querySelector('select[name="chosenAttribute"]')?.value ?? null)
       : null;
     if (needsAttributeChoice && !chosenAttribute) {
-      ui.notifications.warn("Ingen grundegenskap vald.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Spell.NoAttributeSelected"));
       return;
     }
 
@@ -253,9 +253,9 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
       await postSpellCard(result, { caster: this.actor, targets: targetActors });
     } else {
       await postSpellCard(result, { caster: this.actor, targets: targetActors, pending: true });
-      ui.notifications.info("Besvärjelsen är kastad och väntar på SL-godkännande.");
+      ui.notifications.info(game.i18n.localize("DODE.Notify.Spell.Sent"));
       if (!game.users.some((u) => u.isGM && u.active)) {
-        ui.notifications.warn("Ingen SL är online just nu — besvärjelsen väntar tills en SL loggar in och godkänner.");
+        ui.notifications.warn(game.i18n.localize("DODE.Notify.Spell.NoGmOnline"));
       }
     }
 

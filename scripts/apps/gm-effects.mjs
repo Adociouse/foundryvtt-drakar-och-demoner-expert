@@ -149,7 +149,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
 
   #readEffectForm(form) {
     const label = form.querySelector('[name="label"]').value.trim();
-    if (!label) { ui.notifications.warn("Effekten behöver ett namn."); return null; }
+    if (!label) { ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.NeedsName")); return null; }
     const kind = form.querySelector('[name="kind"]').value;
     const value = Number(form.querySelector('[name="value"]').value) || 0;
     const operation = form.querySelector('[name="operation"]')?.value ?? "add";
@@ -160,7 +160,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     if (kind === "skillMod") {
       effect.skillKey = form.querySelector('[name="skillKey"]').value.trim();
       effect.operation = operation;
-      if (!effect.skillKey) { ui.notifications.warn("Ange en färdighetsnyckel."); return null; }
+      if (!effect.skillKey) { ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.NeedsSkillKey")); return null; }
     } else if (kind === "recoveryMod") {
       effect.resource = form.querySelector('[name="resource"]').value;
       effect.operation = operation;
@@ -192,7 +192,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
 
   static async #onAddSceneEffect(event, target) {
     const scene = game.scenes.active ?? canvas?.scene ?? null;
-    if (!scene) return ui.notifications.warn("Ingen aktiv scen.");
+    if (!scene) return ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.NoActiveScene"));
     const form = target.closest("[data-effect-form]");
     const effect = this.#readEffectForm(form);
     if (!effect) return;
@@ -209,7 +209,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
 
   static async #onAddActorEffect(event, target) {
     const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
-    if (!actor) return ui.notifications.warn("Välj en rollperson.");
+    if (!actor) return ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.PickActor"));
     const form = target.closest("[data-effect-form]");
     const effect = this.#readEffectForm(form);
     if (!effect) return;
@@ -236,14 +236,14 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     if (!checkbox?.checked) return;
     const current = actor.system.resources?.psy?.value ?? actor.system.resources?.psy?.max ?? 0;
     if (current < 5) {
-      ui.notifications.warn(`${actor.name} har bara ${current} PSY kvar — beviljar ändå, men PSY dras inte under 0.`);
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.LowPsyWarning", { actor: actor.name, current }));
     }
     await actor.update({ "system.resources.psy.value": Math.max(0, current - 5) });
   }
 
   static async #onGrantBonusAttack(event, target) {
     const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
-    if (!actor) return ui.notifications.warn("Välj en rollperson.");
+    if (!actor) return ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.PickActor"));
     await this.#deductPsyIfChecked(actor);
     await CONFIG.DODE.grantBonusAction(actor, "attack");
     this.render();
@@ -251,7 +251,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
 
   static async #onGrantBonusParry(event, target) {
     const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
-    if (!actor) return ui.notifications.warn("Välj en rollperson.");
+    if (!actor) return ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.PickActor"));
     await this.#deductPsyIfChecked(actor);
     await CONFIG.DODE.grantBonusAction(actor, "parry");
     this.render();
@@ -272,12 +272,12 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
    */
   #readPeriodicEffectFields(form) {
     const label = form.querySelector('[name="label"]').value.trim();
-    if (!label) { ui.notifications.warn("Effekten behöver ett namn."); return null; }
+    if (!label) { ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.NeedsName")); return null; }
     const cadence = form.querySelector('[name="cadence"]').value;
     const targetField = form.querySelector('[name="target"]').value.trim() || "hp";
     const amount = Number(form.querySelector('[name="amount"]').value) || 0;
     const ticksRemaining = Number(form.querySelector('[name="ticks"]').value) || 0;
-    if (ticksRemaining < 1) { ui.notifications.warn("Antal tickar måste vara minst 1."); return null; }
+    if (ticksRemaining < 1) { ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.TicksMin1")); return null; }
     // ⚠ `source` styr ikonsynken (PERIODIC_STATUS_ICONS, config.mjs) — tidigare
     // hårdkodad till "gm" här, vilket gjorde att GM-tillagda effekter ALDRIG
     // tände Token HUD-ikonen även för gift/eld. Fixad i samma veva.
@@ -301,12 +301,12 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     // aktör (två länkade tokens av samma aktör ska inte ge dubbla effekter).
     if (form.querySelector('input[name="applyToTargets"]')?.checked) {
       const actors = [...new Set([...game.user.targets].map((t) => t.actor).filter(Boolean))];
-      if (!actors.length) { ui.notifications.warn("Inga tokens målsatta."); return; }
+      if (!actors.length) { ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.NoTargets")); return; }
       for (const actor of actors) await CONFIG.DODE.addPeriodicEffect(actor, fields);
-      ui.notifications.info(`"${fields.label}" tillagd på ${actors.length} mål.`);
+      ui.notifications.info(game.i18n.localize("DODE.Notify.GmEffects.AddedToTargets", { label: fields.label, count: actors.length }));
     } else {
       const actor = this.selectedActorId ? game.actors.get(this.selectedActorId) : null;
-      if (!actor) return ui.notifications.warn("Välj en rollperson.");
+      if (!actor) return ui.notifications.warn(game.i18n.localize("DODE.Notify.GmEffects.PickActor"));
       await CONFIG.DODE.addPeriodicEffect(actor, fields);
     }
     this.render();

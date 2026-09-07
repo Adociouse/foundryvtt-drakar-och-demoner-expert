@@ -22,15 +22,15 @@
  */
 export async function requestSell(seller, itemId, merchant) {
   const item = seller.items.get(itemId);
-  if (!item) { ui.notifications.warn("Föremålet finns inte längre."); return; }
+  if (!item) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Common.ItemGone")); return; }
   if (!merchant || merchant.type !== "handlare") {
-    ui.notifications.warn("Ingen handlare målsatt — hovra en handlartoken och tryck T innan du säljer.");
+    ui.notifications.warn(game.i18n.localize("DODE.Notify.Sell.NoMerchantTargeted"));
     return;
   }
 
   const priceSm = merchantBasePriceSm(item);
   if (priceSm === null) {
-    ui.notifications.warn(`${item.name} har inget automatiserbart pris — SL får avgöra försäljningen manuellt.`);
+    ui.notifications.warn(game.i18n.localize("DODE.Notify.Sell.NoAutoPrice", { item: item.name }));
     return;
   }
   const sellPriceSm = Math.round(priceSm * (merchant.system.buybackRate ?? 50) / 100 * 100) / 100;
@@ -40,9 +40,9 @@ export async function requestSell(seller, itemId, merchant) {
     return;
   }
 
-  ui.notifications.info(`Begär att sälja ${item.name} för ~${sellPriceSm} sm — väntar på SL-godkännande.`);
+  ui.notifications.info(game.i18n.localize("DODE.Notify.Sell.Requested", { item: item.name, price: sellPriceSm }));
   if (!game.users.some((u) => u.isGM && u.active)) {
-    ui.notifications.warn("Ingen SL är online just nu — försäljningen väntar tills en SL loggar in och godkänner.");
+    ui.notifications.warn(game.i18n.localize("DODE.Notify.Sell.NoGmOnline"));
   }
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: seller }),
@@ -68,7 +68,7 @@ export async function applySell({ sellerUuid, itemId, merchantUuid, sellPriceSm 
   const merchant = fromUuidSync(merchantUuid);
   const item = seller?.items.get(itemId);
   if (!seller || !merchant || !item) {
-    ui.notifications.error("Säljaren, handlaren eller föremålet finns inte längre — kan inte genomföra försäljningen.");
+    ui.notifications.error(game.i18n.localize("DODE.Notify.Sell.ApproveMissing"));
     return;
   }
 

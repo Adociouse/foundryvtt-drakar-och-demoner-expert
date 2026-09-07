@@ -765,12 +765,12 @@
               <div class="wizard-card-meta">{{entry.priceLabel}}{{#if entry.qty}} · {{entry.qty}} st{{/if}}</div>
               <div class="wizard-skill-buy">
                 <button type="button" data-action="sellEquipment" data-uuid="{{entry.uuid}}" {{#unless entry.canSell}}disabled{{/unless}}>−</button>
-                <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>Köp</button>
+                <button type="button" data-action="buyEquipment" data-uuid="{{entry.uuid}}" data-can-buy="{{entry.canBuy}}" {{#unless entry.canBuy}}disabled{{/unless}}>{{localize "DODE.Wizard.Buy"}}</button>
               </div>
             {{else}}
               <div class="wizard-card-meta">{{entry.priceLabel}}</div>
               <div class="wizard-skill-buy">
-                <span class="wizard-reference-badge" title="Prissätter ett annat föremål — inte köpbart här.">Referens</span>
+                <span class="wizard-reference-badge" title="{{localize 'DODE.Wizard.ReferenceHint'}}">{{localize "DODE.Wizard.Reference"}}</span>
               </div>
             {{/if}}
           </div>
@@ -782,7 +782,7 @@
 
   {{#if showGranska}}
   <section class="wizard-step">
-    <h4>Sammanfattning</h4>
+    <h4>{{localize "DODE.Wizard.Summary"}}</h4>
     <table class="wizard-summary">
       <tr><td>Kön</td><td>{{#each konOptions as |option|}}{{#if option.selected}}{{option.label}}{{/if}}{{/each}}</td></tr>
       <tr><td>Nivå</td><td>{{#if selectedNivaOption}}{{selectedNivaOption.label}}{{else}}—{{/if}}</td></tr>
@@ -862,13 +862,13 @@
   </div>
 
   <footer class="wizard-nav">
-    <button type="button" data-action="prevStep" {{#if isFirstStep}}disabled{{/if}}>Föregående</button>
+    <button type="button" data-action="prevStep" {{#if isFirstStep}}disabled{{/if}}>{{localize "DODE.Wizard.Nav.Previous"}}</button>
     {{#if isLastStep}}
       <button type="button" data-action="createCharacter" class="primary">
-        {{#if isEditMode}}<i class="fa-solid fa-floppy-disk"></i> Spara ändringar{{else}}<i class="fa-solid fa-wand-magic-sparkles"></i> Skapa rollperson{{/if}}
+        {{#if isEditMode}}<i class="fa-solid fa-floppy-disk"></i> {{localize "DODE.Wizard.Nav.SaveChanges"}}{{else}}<i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "DODE.Wizard.Nav.CreateCharacter"}}{{/if}}
       </button>
     {{else}}
-      <button type="button" data-action="nextStep" {{#unless canAdvance}}disabled{{/unless}}>Nästa</button>
+      <button type="button" data-action="nextStep" {{#unless canAdvance}}disabled{{/unless}}>{{localize "DODE.Wizard.Nav.Next"}}</button>
     {{/if}}
   </footer>
 </div>

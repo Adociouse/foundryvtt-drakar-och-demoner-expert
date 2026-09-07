@@ -23,8 +23,8 @@
  */
 export async function requestLoot(corpse, itemId, looter) {
   const item = corpse.items.get(itemId);
-  if (!item) { ui.notifications.warn("Föremålet finns inte längre på liket."); return; }
-  if (!looter) { ui.notifications.warn("Ingen rollperson vald att plundra åt — tilldela dig en karaktär först."); return; }
+  if (!item) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Loot.ItemGone")); return; }
+  if (!looter) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Loot.NoLooter")); return; }
 
   const canApplyDirectly = game.user.isGM || corpse.isOwner;
   if (canApplyDirectly) {
@@ -32,9 +32,9 @@ export async function requestLoot(corpse, itemId, looter) {
     return;
   }
 
-  ui.notifications.info(`Begär att plundra ${item.name} — väntar på SL-godkännande.`);
+  ui.notifications.info(game.i18n.localize("DODE.Notify.Loot.Requested", { item: item.name }));
   if (!game.users.some((u) => u.isGM && u.active)) {
-    ui.notifications.warn("Ingen SL är online just nu — plundringen väntar tills en SL loggar in och godkänner.");
+    ui.notifications.warn(game.i18n.localize("DODE.Notify.Loot.NoGmOnline"));
   }
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: looter }),
@@ -65,7 +65,7 @@ export async function applyLoot({ corpseUuid, itemId, looterUuid }) {
   const looter = fromUuidSync(looterUuid);
   const item = corpse?.items.get(itemId);
   if (!corpse || !looter || !item) {
-    ui.notifications.error("Liket, rollpersonen eller föremålet finns inte längre — kan inte plundra.");
+    ui.notifications.error(game.i18n.localize("DODE.Notify.Loot.ApproveMissing"));
     return;
   }
   await looter.createEmbeddedDocuments("Item", [item.toObject()]);

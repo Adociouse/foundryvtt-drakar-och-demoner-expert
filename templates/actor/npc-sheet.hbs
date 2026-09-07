@@ -44,8 +44,8 @@
 
 <section class="attacks">
   <header class="skills-header">
-    <h3>Anfall</h3>
-    <button type="button" data-action="addAttack"><i class="fa-solid fa-plus"></i> Nytt anfall</button>
+    <h3>{{localize "DODE.NpcSheet.AttacksHeading"}}</h3>
+    <button type="button" data-action="addAttack"><i class="fa-solid fa-plus"></i> {{localize "DODE.NpcSheet.NewAttack"}}</button>
   </header>
   <ol class="skill-list">
     {{#each system.attacks as |attack index|}}
@@ -60,7 +60,7 @@
         <button type="button" data-action="deleteAttack" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
       </li>
     {{else}}
-      <li class="skill-row-empty">Inga anfall ännu.</li>
+      <li class="skill-row-empty">{{localize "DODE.NpcSheet.NoAttacksYet"}}</li>
     {{/each}}
   </ol>
 </section>
@@ -100,20 +100,20 @@
         {{#if ../isGM}}<button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>{{/if}}
       </li>
     {{else}}
-      <li class="skill-row-empty">Ingen utrustning ännu — dra hit vapen, rustning eller utrustning från ett kompendium.</li>
+      <li class="skill-row-empty">{{localize "DODE.NpcSheet.NoGearYet"}}</li>
     {{/each}}
   </ol>
 </section>
 
 {{#if isGM}}
 <section class="npc-fields">
-  <label>Färdigheter (fritext) <input type="text" name="system.skills" value="{{system.skills}}" /></label>
+  <label>{{localize "DODE.NpcSheet.SkillsFreetext"}} <input type="text" name="system.skills" value="{{system.skills}}" /></label>
 </section>
 
 <section class="npc-special">
-  <h3>Speciellt</h3>
+  <h3>{{localize "DODE.NpcSheet.SpecialHeading"}}</h3>
   {{editor system.special target="system.special" button=true engine="prosemirror"}}
-  <h3>Beskrivning</h3>
+  <h3>{{localize "DODE.NpcSheet.DescriptionHeading"}}</h3>
   {{editor system.biography target="system.biography" button=true engine="prosemirror"}}
 </section>
 {{/if}}

@@ -1724,7 +1724,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
           existing.weaponGroup = weaponGroup?.key ?? "";
         } else {
           if (picks.length >= this.#professionSkillTarget) {
-            ui.notifications.warn(`Du har redan valt ${this.#professionSkillTarget} yrkesfärdigheter.`);
+            ui.notifications.warn(game.i18n.localize("DODE.Notify.Wizard.AlreadyPickedSkills", { count: this.#professionSkillTarget }));
             ev.target.value = "";
             return;
           }
@@ -1801,7 +1801,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   static #onNextStep() {
     const steps = this.steps;
     if (!this.#canAdvance(steps[this.stepIndex])) {
-      ui.notifications.warn("Fyll i det här steget innan du går vidare.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Wizard.StepIncomplete"));
       return;
     }
     this.stepIndex = Math.min(this.stepIndex + 1, steps.length - 1);
@@ -2153,7 +2153,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       picks.splice(at, 1);
     } else {
       if (picks.length >= this.#professionSkillTarget) {
-        ui.notifications.warn(`Du har redan valt ${this.#professionSkillTarget} yrkesfärdigheter — avmarkera en först.`);
+        ui.notifications.warn(game.i18n.localize("DODE.Notify.Wizard.AlreadyPickedSkillsDeselect", { count: this.#professionSkillTarget }));
         return;
       }
       picks.push({
@@ -2508,7 +2508,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // `data-skill` bär färdighetens NYCKEL (skillKey), inte visningsnamnet.
     const key = el?.dataset.skill;
     if (!key || el.dataset.canIncrease !== "true") {
-      ui.notifications.warn("Inte tillräckligt med EP kvar, eller max-FV vid skapande redan nådd.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Wizard.NotEnoughEp"));
       return;
     }
     this.state.fardigheter[key] = (this.state.fardigheter[key] ?? 0) + 1;
@@ -2573,7 +2573,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const el = target.closest("[data-uuid]");
     const uuid = el?.dataset.uuid;
     if (!uuid || el.dataset.canBuy !== "true") {
-      ui.notifications.warn("Inte tillräckligt med startkapital kvar.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Wizard.NotEnoughCapital"));
       return;
     }
     this.state.equipment[uuid] = (this.state.equipment[uuid] ?? 0) + 1;
@@ -2726,7 +2726,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const specialKeep = await this.#applySpecialAbilityGrants(actor);
     await pruneOrphanedAbilityGrants(actor, [...raceKeep, ...professionKeep, ...specialKeep]);
 
-    ui.notifications.info(`${actor.name} uppdaterad via guiden.`);
+    ui.notifications.info(game.i18n.localize("DODE.Notify.Wizard.ActorUpdated", { actor: actor.name }));
     await this.close();
     actor.sheet.render(true);
   }

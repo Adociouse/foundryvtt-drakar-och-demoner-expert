@@ -102,9 +102,7 @@ export default class DoDEHandlareSheet extends HandlebarsApplicationMixin(ActorS
     if (!item) return;
     const buyer = this.#buyer();
     if (!buyer) {
-      ui.notifications.warn(
-        "Ingen rollperson vald. Tilldela en rollperson till ditt konto (eller markera en token) innan du handlar."
-      );
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Handlare.NoBuyerSelected"));
       return;
     }
     const qtyInput = target.closest(".stock-row")?.querySelector("[data-buy-qty]");

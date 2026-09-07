@@ -126,10 +126,10 @@ export default class DoDETrainingBase extends HandlebarsApplicationMixin(Applica
     const item = this.#itemFrom(target);
     if (!item) return;
     if (!this.actor.system.rest.trainingUnlocked) {
-      return ui.notifications.warn("Viloperioden är inte öppnad — det går inte att träna under ett pågående äventyr (RP s.63).");
+      return ui.notifications.warn(game.i18n.localize("DODE.Notify.Training.RestClosedTrain"));
     }
     const row = this.describeRow(item);
-    if (!row.canTrain) return ui.notifications.warn(row.trainNote || "Går inte att träna.");
+    if (!row.canTrain) return ui.notifications.warn(row.trainNote || game.i18n.localize("DODE.Notify.Training.CannotTrain"));
 
     await runTrainingWeek({
       actor: this.actor, item, mode: this.mode,
@@ -145,12 +145,12 @@ export default class DoDETrainingBase extends HandlebarsApplicationMixin(Applica
     // Grinden kontrolleras här också, inte bara i mallen — fönstret kan stå öppet
     // när SL stänger den.
     if (!this.actor.system.rest.trainingUnlocked) {
-      return ui.notifications.warn("Viloperioden är inte öppnad — EP kan inte omsättas under ett äventyr (RP s.63).");
+      return ui.notifications.warn(game.i18n.localize("DODE.Notify.Training.RestClosedEp"));
     }
     const row = this.describeRow(item);
     if (row.blocked) return;
     if (!row.affordable) {
-      return ui.notifications.warn(`${row.label} kostar ${row.cost} EP — det finns inte täckning.`);
+      return ui.notifications.warn(game.i18n.localize("DODE.Notify.Training.NotEnoughEp", { label: row.label, cost: row.cost }));
     }
     await spendEp({ actor: this.actor, item, row, valueField: row.valueField });
     this.render();

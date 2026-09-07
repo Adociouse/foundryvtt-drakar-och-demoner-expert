@@ -160,7 +160,7 @@ export async function payFromPurse(actor, sm) {
 export async function runTrainingWeek({ actor, item, mode, target, targetLabel }) {
   const fee = trainingFee(mode, item);
   if (fee > 0 && !(await payFromPurse(actor, fee))) {
-    ui.notifications.warn(`Har inte råd med träningsavgiften (${fee} sm).`);
+    ui.notifications.warn(game.i18n.localize("DODE.Notify.Training.CannotAffordFee", { fee }));
     return null;
   }
 

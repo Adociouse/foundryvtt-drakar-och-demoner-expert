@@ -345,7 +345,7 @@ export default class DoDEActor extends Actor {
     if (!item || item.system.consumable !== true) return;
     let changes = (item.system.effectChanges ?? []).filter((c) => c.key);
     if (!changes.length) {
-      ui.notifications.warn(`${item.name} har ingen konsumtionseffekt definierad.`);
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Actor.NoConsumeEffect", { name: item.name }));
       return;
     }
 
@@ -396,13 +396,13 @@ export default class DoDEActor extends Actor {
    */
   async buyFromMerchant(stockItem, merchant, quantity = 1) {
     if (this.type !== "character") {
-      ui.notifications.warn("Bara rollpersoner kan handla.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Actor.OnlyCharactersTrade"));
       return false;
     }
     const qty = Math.max(1, Math.round(quantity));
     const unitSm = DoDEActor.merchantPriceSm(stockItem, merchant);
     if (unitSm === null) {
-      ui.notifications.warn(`${stockItem.name} har inget styckpris — priset måste hanteras vid bordet.`);
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Actor.NoUnitPrice", { name: stockItem.name }));
       return false;
     }
     // All aritmetik i kopparmynt som heltal, aldrig i silver som flyttal.
@@ -410,7 +410,7 @@ export default class DoDEActor extends Actor {
     const purseKm = CONFIG.DODE.purseToKm(this.system.currency);
     if (costKm > purseKm) {
       const short = CONFIG.DODE.formatPurse(CONFIG.DODE.kmToPurse(costKm - purseKm));
-      ui.notifications.warn(`${this.name} har inte råd med ${stockItem.name} — saknar ${short}.`);
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Actor.CannotAfford", { buyer: this.name, item: stockItem.name, short }));
       return false;
     }
 

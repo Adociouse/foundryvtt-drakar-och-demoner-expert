@@ -406,12 +406,12 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
   static async #onSubmitAttack(event, target) {
     const form = this.element;
     const targets = this.#targetTokens().filter((t) => t?.actor);
-    if (!targets.length) { ui.notifications.warn("Inget mål valt — högerklicka en token på kartan."); return; }
+    if (!targets.length) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.NoTarget")); return; }
     const multiTarget = targets.length > 1;
 
     const isNpc = this.isNpc;
     const selected = this.#selectedWeapon();
-    if (!selected) { ui.notifications.warn("Inget vapen/anfall valt."); return; }
+    if (!selected) { ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.NoWeapon")); return; }
 
     let weapon, skill, fv;
     if (isNpc) {
@@ -422,7 +422,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
         weapon = selected.item;
         skill = findWeaponSkill(this.actor, weapon.name);
         if (!skill) {
-          ui.notifications.warn(`Ingen färdighet kopplad till ${weapon.name} — lägg till en färdighetsrad först.`);
+          ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.NoSkillLinked", { weapon: weapon.name }));
           return;
         }
         fv = null;
@@ -438,7 +438,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       weapon = selected;
       skill = findWeaponSkill(this.actor, weapon.name);
       if (!skill) {
-        ui.notifications.warn(`Ingen färdighet kopplad till ${weapon.name} — lägg till en färdighetsrad först.`);
+        ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.NoSkillLinked", { weapon: weapon.name }));
         return;
       }
       fv = null;
@@ -555,7 +555,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
             // anfallssidan redan använder för SLP:er utan färdighets-Item.
             rawFv = Number(form.querySelector('input[name="parryFvOverride"]')?.value) || 0;
             if (!rawFv) {
-              ui.notifications.warn(`Inget FV att parera med för ${targetToken.actor.name} — ange ett manuellt.`);
+              ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.NoParryFv", { target: targetToken.actor.name }));
               return;
             }
             if (!parryItem) {
@@ -589,7 +589,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       });
 
       if (result.outOfRange) {
-        ui.notifications.warn(`${targetToken.actor.name}: ${result.reason}`);
+        ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.TargetReason", { target: targetToken.actor.name, reason: result.reason }));
         continue;
       }
 
@@ -615,9 +615,9 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     }
 
     if (anyPending) {
-      ui.notifications.info("Anfallet är skickat och väntar på SL-godkännande.");
+      ui.notifications.info(game.i18n.localize("DODE.Notify.Attack.Sent"));
       if (!game.users.some((u) => u.isGM && u.active)) {
-        ui.notifications.warn("Ingen SL är online just nu — anfallet väntar tills en SL loggar in och godkänner.");
+        ui.notifications.warn(game.i18n.localize("DODE.Notify.Attack.NoGmOnline"));
       }
     }
 

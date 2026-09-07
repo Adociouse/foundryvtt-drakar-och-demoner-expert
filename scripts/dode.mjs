@@ -406,14 +406,14 @@ Hooks.once("init", () => {
     // som resten av stridssystemet (se rolls/dual-wield.mjs).
     declareAttackMacro(weaponOrAttackName) {
       const actor = ChatMessage.getSpeakerActor(ChatMessage.getSpeaker());
-      if (!actor) return ui.notifications.warn("Ingen token vald.");
+      if (!actor) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Common.NoTokenSelected"));
       if (actor.type === "npc") {
         const index = actor.system.attacks.findIndex((a) => a.name === weaponOrAttackName);
-        if (index < 0) return ui.notifications.warn(`${actor.name} har inget anfall som heter "${weaponOrAttackName}".`);
+        if (index < 0) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Combat.NoSuchAttack", { actor: actor.name, query: weaponOrAttackName }));
         return game.dode.openAttackDialog(actor, { npcAttackIndex: index });
       }
       const weapon = actor.items.find((i) => i.type === "vapen" && i.name === weaponOrAttackName);
-      if (!weapon) return ui.notifications.warn(`${actor.name} har inget vapen som heter "${weaponOrAttackName}".`);
+      if (!weapon) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Combat.NoSuchWeapon", { actor: actor.name, query: weaponOrAttackName }));
       return game.dode.openAttackDialog(actor, { weapon });
     },
     // Samma mönster som declareAttackMacro ovan, för besvärjelser (se
@@ -421,9 +421,9 @@ Hooks.once("init", () => {
     // just då är vald, inte den aktör som råkade vara vald vid dragtillfället.
     declareSpellCastMacro(spellName) {
       const actor = ChatMessage.getSpeakerActor(ChatMessage.getSpeaker());
-      if (!actor) return ui.notifications.warn("Ingen token vald.");
+      if (!actor) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Common.NoTokenSelected"));
       const spell = actor.items.find((i) => ["besvarjelse", "minibesvarjelse"].includes(i.type) && i.name === spellName);
-      if (!spell) return ui.notifications.warn(`${actor.name} kan inte "${spellName}".`);
+      if (!spell) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Magic.CannotCast", { actor: actor.name, spell: spellName }));
       return game.dode.openSpellDialog(actor, { item: spell });
     },
     // Manuell SL-städning av besegrade NPC-token — se full motivering vid
@@ -498,7 +498,7 @@ Hooks.once("ready", () => {
 function makeLockAndMark(message, html, flagKey) {
   return async (note) => {
     const latest = game.messages.get(message.id)?.getFlag(game.system.id, flagKey);
-    if (!latest || latest.processed) { ui.notifications.info("Redan hanterat av en annan SL-klient."); return false; }
+    if (!latest || latest.processed) { ui.notifications.info(game.i18n.localize("DODE.Notify.Common.AlreadyHandled")); return false; }
     await message.setFlag(game.system.id, flagKey, { ...latest, processed: true });
     html.querySelector(".pending-banner")?.replaceWith(
       Object.assign(document.createElement("div"), { className: "processed-note", textContent: note })
@@ -550,7 +550,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         // faktiskt förhandsvisades/målsattes).
         const attacker = attackFlag.attackerUuid ? fromUuidSync(attackFlag.attackerUuid) : null;
         const target = attackFlag.targetUuid ? fromUuidSync(attackFlag.targetUuid) : null;
-        if (!attacker || !target) { ui.notifications.error("Anfallaren eller målet finns inte längre — kan inte godkänna."); return; }
+        if (!attacker || !target) { ui.notifications.error(game.i18n.localize("DODE.Notify.Combat.ApproveMissingActors")); return; }
         if (!(await lockAndMark(`✅ Godkänt av ${game.user.name}`))) return;
         const pending = attackFlag.pending ?? {};
         const weapon = pending.wear?.side === "attacker" ? attacker.items.get(pending.wear.itemId) : null;
@@ -559,7 +559,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
           await applyAttackResult({ pending }, { attacker, target, weapon, parryItem });
         } catch (err) {
           console.error("DoDE | applyAttackResult misslyckades efter godkännande", err);
-          ui.notifications.error("Kunde inte skriva anfallets resultat — se konsolen.");
+          ui.notifications.error(game.i18n.localize("DODE.Notify.Combat.ApproveWriteFailed"));
         }
       });
 
@@ -589,7 +589,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         const targetUuids = spellFlag.targetUuids ?? [];
         const targets = targetUuids.map((uuid) => fromUuidSync(uuid)).filter(Boolean);
         if (!caster || !item || targets.length !== targetUuids.length) {
-          ui.notifications.error("Kastaren, besvärjelsen eller ett mål finns inte längre — kan inte godkänna.");
+          ui.notifications.error(game.i18n.localize("DODE.Notify.Magic.ApproveMissingActors"));
           return;
         }
         if (!(await lockAndMarkSpell(`✅ Godkänt av ${game.user.name}`))) return;
@@ -597,7 +597,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
           await applySpellResult({ pending: spellFlag.pending, item }, { caster, targets });
         } catch (err) {
           console.error("DoDE | applySpellResult misslyckades efter godkännande", err);
-          ui.notifications.error("Kunde inte skriva besvärjelsens resultat — se konsolen.");
+          ui.notifications.error(game.i18n.localize("DODE.Notify.Magic.ApproveWriteFailed"));
         }
       });
 
@@ -621,7 +621,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
           await applyLoot(lootFlag);
         } catch (err) {
           console.error("DoDE | applyLoot misslyckades efter godkännande", err);
-          ui.notifications.error("Kunde inte genomföra plundringen — se konsolen.");
+          ui.notifications.error(game.i18n.localize("DODE.Notify.Loot.ApproveWriteFailed"));
         }
       });
 
@@ -646,7 +646,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
           await applySell(sellFlag);
         } catch (err) {
           console.error("DoDE | applySell misslyckades efter godkännande", err);
-          ui.notifications.error("Kunde inte genomföra försäljningen — se konsolen.");
+          ui.notifications.error(game.i18n.localize("DODE.Notify.Sell.ApproveWriteFailed"));
         }
       });
 
@@ -728,7 +728,7 @@ Hooks.on("canvasReady", (canvas) => {
   const ghosts = canvas.scene?.tokens.filter((t) => !t.actor) ?? [];
   if (!ghosts.length) return;
   const names = ghosts.map((t) => t.name).join(", ");
-  ui.notifications.warn(`Scenen "${canvas.scene.name}" har ${ghosts.length} spöktoken(s) utan kopplad aktör: ${names}. Kontrollera/städa innan striden börjar.`, { permanent: true });
+  ui.notifications.warn(game.i18n.localize("DODE.Notify.Scene.GhostTokens", { scene: canvas.scene.name, count: ghosts.length, names }), { permanent: true });
 });
 
 /**
@@ -749,12 +749,12 @@ Hooks.on("canvasReady", (canvas) => {
  * av dramatiska skäl utan att deras token ska försvinna från kartan.
  */
 async function clearDefeatedTokens(scene = canvas.scene) {
-  if (!scene) return ui.notifications.warn("Ingen scen vald.");
+  if (!scene) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Common.NoSceneSelected"));
   const defeated = scene.tokens.filter((t) => t.actor?.type === "npc" && t.actor?.statuses?.has("dead"));
-  if (!defeated.length) return ui.notifications.info(`Inga besegrade NPC-token att rensa på "${scene.name}".`);
+  if (!defeated.length) return ui.notifications.info(game.i18n.localize("DODE.Notify.Scene.NoDefeatedTokens", { scene: scene.name }));
   const names = defeated.map((t) => t.name).join(", ");
   await scene.deleteEmbeddedDocuments("Token", defeated.map((t) => t.id));
-  ui.notifications.info(`Rensade ${defeated.length} besegrad(e) NPC-token från "${scene.name}": ${names}.`);
+  ui.notifications.info(game.i18n.localize("DODE.Notify.Scene.ClearedDefeated", { count: defeated.length, scene: scene.name, names }));
 }
 
 /** Kontextmenyrad i Scene Directory (högerklick på en scen) — bara synlig när scenen faktiskt har något att rensa. */
@@ -1057,12 +1057,12 @@ function mountDisplaceOptions() {
 async function mountToken(riderTokenArg, mountTokenArg) {
   const rider = (riderTokenArg ?? canvas.tokens?.controlled[0])?.document ?? riderTokenArg;
   const mount = (mountTokenArg ?? [...(game.user.targets ?? [])][0])?.document ?? mountTokenArg;
-  if (!rider) return ui.notifications.warn("Ingen ryttartoken vald — markera ryttarens token först.");
-  if (!mount) return ui.notifications.warn('Inget riddjur valt — högerklicka och "Target" riddjurets token.');
-  if (rider.id === mount.id) return ui.notifications.warn("En token kan inte bära sig själv.");
+  if (!rider) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Mount.NoRiderSelected"));
+  if (!mount) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Mount.NoMountSelected"));
+  if (rider.id === mount.id) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Mount.CannotMountSelf"));
   await rider.setFlag(SYSTEM_ID, "mountedOn", mount.id);
   await rider.move({ x: mount.x, y: mount.y, elevation: mount.elevation }, mountDisplaceOptions());
-  ui.notifications.info(`${rider.name} monterar ${mount.name}.`);
+  ui.notifications.info(game.i18n.localize("DODE.Notify.Mount.Mounted", { rider: rider.name, mount: mount.name }));
 }
 
 /**
@@ -1072,9 +1072,9 @@ async function mountToken(riderTokenArg, mountTokenArg) {
  */
 async function dismountToken(riderTokenArg) {
   const rider = (riderTokenArg ?? canvas.tokens?.controlled[0])?.document ?? riderTokenArg;
-  if (!rider) return ui.notifications.warn("Ingen ryttartoken vald.");
+  if (!rider) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Mount.NoRiderSelectedShort"));
   await rider.unsetFlag(SYSTEM_ID, "mountedOn");
-  ui.notifications.info(`${rider.name} kliver av.`);
+  ui.notifications.info(game.i18n.localize("DODE.Notify.Mount.Dismounted", { rider: rider.name }));
 }
 
 /**

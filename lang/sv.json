@@ -143,6 +143,162 @@
       "Book": "Källbok",
       "Page": "Sida",
       "Label": "Källa"
+    },
+    "Notify": {
+      "Common": {
+        "NoTokenSelected": "Ingen token vald.",
+        "NoSceneSelected": "Ingen scen vald.",
+        "AlreadyHandled": "Redan hanterat av en annan SL-klient.",
+        "ItemGone": "Föremålet finns inte längre."
+      },
+      "Actor": {
+        "NoConsumeEffect": "{name} har ingen konsumtionseffekt definierad.",
+        "OnlyCharactersTrade": "Bara rollpersoner kan handla.",
+        "NoUnitPrice": "{name} har inget styckpris — priset måste hanteras vid bordet.",
+        "CannotAfford": "{buyer} har inte råd med {item} — saknar {short}."
+      },
+      "Combat": {
+        "NoSuchAttack": "{actor} har inget anfall som heter \"{query}\".",
+        "NoSuchWeapon": "{actor} har inget vapen som heter \"{query}\".",
+        "ApproveMissingActors": "Anfallaren eller målet finns inte längre — kan inte godkänna.",
+        "ApproveWriteFailed": "Kunde inte skriva anfallets resultat — se konsolen."
+      },
+      "Magic": {
+        "CannotCast": "{actor} kan inte \"{spell}\".",
+        "ApproveMissingActors": "Kastaren, besvärjelsen eller ett mål finns inte längre — kan inte godkänna.",
+        "ApproveWriteFailed": "Kunde inte skriva besvärjelsens resultat — se konsolen."
+      },
+      "Loot": {
+        "ApproveWriteFailed": "Kunde inte genomföra plundringen — se konsolen.",
+        "ItemGone": "Föremålet finns inte längre på liket.",
+        "NoLooter": "Ingen rollperson vald att plundra åt — tilldela dig en karaktär först.",
+        "Requested": "Begär att plundra {item} — väntar på SL-godkännande.",
+        "NoGmOnline": "Ingen SL är online just nu — plundringen väntar tills en SL loggar in och godkänner.",
+        "ApproveMissing": "Liket, rollpersonen eller föremålet finns inte längre — kan inte plundra."
+      },
+      "Sell": {
+        "ApproveWriteFailed": "Kunde inte genomföra försäljningen — se konsolen.",
+        "NoMerchantTargeted": "Ingen handlare målsatt — hovra en handlartoken och tryck T innan du säljer.",
+        "NoAutoPrice": "{item} har inget automatiserbart pris — SL får avgöra försäljningen manuellt.",
+        "Requested": "Begär att sälja {item} för ~{price} sm — väntar på SL-godkännande.",
+        "NoGmOnline": "Ingen SL är online just nu — försäljningen väntar tills en SL loggar in och godkänner.",
+        "ApproveMissing": "Säljaren, handlaren eller föremålet finns inte längre — kan inte genomföra försäljningen."
+      },
+      "Scene": {
+        "GhostTokens": "Scenen \"{scene}\" har {count} spöktoken(s) utan kopplad aktör: {names}. Kontrollera/städa innan striden börjar.",
+        "NoDefeatedTokens": "Inga besegrade NPC-token att rensa på \"{scene}\".",
+        "ClearedDefeated": "Rensade {count} besegrad(e) NPC-token från \"{scene}\": {names}."
+      },
+      "Mount": {
+        "NoRiderSelected": "Ingen ryttartoken vald — markera ryttarens token först.",
+        "NoMountSelected": "Inget riddjur valt — högerklicka och \"Target\" riddjurets token.",
+        "CannotMountSelf": "En token kan inte bära sig själv.",
+        "Mounted": "{rider} monterar {mount}.",
+        "NoRiderSelectedShort": "Ingen ryttartoken vald.",
+        "Dismounted": "{rider} kliver av."
+      },
+      "Sheet": {
+        "RestOpened": "Viloperiod öppnad för {actor} — träning möjlig.",
+        "RestClosed": "Viloperiod stängd för {actor}.",
+        "SleptWithTicks": "{actor} har sovit — {count} färdigheter kan kryssa i sitt EP-streck igen.",
+        "SleptNoTicks": "{actor} har sovit. Inga färdigheter hade använts sedan sist.",
+        "GmOnlyNewSkills": "Bara SL kan dela ut nya färdigheter — de lärs in genom träning i spel.",
+        "GmOnlyTwoWeapon": "Bara SL kan dela ut Två vapen-kombinationer — de lärs in genom träning i spel.",
+        "TwoWeaponNeedsSkills": "{actor} behöver minst två vapenfärdigheter (med vapengrupp satt) innan en Två vapen-kombination går att skapa.",
+        "TwoWeaponPickDifferent": "Välj två OLIKA vapenfärdigheter.",
+        "AlreadyHasCombo": "{actor} har redan {combo}.",
+        "AllSpellsKnown": "Rollpersonen kan redan alla besvärjelser i kompendiet.",
+        "WizardLocked": "{actor} är låst för guide-redigering igen.",
+        "WizardUnlocked": "{actor} är upplåst — spelaren kan nu öppna guiden.",
+        "NotUnlocked": "Rollpersonen är inte upplåst för redigering — be SL låsa upp den.",
+        "NoBonusAttack": "Ingen extra attack tillgänglig.",
+        "NoBonusParry": "Ingen extra parering tillgänglig."
+      },
+      "Handlare": {
+        "NoBuyerSelected": "Ingen rollperson vald. Tilldela en rollperson till ditt konto (eller markera en token) innan du handlar."
+      },
+      "Training": {
+        "CannotAffordFee": "Har inte råd med träningsavgiften ({fee} sm).",
+        "RestClosedTrain": "Viloperioden är inte öppnad — det går inte att träna under ett pågående äventyr (RP s.63).",
+        "CannotTrain": "Går inte att träna.",
+        "RestClosedEp": "Viloperioden är inte öppnad — EP kan inte omsättas under ett äventyr (RP s.63).",
+        "NotEnoughEp": "{label} kostar {cost} EP — det finns inte täckning."
+      },
+      "GmEffects": {
+        "NeedsName": "Effekten behöver ett namn.",
+        "NeedsSkillKey": "Ange en färdighetsnyckel.",
+        "NoActiveScene": "Ingen aktiv scen.",
+        "PickActor": "Välj en rollperson.",
+        "LowPsyWarning": "{actor} har bara {current} PSY kvar — beviljar ändå, men PSY dras inte under 0.",
+        "TicksMin1": "Antal tickar måste vara minst 1.",
+        "NoTargets": "Inga tokens målsatta.",
+        "AddedToTargets": "\"{label}\" tillagd på {count} mål."
+      },
+      "Wizard": {
+        "AlreadyPickedSkills": "Du har redan valt {count} yrkesfärdigheter.",
+        "StepIncomplete": "Fyll i det här steget innan du går vidare.",
+        "AlreadyPickedSkillsDeselect": "Du har redan valt {count} yrkesfärdigheter — avmarkera en först.",
+        "NotEnoughEp": "Inte tillräckligt med EP kvar, eller max-FV vid skapande redan nådd.",
+        "NotEnoughCapital": "Inte tillräckligt med startkapital kvar.",
+        "ActorUpdated": "{actor} uppdaterad via guiden."
+      },
+      "Attack": {
+        "NoTarget": "Inget mål valt — högerklicka en token på kartan.",
+        "NoWeapon": "Inget vapen/anfall valt.",
+        "NoSkillLinked": "Ingen färdighet kopplad till {weapon} — lägg till en färdighetsrad först.",
+        "NoParryFv": "Inget FV att parera med för {target} — ange ett manuellt.",
+        "TargetReason": "{target}: {reason}",
+        "Sent": "Anfallet är skickat och väntar på SL-godkännande.",
+        "NoGmOnline": "Ingen SL är online just nu — anfallet väntar tills en SL loggar in och godkänner."
+      },
+      "Spell": {
+        "NoSpellSelected": "Ingen besvärjelse vald.",
+        "NoTarget": "Inget mål valt — hovra en token och tryck T.",
+        "NoWeaponToEnchant": "Inget vapen att förtrolla på målet.",
+        "NoAttributeSelected": "Ingen grundegenskap vald.",
+        "Sent": "Besvärjelsen är kastad och väntar på SL-godkännande.",
+        "NoGmOnline": "Ingen SL är online just nu — besvärjelsen väntar tills en SL loggar in och godkänner."
+      }
+    },
+    "Wizard": {
+      "Nav": {
+        "Previous": "Föregående",
+        "Next": "Nästa",
+        "SaveChanges": "Spara ändringar",
+        "CreateCharacter": "Skapa rollperson"
+      },
+      "Buy": "Köp",
+      "Reference": "Referens",
+      "ReferenceHint": "Prissätter ett annat föremål — inte köpbart här.",
+      "Summary": "Sammanfattning"
+    },
+    "CharacterSheet": {
+      "SkillsHeading": "Färdigheter",
+      "GrantSkill": "Dela ut färdighet",
+      "GrantSkillTitle": "Dela ut en färdighet efter träning",
+      "GrantTwoWeapon": "Dela ut Två vapen",
+      "GrantTwoWeaponTitle": "Dela ut en Två vapen-kombination (RP s.59)",
+      "GrantSpell": "Dela ut besvärjelse",
+      "GrantSpellTitle": "Dela ut en besvärjelse eller välsignelse",
+      "NoSkillsYet": "Inga färdigheter ännu.",
+      "SpecialAbilitiesHeading": "Särskilda förmågor",
+      "RollAbility": "Slå fram förmåga",
+      "RollAbilityTitle": "Slå 2T20+BP mot RP s.25-27:s tabell",
+      "NewAbility": "Ny förmåga",
+      "NoAbilitiesYet": "Inga särskilda förmågor ännu.",
+      "AbilitiesWithEffects": "Förmågor med effekter",
+      "MinispellsHeading": "Minibesvärjelser",
+      "NoGearYet": "Ingen utrustning ännu — dra hit vapen, rustning eller besvärjelser från ett kompendium.",
+      "LifeGoal": "Livsmål"
+    },
+    "NpcSheet": {
+      "AttacksHeading": "Anfall",
+      "NewAttack": "Nytt anfall",
+      "NoAttacksYet": "Inga anfall ännu.",
+      "NoGearYet": "Ingen utrustning ännu — dra hit vapen, rustning eller utrustning från ett kompendium.",
+      "SkillsFreetext": "Färdigheter (fritext)",
+      "SpecialHeading": "Speciellt",
+      "DescriptionHeading": "Beskrivning"
     }
   },
   "TYPES": {

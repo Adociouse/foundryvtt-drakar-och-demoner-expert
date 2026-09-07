@@ -189,9 +189,10 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     const { setTrainingUnlocked } = await import("../helpers/ep.mjs");
     const next = !this.actor.system.rest?.trainingUnlocked;
     await setTrainingUnlocked(this.actor, next);
-    ui.notifications.info(next
-      ? `Viloperiod öppnad för ${this.actor.name} — träning möjlig.`
-      : `Viloperiod stängd för ${this.actor.name}.`);
+    ui.notifications.info(game.i18n.localize(
+      next ? "DODE.Notify.Sheet.RestOpened" : "DODE.Notify.Sheet.RestClosed",
+      { actor: this.actor.name }
+    ));
   }
 
   /**
@@ -242,9 +243,10 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static async #onSleep() {
     const { clearEpTicks } = await import("../helpers/ep.mjs");
     const count = await clearEpTicks(this.actor);
-    ui.notifications.info(count
-      ? `${this.actor.name} har sovit — ${count} färdigheter kan kryssa i sitt EP-streck igen.`
-      : `${this.actor.name} har sovit. Inga färdigheter hade använts sedan sist.`);
+    ui.notifications.info(game.i18n.localize(
+      count ? "DODE.Notify.Sheet.SleptWithTicks" : "DODE.Notify.Sheet.SleptNoTicks",
+      { actor: this.actor.name, count }
+    ));
   }
 
   /**
@@ -388,7 +390,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    */
   static async #onAddSkill() {
     if (!game.user.isGM) {
-      ui.notifications.warn("Bara SL kan dela ut nya färdigheter — de lärs in genom träning i spel.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.GmOnlyNewSkills"));
       return;
     }
     const actor = this.actor;
@@ -509,13 +511,13 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    */
   static async #onAddTwoWeaponCombo() {
     if (!game.user.isGM) {
-      ui.notifications.warn("Bara SL kan dela ut Två vapen-kombinationer — de lärs in genom träning i spel.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.GmOnlyTwoWeapon"));
       return;
     }
     const actor = this.actor;
     const weaponSkills = actor.items.filter((i) => i.type === "fardighet" && i.system.weaponGroup);
     if (weaponSkills.length < 2) {
-      ui.notifications.warn(`${actor.name} behöver minst två vapenfärdigheter (med vapengrupp satt) innan en Två vapen-kombination går att skapa.`);
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.TwoWeaponNeedsSkills", { actor: actor.name }));
       return;
     }
     // Det EFFEKTIVA FV:t (inte bara item.system.total) — en vapenfärdighet som
@@ -541,14 +543,14 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     const primary = weaponSkills.find((i) => i.system.skillKey === result.primaryKey);
     const off = weaponSkills.find((i) => i.system.skillKey === result.offKey);
     if (!primary || !off || primary === off) {
-      ui.notifications.warn("Välj två OLIKA vapenfärdigheter.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.TwoWeaponPickDifferent"));
       return;
     }
 
     const comboName = `Två vapen (${primary.name}+${off.name})`;
     const comboKey = CONFIG.DODE.skillKey(comboName);
     if (actor.items.some((i) => i.type === "fardighet" && i.system.skillKey === comboKey)) {
-      ui.notifications.warn(`${actor.name} har redan ${comboName}.`);
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.AlreadyHasCombo", { actor: actor.name, combo: comboName }));
       return;
     }
     const primaryAttr = primary.system.attribute;
@@ -621,7 +623,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
         })
         .join("") + "</optgroup>";
     }
-    if (!opts) return void ui.notifications.info("Rollpersonen kan redan alla besvärjelser i kompendiet.");
+    if (!opts) return void ui.notifications.info(game.i18n.localize("DODE.Notify.Sheet.AllSpellsKnown"));
 
     const result = await foundry.applications.api.DialogV2.input({
       window: { title: `Dela ut besvärjelse till ${actor.name}` },
@@ -816,17 +818,16 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (!game.user.isGM) return;
     const current = !!this.actor.getFlag(game.system.id, "wizardUnlocked");
     await this.actor.setFlag(game.system.id, "wizardUnlocked", !current);
-    ui.notifications.info(
-      current
-        ? `${this.actor.name} är låst för guide-redigering igen.`
-        : `${this.actor.name} är upplåst — spelaren kan nu öppna guiden.`
-    );
+    ui.notifications.info(game.i18n.localize(
+      current ? "DODE.Notify.Sheet.WizardLocked" : "DODE.Notify.Sheet.WizardUnlocked",
+      { actor: this.actor.name }
+    ));
   }
 
   static #onOpenWizardEdit() {
     const unlocked = !!this.actor.getFlag(game.system.id, "wizardUnlocked");
     if (!game.user.isGM && !unlocked) {
-      ui.notifications.warn("Rollpersonen är inte upplåst för redigering — be SL låsa upp den.");
+      ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.NotUnlocked"));
       return;
     }
     game.dode.openCharacterWizard(this.actor);
@@ -869,7 +870,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    */
   static async #onUseBonusAttack() {
     const before = CONFIG.DODE.getBonusActions(this.actor);
-    if (!before.attacks) return ui.notifications.warn("Ingen extra attack tillgänglig.");
+    if (!before.attacks) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.NoBonusAttack"));
     await CONFIG.DODE.useBonusAction(this.actor, "attack");
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -879,7 +880,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
 
   static async #onUseBonusParry() {
     const before = CONFIG.DODE.getBonusActions(this.actor);
-    if (!before.parries) return ui.notifications.warn("Ingen extra parering tillgänglig.");
+    if (!before.parries) return ui.notifications.warn(game.i18n.localize("DODE.Notify.Sheet.NoBonusParry"));
     await CONFIG.DODE.useBonusAction(this.actor, "parry");
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),

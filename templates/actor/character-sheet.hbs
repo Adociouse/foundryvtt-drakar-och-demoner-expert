@@ -147,13 +147,13 @@
 
 <section class="skills">
   <header class="skills-header">
-    <h3>Färdigheter</h3>
+    <h3>{{localize "DODE.CharacterSheet.SkillsHeading"}}</h3>
     {{!-- SL-låst: färdigheter lärs in genom träning i spel, inte genom att
           spelaren lägger till dem själv. Se #onAddSkill. --}}
     {{#if isGM}}
-      <button type="button" data-action="addSkill" title="Dela ut en färdighet efter träning"><i class="fa-solid fa-plus"></i> Dela ut färdighet</button>
-      <button type="button" data-action="addTwoWeaponCombo" title="Dela ut en Två vapen-kombination (RP s.59)"><i class="fa-solid fa-hands"></i> Dela ut Två vapen</button>
-      <button type="button" data-action="grantSpell" title="Dela ut en besvärjelse eller välsignelse"><i class="fa-solid fa-wand-sparkles"></i> Dela ut besvärjelse</button>
+      <button type="button" data-action="addSkill" title="{{localize 'DODE.CharacterSheet.GrantSkillTitle'}}"><i class="fa-solid fa-plus"></i> {{localize "DODE.CharacterSheet.GrantSkill"}}</button>
+      <button type="button" data-action="addTwoWeaponCombo" title="{{localize 'DODE.CharacterSheet.GrantTwoWeaponTitle'}}"><i class="fa-solid fa-hands"></i> {{localize "DODE.CharacterSheet.GrantTwoWeapon"}}</button>
+      <button type="button" data-action="grantSpell" title="{{localize 'DODE.CharacterSheet.GrantSpellTitle'}}"><i class="fa-solid fa-wand-sparkles"></i> {{localize "DODE.CharacterSheet.GrantSpell"}}</button>
     {{/if}}
   </header>
   <ol class="skill-list">
@@ -188,16 +188,16 @@
         <button type="button" data-action="deleteSkill" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
       </li>
     {{else}}
-      <li class="skill-row-empty">Inga färdigheter ännu.</li>
+      <li class="skill-row-empty">{{localize "DODE.CharacterSheet.NoSkillsYet"}}</li>
     {{/each}}
   </ol>
 </section>
 
 <section class="special-abilities">
   <header class="skills-header">
-    <h3>Särskilda förmågor</h3>
-    <button type="button" data-action="rollAbility" title="Slå 2T20+BP mot RP s.25-27:s tabell"><i class="fa-solid fa-dice-d20"></i> Slå fram förmåga</button>
-    <button type="button" data-action="addAbility"><i class="fa-solid fa-plus"></i> Ny förmåga</button>
+    <h3>{{localize "DODE.CharacterSheet.SpecialAbilitiesHeading"}}</h3>
+    <button type="button" data-action="rollAbility" title="{{localize 'DODE.CharacterSheet.RollAbilityTitle'}}"><i class="fa-solid fa-dice-d20"></i> {{localize "DODE.CharacterSheet.RollAbility"}}</button>
+    <button type="button" data-action="addAbility"><i class="fa-solid fa-plus"></i> {{localize "DODE.CharacterSheet.NewAbility"}}</button>
   </header>
   <ol class="skill-list">
     {{#each system.specialAbilities as |ability i|}}
@@ -210,12 +210,12 @@
         <textarea name="system.specialAbilities.{{i}}.description" placeholder="Beskrivning" class="ability-description" rows="2">{{ability.description}}</textarea>
       </li>
     {{else}}
-      <li class="skill-row-empty">Inga särskilda förmågor ännu.</li>
+      <li class="skill-row-empty">{{localize "DODE.CharacterSheet.NoAbilitiesYet"}}</li>
     {{/each}}
   </ol>
 
   {{#if formagor.length}}
-    <h4 class="formaga-item-heading">Förmågor med effekter</h4>
+    <h4 class="formaga-item-heading">{{localize "DODE.CharacterSheet.AbilitiesWithEffects"}}</h4>
     <ol class="skill-list">
       {{#each formagor as |formaga|}}
         <li class="skill-row" data-item-id="{{formaga.id}}">
@@ -234,7 +234,7 @@
       och lyckas alltid. En magiker med flera skolor har alla skolornas minimagi. --}}
 <section class="minimagi">
   <header class="skills-header">
-    <h3>Minibesvärjelser</h3>
+    <h3>{{localize "DODE.CharacterSheet.MinispellsHeading"}}</h3>
     <span class="minimagi-source" title="Följer automatiskt med magiskolorna — inga poster att äga">
       {{minimagi.schoolNames}}
     </span>
@@ -296,13 +296,13 @@
         <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
       </li>
     {{else}}
-      <li class="skill-row-empty">Ingen utrustning ännu — dra hit vapen, rustning eller besvärjelser från ett kompendium.</li>
+      <li class="skill-row-empty">{{localize "DODE.CharacterSheet.NoGearYet"}}</li>
     {{/each}}
   </ol>
 </section>
 
 <section class="biography">
-  <label class="life-goal-field">Livsmål
+  <label class="life-goal-field">{{localize "DODE.CharacterSheet.LifeGoal"}}
     <input type="text" name="system.lifeGoal" value="{{system.lifeGoal}}" placeholder="T.ex. Berömmelse, Kunskap, Rikedom..." />
   </label>
   {{editor system.biography target="system.biography" button=true engine="prosemirror"}}

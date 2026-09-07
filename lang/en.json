@@ -142,6 +142,162 @@
       "Book": "Source book",
       "Page": "Page",
       "Label": "Source"
+    },
+    "Notify": {
+      "Common": {
+        "NoTokenSelected": "No token selected.",
+        "NoSceneSelected": "No scene selected.",
+        "AlreadyHandled": "Already handled by another GM client.",
+        "ItemGone": "The item no longer exists."
+      },
+      "Actor": {
+        "NoConsumeEffect": "{name} has no consumption effect defined.",
+        "OnlyCharactersTrade": "Only characters can trade.",
+        "NoUnitPrice": "{name} has no unit price — the price must be handled at the table.",
+        "CannotAfford": "{buyer} cannot afford {item} — missing {short}."
+      },
+      "Combat": {
+        "NoSuchAttack": "{actor} has no attack called \"{query}\".",
+        "NoSuchWeapon": "{actor} has no weapon called \"{query}\".",
+        "ApproveMissingActors": "The attacker or target no longer exists — cannot approve.",
+        "ApproveWriteFailed": "Could not write the attack's result — see the console."
+      },
+      "Magic": {
+        "CannotCast": "{actor} cannot cast \"{spell}\".",
+        "ApproveMissingActors": "The caster, spell, or a target no longer exists — cannot approve.",
+        "ApproveWriteFailed": "Could not write the spell's result — see the console."
+      },
+      "Loot": {
+        "ApproveWriteFailed": "Could not complete the loot — see the console.",
+        "ItemGone": "The item is no longer on the body.",
+        "NoLooter": "No character selected to loot for — assign yourself a character first.",
+        "Requested": "Requesting to loot {item} — waiting for GM approval.",
+        "NoGmOnline": "No GM is online right now — the loot will wait until a GM logs in and approves.",
+        "ApproveMissing": "The body, character, or item no longer exists — cannot loot."
+      },
+      "Sell": {
+        "ApproveWriteFailed": "Could not complete the sale — see the console.",
+        "NoMerchantTargeted": "No merchant targeted — hover a merchant token and press T before selling.",
+        "NoAutoPrice": "{item} has no automatable price — the GM must decide the sale manually.",
+        "Requested": "Requesting to sell {item} for ~{price} sc — waiting for GM approval.",
+        "NoGmOnline": "No GM is online right now — the sale will wait until a GM logs in and approves.",
+        "ApproveMissing": "The seller, merchant, or item no longer exists — cannot complete the sale."
+      },
+      "Scene": {
+        "GhostTokens": "The scene \"{scene}\" has {count} ghost token(s) with no linked actor: {names}. Check/clean up before combat starts.",
+        "NoDefeatedTokens": "No defeated NPC tokens to clear on \"{scene}\".",
+        "ClearedDefeated": "Cleared {count} defeated NPC token(s) from \"{scene}\": {names}."
+      },
+      "Mount": {
+        "NoRiderSelected": "No rider token selected — select the rider's token first.",
+        "NoMountSelected": "No mount selected — right-click and \"Target\" the mount's token.",
+        "CannotMountSelf": "A token cannot mount itself.",
+        "Mounted": "{rider} mounts {mount}.",
+        "NoRiderSelectedShort": "No rider token selected.",
+        "Dismounted": "{rider} dismounts."
+      },
+      "Sheet": {
+        "RestOpened": "Rest period opened for {actor} — training possible.",
+        "RestClosed": "Rest period closed for {actor}.",
+        "SleptWithTicks": "{actor} has slept — {count} skill(s) can tick their EP mark again.",
+        "SleptNoTicks": "{actor} has slept. No skills had been used since last time.",
+        "GmOnlyNewSkills": "Only the GM can grant new skills — they're learned through training in play.",
+        "GmOnlyTwoWeapon": "Only the GM can grant Two Weapons combinations — they're learned through training in play.",
+        "TwoWeaponNeedsSkills": "{actor} needs at least two weapon skills (with a weapon group set) before a Two Weapons combination can be created.",
+        "TwoWeaponPickDifferent": "Pick two DIFFERENT weapon skills.",
+        "AlreadyHasCombo": "{actor} already has {combo}.",
+        "AllSpellsKnown": "The character already knows every spell in the compendium.",
+        "WizardLocked": "{actor} is locked for wizard editing again.",
+        "WizardUnlocked": "{actor} is unlocked — the player can now open the wizard.",
+        "NotUnlocked": "The character is not unlocked for editing — ask the GM to unlock it.",
+        "NoBonusAttack": "No bonus attack available.",
+        "NoBonusParry": "No bonus parry available."
+      },
+      "Handlare": {
+        "NoBuyerSelected": "No character selected. Assign a character to your account (or select a token) before trading."
+      },
+      "Training": {
+        "CannotAffordFee": "Cannot afford the training fee ({fee} sc).",
+        "RestClosedTrain": "The rest period is not open — you cannot train during an ongoing adventure (RP p.63).",
+        "CannotTrain": "Cannot train.",
+        "RestClosedEp": "The rest period is not open — EP cannot be spent during an adventure (RP p.63).",
+        "NotEnoughEp": "{label} costs {cost} EP — not enough available."
+      },
+      "GmEffects": {
+        "NeedsName": "The effect needs a name.",
+        "NeedsSkillKey": "Enter a skill key.",
+        "NoActiveScene": "No active scene.",
+        "PickActor": "Select a character.",
+        "LowPsyWarning": "{actor} only has {current} PSY left — granting anyway, but PSY won't drop below 0.",
+        "TicksMin1": "Number of ticks must be at least 1.",
+        "NoTargets": "No tokens targeted.",
+        "AddedToTargets": "\"{label}\" added to {count} target(s)."
+      },
+      "Wizard": {
+        "AlreadyPickedSkills": "You have already picked {count} profession skills.",
+        "StepIncomplete": "Fill in this step before moving on.",
+        "AlreadyPickedSkillsDeselect": "You have already picked {count} profession skills — deselect one first.",
+        "NotEnoughEp": "Not enough EP left, or max starting FV already reached.",
+        "NotEnoughCapital": "Not enough starting capital left.",
+        "ActorUpdated": "{actor} updated via the wizard."
+      },
+      "Attack": {
+        "NoTarget": "No target selected — right-click a token on the map.",
+        "NoWeapon": "No weapon/attack selected.",
+        "NoSkillLinked": "No skill linked to {weapon} — add a skill row first.",
+        "NoParryFv": "No FV to parry with for {target} — enter one manually.",
+        "TargetReason": "{target}: {reason}",
+        "Sent": "The attack has been sent and is waiting for GM approval.",
+        "NoGmOnline": "No GM is online right now — the attack will wait until a GM logs in and approves."
+      },
+      "Spell": {
+        "NoSpellSelected": "No spell selected.",
+        "NoTarget": "No target selected — hover a token and press T.",
+        "NoWeaponToEnchant": "No weapon on the target to enchant.",
+        "NoAttributeSelected": "No attribute selected.",
+        "Sent": "The spell has been cast and is waiting for GM approval.",
+        "NoGmOnline": "No GM is online right now — the spell will wait until a GM logs in and approves."
+      }
+    },
+    "Wizard": {
+      "Nav": {
+        "Previous": "Previous",
+        "Next": "Next",
+        "SaveChanges": "Save changes",
+        "CreateCharacter": "Create character"
+      },
+      "Buy": "Buy",
+      "Reference": "Reference",
+      "ReferenceHint": "Prices another item — not purchasable here.",
+      "Summary": "Summary"
+    },
+    "CharacterSheet": {
+      "SkillsHeading": "Skills",
+      "GrantSkill": "Grant skill",
+      "GrantSkillTitle": "Grant a skill after training",
+      "GrantTwoWeapon": "Grant Two Weapons",
+      "GrantTwoWeaponTitle": "Grant a Two Weapons combination (RP p.59)",
+      "GrantSpell": "Grant spell",
+      "GrantSpellTitle": "Grant a spell or blessing",
+      "NoSkillsYet": "No skills yet.",
+      "SpecialAbilitiesHeading": "Special abilities",
+      "RollAbility": "Roll for ability",
+      "RollAbilityTitle": "Roll 2d20+BP against RP p.25-27's table",
+      "NewAbility": "New ability",
+      "NoAbilitiesYet": "No special abilities yet.",
+      "AbilitiesWithEffects": "Abilities with effects",
+      "MinispellsHeading": "Mini-spells",
+      "NoGearYet": "No equipment yet — drag weapons, armor, or spells here from a compendium.",
+      "LifeGoal": "Life goal"
+    },
+    "NpcSheet": {
+      "AttacksHeading": "Attacks",
+      "NewAttack": "New attack",
+      "NoAttacksYet": "No attacks yet.",
+      "NoGearYet": "No equipment yet — drag weapons, armor, or gear here from a compendium.",
+      "SkillsFreetext": "Skills (free text)",
+      "SpecialHeading": "Special",
+      "DescriptionHeading": "Description"
     }
   },
   "TYPES": {
