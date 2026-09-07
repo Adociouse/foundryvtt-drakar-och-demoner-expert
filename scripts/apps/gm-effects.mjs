@@ -45,7 +45,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
     tag: "div",
     classes: ["dode", "dode-gm-effects"],
     position: { width: 640, height: 760 },
-    window: { title: "GM-effekter", resizable: true },
+    window: { title: "DODE.Dialog.GmEffects", resizable: true },
     actions: {
       addWorldEffect: DoDEGmEffectsApp.#onAddWorldEffect,
       removeWorldEffect: DoDEGmEffectsApp.#onRemoveWorldEffect,
@@ -71,7 +71,7 @@ export default class DoDEGmEffectsApp extends HandlebarsApplicationMixin(Applica
   }
 
   get title() {
-    return "GM-effekter";
+    return game.i18n.localize("DODE.Dialog.GmEffects");
   }
 
   #decorate(effect) {

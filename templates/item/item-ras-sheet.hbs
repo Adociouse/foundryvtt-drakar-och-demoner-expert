@@ -1,15 +1,15 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
-  <label>BP-kostnad <input type="number" name="system.bpCost" value="{{system.bpCost}}" min="0" /></label>
+  <label>{{localize "DODE.ItemSheet.Ras.BpCost"}} <input type="number" name="system.bpCost" value="{{system.bpCost}}" min="0" /></label>
 </section>
 
 <section class="attribute-mods">
-  <h3>Egenskapsmodifikationer</h3>
+  <h3>{{localize "DODE.ItemSheet.Ras.AttributeMods"}}</h3>
   <div class="mod-grid">
     <label>{{localize "DODE.Attribute.STY"}} <input type="number" name="system.attributeMods.sty" value="{{system.attributeMods.sty}}" /></label>
     <label>{{localize "DODE.Attribute.FYS"}} <input type="number" name="system.attributeMods.fys" value="{{system.attributeMods.fys}}" /></label>
@@ -18,37 +18,37 @@
     <label>{{localize "DODE.Attribute.PSY"}} <input type="number" name="system.attributeMods.psy" value="{{system.attributeMods.psy}}" /></label>
     <label>{{localize "DODE.Attribute.KAR"}} <input type="number" name="system.attributeMods.kar" value="{{system.attributeMods.kar}}" /></label>
   </div>
-  <p class="hint">STO anges som intervall nedan, inte som en fast modifierare (se RASER.md).</p>
+  <p class="hint">{{localize "DODE.ItemSheet.Ras.StoHint"}}</p>
   <div class="sto-range">
-    <label>STO min <input type="number" name="system.stoRange.min" value="{{system.stoRange.min}}" /></label>
-    <label>STO max <input type="number" name="system.stoRange.max" value="{{system.stoRange.max}}" /></label>
-    <label>STO normal <input type="number" name="system.stoRange.normal" value="{{system.stoRange.normal}}" /></label>
+    <label>{{localize "DODE.ItemSheet.Ras.StoMin"}} <input type="number" name="system.stoRange.min" value="{{system.stoRange.min}}" /></label>
+    <label>{{localize "DODE.ItemSheet.Ras.StoMax"}} <input type="number" name="system.stoRange.max" value="{{system.stoRange.max}}" /></label>
+    <label>{{localize "DODE.ItemSheet.Ras.StoNormal"}} <input type="number" name="system.stoRange.normal" value="{{system.stoRange.normal}}" /></label>
   </div>
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 
 <section class="item-description">
-  <h3>Automatiska förmågor</h3>
+  <h3>{{localize "DODE.ItemSheet.Ras.AutomaticAbilities"}}</h3>
   {{!-- Strukturerad array (2026-08-16, se DESIGN_DECISIONS.md backlog 70) —
     redigeras via packs/raser/_source/*.json + ompackning. --}}
   {{#if system.automaticAbilities.length}}
     <dl class="item-ability-list">
       {{#each system.automaticAbilities as |ability|}}
-        <dt>{{#if ability.name}}{{ability.name}}{{else}}—{{/if}}{{#unless ability.effect}} <span class="hint">(ingen mekanisk effekt)</span>{{/unless}}</dt>
+        <dt>{{#if ability.name}}{{ability.name}}{{else}}—{{/if}}{{#unless ability.effect}} <span class="hint">{{localize "DODE.ItemSheet.Common.NoMechanicalEffect"}}</span>{{/unless}}</dt>
         <dd>{{{ability.description}}}</dd>
       {{/each}}
     </dl>
   {{else}}
-    <p class="hint">Inga strukturerade automatiska förmågor — redigera via packs/raser/_source/*.json.</p>
+    <p class="hint">{{localize "DODE.ItemSheet.Ras.NoAutomaticAbilities"}}</p>
   {{/if}}
-  <h3>Beskrivning</h3>
+  <h3>{{localize "DODE.ItemSheet.Common.DescriptionHeading"}}</h3>
   {{editor system.description target="system.description" button=true engine="prosemirror"}}
 </section>
 </div>

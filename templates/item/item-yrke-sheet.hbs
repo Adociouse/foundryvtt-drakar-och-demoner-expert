@@ -1,41 +1,41 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
-  <label>Grundegenskapskrav
-    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="t.ex. STY 14, FYS 12" />
+  <label>{{localize "DODE.ItemSheet.Yrke.Requirements"}}
+    <input type="text" name="system.requirements" value="{{system.requirements}}" placeholder="{{localize 'DODE.ItemSheet.Yrke.RequirementsPlaceholder'}}" />
   </label>
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 
 <section class="item-description">
-  <h3>Yrkesförmågor</h3>
+  <h3>{{localize "DODE.ItemSheet.Yrke.ProfessionAbilities"}}</h3>
   {{!-- Strukturerad array (2026-08-16, se DESIGN_DECISIONS.md backlog 70) —
     redigeras via packs/yrken/_source/*.json + ompackning, som professionSkills
     redan gör, inte via en live ProseMirror-array-editor här. --}}
   {{#if system.professionAbilities.length}}
     <dl class="item-ability-list">
       {{#each system.professionAbilities as |ability|}}
-        <dt>{{#if ability.name}}{{ability.name}}{{else}}—{{/if}}{{#unless ability.effect}} <span class="hint">(ingen mekanisk effekt)</span>{{/unless}}</dt>
+        <dt>{{#if ability.name}}{{ability.name}}{{else}}—{{/if}}{{#unless ability.effect}} <span class="hint">{{localize "DODE.ItemSheet.Common.NoMechanicalEffect"}}</span>{{/unless}}</dt>
         <dd>{{{ability.description}}}</dd>
       {{/each}}
     </dl>
   {{else}}
-    <p class="hint">Inga strukturerade yrkesförmågor — redigera via packs/yrken/_source/*.json.</p>
+    <p class="hint">{{localize "DODE.ItemSheet.Yrke.NoProfessionAbilities"}}</p>
   {{/if}}
-  <h3>Möjliga yrkesfärdigheter</h3>
+  <h3>{{localize "DODE.ItemSheet.Yrke.PossibleSkills"}}</h3>
   {{editor system.skillList target="system.skillList" button=true engine="prosemirror"}}
-  <h3>Beskrivning</h3>
+  <h3>{{localize "DODE.ItemSheet.Common.DescriptionHeading"}}</h3>
   {{editor system.description target="system.description" button=true engine="prosemirror"}}
 </section>
 </div>

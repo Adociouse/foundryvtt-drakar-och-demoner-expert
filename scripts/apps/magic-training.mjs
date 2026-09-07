@@ -27,7 +27,7 @@ import { isSchool, spellSoloTarget } from "../helpers/training.mjs";
 export default class DoDEMagicTrainingApp extends DoDETrainingBase {
   static DEFAULT_OPTIONS = {
     id: "dode-magic-training-{id}",
-    window: { title: "Magiträning" }
+    window: { title: "DODE.Dialog.MagicTraining" }
   };
 
   static PARTS = {
@@ -35,7 +35,7 @@ export default class DoDEMagicTrainingApp extends DoDETrainingBase {
   };
 
   get title() {
-    return `Magiträning — ${this.actor.name}`;
+    return game.i18n.localize("DODE.Dialog.MagicTrainingFor", { actor: this.actor.name });
   }
 
   get trainableItems() {

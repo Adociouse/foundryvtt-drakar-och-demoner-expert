@@ -104,7 +104,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     tag: "div",
     classes: ["dode", "dode-attack-dialog"],
     position: { width: 520, height: "auto" },
-    window: { title: "Anfall", resizable: true },
+    window: { title: "DODE.Dialog.Attack", resizable: true },
     actions: {
       submitAttack: DoDEAttackDialog.#onSubmitAttack
     }
@@ -142,7 +142,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
   }
 
   get title() {
-    return `Anfall — ${this.actor.name}`;
+    return game.i18n.localize("DODE.Dialog.AttackFor", { actor: this.actor.name });
   }
 
   /**

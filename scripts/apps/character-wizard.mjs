@@ -197,7 +197,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // kortrutnät (yrke: upp till 19 kort) och hjältedåd-resultatlistan.
     // `resizable:true` sedan tidigare, det här är bara ett bekvämare default.
     position: { width: 900, height: 1000 },
-    window: { title: "Ny rollperson", resizable: true },
+    window: { title: "DODE.Dialog.NewCharacter", resizable: true },
     actions: {
       nextStep: DoDECharacterWizard.#onNextStep,
       prevStep: DoDECharacterWizard.#onPrevStep,
@@ -276,7 +276,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       </label>`).join("");
 
     return DialogV2.prompt({
-      window: { title: "Välj rollperson" },
+      window: { title: game.i18n.localize("DODE.Dialog.ChooseCharacter") },
       content: `<p>Du har flera rollpersoner. Vilken vill du öppna?</p>
         <div class="wizard-pick-list">
           ${rows}
@@ -419,7 +419,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #weaponDocs = [];
 
   get title() {
-    return this.isEditMode ? `Redigera: ${this.actor.name}` : "Ny rollperson";
+    return this.isEditMode
+      ? game.i18n.localize("DODE.Dialog.EditCharacter", { actor: this.actor.name })
+      : game.i18n.localize("DODE.Dialog.NewCharacter");
   }
 
   stepIndex = 0;
@@ -2177,7 +2179,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    */
   static async #onRestartAttributes() {
     const ok = await foundry.applications.api.DialogV2.confirm({
-      window: { title: "Återställ grundegenskaper?" },
+      window: { title: game.i18n.localize("DODE.Dialog.ResetAttributes") },
       content: "<p>Alla köpta grundegenskaper återställs till baslinjen och den spenderade BP:n "
         + "återbetalas. Övriga val (kön, nivå, namn, ras) behålls.</p>"
     });
@@ -2295,10 +2297,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       rolls.push({ roll: result, name: row.name, description: row.description, bonusBP: rowBP, bonusHjaltepoang: rowHjaltepoang, notes: row.notes });
     }
     const message = await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ alias: this.state.name || "Ny rollperson" }),
-      flavor: `Hjältedåd — resultat (${count} slag)`,
+      speaker: ChatMessage.getSpeaker({ alias: this.state.name || game.i18n.localize("DODE.Dialog.NewCharacter") }),
+      flavor: game.i18n.localize("DODE.Chat.HeroicDeedsHeading", { count }),
       content: `<div class="dode-chat-card"><ul>${rolls.map((r) =>
-        `<li><strong>${r.name}</strong> (${r.roll}): +${r.bonusBP} BP, +${r.bonusHjaltepoang} hjältepoäng${r.notes ? ` — ${r.notes}` : ""}</li>`
+        `<li>${game.i18n.localize("DODE.Chat.HeroicDeedLine", { name: r.name, roll: r.roll, bp: r.bonusBP, heroPoints: r.bonusHjaltepoang })}${r.notes ? ` — ${r.notes}` : ""}</li>`
       ).join("")}</ul></div>`,
       rolls: [pool],
       sound: CONFIG.sounds.dice

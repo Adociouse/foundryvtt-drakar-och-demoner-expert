@@ -580,12 +580,22 @@ export async function applyAttackResult(result, { attacker, target, weapon = nul
   return null;
 }
 
-const OUTCOME_LABEL = { perfekt: "Perfekt!", lyckat: "Lyckat", misslyckat: "Misslyckat", fummel: "Fummel!" };
-const VERDICT_NOTE = {
-  ingenting: "Ingenting händer — fortsätt med nästa attack",
-  parerat: "Pareringen höll — anfallet är slut (SLB s.31)",
-  vapenslitage: "Pareringen tog emot ett misslyckat hugg — anfallarens vapen slits"
+// ⚠ 2026-09-07: samma nycklar som DODE.RollCard.* (lang/*.json) — dessa
+// utfall visades tidigare RAKT AV på det viktigaste kortet i hela systemet
+// (varje anfall) oavsett världens språkinställning, en separat, tidigare
+// oupptäckt instans av samma "hårdkodad text i stället för localize()"-gap
+// som backlog 6:s lokaliseringssvep hittade och fixade på andra håll.
+const OUTCOME_LABEL_KEY = {
+  perfekt: "DODE.RollCard.Perfekt", lyckat: "DODE.RollCard.Lyckat",
+  misslyckat: "DODE.RollCard.Misslyckat", fummel: "DODE.RollCard.Fummel"
 };
+const OUTCOME_LABEL = new Proxy({}, { get: (_, key) => game.i18n.localize(OUTCOME_LABEL_KEY[key]) });
+const VERDICT_NOTE_KEY = {
+  ingenting: "DODE.Combat.Verdict.Ingenting",
+  parerat: "DODE.Combat.Verdict.Parerat",
+  vapenslitage: "DODE.Combat.Verdict.Vapenslitage"
+};
+const VERDICT_NOTE = new Proxy({}, { get: (_, key) => key in VERDICT_NOTE_KEY ? game.i18n.localize(VERDICT_NOTE_KEY[key]) : undefined });
 
 /**
  * Bygger mallkontexten för stridskortet. Godkännande-/avvisningshooken
@@ -710,7 +720,7 @@ export async function postAttackCard(result, { attacker, target = null, weapon, 
 
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: attacker }),
-    content: `<div class="dode-chat-card"><p>🎲 <strong>${attacker.name}</strong> anfaller... <strong>${result.attack.roll.total}</strong> — ${OUTCOME_LABEL[result.attack.outcome]}</p></div>`,
+    content: `<div class="dode-chat-card"><p>🎲 ${game.i18n.localize("DODE.Chat.AttackRoll", { actor: attacker.name, roll: result.attack.roll.total, outcome: OUTCOME_LABEL[result.attack.outcome] })}</p></div>`,
     rolls: [result.attack.roll],
     sound: CONFIG.sounds.dice
   });

@@ -39,11 +39,11 @@ export async function requestLoot(corpse, itemId, looter) {
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: looter }),
     content: `<div class="dode-chat-card dode-loot-card">
-      <p><i class="fa-solid fa-sack-dollar"></i> <strong>${looter.name}</strong> vill plundra <strong>${item.name}</strong> från <strong>${corpse.name}</strong>.</p>
-      <div class="pending-banner"><i class="fa-solid fa-hourglass-half"></i> Väntar på SL-godkännande</div>
+      <p><i class="fa-solid fa-sack-dollar"></i> ${game.i18n.localize("DODE.Chat.LootRequest", { looter: looter.name, item: item.name, corpse: corpse.name })}</p>
+      <div class="pending-banner"><i class="fa-solid fa-hourglass-half"></i> ${game.i18n.localize("DODE.Chat.PendingGmApproval")}</div>
       <div class="pending-actions">
-        <button type="button" data-action="approveLootRequest"><i class="fa-solid fa-check"></i> Godkänn</button>
-        <button type="button" data-action="rejectLootRequest"><i class="fa-solid fa-xmark"></i> Avvisa</button>
+        <button type="button" data-action="approveLootRequest"><i class="fa-solid fa-check"></i> ${game.i18n.localize("DODE.Chat.Approve")}</button>
+        <button type="button" data-action="rejectLootRequest"><i class="fa-solid fa-xmark"></i> ${game.i18n.localize("DODE.Chat.Reject")}</button>
       </div>
     </div>`,
     flags: {
@@ -71,7 +71,7 @@ export async function applyLoot({ corpseUuid, itemId, looterUuid }) {
   await looter.createEmbeddedDocuments("Item", [item.toObject()]);
   await item.delete();
   await ChatMessage.create({
-    content: `<div class="dode-chat-card"><p>🎒 <strong>${looter.name}</strong> plundrade <strong>${item.name}</strong> från ${corpse.name}.</p></div>`
+    content: `<div class="dode-chat-card"><p>🎒 ${game.i18n.localize("DODE.Chat.LootCompleted", { looter: looter.name, item: item.name, corpse: corpse.name })}</p></div>`
   });
 
   // Motsvarigheten till "dead" → Observer-hooken i dode.mjs: när det sista

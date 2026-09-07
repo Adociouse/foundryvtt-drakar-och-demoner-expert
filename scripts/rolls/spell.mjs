@@ -266,7 +266,14 @@ export async function applySpellResult(result, { caster, targets = [] }) {
   }
 }
 
-const OUTCOME_LABEL = { perfekt: "Perfekt!", lyckat: "Lyckat", misslyckat: "Misslyckat", fummel: "Fummel!" };
+// ⚠ Samma nycklar som DODE.RollCard.* (lang/*.json) — se attack.mjs:s
+// motsvarande kommentar (2026-09-07): besvärjelsekortet visade tidigare
+// hårdkodad svensk utfallstext oavsett världens språkinställning.
+const OUTCOME_LABEL_KEY = {
+  perfekt: "DODE.RollCard.Perfekt", lyckat: "DODE.RollCard.Lyckat",
+  misslyckat: "DODE.RollCard.Misslyckat", fummel: "DODE.RollCard.Fummel"
+};
+const OUTCOME_LABEL = new Proxy({}, { get: (_, key) => game.i18n.localize(OUTCOME_LABEL_KEY[key]) });
 
 /** Bygger mallkontexten för besvärjelsekortet — mirror av attack.mjs:s buildAttackCardContext. */
 function buildSpellCardContext(result, { caster, targets = [], pendingBanner = false }) {
@@ -383,7 +390,7 @@ export async function postSpellCard(result, { caster, targets = [], pending = fa
   // array, så inget syns dubbelt.
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: caster }),
-    content: `<div class="dode-chat-card"><p>🎲 <strong>${caster.name}</strong> kastar ${result.item.name}... <strong>${result.cast.roll.total}</strong> — ${OUTCOME_LABEL[result.cast.outcome]}</p></div>`,
+    content: `<div class="dode-chat-card"><p>🎲 ${game.i18n.localize("DODE.Chat.SpellRoll", { actor: caster.name, spell: result.item.name, roll: result.cast.roll.total, outcome: OUTCOME_LABEL[result.cast.outcome] })}</p></div>`,
     rolls: [result.cast.roll],
     sound: CONFIG.sounds.dice
   });

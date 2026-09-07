@@ -128,7 +128,7 @@
     "Equipment": {
       "Category": "Category",
       "Quantity": "Quantity",
-      "Weight": "Weight (BEP)",
+      "Weight": "Weight (kg)",
       "Price": "Price",
       "PriceUnit": "Coin type",
       "PriceNote": "Price note (free text)",
@@ -142,6 +142,79 @@
       "Book": "Source book",
       "Page": "Page",
       "Label": "Source"
+    },
+    "Item": {
+      "Skola": "Magic school"
+    },
+    "ItemSheet": {
+      "Common": {
+        "NamePlaceholder": "Name",
+        "SourceTitle": "Where in the books does this come from?",
+        "SourcePagePlaceholder": "e.g. 22 or 43-48",
+        "DescriptionHeading": "Description",
+        "NoMechanicalEffect": "(no mechanical effect)",
+        "PriceSm": "Price (sc)"
+      },
+      "Ras": {
+        "BpCost": "BP cost",
+        "AttributeMods": "Attribute modifiers",
+        "StoHint": "STO is given as a range below, not as a fixed modifier (see RASER.md).",
+        "StoMin": "STO min",
+        "StoMax": "STO max",
+        "StoNormal": "STO normal",
+        "AutomaticAbilities": "Automatic abilities",
+        "NoAutomaticAbilities": "No structured automatic abilities — edit via packs/raser/_source/*.json."
+      },
+      "Fardighet": {
+        "Attribute": "Attribute",
+        "Category": "Category",
+        "ManualBonus": "Bonus (manual)",
+        "TotalHint": "Total (FV + bonus): {total}",
+        "CostTier": "EP cost tier"
+      },
+      "Formaga": {
+        "Origin": "Source",
+        "Hint": "The ability's rule effects are added as ActiveEffects on this item (transfer:true). They apply automatically as soon as the ability sits on a character — target the changes at <code>system.attributes.*.bonus</code> with ADD mode. An ability has no equipped/unequipped toggle; it is always active."
+      },
+      "Minibesvarjelse": {
+        "Hint": "Mini-spells require <strong>no CL check — they always succeed</strong>, cost 1 PSY, and take effect the same combat round (always Quick). Below FV 15 in the school normal gestures are required, at 15+ none, at 25+ they activate almost unconsciously. <em>MAG p.23.</em>",
+        "PsyCost": "PSY cost"
+      },
+      "Rustning": {
+        "Slot": "Slot",
+        "Abs": "Abs"
+      },
+      "Vapen": {
+        "Grip": "Grip",
+        "StyGroup": "STY group",
+        "Damage": "Damage",
+        "Length": "Length (category 0-5)",
+        "BaseValue": "Base value (BV)",
+        "Type": "Type",
+        "Category": "Category",
+        "Range": "Range"
+      },
+      "Yrke": {
+        "Requirements": "Attribute requirements",
+        "RequirementsPlaceholder": "e.g. STY 14, FYS 12",
+        "ProfessionAbilities": "Profession abilities",
+        "NoProfessionAbilities": "No structured profession abilities — edit via packs/yrken/_source/*.json.",
+        "PossibleSkills": "Possible profession skills"
+      },
+      "Besvarjelse": {
+        "SValue": "School value (S)",
+        "Duration": "Duration",
+        "Ritual": "Ritual",
+        "Kvick": "Quick",
+        "CodexTitle": "Required for solo training of the spell (SB p.7)",
+        "CodexAvailable": "Magic codex available",
+        "SpellDuration": "Effect duration (combat rounds)",
+        "SpellEffectDefined": "{count} temporary effect change defined — applied to the target via <code>applySpellEffect()</code>.",
+        "SpellEffectHint": "Temporary effect changes (<code>spellEffect</code>) are authored in the spell's _source JSON/via the API — target <code>*.bonus</code>, ADD mode."
+      },
+      "Utrustning": {
+        "PriceNotePlaceholder": "e.g. 4 per barrel — leave blank for a normal unit price"
+      }
     },
     "Notify": {
       "Common": {
@@ -298,6 +371,111 @@
       "SkillsFreetext": "Skills (free text)",
       "SpecialHeading": "Special",
       "DescriptionHeading": "Description"
+    },
+    "Dialog": {
+      "RestPeriod": "Rest period",
+      "GrantBonusPoints": "Grant bonus points",
+      "GrantSkillTo": "Grant skill to {actor}",
+      "NewTwoWeaponCombo": "New Two Weapons combination — {actor}",
+      "GrantSpellTo": "Grant spell to {actor}",
+      "Choose": "Choose",
+      "Consume": "Consume {item}",
+      "SkillTraining": "Skill training",
+      "SkillTrainingFor": "Skill training — {actor}",
+      "CastSpell": "Cast spell",
+      "CastSpellFor": "Cast spell — {actor}",
+      "MagicTraining": "Magic training",
+      "MagicTrainingFor": "Magic training — {actor}",
+      "GmEffects": "GM effects",
+      "Attack": "Attack",
+      "AttackFor": "Attack — {actor}",
+      "NewCharacter": "New character",
+      "EditCharacter": "Edit: {actor}",
+      "ChooseCharacter": "Choose character",
+      "ResetAttributes": "Reset attributes?",
+      "Time": "Time"
+    },
+    "Chat": {
+      "AimedAt": "aimed at {location}",
+      "Approve": "Approve",
+      "Approved": "✅ Approved by {user}",
+      "AttackRoll": "<strong>{actor}</strong> attacks... <strong>{roll}</strong> — {outcome}",
+      "BonusPointsHeading": "Bonus points",
+      "BonusPointsLine": "{actor} receives <strong>{amount} free EP</strong>.",
+      "DamageAbs": "− {abs} abs",
+      "DamageDoubled": "doubled (vulnerability)",
+      "DamageHalved": "halved (weapon material)",
+      "DamageImmune": "immune (weapon material)",
+      "DamageImmuneShort": "immune",
+      "DamagePulled": "the blow was pulled",
+      "DamageResistance": "− {reduction} resistance",
+      "Damaged": "damage",
+      "EnchantsWeapon": "Enchants {weapon}",
+      "FullyRestored": "fully restored",
+      "FumbleTable": "Fumble table:",
+      "FvCap": "FV cap: {cap} (RP p.59)",
+      "Healed": "healed",
+      "HealedAmount": "healed {amount} HP",
+      "HeroicDeedLine": "<strong>{name}</strong> ({roll}): +{bp} BP, +{heroPoints} hero points",
+      "HeroicDeedsHeading": "Heroic deeds — result ({count} rolls)",
+      "Label": {
+        "Attack": "Attack",
+        "Cast": "Cast",
+        "Damage": "Damage",
+        "Heal": "Healing",
+        "Parry": "Parry",
+        "SelfFumbleCheck": "Self-fumble check (chain weapon)"
+      },
+      "LearnedCombo": "<strong>{actor}</strong> learned <strong>{combo}</strong> (FV {fv}, auto-BC).",
+      "LearnedSkill": "<strong>{actor}</strong> learned <strong>{skill}</strong> (FV {fv}, {tier}).",
+      "LearnedSpell": "<strong>{actor}</strong> learned <strong>{spell}</strong> ({school}, S{sValue}).",
+      "LootCompleted": "<strong>{looter}</strong> looted <strong>{item}</strong> from {corpse}.",
+      "LootRequest": "<strong>{looter}</strong> wants to loot <strong>{item}</strong> from <strong>{corpse}</strong>.",
+      "MishapPrefix": "Mishap:",
+      "NonLethalIntent": "Non-lethal intent",
+      "MishapTableNotFound": "⚠ Roll on the Mishap Table (the table could not be found in the compendium)",
+      "NewSkillHeading": "New skill",
+      "NewSpellHeading": "New spell",
+      "NoParryRanged": "Projectile weapons cannot be parried (SLB p.16)",
+      "Outcome": {
+        "Fumbled": "Fumbled!",
+        "JustMiss": "Just a miss"
+      },
+      "PendingGmApproval": "Waiting for GM approval",
+      "PhobiaPrefix": "Phobia:",
+      "PsyRecovered": "recovered {amount} PSY",
+      "PsySpent": "{amount} PSY spent.",
+      "PsySpentMishap": "{amount} PSY spent. Fumble — Mishap Table: <strong>{name}</strong>. {description}",
+      "PsySpentMishapNoTable": "{amount} PSY spent. Fumble — roll on the Mishap Table (the table could not be found in the compendium).",
+      "PurchaseHeading": "Purchase from {merchant}",
+      "PurchaseLine": "<strong>{buyer}</strong> bought {qty}× <strong>{item}</strong> for {price}.",
+      "PurseRemaining": "Left in purse: {purse}",
+      "Reject": "Reject",
+      "Rejected": "❌ Rejected by {user}",
+      "Resisted": "resisted",
+      "ResistedFail": "did not resist",
+      "RestPeriodHeading": "Rest period — {days} days",
+      "RestPeriodTicksCleared": "{count} skill(s) can tick their EP mark again.",
+      "RestStreak": "{actor}: rest {streak}/7",
+      "SellCompleted": "<strong>{seller}</strong> sold <strong>{item}</strong> to {merchant} for <strong>{price} sc</strong>.",
+      "SellRequest": "<strong>{seller}</strong> wants to sell <strong>{item}</strong> to <strong>{merchant}</strong> for ~<strong>{price} sc</strong> ({rate}% buyback).",
+      "SkillBoost": "Skill boost",
+      "SpellHalved": "halved (resistance)",
+      "SpellRoll": "<strong>{actor}</strong> casts {spell}... <strong>{roll}</strong> — {outcome}",
+      "TheMerchant": "the merchant",
+      "TimeAdvanceHeading": "{kind} — {days} days",
+      "TotalHpLeft": "Total HP left:",
+      "TotalResourcePrefix": "Total",
+      "TotalResourceSuffix": "after:",
+      "TrainingOpen": "<strong>Training is open</strong> — EP can be spent on FV.",
+      "TrainingOpenShort": "training open",
+      "TrainingStillClosed": "⚠ Under 7 days — EP cannot <strong>yet</strong> be spent (RP p.63).",
+      "UsedBonusAttack": "<strong>{actor}</strong> uses a GM-granted bonus attack.",
+      "UsedBonusParry": "<strong>{actor}</strong> uses a GM-granted bonus parry.",
+      "WearBroken": "broken through!",
+      "WearDamage": "{item}: damage {damage} against BV {bv}",
+      "WearHolds": "— holds",
+      "WearNewBv": "→ BV {bv}"
     }
   },
   "TYPES": {

@@ -11,7 +11,7 @@ import { skillCap, isSchool } from "../helpers/training.mjs";
 export default class DoDETrainingApp extends DoDETrainingBase {
   static DEFAULT_OPTIONS = {
     id: "dode-training-{id}",
-    window: { title: "Färdighetsträning" }
+    window: { title: "DODE.Dialog.SkillTraining" }
   };
 
   static PARTS = {
@@ -21,7 +21,7 @@ export default class DoDETrainingApp extends DoDETrainingBase {
   };
 
   get title() {
-    return `Färdighetsträning — ${this.actor.name}`;
+    return game.i18n.localize("DODE.Dialog.SkillTrainingFor", { actor: this.actor.name });
   }
 
   get trainableItems() {

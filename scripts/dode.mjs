@@ -551,7 +551,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         const attacker = attackFlag.attackerUuid ? fromUuidSync(attackFlag.attackerUuid) : null;
         const target = attackFlag.targetUuid ? fromUuidSync(attackFlag.targetUuid) : null;
         if (!attacker || !target) { ui.notifications.error(game.i18n.localize("DODE.Notify.Combat.ApproveMissingActors")); return; }
-        if (!(await lockAndMark(`✅ Godkänt av ${game.user.name}`))) return;
+        if (!(await lockAndMark(game.i18n.localize("DODE.Chat.Approved", { user: game.user.name })))) return;
         const pending = attackFlag.pending ?? {};
         const weapon = pending.wear?.side === "attacker" ? attacker.items.get(pending.wear.itemId) : null;
         const parryItem = pending.wear?.side === "defender" ? target.items.get(pending.wear.itemId) : null;
@@ -563,7 +563,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         }
       });
 
-      rejectBtn?.addEventListener("click", () => lockAndMark(`❌ Avvisat av ${game.user.name}`));
+      rejectBtn?.addEventListener("click", () => lockAndMark(game.i18n.localize("DODE.Chat.Rejected", { user: game.user.name })));
     }
   }
 
@@ -592,7 +592,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
           ui.notifications.error(game.i18n.localize("DODE.Notify.Magic.ApproveMissingActors"));
           return;
         }
-        if (!(await lockAndMarkSpell(`✅ Godkänt av ${game.user.name}`))) return;
+        if (!(await lockAndMarkSpell(game.i18n.localize("DODE.Chat.Approved", { user: game.user.name })))) return;
         try {
           await applySpellResult({ pending: spellFlag.pending, item }, { caster, targets });
         } catch (err) {
@@ -601,7 +601,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         }
       });
 
-      rejectSpellBtn?.addEventListener("click", () => lockAndMarkSpell(`❌ Avvisat av ${game.user.name}`));
+      rejectSpellBtn?.addEventListener("click", () => lockAndMarkSpell(game.i18n.localize("DODE.Chat.Rejected", { user: game.user.name })));
     }
   }
 
@@ -616,7 +616,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
       const lockAndMarkLoot = makeLockAndMark(message, html, "pendingLoot");
 
       approveLootBtn?.addEventListener("click", async () => {
-        if (!(await lockAndMarkLoot(`✅ Godkänt av ${game.user.name}`))) return;
+        if (!(await lockAndMarkLoot(game.i18n.localize("DODE.Chat.Approved", { user: game.user.name })))) return;
         try {
           await applyLoot(lootFlag);
         } catch (err) {
@@ -625,7 +625,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         }
       });
 
-      rejectLootBtn?.addEventListener("click", () => lockAndMarkLoot(`❌ Avvisat av ${game.user.name}`));
+      rejectLootBtn?.addEventListener("click", () => lockAndMarkLoot(game.i18n.localize("DODE.Chat.Rejected", { user: game.user.name })));
     }
   }
 
@@ -641,7 +641,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
       const lockAndMarkSell = makeLockAndMark(message, html, "pendingSell");
 
       approveSellBtn?.addEventListener("click", async () => {
-        if (!(await lockAndMarkSell(`✅ Godkänt av ${game.user.name}`))) return;
+        if (!(await lockAndMarkSell(game.i18n.localize("DODE.Chat.Approved", { user: game.user.name })))) return;
         try {
           await applySell(sellFlag);
         } catch (err) {
@@ -650,7 +650,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         }
       });
 
-      rejectSellBtn?.addEventListener("click", () => lockAndMarkSell(`❌ Avvisat av ${game.user.name}`));
+      rejectSellBtn?.addEventListener("click", () => lockAndMarkSell(game.i18n.localize("DODE.Chat.Rejected", { user: game.user.name })));
     }
   }
 });

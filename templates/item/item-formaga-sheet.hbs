@@ -1,24 +1,21 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
-  <label>Källa
+  <label>{{localize "DODE.ItemSheet.Formaga.Origin"}}
     <input type="text" name="system.origin" value="{{system.origin}}" placeholder="bas / ras / yrke / hjalte" />
   </label>
-  <p class="hint">Förmågans regeleffekter läggs som ActiveEffects på detta föremål
-    (transfer:true). De appliceras automatiskt så fort förmågan ligger på en
-    rollperson — rikta ändringarna mot <code>system.attributes.*.bonus</code> med
-    läget ADD. En förmåga har ingen utrustad/av-växel; den är alltid aktiv.</p>
+  <p class="hint">{{{localize "DODE.ItemSheet.Formaga.Hint"}}}</p>
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 

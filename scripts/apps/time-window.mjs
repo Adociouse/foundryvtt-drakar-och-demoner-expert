@@ -14,7 +14,7 @@ export default class DoDETimeWindow extends HandlebarsApplicationMixin(Applicati
     id: "dode-time-window",
     classes: ["dode", "dode-time"],
     position: { width: 420, height: "auto" },
-    window: { title: "Tid", resizable: false },
+    window: { title: "DODE.Dialog.Time", resizable: false },
     actions: {
       setKind: DoDETimeWindow.#onSetKind,
       advance: DoDETimeWindow.#onAdvance,
@@ -56,15 +56,15 @@ export default class DoDETimeWindow extends HandlebarsApplicationMixin(Applicati
   async #run(seconds) {
     const res = await advanceTime({ seconds, kind: this.kind, actors: this.#selected() });
     const lines = res.report.map((r) =>
-      `<li>${r.name}: vila ${Math.floor(r.streak)}/7${r.unlocked ? " — <strong>träning öppen</strong>" : ""}`
-      + (r.healed ? ` · läkte ${r.healed} KP` : "") + (r.restored ? " · <em>helt återställd</em>" : "")
-      + (r.psyRecovered ? ` · återfick ${r.psyRecovered} PSY` : "")
+      `<li>${game.i18n.localize("DODE.Chat.RestStreak", { actor: r.name, streak: Math.floor(r.streak) })}${r.unlocked ? ` — <strong>${game.i18n.localize("DODE.Chat.TrainingOpenShort")}</strong>` : ""}`
+      + (r.healed ? ` · ${game.i18n.localize("DODE.Chat.HealedAmount", { amount: r.healed })}` : "") + (r.restored ? ` · <em>${game.i18n.localize("DODE.Chat.FullyRestored")}</em>` : "")
+      + (r.psyRecovered ? ` · ${game.i18n.localize("DODE.Chat.PsyRecovered", { amount: r.psyRecovered })}` : "")
       + (r.periodicTicks?.length ? ` · <strong>${r.periodicTicks.map((t) => `${t.label} (${t.ticks} tick)`).join(", ")}</strong>` : "")
       + "</li>").join("");
     // ⚠ Påminnelse i stället för automatik — se DODE.supplyReminder.
     const supplies = res.days >= 1 ? `<p class="hint">${CONFIG.DODE.supplyReminder}</p>` : "";
     await ChatMessage.create({
-      content: `<div class="dode-chat-card"><h3>${res.kind} — ${res.days} dygn</h3>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.TimeAdvanceHeading", { kind: res.kind, days: res.days })}</h3>`
         + `<ul>${lines}</ul>${supplies}</div>`
     });
     this.render();

@@ -1,34 +1,34 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
-  <label class="checkbox-field"><input type="checkbox" name="system.equipped" {{checked system.equipped}} /> Utrustad (aktiverar ev. ActiveEffects)</label>
-  <label>Fattning
+  <label class="checkbox-field"><input type="checkbox" name="system.equipped" {{checked system.equipped}} /> {{localize "DODE.Equipment.Equipped"}}</label>
+  <label>{{localize "DODE.ItemSheet.Vapen.Grip"}}
     <select name="system.grip">{{selectOptions weaponGrips selected=system.grip localize=true}}</select>
   </label>
-  <label>STY-grupp <input type="number" name="system.styGroup" value="{{system.styGroup}}" min="0" /></label>
-  <label>Skada <input type="text" name="system.damage" value="{{system.damage}}" placeholder="1T6+1" /></label>
-  <label>Längd (kategori 0-5) <input type="number" name="system.length" value="{{system.length}}" /></label>
-  <label>Vikt (kg) <input type="number" name="system.weight" value="{{system.weight}}" step="0.1" /></label>
-  <label>Basvärde (BV) <input type="number" name="system.baseValue" value="{{system.baseValue}}" /></label>
-  <label>Typ
+  <label>{{localize "DODE.ItemSheet.Vapen.StyGroup"}} <input type="number" name="system.styGroup" value="{{system.styGroup}}" min="0" /></label>
+  <label>{{localize "DODE.ItemSheet.Vapen.Damage"}} <input type="text" name="system.damage" value="{{system.damage}}" placeholder="1T6+1" /></label>
+  <label>{{localize "DODE.ItemSheet.Vapen.Length"}} <input type="number" name="system.length" value="{{system.length}}" /></label>
+  <label>{{localize "DODE.Equipment.Weight"}} <input type="number" name="system.weight" value="{{system.weight}}" step="0.1" /></label>
+  <label>{{localize "DODE.ItemSheet.Vapen.BaseValue"}} <input type="number" name="system.baseValue" value="{{system.baseValue}}" /></label>
+  <label>{{localize "DODE.ItemSheet.Vapen.Type"}}
     <select name="system.weaponType">{{selectOptions weaponTypes selected=system.weaponType localize=true}}</select>
   </label>
-  <label>Kategori
+  <label>{{localize "DODE.ItemSheet.Vapen.Category"}}
     <select name="system.category">{{selectOptions weaponCategories selected=system.category localize=true}}</select>
   </label>
-  <label>Räckvidd <input type="text" name="system.range" value="{{system.range}}" /></label>
-  <label>Pris (sm) <input type="number" name="system.price" value="{{system.price}}" /></label>
+  <label>{{localize "DODE.ItemSheet.Vapen.Range"}} <input type="text" name="system.range" value="{{system.range}}" /></label>
+  <label>{{localize "DODE.ItemSheet.Common.PriceSm"}} <input type="number" name="system.price" value="{{system.price}}" /></label>
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 

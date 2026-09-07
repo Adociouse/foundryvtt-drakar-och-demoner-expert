@@ -1,41 +1,39 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
-  <label>Magiskola
+  <label>{{localize "DODE.Item.Skola"}}
     <select name="system.school">{{selectOptions magicSchools selected=system.school localize=true}}</select>
   </label>
-  <label>Skolvärde (S) <input type="number" name="system.sValue" value="{{system.sValue}}" min="0" /></label>
-  <label>Varaktighet <input type="text" name="system.duration" value="{{system.duration}}" /></label>
-  <label>Räckvidd <input type="text" name="system.range" value="{{system.range}}" /></label>
-  <label class="checkbox-field"><input type="checkbox" name="system.ritual" {{checked system.ritual}} /> Ritual</label>
-  <label class="checkbox-field"><input type="checkbox" name="system.kvick" {{checked system.kvick}} /> Kvick</label>
+  <label>{{localize "DODE.ItemSheet.Besvarjelse.SValue"}} <input type="number" name="system.sValue" value="{{system.sValue}}" min="0" /></label>
+  <label>{{localize "DODE.ItemSheet.Besvarjelse.Duration"}} <input type="text" name="system.duration" value="{{system.duration}}" /></label>
+  <label>{{localize "DODE.ItemSheet.Vapen.Range"}} <input type="text" name="system.range" value="{{system.range}}" /></label>
+  <label class="checkbox-field"><input type="checkbox" name="system.ritual" {{checked system.ritual}} /> {{localize "DODE.ItemSheet.Besvarjelse.Ritual"}}</label>
+  <label class="checkbox-field"><input type="checkbox" name="system.kvick" {{checked system.kvick}} /> {{localize "DODE.ItemSheet.Besvarjelse.Kvick"}}</label>
   {{!-- SB s.7: en magisk kodex för just denna besvärjelse krävs för att kunna
         ENSAMTRÄNA den. Träning med lärare kräver ingen kodex. --}}
-  <label class="checkbox-field" title="Krävs för ensamträning av besvärjelsen (SB s.7)">
+  <label class="checkbox-field" title="{{localize 'DODE.ItemSheet.Besvarjelse.CodexTitle'}}">
     <input type="checkbox" name="system.hasCodex" {{checked system.hasCodex}} />
-    Magisk kodex tillgänglig
+    {{localize "DODE.ItemSheet.Besvarjelse.CodexAvailable"}}
   </label>
-  <label>Effektvaraktighet (stridsrundor)
+  <label>{{localize "DODE.ItemSheet.Besvarjelse.SpellDuration"}}
     <input type="number" name="system.spellDuration" value="{{system.spellDuration}}" min="0" />
   </label>
   {{#if system.spellEffect.length}}
-    <p class="hint">{{system.spellEffect.length}} temporär effektändring definierad —
-      läggs på målet via <code>applySpellEffect()</code>.</p>
+    <p class="hint">{{{localize "DODE.ItemSheet.Besvarjelse.SpellEffectDefined" count=system.spellEffect.length}}}</p>
   {{else}}
-    <p class="hint">Temporära effektändringar (<code>spellEffect</code>) authoras i
-      besvärjelsens _source-JSON/via API — rikta mot <code>*.bonus</code>, läge ADD.</p>
+    <p class="hint">{{{localize "DODE.ItemSheet.Besvarjelse.SpellEffectHint"}}}</p>
   {{/if}}
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 

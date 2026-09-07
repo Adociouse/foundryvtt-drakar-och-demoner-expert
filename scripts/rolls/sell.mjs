@@ -47,11 +47,11 @@ export async function requestSell(seller, itemId, merchant) {
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: seller }),
     content: `<div class="dode-chat-card dode-loot-card">
-      <p><i class="fa-solid fa-coins"></i> <strong>${seller.name}</strong> vill sälja <strong>${item.name}</strong> till <strong>${merchant.name}</strong> för ~<strong>${sellPriceSm} sm</strong> (${merchant.system.buybackRate ?? 50}% återköp).</p>
-      <div class="pending-banner"><i class="fa-solid fa-hourglass-half"></i> Väntar på SL-godkännande</div>
+      <p><i class="fa-solid fa-coins"></i> ${game.i18n.localize("DODE.Chat.SellRequest", { seller: seller.name, item: item.name, merchant: merchant.name, price: sellPriceSm, rate: merchant.system.buybackRate ?? 50 })}</p>
+      <div class="pending-banner"><i class="fa-solid fa-hourglass-half"></i> ${game.i18n.localize("DODE.Chat.PendingGmApproval")}</div>
       <div class="pending-actions">
-        <button type="button" data-action="approveSellRequest"><i class="fa-solid fa-check"></i> Godkänn</button>
-        <button type="button" data-action="rejectSellRequest"><i class="fa-solid fa-xmark"></i> Avvisa</button>
+        <button type="button" data-action="approveSellRequest"><i class="fa-solid fa-check"></i> ${game.i18n.localize("DODE.Chat.Approve")}</button>
+        <button type="button" data-action="rejectSellRequest"><i class="fa-solid fa-xmark"></i> ${game.i18n.localize("DODE.Chat.Reject")}</button>
       </div>
     </div>`,
     flags: {
@@ -82,7 +82,7 @@ export async function applySell({ sellerUuid, itemId, merchantUuid, sellPriceSm 
   await item.delete();
 
   await ChatMessage.create({
-    content: `<div class="dode-chat-card"><p>🪙 <strong>${seller.name}</strong> sålde <strong>${item.name}</strong> till ${merchant.name} för <strong>${sellPriceSm} sm</strong>.</p></div>`
+    content: `<div class="dode-chat-card"><p>🪙 ${game.i18n.localize("DODE.Chat.SellCompleted", { seller: seller.name, item: item.name, merchant: merchant.name, price: sellPriceSm })}</p></div>`
   });
 }
 

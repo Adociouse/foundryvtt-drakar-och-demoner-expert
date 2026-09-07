@@ -1,35 +1,35 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
-  <label>Grundegenskap
+  <label>{{localize "DODE.ItemSheet.Fardighet.Attribute"}}
     <select name="system.attribute">
       {{selectOptions attributes selected=system.attribute localize=true}}
     </select>
   </label>
-  <label>Kategori
+  <label>{{localize "DODE.ItemSheet.Fardighet.Category"}}
     <select name="system.category">
       {{selectOptions skillCategories selected=system.category localize=true}}
     </select>
   </label>
   <label>FV <input type="number" name="system.fv" value="{{system.fv}}" min="0" /></label>
-  <label>Bonus (manuell) <input type="number" name="system.bonus" value="{{system.bonus}}" /></label>
-  <p class="hint">Totalt (FV + bonus): {{system.total}}</p>
-  <label>EP-kostnadskategori
+  <label>{{localize "DODE.ItemSheet.Fardighet.ManualBonus"}} <input type="number" name="system.bonus" value="{{system.bonus}}" /></label>
+  <p class="hint">{{localize "DODE.ItemSheet.Fardighet.TotalHint" total=system.total}}</p>
+  <label>{{localize "DODE.ItemSheet.Fardighet.CostTier"}}
     <select name="system.costTier">
       {{selectOptions costTiers selected=system.costTier localize=true}}
     </select>
   </label>
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 

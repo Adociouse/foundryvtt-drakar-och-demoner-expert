@@ -5,9 +5,9 @@
     <img src="{{weaponImg}}" alt="" />
     <div>
       <strong>{{attackerName}}</strong>{{#if targetName}} <i class="fa-solid fa-arrow-right target-arrow"></i> <strong class="target-name">{{targetName}}</strong>{{/if}}
-      <span class="weapon">{{weaponName}}{{#if aimed}} — riktat mot {{locationLabel}}{{/if}}</span>
+      <span class="weapon">{{weaponName}}{{#if aimed}} — {{localize "DODE.Chat.AimedAt" location=locationLabel}}{{/if}}</span>
     </div>
-    {{#if intentBedova}}<i class="fa-solid fa-hand-fist" title="Bedövande avsikt"></i>{{/if}}
+    {{#if intentBedova}}<i class="fa-solid fa-hand-fist" title="{{localize 'DODE.Chat.NonLethalIntent'}}"></i>{{/if}}
   </header>
 
   {{#if targetWarning}}
@@ -23,11 +23,11 @@
         att rendera om hela kortet. --}}
   {{#if pendingBanner}}
     <div class="pending-banner">
-      <i class="fa-solid fa-hourglass-half"></i> Väntar på SL-godkännande
+      <i class="fa-solid fa-hourglass-half"></i> {{localize "DODE.Chat.PendingGmApproval"}}
     </div>
     <div class="pending-actions">
-      <button type="button" data-action="approveAttackRequest"><i class="fa-solid fa-check"></i> Godkänn</button>
-      <button type="button" data-action="rejectAttackRequest"><i class="fa-solid fa-xmark"></i> Avvisa</button>
+      <button type="button" data-action="approveAttackRequest"><i class="fa-solid fa-check"></i> {{localize "DODE.Chat.Approve"}}</button>
+      <button type="button" data-action="rejectAttackRequest"><i class="fa-solid fa-xmark"></i> {{localize "DODE.Chat.Reject"}}</button>
     </div>
   {{/if}}
 
@@ -43,7 +43,7 @@
   </div>
 
   <div class="roll-line role-attack">
-    <span class="label">Anfall</span>
+    <span class="label">{{localize "DODE.Chat.Label.Attack"}}</span>
     <span class="d20 {{attackOutcome}}">{{attackRoll}}</span>
     <span class="outcome {{attackOutcome}}">{{attackOutcomeLabel}}</span>
   </div>
@@ -57,15 +57,15 @@
         självfummelslag oavsett vad huvudslaget annars visade. --}}
   {{#if hardParrySelfFumble}}
     <div class="roll-line self-fumble-check">
-      <span class="label">Självfummelkontroll (kättingvapen)</span>
+      <span class="label">{{localize "DODE.Chat.Label.SelfFumbleCheck"}}</span>
       <span class="d20 {{#if hardParrySelfFumble.fumbled}}fummel{{else}}lyckat{{/if}}">{{hardParrySelfFumble.roll}}</span>
-      <span class="outcome">{{#if hardParrySelfFumble.fumbled}}Fumlat!{{else}}Bara miss{{/if}}</span>
+      <span class="outcome">{{#if hardParrySelfFumble.fumbled}}{{localize "DODE.Chat.Outcome.Fumbled"}}{{else}}{{localize "DODE.Chat.Outcome.JustMiss"}}{{/if}}</span>
     </div>
   {{/if}}
 
   {{#if hasParry}}
     <div class="roll-line role-parry">
-      <span class="label">Parering</span>
+      <span class="label">{{localize "DODE.Chat.Label.Parry"}}</span>
       <span class="d20 {{parryOutcome}}">{{parryRoll}}</span>
       <span class="outcome {{parryOutcome}}">{{parryOutcomeLabel}}</span>
       <span class="via">{{parryItemName}}</span>
@@ -74,7 +74,7 @@
       <div class="ep-tick-line"><i class="fa-solid fa-check"></i> +{{parryEp.amount}} EP → {{parryEp.skillName}}</div>
     {{/if}}
   {{else if ranged}}
-    <div class="roll-line muted">Projektilvapen kan inte pareras (SLB s.16)</div>
+    <div class="roll-line muted">{{localize "DODE.Chat.NoParryRanged"}}</div>
   {{/if}}
 
   {{#if cleanKnockout}}
@@ -85,9 +85,9 @@
   {{else if wear}}
     <div class="wear-line">
       <i class="fa-solid fa-shield-halved"></i>
-      {{wear.item}}: skada {{wear.damage}} mot BV {{wear.bv}}
-      {{#if wear.worn}}→ BV {{wear.bvAfter}}{{else}}— håller{{/if}}
-      {{#if wear.broke}}<strong>genombruten!</strong>{{/if}}
+      {{localize "DODE.Chat.WearDamage" item=wear.item damage=wear.damage bv=wear.bv}}
+      {{#if wear.worn}}{{localize "DODE.Chat.WearNewBv" bv=wear.bvAfter}}{{else}}{{localize "DODE.Chat.WearHolds"}}{{/if}}
+      {{#if wear.broke}}<strong>{{localize "DODE.Chat.WearBroken"}}</strong>{{/if}}
     </div>
   {{/if}}
 
@@ -95,14 +95,14 @@
     <div class="damage-line">
       <span class="location">{{locationLabel}}</span>
       <span class="dmg">{{damage.rolled}}{{#if damage.maximised}} (max){{/if}}</span>
-      {{#if damage.abs}}<span class="abs">− {{damage.abs}} abs</span>{{/if}}
-      {{#if damage.resistanceBlocked}}<span class="abs">immun (vapenmaterial)</span>{{/if}}
-      {{#if damage.resistanceReduction}}<span class="abs">− {{damage.resistanceReduction}} motstånd</span>{{/if}}
-      {{#if damage.resistanceHalved}}<span class="abs">halverad (vapenmaterial)</span>{{/if}}
-      {{#if damage.resistanceDoubled}}<span class="abs">dubblad (sårbarhet)</span>{{/if}}
+      {{#if damage.abs}}<span class="abs">{{localize "DODE.Chat.DamageAbs" abs=damage.abs}}</span>{{/if}}
+      {{#if damage.resistanceBlocked}}<span class="abs">{{localize "DODE.Chat.DamageImmune"}}</span>{{/if}}
+      {{#if damage.resistanceReduction}}<span class="abs">{{localize "DODE.Chat.DamageResistance" reduction=damage.resistanceReduction}}</span>{{/if}}
+      {{#if damage.resistanceHalved}}<span class="abs">{{localize "DODE.Chat.DamageHalved"}}</span>{{/if}}
+      {{#if damage.resistanceDoubled}}<span class="abs">{{localize "DODE.Chat.DamageDoubled"}}</span>{{/if}}
       <strong class="applied">{{damage.applied}} KP</strong>
     </div>
-    <div class="total-line">Totala KP kvar: <strong>{{totalAfter}}</strong>{{#if pulled}} <em>(slaget hölls tillbaka)</em>{{/if}}</div>
+    <div class="total-line">{{localize "DODE.Chat.TotalHpLeft"}} <strong>{{totalAfter}}</strong>{{#if pulled}} <em>({{localize "DODE.Chat.DamagePulled"}})</em>{{/if}}</div>
   {{/if}}
 
   {{#if effect}}
@@ -115,7 +115,7 @@
 
   {{#if fummelDraw}}
     <div class="effect-line kritisk">
-      <i class="fa-solid fa-triangle-exclamation"></i> Fummeltabell: <strong>{{fummelDraw.primaryName}}</strong>. {{fummelDraw.primaryText}}
+      <i class="fa-solid fa-triangle-exclamation"></i> {{localize "DODE.Chat.FumbleTable"}} <strong>{{fummelDraw.primaryName}}</strong>. {{fummelDraw.primaryText}}
       {{#each fummelDraw.extra}}<br />+ <strong>{{this.name}}</strong>. {{this.text}}{{/each}}
     </div>
   {{/if}}

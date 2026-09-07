@@ -1,7 +1,7 @@
 <div class="dode-item-sheet-body">
 <header class="sheet-header">
   <img class="profile-img" src="{{item.img}}" data-action="editImage" data-edit="img" title="{{item.name}}" />
-  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Namn" />
+  <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DODE.ItemSheet.Common.NamePlaceholder'}}" />
 </header>
 
 <section class="item-fields">
@@ -19,7 +19,7 @@
   {{!-- Priser som inte är ett rent tal ("4 per kagge", "5 sm/g", "×0,5") lagras
         som fritext. Är fältet ifyllt är posten referensdata, inte köpbar. --}}
   <label class="wide">{{localize "DODE.Equipment.PriceNote"}}
-    <input type="text" name="system.priceNote" value="{{system.priceNote}}" placeholder="t.ex. 4 per kagge — lämna tomt för ett vanligt styckpris" />
+    <input type="text" name="system.priceNote" value="{{system.priceNote}}" placeholder="{{localize 'DODE.ItemSheet.Utrustning.PriceNotePlaceholder'}}" />
   </label>
   <label class="checkbox-field"><input type="checkbox" name="system.equipped" {{checked system.equipped}} /> {{localize "DODE.Equipment.Equipped"}}</label>
 </section>
@@ -29,11 +29,11 @@
   <span>{{localize "DODE.Equipment.TotalWeight"}}: <strong>{{system.totalWeight}}</strong> kg</span>
 </section>
 
-<section class="item-source" title="Var i böckerna kommer detta ifrån?">
+<section class="item-source" title="{{localize 'DODE.ItemSheet.Common.SourceTitle'}}">
   <label>{{localize "DODE.Source.Book"}}
     <select name="system.source.book">{{selectOptions books selected=system.source.book blank=""}}</select>
   </label>
-  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="t.ex. 22 eller 43-48" /></label>
+  <label>{{localize "DODE.Source.Page"}} <input type="text" name="system.source.page" value="{{system.source.page}}" placeholder="{{localize 'DODE.ItemSheet.Common.SourcePagePlaceholder'}}" /></label>
   {{#if sourceLabel}}<span class="source-label">{{sourceLabel}}</span>{{/if}}
 </section>
 

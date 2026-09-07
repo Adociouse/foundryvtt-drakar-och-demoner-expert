@@ -31,7 +31,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
     tag: "div",
     classes: ["dode", "dode-spell-dialog"],
     position: { width: 480, height: "auto" },
-    window: { title: "Kasta besvärjelse", resizable: true },
+    window: { title: "DODE.Dialog.CastSpell", resizable: true },
     actions: {
       submitCast: DoDESpellDialog.#onSubmitCast
     }
@@ -62,7 +62,7 @@ export default class DoDESpellDialog extends HandlebarsApplicationMixin(Applicat
   }
 
   get title() {
-    return `Kasta besvärjelse — ${this.actor.name}`;
+    return game.i18n.localize("DODE.Dialog.CastSpellFor", { actor: this.actor.name });
   }
 
   #selectedItem() {

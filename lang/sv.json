@@ -144,6 +144,79 @@
       "Page": "Sida",
       "Label": "Källa"
     },
+    "Item": {
+      "Skola": "Magiskola"
+    },
+    "ItemSheet": {
+      "Common": {
+        "NamePlaceholder": "Namn",
+        "SourceTitle": "Var i böckerna kommer detta ifrån?",
+        "SourcePagePlaceholder": "t.ex. 22 eller 43-48",
+        "DescriptionHeading": "Beskrivning",
+        "NoMechanicalEffect": "(ingen mekanisk effekt)",
+        "PriceSm": "Pris (sm)"
+      },
+      "Ras": {
+        "BpCost": "BP-kostnad",
+        "AttributeMods": "Egenskapsmodifikationer",
+        "StoHint": "STO anges som intervall nedan, inte som en fast modifierare (se RASER.md).",
+        "StoMin": "STO min",
+        "StoMax": "STO max",
+        "StoNormal": "STO normal",
+        "AutomaticAbilities": "Automatiska förmågor",
+        "NoAutomaticAbilities": "Inga strukturerade automatiska förmågor — redigera via packs/raser/_source/*.json."
+      },
+      "Fardighet": {
+        "Attribute": "Grundegenskap",
+        "Category": "Kategori",
+        "ManualBonus": "Bonus (manuell)",
+        "TotalHint": "Totalt (FV + bonus): {total}",
+        "CostTier": "EP-kostnadskategori"
+      },
+      "Formaga": {
+        "Origin": "Källa",
+        "Hint": "Förmågans regeleffekter läggs som ActiveEffects på detta föremål (transfer:true). De appliceras automatiskt så fort förmågan ligger på en rollperson — rikta ändringarna mot <code>system.attributes.*.bonus</code> med läget ADD. En förmåga har ingen utrustad/av-växel; den är alltid aktiv."
+      },
+      "Minibesvarjelse": {
+        "Hint": "Minibesvärjelser kräver <strong>ingen CL-kontroll — de lyckas alltid</strong>, kostar 1 PSY och verkar samma stridsrunda (alltid Kvick). Under FV 15 i skolan krävs normala åthävor, vid 15+ inga, vid 25+ aktiveras de nästan omedvetet. <em>MAG s.23.</em>",
+        "PsyCost": "PSY-kostnad"
+      },
+      "Rustning": {
+        "Slot": "Plats",
+        "Abs": "Abs"
+      },
+      "Vapen": {
+        "Grip": "Fattning",
+        "StyGroup": "STY-grupp",
+        "Damage": "Skada",
+        "Length": "Längd (kategori 0-5)",
+        "BaseValue": "Basvärde (BV)",
+        "Type": "Typ",
+        "Category": "Kategori",
+        "Range": "Räckvidd"
+      },
+      "Yrke": {
+        "Requirements": "Grundegenskapskrav",
+        "RequirementsPlaceholder": "t.ex. STY 14, FYS 12",
+        "ProfessionAbilities": "Yrkesförmågor",
+        "NoProfessionAbilities": "Inga strukturerade yrkesförmågor — redigera via packs/yrken/_source/*.json.",
+        "PossibleSkills": "Möjliga yrkesfärdigheter"
+      },
+      "Besvarjelse": {
+        "SValue": "Skolvärde (S)",
+        "Duration": "Varaktighet",
+        "Ritual": "Ritual",
+        "Kvick": "Kvick",
+        "CodexTitle": "Krävs för ensamträning av besvärjelsen (SB s.7)",
+        "CodexAvailable": "Magisk kodex tillgänglig",
+        "SpellDuration": "Effektvaraktighet (stridsrundor)",
+        "SpellEffectDefined": "{count} temporär effektändring definierad — läggs på målet via <code>applySpellEffect()</code>.",
+        "SpellEffectHint": "Temporära effektändringar (<code>spellEffect</code>) authoras i besvärjelsens _source-JSON/via API — rikta mot <code>*.bonus</code>, läge ADD."
+      },
+      "Utrustning": {
+        "PriceNotePlaceholder": "t.ex. 4 per kagge — lämna tomt för ett vanligt styckpris"
+      }
+    },
     "Notify": {
       "Common": {
         "NoTokenSelected": "Ingen token vald.",
@@ -299,6 +372,111 @@
       "SkillsFreetext": "Färdigheter (fritext)",
       "SpecialHeading": "Speciellt",
       "DescriptionHeading": "Beskrivning"
+    },
+    "Dialog": {
+      "RestPeriod": "Viloperiod",
+      "GrantBonusPoints": "Dela ut bonuspoäng",
+      "GrantSkillTo": "Dela ut färdighet till {actor}",
+      "NewTwoWeaponCombo": "Ny Två vapen-kombination — {actor}",
+      "GrantSpellTo": "Dela ut besvärjelse till {actor}",
+      "Choose": "Välj",
+      "Consume": "Konsumera {item}",
+      "SkillTraining": "Färdighetsträning",
+      "SkillTrainingFor": "Färdighetsträning — {actor}",
+      "CastSpell": "Kasta besvärjelse",
+      "CastSpellFor": "Kasta besvärjelse — {actor}",
+      "MagicTraining": "Magiträning",
+      "MagicTrainingFor": "Magiträning — {actor}",
+      "GmEffects": "GM-effekter",
+      "Attack": "Anfall",
+      "AttackFor": "Anfall — {actor}",
+      "NewCharacter": "Ny rollperson",
+      "EditCharacter": "Redigera: {actor}",
+      "ChooseCharacter": "Välj rollperson",
+      "ResetAttributes": "Återställ grundegenskaper?",
+      "Time": "Tid"
+    },
+    "Chat": {
+      "AimedAt": "riktat mot {location}",
+      "Approve": "Godkänn",
+      "Approved": "✅ Godkänt av {user}",
+      "AttackRoll": "<strong>{actor}</strong> anfaller... <strong>{roll}</strong> — {outcome}",
+      "BonusPointsHeading": "Bonuspoäng",
+      "BonusPointsLine": "{actor} får <strong>{amount} fria EP</strong>.",
+      "DamageAbs": "− {abs} abs",
+      "DamageDoubled": "dubblad (sårbarhet)",
+      "DamageHalved": "halverad (vapenmaterial)",
+      "DamageImmune": "immun (vapenmaterial)",
+      "DamageImmuneShort": "immun",
+      "DamagePulled": "slaget hölls tillbaka",
+      "DamageResistance": "− {reduction} motstånd",
+      "Damaged": "skada",
+      "EnchantsWeapon": "Förtrollar {weapon}",
+      "FullyRestored": "helt återställd",
+      "FumbleTable": "Fummeltabell:",
+      "FvCap": "FV-tak: {cap} (RP s.59)",
+      "Healed": "läkt",
+      "HealedAmount": "läkte {amount} KP",
+      "HeroicDeedLine": "<strong>{name}</strong> ({roll}): +{bp} BP, +{heroPoints} hjältepoäng",
+      "HeroicDeedsHeading": "Hjältedåd — resultat ({count} slag)",
+      "Label": {
+        "Attack": "Anfall",
+        "Cast": "Kastning",
+        "Damage": "Skada",
+        "Heal": "Läkning",
+        "Parry": "Parering",
+        "SelfFumbleCheck": "Självfummelkontroll (kättingvapen)"
+      },
+      "LearnedCombo": "<strong>{actor}</strong> lärde sig <strong>{combo}</strong> (FV {fv}, auto-BC).",
+      "LearnedSkill": "<strong>{actor}</strong> lärde sig <strong>{skill}</strong> (FV {fv}, {tier}).",
+      "LearnedSpell": "<strong>{actor}</strong> lärde sig <strong>{spell}</strong> ({school}, S{sValue}).",
+      "LootCompleted": "<strong>{looter}</strong> plundrade <strong>{item}</strong> från {corpse}.",
+      "LootRequest": "<strong>{looter}</strong> vill plundra <strong>{item}</strong> från <strong>{corpse}</strong>.",
+      "MishapPrefix": "Snedtändning:",
+      "NonLethalIntent": "Bedövande avsikt",
+      "MishapTableNotFound": "⚠ Slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet)",
+      "NewSkillHeading": "Ny färdighet",
+      "NewSpellHeading": "Ny besvärjelse",
+      "NoParryRanged": "Projektilvapen kan inte pareras (SLB s.16)",
+      "Outcome": {
+        "Fumbled": "Fumlat!",
+        "JustMiss": "Bara miss"
+      },
+      "PendingGmApproval": "Väntar på SL-godkännande",
+      "PhobiaPrefix": "Fobi:",
+      "PsyRecovered": "återfick {amount} PSY",
+      "PsySpent": "{amount} PSY förbrukat.",
+      "PsySpentMishap": "{amount} PSY förbrukat. Fummel — Snedtändningstabellen: <strong>{name}</strong>. {description}",
+      "PsySpentMishapNoTable": "{amount} PSY förbrukat. Fummel — slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet).",
+      "PurchaseHeading": "Köp hos {merchant}",
+      "PurchaseLine": "<strong>{buyer}</strong> köpte {qty}× <strong>{item}</strong> för {price}.",
+      "PurseRemaining": "Kvar i börsen: {purse}",
+      "Reject": "Avvisa",
+      "Rejected": "❌ Avvisat av {user}",
+      "Resisted": "motstod",
+      "ResistedFail": "motstod ej",
+      "RestPeriodHeading": "Viloperiod — {days} dygn",
+      "RestPeriodTicksCleared": "{count} färdigheter kan kryssa i sitt EP-streck igen.",
+      "RestStreak": "{actor}: vila {streak}/7",
+      "SellCompleted": "<strong>{seller}</strong> sålde <strong>{item}</strong> till {merchant} för <strong>{price} sm</strong>.",
+      "SellRequest": "<strong>{seller}</strong> vill sälja <strong>{item}</strong> till <strong>{merchant}</strong> för ~<strong>{price} sm</strong> ({rate}% återköp).",
+      "SkillBoost": "Färdighetsboost",
+      "SpellHalved": "halverad (motstånd)",
+      "SpellRoll": "<strong>{actor}</strong> kastar {spell}... <strong>{roll}</strong> — {outcome}",
+      "TheMerchant": "handlaren",
+      "TimeAdvanceHeading": "{kind} — {days} dygn",
+      "TotalHpLeft": "Totala KP kvar:",
+      "TotalResourcePrefix": "Totala",
+      "TotalResourceSuffix": "efter:",
+      "TrainingOpen": "<strong>Träningen är öppen</strong> — EP kan växlas in mot FV.",
+      "TrainingOpenShort": "träning öppen",
+      "TrainingStillClosed": "⚠ Under 7 dygn — EP kan <strong>inte</strong> omsättas ännu (RP s.63).",
+      "UsedBonusAttack": "<strong>{actor}</strong> använder en SL-beviljad extra attack.",
+      "UsedBonusParry": "<strong>{actor}</strong> använder en SL-beviljad extra parering.",
+      "WearBroken": "genombruten!",
+      "WearDamage": "{item}: skada {damage} mot BV {bv}",
+      "WearHolds": "— håller",
+      "WearNewBv": "→ BV {bv}"
     }
   },
   "TYPES": {

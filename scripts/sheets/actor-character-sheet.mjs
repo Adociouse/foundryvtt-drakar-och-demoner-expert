@@ -210,7 +210,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    */
   static async #onRestPeriod() {
     const days = await DialogV2.prompt({
-      window: { title: "Viloperiod" },
+      window: { title: game.i18n.localize("DODE.Dialog.RestPeriod") },
       content: `<p>Hur många dygn får ${this.actor.name} vila?</p>
         <p class="hint">Minst <strong>1 dygn</strong> kryssar ur EP-strecken så att varje
         färdighet kan kryssas i igen. Minst <strong>7 dygn</strong> öppnar dessutom
@@ -227,11 +227,11 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
 
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: `<div class="dode-chat-card"><h3>Viloperiod — ${days} dygn</h3>
-        <p>${cleared} färdigheter kan kryssa i sitt EP-streck igen.</p>
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.RestPeriodHeading", { days })}</h3>
+        <p>${game.i18n.localize("DODE.Chat.RestPeriodTicksCleared", { count: cleared })}</p>
         <p>${training
-          ? "<strong>Träningen är öppen</strong> — EP kan växlas in mot FV."
-          : "⚠ Under 7 dygn — EP kan <strong>inte</strong> omsättas ännu (RP s.63)."}</p></div>`
+          ? game.i18n.localize("DODE.Chat.TrainingOpen")
+          : game.i18n.localize("DODE.Chat.TrainingStillClosed")}</p></div>`
     });
   }
 
@@ -257,7 +257,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    */
   static async #onAwardBonusEp() {
     const amount = await DialogV2.prompt({
-      window: { title: "Dela ut bonuspoäng" },
+      window: { title: game.i18n.localize("DODE.Dialog.GrantBonusPoints") },
       content: `<p>Fria EP till <strong>${this.actor.name}</strong>. Ej bundna till någon färdighet.</p>
         <p class="hint">REG s.46: 1-4 uppdragsframgång · 1-2 svåra gärningar · 1-4 god rollspelning.
         Högst 10 per äventyr.</p>
@@ -269,8 +269,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     await awardBonusEp(this.actor, amount);
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: `<div class="dode-chat-card"><h3>Bonuspoäng</h3>
-        <p>${this.actor.name} får <strong>${amount} fria EP</strong>.</p></div>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.BonusPointsHeading")}</h3>
+        <p>${game.i18n.localize("DODE.Chat.BonusPointsLine", { actor: this.actor.name, amount })}</p></div>`
     });
   }
 
@@ -455,7 +455,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     }
 
     const result = await foundry.applications.api.DialogV2.input({
-      window: { title: `Dela ut färdighet till ${actor.name}` },
+      window: { title: game.i18n.localize("DODE.Dialog.GrantSkillTo", { actor: actor.name }) },
       content: `
         <p class="hint">Färdigheten läggs till på baschansen (BC) ur grundegenskapen.
         Anteckna gärna varför — det visas i chatten och på färdigheten.</p>
@@ -488,8 +488,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     }]);
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div class="dode-chat-card"><h3>Ny färdighet</h3>`
-        + `<p><strong>${actor.name}</strong> lärde sig <strong>${name}</strong> (FV ${fv}, ${game.i18n.localize(CONFIG.DODE.costTiers[costTier])}).</p>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.NewSkillHeading")}</h3>`
+        + `<p>${game.i18n.localize("DODE.Chat.LearnedSkill", { actor: actor.name, skill: name, fv, tier: game.i18n.localize(CONFIG.DODE.costTiers[costTier]) })}</p>`
         + (reason ? `<p class="dode-chat-note">${reason}</p>` : "") + `</div>`
     });
   }
@@ -530,7 +530,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       + (actor.system.skillModifierTotals?.[item.system.skillKey] ?? 0);
     const options = weaponSkills.map((i) => `<option value="${i.system.skillKey}">${i.name} (FV ${effectiveFv(i)})</option>`).join("");
     const result = await foundry.applications.api.DialogV2.input({
-      window: { title: `Ny Två vapen-kombination — ${actor.name}` },
+      window: { title: game.i18n.localize("DODE.Dialog.NewTwoWeaponCombo", { actor: actor.name }) },
       content: `
         <p class="hint">RP s.59: FV kan aldrig överstiga den lägsta av de två vapnens FV. BC blir automatiskt
         hälften (avrundat nedåt) av det lägsta. Tvåhandsvapen kan inte kombineras (Man kan inte använda något
@@ -571,9 +571,9 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     }]);
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div class="dode-chat-card"><h3>Ny färdighet</h3>`
-        + `<p><strong>${actor.name}</strong> lärde sig <strong>${comboName}</strong> (FV ${fv}, auto-BC).</p>`
-        + `<p class="dode-chat-note">FV-tak: ${CONFIG.DODE.twoWeaponCap(primaryFv, offFv)} (RP s.59)</p></div>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.NewSkillHeading")}</h3>`
+        + `<p>${game.i18n.localize("DODE.Chat.LearnedCombo", { actor: actor.name, combo: comboName, fv })}</p>`
+        + `<p class="dode-chat-note">${game.i18n.localize("DODE.Chat.FvCap", { cap: CONFIG.DODE.twoWeaponCap(primaryFv, offFv) })}</p></div>`
     });
   }
 
@@ -626,7 +626,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     if (!opts) return void ui.notifications.info(game.i18n.localize("DODE.Notify.Sheet.AllSpellsKnown"));
 
     const result = await foundry.applications.api.DialogV2.input({
-      window: { title: `Dela ut besvärjelse till ${actor.name}` },
+      window: { title: game.i18n.localize("DODE.Dialog.GrantSpellTo", { actor: actor.name }) },
       content: `
         <p class="hint">Fungerar även för icke-magiker — en välsignelse från SL är
         mekaniskt samma dokument som en besvärjelse.</p>
@@ -653,9 +653,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     await actor.createEmbeddedDocuments("Item", [obj]);
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div class="dode-chat-card"><h3>Ny besvärjelse</h3>`
-        + `<p><strong>${actor.name}</strong> lärde sig <strong>${doc.name}</strong> `
-        + `(${game.i18n.localize(CONFIG.DODE.magicSchools[doc.system.school] ?? doc.system.school)}, S${doc.system.sValue}).</p>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.NewSpellHeading")}</h3>`
+        + `<p>${game.i18n.localize("DODE.Chat.LearnedSpell", { actor: actor.name, spell: doc.name, school: game.i18n.localize(CONFIG.DODE.magicSchools[doc.system.school] ?? doc.system.school), sValue: doc.system.sValue })}</p>`
         + (reason ? `<p class="dode-chat-note">${reason}</p>` : "") + `</div>`
     });
   }
@@ -768,7 +767,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
           <input type="text" name="choice${i}" />
         </div>`).join("");
       const choiceResult = await foundry.applications.api.DialogV2.input({
-        window: { title: entry.name || "Välj" },
+        window: { title: entry.name || game.i18n.localize("DODE.Dialog.Choose") },
         content: `<p>${entry.description}</p>${fields}`
       });
       if (!choiceResult) return; // avbrutet — förmågan läggs INTE till halvfärdig
@@ -874,7 +873,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     await CONFIG.DODE.useBonusAction(this.actor, "attack");
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: `<p><strong>${this.actor.name}</strong> använder en SL-beviljad extra attack.</p>`
+      content: `<p>${game.i18n.localize("DODE.Chat.UsedBonusAttack", { actor: this.actor.name })}</p>`
     });
   }
 
@@ -884,7 +883,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     await CONFIG.DODE.useBonusAction(this.actor, "parry");
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: `<p><strong>${this.actor.name}</strong> använder en SL-beviljad extra parering.</p>`
+      content: `<p>${game.i18n.localize("DODE.Chat.UsedBonusParry", { actor: this.actor.name })}</p>`
     });
   }
 

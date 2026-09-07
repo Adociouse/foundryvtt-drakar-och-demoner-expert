@@ -13,18 +13,18 @@
 
   {{#if pendingBanner}}
     <div class="pending-banner">
-      <i class="fa-solid fa-hourglass-half"></i> Väntar på SL-godkännande
+      <i class="fa-solid fa-hourglass-half"></i> {{localize "DODE.Chat.PendingGmApproval"}}
     </div>
     <div class="pending-actions">
-      <button type="button" data-action="approveSpellRequest"><i class="fa-solid fa-check"></i> Godkänn</button>
-      <button type="button" data-action="rejectSpellRequest"><i class="fa-solid fa-xmark"></i> Avvisa</button>
+      <button type="button" data-action="approveSpellRequest"><i class="fa-solid fa-check"></i> {{localize "DODE.Chat.Approve"}}</button>
+      <button type="button" data-action="rejectSpellRequest"><i class="fa-solid fa-xmark"></i> {{localize "DODE.Chat.Reject"}}</button>
     </div>
   {{/if}}
 
   <div class="cl-line" title="Chans att lyckas">CL <strong>{{cl}}</strong></div>
 
   <div class="roll-line">
-    <span class="label">Kastning</span>
+    <span class="label">{{localize "DODE.Chat.Label.Cast"}}</span>
     <span class="d20 {{castOutcome}}">{{castRoll}}</span>
     <span class="outcome {{castOutcome}}">{{castOutcomeLabel}}</span>
   </div>
@@ -32,11 +32,11 @@
   {{#if psyCost}}<div class="ep-tick-line">−{{psyCost}} PSY</div>{{/if}}
   {{#if snedtandning}}
     <div class="effect-line kritisk">
-      <i class="fa-solid fa-triangle-exclamation"></i> Snedtändning: <strong>{{snedtandning.name}}</strong>. {{snedtandning.description}}
-      {{#if snedtandning.fobiName}}<br />Fobi: <strong>{{snedtandning.fobiName}}</strong>. {{snedtandning.fobiDescription}}{{/if}}
+      <i class="fa-solid fa-triangle-exclamation"></i> {{localize "DODE.Chat.MishapPrefix"}} <strong>{{snedtandning.name}}</strong>. {{snedtandning.description}}
+      {{#if snedtandning.fobiName}}<br />{{localize "DODE.Chat.PhobiaPrefix"}} <strong>{{snedtandning.fobiName}}</strong>. {{snedtandning.fobiDescription}}{{/if}}
     </div>
   {{else if fumbled}}
-    <div class="verdict-note">⚠ Slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet)</div>
+    <div class="verdict-note">{{localize "DODE.Chat.MishapTableNotFound"}}</div>
   {{/if}}
 
   {{#each targets}}
@@ -48,30 +48,30 @@
       {{#if this.resisted}}
         <span class="outcome {{#if this.resisted.success}}lyckat{{else}}misslyckat{{/if}}">
           {{#if this.resisted.autoResult}}{{this.resisted.autoResult}}{{else}}{{this.resisted.rolled}}{{/if}}
-          {{#if this.resisted.success}}motstod{{else}}motstod ej{{/if}}
+          {{#if this.resisted.success}}{{localize "DODE.Chat.Resisted"}}{{else}}{{localize "DODE.Chat.ResistedFail"}}{{/if}}
         </span>
       {{/if}}
     </div>
     {{#if this.instantEffect}}
       <div class="damage-line">
-        <span class="label">{{#if (eq this.instantEffect.kind "heal")}}Läkning{{else}}Skada{{/if}}</span>
+        <span class="label">{{#if (eq this.instantEffect.kind "heal")}}{{localize "DODE.Chat.Label.Heal"}}{{else}}{{localize "DODE.Chat.Label.Damage"}}{{/if}}</span>
         <span class="dmg">{{this.instantEffect.rolled}}{{#if this.instantEffect.maximised}} (max){{/if}}</span>
         {{#if this.instantEffect.blocked}}
-          <span class="abs">immun</span>
+          <span class="abs">{{localize "DODE.Chat.DamageImmuneShort"}}</span>
         {{else}}
-          {{#if this.instantEffect.reduction}}<span class="abs">− {{this.instantEffect.reduction}} motstånd</span>{{/if}}
-          {{#if this.instantEffect.halved}}<span class="abs">halverad (motstånd)</span>{{/if}}
-          {{#if this.instantEffect.doubled}}<span class="abs">dubblad (sårbarhet)</span>{{/if}}
-          <strong class="applied">{{this.instantEffect.applied}} {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} {{#if (eq this.instantEffect.kind "heal")}}läkt{{else}}skada{{/if}}</strong>
+          {{#if this.instantEffect.reduction}}<span class="abs">{{localize "DODE.Chat.DamageResistance" reduction=this.instantEffect.reduction}}</span>{{/if}}
+          {{#if this.instantEffect.halved}}<span class="abs">{{localize "DODE.Chat.SpellHalved"}}</span>{{/if}}
+          {{#if this.instantEffect.doubled}}<span class="abs">{{localize "DODE.Chat.DamageDoubled"}}</span>{{/if}}
+          <strong class="applied">{{this.instantEffect.applied}} {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} {{#if (eq this.instantEffect.kind "heal")}}{{localize "DODE.Chat.Healed"}}{{else}}{{localize "DODE.Chat.Damaged"}}{{/if}}</strong>
         {{/if}}
       </div>
       {{#unless this.instantEffect.blocked}}
-        <div class="total-line">Totala {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} efter: <strong>{{this.instantEffect.totalAfter}}</strong></div>
+        <div class="total-line">{{localize "DODE.Chat.TotalResourcePrefix"}} {{#if (eq this.instantEffect.resource "psy")}}PSY{{else}}KP{{/if}} {{localize "DODE.Chat.TotalResourceSuffix"}} <strong>{{this.instantEffect.totalAfter}}</strong></div>
       {{/unless}}
     {{/if}}
     {{#if this.statusApplied}}<div class="wear-line"><i class="fa-solid fa-circle-exclamation"></i> {{this.statusApplied}}</div>{{/if}}
-    {{#if this.weaponEnchantApplies}}<div class="wear-line"><i class="fa-solid fa-wand-sparkles"></i> Förtrollar {{this.weaponName}}</div>{{/if}}
-    {{#if this.skillEffectApplies}}<div class="wear-line"><i class="fa-solid fa-arrow-up-right-dots"></i> Färdighetsboost</div>{{/if}}
+    {{#if this.weaponEnchantApplies}}<div class="wear-line"><i class="fa-solid fa-wand-sparkles"></i> {{localize "DODE.Chat.EnchantsWeapon" weapon=this.weaponName}}</div>{{/if}}
+    {{#if this.skillEffectApplies}}<div class="wear-line"><i class="fa-solid fa-arrow-up-right-dots"></i> {{localize "DODE.Chat.SkillBoost"}}</div>{{/if}}
     {{#if this.fearDraw}}<div class="effect-line kritisk"><i class="fa-solid fa-face-flushed"></i> {{this.fearDraw.text}}</div>{{/if}}
   {{/each}}
 </div>

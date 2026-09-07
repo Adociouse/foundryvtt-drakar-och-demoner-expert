@@ -126,17 +126,17 @@ export default class DoDEActor extends Actor {
     }
 
     if (psyCost > 0 || outcome === "fummel") {
-      let note = `${psyCost} PSY förbrukat.`;
+      let note = game.i18n.localize("DODE.Chat.PsySpent", { amount: psyCost });
       const rolls = [];
       if (outcome === "fummel") {
         const draw = await CONFIG.DODE.rollSnedtandningstabell(E);
         if (draw) {
-          note = `${psyCost} PSY förbrukat. Fummel — Snedtändningstabellen: <strong>${draw.result.name}</strong>. ${draw.result.description}`
-            + (draw.fobi ? ` Fobi: <strong>${draw.fobi.result.name}</strong>. ${draw.fobi.result.description}` : "");
+          note = game.i18n.localize("DODE.Chat.PsySpentMishap", { amount: psyCost, name: draw.result.name, description: draw.result.description })
+            + (draw.fobi ? " " + game.i18n.localize("DODE.Chat.PhobiaPrefix") + ` <strong>${draw.fobi.result.name}</strong>. ${draw.fobi.result.description}` : "");
           rolls.push(draw.roll);
           if (draw.fobi) rolls.push(draw.fobi.roll);
         } else {
-          note = `${psyCost} PSY förbrukat. Fummel — slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet).`;
+          note = game.i18n.localize("DODE.Chat.PsySpentMishapNoTable", { amount: psyCost });
         }
       }
       await ChatMessage.create({
@@ -354,7 +354,7 @@ export default class DoDEActor extends Actor {
         .map(([key, label]) => `<option value="${key}">${game.i18n.localize(label)}</option>`)
         .join("");
       const result = await foundry.applications.api.DialogV2.input({
-        window: { title: `Konsumera ${item.name}` },
+        window: { title: game.i18n.localize("DODE.Dialog.Consume", { item: item.name }) },
         content: `
           <div class="form-group">
             <label>Grundegenskap</label>
@@ -428,9 +428,9 @@ export default class DoDEActor extends Actor {
     const priceLabel = CONFIG.DODE.formatPurse(CONFIG.DODE.kmToPurse(costKm));
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      content: `<div class="dode-chat-card"><h3>Köp hos ${merchant?.name ?? "handlaren"}</h3>`
-        + `<p><strong>${this.name}</strong> köpte ${qty}× <strong>${stockItem.name}</strong> för ${priceLabel}.</p>`
-        + `<p class="dode-chat-note">Kvar i börsen: ${CONFIG.DODE.formatPurse(newPurse)}</p></div>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.PurchaseHeading", { merchant: merchant?.name ?? game.i18n.localize("DODE.Chat.TheMerchant") })}</h3>`
+        + `<p>${game.i18n.localize("DODE.Chat.PurchaseLine", { buyer: this.name, qty, item: stockItem.name, price: priceLabel })}</p>`
+        + `<p class="dode-chat-note">${game.i18n.localize("DODE.Chat.PurseRemaining", { purse: CONFIG.DODE.formatPurse(newPurse) })}</p></div>`
     });
     return true;
   }
