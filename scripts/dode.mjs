@@ -19,6 +19,7 @@ import SceneEffects from "./utils/scene-effects.mjs";
 import DoDECharacterSheet from "./sheets/actor-character-sheet.mjs";
 import DoDENpcSheet from "./sheets/actor-npc-sheet.mjs";
 import DoDEHandlareSheet from "./sheets/actor-handlare-sheet.mjs";
+import DoDEJournalSheet from "./sheets/dode-journal-sheet.mjs";
 import {
   DoDEFardighetSheet,
   DoDERasSheet,
@@ -168,6 +169,17 @@ Hooks.once("init", () => {
       label: `TYPES.Item.${type}`
     });
   }
+
+  // Språkvalsgated regelsidor (backlog 6, Del 6) — se dode-journal-sheet.mjs
+  // för hela motiveringen. Gäller ALLA JournalEntry, inte bara `regler`-
+  // packet: en oöversatt journal fungerar identiskt som förut (fallback till
+  // den enda, oflaggade sidan), så det finns ingen anledning att smalna av
+  // registreringen till bara ett pack.
+  DocumentSheetConfig.unregisterSheet(JournalEntry, "core", foundry.applications.sheets.journal.JournalEntrySheet);
+  DocumentSheetConfig.registerSheet(JournalEntry, "drakar-och-demoner-expert", DoDEJournalSheet, {
+    makeDefault: true,
+    label: "DODE.Sheet.Journal"
+  });
 
   /**
    * Systeminställningar. Först registrerade inställningarna i projektet

@@ -75,6 +75,88 @@
         "exportSource": null
       },
       "_key": "!journal.pages!yScdCIDjoQuIfwOw.zU04r4iAIhPuPbzJ"
+    },
+    {
+      "_id": "9hh8UU8W9dDmC4CY",
+      "name": "Base Races",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Base Races</h2><p>The basic playable races (Rollpersonen p.9-10).</p><h4>Elf</h4><p>Elves look roughly like humans except they have cat-like eyes and pointed ears. Elves are immortal in that they cannot die of old age, and due to their great age and vast experience they are often very wise and radiate confidence and wisdom. They are shorter and rather slightly built, but on the other hand more agile than humans. They also have much better sight and hearing. Elves are suited to all kinds of professions but are often magicians or rangers.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR -1, AGI +3, INT +3, CHA +2</td></tr>\n<tr><th>Size (SIZ)</th><td>8–14 (normally 11)</td></tr>\n<tr><th>Movement Modifier</th><td>+1</td></tr>\n<tr><th>Background Points (BP)</th><td>25</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Keen senses</strong> <p>+4 FV Spot Danger, +4 FV Listen. Much better sight and hearing.</p><strong>Immortal</strong> <p>Does not age, always starts as Young.</p><strong>Disease immune</strong> <p>Immune to diseases.</p><strong>Little need for sleep</strong> <p>Only sleeps 4 hours/night.</p></td></tr>\n</tbody></table><h4>Duck</h4><p>Picture a large duck with arms instead of wings and you have the duck of Drakar och Demoner. Ducks are small and frail but on the other hand hardy and agile. They are thus not especially well suited as warriors, but better as sailors, merchants, thieves, hunters, or magicians.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR -2, CON +2, AGI +2, CHA -5</td></tr>\n<tr><th>Size (SIZ)</th><td>3–6 (normally 5)</td></tr>\n<tr><th>Movement Modifier</th><td>-2</td></tr>\n<tr><th>Background Points (BP)</th><td>10</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Natural swimming ability</strong> <p>Automatic FV 20 (B5) in Swim.</p><strong>Sneaking ability</strong> <p>Automatic FV 4 in Sneak.</p><strong>Social disadvantage</strong> <p>CHA −5 is a strong social disadvantage (already reflected in the attribute modifiers).</p></td></tr>\n</tbody></table><h4>Dwarf</h4><p>Dwarves are short and stocky and usually have large full beards they are very proud of. The dwarves' great passion is gold and precious stones, so they usually live by mining and crafting in great underground cities. They are highly skilled at most things related to the earth's own elements; smithing, mining, stonecutting, etc. They also have perfect darkvision. Dwarves are both stronger, hardier, and more powerful than humans and therefore often make excellent warriors. Dwarves normally don't become magicians.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR +3, CON +2, PSY +2, CHA -3</td></tr>\n<tr><th>Size (SIZ)</th><td>4–9 (normally 7)</td></tr>\n<tr><th>Movement Modifier</th><td>-2</td></tr>\n<tr><th>Background Points (BP)</th><td>25</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Perfect darkvision</strong> <p>Perfect darkvision.</p><strong>Geology knowledge</strong> <p>+5 FV in Geology (counts as a primary skill).</p><strong>Armor restriction</strong> <p>Normally cannot wear full armor without special crafting.</p></td></tr>\n</tbody></table><h4>Half-elf</h4><p>A half-elf is the offspring of an elf and a human but resembles humans more than elves. They are somewhat more agile than humans and have roughly twice as good hearing and sight. They don't share the elves' immortality but still live very long. They are excellently suited to all professions.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>AGI +2, CHA +1</td></tr>\n<tr><th>Size (SIZ)</th><td>7–16 (normally 12)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>15</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Keen senses</strong> <p>+2 FV Spot Danger, +2 FV Listen. Twice as good hearing and sight compared to humans.</p><strong>Long lifespan</strong> <p>Lives longer than humans (though not immortal).</p><strong>Adaptable</strong> <p>Suited to all professions.</p></td></tr>\n</tbody></table><h4>Halfling</h4><p>Halflings don't grow much more than a meter tall and usually live peacefully as far away from danger and adventure as they can get. When faced with difficult situations, however, they can prove surprisingly resilient and brave. Due to their low strength, halflings rarely become warriors, but their great agility makes them excellently suited as thieves. They normally don't become magicians.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR -4, CON +3, AGI +3, PSY +2</td></tr>\n<tr><th>Size (SIZ)</th><td>3–6 (normally 5)</td></tr>\n<tr><th>Movement Modifier</th><td>-2</td></tr>\n<tr><th>Background Points (BP)</th><td>15</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Skilled at hiding</strong> <p>+4 FV in Hide. Hard to spot when they want to hide.</p><strong>Tasting talent</strong> <p>+1d3 BC in Taste Testing.</p></td></tr>\n</tbody></table><h4>Half-orc</h4><p>Half-orcs are crossbreeds between orcs — cruel, tough, and bloodthirsty creatures with black skin, tusks, and claws — and humans. Half-orcs, however, resemble humans with orcish traits more than the reverse. They are considerably stronger and more powerful than humans, but often have a rather repulsive appearance with a sickly yellow-brown complexion, gnarled limbs, and yellow eye whites. Half-orcs are well suited to all professions.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR +2, CON +2, AGI -1, CHA -3</td></tr>\n<tr><th>Size (SIZ)</th><td>8–18 (normally 13)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>10</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Brawling experience</strong> <p>+4 FV in Brawling.</p><strong>Darkvision</strong> <p>Darkvision.</p><strong>Repulsive appearance</strong> <p>Repulsive appearance (already reflected in the attribute modifiers, CHA −3).</p><strong>Bone magic</strong> <p>Can learn Bone Magic under certain conditions (Svartfolk book).</p></td></tr>\n</tbody></table><h4>Human</h4><p>In most fantasy worlds, humans are the most common people, while elves, dwarves, and halflings live isolated in remote forest and mountain regions. Keep in mind, though, that player characters are meant to be a bit special, a bit beyond the ordinary. Humans are well suited to all professions.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>None (human norm)</td></tr>\n<tr><th>Size (SIZ)</th><td>8–18 (normally 13)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>0</td></tr>\n<tr><th>Source</th><td>Rollpersonen p.9-10</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>No special ability</strong> <p>Nothing specific. Suited to all professions. The most common playable race.</p></td></tr>\n</tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794775168,
+        "modifiedTime": 1788794775168,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!yScdCIDjoQuIfwOw.9hh8UU8W9dDmC4CY"
+    },
+    {
+      "_id": "olkrks3paewc22yf",
+      "name": "Elf Kindreds",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Elf Kindreds (Alver p.22)</h2><p>Elf is the collective name for several sub-kindreds with their own attribute modifiers and special abilities (Alver p.22-24). The base Elf race above represents the most common, half-elf-like variant; the kindreds below are alternatives within the same people.</p><h4>Cave Elf</h4><p>Cave elves live in natural cave systems underground and are skilled artisans with an infallible sense of direction underground.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR -1, CON +1, AGI +2, INT +3, PSY +1, CHA +2</td></tr>\n<tr><th>Size (SIZ)</th><td>7–17 (normally 12)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>25</td></tr>\n<tr><th>Source</th><td>Alver p.22</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Kindred special abilities</strong> <p>Underground elf kindred. Per Alver p.23, a cave elf may roll for the kindred's own special abilities <em>Metal Sense</em> (identifies metals by sight, smell, and touch) and <em>Darksight</em> (sees in total pitch darkness, unlike other elves).</p><p>The Nemesis ability for cave elves is usually dwarves (Alver p.23).</p></td></tr>\n</tbody></table><h4>Grey Elf</h4><p>Grey elves live their lives on and by the sea. A grey elf cannot get seasick and constantly seeks out new experiences.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR -1, CON +2, AGI +1, INT +3, PSY +1, CHA +2</td></tr>\n<tr><th>Size (SIZ)</th><td>5–15 (normally 10)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>25</td></tr>\n<tr><th>Source</th><td>Alver p.22</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Kindred special abilities</strong> <p>Sea-nomadic elf kindred. Per Alver p.23, a grey elf may roll for the kindred's own special abilities <em>Tireless Swimmer</em> (can swim virtually any distance regardless of water temperature) and <em>Friend of Dolphins</em> (telepathic contact with dolphins, who help in emergencies).</p></td></tr>\n</tbody></table><h4>High Elf (GM approval)</h4><p>The oldest and mightiest elf kindred — power-hungry, and the most evil of the elf races. Skilled magicians.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR -2, CON -3, INT +10, PSY +10, CHA +2</td></tr>\n<tr><th>Size (SIZ)</th><td>13–23 (normally 18)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>65</td></tr>\n<tr><th>Source</th><td>Alver p.22</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>GM approval required</strong> <p><strong>⚠ Requires the Game Master's approval.</strong> Alver p.22 explicitly states: <em>\"High elves are not really intended to be used by players as characters, but if the GM allows it, they can work.\"</em></p><p>The extreme INT and PSY modifiers (+10/+10) and the high background point cost (65 BP) are the book's own values, not a balancing decision from this system.</p></td></tr>\n</tbody></table><h4>Injir</h4><p>The Injir are nomadic riders who can handle temperatures from −40 °C to +40 °C.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>CON +1, AGI +2, INT +3, CHA +1</td></tr>\n<tr><th>Size (SIZ)</th><td>7–17 (normally 12)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>25</td></tr>\n<tr><th>Source</th><td>Alver p.22</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Kindred special abilities</strong> <p>Nomadic rider kindred related to the wood elves. Per Alver p.24, an Injir may roll for the kindred's own special abilities <em>Skilled Rider</em> (+4 CL on Ride and Fight Mounted) and <em>Iron Resolve</em> (reduces SP damage by 2 by completely ignoring the pain).</p><p>The Hardy Against the Elements ability grants +20 instead of +15 for the Injir (Alver p.23).</p></td></tr>\n</tbody></table><h4>Dark Elf</h4><p>Dark elves are tall and slender, feared by the people of the surface world and often solitary.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>STR +2, AGI +1, INT +3, PSY +3, CHA -1</td></tr>\n<tr><th>Size (SIZ)</th><td>7–22 (normally 15)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>25</td></tr>\n<tr><th>Source</th><td>Alver p.22</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Kindred special ability</strong> <p>Deep-underground elf kindred with a strong magical affinity. Per Alver p.24, a dark elf may roll for the kindred's own special ability <em>Bloodlust</em> (+3 CL in combat after the first HP of damage dealt to the opponent).</p></td></tr>\n</tbody></table><h4>Wood Elf</h4><p>Wood elves live in the treetops and are the most common elf kindred among adventurers.</p><table><tbody>\n<tr><th>Attribute Modifiers</th><td>AGI +3, INT +3, PSY +1, CHA +2</td></tr>\n<tr><th>Size (SIZ)</th><td>8–18 (normally 13)</td></tr>\n<tr><th>Movement Modifier</th><td>No change</td></tr>\n<tr><th>Background Points (BP)</th><td>30</td></tr>\n<tr><th>Source</th><td>Alver p.22</td></tr>\n<tr><th>Automatic Abilities</th><td><strong>Kindred special ability</strong> <p>Forest-dwelling elf kindred (satari). Per Alver p.24, a wood elf may roll for the kindred's own special ability <em>Excellent Balance</em> (+5 CL on all AGI checks related to balance).</p></td></tr>\n</tbody></table>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 300000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794814246,
+        "modifiedTime": 1788794814246,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!yScdCIDjoQuIfwOw.olkrks3paewc22yf"
     }
   ],
   "folder": null,

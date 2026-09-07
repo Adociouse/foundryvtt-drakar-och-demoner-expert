@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!6sstT8fsLqBTUpcT.R9B4YLK92iCtSP8e"
+    },
+    {
+      "_id": "y37Jky6V7faPIGsT",
+      "name": "Fear & Phobias",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>The Fear Table — When It's Rolled</h2><p>The Fear Table is rolled when a creature is exposed to genuine fear — among other things by spells such as Fear, Panic, and Terror.</p><p>⚠ Creatures that themselves cause fear (e.g. dragons) or entirely lack emotions (e.g. insectoids) never roll on the table. Undead never roll on it either.</p><p><em>Source: Magi-Regelboken (Magic Rulebook, MAG) p.25.</em></p><h2>Rolling on the Table</h2><p>Roll <strong>1d20</strong> and read the result below. Situational modifiers (e.g. how dreadful the source is) are added to the die roll at the GM's discretion.</p><ul><li>If the victim has several simultaneous modifiers, only the HIGHEST applies — they are not added together.</li><li>If several fear rolls are made in the same combat round, only the HARSHEST result applies.</li></ul><p><em>Source: Magi-Regelboken (Magic Rulebook, MAG) p.25.</em></p><h2>The Result Table</h2><table style=\"width:100%\"><thead><tr><th>Roll</th><th>Result</th><th>Effect</th></tr></thead><tbody><tr><td>1–4</td><td>Cautious</td><td>The victim becomes cautious: −2 on all attacks and parries for 1d4 combat rounds.</td></tr><tr><td>5</td><td>Berserk Rage</td><td>The victim goes berserk and charges straight at the cause of their outburst.</td></tr><tr><td>6–14</td><td>Flight</td><td>The victim flees as fast as possible from the source of fear for 3d6 combat rounds.</td></tr><tr><td>15</td><td>Shaking</td><td>The victim falls to the ground, body shaking, until the source of fear disappears. Afterward shaky for 1d4 hours — AGI and all AGI-based skills halved.</td></tr><tr><td>16–18</td><td>Paralyzed</td><td>The victim stands completely still as if paralyzed. In addition, +1 on all subsequent rolls on the table for the rest of the day.</td></tr><tr><td>19</td><td>Hysteria</td><td>The victim becomes hysterical, stays put and screams in terror until the source of fear disappears and the victim is calmed. In addition, +3 on subsequent rolls for the rest of the day.</td></tr><tr><td>20</td><td>Fainting</td><td>The victim faints, unconscious for 2d8 minutes. Risk of permanent harm (see 23–30). In addition, +3 on subsequent rolls for the next 1d3 days.</td></tr><tr><td>21–22</td><td>Prolonged Paralysis</td><td>The victim stands completely paralyzed for 1d4 hours. Risk of permanent harm (see 23–30). In addition, +3 on subsequent rolls for the next 1d4 days.</td></tr><tr><td>23–30</td><td>Heart Attack</td><td>The victim suffers a heart attack: roll a Normal CON check — if it fails the victim dies, if it succeeds the victim faints for 1d8 hours. Permanent harm: roll 1d20 per attribute — a result of 19–20 permanently lowers it by 1. In addition, +5 on subsequent rolls for the next 2d4 days.</td></tr></tbody></table><p><em>Source: Magi-Regelboken (Magic Rulebook, MAG) p.25.</em></p><h2>The Phobia Table</h2><p>The Phobia Table is NOT a direct consequence of a bad Fear Table roll — it is only reached via the <strong>Mishap Table's</strong> result of 20+ (\"Total memory loss\"), when a magician fumbles a cast. The victim then gains the rolled phobia for 1d8 months, in addition to the Mishap Table's other effects.</p><table style=\"width:100%\"><thead><tr><th>1d10</th><th>Phobia</th></tr></thead><tbody><tr><td>1</td><td>Agoraphobia — fear of open areas</td></tr><tr><td>2</td><td>Claustrophobia — fear of being enclosed</td></tr><tr><td>3</td><td>Demophobia — fear of crowds</td></tr><tr><td>4</td><td>Ailurophobia — fear of felines</td></tr><tr><td>5</td><td>Entomophobia — fear of insects</td></tr><tr><td>6</td><td>Ophiophobia — fear of snakes</td></tr><tr><td>7</td><td>Scotophobia — fear of darkness</td></tr><tr><td>8</td><td>Dendrophobia — fear of trees</td></tr><tr><td>9</td><td>Thalassophobia — fear of the sea</td></tr><tr><td>10</td><td>Xenophobia — fear of strangers</td></tr></tbody></table><p>See \"Using Magic\" for the full Mishap Table and when it's rolled.</p><p><em>Source: Magi-Regelboken (Magic Rulebook), 0-Magi edition, p.8.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794417503,
+        "modifiedTime": 1788794417503,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!6sstT8fsLqBTUpcT.y37Jky6V7faPIGsT"
     }
   ],
   "folder": null,

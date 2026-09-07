@@ -6,9 +6,9 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 
 **System id:** `drakar-och-demoner-expert`
 **Foundry compatibility:** minimum v12, verified against v14
-**Client language:** Swedish (`lang/sv.json`) and English (`lang/en.json`) UI translations are both available in Foundry's language picker.
+**Client language:** Swedish (`lang/sv.json`) and English (`lang/en.json`) for all UI chrome (field labels, buttons, notifications, chat cards). The `regler` (rules) compendium's 11 rules pages are also fully translated and switch automatically with the client's language (one `JournalEntryPage` per language in the same document — see "Known limitations").
 
-> **Note:** the game content (compendiums, rules) is in Swedish only, regardless of the chosen client language — this is a translation of the project README, not of the system's game data. See "Known limitations" below.
+> **Note:** the rest of the game content (compendiums — weapons, spells, races, professions, monsters) is in Swedish only, regardless of the chosen client language — this is a translation of the project README, not of the system's game data. See "Known limitations" below.
 
 ## Getting started
 
@@ -95,7 +95,7 @@ The load table (`system.encumbrance`, Spelarboken p.44) sums carried weight (wor
 | `monster` | 242 creatures for the NPC/monster actor type (all of Monsterboken 1 AND 2, plus all of Monsterboxen II — including combat statblocks for the peoples that also exist as playable races — plus a full "Tung stridshäst" (Heavy war horse) statblock, Krigarens Handbok p.27-28) |
 | `magiska-foremal` | Magic items — GM-only pack, kept separate from the player-visible shop |
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
-| `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks. `regler` also holds a Races and a Professions overview page (all races/professions in table form), plus full rules pages for Movement, Carrying Capacity & Encumbrance, Riding & Mounts, Combat, Using Magic, Fear & Phobias, Hit Locations & Damage, and Weapons & Armor |
+| `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks. `regler` also holds a Races and a Professions overview page (all races/professions in table form), plus full rules pages for Movement, Carrying Capacity & Encumbrance, Riding & Mounts, Combat, Using Magic, Fear & Phobias, Hit Locations & Damage, and Weapons & Armor. All 11 pages are fully translated to English and switch automatically with the client's language setting (see "Known limitations") — `sl-regler`/`tabeller` remain Swedish-only |
 | `journaler` (shown as "Magiskolreferenser") | 15 auto-generated school reference pages (14 magic schools, including Portalmagi, + General spells), one per school, with a spell/minor-spell table compiled from the `besvarjelser` compendium (regenerated via `scripts/build/generate-journal-summaries.mjs` whenever spells change), plus real description text for 13 of 15 (Alkemi/General spells still lack source text) |
 | `scener` | Ready-made scenes, including the character wizard's own backdrop scene |
 
@@ -113,6 +113,7 @@ Compendium content is edited as JSON under `packs/<name>/_source/`, then compile
 - **~122 of 475 spells only have a compressed one-line summary** instead of the book's actual description text (left over from the first 2026-07-27 porting pass) — being upgraded school by school in the same pass as catalogue completion. General spells, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Demonologi, and Portal Magic are fully done; Animism, Elementarmagi, Harmonism, Häxkonster, and Illusionism remain (complete on the spell list, not on description quality).
 - **Unarmed combat styles are built with a deliberate simplification.** The source material describes a player-composed bundle of techniques sharing a single skill value; the current implementation instead gives each technique its own, independent skill value (the same model used for weapon techniques) — an explicit, documented deviation, not a bug.
 - **The Svartfolk (Dark Folk) supplement hasn't been started.**
+- **Only the `regler` compendium's 11 rules pages are translated to English** — all other compendium content (weapons, spells, races, professions, monsters, `sl-regler`, `journaler`) and the wizard's own longer explanatory text remain Swedish-only regardless of client language. The mechanism (one English `JournalEntryPage` per Swedish page, filtered against `game.i18n.lang` with an automatic fallback to Swedish if no translation exists) is built to generalize to more compendiums if that's ever requested.
 - **Heroic abilities (HH p.20/46-48) can't be spent yet.** The heroic-deeds table (HH p.6-7) already rolls during character creation and correctly accumulates heroic points as a currency — but the separate 18-row table that currency is meant to be spent against, plus a UI for doing so, aren't built.
 - The UI chrome has an English translation (`lang/en.json`), but the game content itself (compendiums, rules text) is Swedish-only regardless of the chosen client language.
 - See code comments marked `⚠` for specific, deliberately flagged rule deviations or simplifications.

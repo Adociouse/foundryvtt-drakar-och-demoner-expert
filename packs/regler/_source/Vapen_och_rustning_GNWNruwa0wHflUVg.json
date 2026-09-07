@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!GNWNruwa0wHflUVg.N7fURZE6oTGOHRxP"
+    },
+    {
+      "_id": "pCVspVH0N5KtrNh7",
+      "name": "Weapons & Armor",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Weapon Categories</h2><p>Every weapon belongs to one of three categories, which determine which combat rules apply (see \"Combat\"):</p><table style=\"width:100%\"><thead><tr><th>Category</th><th>Means</th></tr></thead><tbody><tr><td>Melee</td><td>The opponent must normally stand in the adjacent square (see \"Weapon Length &amp; Reach\" below). Can both parry and be parried against.</td></tr><tr><td>Ranged (projectile)</td><td>Bow, crossbow, sling, blowgun. Can never parry or be parried against.</td></tr><tr><td>Thrown</td><td>Thrown weapons. Can be parried if the defender has a shield and sees the weapon thrown.</td></tr></tbody></table><p><em>Source: Spelarboken (Player's Book, SB) p.28-31, Grundregelboken (Core Rulebook, REG) p.58-59.</em></p><h2>Weapon Groups</h2><p>Weapon skills are grouped by weapon type. If a character already has a trained skill in a group, the OTHER skills in the same group automatically get a floor: half (rounded down) of the group's best skill's effective FV. You therefore never have to start completely from zero on a new weapon just because you're already skilled with a related one.</p><table style=\"width:100%\"><thead><tr><th>Group</th><th>Examples</th></tr></thead><tbody><tr><td>Daggers</td><td>Dagger, Parrying dagger</td></tr><tr><td>One-handed swords</td><td>Shortsword, Broadsword, Scimitar, Bastard sword</td></tr><tr><td>One-handed blunt weapons</td><td>Club, War hammer, Morning star, Raven's beak, and others</td></tr><tr><td>One-handed axes</td><td>Hand axe, War axe, Bearded axe, Broad axe</td></tr><tr><td>Two-handed weapons</td><td>Two-handed sword, Two-handed axe</td></tr><tr><td>Thrusting weapons</td><td>Short spear, Long spear, Lance, Trident, Spetum, Partisan, Pole axe, Glaive</td></tr><tr><td>Chain weapons</td><td>War flail, War scourge</td></tr><tr><td>Polearms</td><td>Wooden staff, Halberd, Pole axe, Pike</td></tr><tr><td>Bows</td><td>Small bow, Short bow, Long bow, Composite bow</td></tr><tr><td>Crossbows</td><td>Light crossbow, Heavy crossbow, Arbalest</td></tr><tr><td>Slings</td><td>Sling, Staff sling</td></tr><tr><td>Thrown weapons</td><td>Throwing spear, Throwing knife, Throwing axe, Throwing star</td></tr><tr><td>Whip</td><td>Whip</td></tr><tr><td>Shields</td><td>Targe, Buckler, Round shield, Kite shield, and others</td></tr><tr><td>Blowgun</td><td>Blowgun</td></tr></tbody></table><p><em>Source: Rollpersonen (The Character, RP) p.60.</em></p><h2>Weapon Length &amp; Reach</h2><p>Normally a melee opponent must stand in the adjacent square. Longer weapons reach further, and with them you can also attack through squares occupied by other combatants:</p><table style=\"width:100%\"><thead><tr><th>Length</th><th>Weapon</th><th>Reach</th></tr></thead><tbody><tr><td>0</td><td>Dagger, sword, axes, clubs, and others</td><td>1 square</td></tr><tr><td>1</td><td>Two-handed sword, two-handed axe, halberd, partisan, glaive, spetum, pole axe, short spear, whip, trident</td><td>2 squares</td></tr><tr><td>2</td><td>Long spear, lance</td><td>3 squares</td></tr><tr><td>3</td><td>Pike</td><td>4 squares</td></tr></tbody></table><p><em>Source: Spelarboken (Player's Book, SB) p.35.</em></p><h2>Damage Bonus</h2><p>Damage bonus is added to damage on a successful MELEE ATTACK (never a ranged attack) and depends on STR and SIZ together:</p><table style=\"width:100%\"><thead><tr><th>STR + SIZ</th><th>Damage bonus</th></tr></thead><tbody><tr><td>≤26</td><td>+0</td></tr><tr><td>27–29</td><td>+1</td></tr><tr><td>30–32</td><td>+1d2</td></tr><tr><td>33–40</td><td>+1d4</td></tr><tr><td>41–50</td><td>+1d6</td></tr><tr><td>51–60</td><td>+1d10</td></tr><tr><td>61–80</td><td>+2d6</td></tr><tr><td>81–100</td><td>+3d6</td></tr><tr><td>101–140</td><td>+4d6</td></tr><tr><td>141+</td><td>+5d6</td></tr></tbody></table><p><em>Source: Rollpersonen (The Character, RP) p.25.</em></p><h2>Weapon Material &amp; Damage Type</h2><p>Every weapon has a MATERIAL (mundane, silver, or magical) and a DAMAGE TYPE (slash, pierce, or blunt). Some creatures are immune, take halved damage, or take doubled damage from a specific material or damage type — always checked AFTER the armor's absorption has been subtracted.</p><p>For ranged weapons it is the AMMUNITION's material (the arrow, bolt, sling stone) that decides, not the bow or crossbow itself — a silver arrow shot from an entirely ordinary bow counts as silver.</p><p><em>Source: Monsterboken 1 (Monster Book 1, MB1) p.91 and others.</em></p><h2>Hard-to-Parry Weapons — Chain Weapons and Whip</h2><p>Chain weapons (e.g. War flail, War scourge) and the Whip are difficult to control both for the wielder and for whoever tries to parry them:</p><ul><li>A raw attack roll of 18 or higher is tested against an extra roll — higher than your own FV (or a new raw 20) counts as a fumble, otherwise as a failure.</li><li>Every parry attempt against the weapon — with a weapon OR a shield — has its CL HALVED.</li></ul><p><em>Source: Spelarboken (Player's Book, SB) p.33.</em></p><h2>Strength Requirements</h2><ul><li>Weapon's STR group ONE level too high for the user — the weapon can be used two-handed (if the grip allows) as its own skill.</li><li>Weapon's STR group TWO levels or more too high — CL is halved. Using it two-handed does not help.</li><li>A weapon marked \"1-2H\" requires, to be used one-handed, a STR group ONE STEP HIGHER than the weapon's stated requirement.</li></ul><p><em>Source: Grundregelboken (Core Rulebook, REG) p.58.</em></p><h2>Armor</h2><p>Armor provides absorption (Abs) against damage. See \"Hit Locations &amp; Damage\" for how absorption is calculated per body part, and \"Combat\" for shields' break value (BV) and what a shield grants in actions per combat round.</p><p><em>Source: Spelarboken (Player's Book, SB) p.27, p.38.</em></p><h2>Weapon Techniques</h2><p>Beyond the regular weapon skill, a character can learn separate weapon techniques — for example breaking an opponent's weapon or aiming a disarming blow. Each technique is its own secondary skill, distinct from the weapon skill itself.</p><p><em>Source: Krigarens Handbok (Warrior's Handbook, KH) p.38-40.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794543419,
+        "modifiedTime": 1788794543419,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!GNWNruwa0wHflUVg.pCVspVH0N5KtrNh7"
     }
   ],
   "folder": null,

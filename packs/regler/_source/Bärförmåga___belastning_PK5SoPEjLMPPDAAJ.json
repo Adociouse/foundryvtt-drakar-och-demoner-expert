@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!PK5SoPEjLMPPDAAJ.OIYggeT6M6LEHROn"
+    },
+    {
+      "_id": "qZLT2BNX0mgXXAhe",
+      "name": "Carrying Capacity & Encumbrance",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>A character's normal carrying capacity equals <strong>STR in kg</strong>. Carrying more forces them to move more slowly. The encumbrance affects Movement, AGI, <strong>and</strong> CL on all AGI-based skills at once — <em>\"None of these values can drop below 1.\"</em></p><table style=\"width:100%\"><thead><tr><th>Encumbrance</th><th>Modifier</th><th>Other</th></tr></thead><tbody><tr><td>&lt; STR×1</td><td>±0</td><td></td></tr><tr><td>STR×1 – STR×2</td><td>−1</td><td>Cannot swim, run, or sprint</td></tr><tr><td>STR×2 – STR×3</td><td>−2</td><td>Cannot swim, run, or sprint</td></tr><tr><td>STR×3 – STR×4</td><td>−4</td><td>Cannot swim, run, or sprint</td></tr><tr><td>STR×4 – STR×5</td><td>−6</td><td>Cannot swim, run, or sprint</td></tr><tr><td>STR×5 – STR×6</td><td>−8</td><td>Cannot swim, run, or sprint.<br>No AGI-based skills can be used.</td></tr></tbody></table><p><strong>Three rules from the text govern what counts toward the encumbrance:</strong></p><ul><li><em>\"Ordinary clothing is not counted when calculating encumbrance.\"</em></li><li><em>\"Only half the weight of armor worn on the body is counted\"</em> — applies only to equipped armor.</li><li><em>\"When calculating how long one can exert oneself, half the carried weight (in kg) is subtracted from CON.\"</em> — a separate endurance mechanic, not the same as the modifier above.</li></ul><p>⚠ <strong>Deliberate, documented deviation (Johan, 2026-09-06):</strong> all item weights were migrated from the Magi Rulebook's older BEP table to kg per the Player's Book's own errata (p.12): <em>\"These rules replace any conflicting rules in Magi\"</em> and <em>\"One (1) BEP equals 3 kg in these cases.\"</em> The ×3 factor is correct per the errata, but a sample check against the Player's Book's OWN kg-priced equipment lists showed that only 1 of 19 compared items (Hand axe) actually matches the value ×3 gives — the Magi book's and Player's Book's lists appear to have been authored independently for the same items, not a pure unit conversion of the same number. The migration was run anyway (the only practical path without a full re-transcription of the Player's Book's entire equipment list), rather than blocking the entire movement/encumbrance feature on a curation pass. A possible future item-by-item reconciliation remains an open backlog item.</p><p><em>Source: Spelarboken (Player's Book, SPB) p.44, with errata from p.12. Replaces the Magi Rulebook's p.43 table in BEP, which this page previously showed.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794367832,
+        "modifiedTime": 1788794367832,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!PK5SoPEjLMPPDAAJ.qZLT2BNX0mgXXAhe"
     }
   ],
   "folder": null,

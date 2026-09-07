@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!W7K4T7wpkVXUEDku.D2Eq5xbTZ2bHLr0Z"
+    },
+    {
+      "_id": "fNLAD6X1BLub3dEX",
+      "name": "Grade Tables",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>The multiplier at the intersection of effect grade and attribute is multiplied by the value the undead had in life. The product is the undead's new value — round fractions up. Effect grades higher than 5 use column 5.</p><h2>Skeleton</h2><table style=\"width:100%\"><thead><tr><th>Attribute</th><th>Grade 1</th><th>Grade 2</th><th>Grade 3</th><th>Grade 4</th><th>Grade 5</th></tr></thead><tbody><tr><td>STR</td><td>0.4</td><td>0.8</td><td>1.2</td><td>1.6</td><td>2.0</td></tr><tr><td>AGI</td><td>0.2</td><td>0.4</td><td>0.6</td><td>0.8</td><td>1.0</td></tr><tr><td>INT</td><td>0.05</td><td>0.10</td><td>0.15</td><td>0.20</td><td>0.25</td></tr></tbody></table><h2>Zombie</h2><table style=\"width:100%\"><thead><tr><th>Attribute</th><th>Grade 1</th><th>Grade 2</th><th>Grade 3</th><th>Grade 4</th><th>Grade 5</th></tr></thead><tbody><tr><td>STR</td><td>0.6</td><td>1.2</td><td>1.8</td><td>2.4</td><td>3.0</td></tr><tr><td>AGI</td><td>0.1</td><td>0.2</td><td>0.3</td><td>0.4</td><td>0.5</td></tr><tr><td>INT</td><td>0.05</td><td>0.10</td><td>0.15</td><td>0.20</td><td>0.25</td></tr></tbody></table><h2>Mummy</h2><table style=\"width:100%\"><thead><tr><th>Attribute</th><th>Grade 1 <sup>1</sup></th><th>Grade 2 <sup>1</sup></th><th>Grade 3 <sup>2</sup></th><th>Grade 4 <sup>2</sup></th><th>Grade 5 <sup>3</sup></th></tr></thead><tbody><tr><td>STR</td><td>1.2</td><td>2.4</td><td>3.6</td><td>4.8</td><td>6.0</td></tr><tr><td>AGI</td><td>0.1</td><td>0.2</td><td>0.3</td><td>0.4</td><td>0.5</td></tr><tr><td>INT</td><td>0.2</td><td>0.4</td><td>0.6</td><td>0.8</td><td>1.0</td></tr></tbody></table><p><sup>1</sup> The embalmer must have FV 3 in their craft. <sup>2</sup> FV 4. <sup>3</sup> FV 5.</p><p>Activating a magical undead costs, in addition to everything else, <strong>1 grade per 20 SIZ</strong> of the victim. The undead's PSY equals the number of PSY points the magician invested in the spell. The undead retains all skills except those based on INT; those based on AGI and STR are also multiplied by the multiplier above.</p><p><em>Source: Magi-regelboken (Magic Rulebook) p.23 (the Animate Dead spell).</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794333017,
+        "modifiedTime": 1788794333017,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!W7K4T7wpkVXUEDku.fNLAD6X1BLub3dEX"
     }
   ],
   "folder": null,

@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!KgnhtRVUy1sZJopf.f2kNJT0YHLCoOomY"
+    },
+    {
+      "_id": "m6Lz2GEvxsYQ4eME",
+      "name": "Riding & Mounts",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Ride Rolls in Combat</h2><p>Mounted combat is governed by the skills <strong>Ride</strong> and/or <strong>Fight Mounted</strong>. Every time you enter combat you make a Ride roll to stay in the saddle — the roll applies for the ENTIRE fight. If you gallop during combat, you must instead make a new Ride roll every combat round.</p><p>With <strong>Fight Mounted FV 5+</strong> you almost always avoid this: only ONE roll at the start of a galloping fight, not every round. The skill also lets you use ranged weapons from horseback without penalty, and you can use either Fight Mounted or Ride to resolve mounted maneuvers.</p><p><em>Source: Krigarens Handbok (Warrior's Handbook, KH) p.27.</em></p><h2>The Mount Table</h2><p>Mounted combat assumes a war horse. Lesser mounts give a penalty to Ride/Fight Mounted in combat:</p><table style=\"width:100%\"><thead><tr><th>Mount</th><th>Penalty to Ride/Fight Mounted</th></tr></thead><tbody><tr><td>Heavy war horse</td><td>+5</td></tr><tr><td>War horse</td><td>±0</td></tr><tr><td>Good riding horse</td><td>−5</td></tr><tr><td>Riding horse</td><td>−10</td></tr><tr><td>Unicorn</td><td>−5</td></tr><tr><td>Griffin</td><td>−5</td></tr><tr><td>Centaur</td><td>±0</td></tr><tr><td>Pegasus</td><td>−5</td></tr><tr><td>Dragon</td><td>−5</td></tr></tbody></table><p>A riding horse corresponds to a small horse in the core rules, a war horse to a large horse. See the packaged NPC <strong>\"Heavy War Horse\"</strong> in the monster compendium for a full stat block.</p><p><em>Source: KH p.27-28.</em></p><h2>Attacking From a Galloping Horse</h2><p>For any form of attack from the back of a horse at a gallop that has built up speed over at least <strong>15 meters</strong>, the horse's Damage Bonus (SB) may be used instead of your own — you're harnessing the horse's momentum. The exception is ranged weapons and weapons shorter than half a meter (daggers, shortswords).</p><p>If two riders charge each other, BOTH horses' SB is added to the damage for whoever succeeds with the attack.</p><p>Attacking from a galloping horse is difficult: you must succeed at a Ride roll EVERY combat round you fight from a gallop. If you fail, you lose your balance and forfeit your next action. Fight Mounted reduces this to a single roll at the start of the fight.</p><p><em>Source: Spelarboken (Player's Book, SB) p.33 (the original rule for spear attacks from a gallop), generalized by KH p.28 to all qualifying weapons.</em></p><h2>Ranged Weapons From Horseback</h2><p>Without Fight Mounted: <strong>−10 CL</strong> with archery/crossbow/gunpowder weapons when attacking from a GALLOPING horse, <strong>−5 CL</strong> from a TROTTING horse. With Fight Mounted: no penalty at all.</p><p><em>Source: KH p.28.</em></p><h2>Thrown From the Saddle</h2><p>Four situations where you risk being thrown off:</p><ul><li>If you're hit by a weapon that does MORE HP/SP damage than you have left in a hit location: make a Ride roll to stay on.</li><li>If you're hit in the HEAD or CHEST by an attack that does more damage than your SIZ value: you're thrown off, no roll helps.</li><li>If the damage overcomes your SIZ on the Resistance Table: you're thrown off, regardless of hit location.</li><li>If your HP/SP reach 0 in any body part: make a Ride roll EVERY combat round to stay on.</li></ul><p><em>Source: KH p.28.</em></p><h2>Mounted Maneuvers</h2><p>Generally require a successful Ride (or Fight Mounted) roll. Some can be combined with an attack/parry, normally at −5 CL on the weapon/shield.</p><table style=\"width:100%\"><thead><tr><th>Maneuver</th><th>Effect</th></tr></thead><tbody><tr><td>About-face</td><td>Turns the horse 90°, one combat round. Failed Ride: only 45°. −5 CL on attack/parry for as long as the turn lasts.</td></tr><tr><td>Jump</td><td>One action, requires a successful Ride. Attack/parry in the same action: −5 CL.</td></tr><tr><td>Jump From Horseback</td><td>Stand up, throw yourself off, and grab hold of something — requires a successful Ride, then an Acrobatics roll.</td></tr><tr><td>Horse as Shield</td><td>Slide down the horse's side, using it as cover against missiles/riders. A successful Ride is required; you can't do anything else while clinging on. Opponents on the other side of the horse have −10 CL against you.</td></tr><tr><td>Rear Up</td><td>The horse rears and shields you with its body (risking injury itself). A successful Ride, one combat round. You can attack/parry at −5 CL. Opponents directly in front of you have −5 CL.</td></tr><tr><td>Volte</td><td>Ride the horse in a tight circle to keep several opponents at bay. One combat round, a successful Ride. Attack/parry as normal, no penalty.</td></tr></tbody></table><p><em>Source: KH p.29.</em></p><h2>The Horse's Hit Locations</h2><p>Seven hit locations, same as other four-legged animals. If you swing wildly without aiming, there's a 1-in-6 chance you hit the horse instead of your opponent.</p><p><em>Source: KH p.29.</em></p><h2>Carrying Capacity</h2><p>Horses' carrying capacity is NOT calculated like humans'. A horse carries double its STR (in kg) without difficulty — a light war horse (STR 32) carries 64 kg, a heavy war horse (STR 38) carries 76 kg, roughly corresponding to tack and rider. Beyond that, a gradual movement penalty applies:</p><table style=\"width:100%\"><thead><tr><th>Load</th><th>Movement penalty</th></tr></thead><tbody><tr><td>&lt; STR×2</td><td>±0</td></tr><tr><td>STR×2 – STR×3</td><td>−3</td></tr><tr><td>STR×3 – STR×4</td><td>−6</td></tr><tr><td>STR×4 – STR×5</td><td>−9</td></tr><tr><td>STR×5 – STR×6</td><td>−12</td></tr><tr><td>STR×6 – STR×7</td><td>−15</td></tr><tr><td>STR×7 – STR×8</td><td>−18</td></tr><tr><td>STR×8 – STR×9</td><td>−21</td></tr></tbody></table><p>Add together the weight of the rider, their equipment and armor, and any armor worn by the horse itself.</p><p>⚠ <strong>Deviation, decided by the project 2026-09-06:</strong> the Magi Rulebook's mount table (p.46, \"maximum 3×STR BEP, overloaded mounts refuse to move\") and KH's table above are treated as the SAME curve seen from two angles, not a contradiction — the Magi Rulebook's cap, recalculated with the already-decided BEP→kg factor (×3, see \"Carrying Capacity &amp; Encumbrance\"), lands almost exactly on the STR×9 row above. A mount loaded beyond STR×9 kg <strong>refuses to move at all</strong> (coded: `DODE.mountEncumbranceStep` returns `refuses:true`). See CLAUDE.md \"Decided Deviations\" in the system repository for the full reasoning.</p><p><em>Source: KH p.28.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794580057,
+        "modifiedTime": 1788794580057,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!KgnhtRVUy1sZJopf.m6Lz2GEvxsYQ4eME"
     }
   ],
   "folder": null,

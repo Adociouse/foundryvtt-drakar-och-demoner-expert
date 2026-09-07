@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!HYw71ga1Dl00r50g.jgLLX4p4bq2JRzI9"
+    },
+    {
+      "_id": "dUZZpsL2J8uuBxfH",
+      "name": "Hit Locations & Damage",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Body Plan &amp; Hit Location HP</h2><p>If a creature has at least <strong>5 Total HP</strong>, the body is divided into its own hit locations, each with its own max HP derived directly from Total HP. Below 5 Total HP the body isn't divided at all — aimed attacks are meaningless against very small creatures.</p><p>Example, Humanoid (humans, elves, dwarves, and most other two-legged creatures):</p><table style=\"width:100%\"><thead><tr><th>Total HP</th><th>Leg (each)</th><th>Abdomen</th><th>Chest</th><th>Arm (each)</th><th>Head</th></tr></thead><tbody><tr><td>≤7</td><td>3</td><td>3</td><td>4</td><td>2</td><td>3</td></tr><tr><td>8–11</td><td>4</td><td>4</td><td>5</td><td>3</td><td>4</td></tr><tr><td>12–15</td><td>5</td><td>5</td><td>6</td><td>4</td><td>5</td></tr><tr><td>16–20</td><td>6</td><td>6</td><td>7</td><td>5</td><td>6</td></tr><tr><td>21–25</td><td>7</td><td>7</td><td>8</td><td>6</td><td>7</td></tr><tr><td>26–30</td><td>8</td><td>8</td><td>9</td><td>7</td><td>8</td></tr></tbody></table><p>Above 30 Total HP: <strong>+1 to every hit location for every 5 points started</strong> beyond 30.</p><p><em>Source: Rollpersonen (The Character, RP) p.48.</em></p><h2>Body Plans</h2><p>Each body plan has its own set of hit locations and its own hit tables:</p><table style=\"width:100%\"><thead><tr><th>Body Plan</th><th>Used for</th></tr></thead><tbody><tr><td>Humanoid</td><td>Humans, elves, dwarves, and most other two-legged creatures</td></tr><tr><td>Winged Humanoid</td><td>Two-legged creatures with wings</td></tr><tr><td>Quadruped</td><td>Horses, wolves, and other four-legged animals</td></tr><tr><td>Centaur</td><td>Centaurs</td></tr><tr><td>Swan Maiden</td><td>Swan maidens</td></tr></tbody></table><p><em>Source: Rollpersonen (The Character, RP) p.48-50.</em></p><h2>The Hit Tables — Column A and B</h2><p>Which column applies is determined by the defender's stance, not weapon type:</p><ul><li><strong>Column A</strong> — against projectile weapons, or against a melee opponent who is NOT defending themselves.</li><li><strong>Column B</strong> — against a melee opponent who IS defending themselves.</li></ul><p>For Humanoid, Column A is a 1d8 and Column B a 1d10 — a defenseless opponent is thus hit in the head more often (1 chance in 8) than one who defends themselves (2 in 10).</p><table style=\"width:100%\"><thead><tr><th>Roll</th><th>Column A (1d8)</th><th>Column B (1d10)</th></tr></thead><tbody><tr><td>1</td><td>Right leg</td><td>Right leg</td></tr><tr><td>2</td><td>Left leg</td><td>Left leg</td></tr><tr><td>3</td><td>Abdomen</td><td>Abdomen</td></tr><tr><td>4</td><td>Chest</td><td>Chest</td></tr><tr><td>5</td><td>Chest</td><td>Right arm</td></tr><tr><td>6</td><td>Right arm</td><td>Right arm</td></tr><tr><td>7</td><td>Left arm</td><td>Left arm</td></tr><tr><td>8</td><td>Head</td><td>Left arm</td></tr><tr><td>9</td><td>—</td><td>Head</td></tr><tr><td>10</td><td>—</td><td>Head</td></tr></tbody></table><p>If the attacker instead aims at a specific body part (−5 CL, see \"Combat\"), the hit location is determined directly by the choice — no die is rolled.</p><p><em>Source: Rollpersonen (The Character, RP) p.49.</em></p><h2>Armor per Hit Location</h2><p>Armor consists of named parts (helmet, arm guards, leg guards, cuirass, and others), each with its own coverage. The best plate worn over the specific area hit applies — multiple armor pieces are NEVER stacked on the same location.</p><p><em>Source: Spelarboken (Player's Book, SB) p.27.</em></p><h2>Effects at Zero HP and Critical Damage</h2><p>Two separate thresholds for a hit location:</p><ul><li><strong>HP in the location reaches zero</strong> — the location becomes unusable.</li><li><strong>Damage in a single hit is at least DOUBLE the location's max HP</strong> — critical damage, regardless of how much HP remained there.</li></ul><table style=\"width:100%\"><thead><tr><th>Body part</th><th>At zero HP</th><th>At critical damage</th></tr></thead><tbody><tr><td>Arm or leg</td><td>Unusable — the arm hangs limp, the leg buckles (must kneel)</td><td>Severed or must be amputated — never usable normally again</td></tr><tr><td>Chest or abdomen</td><td>Falls to the ground, unable to do anything until help arrives</td><td>Immediately unconscious and bleeding out within CON combat rounds</td></tr><tr><td>Head</td><td>Unconscious for 1d100−CON minutes (minimum 5)</td><td>Crushed or severed — immediate death</td></tr></tbody></table><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.18, Rollpersonen (The Character, RP) p.50.</em></p><h2>Healing</h2><p>Natural healing at full rest gives <strong>1 HP per week</strong>.</p><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.20.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794500385,
+        "modifiedTime": 1788794500385,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!HYw71ga1Dl00r50g.dUZZpsL2J8uuBxfH"
     }
   ],
   "folder": null,

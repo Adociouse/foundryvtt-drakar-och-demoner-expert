@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!olpQbNVip4cIlmnE.ubToROifnwrRJgkL"
+    },
+    {
+      "_id": "dfZxyxdyW50Tcolf",
+      "name": "Prices, Rooms & Stabling",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Food &amp; drink</h2><table style=\"width:100%\"><thead><tr><th>Dish</th><th>Price</th></tr></thead><tbody><tr><td>Simple vegetable stew</td><td>5 cc</td></tr><tr><td>Meat stew</td><td>10 cc</td></tr><tr><td>Meat cut and turnips</td><td>30 cc</td></tr><tr><td>Good meal (not slum)</td><td>50 cc</td></tr><tr><td>Luxury meal (not slum/poor)</td><td>10 sc</td></tr><tr><td>Banquet</td><td>20 sc</td></tr><tr><td>Beer (tankard)</td><td>2 cc</td></tr><tr><td>Mead (tankard)</td><td>2 cc</td></tr><tr><td>Cider (mug)</td><td>1 cc</td></tr><tr><td>Wine (mug)</td><td>3 cc</td></tr></tbody></table><h2>Lodging (per night)</h2><table style=\"width:100%\"><thead><tr><th>Room</th><th>Price</th></tr></thead><tbody><tr><td>Dormitory</td><td>3 sc</td></tr><tr><td>Double room</td><td>5 sc</td></tr><tr><td>Single room</td><td>7 sc</td></tr></tbody></table><h2>Stabling (per day)</h2><table style=\"width:100%\"><thead><tr><th>Animal</th><th>Price</th></tr></thead><tbody><tr><td>Donkey/Mule</td><td>7 cc</td></tr><tr><td>Pony</td><td>6 cc</td></tr><tr><td>Light + medium horse</td><td>10 cc</td></tr><tr><td>Large horse</td><td>15 cc</td></tr><tr><td>Ox</td><td>9 cc</td></tr><tr><td>Elephant (not allowed in cities)</td><td>10 sc</td></tr><tr><td>Legendary animal (hippogriff, pegasus, etc.)</td><td>5 sc</td></tr></tbody></table><h2>Entertainment</h2><p>Characters throw coins to the entertainers as payment. If a character owns less than 30 cc, they don't need to pay.</p><table style=\"width:100%\"><thead><tr><th>Entertainer</th><th>Payment</th></tr></thead><tbody><tr><td>Musician</td><td>1d6 cc</td></tr><tr><td>Dancing girls (male characters)</td><td>1d10 cc</td></tr><tr><td>Dancing girls (female characters)</td><td>1d3−1 cc</td></tr><tr><td>Jester</td><td>1d8 cc</td></tr></tbody></table><p><em>Source: Magi-regelboken (Magic Rulebook) p.48. Four types of inns: fine, normal, poor, and slum. An inn with no lodging is called a tavern.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794122269,
+        "modifiedTime": 1788794122269,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!olpQbNVip4cIlmnE.dfZxyxdyW50Tcolf"
     }
   ],
   "folder": null,

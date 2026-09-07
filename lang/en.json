@@ -67,7 +67,8 @@
       "Vapen": "Weapon",
       "Rustning": "Armor",
       "Besvarjelse": "Spell",
-      "Handlare": "Merchant (shop)"
+      "Handlare": "Merchant (shop)",
+      "Journal": "Rules page (language-gated)"
     },
     "Skill": {
       "New": "New skill",

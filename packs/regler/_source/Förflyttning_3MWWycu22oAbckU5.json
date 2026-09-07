@@ -38,6 +38,47 @@
         "exportSource": null
       },
       "_key": "!journal.pages!3MWWycu22oAbckU5.gqQiYJ439aHNvyAV"
+    },
+    {
+      "_id": "7zoXvX3HD1AsloC7",
+      "name": "Movement",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Movement</h2><p>Movement indicates how many squares a character can move in a combat round (SR). Look up the <strong>sum of SIZ + CON + AGI</strong> in the table below.</p><table style=\"width:100%\"><thead><tr><th>SIZ+CON+AGI</th><th>Squares/SR</th></tr></thead><tbody><tr><td>≤ 11</td><td>7</td></tr><tr><td>12 – 20</td><td>8</td></tr><tr><td>21 – 29</td><td>9</td></tr><tr><td>30 – 38</td><td>10</td></tr><tr><td>39 – 47</td><td>11</td></tr><tr><td>48 – 56</td><td>12</td></tr><tr><td>57 – 65</td><td>13</td></tr><tr><td>66 – 74</td><td>14</td></tr><tr><td>75 – 83</td><td>15</td></tr><tr><td>84 – 92</td><td>16</td></tr></tbody></table><p>Above 92: <strong>+1 square for every additional +8.</strong></p><p><em>Source: Rollpersonen (The Character, RP) p.25.</em></p><h2>Racial Modifiers</h2><table style=\"width:100%\"><thead><tr><th>Race</th><th>Modifier</th></tr></thead><tbody><tr><td>Duck</td><td>−2</td></tr><tr><td>Elf</td><td>+1</td></tr><tr><td>Dwarf</td><td>−2</td></tr><tr><td>Halfling</td><td>−2</td></tr><tr><td>Other races</td><td>±0</td></tr></tbody></table><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.32.</em></p><h2>Effect of Encumbrance</h2><p>If a character carries more than their carrying capacity (STR kg), Movement is reduced per its own table — see the separate rules page <strong>\"Carrying Capacity &amp; Encumbrance\"</strong>. The same modifier also reduces AGI and CL on AGI-based skills.</p><h2>Square Size &amp; Time</h2><p>1 square corresponds to <strong>1.5 meters</strong>. A combat round (SR) corresponds to roughly <strong>five seconds</strong>.</p><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.15, p.25-26.</em></p><h2>Movement in Combat</h2><p>The rest of the combat rules (turn order, attack/parry, hit locations, damage) are on the separate rules page <strong>\"Combat\"</strong>.</p><p>During a combat round you choose <strong>one</strong> action. How much you may move depends on which:</p><table style=\"width:100%\"><thead><tr><th>Level</th><th>Limit</th><th>Meaning</th></tr></thead><tbody><tr><td>Take part in melee</td><td>At most ½ Movement</td><td>May move at most half their modified Movement <strong>before</strong> the fight (rounded down) and still attack/be parried the same SR.</td></tr><tr><td>Full Movement</td><td>1× Movement</td><td>May be interrupted to seek cover or parry a blow — you stop where you stood when the movement ended.</td></tr><tr><td>Run</td><td>2× Movement</td><td>\"You may not do anything else during the combat round, not even shout a message. You are completely unaware of your surroundings.\"</td></tr><tr><td>Sprint</td><td>3× Movement</td><td>Requires no armor or backpack, empty hands, and suitable clothing (GM's judgment).</td></tr></tbody></table><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.15-16.</em></p><h2>Terrain</h2><p><em>\"A person wading through a swamp … has their full Movement reduced, but it's the GM who decides by how much.\"</em> The books provide no terrain table of their own — the GM judges difficult terrain (swamp, deep snow, steep climbing, etc.) case by case at the table.</p><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.15.</em></p><h2>Swimming</h2><p><em>\"Under no circumstances can you swim in armor, not even leather armor. You can stay afloat in leather armor, but for no more than CON/2 minutes.\"</em> This applies <strong>regardless of weight</strong> — an unencumbered character in full armor still cannot swim. This is a COMPLETELY SEPARATE restriction, distinct from the encumbrance-based swimming ban above (which applies from STR×1 in carried weight, see \"Carrying Capacity &amp; Encumbrance\").</p><p><em>Source: Rollpersonen (The Character, RP) p.55.</em></p><h2>Monster Movement Codes</h2><p>In monster stat blocks, Movement is given as a number followed by a letter code showing HOW the creature moves:</p><table style=\"width:100%\"><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody><tr><td>L</td><td>Land — movement on land</td></tr><tr><td>F</td><td>Flying</td></tr><tr><td>S</td><td>Swimming</td></tr><tr><td>B</td><td>Burrowing</td></tr><tr><td>A</td><td>Any environment</td></tr></tbody></table><p>A creature can have several codes at once (e.g. \"F30/L26\" — 30 squares flying, 26 squares on land).</p><p><em>Source: Spelledarboken (Game Master's Book, SLB) p.25-26.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788794471214,
+        "modifiedTime": 1788794471214,
+        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!3MWWycu22oAbckU5.7zoXvX3HD1AsloC7"
     }
   ],
   "folder": null,

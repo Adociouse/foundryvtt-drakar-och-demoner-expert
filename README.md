@@ -6,7 +6,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 
 **System-id:** `drakar-och-demoner-expert`
 **Foundry-kompatibilitet:** minimum v12, verifierad mot v14
-**Klientspråk:** svenska (`lang/sv.json`) och engelska (`lang/en.json`) — spelinnehållet (kompendier, regeltexter) är på svenska oavsett vald klientspråk.
+**Klientspråk:** svenska (`lang/sv.json`) och engelska (`lang/en.json`) för allt UI-chrome (fältetiketter, knappar, notiser, chattkort). `regler`-kompendiets 11 regelsidor är dessutom fullt översatta och växlar automatiskt med klientens språkval (en `JournalEntryPage` per språk i samma dokument — se "Kända begränsningar"). Övrigt kompendieinnehåll (vapen, besvärjelser, raser, yrken, monster, `sl-regler`/`journaler`) är på svenska oavsett klientspråk.
 
 ## Kom igång
 
@@ -93,7 +93,7 @@ Bördetabellen (`system.encumbrance`, Spelarboken s.44) summerar buren vikt (rus
 | `monster` | 242 varelser för NPC/monster-actortypen (hela Monsterboken 1 OCH 2, plus hela Monsterboxen II — inklusive stridsstatblock för de folkslag som också finns som spelbara raser — samt ett fullt statblock för "Tung stridshäst", Krigarens Handbok s.27-28) |
 | `magiska-foremal` | Magiska föremål — GM-only pack, separat från den spelarsynliga butiken |
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
-| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna. `regler` innehåller även en Raser- och en Yrken-översiktssida (samtliga raser/yrken i tabellform), samt fullständiga regelsidor för Förflyttning, Bärförmåga & belastning, Ridning & riddjur, Strid, Att använda magi, Skräck & fobier, Träffområden & skador och Vapen & rustning |
+| `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna. `regler` innehåller även en Raser- och en Yrken-översiktssida (samtliga raser/yrken i tabellform), samt fullständiga regelsidor för Förflyttning, Bärförmåga & belastning, Ridning & riddjur, Strid, Att använda magi, Skräck & fobier, Träffområden & skador och Vapen & rustning. Alla 11 sidor är fullt översatta till engelska och växlar automatiskt med klientens språkval (se "Kända begränsningar") — `sl-regler`/`tabeller` är fortfarande enbart svenska |
 | `journaler` (visas som "Magiskolreferenser") | 15 auto-genererade skolreferenssidor (14 magiskolor, inklusive Portalmagi, + Allmänna besvärjelser), en per skola, med en besvärjelse-/minimagitabell sammanställd ur `besvarjelser`-kompendiet (regenereras via `scripts/build/generate-journal-summaries.mjs` varje gång besvärjelser ändras), plus riktig skolbeskrivningstext för 13 av 15 (Alkemi/Allmänna besvärjelser saknar ännu källtext) |
 | `scener` | Färdiga scener, bl.a. rollpersonsskaparens egen bakgrundsscen |
 
@@ -111,6 +111,7 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 - **~122 av 475 besvärjelser har bara en komprimerad en-radssammanfattning** i stället för bokens faktiska beskrivningstext (kvar från 2026-07-27-portens första omgång) — uppgraderas skola för skola i samma pass som katalogkompletteringen. Allmänna besvärjelser, Mentalism, Nekromanti, Röstmagi, Spiritism, Stavmagi, Symbolism, Demonologi och Portalmagi är helt klara på den punkten; Animism, Elementarmagi, Harmonism, Häxkonster och Illusionism kvarstår (klara på spellista, inte på beskrivningskvalitet).
 - **Stridskonster (obeväpnad strid, RP s.56-58/KH s.91-93) är byggt med en medveten förenkling.** Boken beskriver en spelarkomponerad teknikbunt med ett delat färdighetsvärde; den nuvarande implementationen ger i stället varje teknik ett eget, oberoende FV (samma modell som Vapentekniker) — ett uttryckligt, dokumenterat avsteg, inte en bugg.
 - **Svartfolk-supplementet är inte påbörjat.**
+- **Bara `regler`-kompendiets 11 regelsidor är översatta till engelska** — allt annat kompendieinnehåll (vapen, besvärjelser, raser, yrken, monster, `sl-regler`, `journaler`) och wizardens egna längre förklaringstexter är fortfarande enbart svenska, oavsett klientspråk. Mekanismen (en engelsk `JournalEntryPage` per svensk sida, filtrerad mot `game.i18n.lang` med automatisk fallback till svenska om ingen översättning finns) är byggd för att generaliseras till fler kompendier om det efterfrågas.
 - **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.
 - Se kodkommentarer märkta `⚠` för specifika, medvetet flaggade regelavvikelser eller förenklingar.
 
