@@ -58,7 +58,7 @@ export async function rollFV({ actor, label, fv, item = null }) {
     misslyckat: "DODE.RollCard.Misslyckat"
   };
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     "systems/drakar-och-demoner-expert/templates/chat/roll-card.hbs",
     {
       label,

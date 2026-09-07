@@ -685,7 +685,7 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
  *   i stället för att vara ett färdigt resultat.
  */
 export async function postAttackCard(result, { attacker, target = null, weapon, parryItem, ranged, pending = false }) {
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     "systems/drakar-och-demoner-expert/templates/chat/attack-card.hbs",
     buildAttackCardContext(result, { attacker, target, weapon, parryItem, ranged, pendingBanner: pending })
   );

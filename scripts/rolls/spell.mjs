@@ -345,7 +345,7 @@ function buildSpellCardContext(result, { caster, targets = [], pendingBanner = f
  *   (minst ett av) målen.
  */
 export async function postSpellCard(result, { caster, targets = [], pending = false }) {
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     "systems/drakar-och-demoner-expert/templates/chat/spell-card.hbs",
     buildSpellCardContext(result, { caster, targets, pendingBanner: pending })
   );

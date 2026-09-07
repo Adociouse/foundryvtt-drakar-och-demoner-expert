@@ -9,7 +9,7 @@ export async function rollDamage({ actor, label, formula }) {
   const targetName = target?.actor?.name ?? null;
   const finalDamage = Math.max(0, roll.total - targetAbs);
 
-  const content = await renderTemplate(
+  const content = await foundry.applications.handlebars.renderTemplate(
     "systems/drakar-och-demoner-expert/templates/chat/damage-card.hbs",
     { label, formula, rollTotal: roll.total, targetName, targetAbs, finalDamage }
   );
