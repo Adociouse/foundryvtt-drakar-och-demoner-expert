@@ -564,6 +564,88 @@ DODE.specialAbilitiesTable = [
   { range: [78, 999], name: "Hamnbytare", description: "Kan förvandla sig till ett djur (slå 1T6): 1 — varg, 2 — björn, 3 — hök, 4 — hjort, 5 — svan, 6 — katt. Verklig förvandling; övertar djurets egenskaper utom INT och INT-baserade färdigheter" }
 ];
 
+/**
+ * Hjälteförmågor och Mörka hjälteförmågor (HH s.10-15/45-51) — spenderas med
+ * hjältepoäng (system.hjaltepoang), skilt system från DODE.specialAbilitiesTable
+ * ovan (som spenderas med BP vid skapandet ELLER med hjältepoäng post-creation,
+ * se DODE.rollSpecialAbility). Källa: docs/extracts/HH_Hjaltarnas_Handbok_extract.md
+ * (Roll20-projektet), §7 (ljusa) och §19 (mörka).
+ *
+ * Kostnad (boken, samma för båda tabellerna): 5 HP bas för att slå ALLS (ger
+ * +0 bonus), +1 bonus per HP därutöver, max 20 HP totalt (bonus-tak +15,
+ * tabellräckvidd 1-35). Rullas 1T20+bonus. Bara mellan äventyr/under en
+ * vilovecka. Se DODE.rollHeroicAbility.
+ *
+ * ⚠ Medvetet TEXT-ONLY denna runda — ingen av raderna har ett `effect`-fält
+ * som specialAbilitiesTable delvis har. Flera rader (Vapenmästare, Osårbarhet,
+ * Magisk immunitet m.fl.) BESKRIVER mekaniska effekter som skulle kräva nya
+ * effekttyper i special-ability-effects.mjs (permanent CL-bonus mot alla
+ * vapen, skadeimmunitet mot icke-magiska vapen, ...) — samma avgränsning som
+ * redan gäller för gren 1 (Höja CL) i hjältepoäng-fönstret: ingen kirurgi i
+ * stridsmotorn den här rundan. SL tillämpar texten manuellt, samma modell som
+ * redan används för ~35 av specialAbilitiesTable-radernas egna text-only-rader.
+ *
+ * ⚠ Rad "3-5 Järnnäve" (ljusa tabellen): källextraktets OCR hade en trasig,
+ * ensam rad "5" utan tydlig tillhörighet mellan Järnnäve (3-4) och Onda ögat
+ * (6-7). Utökade Järnnäves räckvidd till [3,5] för att täcka luckan i stället
+ * för att gissa fram en 22:a rad — enda stället i hela 35-radersspannet där
+ * källan inte gav en ren, obruten sekvens. Flaggat, inte tyst löst.
+ */
+DODE.heroicAbilitiesTable = [
+  { range: [1, 2], name: "Empati", description: "Känner alltid av andras humör och avsikter; vet om någon är fientligt inställd. Bara avancerad magi kan lura förmågan." },
+  { range: [3, 5], name: "Järnnäve", description: "Varje slag/spark gör alltid maximal skada, inklusive SB. Kan medvetet slå svagare, upp till 5 poäng lägre." },
+  { range: [6, 7], name: "Onda ögat", description: "Beta motståndarens PSY genom ögonkontakt — motståndaren avstår från att anfalla. Ett markerat mål får −3 CL resten av dagen." },
+  { range: [8, 9], name: "Snabbdragning", description: "Att dra ett vapen kostar aldrig en handling; vinner alltid initiativ den stridsrundan. Kan dra ett slag i sista stund (klingan stannar 1 cm från strupen)." },
+  { range: [10, 11], name: "Kraftslag", description: "Spendera 1T6 PSY för att ett träffande slag gör maximal skada inklusive SB. Max 4 gånger/dag." },
+  { range: [12, 13], name: "Snabbslående", description: "Vinner initiativ varje stridsrunda. Möter hjälten en annan Snabbslående gäller vanlig turordning dem emellan." },
+  { range: [14, 15], name: "Projektilparering", description: "Kan parera avståndsvapen med eggvapen, sköld eller stav — måste se avfyrandet eller följa projektilen minst 10 m." },
+  { range: [16, 17], name: "Djurherre", description: "Oprovocerade djur anfaller aldrig hjälten. Kan lugna aggressiva djur (icke-magiskt) genom att beta deras PSY." },
+  { range: [18, 19], name: "Telepati", description: "Kommunicerar utan ord på räckhåll PSY×10 meter." },
+  { range: [20, 21], name: "Orädd", description: "Slår bara på Skräcktabellen för magisk skräck (inte t.ex. drakars närvaro) — annars immun." },
+  { range: [22, 23], name: "Gott läkekött", description: "Läker tre gånger snabbare än normalt, även med läkedroger." },
+  { range: [24, 25], name: "Stålsättning", description: "Tål skada som vid Bärsärkagång (Grundreglerna s.46) — slår PSY i stället för färdighetsslaget." },
+  { range: [26, 27], name: "Magisk talang", description: "Medfödd magisk begåvning — kan spendera EP på magiskolor/besvärjelser utan lärare och träna själv. Kan slå på Vild magi-tabellen om Magi-regelboken används." },
+  { range: [28, 28], name: "Okänslig för eld", description: "Immun mot all icke-magisk eld/hetta, fattar inte eld själv. Utrustning tar normal skada." },
+  { range: [29, 29], name: "Sjätte sinne", description: "Kan inte överraskas. Med magi: alltid minst CL1 på Upptäcka fara. Utan magi: automatisk framgång. Ger en klarare bild av faran." },
+  { range: [30, 30], name: "Vapenmästare", description: "+5 CL med alla vapen, även otränade." },
+  { range: [31, 31], name: "Vilddjuret", description: "I strid, efter att ha tagit KP-skada: SB+1T6, CL+3, en extra handling. Utvecklar en offensiv ovana (äter hjärtan, skalperar, e.dyl.)." },
+  { range: [32, 32], name: "Besatt", description: "En övernaturlig varelse bor i kroppen och ger kraft i svåra stunder (SL-styrt). 25 % chans att varelsens drag tar över i valsituationer." },
+  { range: [33, 33], name: "Gudarnas gunstling", description: "Vid 0 KP: 25-50 % chans (SL avgör exakt) att gudarna återställer KP och botar gifter." },
+  { range: [34, 34], name: "Magisk immunitet", description: "Helt immun mot all magi, även välvillig sådan (t.ex. verkar inte Mula på hjälten)." },
+  { range: [35, 35], name: "Osårbarhet", description: "Kan inte skadas av icke-magiska vapen. Tar normal skada av eld, kyla och magiska/välsignade/förbannade vapen." }
+];
+
+DODE.heroicAbilitiesTableDark = [
+  { range: [1, 2], name: "Järnnäve", description: "Samma som den ljusa förmågan." },
+  { range: [3, 4], name: "Onda ögat", description: "Starkare variant: −5 CL i stället för −3 på det markerade målet." },
+  { range: [5, 6], name: "Snabbdragning", description: "Samma som den ljusa förmågan." },
+  { range: [7, 8], name: "Kraftslag", description: "Samma som den ljusa förmågan." },
+  { range: [9, 10], name: "Snabbslående", description: "Samma som den ljusa förmågan." },
+  { range: [11, 12], name: "Ormögon", description: "Hypnotiserar genom ögonkontakt (beta motståndarens PSY) — styr målet så länge kontrollen underhålls med ett PSY-slag per stridsrunda." },
+  { range: [13, 14], name: "Demontunga", description: "Talar flytande ett demonspråk, FV 20." },
+  { range: [15, 16], name: "Telepati", description: "Samma som den ljusa förmågan." },
+  { range: [17, 18], name: "Mörkersyn", description: "Ser obehindrat i mörker, lika bra som i dagsljus." },
+  { range: [19, 20], name: "Vilddjuret", description: "Samma som den ljusa förmågan." },
+  { range: [21, 22], name: "Stålsättning", description: "Samma som den ljusa förmågan." },
+  { range: [23, 24], name: "Bestens hand", description: "Förvandlar en hand till klor (1 stridsrunda) — gör 1T8 KP + SB." },
+  { range: [25, 26], name: "Projektilparering", description: "Samma som den ljusa förmågan." },
+  { range: [27, 27], name: "Vapenmästare", description: "Samma som den ljusa förmågan." },
+  { range: [28, 28], name: "Okänslig för eld", description: "Samma som den ljusa förmågan." },
+  { range: [29, 29], name: "Sjätte sinne", description: "Samma som den ljusa förmågan." },
+  { range: [30, 30], name: "Mörkerblixt", description: "1T4 KP per spenderad PSY-poäng. Icke-magisk rustning absorberar bara halva skadan. Kan låsa fast ett mål (beta PSY, 1 KP/stridsrunda, chans PSY/2) tills koncentrationen bryts." },
+  { range: [31, 31], name: "Livsutsugning", description: "Genom beröring: dränerar 1T4 FYS eller 1T4 PSY per stridsrunda (beta målets PSY varje runda). Poängen går till hjälten men klingar av, 1/timme." },
+  { range: [32, 32], name: "Gudarnas gunstling", description: "Samma som den ljusa förmågan." },
+  { range: [33, 33], name: "Besatt", description: "Samma som den ljusa förmågan, men den besättande varelsen är alltid en demon." },
+  { range: [34, 34], name: "Mörkerpakt", description: "Efter döden återuppstår hjälten som en dödsgast, ute efter hämnd." },
+  { range: [35, 35], name: "Osårbarhet", description: "Samma som den ljusa förmågan." }
+];
+
+/** Slår upp en rad i Hjälteförmågor/Mörka hjälteförmågor på ett förberäknat 1T20+bonus-totalvärde. */
+DODE.rollHeroicAbility = function (total, dark = false) {
+  const table = dark ? DODE.heroicAbilitiesTableDark : DODE.heroicAbilitiesTable;
+  return table.find((row) => total >= row.range[0] && total <= row.range[1]) ?? null;
+};
+
 // Kaos Väktare s.34-35 (backlog 88), ordagrant: "Denna tabell ersätter den
 // som finns i Grundreglerna" — men bara för Demonolog/Demonjägare/
 // Demonkrigare, och bara för DE RADER boken faktiskt skriver om. Alla andra

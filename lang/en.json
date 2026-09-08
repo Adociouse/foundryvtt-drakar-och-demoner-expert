@@ -81,6 +81,28 @@
       "Roll": "Roll for special ability",
       "BpSpent": "BP to spend (1-40)"
     },
+    "HeroPoints": {
+      "Pool": "Hero points",
+      "Roll": "Roll",
+      "Buy": "Buy",
+      "Spend": "HP to spend",
+      "Spend1": "Spend 1 HP",
+      "NotEnough": "Not enough hero points",
+      "NoTableEntry": "No table entry found for that roll",
+      "SpecialAbility": "Acquire special ability",
+      "SpecialAbilityHint": "HH p.20/46-48: roll on the same table as RP p.25-27 (CONFIG.DODE.specialAbilitiesTable), 2d20 + 2 per HP spent, min 1/max 40 HP. Between adventures only.",
+      "HeroicAbility": "Acquire heroic ability",
+      "HeroicAbilityHint": "HH p.10-15 (light)/p.45-51 (dark): 5-20 HP, bonus = HP−5, roll 1d20+bonus. Dark is the villain/dark-hero variant — choose freely. Between adventures only.",
+      "Table": "Table",
+      "TableLight": "Heroic abilities (light)",
+      "TableDark": "Dark heroic abilities",
+      "ImproveAttribute": "Improve base attribute",
+      "ImproveAttributeHint": "HH p.20/46-48: 5 HP per point, permanent, unlimited. All base attributes except SIZ. Between adventures only.",
+      "Attribute": "Base attribute",
+      "RaiseCl": "Raise CL (GM-handled)",
+      "RaiseClHint": "HH p.20/46-48: 1 HP shifts the outcome one tier up (fumble→failure→success→perfect); a perfect result refunds the point. Usable anytime, even in combat. This button only handles the bookkeeping (deducts 1 HP) — the GM applies the actual outcome shift manually, see docs/dev/SPECIALANFALL_SL_GUIDE.md.",
+      "AwardHint": "Hero points to <strong>{actor}</strong>. HH p.20/46-48 — same pool and spending rules whether the points came from the wizard's heroic-deed roll or were awarded mid-campaign."
+    },
     "Derived": {
       "KP": "Hit Points",
       "Psy": "PSY",
@@ -615,6 +637,9 @@
     "Dialog": {
       "RestPeriod": "Rest period",
       "GrantBonusPoints": "Grant bonus points",
+      "GrantHeroPoints": "Grant hero points",
+      "HeroPoints": "Hero points",
+      "HeroPointsFor": "Hero points — {actor}",
       "GrantSkillTo": "Grant skill to {actor}",
       "NewTwoWeaponCombo": "New Two Weapons combination — {actor}",
       "GrantSpellTo": "Grant spell to {actor}",
@@ -658,6 +683,9 @@
       "HealedAmount": "healed {amount} HP",
       "HeroicDeedLine": "<strong>{name}</strong> ({roll}): +{bp} BP, +{heroPoints} hero points",
       "HeroicDeedsHeading": "Heroic deeds — result ({count} rolls)",
+      "HeroPointsAwardedHeading": "Hero points awarded",
+      "HeroPointsAwardedLine": "{actor} receives <strong>{amount} hero points</strong>.",
+      "RaiseClLine": "{actor} spends 1 hero point to raise CL — confirm with the GM which outcome you land on.",
       "Label": {
         "Attack": "Attack",
         "Cast": "Cast",

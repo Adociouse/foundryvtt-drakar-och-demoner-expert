@@ -42,6 +42,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 | Vapensystem: vapengrupper, Två vapen, Vapentekniker/Vapenakademier, Stridskonster | Klar, med en medveten förenkling på ett område (se nedan) |
 | GM-effekter (person/scen/värld), DoDE-villkor, periodiska effekter (gift m.m.) | Klar, med eget GM-effektfönster (`scripts/apps/gm-effects.mjs`) |
 | Träningsekonomi (post-skapande färdighetsköp), EP-intjäning i spel | Klar, egen `ApplicationV2`-vy |
+| Hjältepoäng-spenderingsfönster (HH s.20/46-48: särskild förmåga, hjälteförmåga, grundegenskap, Höja CL) | Klar, egen `ApplicationV2`-vy (`scripts/apps/hero-points.mjs`) — se "Kända begränsningar" för Höja CL:s bokförings-/regeltillämpningsdelning |
 | Magisystem (kastning, PSY-resurs, minimagi, magiskolor) | Klar, med några medvetna förenklingar (se kodkommentarer) |
 | Språkmekanik (modersmål, främmande språk) | Klar |
 | Schemaversionering + JSON export/import (aktörer, NPC:er, items) | Klar, bygger på Foundrys egna `TypeDataModel.migrateData`/`exportToJSON` |
@@ -113,7 +114,7 @@ Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompilera
 - **Svartfolk finns inte som ett spelbart rasval i rollpersonsguiden.** Svartfolk-supplementets NPC-/monsterinnehåll (SLP:er, arketyper) är byggt och ingår i bestiaryn ovan — men en spelbar Svartfolk-bas-ras med egna undersläkten (samma form som Alv/Alvsläkten) är inte påbörjad.
 - **Bara `regler`-kompendiets 11 regelsidor är översatta till engelska** — allt annat kompendieinnehåll (vapen, besvärjelser, raser, yrken, monster, `sl-regler`, `journaler`) är fortfarande enbart svenska, oavsett klientspråk. Mekanismen (en engelsk `JournalEntryPage` per svensk sida, filtrerad mot `game.i18n.lang` med automatisk fallback till svenska om ingen översättning finns) är byggd för att generaliseras till fler kompendier om det efterfrågas. Rollpersonsguidens egna förklaringstexter (hintar, stegöversikten, granskningssidan) är däremot fullt översatta — se nästa punkt.
 - **Färdighetsnamn, förmågenamn och guidens statiska stegetiketter (t.ex. "Kön", "Nivå", "Ras") är inte lokaliserade** — de är hårdkodade i `scripts/apps/character-wizard.mjs` (STEP_LABELS, kön-/nivåalternativ) respektive `scripts/helpers/config.mjs` (`DODE.skills`), skilt från de mallbaserade texterna. En engelsktalande spelare ser alltså ett engelskt UI-skal runt en handfull svenska sakord.
-- **Hjälteförmågor (HH s.20/46-48) går inte att spendera än.** Hjältedådstabellen (HH s.6-7) rullas redan i guiden vid skapandet och ackumulerar hjältepoäng korrekt — men den separata 18-rads tabell man spenderar den valutan mot, plus ett gränssnitt för att göra det, är inte byggda.
+- **Hjältepoängs "Höja CL"-gren (HH s.20/46-48) automatiserar bara bokföringen.** Knappen drar 1 hjältepoäng ur poolen, men själva regeltillämpningen (vilket steg utfallet flyttas till) görs manuellt av SL — se `docs/dev/SPECIALANFALL_SL_GUIDE.md`. De tre andra grenarna (skaffa särskild förmåga, skaffa hjälteförmåga, förbättra grundegenskaper) är fullt automatiserade.
 - Se kodkommentarer märkta `⚠` för specifika, medvetet flaggade regelavvikelser eller förenklingar.
 
 ## Arkitektur

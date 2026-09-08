@@ -865,6 +865,15 @@
 .dode-roll-card .roll-card-ep { margin-top: 6px; text-align: center; font-size: 0.85em; color: #8a6d1f; }
 .skill-row .ep-tick-mark { opacity: 0.6; font-size: 0.75em; color: #2f6d3a; }
 
+/* ---- Hjältepoäng-spenderingsfönstret (HH s.20/46-48) ---- */
+.dode-hero-points-body { padding: 8px; overflow-y: auto; }
+.hero-points-pool { font-size: 1.1em; margin: 0 0 10px; }
+.hero-points-branch { border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding: 6px 0 10px; margin-bottom: 6px; }
+.hero-points-branch:last-child { border-bottom: none; }
+.hero-points-branch h3 { margin-bottom: 2px; }
+.hero-points-branch .section-hint { font-size: 0.8em; opacity: 0.75; margin: 0 0 6px; }
+.hero-points-attributes { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; font-size: 0.85em; }
+
 /* ---- Stridskort (SLB s.31) ---- */
 .dode-attack-card { font-size: 0.9em; }
 .dode-attack-card .attack-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }

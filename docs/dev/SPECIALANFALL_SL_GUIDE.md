@@ -62,6 +62,20 @@ Relaterat: **RP s.55** — man kan inte simma i NÅGON rustning (inte ens läder
 
 **Varför inte automatiserat:** till skillnad från gift/eld/blödning (som redan har en riktig periodeffekt-motor, `tickPeriodicEffect`, config.mjs) är drunkning ett sällsynt, SL-styrt narrativt förlopp snarare än något som normalt behöver tickas i bakgrunden under en pågående scen — samma "perfection is the enemy of the good"-avvägning som resten av förflyttningspasset. SL håller reda på tiden för hand med numren ovan; ingen egen Combat-/worldTime-krok byggd. **Byggd, mekaniskt genomdriven del:** `system.canSwim` (actor-character.mjs) visar redan en tydlig "Kan inte simma"-indikator på arket när rustning eller börda blockerar simning (se `docs/dev/SL_STRIDSGUIDE.md`) — bara själva UNDER VATTEN-nedräkningen är oautomatiserad.
 
+## Höja CL med hjältepoäng (HH s.20/46-48)
+
+*Tillagd 2026-09-08, hjältepoäng-spenderingsfönstret (plan wise-herding-lemur). Bokföringen är byggd (knappen "Höj CL (SL-hanterat)" i `apps/hero-points.mjs` drar 1 HP), men själva regeltillämpningen är MEDVETET inte automatiserad — se motiveringen nedan.*
+
+Ordagrant ur HH §8 "Hjältepoäng (HP)":
+
+> 1 hjältepoäng skiftar ett stridsslags/färdighetsslags utfall **ett steg uppåt** (fummel → misslyckat → lyckat → perfekt). Om resultatet blir **perfekt** genom detta får spelaren **tillbaka poängen**. Kan användas **när som helst**, även mitt i strid.
+
+1. Spelaren spenderar 1 HP (knappen i hjältepoäng-fönstret sköter avdraget).
+2. **SL flyttar manuellt** det redan slagna utfallet ett steg uppåt på skalan fummel/misslyckat/lyckat/perfekt, och tillämpar konsekvenserna för det NYA utfallet för hand (omräknad skada, EP, etc. — precis som om tärningen från början visat det nya resultatet).
+3. Om det nya utfallet är **perfekt**: ge tillbaka den spenderade poängen direkt (knappen gör INTE detta automatiskt — SL delar ut den via "Dela ut hjältepoäng"-knappen på arket, `helpers/hero-points.mjs#awardHeroPoints`).
+
+**Varför inte automatiserat:** `rollFV()` (`scripts/rolls/fv-roll.mjs`) och `classifiedRoll()` (delad av `attack.mjs`/`spell.mjs`) klassificerar utfallet och KONSUMERAR det (EP-beräkning, skadeberäkning, PSY-kostnad, fummeltabellsdragningar) i samma synkrona block — det finns ingen ren "klassificera→konsumera"-uppdelning att haka en post-hoc-bump på. En sann automatisering hade krävt att bryta isär tre redan hårt testade kärnmotorer, avsiktligt avgränsat bort denna runda (se `docs/DESIGN_DECISIONS.md`).
+
 ---
 
 > **Gift/periodiska effekter och HP/PSY-återhämtning utanför strid flyttat till `docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md`** ("SL-rutin: Effekter och återhämtning utanför strid") — det är inte ett specialanfall, det är samma generella tidsflytt-mekanism som all annan återhämtning redan använder, så den hör hemma i återhämtningskatalogen i stället för här.

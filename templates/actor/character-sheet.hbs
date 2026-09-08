@@ -19,6 +19,9 @@
         <button type="button" data-action="awardBonusEp" title="Dela ut fria bonuspoäng efter äventyret">
           <i class="fa-solid fa-star"></i>
         </button>
+        <button type="button" data-action="awardHeroPoints" title="Dela ut hjältepoäng (HH s.20/46-48)">
+          <i class="fa-solid fa-shield-heart"></i>
+        </button>
         {{!-- EP-strecket — RP s.63: en färdighet ger EP första gången den lyckas
               efter en sovperiod om minst sex timmar (två för alver). Precis som
               den lilla rutan bredvid varje färdighet på det fysiska
@@ -45,6 +48,9 @@
           </button>
         {{/if}}
       {{/if}}
+      <button type="button" data-action="openHeroPoints" title="Spendera hjältepoäng (HH s.20/46-48)">
+        <i class="fa-solid fa-shield-heart"></i> Hjältepoäng
+      </button>
       {{#if canEditInWizard}}
         <button type="button" data-action="openWizardEdit" title="{{localize 'DODE.CharacterSheet.EditInWizardTitle'}}">
           <i class="fa-solid fa-hat-wizard"></i> {{localize "DODE.CharacterSheet.EditInWizard"}}
@@ -101,9 +107,9 @@
       {{/if}}
       {{#if system.hjaltepoang}}
         {{!-- HH s.6-7 (källan)/s.20+46-48 (användningen) — en egen valuta,
-              INTE kroppspoäng. Bara visning tills vidare, ingen spenderingsvy
-              byggd än (se DESIGN_DECISIONS.md backlog). --}}
-        <span title="Hjältepoäng (HH s.6-7/s.20/46-48) — spenderas på hjälteförmågor, ingen spenderingsvy byggd än">Hjältepoäng: {{system.hjaltepoang}}</span>
+              INTE kroppspoäng. Spenderas via knappen "Hjältepoäng" ovan
+              (apps/hero-points.mjs). --}}
+        <span title="Hjältepoäng (HH s.6-7/s.20/46-48) — spendera via knappen ovan">Hjältepoäng: {{system.hjaltepoang}}</span>
       {{/if}}
       {{!-- SL-beviljade extra attacker/pareringar denna stridsrunda (t.ex.
             Vapenmästarens PSY-köpta handling, KH s.8-9) — se

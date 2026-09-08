@@ -59,7 +59,9 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       toggleRest: DoDECharacterSheet.#onToggleRest,
       sleep: DoDECharacterSheet.#onSleep,
       restPeriod: DoDECharacterSheet.#onRestPeriod,
-      awardBonusEp: DoDECharacterSheet.#onAwardBonusEp
+      awardBonusEp: DoDECharacterSheet.#onAwardBonusEp,
+      openHeroPoints: DoDECharacterSheet.#onOpenHeroPoints,
+      awardHeroPoints: DoDECharacterSheet.#onAwardHeroPoints
     },
     form: { submitOnChange: true, closeOnSubmit: false }
   };
@@ -171,6 +173,12 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     new DoDETrainingApp(this.actor).render(true);
   }
 
+  /** Hjältepoäng-spenderingsfönstret (HH s.20/46-48) — se apps/hero-points.mjs. */
+  static async #onOpenHeroPoints() {
+    const { default: DoDEHeroPointsApp } = await import("../apps/hero-points.mjs");
+    new DoDEHeroPointsApp(this.actor).render(true);
+  }
+
   /**
    * ⚠ Magi har ett EGET fönster — SB s.7 ger magiskolor och besvärjelser andra
    * EP-källor än vanliga färdigheter (skolor: bara lärare; besvärjelser: kodex
@@ -271,6 +279,30 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.BonusPointsHeading")}</h3>
         <p>${game.i18n.localize("DODE.Chat.BonusPointsLine", { actor: this.actor.name, amount })}</p></div>`
+    });
+  }
+
+  /**
+   * SL:s hjältepoängutdelning mitt i en kampanj — HH s.20/46-48. Samma pool och
+   * samma spenderingsregler som guidens hjältedåd-slag vid skapandet, se
+   * helpers/hero-points.mjs. Backlog 46:s fulla dådtabell (vad som TRIGGAR en
+   * utdelning) förblir manuell SL-bedömning — den här knappen är bara
+   * bokföringen.
+   */
+  static async #onAwardHeroPoints() {
+    const amount = await DialogV2.prompt({
+      window: { title: game.i18n.localize("DODE.Dialog.GrantHeroPoints") },
+      content: `<p>${game.i18n.localize("DODE.HeroPoints.AwardHint", { actor: this.actor.name })}</p>
+        <input type="number" name="amount" value="1" min="1" autofocus />`,
+      ok: { label: "Dela ut", callback: (event, button) => Number(button.form.elements.amount.value) }
+    });
+    if (!amount || amount <= 0) return;
+    const { awardHeroPoints } = await import("../helpers/hero-points.mjs");
+    await awardHeroPoints(this.actor, amount);
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.HeroPointsAwardedHeading")}</h3>
+        <p>${game.i18n.localize("DODE.Chat.HeroPointsAwardedLine", { actor: this.actor.name, amount })}</p></div>`
     });
   }
 

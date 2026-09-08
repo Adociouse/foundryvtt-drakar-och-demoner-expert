@@ -1,0 +1,601 @@
+{
+  "name": "Mörka hjälteförmågor",
+  "_id": "ekP2afV0hQrRt8AI",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/demonologi.png",
+  "description": "<p>Skurk-/mörk hjälte-varianten av Hjälteförmågor. Köps med hjältepoäng (5-20 HP, ger bonus = HP-5, slå 1T20+bonus, min 5/max 20 HP). HH s.45-51 (§19). Bara mellan äventyr.</p><p><em>Systemets egen kopia ligger i <code>CONFIG.DODE.heroicAbilitiesTableDark</code>.</em></p>",
+  "results": [
+    {
+      "_id": "hFj8TpX5LaoeQnXd",
+      "type": "text",
+      "name": "Järnnäve",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.hFj8TpX5LaoeQnXd"
+    },
+    {
+      "_id": "VmciHCcPf6maja53",
+      "type": "text",
+      "name": "Onda ögat",
+      "img": null,
+      "description": "<p>Starkare variant: −5 CL i stället för −3 på det markerade målet.</p>",
+      "weight": 1,
+      "range": [
+        3,
+        4
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.VmciHCcPf6maja53"
+    },
+    {
+      "_id": "oT2D8IfFVMoetCfG",
+      "type": "text",
+      "name": "Snabbdragning",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        5,
+        6
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.oT2D8IfFVMoetCfG"
+    },
+    {
+      "_id": "KkHZhJYMgWJkj8gF",
+      "type": "text",
+      "name": "Kraftslag",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        7,
+        8
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.KkHZhJYMgWJkj8gF"
+    },
+    {
+      "_id": "DjBIm3RSyha1eagh",
+      "type": "text",
+      "name": "Snabbslående",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        9,
+        10
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.DjBIm3RSyha1eagh"
+    },
+    {
+      "_id": "zNnkDULLwQAoBhnd",
+      "type": "text",
+      "name": "Ormögon",
+      "img": null,
+      "description": "<p>Hypnotiserar genom ögonkontakt (beta motståndarens PSY) — styr målet så länge kontrollen underhålls med ett PSY-slag per stridsrunda.</p>",
+      "weight": 1,
+      "range": [
+        11,
+        12
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.zNnkDULLwQAoBhnd"
+    },
+    {
+      "_id": "bGfF0zIVF34wPj6D",
+      "type": "text",
+      "name": "Demontunga",
+      "img": null,
+      "description": "<p>Talar flytande ett demonspråk, FV 20.</p>",
+      "weight": 1,
+      "range": [
+        13,
+        14
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.bGfF0zIVF34wPj6D"
+    },
+    {
+      "_id": "coRNOXNATJDNweP6",
+      "type": "text",
+      "name": "Telepati",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        15,
+        16
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.coRNOXNATJDNweP6"
+    },
+    {
+      "_id": "oYRuyljVADCj83np",
+      "type": "text",
+      "name": "Mörkersyn",
+      "img": null,
+      "description": "<p>Ser obehindrat i mörker, lika bra som i dagsljus.</p>",
+      "weight": 1,
+      "range": [
+        17,
+        18
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.oYRuyljVADCj83np"
+    },
+    {
+      "_id": "zYOArWoFnYodQnl1",
+      "type": "text",
+      "name": "Vilddjuret",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        19,
+        20
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.zYOArWoFnYodQnl1"
+    },
+    {
+      "_id": "eRSKkJ4UoLbK4U8j",
+      "type": "text",
+      "name": "Stålsättning",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        21,
+        22
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.eRSKkJ4UoLbK4U8j"
+    },
+    {
+      "_id": "bIK9hI85Tx0P2f2P",
+      "type": "text",
+      "name": "Bestens hand",
+      "img": null,
+      "description": "<p>Förvandlar en hand till klor (1 stridsrunda) — gör 1T8 KP + SB.</p>",
+      "weight": 1,
+      "range": [
+        23,
+        24
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.bIK9hI85Tx0P2f2P"
+    },
+    {
+      "_id": "6dLB4HViEtZOewNA",
+      "type": "text",
+      "name": "Projektilparering",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        25,
+        26
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.6dLB4HViEtZOewNA"
+    },
+    {
+      "_id": "hSix1AyEB4BJZmjX",
+      "type": "text",
+      "name": "Vapenmästare",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        27,
+        27
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.hSix1AyEB4BJZmjX"
+    },
+    {
+      "_id": "cmJRE1xUzY21Uasy",
+      "type": "text",
+      "name": "Okänslig för eld",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        28,
+        28
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.cmJRE1xUzY21Uasy"
+    },
+    {
+      "_id": "v1Ay3ZoagYcKlaFL",
+      "type": "text",
+      "name": "Sjätte sinne",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        29,
+        29
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.v1Ay3ZoagYcKlaFL"
+    },
+    {
+      "_id": "sdSW2uqN7XnYahY7",
+      "type": "text",
+      "name": "Mörkerblixt",
+      "img": null,
+      "description": "<p>1T4 KP per spenderad PSY-poäng. Icke-magisk rustning absorberar bara halva skadan. Kan låsa fast ett mål (beta PSY, 1 KP/stridsrunda, chans PSY/2) tills koncentrationen bryts.</p>",
+      "weight": 1,
+      "range": [
+        30,
+        30
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.sdSW2uqN7XnYahY7"
+    },
+    {
+      "_id": "b7fRAvX6f1qpwHuL",
+      "type": "text",
+      "name": "Livsutsugning",
+      "img": null,
+      "description": "<p>Genom beröring: dränerar 1T4 FYS eller 1T4 PSY per stridsrunda (beta målets PSY varje runda). Poängen går till hjälten men klingar av, 1/timme.</p>",
+      "weight": 1,
+      "range": [
+        31,
+        31
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.b7fRAvX6f1qpwHuL"
+    },
+    {
+      "_id": "xUQbZnV3YWPHLvSi",
+      "type": "text",
+      "name": "Gudarnas gunstling",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        32,
+        32
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.xUQbZnV3YWPHLvSi"
+    },
+    {
+      "_id": "PWQtmaYCJ8amJwIV",
+      "type": "text",
+      "name": "Besatt",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan, men den besättande varelsen är alltid en demon.</p>",
+      "weight": 1,
+      "range": [
+        33,
+        33
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.PWQtmaYCJ8amJwIV"
+    },
+    {
+      "_id": "7Fy3AS3SZE9uIQsZ",
+      "type": "text",
+      "name": "Mörkerpakt",
+      "img": null,
+      "description": "<p>Efter döden återuppstår hjälten som en dödsgast, ute efter hämnd.</p>",
+      "weight": 1,
+      "range": [
+        34,
+        34
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.7Fy3AS3SZE9uIQsZ"
+    },
+    {
+      "_id": "pDyF5EuJB8uTFqZp",
+      "type": "text",
+      "name": "Osårbarhet",
+      "img": null,
+      "description": "<p>Samma som den ljusa förmågan.</p>",
+      "weight": 1,
+      "range": [
+        35,
+        35
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!ekP2afV0hQrRt8AI.pDyF5EuJB8uTFqZp"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788879089684,
+    "modifiedTime": 1788879089684,
+    "lastModifiedBy": "Zaopn5fDFZarHfsj",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!ekP2afV0hQrRt8AI"
+}

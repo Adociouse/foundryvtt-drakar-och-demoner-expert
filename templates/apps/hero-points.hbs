@@ -1,0 +1,32 @@
+<div class="dode-hero-points-body">
+  <p class="hero-points-pool">{{localize "DODE.HeroPoints.Pool"}}: <strong>{{hjaltepoang}}</strong></p>
+
+  <section class="hero-points-branch">
+    <h3>{{localize "DODE.HeroPoints.SpecialAbility"}}</h3>
+    <p class="section-hint">{{localize "DODE.HeroPoints.SpecialAbilityHint"}}</p>
+    <button type="button" data-action="buySpecialAbility">{{localize "DODE.HeroPoints.Roll"}}</button>
+  </section>
+
+  <section class="hero-points-branch">
+    <h3>{{localize "DODE.HeroPoints.HeroicAbility"}}</h3>
+    <p class="section-hint">{{localize "DODE.HeroPoints.HeroicAbilityHint"}}</p>
+    <button type="button" data-action="buyHeroicAbility">{{localize "DODE.HeroPoints.Roll"}}</button>
+  </section>
+
+  <section class="hero-points-branch">
+    <h3>{{localize "DODE.HeroPoints.ImproveAttribute"}}</h3>
+    <p class="section-hint">{{localize "DODE.HeroPoints.ImproveAttributeHint"}}</p>
+    <ul class="hero-points-attributes">
+      {{#each attributes}}
+        <li>{{this.label}}: {{this.value}}</li>
+      {{/each}}
+    </ul>
+    <button type="button" data-action="improveAttribute">{{localize "DODE.HeroPoints.Buy"}}</button>
+  </section>
+
+  <section class="hero-points-branch">
+    <h3>{{localize "DODE.HeroPoints.RaiseCl"}}</h3>
+    <p class="section-hint">{{localize "DODE.HeroPoints.RaiseClHint"}}</p>
+    <button type="button" data-action="raiseCl">{{localize "DODE.HeroPoints.Spend1"}}</button>
+  </section>
+</div>

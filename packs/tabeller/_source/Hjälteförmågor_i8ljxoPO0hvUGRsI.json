@@ -1,0 +1,575 @@
+{
+  "name": "Hjälteförmågor",
+  "_id": "i8ljxoPO0hvUGRsI",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/magiskolor/harmonism.png",
+  "description": "<p>Köps med hjältepoäng (5-20 HP, ger bonus = HP-5, slå 1T20+bonus, min 5/max 20 HP). HH s.10-15 (§7). Bara mellan äventyr.</p><p><em>Systemets egen kopia ligger i <code>CONFIG.DODE.heroicAbilitiesTable</code>.</em></p>",
+  "results": [
+    {
+      "_id": "jkg8KzIoIvrrdzr1",
+      "type": "text",
+      "name": "Empati",
+      "img": null,
+      "description": "<p>Känner alltid av andras humör och avsikter; vet om någon är fientligt inställd. Bara avancerad magi kan lura förmågan.</p>",
+      "weight": 1,
+      "range": [
+        1,
+        2
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.jkg8KzIoIvrrdzr1"
+    },
+    {
+      "_id": "UT9igUYs29XwsMQ7",
+      "type": "text",
+      "name": "Järnnäve",
+      "img": null,
+      "description": "<p>Varje slag/spark gör alltid maximal skada, inklusive SB. Kan medvetet slå svagare, upp till 5 poäng lägre.</p>",
+      "weight": 1,
+      "range": [
+        3,
+        5
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.UT9igUYs29XwsMQ7"
+    },
+    {
+      "_id": "scwhKICb937f5Xtr",
+      "type": "text",
+      "name": "Onda ögat",
+      "img": null,
+      "description": "<p>Beta motståndarens PSY genom ögonkontakt — motståndaren avstår från att anfalla. Ett markerat mål får −3 CL resten av dagen.</p>",
+      "weight": 1,
+      "range": [
+        6,
+        7
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.scwhKICb937f5Xtr"
+    },
+    {
+      "_id": "KYDBLS4hTXtpMh7O",
+      "type": "text",
+      "name": "Snabbdragning",
+      "img": null,
+      "description": "<p>Att dra ett vapen kostar aldrig en handling; vinner alltid initiativ den stridsrundan. Kan dra ett slag i sista stund (klingan stannar 1 cm från strupen).</p>",
+      "weight": 1,
+      "range": [
+        8,
+        9
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.KYDBLS4hTXtpMh7O"
+    },
+    {
+      "_id": "YfaaXbPwkBGuwwr8",
+      "type": "text",
+      "name": "Kraftslag",
+      "img": null,
+      "description": "<p>Spendera 1T6 PSY för att ett träffande slag gör maximal skada inklusive SB. Max 4 gånger/dag.</p>",
+      "weight": 1,
+      "range": [
+        10,
+        11
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.YfaaXbPwkBGuwwr8"
+    },
+    {
+      "_id": "wlqrczB5rck5eAeS",
+      "type": "text",
+      "name": "Snabbslående",
+      "img": null,
+      "description": "<p>Vinner initiativ varje stridsrunda. Möter hjälten en annan Snabbslående gäller vanlig turordning dem emellan.</p>",
+      "weight": 1,
+      "range": [
+        12,
+        13
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.wlqrczB5rck5eAeS"
+    },
+    {
+      "_id": "QD6k9sgcdPviIwrn",
+      "type": "text",
+      "name": "Projektilparering",
+      "img": null,
+      "description": "<p>Kan parera avståndsvapen med eggvapen, sköld eller stav — måste se avfyrandet eller följa projektilen minst 10 m.</p>",
+      "weight": 1,
+      "range": [
+        14,
+        15
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.QD6k9sgcdPviIwrn"
+    },
+    {
+      "_id": "TcVSgQQYKwUxhtnF",
+      "type": "text",
+      "name": "Djurherre",
+      "img": null,
+      "description": "<p>Oprovocerade djur anfaller aldrig hjälten. Kan lugna aggressiva djur (icke-magiskt) genom att beta deras PSY.</p>",
+      "weight": 1,
+      "range": [
+        16,
+        17
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.TcVSgQQYKwUxhtnF"
+    },
+    {
+      "_id": "RqFcCxNxGPwlpXQt",
+      "type": "text",
+      "name": "Telepati",
+      "img": null,
+      "description": "<p>Kommunicerar utan ord på räckhåll PSY×10 meter.</p>",
+      "weight": 1,
+      "range": [
+        18,
+        19
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.RqFcCxNxGPwlpXQt"
+    },
+    {
+      "_id": "xcqUG5whs7NlvfVU",
+      "type": "text",
+      "name": "Orädd",
+      "img": null,
+      "description": "<p>Slår bara på Skräcktabellen för magisk skräck (inte t.ex. drakars närvaro) — annars immun.</p>",
+      "weight": 1,
+      "range": [
+        20,
+        21
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.xcqUG5whs7NlvfVU"
+    },
+    {
+      "_id": "B6XMlqZHVaXzldKL",
+      "type": "text",
+      "name": "Gott läkekött",
+      "img": null,
+      "description": "<p>Läker tre gånger snabbare än normalt, även med läkedroger.</p>",
+      "weight": 1,
+      "range": [
+        22,
+        23
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.B6XMlqZHVaXzldKL"
+    },
+    {
+      "_id": "e6ihtEP5FOaxyAQ2",
+      "type": "text",
+      "name": "Stålsättning",
+      "img": null,
+      "description": "<p>Tål skada som vid Bärsärkagång (Grundreglerna s.46) — slår PSY i stället för färdighetsslaget.</p>",
+      "weight": 1,
+      "range": [
+        24,
+        25
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.e6ihtEP5FOaxyAQ2"
+    },
+    {
+      "_id": "zD1e8FO8qnpDvUtC",
+      "type": "text",
+      "name": "Magisk talang",
+      "img": null,
+      "description": "<p>Medfödd magisk begåvning — kan spendera EP på magiskolor/besvärjelser utan lärare och träna själv. Kan slå på Vild magi-tabellen om Magi-regelboken används.</p>",
+      "weight": 1,
+      "range": [
+        26,
+        27
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.zD1e8FO8qnpDvUtC"
+    },
+    {
+      "_id": "Wn1BxvamUN1w4Cri",
+      "type": "text",
+      "name": "Okänslig för eld",
+      "img": null,
+      "description": "<p>Immun mot all icke-magisk eld/hetta, fattar inte eld själv. Utrustning tar normal skada.</p>",
+      "weight": 1,
+      "range": [
+        28,
+        28
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.Wn1BxvamUN1w4Cri"
+    },
+    {
+      "_id": "g2SLHwXxLBdIkXsZ",
+      "type": "text",
+      "name": "Sjätte sinne",
+      "img": null,
+      "description": "<p>Kan inte överraskas. Med magi: alltid minst CL1 på Upptäcka fara. Utan magi: automatisk framgång. Ger en klarare bild av faran.</p>",
+      "weight": 1,
+      "range": [
+        29,
+        29
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.g2SLHwXxLBdIkXsZ"
+    },
+    {
+      "_id": "jO1RpxmGouNybPs3",
+      "type": "text",
+      "name": "Vapenmästare",
+      "img": null,
+      "description": "<p>+5 CL med alla vapen, även otränade.</p>",
+      "weight": 1,
+      "range": [
+        30,
+        30
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.jO1RpxmGouNybPs3"
+    },
+    {
+      "_id": "3nqYXJyNnzor6bYX",
+      "type": "text",
+      "name": "Vilddjuret",
+      "img": null,
+      "description": "<p>I strid, efter att ha tagit KP-skada: SB+1T6, CL+3, en extra handling. Utvecklar en offensiv ovana (äter hjärtan, skalperar, e.dyl.).</p>",
+      "weight": 1,
+      "range": [
+        31,
+        31
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.3nqYXJyNnzor6bYX"
+    },
+    {
+      "_id": "vekCh9rTusNZKvP9",
+      "type": "text",
+      "name": "Besatt",
+      "img": null,
+      "description": "<p>En övernaturlig varelse bor i kroppen och ger kraft i svåra stunder (SL-styrt). 25% chans att varelsens drag tar över i valsituationer.</p>",
+      "weight": 1,
+      "range": [
+        32,
+        32
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.vekCh9rTusNZKvP9"
+    },
+    {
+      "_id": "2mKUEYYgJe4p8BbR",
+      "type": "text",
+      "name": "Gudarnas gunstling",
+      "img": null,
+      "description": "<p>Vid 0 KP: 25-50% chans (SL avgör exakt) att gudarna återställer KP och botar gifter.</p>",
+      "weight": 1,
+      "range": [
+        33,
+        33
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.2mKUEYYgJe4p8BbR"
+    },
+    {
+      "_id": "Dcvsk6d1YMF5hAHN",
+      "type": "text",
+      "name": "Magisk immunitet",
+      "img": null,
+      "description": "<p>Helt immun mot all magi, även välvillig sådan (t.ex. verkar inte Mula på hjälten).</p>",
+      "weight": 1,
+      "range": [
+        34,
+        34
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.Dcvsk6d1YMF5hAHN"
+    },
+    {
+      "_id": "f2tWkCgZLITq1rbs",
+      "type": "text",
+      "name": "Osårbarhet",
+      "img": null,
+      "description": "<p>Kan inte skadas av icke-magiska vapen. Tar normal skada av eld, kyla och magiska/välsignade/förbannade vapen.</p>",
+      "weight": 1,
+      "range": [
+        35,
+        35
+      ],
+      "drawn": false,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788879089684,
+        "modifiedTime": 1788879089684,
+        "lastModifiedBy": "Zaopn5fDFZarHfsj",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!tables.results!i8ljxoPO0hvUGRsI.f2tWkCgZLITq1rbs"
+    }
+  ],
+  "formula": "1d20",
+  "replacement": true,
+  "displayRoll": true,
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 2
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788879089684,
+    "modifiedTime": 1788879089684,
+    "lastModifiedBy": "Zaopn5fDFZarHfsj",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!tables!i8ljxoPO0hvUGRsI"
+}

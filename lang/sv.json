@@ -82,6 +82,28 @@
       "Roll": "Slå fram särskild förmåga",
       "BpSpent": "BP att spendera (1-40)"
     },
+    "HeroPoints": {
+      "Pool": "Hjältepoäng",
+      "Roll": "Slå",
+      "Buy": "Köp",
+      "Spend": "HP att spendera",
+      "Spend1": "Spendera 1 HP",
+      "NotEnough": "Inte tillräckligt med hjältepoäng",
+      "NoTableEntry": "Ingen tabellrad hittades för det slaget",
+      "SpecialAbility": "Skaffa särskild förmåga",
+      "SpecialAbilityHint": "HH s.20/46-48: slå på samma tabell som RP s.25-27 (CONFIG.DODE.specialAbilitiesTable), 2T20 + 2 per spenderad HP, min 1/max 40 HP. Bara mellan äventyr.",
+      "HeroicAbility": "Skaffa hjälteförmåga",
+      "HeroicAbilityHint": "HH s.10-15 (ljusa)/s.45-51 (mörka): 5-20 HP, bonus = HP−5, slå 1T20+bonus. Mörka är skurk-/mörk hjälte-varianten — välj fritt. Bara mellan äventyr.",
+      "Table": "Tabell",
+      "TableLight": "Hjälteförmågor (ljusa)",
+      "TableDark": "Mörka hjälteförmågor",
+      "ImproveAttribute": "Förbättra grundegenskap",
+      "ImproveAttributeHint": "HH s.20/46-48: 5 HP per poäng, permanent, obegränsat. Alla grundegenskaper utom STO. Bara mellan äventyr.",
+      "Attribute": "Grundegenskap",
+      "RaiseCl": "Höj CL (SL-hanterat)",
+      "RaiseClHint": "HH s.20/46-48: 1 HP skiftar utfallet ett steg uppåt (fummel→misslyckat→lyckat→perfekt); ett perfekt resultat ger tillbaka poängen. Kan användas när som helst, även i strid. Knappen sköter bara bokföringen (drar 1 HP) — SL avgör och tillämpar utfallsskiftet manuellt, se docs/dev/SPECIALANFALL_SL_GUIDE.md.",
+      "AwardHint": "Hjältepoäng till <strong>{actor}</strong>. HH s.20/46-48 — samma pool och spenderingsregler oavsett om poängen kom från guidens hjältedåd-slag eller delas ut mitt i en kampanj."
+    },
     "Derived": {
       "KP": "Kroppspoäng",
       "Psy": "PSY",
@@ -616,6 +638,9 @@
     "Dialog": {
       "RestPeriod": "Viloperiod",
       "GrantBonusPoints": "Dela ut bonuspoäng",
+      "GrantHeroPoints": "Dela ut hjältepoäng",
+      "HeroPoints": "Hjältepoäng",
+      "HeroPointsFor": "Hjältepoäng — {actor}",
       "GrantSkillTo": "Dela ut färdighet till {actor}",
       "NewTwoWeaponCombo": "Ny Två vapen-kombination — {actor}",
       "GrantSpellTo": "Dela ut besvärjelse till {actor}",
@@ -659,6 +684,9 @@
       "HealedAmount": "läkte {amount} KP",
       "HeroicDeedLine": "<strong>{name}</strong> ({roll}): +{bp} BP, +{heroPoints} hjältepoäng",
       "HeroicDeedsHeading": "Hjältedåd — resultat ({count} slag)",
+      "HeroPointsAwardedHeading": "Hjältepoäng utdelade",
+      "HeroPointsAwardedLine": "{actor} får <strong>{amount} hjältepoäng</strong>.",
+      "RaiseClLine": "{actor} spenderar 1 hjältepoäng för att höja CL — bekräfta med SL vilket utfall ni landar på.",
       "Label": {
         "Attack": "Anfall",
         "Cast": "Kastning",

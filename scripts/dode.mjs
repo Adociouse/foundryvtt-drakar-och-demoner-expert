@@ -33,6 +33,7 @@ import {
 } from "./sheets/item-sheet.mjs";
 import DoDECharacterWizard from "./apps/character-wizard.mjs";
 import DoDETrainingApp from "./apps/training.mjs";
+import DoDEHeroPointsApp from "./apps/hero-points.mjs";
 import DoDETimeWindow from "./apps/time-window.mjs";
 import DoDEMagicTrainingApp from "./apps/magic-training.mjs";
 import DoDEGmEffectsApp from "./apps/gm-effects.mjs";
@@ -382,6 +383,8 @@ Hooks.once("init", () => {
     // Tidsfonstret — SL:s enda stalle for att flytta klockan utanfor strid (§10).
     openTimeWindow: () => new DoDETimeWindow().render(true),
     openTraining: (actor) => new DoDETrainingApp(actor).render(true),
+    // Hjältepoäng-spenderingsfönstret (HH s.20/46-48) — se apps/hero-points.mjs.
+    openHeroPoints: (actor) => new DoDEHeroPointsApp(actor).render(true),
     // Magi har ett eget fönster — EP-källorna skiljer sig från vanliga
     // färdigheters (SB s.7), se apps/magic-training.mjs.
     openMagicTraining: (actor) => new DoDEMagicTrainingApp(actor).render(true),
