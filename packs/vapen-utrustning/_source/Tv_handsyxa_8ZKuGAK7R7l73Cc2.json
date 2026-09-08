@@ -1,0 +1,44 @@
+{
+  "name": "Tvåhandsyxa",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "2H",
+    "styGroup": 7,
+    "damage": "2d10+1",
+    "length": 1,
+    "weight": 8,
+    "baseValue": 11,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 1900,
+    "range": "",
+    "description": "",
+    "source": {
+      "book": "sb",
+      "page": "33-35"
+    },
+    "strikeType": "slashing"
+  },
+  "_id": "8ZKuGAK7R7l73Cc2",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/tvahandsyxa.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788866762971,
+    "modifiedTime": 1788866762971,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!8ZKuGAK7R7l73Cc2"
+}

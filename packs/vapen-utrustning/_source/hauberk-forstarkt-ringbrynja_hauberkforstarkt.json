@@ -19,7 +19,7 @@
     ],
     "armourGroup": "hauberk",
     "source": {
-      "book": "spelarboken",
+      "book": "sb",
       "page": "27"
     },
     "description": "<p>Sår kan inte bli infekterade.</p>"

@@ -16,7 +16,7 @@
     "hardToParry": true,
     "description": "<p>Kättingvapen (SB s.33): kättingen kan slå runt både vapen och sköldar — varje pareringsförsök mot en stridsslaga, oavsett om det görs med vapen eller sköld, får CL halverat. Vapnet är dock svårt att hantera för användaren själv: slår man 18, 19 eller 20 på det egna anfallsslaget räknas det automatiskt som miss, och ett 1T20-slag avgör fummel (resultat högre än eget FV = fumlat, ett rått 20 är alltid fummel).</p>",
     "source": {
-      "book": "spelarboken",
+      "book": "sb",
       "page": "33-35"
     },
     "strikeType": "blunt"

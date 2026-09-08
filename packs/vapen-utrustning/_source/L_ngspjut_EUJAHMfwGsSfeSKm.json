@@ -1,0 +1,44 @@
+{
+  "name": "Långspjut",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "2H",
+    "styGroup": 2,
+    "damage": "1d10+1",
+    "length": 4,
+    "weight": 9,
+    "baseValue": 11,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 100,
+    "range": "",
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    },
+    "strikeType": "piercing"
+  },
+  "_id": "EUJAHMfwGsSfeSKm",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/langspjut.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788866762971,
+    "modifiedTime": 1788866762971,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!EUJAHMfwGsSfeSKm"
+}

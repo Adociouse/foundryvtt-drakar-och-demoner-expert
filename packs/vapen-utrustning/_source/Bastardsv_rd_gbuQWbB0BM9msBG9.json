@@ -1,0 +1,44 @@
+{
+  "name": "Bastardsvärd",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "1H",
+    "styGroup": 4,
+    "damage": "1d10+1",
+    "length": 0,
+    "weight": 5.5,
+    "baseValue": 15,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 2500,
+    "range": "",
+    "description": "",
+    "source": {
+      "book": "sb",
+      "page": "33-35"
+    },
+    "strikeType": "slashing"
+  },
+  "_id": "gbuQWbB0BM9msBG9",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/bastardsvard.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788866762971,
+    "modifiedTime": 1788866762971,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!gbuQWbB0BM9msBG9"
+}

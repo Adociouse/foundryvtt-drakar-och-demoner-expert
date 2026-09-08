@@ -1,0 +1,44 @@
+{
+  "name": "Arbalest",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "2H",
+    "styGroup": 3,
+    "damage": "3d6+3",
+    "length": 0,
+    "weight": 9,
+    "baseValue": 11,
+    "weaponType": "tung",
+    "category": "projektil",
+    "price": 750,
+    "range": "250 m",
+    "description": "",
+    "source": {
+      "book": "regler",
+      "page": "49-62"
+    },
+    "strikeType": "piercing"
+  },
+  "_id": "IxDZyXFEdBfdQsSa",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/arbalest.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788866762971,
+    "modifiedTime": 1788866762971,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!IxDZyXFEdBfdQsSa"
+}
