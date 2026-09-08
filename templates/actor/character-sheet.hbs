@@ -40,14 +40,14 @@
         {{#if hasMagic}}
           {{!-- Eget fönster: SB s.7 ger magiskolor och besvärjelser andra
                 EP-källor än vanliga färdigheter. --}}
-          <button type="button" data-action="openMagicTraining" title="Träna magiskolor och besvärjelser">
-            <i class="fa-solid fa-wand-sparkles"></i> Magi
+          <button type="button" data-action="openMagicTraining" title="{{localize 'DODE.CharacterSheet.OpenMagicTrainingTitle'}}">
+            <i class="fa-solid fa-wand-sparkles"></i> {{localize "DODE.CharacterSheet.OpenMagicTraining"}}
           </button>
         {{/if}}
       {{/if}}
       {{#if canEditInWizard}}
-        <button type="button" data-action="openWizardEdit" title="Öppna rollpersonen i guiden">
-          <i class="fa-solid fa-hat-wizard"></i> Redigera i guiden
+        <button type="button" data-action="openWizardEdit" title="{{localize 'DODE.CharacterSheet.EditInWizardTitle'}}">
+          <i class="fa-solid fa-hat-wizard"></i> {{localize "DODE.CharacterSheet.EditInWizard"}}
         </button>
       {{/if}}
     </div>

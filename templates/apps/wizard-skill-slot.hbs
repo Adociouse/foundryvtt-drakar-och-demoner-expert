@@ -6,9 +6,9 @@
       {{#if (eq swordHand.key "ambidextrios")}}
         {{!-- Ambidextriös slipper Två vapen-träningskravet helt (CLAUDE.md-avsteget,
               backlog 33) — texten fick inte påstå ett träningskrav som inte gäller. --}}
-        Slåss med två vapen (Ambidextriös — ingen Två vapen-färdighet behövs)
+        {{localize "DODE.Wizard.Skill.DualWieldAmbidextrios"}}
       {{else}}
-        Slåss med två vapen (kräver Två vapen-färdighet)
+        {{localize "DODE.Wizard.Skill.DualWieldNormal"}}
       {{/if}}
     </label>
   {{/if}}
@@ -24,7 +24,7 @@
       {{#if ../slot.isLanguagePool}}
         <select data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
           data-slot-attribute="{{../slot.attribute}}">
-          <option value="">— välj —</option>
+          <option value="">{{localize "DODE.Wizard.Sprak.ChoosePlaceholder"}}</option>
           {{#each row.languageOptions as |opt|}}
             <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}} {{#if opt.disabled}}disabled{{/if}}>{{opt.label}}</option>
           {{/each}}
@@ -37,7 +37,7 @@
           valet syns INNAN man bestämmer sig. --}}
         <select data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
           data-slot-attribute="{{../slot.attribute}}">
-          <option value="">— välj vapen —</option>
+          <option value="">{{localize "DODE.Wizard.Skill.ChooseWeaponPlaceholder"}}</option>
           {{#each row.weaponOptions as |opt|}}
             <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}} {{#if opt.disabled}}disabled{{/if}}>{{opt.label}}</option>
           {{/each}}
@@ -50,7 +50,7 @@
           en enda namngiven, egen-kostad teknik, inte en platt platshållare. --}}
         <select data-slot-index="{{row.slotIndex}}" data-slot-row="{{row.row}}"
           data-slot-attribute="{{../slot.attribute}}">
-          <option value="">— välj teknik —</option>
+          <option value="">{{localize "DODE.Wizard.Skill.ChooseTechniquePlaceholder"}}</option>
           {{#each row.stridskonstOptions as |opt|}}
             <option value="{{opt.value}}" {{#if opt.selected}}selected{{/if}} {{#if opt.disabled}}disabled{{/if}}>{{opt.label}}</option>
           {{/each}}
