@@ -1,0 +1,45 @@
+{
+  "name": "Tvåhandsgissel",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "2H",
+    "styGroup": 7,
+    "damage": "2d6",
+    "length": 1,
+    "weight": 8,
+    "baseValue": 15,
+    "weaponType": "tung",
+    "category": "narstrid",
+    "price": 2500,
+    "range": "",
+    "hardToParry": true,
+    "description": "<p>Kättingvapen (SB s.33-regeln, tillämpad analogt): kättingen kan slå runt vapen och sköldar — varje pareringsförsök mot vapnet får CL halverat. Svårt att hantera: 18, 19 eller 20 på eget anfallsslag räknas automatiskt som miss, avgör fummel med ett eget 1T20-slag.</p><p>⚠ Krigarens Handbok ger även 2T6+2 smärtpoäng (SP) om SL använder det valfria KP/SP-skadesystemet (KH s.46-47) — inte implementerat i det här systemet, se `docs/extracts/DODE_KH_VAPEN_KP_SP.md` (Roll20-projektet).</p>",
+    "source": {
+      "book": "kh",
+      "page": "46-51"
+    },
+    "strikeType": "blunt"
+  },
+  "_id": "F4ZNSOsARa7wrtVR",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/tvahandsgissel.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788875741337,
+    "modifiedTime": 1788875741337,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!F4ZNSOsARa7wrtVR"
+}

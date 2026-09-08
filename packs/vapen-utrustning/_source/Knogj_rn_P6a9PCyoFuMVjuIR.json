@@ -1,0 +1,44 @@
+{
+  "name": "Knogjärn",
+  "type": "vapen",
+  "system": {
+    "equipped": false,
+    "grip": "1H",
+    "styGroup": 0,
+    "damage": "Spec (inget eget skadevärde — lägger +1 KP till obeväpnad skada; ingen automatisk koppling i det här systemet, tillämpas manuellt)",
+    "length": 0,
+    "weight": 0.5,
+    "baseValue": 0,
+    "weaponType": "latt",
+    "category": "narstrid",
+    "price": 20,
+    "range": "",
+    "description": "<p>⚠ Krigarens Handbok ger även +2 (till SP vid obeväpnad skada) smärtpoäng (SP) om SL använder det valfria KP/SP-skadesystemet (KH s.46-47) — inte implementerat i det här systemet, se `docs/extracts/DODE_KH_VAPEN_KP_SP.md` (Roll20-projektet).</p>",
+    "source": {
+      "book": "kh",
+      "page": "46-51"
+    },
+    "strikeType": "blunt"
+  },
+  "_id": "P6a9PCyoFuMVjuIR",
+  "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/knogjarn.png",
+  "effects": [],
+  "folder": "A03eQHYKjZsSsibS",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788875741337,
+    "modifiedTime": 1788875741337,
+    "lastModifiedBy": "WZKk8GW5BTYns1K8",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!items!P6a9PCyoFuMVjuIR"
+}

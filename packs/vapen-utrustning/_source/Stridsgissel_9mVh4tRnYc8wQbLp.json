@@ -14,7 +14,7 @@
     "price": 300,
     "range": "",
     "hardToParry": true,
-    "description": "<p>Kättingvapen (SB s.33): kättingen kan slå runt både vapen och sköldar — varje pareringsförsök mot ett stridsgissel, oavsett om det görs med vapen eller sköld, får CL halverat. Vapnet är dock svårt att hantera för användaren själv: slår man 18, 19 eller 20 på det egna anfallsslaget räknas det automatiskt som miss, och ett 1T20-slag avgör fummel (resultat högre än eget FV = fumlat, ett rått 20 är alltid fummel).</p><p>⚠ En namngiven variant, <strong>Stridsgissel med spik</strong> (KH s.51), är ännu inte portad — exakta stats obekräftade, se backlog.</p>",
+    "description": "<p>Kättingvapen (SB s.33): kättingen kan slå runt både vapen och sköldar — varje pareringsförsök mot ett stridsgissel, oavsett om det görs med vapen eller sköld, får CL halverat. Vapnet är dock svårt att hantera för användaren själv: slår man 18, 19 eller 20 på det egna anfallsslaget räknas det automatiskt som miss, och ett 1T20-slag avgör fummel (resultat högre än eget FV = fumlat, ett rått 20 är alltid fummel).</p><p>En namngiven variant, <strong>Stridsgissel med spik</strong> (KH s.51), finns som ett eget föremål med högre skada och pris.</p>",
     "source": {
       "book": "sb",
       "page": "33-35"
