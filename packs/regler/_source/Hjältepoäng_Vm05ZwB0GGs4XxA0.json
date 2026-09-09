@@ -1,0 +1,103 @@
+{
+  "name": "Hjältepoäng",
+  "_id": "Vm05ZwB0GGs4XxA0",
+  "pages": [
+    {
+      "_id": "CCVCwVwuCA07iBcj",
+      "name": "Hjältepoäng",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>Vad är hjältepoäng?</h2><p>Hjältepoäng (HP) är Hjältarnas Handboks (HH) egen valuta för att göra en rollperson till en sann hjälte — helt skild från kroppspoäng (KP), bäruppgiftspoäng (BP) och erfarenhetspoäng (EP). Boken förkortar den ibland till samma \"HP\" som kroppspoäng, men det är två helt olika saker som råkar dela bokstäver.</p><p><em>Källa: Hjältarnas Handbok (HH) s.6-7/20/46-48.</em></p><h2>Hur poäng tjänas</h2><ul><li><strong>Vid rollpersonsskapande</strong> — guidens hjältedåd-steg slår på Hjältedådstabellen (1T20). Varje dåd ger bakgrundspoäng och/eller hjältepoäng, beroende på slaget.</li><li><strong>Mitt i en kampanj</strong> — spelledaren delar ut poäng för verkliga hjältedåd, med samma knapp som delar ut fria erfarenhetspoäng. Det är SAMMA pool och SAMMA spenderingsregler oavsett varifrån poängen kom.</li></ul><p><em>Källa: Hjältarnas Handbok (HH) s.6-7.</em></p><h2>Hur poäng spenderas</h2><p>Öppnas via knappen \"Hjältepoäng\" på rollpersonens ark. Fyra sätt att spendera — bara Höja CL kan användas när som helst, de tre andra bara mellan äventyr.</p><table style=\"width:100%\"><thead><tr><th>Gren</th><th>Kostnad</th><th>Effekt</th></tr></thead><tbody><tr><td>Höja CL</td><td>1 HP</td><td>Skiftar ett redan slaget utfall ETT STEG uppåt: fummel → misslyckat → lyckat → perfekt. Blir resultatet perfekt får spelaren tillbaka poängen. Kan användas när som helst, även mitt i strid.</td></tr><tr><td>Skaffa särskild förmåga</td><td>1–40 HP</td><td>Slå 2T20 + (2 × spenderad HP) och slå upp resultatet på samma 49-rader-tabell som används vid skapandet (vapenmästerskap, osårbarhet, magisk immunitet, med mera).</td></tr><tr><td>Skaffa hjälteförmåga</td><td>5–20 HP</td><td>Slå 1T20 + (spenderad HP − 5) på en av två 35-rader-tabeller: <strong>Hjälteförmågor</strong> (ljusa) eller <strong>Mörka hjälteförmågor</strong> (skurk-/mörk hjälte-varianten). Spelaren väljer fritt.</td></tr><tr><td>Förbättra grundegenskap</td><td>5 HP / poäng</td><td>Höjer ett valfritt grundegenskapsvärde (alla utom STORLEK) med 1, permanent. Ingen övre gräns.</td></tr></tbody></table><p>⚠ <strong>Höja CL automatiserar bara poängavdraget.</strong> Själva utfallsskiftet — vilken ny nivå slaget landar på — avgör och tillämpar spelledaren manuellt vid bordet. Se Spelledarens referens för specialfall.</p><p><em>Källa: Hjältarnas Handbok (HH) s.20/46-48.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 0,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788952723440,
+        "modifiedTime": 1788952723440,
+        "lastModifiedBy": "e0PMYsODSp3VV4jC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Vm05ZwB0GGs4XxA0.CCVCwVwuCA07iBcj"
+    },
+    {
+      "_id": "dqv70B5Et855R8zM",
+      "name": "Hero Points",
+      "type": "text",
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<h2>What Are Hero Points?</h2><p>Hero points (HP) are the Heroes' Handbook's (HH) own currency for turning a character into a true hero — entirely separate from Hit Points (KP), Background Points (BP), and Experience Points (EP). The book sometimes abbreviates it with the same \"HP\" as Hit Points, but they are two unrelated things that happen to share letters.</p><p><em>Source: Hjältarnas Handbok (Heroes' Handbook, HH) p.6-7/20/46-48.</em></p><h2>Earning Points</h2><ul><li><strong>During character creation</strong> — the wizard's heroic-deeds step rolls on the Heroic Deeds Table (1d20). Each deed grants background points and/or hero points, depending on the roll.</li><li><strong>Mid-campaign</strong> — the GM awards points for genuine heroic deeds, using the same button that grants bonus experience points. It is the SAME pool and the SAME spending rules regardless of where the points came from.</li></ul><p><em>Source: Hjältarnas Handbok (Heroes' Handbook, HH) p.6-7.</em></p><h2>Spending Points</h2><p>Opened via the \"Hero points\" button on the character sheet. Four ways to spend them — only Raise CL can be used at any time, the other three only between adventures.</p><table style=\"width:100%\"><thead><tr><th>Branch</th><th>Cost</th><th>Effect</th></tr></thead><tbody><tr><td>Raise CL</td><td>1 HP</td><td>Shifts an already-rolled outcome ONE STEP up: fumble → failure → success → perfect. If the result becomes perfect, the player gets the point back. Usable at any time, even mid-combat.</td></tr><tr><td>Acquire special ability</td><td>1–40 HP</td><td>Roll 2d20 + (2 × HP spent) and look up the result on the same 49-row table used at creation (weapon mastery, invulnerability, magic immunity, and more).</td></tr><tr><td>Acquire heroic ability</td><td>5–20 HP</td><td>Roll 1d20 + (HP spent − 5) on one of two 35-row tables: <strong>Heroic Abilities</strong> (light) or <strong>Dark Heroic Abilities</strong> (the villain/dark-hero variant). The player chooses freely.</td></tr><tr><td>Improve base attribute</td><td>5 HP / point</td><td>Raises any base attribute (all except SIZE) by 1, permanently. No upper limit.</td></tr></tbody></table><p>⚠ <strong>Raise CL only automates the point deduction.</strong> The actual outcome shift — which new tier the roll lands on — is decided and applied manually by the GM at the table. See the GM reference for edge cases.</p><p><em>Source: Hjältarnas Handbok (Heroes' Handbook, HH) p.20/46-48.</em></p>",
+        "format": 1
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "system": {},
+      "sort": 200000,
+      "ownership": {
+        "default": -1
+      },
+      "flags": {
+        "drakar-och-demoner-expert": {
+          "lang": "en"
+        }
+      },
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": 1788952723440,
+        "modifiedTime": 1788952723440,
+        "lastModifiedBy": "e0PMYsODSp3VV4jC",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!Vm05ZwB0GGs4XxA0.dqv70B5Et855R8zM"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 700000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.365",
+    "systemId": "drakar-och-demoner-expert",
+    "systemVersion": "0.1.0",
+    "createdTime": 1788952723440,
+    "modifiedTime": 1788952723440,
+    "lastModifiedBy": "e0PMYsODSp3VV4jC",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_key": "!journal!Vm05ZwB0GGs4XxA0"
+}
