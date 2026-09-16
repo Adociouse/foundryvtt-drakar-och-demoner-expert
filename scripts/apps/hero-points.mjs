@@ -54,6 +54,7 @@ export default class DoDEHeroPointsApp extends HandlebarsApplicationMixin(Applic
     return {
       actor: this.actor,
       hjaltepoang: this.actor.system.hjaltepoang ?? 0,
+      hjaltepoangEarned: this.actor.system.hjaltepoangEarned ?? 0,
       attributes: ATTRIBUTE_KEYS.map((key) => ({
         key,
         label: game.i18n.localize(`DODE.Attribute.${key.toUpperCase()}`),

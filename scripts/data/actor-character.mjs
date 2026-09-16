@@ -189,13 +189,18 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       // 2026-08-02 (Johan): fältet hette tidigare `hp.bonusHjaltedad` och
       // lades felaktigt in i `hp.max` (kroppspoäng, spelets egen förkortning
       // KP). Hjältedådstabellens andra kolumn ("HP" i boken) är HJÄLTEPOÄNG,
-      // inte kroppspoäng — en helt egen valuta, spenderas post-creation på
-      // ett 1T20-slag mot en separat 18-radig hjälteförmågetabell (HH s.20/
-      // 46-48). Den tabellen och en spenderingsvy är INTE byggda än (se
-      // DESIGN_DECISIONS.md backlog) — det här fältet är bara en ackumulerad
-      // pool tills vidare, satt vid #onRollHjaltedad (character-wizard.mjs)
-      // och oförändrad annars.
+      // inte kroppspoäng — en helt egen valuta. Spenderbar pool: ökar vid
+      // #onRollHjaltedad (character-wizard.mjs, vid skapande) och via SL:s
+      // "Dela ut hjältepoäng"-knapp (actor-character-sheet.mjs), minskar när
+      // spelaren köper något i apps/hero-points.mjs — se den appen för hela
+      // spendersidan (byggd 2026-09-08).
       hjaltepoang: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
+      // Livstidstotal — ökar i takt med `hjaltepoang` men minskar ALDRIG när
+      // poolen spenderas (helpers/hero-points.mjs#awardHeroPoints skriver
+      // båda fälten tillsammans för varje positiv intjäning). RP s.64:
+      // "Igenkänningsrisken är [totalt insamlade HP i livet] %" — se
+      // Igenkänningsrisk-raden i character-sheet.hbs.
+      hjaltepoangEarned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
       resources: new fields.SchemaField({
         psy: new fields.SchemaField({
           value: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true }),
@@ -216,7 +221,12 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
   /**
    * Se scripts/helpers/schema-migrations.mjs SCHEMA_LOG för vad som faktiskt
    * migreras och varför — den gamla 3-nivå `niva`-skalan (v1) är den enda
-   * grenen just nu. Anropas AUTOMATISKT av Foundry (världsuppstart och
+   * grenen just nu. ⚠ `hjaltepoangEarned`s livstidstotal-backfill (v2) hör
+   * INTE hemma här — se dode.mjs's `hjaltepoangEarnedBackfilled`-ready-hook
+   * och SCHEMA_LOG v2 för varför en `migrateData()`-gren är fel verktyg för
+   * den (körs på VARJE partiell update-delta, inte bara vid en riktig
+   * dokumentmigrering — ett första försök korrumperade fältet tyst).
+   * Anropas AUTOMATISKT av Foundry (världsuppstart och
    * Document#importFromJSON), aldrig manuellt.
    */
   static migrateData(source) {

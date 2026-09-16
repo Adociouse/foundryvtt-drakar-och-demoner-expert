@@ -868,6 +868,7 @@
 /* ---- Hjältepoäng-spenderingsfönstret (HH s.20/46-48) ---- */
 .dode-hero-points-body { padding: 8px; overflow-y: auto; }
 .hero-points-pool { font-size: 1.1em; margin: 0 0 10px; }
+.hero-points-risk { margin-left: 12px; font-size: 0.75em; opacity: 0.75; color: #a3701f; }
 .hero-points-branch { border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding: 6px 0 10px; margin-bottom: 6px; }
 .hero-points-branch:last-child { border-bottom: none; }
 .hero-points-branch h3 { margin-bottom: 2px; }

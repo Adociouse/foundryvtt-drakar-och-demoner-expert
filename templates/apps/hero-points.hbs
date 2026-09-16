@@ -1,5 +1,9 @@
 <div class="dode-hero-points-body">
-  <p class="hero-points-pool">{{localize "DODE.HeroPoints.Pool"}}: <strong>{{hjaltepoang}}</strong></p>
+  <p class="hero-points-pool">{{localize "DODE.HeroPoints.Pool"}}: <strong>{{hjaltepoang}}</strong>
+    {{#if hjaltepoangEarned}}
+      <span class="hero-points-risk" title="{{localize 'DODE.HeroPoints.RecognitionRiskHint'}}">{{localize "DODE.HeroPoints.RecognitionRisk"}}: {{hjaltepoangEarned}}%</span>
+    {{/if}}
+  </p>
 
   <section class="hero-points-branch">
     <h3>{{localize "DODE.HeroPoints.SpecialAbility"}}</h3>

@@ -283,26 +283,72 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   }
 
   /**
-   * SL:s hjältepoängutdelning mitt i en kampanj — HH s.20/46-48. Samma pool och
-   * samma spenderingsregler som guidens hjältedåd-slag vid skapandet, se
-   * helpers/hero-points.mjs. Backlog 46:s fulla dådtabell (vad som TRIGGAR en
-   * utdelning) förblir manuell SL-bedömning — den här knappen är bara
-   * bokföringen.
+   * SL:s hjältepoängutdelning mitt i en kampanj — HH s.20/46-48 (poolen) +
+   * RP s.64 (dådtabellen, `DODE.heroicDeedsAwardTable`, som TRIGGAR en
+   * utdelning). Tvåstegsflöde, samma mönster som redan finns i
+   * apps/hero-points.mjs (räkna/rulla → bekräfta): dialog 1 väljer en bragd
+   * ur dådtabellen (plus ett fält för "besegra hjälte"-fallets motståndar-
+   * värde), dialog 2 visar ett FÖRESLAGET belopp i ett redigerbart fält —
+   * inklusive fasta belopp, samma "aldrig applicera utan en sista redigerbar
+   * bekräftelse"-princip som resten av appen. Negativa belopp tillåtna (RP
+   * s.64: SL drar bort HP för ohjältemodiga handlingar).
    */
   static async #onAwardHeroPoints() {
+    const table = CONFIG.DODE.heroicDeedsAwardTable;
+    const options = table.map((row) => `<option value="${row.key}">${row.name}</option>`).join("");
+    const step1 = await DialogV2.input({
+      window: { title: game.i18n.localize("DODE.Dialog.GrantHeroPoints") },
+      content: `
+        <div class="form-group">
+          <label>${game.i18n.localize("DODE.HeroPoints.Deed")}</label>
+          <select name="deed">${options}</select>
+        </div>
+        <div class="form-group">
+          <label>${game.i18n.localize("DODE.HeroPoints.OpponentEarnedLabel")}</label>
+          <input type="number" name="opponentEarned" min="0" value="0" />
+        </div>
+      `
+    });
+    if (!step1) return;
+
+    const row = table.find((r) => r.key === step1.deed) ?? table.at(-1);
+    let suggested = 0;
+    if (row.kind === "fixed") {
+      suggested = row.amount;
+    } else if (row.kind === "dice") {
+      const roll = await new Roll(row.formula).evaluate();
+      const message = await roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: row.name
+      });
+      await CONFIG.DODE.waitForDiceAnimation(message);
+      suggested = roll.total;
+    } else if (row.kind === "range") {
+      suggested = Math.round((row.min + row.max) / 2);
+    } else if (row.kind === "relative") {
+      suggested = Math.round((Number(step1.opponentEarned) || 0) * 0.1);
+    }
+    // "penalty"/"custom": inget bokfäst belopp — RP s.64 ger inga fasta
+    // avdragstal, SL skriver in det fritt i dialog 2.
+
     const amount = await DialogV2.prompt({
       window: { title: game.i18n.localize("DODE.Dialog.GrantHeroPoints") },
       content: `<p>${game.i18n.localize("DODE.HeroPoints.AwardHint", { actor: this.actor.name })}</p>
-        <input type="number" name="amount" value="1" min="1" autofocus />`,
+        <p class="hint">${row.name}</p>
+        <div class="form-group">
+          <label>${game.i18n.localize("DODE.HeroPoints.AwardAmountLabel")}</label>
+          <input type="number" name="amount" value="${suggested}" autofocus />
+        </div>`,
       ok: { label: "Dela ut", callback: (event, button) => Number(button.form.elements.amount.value) }
     });
-    if (!amount || amount <= 0) return;
+    if (!amount) return;
     const { awardHeroPoints } = await import("../helpers/hero-points.mjs");
     await awardHeroPoints(this.actor, amount);
+    const deducted = amount < 0;
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: `<div class="dode-chat-card"><h3>${game.i18n.localize("DODE.Chat.HeroPointsAwardedHeading")}</h3>
-        <p>${game.i18n.localize("DODE.Chat.HeroPointsAwardedLine", { actor: this.actor.name, amount })}</p></div>`
+      content: `<div class="dode-chat-card"><h3>${game.i18n.localize(deducted ? "DODE.Chat.HeroPointsDeductedHeading" : "DODE.Chat.HeroPointsAwardedHeading")}</h3>
+        <p>${game.i18n.localize(deducted ? "DODE.Chat.HeroPointsDeductedLine" : "DODE.Chat.HeroPointsAwardedLine", { actor: this.actor.name, amount: Math.abs(amount) })}</p></div>`
     });
   }
 

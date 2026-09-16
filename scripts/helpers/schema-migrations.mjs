@@ -34,7 +34,7 @@
  */
 
 /** Höj vid varje schemaförändring som kräver en migreringsgren. */
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 /**
  * Människoläsbar logg — komplement till SCHEMA_VERSION-numret, som bara
@@ -53,6 +53,25 @@ export const SCHEMA_LOG = [
       + "bokbelagt eller Johan-beslutat (se DESIGN_DECISIONS.md §3 Critical #3) — "
       + "migreringen loggar en konsolvarning så SL kan dubbelkolla BP-poolen manuellt "
       + "på en migrerad aktör, i stället för att tyst byta nivå utan spår."
+  },
+  {
+    version: 2,
+    date: "2026-09-16",
+    affects: ["character"],
+    summary: "Nytt fält `hjaltepoangEarned` (livstidstotal, för igenkänningsrisk-"
+      + "beräkningen, RP s.64). Fält med `initial:0` behöver i sig ingen "
+      + "migreringsgren (gamla dokument får bara defaultvärdet) — höjningen här är "
+      + "bara en bokföringspost för att fältet finns, ingen kod knuten till den. "
+      + "⚠ Ett första försök att backfylla EXISTERANDE rollpersoners hjaltepoang>0 "
+      + "in i det nya fältet via en riktig migrateData()-gren visade sig FEL: "
+      + "migrateData körs av Foundry på VARJE partiell actor.update()-delta, inte "
+      + "bara vid en riktig dokumentmigrering — en uppdatering som bara rör "
+      + "system.hjaltepoang (t.ex. varje köp i hero-points.mjs) såg "
+      + "source.hjaltepoangEarned som undefined i just DEN deltan och skrev tyst "
+      + "ner livstidstotalen till att matcha den krympande poolen, varje gång. Se "
+      + "dode.mjs's hjaltepoangEarnedBackfilled-ready-hook (samma 'kör en gång, "
+      + "rör aldrig igen'-mönster som coreTablesImported) för den FAKTISKA, säkra "
+      + "backfillen — en riktig ENGÅNGS-världsåtgärd, inte en schemamigrering."
   }
 ];
 

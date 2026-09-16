@@ -102,7 +102,12 @@
       "Attribute": "Grundegenskap",
       "RaiseCl": "Höj CL (SL-hanterat)",
       "RaiseClHint": "HH s.20/46-48: 1 HP skiftar utfallet ett steg uppåt (fummel→misslyckat→lyckat→perfekt); ett perfekt resultat ger tillbaka poängen. Kan användas när som helst, även i strid. Knappen sköter bara bokföringen (drar 1 HP) — SL avgör och tillämpar utfallsskiftet manuellt, se docs/dev/SPECIALANFALL_SL_GUIDE.md.",
-      "AwardHint": "Hjältepoäng till <strong>{actor}</strong>. HH s.20/46-48 — samma pool och spenderingsregler oavsett om poängen kom från guidens hjältedåd-slag eller delas ut mitt i en kampanj."
+      "AwardHint": "Hjältepoäng till <strong>{actor}</strong>. HH s.20/46-48 — samma pool och spenderingsregler oavsett om poängen kom från guidens hjältedåd-slag eller delas ut mitt i en kampanj.",
+      "Deed": "Bragd (RP s.64)",
+      "OpponentEarnedLabel": "Motståndarens hjältepoäng (livstid), om tillämpligt",
+      "AwardAmountLabel": "Belopp att dela ut (negativt för avdrag)",
+      "RecognitionRisk": "Igenkänningsrisk",
+      "RecognitionRiskHint": "RP s.64 — lika med den totala mängden hjältepoäng man tjänat in genom livet, oavsett hur mycket som redan spenderats ur poolen ovan."
     },
     "Derived": {
       "KP": "Kroppspoäng",
@@ -686,6 +691,8 @@
       "HeroicDeedsHeading": "Hjältedåd — resultat ({count} slag)",
       "HeroPointsAwardedHeading": "Hjältepoäng utdelade",
       "HeroPointsAwardedLine": "{actor} får <strong>{amount} hjältepoäng</strong>.",
+      "HeroPointsDeductedHeading": "Hjältepoäng avdragna",
+      "HeroPointsDeductedLine": "{actor} förlorar <strong>{amount} hjältepoäng</strong> för en ohjältemodig handling (RP s.64).",
       "RaiseClLine": "{actor} spenderar 1 hjältepoäng för att höja CL — bekräfta med SL vilket utfall ni landar på.",
       "Label": {
         "Attack": "Anfall",

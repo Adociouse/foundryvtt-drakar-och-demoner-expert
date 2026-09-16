@@ -929,10 +929,21 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // m.fl. En omslagen hjältedåd-lista finns inte att återskapa, bara
     // slutsumman. `sys.hjaltepoang` (inte `sys.hp.bonusHjaltedad`, se ⚠ i
     // actor-character.mjs) är den sparade hjältepoäng-poolen.
+    //
+    // ⚠ BUGGFIX 2026-09-16: `bonusBP`/`bonusHjaltepoang` här representerar
+    // BARA ett ev. NYTT omslag av hjältedåd under DEN HÄR redigeringssessionen
+    // (#onRollHjaltedad skriver över dem rakt av vid varje omslag — se den
+    // metoden). Det redan sparade värdet på aktören läggs i stället i egna
+    // `baseline*`-fält och adderas in separat vid sparning (#onSaveEdit),
+    // annars skriver ett omslag i redigeringsläge bort all post-skapande-
+    // historik (SL-utdelningar, spenderade hjältepoäng) i stället för att
+    // lägga till ovanpå den. I skapaläge (`this.actor` null, den här metoden
+    // anropas aldrig) finns ingen baseline — där är beteendet oförändrat.
     this.state.hjaltedad = {
-      rollCount: 0, rolls: [],
-      bonusBP: sys.bp?.bonusHjaltedad ?? 0,
-      bonusHjaltepoang: sys.hjaltepoang ?? 0
+      rollCount: 0, rolls: [], bonusBP: 0, bonusHjaltepoang: 0,
+      baselineBP: sys.bp?.bonusHjaltedad ?? 0,
+      baselineHjaltepoang: sys.hjaltepoang ?? 0,
+      baselineHjaltepoangEarned: sys.hjaltepoangEarned ?? 0
     };
     // Hjältedåd-rader (source === DODE.hjaltedadAbilitySource) hålls ISÄR
     // från de vanliga formagor-slotsen nedan — de läses tillbaka rakt av,
@@ -2206,7 +2217,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       // Ett bytt nivåval nollställer ev. redan slaget hjältedåd — det hörde
       // till den GAMLA nivån (t.ex. byte bort från en hjälte-nivå till
       // "vanlig", som inte har hjältedåd alls) och ska inte tyst hänga kvar.
-      this.state.hjaltedad = { rollCount: 0, rolls: [], bonusBP: 0, bonusHjaltepoang: 0 };
+      // Spread bevarar ett ev. inläst baseline* (se #loadStateFromActor) —
+      // BARA den här sessionens egna, tier-bundna rollBP/bonusHjaltepoang
+      // nollställs, inte vad aktören redan hade innan redigeringen öppnades.
+      this.state.hjaltedad = { ...this.state.hjaltedad, rollCount: 0, rolls: [], bonusBP: 0, bonusHjaltepoang: 0 };
       this.state.hjaltedadAbilities = [];
     }
     this.render();
@@ -2252,7 +2266,9 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // config.mjs för hela regeln (gäller nu ALLA slag i systemet, inte bara
     // hjältedåd, se DESIGN_DECISIONS.md §6).
     await CONFIG.DODE.waitForDiceAnimation(message);
-    this.state.hjaltedad = { rollCount: countRoll.total, rolls: [], bonusBP: 0, bonusHjaltepoang: 0 };
+    // Spread — bevarar baseline*, se #onSelectNiva/#loadStateFromActors
+    // motsvarande kommentarer.
+    this.state.hjaltedad = { ...this.state.hjaltedad, rollCount: countRoll.total, rolls: [], bonusBP: 0, bonusHjaltepoang: 0 };
     this.state.hjaltedadAbilities = [];
     this.render();
   }
@@ -2310,7 +2326,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // klar så att resultatlistan (med sin fulla boktext) inte dyker upp innan
     // spelaren sett vilka tal tärningarna faktiskt visar.
     await CONFIG.DODE.waitForDiceAnimation(message);
-    this.state.hjaltedad = { rollCount: count, rolls, bonusBP, bonusHjaltepoang };
+    // Spread — bevarar ett ev. inläst baseline* från #loadStateFromActor (se
+    // buggfixkommentaren där). Ett omslag ersätter bara DEN HÄR sessionens
+    // egna bonusBP/bonusHjaltepoang, aldrig baseline.
+    this.state.hjaltedad = { ...this.state.hjaltedad, rollCount: count, rolls, bonusBP, bonusHjaltepoang };
     // Ren text, INGA HTML-taggar — den här beskrivningen visas och redigeras
     // som vanlig text i en <textarea> på rollformuläret (character-sheet.hbs),
     // inte via en rich text-editor. `<em>`/`<strong>` hade bara synts som
@@ -2634,7 +2653,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       .filter((doc) => doc.effects.size === 0);
     const leftoverSm = this.#equipmentResult(shopDocs, capitalResult).remaining;
     this.state.bp.spentSvardshand = this.#swordHandBpSpent();
-    this.state.bp.bonusHjaltedad = this.state.hjaltedad.bonusBP;
+    // Baseline (vad aktören redan hade, se #loadStateFromActor) + den här
+    // sessionens ev. nya omslag — INTE bara det nya omslaget, se buggfix-
+    // kommentaren i #loadStateFromActor.
+    this.state.bp.bonusHjaltedad = (this.state.hjaltedad.baselineBP ?? 0) + this.state.hjaltedad.bonusBP;
+    const totalHjaltepoang = (this.state.hjaltedad.baselineHjaltepoang ?? 0) + this.state.hjaltedad.bonusHjaltepoang;
+    const totalHjaltepoangEarned = (this.state.hjaltedad.baselineHjaltepoangEarned ?? 0) + this.state.hjaltedad.bonusHjaltepoang;
 
     await actor.update({
       name: this.state.name || actor.name,
@@ -2642,7 +2666,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         kon: this.state.kon,
         niva: this.state.niva,
         bp: this.state.bp,
-        hjaltepoang: this.state.hjaltedad.bonusHjaltepoang,
+        hjaltepoang: totalHjaltepoang,
+        hjaltepoangEarned: totalHjaltepoangEarned,
         swordHand: this.#swordHandResult().key ?? "hoger",
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,
@@ -2745,7 +2770,12 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
     const { img, prototypeToken } = this.#tokenDefaults(raceDoc, professionDoc);
     this.state.bp.spentSvardshand = this.#swordHandBpSpent();
-    this.state.bp.bonusHjaltedad = this.state.hjaltedad.bonusBP;
+    // baseline* är alltid 0 i skapaläge (#loadStateFromActor anropas aldrig
+    // utan en existerande aktör) — samma formel som edit-läget ändå, för
+    // symmetri, se buggfixkommentaren i #loadStateFromActor.
+    this.state.bp.bonusHjaltedad = (this.state.hjaltedad.baselineBP ?? 0) + this.state.hjaltedad.bonusBP;
+    const totalHjaltepoang = (this.state.hjaltedad.baselineHjaltepoang ?? 0) + this.state.hjaltedad.bonusHjaltepoang;
+    const totalHjaltepoangEarned = (this.state.hjaltedad.baselineHjaltepoangEarned ?? 0) + this.state.hjaltedad.bonusHjaltepoang;
 
     const actor = await Actor.create({
       name: this.state.name || "Ny rollperson",
@@ -2756,7 +2786,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         kon: this.state.kon,
         niva: this.state.niva,
         bp: this.state.bp,
-        hjaltepoang: this.state.hjaltedad.bonusHjaltepoang,
+        hjaltepoang: totalHjaltepoang,
+        hjaltepoangEarned: totalHjaltepoangEarned,
         swordHand: this.#swordHandResult().key ?? "hoger",
         socialStanding: this.state.socialStanding,
         startCapital: this.state.startCapital,

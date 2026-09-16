@@ -646,6 +646,42 @@ DODE.rollHeroicAbility = function (total, dark = false) {
   return table.find((row) => total >= row.range[0] && total <= row.range[1]) ?? null;
 };
 
+/**
+ * Dådtabellen — RP s.64, den konkreta listan av namngivna bragder som
+ * TRIGGAR en hjältepoängutdelning. Konsumeras av SL:s "Dela ut
+ * hjältepoäng"-dialog (actor-character-sheet.mjs#onAwardHeroPoints), INTE
+ * ett RollTable-kompendium — det här är en meny SL VÄLJER ur, inte ett
+ * tärningsslag som slås upp mot ett intervall (annat mönster än
+ * specialAbilitiesTable/hjaltedadTable).
+ *
+ * `kind` styr hur dialogen räknar fram ett förslag till belopp:
+ *  - "fixed": beloppet är exakt `amount`.
+ *  - "dice": rullas via `formula` (samma `Roll`-mönster som #onRollHjaltedad).
+ *  - "range": inget bokfäst slag — `min`/`max` visas som SL-hjälp, medelvärdet
+ *    föreslås (samma "hint, inte tvingad summa"-princip som redan gäller för
+ *    Fria EP:s "1-4 uppdragsframgång..."-dialog).
+ *  - "relative": 10 % av en ANNAN hjältes livstidsintjänade hjältepoäng
+ *    (`hjaltepoangEarned`) — ⚠ tolkningsval: boken säger bara "10 % av dennes
+ *    HP", läst här som livstidstotalen (hur stor hjälte motståndaren VAR),
+ *    inte den kvarvarande spenderbara poolen (hur mycket hen råkar ha kvar).
+ *  - "penalty"/"custom": inget bokfäst belopp — SL skriver in det fritt
+ *    (penalty = ohjältemodig handling, RP s.64 ger inga fasta avdragstal).
+ */
+DODE.heroicDeedsAwardTable = [
+  { key: "fv", name: "Uppnå FV 21/41/61 i en färdighet", kind: "dice", formula: "1d4" },
+  { key: "tornering", name: "Vinna tornering (fler än 400 deltagare)", kind: "fixed", amount: 5 },
+  { key: "prinsessa", name: "Rädda prinsessa på kungens uppdrag", kind: "fixed", amount: 10 },
+  { key: "harforare", name: "Döda fiendens härförare", kind: "fixed", amount: 10 },
+  { key: "kontinent", name: "Upptäcka ny kontinent", kind: "fixed", amount: 10 },
+  { key: "belagring", name: "Leda belägring och erövring av fientlig borg", kind: "fixed", amount: 10 },
+  { key: "skatt", name: "Stjäla skatt från monster utan att döda det", kind: "range", min: 5, max: 25 },
+  { key: "monster", name: "Döda monster", kind: "range", min: 10, max: 50 },
+  { key: "kungarike", name: "Rädda kungarike från undergång", kind: "fixed", amount: 50 },
+  { key: "hjalte", name: "Besegra annan hjälte (10 % av dennes livstids-HP)", kind: "relative" },
+  { key: "ohjaltemodig", name: "Ohjältemodig handling (avdrag, SL avgör)", kind: "penalty" },
+  { key: "custom", name: "Fritt belopp", kind: "custom" }
+];
+
 // Kaos Väktare s.34-35 (backlog 88), ordagrant: "Denna tabell ersätter den
 // som finns i Grundreglerna" — men bara för Demonolog/Demonjägare/
 // Demonkrigare, och bara för DE RADER boken faktiskt skriver om. Alla andra

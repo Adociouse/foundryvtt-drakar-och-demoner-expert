@@ -252,6 +252,16 @@ Hooks.once("init", () => {
     default: false
   });
 
+  // Engångsflagga för hjaltepoangEarned-backfillen (se ready-hooken nedan och
+  // schema-migrations.mjs SCHEMA_LOG v2 för varför det här INTE är en
+  // migrateData()-gren).
+  game.settings.register(SYSTEM_ID, "hjaltepoangEarnedBackfilled", {
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false
+  });
+
   // Hjältedåd-antal per nivå — HUSREGEL, INTE grundregler.
   //
   // ⚠ EJ STANDARDREGLER. HH s.6-7 anger bara "slå 1T6" för hur många gånger en
@@ -867,6 +877,37 @@ Hooks.once("ready", async () => {
   if (toImport.length) await RollTable.createDocuments(toImport);
   await game.settings.set(SYSTEM_ID, "coreTablesImported", true);
   console.log(`DoDE | ${toImport.length} kärntabeller importerade till världen (${sourceDocs.length - toImport.length} redan fanns)`);
+});
+
+/**
+ * Backfyller `system.hjaltepoangEarned` (livstidstotal, RP s.64:s
+ * igenkänningsrisk) för rollpersoner som redan hade en spenderbar
+ * `hjaltepoang`-pool innan det fältet fanns. Körs EN gång per värld, precis
+ * som `coreTablesImported` ovan — en SL som senare medvetet nollställer en
+ * rollpersons `hjaltepoangEarned` ska inte få den återbackfylld nästa
+ * världsstart.
+ *
+ * ⚠ Detta gjordes FÖRST som en `migrateData()`-gren (schema v2) — fel val.
+ * `migrateData` körs av Foundry på VARJE partiell `actor.update()`-delta,
+ * inte bara vid en riktig dokumentmigrering: en uppdatering som bara rör
+ * `system.hjaltepoang` (varje köp i `apps/hero-points.mjs`) fick
+ * `source.hjaltepoangEarned` att se ut som `undefined` i just DEN deltan,
+ * och migreringsgrenen skrev tyst ner livstidstotalen till att matcha den
+ * krympande poolen — vid VARJE efterföljande köp, inte bara en gång. En
+ * riktig engångs-världsåtgärd här, byggd på precis samma redan beprövade
+ * mönster som tabellimporten ovan, är fri från det problemet: den läser och
+ * skriver hela aktörsdokument via `actor.update()` en enda gång, aldrig ett
+ * schema-hook som körs blint på varje framtida delta.
+ */
+Hooks.once("ready", async () => {
+  if (!game.user.isGM) return;
+  if (game.settings.get(SYSTEM_ID, "hjaltepoangEarnedBackfilled")) return;
+  const updates = game.actors
+    .filter((a) => a.type === "character" && (a.system.hjaltepoang ?? 0) > 0 && !(a.system.hjaltepoangEarned > 0))
+    .map((a) => ({ _id: a.id, "system.hjaltepoangEarned": a.system.hjaltepoang }));
+  if (updates.length) await Actor.updateDocuments(updates);
+  await game.settings.set(SYSTEM_ID, "hjaltepoangEarnedBackfilled", true);
+  console.log(`DoDE | hjaltepoangEarned backfylld för ${updates.length} rollperson(er).`);
 });
 
 Hooks.on("renderActorDirectory", (app, html) => {

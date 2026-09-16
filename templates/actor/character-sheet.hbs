@@ -111,6 +111,13 @@
               (apps/hero-points.mjs). --}}
         <span title="Hjältepoäng (HH s.6-7/s.20/46-48) — spendera via knappen ovan">Hjältepoäng: {{system.hjaltepoang}}</span>
       {{/if}}
+      {{#if system.hjaltepoangEarned}}
+        {{!-- RP s.64, ordagrant: "Igenkänningsrisken är [totalt insamlade HP
+              i livet] %." Livstidstotal, minskar ALDRIG när poolen ovan
+              spenderas — hjältestatus har en baksida. Ingen cap vid 100,
+              boken ger ingen övre gräns. --}}
+        <span class="encumbrance-display encumbrance-active" title="Igenkänningsrisk (RP s.64) — lika med den totala mängden hjältepoäng man tjänat in genom livet, oavsett hur mycket som redan spenderats ur poolen ovan">Igenkänningsrisk: {{system.hjaltepoangEarned}}%</span>
+      {{/if}}
       {{!-- SL-beviljade extra attacker/pareringar denna stridsrunda (t.ex.
             Vapenmästarens PSY-köpta handling, KH s.8-9) — se
             DODE.getBonusActions/gm-effects.mjs. Ren bokföring, ingen spärr. --}}

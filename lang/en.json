@@ -101,7 +101,12 @@
       "Attribute": "Base attribute",
       "RaiseCl": "Raise CL (GM-handled)",
       "RaiseClHint": "HH p.20/46-48: 1 HP shifts the outcome one tier up (fumble→failure→success→perfect); a perfect result refunds the point. Usable anytime, even in combat. This button only handles the bookkeeping (deducts 1 HP) — the GM applies the actual outcome shift manually, see docs/dev/SPECIALANFALL_SL_GUIDE.md.",
-      "AwardHint": "Hero points to <strong>{actor}</strong>. HH p.20/46-48 — same pool and spending rules whether the points came from the wizard's heroic-deed roll or were awarded mid-campaign."
+      "AwardHint": "Hero points to <strong>{actor}</strong>. HH p.20/46-48 — same pool and spending rules whether the points came from the wizard's heroic-deed roll or were awarded mid-campaign.",
+      "Deed": "Deed (RP p.64)",
+      "OpponentEarnedLabel": "Opponent's hero points (lifetime), if applicable",
+      "AwardAmountLabel": "Amount to award (negative for a deduction)",
+      "RecognitionRisk": "Recognition risk",
+      "RecognitionRiskHint": "RP p.64 — equal to the total amount of hero points earned over a lifetime, regardless of how much of the pool above has already been spent."
     },
     "Derived": {
       "KP": "Hit Points",
@@ -685,6 +690,8 @@
       "HeroicDeedsHeading": "Heroic deeds — result ({count} rolls)",
       "HeroPointsAwardedHeading": "Hero points awarded",
       "HeroPointsAwardedLine": "{actor} receives <strong>{amount} hero points</strong>.",
+      "HeroPointsDeductedHeading": "Hero points deducted",
+      "HeroPointsDeductedLine": "{actor} loses <strong>{amount} hero points</strong> for an unheroic act (RP p.64).",
       "RaiseClLine": "{actor} spends 1 hero point to raise CL — confirm with the GM which outcome you land on.",
       "Label": {
         "Attack": "Attack",
