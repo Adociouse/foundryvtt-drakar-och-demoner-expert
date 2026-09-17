@@ -1,6 +1,6 @@
 # Schema-versionering, migration och JSON-export/import
 
-> Byggd 2026-08-08, på Johans begäran: "make sure characters and NPCs, monster
+> Byggd 2026-08-08, på Projektets begäran: "make sure characters and NPCs, monster
 > can be saved exported and imported with json format? Maybe with schema
 > version not to cause crashes and keep schema versioning log". Stänger
 > `docs/DESIGN_DECISIONS.md` §3 Critical #3 ("Niva schema migration").
@@ -61,14 +61,14 @@ hjalte       → gudafodd
 ```
 
 ⚠ **Den här mappningen är ett RIMLIGHETSVAL, inte källbelagt eller
-Johan-beslutat** — se `docs/DESIGN_DECISIONS.md` §3 Critical #3 för hela
+projektbeslutat** — se `docs/DESIGN_DECISIONS.md` §3 Critical #3 för hela
 resonemanget om varför BP-poolerna mellan skalorna inte är en ren
 1-till-1-motsvarighet. Migreringen skriver därför en tydlig
 `console.warn` varje gång den slår till, så en SL som importerar/laddar en
 gammal rollperson vet att kontrollera BP-poolen manuellt i stället för att
 tyst lita på den automatiska gissningen.
 
-**Liveverifierat 2026-08-08 — två omgångar, den andra strängare på Johans begäran ("all NPC, characters and items exported as json? And tested clearing and importing?"):**
+**Liveverifierat 2026-08-08 — två omgångar, den andra strängare på Projektets begäran ("all NPC, characters and items exported as json? And tested clearing and importing?"):**
 
 *Första omgången (in-memory-simulering):*
 - En raw legacy-aktör (`niva:"extraordinar"`, inget `schemaVersion`-fält alls)
@@ -101,7 +101,7 @@ tyst lita på den automatiska gissningen.
   `schemaVersion` — allt bevarat. `testFixture`-flaggan (som
   `seed-test-party.js` sätter) överlevde rundturen intakt.
 - **Samma rundtur körd på en NPC och ett fristående Item** — men med
-  ENGÅNGS-testdokument ("ZZTEST NPC", "ZZTEST Vapen"), INTE Johans riktiga
+  ENGÅNGS-testdokument ("ZZTEST NPC", "ZZTEST Vapen"), INTE Projektets riktiga
   kampanj-NPC:er (AKRAE, KHAA, m.fl.) eller riktiga magiska vapen
   (Drakdödaren, Dödsbringaren) — en medveten säkerhetsavvägning: mekanismen
   bevisas lika bra på engångsdata, och en riktig kampanj-NPC ska inte raderas
@@ -114,7 +114,7 @@ tyst lita på den automatiska gissningen.
 
 ## Repeterbar backup — `docs/dev/backup-world.js`
 
-Johan, samma session: "Keep data backup somehow so nothing gets lost of
+Feedback, samma session: "Keep data backup somehow so nothing gets lost of
 sessions gets broken." En engångskörning i konsolen räcker för STUNDEN, inte
 för nästa session. `docs/dev/backup-world.js` gör det till ett upprepningsbart
 verktyg (samma "klistra in i konsolen"-mönster som `seed-test-party.js`):
@@ -161,5 +161,5 @@ sekvensen som liveverifierades ovan).
   PF2e:s `compendium-migration-status`) är fortfarande värdefull för att
   se STATUS över en stor värld, men är ett separat, större UI-projekt.
 - **Ingen migrering av ActiveEffects, Scenes eller andra dokumenttyper** —
-  bara Actor + Item-typerna som Johan efterfrågade (rollpersoner, NPC:er,
+  bara Actor + Item-typerna som efterfrågades (rollpersoner, NPC:er,
   monster, och alla itemtyper de bär).

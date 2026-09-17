@@ -59,7 +59,7 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
         //    extrakten DODE_Monsterboken1/2_STATBLOCK.md i Roll20-projektet.
         maxOverride: new fields.NumberField({ required: false, integer: true, initial: null, nullable: true })
       }),
-      // ⚠ Deplomerbar PSY-resurs, tillagd 2026-09-03 (Johan: "Build NPC/Monster
+      // ⚠ Deplomerbar PSY-resurs, tillagd 2026-09-03 (Feedback: "Build NPC/Monster
       // PSY like KP to manage PSY spells"). Innan detta hade NPC:er bara
       // `attributes.psy.value` — en platt attributpoäng utan aktuell/max-
       // uppdelning — så en PSY-skadebesvärjelse (Andeslag, Själaförvittring,
@@ -85,7 +85,7 @@ export default class DoDENpcData extends foundry.abstract.TypeDataModel {
         required: false, initial: "humanoid",
         choices: ["humanoid", "fyrfota", "bevingad-humanoid", "kentaur", "svanmo"]
       }),
-      // Kreaturskategori, tillagd 2026-09-03 (Johan: målrestriktioner + en
+      // Kreaturskategori, tillagd 2026-09-03 (Feedback: målrestriktioner + en
       // varning, inte en blockering — se docs/DESIGN_DECISIONS.md backlog-
       // uppföljning och CONFIG.DODE.spellTargetWarning/creatureWeaponWarning
       // i config.mjs). Default "normal" — de allra flesta NPC:er förblir

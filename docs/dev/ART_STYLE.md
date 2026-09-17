@@ -1,6 +1,6 @@
 # Bildstil för porträtt (raser, yrken, ikoner)
 
-> Kanonisk promptmall, given av Johan 2026-07-27. **Använd den ordagrant som grund** när nya ras-/yrkesporträtt genereras, annars glider stilen isär mellan gamla och nya kort i rollpersonsskaparens rutnät.
+> Kanonisk promptmall, given av 2026-07-27. **Använd den ordagrant som grund** när nya ras-/yrkesporträtt genereras, annars glider stilen isär mellan gamla och nya kort i rollpersonsskaparens rutnät.
 
 ## Referensprompt (alv)
 
@@ -32,8 +32,8 @@ portrait, highly detailed
 - **`muted earthy color palette with warm amber highlights`** — varm dämpad jordton är husstilen. Kalla/blå paletter bara när motivet kräver det (mörkeralv, frostmiljö), och även då dämpat.
 - **`waist-up portrait` + `centered square composition`** — midjebild, centrerad, 1:1.
 - **`portrait icon`** — orden spelar roll; de ger den inramade ikonkänslan snarare än en scen.
-- **Ingen dekorativ bildram/kant** — Johan hittade 2026-08-02 att flera porträtt (bl.a. `morkeralv-man.png`) fått en vit, rundad "polaroid"-ram runt hela bilden trots att `dark blurred background` följdes ordagrant — bakgrunden i sig var mörk, men modellen la ändå på en ljus inramning runt kanten. Pixelsampling i fyra hörn missar detta (rundade hörn faller utanför själva ramen och samplar svart/transparent), så sampla ALLTID flera punkter längs alla fyra kanterna (inte bara hörnen) när porträtt verifieras. Lägg till `no border, no frame, edge-to-edge image, full bleed` i slutet av prompten för att motverka det.
-- **Genomskinlig kant på TOKEN-bilden (inte porträttet) — löses inte via prompt.** Johan, 2026-08-22, om hur NPC-tokens ser ut på kartan: en rektangulär bild med opak (t.ex. mörk) bakgrund ända ut i hörnen syns som en fyrkant bakom Foundrys runda token-ram i stället för att smälta in i scenen (Grimnes token pekades ut som exemplet — "great... if he had a transparent outer ring"). Det här är INTE samma problem som "dekorativ ram" ovan (som handlar om en oönskad synlig kant *i motivet*) — bildmodellen kan inte generera äkta alfatransparens i ett vanligt PNG-genereringsanrop, så det går inte att prompt:a bort. **Löst utan bildredigering alls: Foundry-kärnans egen "Dynamic Ring"-tokeninställning** (Token Config → Appearance → Dynamic Ring) maskerar bilden till en ring med genomskinliga kanter direkt i renderingen — Johan bekräftade detta löser exakt problemet på Sylvies token, snabbare än att beskära/maska bilden i förväg. Modulen `Tokenizer 2` (installerad, aktiv) är ett alternativ för samma resultat om Dynamic Ring av någon anledning inte räcker (t.ex. om ett annat visuellt facit behövs), men Dynamic Ring är den enklaste vägen och kräver ingen ny bildfil.
+- **Ingen dekorativ bildram/kant** — upptäckt 2026-08-02: flera porträtt (bl.a. `morkeralv-man.png`) fått en vit, rundad "polaroid"-ram runt hela bilden trots att `dark blurred background` följdes ordagrant — bakgrunden i sig var mörk, men modellen la ändå på en ljus inramning runt kanten. Pixelsampling i fyra hörn missar detta (rundade hörn faller utanför själva ramen och samplar svart/transparent), så sampla ALLTID flera punkter längs alla fyra kanterna (inte bara hörnen) när porträtt verifieras. Lägg till `no border, no frame, edge-to-edge image, full bleed` i slutet av prompten för att motverka det.
+- **Genomskinlig kant på TOKEN-bilden (inte porträttet) — löses inte via prompt.** 2026-08-22, om hur NPC-tokens ser ut på kartan: en rektangulär bild med opak (t.ex. mörk) bakgrund ända ut i hörnen syns som en fyrkant bakom Foundrys runda token-ram i stället för att smälta in i scenen (Grimnes token pekades ut som exemplet — "great... if he had a transparent outer ring"). Det här är INTE samma problem som "dekorativ ram" ovan (som handlar om en oönskad synlig kant *i motivet*) — bildmodellen kan inte generera äkta alfatransparens i ett vanligt PNG-genereringsanrop, så det går inte att prompt:a bort. **Löst utan bildredigering alls: Foundry-kärnans egen "Dynamic Ring"-tokeninställning** (Token Config → Appearance → Dynamic Ring) maskerar bilden till en ring med genomskinliga kanter direkt i renderingen — bekräftat att detta löser exakt problemet på Sylvies token, snabbare än att beskära/maska bilden i förväg. Modulen `Tokenizer 2` (installerad, aktiv) är ett alternativ för samma resultat om Dynamic Ring av någon anledning inte räcker (t.ex. om ett annat visuellt facit behövs), men Dynamic Ring är den enklaste vägen och kräver ingen ny bildfil.
 
 ## Andra motivtyper
 
@@ -76,7 +76,7 @@ detailed
 
 ### Tabellikon (RollTable — SL-tabeller som Snedtändning/Fummel)
 
-De flesta bordstabeller återanvänder bara en befintlig magiskole-/föremålsikon (t.ex. Skräcktabellen fick `magiskolor/nekromanti.png`) — helt tillräckligt för en SL-only referenstabell. **Undantag, Johans instruktion 2026-08-21:** vapenstridens fyra Fummeltabeller (Sköldar/Närstridsvapen/Avståndsvapen/Obeväpnad strid) fick egna genererade ikoner eftersom "fummel table icons can be a bit more witty/fun" — tabellernas eget innehåll ÄR komiska missöden (tappade vapen, sprucken sköld, snubblande slagskämpar), så ikonen får gärna spegla det i stället för att vara en neutral vapensilhuett.
+De flesta bordstabeller återanvänder bara en befintlig magiskole-/föremålsikon (t.ex. Skräcktabellen fick `magiskolor/nekromanti.png`) — helt tillräckligt för en SL-only referenstabell. **Undantag, Projektets instruktion 2026-08-21:** vapenstridens fyra Fummeltabeller (Sköldar/Närstridsvapen/Avståndsvapen/Obeväpnad strid) fick egna genererade ikoner eftersom "fummel table icons can be a bit more witty/fun" — tabellernas eget innehåll ÄR komiska missöden (tappade vapen, sprucken sköld, snubblande slagskämpar), så ikonen får gärna spegla det i stället för att vara en neutral vapensilhuett.
 
 ```
 Fantasy RPG inventory item icon depicting a comic combat mishap: <MISSÖDE — t.ex.
@@ -95,13 +95,13 @@ Filnamn/mapp: `assets/tokens/tabeller/<slug>.png` (ny mapp 2026-08-21). Kopplas 
 
 ### Rastoken (top-down, för spelbrädet)
 
-Johan 2026-08-03: rasernas `prototypeToken.texture.src` ska vara **riktig fågelperspektiv-konst**, inte samma porträtt beskuret till en cirkel (vilket är hur `img`/porträttet redan används, och hur de flesta VTT-system löser tokens — men Johan ville ha äkta top-down här). En helt egen mall, alltså — porträttmallens `waist-up portrait` går inte att återanvända rakt av.
+2026-08-03: rasernas `prototypeToken.texture.src` ska vara **riktig fågelperspektiv-konst**, inte samma porträtt beskuret till en cirkel (vilket är hur `img`/porträttet redan används, och hur de flesta VTT-system löser tokens — men äkta top-down önskades här). En helt egen mall, alltså — porträttmallens `waist-up portrait` går inte att återanvända rakt av.
 
-⚠ **Detta var svårt att få rätt — flera misslyckade promptstrategier innan Johans egen formulering (2026-08-03) gav ett upprepbart resultat:**
+⚠ **Detta var svårt att få rätt — flera misslyckade promptstrategier innan Projektets egen formulering (2026-08-03) gav ett upprepbart resultat:**
 1. `seen from directly above (bird's-eye/top-down view)` — modellen ignorerade det helt, gav en vanlig frontal 3/4-porträttvy varje gång, bara beskuren i en cirkel.
 2. Samma fras + `contained within a circular frame` — samma frontala resultat, OCH modellen tolkade "circular frame" bokstavligt och ritade en mörk disk med VITA hörn runt, i stället för att fylla hela dukens kvadrat.
 3. `VTT player character top down` + `exactly like looking down a stairwell at someone standing below` — gav EN lyckad bild men visade sig ej upprepbar; en direkt uppföljande batch med samma prompt gav 0/3 nya top-down-resultat, bara frontala porträtt igen.
-4. **Johans egen prompt (nedan), testad och bekräftad fungerande** — nyckeltilläggen mot försök 3 är `seen from directly above` UPPREPAT ihop med `top-down bird's-eye view looking straight down at the top of the head and shoulders` (dubbel förstärkning i stället för en enda stairwell-metafor), plus den explicita `face is not visible`.
+4. **Projektets egen prompt (nedan), testad och bekräftad fungerande** — nyckeltilläggen mot försök 3 är `seen from directly above` UPPREPAT ihop med `top-down bird's-eye view looking straight down at the top of the head and shoulders` (dubbel förstärkning i stället för en enda stairwell-metafor), plus den explicita `face is not visible`.
 
 ⚠ **Fortfarande inte 100% garanterat** — bildmodellen är i grunden icke-deterministisk för kameravinkel. Sampla flera punkter längs kanterna (samma kontroll som porträttens vita-kant-regel) OCH titta manuellt på varje bild — automatisk pixelkontroll kan bara fånga vita hörn/kanter, inte fel kameravinkel. Retry med oförändrad prompt vid en frontal träff, snarare än att ändra formuleringen igen.
 
@@ -160,4 +160,4 @@ Miljöerna som användes (2026-07-27): alkemi = alkemistbänk med retorter · an
 
 ## Verktyg
 
-Lokal MCP-server (`mcp__gemini-imagen__generate_image`), som Johan kör. Parametrar: `prompt`, `count`, `output_dir`. Parallella anrop fungerar — 4 åt gången är en rimlig takt.
+Lokal MCP-server (`mcp__gemini-imagen__generate_image`), körd lokalt. Parametrar: `prompt`, `count`, `output_dir`. Parallella anrop fungerar — 4 åt gången är en rimlig takt.

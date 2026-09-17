@@ -18,7 +18,7 @@
  * rollpersonsskaparen (färdighetsgenerering, ålders-AE, prototyptoken osv.).
  * Går seedningen igenom utan fel fungerar hela skaparkedjan.
  *
- * ⚠⚠ STÅENDE REGEL (Johan 2026-08-08): "new features break legacy artifacts...
+ * ⚠⚠ STÅENDE REGEL (feedback 2026-08-08): "new features break legacy artifacts...
  * value building migration tools less than rebuild items based on requirements
  * if needed." Den här filen är INTE en engångsleverans — guidens `state`-form
  * växer varje gång ett nytt steg läggs till (attributköp, hjältedåd, svärdshand,

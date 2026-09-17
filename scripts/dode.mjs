@@ -199,13 +199,13 @@ Hooks.once("init", () => {
 
   // Träningsavgift per veckopass med lärare.
   //
-  // ⚠ AVSTEG FRÅN GRUNDREGLERNA — beslutat av Johan 2026-07-29.
+  // ⚠ AVSTEG FRÅN GRUNDREGLERNA — beslutat av 2026-07-29.
   // REG s.45 anger 150 sm/vecka som grundkostnad och 300 sm/vecka för en
   // magikerlärare, med multiplikatorer ovanpå (×1,5 för elev av annan ras, ×2 för
   // liten klass, × lärarens INT för ensam elev). MAG lägger dessutom på dubbel
   // taxa för besvärjelseträning. Vi tar i stället en FAST avgift per pass, som
   // standard 300 sm, och sätter ingen gräns för hur många färdigheter som kan
-  // tränas samma vecka. Johans motivering: reglerna säger inte att man inte får
+  // tränas samma vecka. Projektets motivering: reglerna säger inte att man inte får
   // träna flera färdigheter under samma vecka, och vad pengarna går till —
   // lärare, material, lokal — är SL:s beskrivning, inte en mekanik. En siffra
   // som SL kan ändra slår en trappa av multiplikatorer som ingen slår upp vid
@@ -224,7 +224,7 @@ Hooks.once("init", () => {
   });
 
   // Varaktighet för "det rena utslaget" — se resolveAttack i rolls/attack.mjs.
-  // ⚠ AVSTEG utan bokstöd (Johan 2026-07-29); därför en inställning och inte en
+  // ⚠ AVSTEG utan bokstöd (2026-07-29); därför en inställning och inte en
   // konstant, så varje bord kan sätta hur brutal tjuvfantasin får vara.
   // Världseffekter (GM-effektfönstret, Part 1) — en lista, inte ett enskilt
   // värde, så `config:false`: redigeras via fönstret (DODE.addWorldEffect/
@@ -267,7 +267,7 @@ Hooks.once("init", () => {
   // ⚠ EJ STANDARDREGLER. HH s.6-7 anger bara "slå 1T6" för hur många gånger en
   // hjälte-nivå (Slumpens hjälte/Sann hjälte/Gudafödd) får slå på
   // hjältedådstabellen — samma 1T6 oavsett vilken av de tre nivåerna, se
-  // #onRollHjaltedadCount. Johan (2026-08-07), efter att ha kört
+  // #onRollHjaltedadCount. Fynd (2026-08-07), efter att ha kört
   // hjältemenyn många gånger: en flat 1T6 gör att en Gudafödd statistiskt
   // inte alls skiljer sig från en Slumpens hjälte i antal slag, trots att de
   // ska vara mekaniskt olika sällsynta/mäktiga (HH s.37-39). Han vill ha en
@@ -275,7 +275,7 @@ Hooks.once("init", () => {
   // sin egen kampanj — INTE som ny systemstandard för alla bord. Default
   // `false` (av) medvetet: byter man på den ändrar man en tryckt regel, ett
   // beslut varje bord ska ta själva, inte något systemet ska välja åt dem.
-  // Formlerna (DODE.hjaltedadCountHouseRule, config.mjs) är Johans egna,
+  // Formlerna (DODE.hjaltedadCountHouseRule, config.mjs) är Projektets egna,
   // inte bokkällade: Slumpens hjälte 1T2, Sann hjälte 2+1T2, Gudafödd 4+1T2.
   game.settings.register(SYSTEM_ID, "hjaltedadTieredRollCount", {
     name: "Hjältedåd: nivåstyrt antal slag (HUSREGEL)",
@@ -302,12 +302,12 @@ Hooks.once("init", () => {
     default: "1d3"
   });
 
-  // ⚠ HOMEBREW, av som standard. Johans uttryckliga fråga 2026-08-21 under
+  // ⚠ HOMEBREW, av som standard. Projektets uttryckliga fråga 2026-08-21 under
   // krogslagsmålet: SLB s.17s "Perfekt → automatisk maximal skada, rustning
   // dras ej bort" gäller ORDAGRANT bara anfallsslag/pareringsslag (se
   // spell.mjs's docblock för resonemanget om varför besvärjelser INTE fick
   // samma regel per default — tabellen är strukturerad kring en pareringsrulle
-  // besvärjelser saknar). Johan bad uttryckligen om en SL-växlingsbar
+  // besvärjelser saknar). Ett uttryckligt önskemål fanns om en SL-växlingsbar
   // inställning i stället för ett hårdkodat ja/nej, så olika bord kan välja.
   // Bara skadan maximeras (samma teknik som redan används för vapen — riktiga
   // tärningar slås och visas, men SUMMAN räknas som om varje tärning visade
@@ -686,13 +686,13 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
  * med `ownership.default >= LIMITED` listas dessutom i ALLA spelares Actors-
  * sidopanel (Foundrys egen `ClientDocument#visible`-getter, kärn-API, testar
  * bara `testUserPermission(user, "LIMITED")` — ingen känsla för "levande
- * fiende" kontra "redan plundrat lik"). Johan, skärmdump 2026-08-22: en
+ * fiende" kontra "redan plundrat lik"). Skärmdump 2026-08-22: en
  * spelare såg "Skelett (togad)", "Vaktskelett (fjällpansar)" och "Malakor
  * Benbrytare" listade i sin egen meny — döda motståndare som SKA gå att
  * plundra, men som inte ska stå namngivna i spelarens sidopanel förrän de
  * faktiskt är besegrade, och inte längre efter allt är plundrat.
  *
- * Lösning, Johans uttryckliga val: `npc`-aktörer föds med `default:0`
+ * Lösning, Projektets uttryckliga val: `npc`-aktörer föds med `default:0`
  * (osynliga), får `default:2` (Observer) AUTOMATISKT i samma stund `dead`-
  * statusen sätts (samma `toggleStatusEffect("dead", ...)`-anrop striden
  * redan använder — se auto-städningshooken ovan), och tappar den igen så
@@ -715,7 +715,7 @@ Hooks.on("createActiveEffect", (effect) => {
 });
 
 /**
- * Berätta när en besvärjelses effekt tar slut — live-fynd 2026-08-21 (Johan:
+ * Berätta när en besvärjelses effekt tar slut — live-fynd 2026-08-21 (Feedback:
  * "if he is no longer blind the icon should vanish and a text message state
  * Spell effect blindness expired?"). Utan detta försvinner statusikonen/
  * ActiveEffecten tyst (utgången varaktighet, botad, eller SL-borttagen för
@@ -744,7 +744,7 @@ Hooks.on("deleteActiveEffect", (effect) => {
  * (`Sigrid Järnhand`, `Stigman`, `Varg`, `Rurik Tvåyxa`) pekade på ett
  * aktörs-id som inte längre fanns i världen — troligen kvarlämnade från en
  * tidigare raderad aktör. De syntes bara som namn utan hälsobar/typ, och
- * förvirrade en riktig strid (Johan: "confused the fight"). Ingen automatisk
+ * förvirrade en riktig strid (Feedback: "confused the fight"). Ingen automatisk
  * städning här — bara en tydlig varning när scenen laddas, så SL kan städa
  * INNAN en strid börjar i stället för att upptäcka det mitt i en runda.
  */
@@ -760,7 +760,7 @@ Hooks.on("canvasReady", (canvas) => {
  * Besegrade NPC-token — manuell SL-städning, INTE automatisk vid scenbyte.
  * ⚠ RÄTTELSE 2026-08-22, samma dag: byggdes först som en `updateScene`-hook
  * som auto-raderade vid VARJE `active`-växling (både när scenen lämnas OCH
- * när den blir aktiv igen). Johan identifierade själv problemet innan det
+ * när den blir aktiv igen). Problemet identifierades innan det
  * hann orsaka skada: en fleravåningsdungeon där spelarna växlar mellan
  * scener (våning 1 → våning 2 → tillbaka) skulle tömma våning 1:s lik VARJE
  * gång SL bytte bort från den — även om gruppen bara var borta en stund och
@@ -804,7 +804,7 @@ Hooks.on("getSceneContextOptions", (app, options) => {
  * t.ex. sitt eget porträtt/token), men INTE FILES_BROWSE (kunna bläddra i hela
  * serverns filträd) — de är oberoende behörigheter i Foundrys kärna
  * (`file-picker.mjs`: FILES_UPLOAD styr uppladdningsknappen, FILES_BROWSE styr
- * bläddringen/trädlistan, separata kontrollpunkter). Johans oro 2026-08-03
+ * bläddringen/trädlistan, separata kontrollpunkter). Projektets oro 2026-08-03
  * ("if they have file browse they can see all? Does not seem ok?") gällde
  * bläddring — den lämnas orörd (kvar på Betrodd, rollid 2+) medan bara
  * uppladdning sänks till Spelare (rollid 1), så en spelare kan ersätta sin egen
@@ -839,7 +839,7 @@ Hooks.once("ready", async () => {
 /**
  * Förinstallerar kärnans slagbara tabeller (de fyra Fummeltabellerna,
  * Skräcktabellen, Snedtändningstabellen, Fobitabellen) i VÄRLDENS egna
- * `game.tables`-samling, en gång, i en tom nyimporterad värld. Johan,
+ * `game.tables`-samling, en gång, i en tom nyimporterad värld. Feedback,
  * 2026-09-04: "The core DoDE system should have these tables installed
  * when a new SL imports these into an empty foundry installation."
  *

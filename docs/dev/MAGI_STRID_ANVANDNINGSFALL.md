@@ -1,10 +1,10 @@
 # Magi, drycker och stridseffekter — 15 användningsfall (design-underlag, INTE byggt än)
 
-> Skapad 2026-08-21. Syfte: samma sak som `STRID_FLERHAND_ANVANDNINGSFALL.md` gjorde för flerhandsstrid — ett käll-förankrat facit att bygga och regressionstesta den kommande besvärjelse-/drycksupplösningen mot, INNAN koden skrivs. Johan: *"get into the spells, potions, magical and maybe other effects in a fight... make sure we have some good use cases."*
+> Skapad 2026-08-21. Syfte: samma sak som `STRID_FLERHAND_ANVANDNINGSFALL.md` gjorde för flerhandsstrid — ett käll-förankrat facit att bygga och regressionstesta den kommande besvärjelse-/drycksupplösningen mot, INNAN koden skrivs. Feedback: *"get into the spells, potions, magical and maybe other effects in a fight... make sure we have some good use cases."*
 >
 > **Status på motorn idag** (`documents/actor.mjs`): `castSpell(item, effektgrad)` löser bara **CL-slaget och PSY-kostnaden** (MAG s.8-13: `CL = S − 2×(E−1)`, PSY = E vid lyckat/fummel, halva E vid perfekt). Den **applicerar ingen effekt alls** — ingen skada, ingen läkning, ingen statuseffekt, ingen måltilldelning. `applySpellEffect(item, target)` finns som en fristående, körbar STUB (skapar en riktig `ActiveEffect` av `item.system.spellEffect`, en lista `{key,mode,value}`-changes mot `.bonus`-fält) men är **medvetet inte** ihopkopplad med `castSpell()` — "måltilldelning/träfflogik är fas 6+", en kommentar skriven för flera sessioner sedan. `consumeItem(item)` (drycker/`utrustning.consumable`) fungerar identiskt — en riktig `ActiveEffect` av `system.effectChanges`, samma `.bonus`-begränsning.
 >
-> **Innehållsläget är den verkliga överraskningen.** `packs/besvarjelser` har **222 riktiga, sourcade besvärjelser** över alla 13 skolor — inklusive exakta träffar på varenda exempel Johan gav (se nedan) — men **INGEN enda av dem** har `spellDuration`/`spellEffect` ifyllt. Katalogen finns, den mekaniska datan gör det inte. Samma mönster som NPC-migreringen (backlog 75) och ras-/yrkesförmågorna (backlog 71/72) redan visat: innehåll som är "lat skapat", inte saknat.
+> **Innehållsläget är den verkliga överraskningen.** `packs/besvarjelser` har **222 riktiga, sourcade besvärjelser** över alla 13 skolor — inklusive exakta träffar på varenda tidigare nämnt exempel (se nedan) — men **INGEN enda av dem** har `spellDuration`/`spellEffect` ifyllt. Katalogen finns, den mekaniska datan gör det inte. Samma mönster som NPC-migreringen (backlog 75) och ras-/yrkesförmågorna (backlog 71/72) redan visat: innehåll som är "lat skapat", inte saknat.
 >
 > **Källa för alla siffror/citat nedan:** `docs/wiki/MAGI.md` (Roll20-projektet), självt sourcat mot `Formelboken` s.1-65 — läst i sin helhet för det här dokumentet, inte gissat.
 
@@ -28,16 +28,16 @@
 3. **Ingen opponerad-slag-mekanik.** `castSpell()`s CL-formel antar ALLTID en ren `1T20 ≤ CL`-kontroll. Flera besvärjelser (Förlamning, Chock, Andebeskydd) är i stället **PSY mot PSY** eller liknande motståndsslag — en annan formkurva än CL-slaget, som `resolveMatrix()` (vapenstrid) inte heller täcker.
 4. **Ingen "vem är målet"-insamling för besvärjelser.** `castSpell(item, effektgrad)` tar bara kastaren och effektgraden — inget mål alls, varken enda eller flera.
 5. **Drycker kan bara ge ActiveEffect-buffar, aldrig en engångseffekt.** `item-utrustning.mjs`s `effectChanges` har SAMMA form/begränsning som besvärjelsers `spellEffect` — en läkande dryck (UC-M1) är mekaniskt omöjlig att bygga med dagens schema, av samma skäl som lucka 1.
-6. **Ingen skadetyp finns någonstans i motorn.** `resolveAttack()`s skada är ett rent tal — inget koncept av "eld"/"köld"/"projektil" som en resistansregel kan haka i. `item-vapen.mjs`/besvärjelsers `spellEffect` har ingen `damageType`. Johans egen påminnelse ("resistance against X fire/cold/arrows") kräver alltså att skadetyper införs FÖRST, innan någon resistansregel kan uttryckas — se Grupp I.
+6. **Ingen skadetyp finns någonstans i motorn.** `resolveAttack()`s skada är ett rent tal — inget koncept av "eld"/"köld"/"projektil" som en resistansregel kan haka i. `item-vapen.mjs`/besvärjelsers `spellEffect` har ingen `damageType`. Projektets egen påminnelse ("resistance against X fire/cold/arrows") kräver alltså att skadetyper införs FÖRST, innan någon resistansregel kan uttryckas — se Grupp I.
 
 ---
 
 ## Öppna frågor — flaggade, inte avgjorda
 
-1. **Ska en spelares besvärjelse mot en SL-ägd NPC gå via SAMMA godkännande-flöde som Spelar-anfall-planen byggde för vapen?** Min bedömning: ja, sannolikt rakt av (samma permission-verklighet), men värt ett uttryckligt Johan-beslut innan det byggs — särskilt eftersom magi har FLER sorters skrivningar (statustoggling, ActiveEffect-skapande, periodeffekt-borttagning) än bara "KP/EP/slitage".
+1. **Ska en spelares besvärjelse mot en SL-ägd NPC gå via SAMMA godkännande-flöde som Spelar-anfall-planen byggde för vapen?** Min bedömning: ja, sannolikt rakt av (samma permission-verklighet), men värt ett uttryckligt beslut innan det byggs — särskilt eftersom magi har FLER sorters skrivningar (statustoggling, ActiveEffect-skapande, periodeffekt-borttagning) än bara "KP/EP/slitage".
 2. **Opponerade slag (PSY vs PSY m.fl.) — bygg en generell mekanism nu, eller punktlösning per besvärjelse när den faktiskt fylls i?** Given att bara ett fåtal av 222 besvärjelser använder mönstret (Förlamning, Chock, Andebeskydd, Andeslag, flera Spiritism-besvärjelser), kan en generell "opponerat slag"-hjälpfunktion vara för tidig — eller precis rätt tidpunkt att bygga den EN gång innan fem olika ad hoc-varianter uppstår.
 3. **"Bedövad" (Röstmagi S6) — namnet antyder ett STUN-liknande stridseffekt, men källtexten säger "Dövar alla inom räckvidden ... i 1T4 timmar"** (dövhet, inte handlingsoförmåga). Antingen ett OCR-/tolkningsfel i det kurerade extraktet, eller boken menar bokstavligen dövhet. Bör verifieras mot originalsidan (Formelboken s.53-56) innan besvärjelsen fylls i — INTE gissad.
-4. **Manipel-besvärjelserna** (Mentalisms "massformler": Fanatism, Demoralisering, Oordning, Moralförstärkning, Fruktan) **är krigföring i stor skala** (hela arméenheter, "PSY/manipel"-kostnader) — troligen helt utanför en enskild PC-strids skala. Föreslår att de explicit exkluderas från den första omgången (se Grupp H), men Johan bör bekräfta att det stämmer med kampanjens behov.
+4. **Manipel-besvärjelserna** (Mentalisms "massformler": Fanatism, Demoralisering, Oordning, Moralförstärkning, Fruktan) **är krigföring i stor skala** (hela arméenheter, "PSY/manipel"-kostnader) — troligen helt utanför en enskild PC-strids skala. Föreslår att de explicit exkluderas från den första omgången (se Grupp H), men detta bör bekräftas mot kampanjens behov.
 5. **Ritualer och besvärjelser med timmars/dagars castingtid** (Animera död, Skicka bort demon, magiska föremåls-tillverkning) hör hemma UTANFÖR "i en strid" per definition — de tar för lång tid. Bör de mekaniseras alls, eller förbli fritext/SL-fiat permanent?
 
 ---
@@ -144,7 +144,7 @@
 
 ---
 
-## Grupp I — Motstånd/resistans mot skadetyp (tillagt efter Johans påminnelse "resistance against X fire/cold/arrows")
+## Grupp I — Motstånd/resistans mot skadetyp (tillagt efter Projektets påminnelse "resistance against X fire/cold/arrows")
 
 Tre STRUKTURELLT olika mönster hittade i källtexten, inte en enda mekanik:
 
@@ -181,7 +181,7 @@ Tre STRUKTURELLT olika mönster hittade i källtexten, inte en enda mekanik:
 6. **Periodeffekt-interaktion** (ta bort, inte bara lägga till) — UC-M4.
 7. **Statuseffekt-avbrytning vid extern händelse** (sömn bryts av skada) — UC-M15.
 8. **Godkännande-flödet, om spelare kastar mot SL-ägda mål** — Öppen fråga 1, gäller potentiellt ALLA fall i Grupp C-E.
-9. **Skadetyper + resistans/immunitet-lager** (NY, tillagd efter Johans påminnelse) — UC-M16, M17, M18. Beror på primitiv 1 (instant HP-delta måste känna till skadetyp för att kunna dra av resistans).
+9. **Skadetyper + resistans/immunitet-lager** (NY, tillagd efter Projektets påminnelse) — UC-M16, M17, M18. Beror på primitiv 1 (instant HP-delta måste känna till skadetyp för att kunna dra av resistans).
 10. **Dolda dependent-tabeller** (Skräcktabellen REDAN byggd, bara okopplad; Snedtändningstabellen och Fummeltabellen för anfall/parering genuint saknade) — UC-M10 plus alla `VERDICT_NOTE`-flaggade fummelutfall i vapenstrid.
 
-Inget av detta är byggt än. Nästa steg, när Johan är redo: en Plan Mode-session per primitiv (troligen 1-2 primitiver i taget, samma stegvisa riskhantering som Spelar-anfall-planens Fas A/B), med det här dokumentet som facit.
+Inget av detta är byggt än. Nästa steg, när arbetet återupptas: en Plan Mode-session per primitiv (troligen 1-2 primitiver i taget, samma stegvisa riskhantering som Spelar-anfall-planens Fas A/B), med det här dokumentet som facit.

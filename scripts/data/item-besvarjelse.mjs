@@ -182,7 +182,7 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         kind: new fields.StringField({ required: false, initial: "none", choices: ["none", "damage", "heal"] }),
         formula: new fields.StringField({ required: false, initial: "" }),
         // Vilken resurs kind:"damage"/"heal" påverkar. Tillagt 2026-09-03
-        // (Johan, efter en direkt fråga om Andeslag/Själaförvittring/Skriks
+        // (efter en direkt fråga om Andeslag/Själaförvittring/Skriks
         // PSY-förlust): innan detta fanns bara ETT mål-attribut (KP/hp),
         // hårdkodat i spell.mjs — besvärjelser som "skadar" PSY i stället
         // för KP (Spiritisms Andeslag/Själaförvittring, Illusionisms Skrik)
@@ -240,7 +240,7 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
       // Hur besvärjelsen väljer mål — informerar kast-UI:t (fas 3), ingen
       // motorlogik i sig. "multi"/"area" återanvänder Anfallsdialogens redan
       // byggda flermåls-loop-mönster (game.user.targets).
-      // "split" tillagt 2026-08-21 (live-fynd/Johans SL-ruling under
+      // "split" tillagt 2026-08-21 (live-fynd/Projektets SL-ruling under
       // krogslagsmålet, se Eld: "Temperaturhöjning i 1 m sfär vid målet...
       // alternativt E sfärer med lägre skada"). Skiljer sig från "multi"
       // (varje mål får HELA effekten dupplicerad) — "split" delar EN delad
@@ -260,7 +260,7 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         choices: ["self", "touch", "single", "multi", "area", "split", "weapon"]
       }),
       // Vilken NPC-`creatureType` (actor-npc.mjs) besvärjelsen enligt boken
-      // FAKTISKT är avsedd mot — tillagt 2026-09-03 (Johan: en varning, INTE
+      // FAKTISKT är avsedd mot — tillagt 2026-09-03 (Feedback: en varning, INTE
       // en blockering, se CONFIG.DODE.spellTargetWarning i config.mjs och
       // spell.mjs#resolveSpellCast). Tomt = ingen restriktion (dagens
       // beteende, oförändrat). ETT val räcker — varje sourcad restriktion
@@ -272,7 +272,7 @@ export default class DoDEBesvarjelseData extends foundry.abstract.TypeDataModel 
         required: false, initial: "", blank: true,
         choices: ["", "undead-corporeal", "spirit", "demon", "elemental", "lycanthrope"]
       }),
-      // Den "stödkolumn för battle" Johan efterfrågade — flaggar besvärjelser
+      // Den efterfrågade "stödkolumn för battle" — flaggar besvärjelser
       // som är relevanta att visa/filtrera i en stridssituation, till
       // skillnad från de ~150 rent narrativa/utility-besvärjelserna (Karta,
       // Levitation, Väderförutsägelse m.fl.) som inte behöver någon av

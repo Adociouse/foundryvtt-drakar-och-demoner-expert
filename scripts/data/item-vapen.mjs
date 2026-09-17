@@ -46,13 +46,13 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
       // resolveAttack), aldrig en väg att göra ett projektilvapen parerbart.
       // Låter enstaka närstrids-/kastvapen (t.ex. ett magiskt vapen som "slår
       // igenom" all parering) markeras oparerbara utan att felaktigt
-      // kategoriseras om. Beslut 2026-08-21 (Spelar-anfall-planen), Johans
-      // exempel: pil/spjut/shuriken/drakeld/mantikoreblixt är redan
+      // kategoriseras om. Beslut 2026-08-21 (Spelar-anfall-planen), exempel:
+      // pil/spjut/shuriken/drakeld/mantikoreblixt är redan
       // korrekt oparerbara via category:"projektil" — det här fältet täcker
       // det ANNAT INTE täckta fallet, "most melee weapons are parryable,
       // some magic weapons might not be".
       parryable: new fields.BooleanField({ required: false, initial: true }),
-      // Vapenmaterial — tillagt 2026-09-03 (Johan: kreaturstyp+varningssystemet,
+      // Vapenmaterial — tillagt 2026-09-03 (Feedback: kreaturstyp+varningssystemet,
       // se CONFIG.DODE.creatureWeaponWarning i config.mjs). Jämförs mot ett
       // NPC-måls `creatureType`/`resistances[]` (actor-npc.mjs) — Dödsgast/
       // Kummelgast/Mörkgast tar bara skada av magiska vapen, Varulv/Vampyr av
@@ -62,12 +62,12 @@ export default class DoDEVapenData extends foundry.abstract.TypeDataModel {
         required: false, initial: "mundane",
         choices: ["mundane", "silver", "magical"]
       }),
-      // Vapnets skadeKATEGORI — tillagt 2026-09-03 (backlog 100, Johan: "All
+      // Vapnets skadeKATEGORI — tillagt 2026-09-03 (backlog 100, Feedback: "All
       // weapons need to have categories"). Skilt från `material` (VAD vapnet
       // är gjort av) — det här är HUR det skadar. Delar `damageType`-
       // vokabulären med `resistances[]` (fields-resistances.mjs) och
       // besvärjelsers egen `damageType` — samma arkitektur genomgående, som
-      // Johan själv observerade: "Seems like 'damage type' is the consistent
+      // en observation som fångar det bra: "Seems like 'damage type' is the consistent
       // architecture?" `resolveAttack()` slår upp en `resistances[]`-post
       // för DENNA specifika kategori FÖRST, och faller bara tillbaka på den
       // generiska `"weapon"`-typen (Varulv/Vampyr m.fl., material-styrd,

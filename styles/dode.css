@@ -12,7 +12,7 @@
  * Gäller karaktärsarket, NPC-arket OCH rollpersonsskaparen (.character-wizard)
  * — samma visuella identitet genom hela flödet, inte bara på det färdiga
  * spelararket. NPC-arket saknade tidigare (till 2026-07-26) denna styling helt
- * — ren förbiseende, inte ett medvetet designval (Johans fynd).
+ * — ren förbiseende, inte ett medvetet designval.
  */
 .dode.sheet.character,
 .dode.sheet.npc,
@@ -54,7 +54,7 @@
  * nav-fot att skydda — hela arket (rubrik + innehåll) får bara scrolla som en enhet,
  * vilket är standardbeteendet för de flesta Foundry-ark.
  *
- * ⚠ FLYTTAD 2026-08-08 (Johan: scroll hoppar till toppen vid varje klick i en
+ * ⚠ FLYTTAD 2026-08-08 (feedback: scroll hoppar till toppen vid varje klick i en
  * lång lista, "sett i fler menyer"). Roten var att `overflow-y:auto` satt på
  * `.window-content` — ETT NIVÅ OVANFÖR den mall-del (`[data-application-part=
  * "form"]`, ren `data-application-part`-attribut satt DIREKT på mallens enda
@@ -584,7 +584,7 @@
   white-space: nowrap;
 }
 
-/* Bulk +1/-1 för hela kategorin (Johan, 2026-08-16: "one has to click a lot
+/* Bulk +1/-1 för hela kategorin (feedback, 2026-08-16: "one has to click a lot
    otherwise") — knappar inline i kategorirubriken, inte en egen rad. */
 .character-wizard h4 .wizard-bulk-skill-buy {
   font-size: 0.7rem;
@@ -620,8 +620,8 @@
 
 /* Fritextpris-poster (t.ex. "20 sm/g") går inte att köpa i guiden — se
    #equipmentResult i character-wizard.mjs. Utan en tydlig egen märkning ser
-   dessa likadana ut som "för dyrt just nu"-gråade kort, vilket Johan
-   2026-08-08 upplevde som trasiga/oklickbara knappar. */
+   dessa likadana ut som "för dyrt just nu"-gråade kort, vilket
+   2026-08-08 upplevdes som trasiga/oklickbara knappar. */
 .character-wizard .wizard-equipment-card.is-reference-only {
   opacity: 0.7;
 }
@@ -890,7 +890,7 @@
 .dode-attack-card .roll-line .via { font-size: 0.8em; opacity: 0.6; }
 .dode-attack-card .roll-line.muted { opacity: 0.6; font-style: italic; font-size: 0.85em; }
 /* Anfall vs Parering — visuellt särskiljda oavsett utfallsfärg (lyckat/
-   misslyckat), Johans live-feedback 2026-08-21: "one color for attack..
+   misslyckat), live-feedback 2026-08-21: "one color for attack..
    one for defence". */
 .dode-attack-card .roll-line.role-attack { border-left-color: #b5462f; }
 .dode-attack-card .roll-line.role-parry { border-left-color: #2f5fb5; }

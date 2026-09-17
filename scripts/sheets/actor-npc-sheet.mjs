@@ -37,7 +37,7 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
 
   static PARTS = {
     // Se actor-character-sheet.mjs PARTS för hela motiveringen — samma
-    // scroll-till-toppen-vid-varje-klick-fix (Johan 2026-08-08).
+    // scroll-till-toppen-vid-varje-klick-fix (2026-08-08).
     form: { template: "systems/drakar-och-demoner-expert/templates/actor/npc-sheet.hbs", scrollable: [""] }
   };
 
@@ -46,7 +46,7 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
   }
 
   /**
-   * ⚠ Live-fynd 2026-08-21 (Johan, som Player2): `ActorSheetV2` inaktiverar
+   * ⚠ Live-fynd 2026-08-21 (testat som Player2): `ActorSheetV2` inaktiverar
    * AUTOMATISKT varenda formulärkontroll (inputs OCH `data-action`-knappar)
    * när `!this.isEditable` — vilket är EXAKT läget för en spelare med bara
    * Observer-behörighet på ett lik (se `_prepareContext`s `isGM`-kommentar
@@ -69,7 +69,7 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
     context.actor = this.actor;
     context.system = this.actor.system;
     context.attributes = CONFIG.DODE.attributes;
-    // ⚠ Live-fynd 2026-08-21 (Johan, som Player2): för att plundringsknappen
+    // ⚠ Live-fynd 2026-08-21 (testat som Player2): för att plundringsknappen
     // (rolls/loot.mjs) ska kunna se vad som finns att plundra måste spelaren
     // ha Observer-behörighet på liket — men Observer visar HELA arket i
     // Foundrys kärna, inklusive "Speciellt"/beskrivning (som ofta bär SL-

@@ -147,7 +147,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
 
   /**
    * Blind → återanvänder den redan sourcade Mörker-modifieraren (SLB s.17)
-   * i stället för en påhittad egen siffra — Johans beslut, oberoende bekräftat
+   * i stället för en påhittad egen siffra — Projektets beslut, oberoende bekräftat
    * av att Foundrys egen `DetectionModeLightPerception` redan behandlar
    * blind-status och "stå i mörker" som samma sak (client/canvas/perception).
    * Delad av både anfallssidan (mods-objektet) och pareringssidan (se
@@ -270,8 +270,8 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
     const canParry = weaponParryable && !ranged && (!isThrown || !!targetShield) && !targetBlocking;
 
     // Blind mål: pareringens FV sänks med Mörker-värdet (samma modifierare,
-    // se #morkerFor) — en straffavgift, inte ett fullt block, Johans
-    // uttryckliga distinktion mot de sex blockerande villkoren ovan.
+    // se #morkerFor) — en straffavgift, inte ett fullt block, en
+    // uttrycklig distinktion mot de sex blockerande villkoren ovan.
     const targetBlind = !!targetActor?.statuses?.has("blind");
     const morker = this.#morkerFor(ranged, isThrown);
     const parryOptions = canParry && targetActor
@@ -340,7 +340,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
         ? `⚠ Målet är ${BLOCKING_STATUS_LABELS[targetBlocking]} — kan inte parera (SLB s.17)` : null,
       // Alltid förvald när parering överhuvudtaget är mekaniskt möjlig — SLB
       // s.17 ger ingen presumtion mot parering, bara mot specifika
-      // undantag (redan täckta av canParry ovan). Johans uttryckliga rättelse
+      // undantag (redan täckta av canParry ovan). Projektets uttryckliga rättelse
       // 2026-08-18 efter att en demo visade motsatsen för en NPC utan Items.
       parryDefaultChecked: canParry,
       // Fri SL-satt bonus till försvararens parering — bara meningsfull i
@@ -604,7 +604,7 @@ export default class DoDEAttackDialog extends HandlebarsApplicationMixin(Applica
       const canApplyDirectly = game.user.isGM || targetToken.actor.isOwner;
       if (canApplyDirectly) {
         await applyAttackResult(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem });
-        // ⚠ `target` skickas nu ALLTID med (rättad 2026-08-21, Johans fynd
+        // ⚠ `target` skickas nu ALLTID med (rättad 2026-08-21, Projektets fynd
         // mitt i liveverifieringen) — utan den visste kortet aldrig vems KP
         // "Totala KP kvar"-raden syftade på, bara anfallarens namn stod med.
         await postAttackCard(result, { attacker: this.actor, target: targetToken.actor, weapon, parryItem, ranged });

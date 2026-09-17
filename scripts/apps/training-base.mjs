@@ -7,7 +7,7 @@ const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 /**
  * Gemensam bas för de två träningsfönstren.
  *
- * ⚠ Två fönster, inte ett — Johans beslut 2026-07-29. Magi och vanliga
+ * ⚠ Två fönster, inte ett — Projektets beslut 2026-07-29. Magi och vanliga
  * färdigheter delar bara skalet: reglerna för VAR EP kommer ifrån skiljer sig
  * fundamentalt (SB s.7), veckoslaget räknas olika för ensamtränade besvärjelser,
  * och magirader har förutsättningar (skolans FV, magisk kodex) som en vanlig

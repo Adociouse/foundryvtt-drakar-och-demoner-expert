@@ -157,9 +157,9 @@ function computeLocationDamage(actor, locationKey, damage, { intent = "skada", l
     effect = locationEffect(locationKey, state, damage);
   }
 
-  // ⚠ AVSTEG (Johan 2026-07-29): boken har ingen icke-dödlig avsikt alls. Ett
+  // ⚠ AVSTEG (2026-07-29): boken har ingen icke-dödlig avsikt alls. Ett
   // klubbslag som når 0 KP dödar inte i sig — men inget hindrar heller att det
-  // gör det. Johan: "A thief clubbing someone still could unintentionally
+  // gör det. Feedback: "A thief clubbing someone still could unintentionally
   // unalive them." Därför är avsikten en HALV garanti: ett bedövningsslag som
   // skulle dra Totala KP under noll stannar på 0 (medvetslös enligt SLB s.18),
   // MEN en kritisk träff följer bokens dödliga utfall ändå. Man kan alltså
@@ -230,7 +230,7 @@ export async function gmDisableLocation(actor, locationKey) {
 /**
  * Avstånd mellan två tokens — **Foundrys egen mätning**, inte egen geometri.
  *
- * ⚠ Johan 2026-07-29: *"But foundry has distance function, right?"* Ja, och den
+ * ⚠ 2026-07-29: *"But foundry has distance function, right?"* Ja, och den
  * ska användas. `canvas.grid.measurePath()` respekterar rutnätstypen (fyrkant,
  * hex, rutnätslöst) och den diagonalregel världen är inställd på. Ett handskrivet
  * Chebyshev-avstånd (som stridssimuleringen använde) ger fel så fort någon byter
@@ -244,7 +244,7 @@ export async function gmDisableLocation(actor, locationKey) {
  * `{x, y}` (via `Token#center`, en canvas-placeable-getare utan höjd) till
  * `measurePath`, som då tyst mätte avståndet som om alla tokens stod på samma
  * plan. DoD-böckerna har ingen egen höjdregel (genomsökt — ingen finns), men
- * Johan: *"'reachability' is an SL aspect and sort of built in to foundry —
+ * Feedback: *"'reachability' is an SL aspect and sort of built in to foundry —
  * if there is a balcony in a bar, melee fight should not be accepted"*.
  * `TokenDocument#getCenterPoint()` (till skillnad från `Token#center`) ger
  * redan `{x, y, elevation}`, och `measurePath` räknar äkta 3D-avstånd när den

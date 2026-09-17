@@ -61,7 +61,7 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
       // inte köps". Det var fel — RP s.23 ("GRUNDEGENSKAPER") är ett uttalat
       // köpsystem med en egen BP-kostnadstabell, inte ett slagsystem. `spentAttribut`
       // härifrån var alltså inte "förberett för framtiden", det var en täckt lucka.
-      // Se DESIGN_DECISIONS.md backlog för hela utredningen (Johans fynd 2026-08-02).
+      // Se DESIGN_DECISIONS.md backlog för hela utredningen (Projektets fynd 2026-08-02).
       bp: new fields.SchemaField({
         spentRas: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         spentFormagor: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
@@ -71,7 +71,7 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         spentAttribut: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         // RP s.27: svärdshandens slag kan modifieras med spenderad BP, precis som
         // socialt stånd/startkapital på samma sida — bara den delen missades tills
-        // Johan hittade att fältet aldrig bands till formuläret (2026-08-02).
+        // Fältet visade sig aldrig ha bundits till formuläret (2026-08-02).
         spentSvardshand: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),
         // Hjältedåd (HH s.6-7) — bara hjälte-nivåerna. Slaget en gång vid
         // skapandet (character-wizard.mjs #onRollHjaltedad), rullat in i
@@ -186,7 +186,7 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
         max: new fields.NumberField({ required: true, integer: true, initial: 0 })
       }),
       // Hjältepoäng (HH s.6-7 källan, s.20/46-48 användningen) — ⚠ RÄTTAT
-      // 2026-08-02 (Johan): fältet hette tidigare `hp.bonusHjaltedad` och
+      // 2026-08-02: fältet hette tidigare `hp.bonusHjaltedad` och
       // lades felaktigt in i `hp.max` (kroppspoäng, spelets egen förkortning
       // KP). Hjältedådstabellens andra kolumn ("HP" i boken) är HJÄLTEPOÄNG,
       // inte kroppspoäng — en helt egen valuta. Spenderbar pool: ökar vid
@@ -425,7 +425,7 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // Båda skälen samlas här så arket kan visa EN kombinerad indikator utan
     // att UI:t behöver känna till två separata bokkällor.
     // ⚠ Rent visuellt/informativt, samma "Display only, no warnings"-princip
-    // som resten av förflyttningssystemet (Johans AskUserQuestion-svar,
+    // som resten av förflyttningssystemet (Projektets AskUserQuestion-svar,
     // planen "Förflyttning, börda & rörelse på kartan") — ingen handling
     // spärras mekaniskt, SL avgör.
     const wornArmor = (this.parent?.items ?? []).find(
@@ -686,7 +686,7 @@ export default class DoDECharacterData extends foundry.abstract.TypeDataModel {
     // canvas-placerade tokens (`scene?.getFlag is not a function`) — ett fel
     // ingen tidigare test hittade eftersom inget tidigare test hade en
     // rollperson med en RIKTIG token på en riktig scen (se memory.md
-    // 2026-08-06, Johans krav på canvas-baserade tester).
+    // 2026-08-06, Projektets krav på canvas-baserade tester).
     const scene = this.parent?.getActiveTokens?.(true, true)?.[0]?.parent ?? game.scenes?.active ?? null;
     const gm = CONFIG.DODE.recoveryModEffects(this.parent, scene);
     for (const resource of ["hp", "psy"]) {

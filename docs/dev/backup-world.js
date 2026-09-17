@@ -3,13 +3,13 @@
  * till riktiga JSON-filer på disk — en fil per dokument, samma format som
  * Foundrys egen "Export Data" (Document#exportToJSON) producerar.
  *
- * VARFÖR DEN HÄR FILEN FINNS (Johan 2026-08-08): "Keep data backup somehow so
+ * VARFÖR DEN HÄR FILEN FINNS (feedback 2026-08-08): "Keep data backup somehow so
  * nothing gets lost of sessions gets broken." En engångskörning i konsolen
  * löser stunden men inte nästa gång. Den här filen gör det till ett
  * upprepningsbart verktyg, samma mönster som `seed-test-party.js`.
  *
  * VARFÖR FILERNA HAMNAR UTANFÖR system-repot: det här är VÄRLDENS spardata
- * (Johans riktiga kampanj — NPC:er, rollpersoner, magiska föremål), inte
+ * (projektets riktiga kampanj — NPC:er, rollpersoner, magiska föremål), inte
  * system-källkod. system-repot är tänkt att bli publikt på GitHub (se
  * CLAUDE.md) — att committa kampanjdata dit vore fel kategori av fil, och en
  * möjlig läcka av privat speldata. Backupen skrivs i stället till

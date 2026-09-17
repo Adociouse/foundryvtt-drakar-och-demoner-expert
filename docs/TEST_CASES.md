@@ -104,7 +104,7 @@ console.table({
 
 ## Vapenfärdighetsval (yrkesfärdighetssteget) — UC-W1 till UC-W12
 
-> Tillagd 2026-08-08 på Johans begäran: *"make sure we have test use cases for
+> Tillagd 2026-08-08 på Projektets begäran: *"make sure we have test use cases for
 > like 10-15 combos that we test properly... run in wizard with real clicks
 > to make sure they work properly, is intuitive... I felt the weapon
 > selection UI setup is weird and not natural."* Ledde till att den fria
@@ -130,7 +130,7 @@ console.table({
 | UC-W9 | Människa | Paladin | 4 | **Magianvändare** — testar att vapenpoolen fungerar OFÖRÄNDRAT när `steps`-arrayen också innehåller "magiskola". Hittade en test­metodik-fälla här (se nedan), inte en produktbugg. |
 | UC-W10 | Dvärg | Barbar | 5 | "Krigaren som kan 6 olika vapentyper" nästan — en plats under taket. |
 | UC-W11 | Människa | Soldat | 5 | Samma platsräkning som UC-W10, annan specialisering. |
-| UC-W12 | Människa | Gladiator | 6 | **Johans "krigare som kan 6 olika vapentyper"** — flest platser i hela yrkeskatalogen. |
+| UC-W12 | Människa | Gladiator | 6 | **Projektets "krigare som kan 6 olika vapentyper"** — flest platser i hela yrkeskatalogen. |
 
 **Körning:** `docs/dev/seed-test-party.js`s `fillProfessionSkills` motsvarar
 UC-W1–W12 programmatiskt vid varje `DoDETestParty.seed()`, men den FULLA

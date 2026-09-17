@@ -1,5 +1,5 @@
 /**
- * Plundring — live-fynd 2026-08-21 (Johan, efter krogslagsmålet): NPC-arkets
+ * Plundring — live-fynd 2026-08-21 (efter krogslagsmålet): NPC-arkets
  * befintliga drag-och-släpp-loot (actor-npc-sheet.mjs#_onDrop) KOPIERAR bara
  * ett item till mottagaren, utan att ta bort det från liket — inget hindrar
  * att flera spelare (eller samma spelare flera gånger) drar samma vapen om

@@ -36,7 +36,7 @@ DODE.contentPacks = {
 /**
  * Källböcker — RIKTIGA boktitlar, aldrig PDF-filnamn.
  *
- * Johans önskemål 2026-07-28: "Kan inte komma ihåg hur många gånger vi har letat
+ * Projektets önskemål 2026-07-28: "Kan inte komma ihåg hur många gånger vi har letat
  * efter var en sak stod i böckerna." Varje innehållsdokument bär därför ett
  * `system.source = { book, page }` där `book` är en nyckel härifrån.
  *
@@ -136,7 +136,7 @@ DODE.toSilver = function (value, unit = "sm") {
 /**
  * Tolkar `system.priceNote` (Magi-regelbokens s.43-48-import, backlog 41) —
  * poster utan ett rent styckpris fick i stället en fritextnot som "20 sm/g",
- * "320 gm/dos", "4 per kagge". Johan 2026-08-08: dessa är i grunden köpbara
+ * "320 gm/dos", "4 per kagge". 2026-08-08: dessa är i grunden köpbara
  * — "en köpbar/brukbar mängd-entitet" — de saknade bara ett UI för att välja
  * MÄNGD. Matchar `<tal> [myntslag]/<enhet>` eller `<tal> per <enhet>`.
  *
@@ -241,7 +241,7 @@ DODE.equipmentCategories = {
   fordon: "DODE.EquipmentCategory.Fordon",
   // Värdesaker — ädelstenar, smycken, tackor och exotiska mynt. Bärs som
   // föremål med ett pris, INTE som en valör i börsen: de är skatt att värdera
-  // och sälja, inte något man betalar öl med. Johans observation 2026-07-28 om
+  // och sälja, inte något man betalar öl med. Projektets observation 2026-07-28 om
   // mithrilmynt, se backlogpost 28.
   vardesaker: "DODE.EquipmentCategory.Vardesaker",
   diverse: "DODE.EquipmentCategory.Diverse"
@@ -262,7 +262,7 @@ DODE.magicSchools = {
   spiritism: "DODE.MagicSchool.Spiritism",
   stavmagi: "DODE.MagicSchool.Stavmagi",
   symbolism: "DODE.MagicSchool.Symbolism",
-  // ⚠ AVSTEG (Johan, 2026-09-02): en 14:e skola utöver MAG s.8-10:s slutna
+  // ⚠ AVSTEG (2026-09-02): en 14:e skola utöver MAG s.8-10:s slutna
   // 13-skole-canon. Boken Kaos Väktare (Target Games, 1993, se
   // DODE.books.kaosvaktare) kallar Portalmagi uttryckligen "en ny magiskola,
   // öppen för alla magiker" (s.49) med en egen, fullständig besvärjelselista
@@ -312,13 +312,13 @@ DODE.magicSchoolSkills = Object.keys(DODE.magicSchools).map((school) => ({
 // Gudafödda hjältar, s.4-5) till en fjärde, mer implementerbar mekanisk
 // skiktning — inte ett fjärde bok-nivå-namn.
 //
-// ⚠ BESLUT (Johan, 2026-08-18, docs/DESIGN_DECISIONS.md backlog 4): Alver-
+// ⚠ BESLUT (2026-08-18, docs/DESIGN_DECISIONS.md backlog 4): Alver-
 // supplementet s.22 ("Hur du skapar en alv") har en EGEN nivåtabell
 // (Vanlig/Extraordinär/Hjälte = 125/150/175 BP, plus egna EP/Max FV-tal utan
 // åldersdimension) som tidigare flaggades som en möjlig konkurrerande källa
 // för de här talen. Boken själv kallar den uttryckligen "regelförslag...
 // specifikt [för] skapandet av en alv" (INTE ett obligatoriskt ersättande
-// system) — Johans beslut: BP och hjältepoäng är SAMMA system för alla raser,
+// system) — Projektets beslut: BP och hjältepoäng är SAMMA system för alla raser,
 // inklusive alver. Alver s.22:s tabell är en inspirationskälla, inte en
 // mekanisk override. Ingen kodändring krävdes — denna flata 125-tabell var
 // redan korrekt implementerad, bara odokumenterad som ett medvetet beslut i
@@ -342,7 +342,7 @@ DODE.swedishDiceToRoll = function (formula) {
 };
 
 /**
- * REGEL (Johan 2026-08-02, se DESIGN_DECISIONS.md §6): varje kodställe som
+ * REGEL (2026-08-02, se DESIGN_DECISIONS.md §6): varje kodställe som
  * postar en `ChatMessage` med `rolls` och sedan omedelbart avslöjar UTFALLET
  * i eget UI (ett state-fält, en sheet-uppdatering, en knapp som byter text)
  * MÅSTE `await` den här helpern mellan `ChatMessage.create()`/`Roll#toMessage()`
@@ -373,7 +373,7 @@ DODE.hjaltedadRollCount = "1T6";
 // 125 BP. Player may choose freely instead of rolling (HH p.6: "eller välja
 // det man tycker passar bäst").
 //
-// ⚠ RÄTTAT 2026-08-02 (Johan): tabellens andra tal är HJÄLTEPOÄNG (HH s.20/
+// ⚠ RÄTTAT 2026-08-02: tabellens andra tal är HJÄLTEPOÄNG (HH s.20/
 // 46-48 — spenderas post-creation på ett 1T20-slag mot en separat 18-radig
 // hjälteförmågetabell, inte byggd än, se DESIGN_DECISIONS.md), INTE kroppspoäng.
 // Boken skriver ut kolumnen som "HP" i de flesta raderna men som fulla ordet
@@ -426,13 +426,13 @@ DODE.hjaltedadTable = [
 DODE.hjaltedadAbilitySource = "Hjältedåd (HH s.6-7)";
 
 // ⚠ HUSREGEL, INTE HH:s tryckta regel — se `hjaltedadTieredRollCount`-
-// inställningen i dode.mjs för hela motiveringen (Johan, 2026-08-07). HH
+// inställningen i dode.mjs för hela motiveringen (2026-08-07). HH
 // s.6-7 säger bara "slå 1T6" för hur många gånger man slår på
 // DODE.hjaltedadTable, samma formel oavsett om man är Slumpens hjälte, Sann
 // hjälte eller Gudafödd. Den här tabellen är den ALTERNATIVA, nivåstyrda
 // formeln som `#onRollHjaltedadCount` (character-wizard.mjs) använder i
 // stället för "1d6", men BARA om SL slagit på inställningen — annars
-// används alltid det tryckta 1T6:et. Formlerna är Johans egna påhitt för sin
+// används alltid det tryckta 1T6:et. Formlerna är Projektets egna påhitt för sin
 // kampanj, inte källbelagda — därför en egen tabell, inte en "rättelse" av
 // hjaltedadTable ovan.
 DODE.hjaltedadCountHouseRule = {
@@ -825,7 +825,7 @@ DODE.epBudgetTable = {
 // Livsmål — REG s.12-14 "Bestäm rollpersonens livsmål" (21 poster, namn +
 // ordagrann bokbeskrivning). Namnen kom ursprungligen från CHARACTERMANCER-
 // WORKFLOW.md ("Expert Regler"); beskrivningarna transkriberade direkt ur
-// PDF:en 2026-08-16 (Johan: "livsmål probably need to have a sub table
+// PDF:en 2026-08-16 (Feedback: "livsmål probably need to have a sub table
 // explaining the contents, otherwise its hard to understand") eftersom
 // rå-textextraktet har svår tvåspaltsbleed på just det avsnittet — se kurerad
 // källa docs/extracts/DODE_Regler_LIVSMAL.md (Roll20-projektet).
@@ -858,7 +858,7 @@ DODE.lifeGoals = [
 // Hantverk — EJ en sluten katalog (till skillnad från vapen/språk finns ingen
 // uttömmande hantverkslista i grundreglerna, "Hantverkarbakgrund"/sekundär
 // "Hantverk"-poolen är uttryckligen "valfri hantverksfärdighet"). De här är
-// bara EXEMPEL, sourcade av Johan 2026-08-16 ur olika äventyr/världsböcker,
+// bara EXEMPEL, sourcade av 2026-08-16 ur olika äventyr/världsböcker,
 // för att ge en `<datalist>`-förslagslista i stället för ett tomt fritextfält
 // — spelaren kan alltid skriva något annat, fältet förblir fritext.
 // Smide/Snickeri/Stenslipning/Bokbinderi/Skomakeri: grundreglernas egna
@@ -895,7 +895,7 @@ DODE.maxStartFvTable = {
  * svenska konfigtabell — i samma stund som namnen körs genom `game.i18n`, eller
  * en Babele-liknande översättningsmodul döper om kompendiedokument, hade en
  * rollperson skapad på ett språk och redigerad på ett annat TYST fått
- * dubblerade färdigheter (backlogpost 6a, Johans observation 2026-07-27).
+ * dubblerade färdigheter (backlogpost 6a, Projektets observation 2026-07-27).
  *
  * Nyckeln utgår från det svenska namnet men fryses i tabellerna nedan som
  * explicita `key`-fält — funktionen används därefter bara som fallback för
@@ -1000,10 +1000,10 @@ DODE.weaponGroupFor = function (weaponName) {
  * platta sekundär-basen (se DODE.secondarySkillBaseOverrideFor).
  *
  * ⚠ **Dubbelhugg** har en fullständig teknikbeskrivning men ingen synlig rad
- * i kostnadstabellen (Johans scan av KH s.38-39) — `grundkostnad: null`
+ * i kostnadstabellen (Projektets scan av KH s.38-39) — `grundkostnad: null`
  * tills en fysisk boksida bekräftar siffran, i stället för att gissa.
  *
- * Post-skapande, ej wizard-integrerat (Johans beslut 2026-08-04): läggs till
+ * Post-skapande, ej wizard-integrerat (Projektets beslut 2026-08-04): läggs till
  * via arkets befintliga "Dela ut färdighet"-knapp (SL-låst) precis som andra
  * sekundära färdigheter, inte via rollpersonsskaparen.
  */
@@ -1367,7 +1367,7 @@ DODE.secondarySkills = [
   // Stråtrövarens automatiska golv ska kunna uttryckas som ett vanligt,
   // OVILLKORAT `skillFloors`-golv (samma mönster som Prisjägares Upptäcka
   // fara-golv) UTAN att felaktigt ge bonusen överallt — se
-  // packs/yrken/_source/stratrovare_dodeYtjuvstratro.json. Johan,
+  // packs/yrken/_source/stratrovare_dodeYtjuvstratro.json. Feedback,
   // 2026-08-17: "We need a new skill. 'Överleva i skog'" — löser den öppna
   // beslutspunkten från backlog 71 genom att göra kontexten till FÄRDIGHETEN
   // själv i stället för en ny effekttyp.
@@ -1389,9 +1389,9 @@ DODE.secondarySkills = [
 //      dialogen i actor-character-sheet.mjs, som erbjuder en rad per språk
 //      här nedan, samma mönster som Vapenfärdigheter redan använder.
 // `description` = "var talas det" (docs/språk-i-ereb-altor.md §1, Ereb Altor —
-// Kampanjbok s.44), visad som en referenstabell under guidens språkval (Johan,
+// Kampanjbok s.44), visad som en referenstabell under guidens språkval (feedback,
 // 2026-08-07: "spelarna [ska] förstå vad de väljer och varför"). ⚠ "Västjori
-// är ALLMÄNNA språket" är Johans egen kampanjramning, inte ett ordagrant citat
+// är ALLMÄNNA språket" är Projektets egen kampanjramning, inte ett ordagrant citat
 // ur källan — källan säger bara att Västjori talas i flest riken (den bredast
 // spridda Jori-dialekten), vilket stödjer men inte bokstavligen SÄGER
 // "allmänspråk". Flaggat här, inte tyst framställt som ett direkt citat.
@@ -1485,7 +1485,7 @@ DODE.motherTongueSlots = function (raceDoc, kind) {
  * Om en ras har en OKONSTRUERAD "human"-plats i BÅDA Tala och Läsa/Skriva
  * (den bokstavliga strängen "human", inte en `{choice:[...]}`-plats)
  * representerar de facto SAMMA modersmål — man kan inte TALA ett människospråk
- * och LÄSA/SKRIVA ett annat som modersmål. Johan 2026-08-07: "Om man väljer
+ * och LÄSA/SKRIVA ett annat som modersmål. 2026-08-07: "Om man väljer
  * väst jori som modersmål borde man nog inte kunna skriva ett annat språk som
  * modersmål. Borde bli samma automatiskt." Halvalvs Läsa/Skriva-plats är en
  * avsiktlig `{choice:["human","alviska"]}`-plats (en riktig valmöjlighet,
@@ -1619,7 +1619,7 @@ DODE.twoWeaponAutoBc = function (primaryFv, offFv) {
  *
  * Krigarmunkens halva pris för Stridskonster-tekniker (KH s.5, "Räkna ut
  * totalsumman och halvera den") hanteras med SAMMA per-teknik-halvering som
- * Vapenmästarens — en MEDVETEN förenkling (Johan, 2026-08-17: "Simplified
+ * Vapenmästarens — en MEDVETEN förenkling (2026-08-17: "Simplified
  * for now with backlog"), inte bokens ordagranna mekanik. Boken beskriver
  * Stridskonster som en spelar-komponerad BUNDLE med ett DELAT FV över alla
  * valda tekniker (grundkostnaderna summeras FÖRST, halveras sedan EN gång
@@ -1650,7 +1650,7 @@ DODE.secondarySkillBaseOverrideFor = function (skillKey, actor) {
 };
 
 // Grundegenskaper KÖPS — RP s.23 ("GRUNDEGENSKAPER"), inte ett slagsystem.
-// ⚠ RÄTTELSE 2026-08-02 (Johans fynd): den kurerade REGLER_EGENSKAPER.md
+// ⚠ RÄTTELSE 2026-08-02 (Projektets fynd): den kurerade REGLER_EGENSKAPER.md
 // citerar "RP s.23-26" som källa för ett 3T6-slag, men RP s.23 självt är en
 // uttalad köptabell — citatet blandar ihop RP med det äldre REG-systemets
 // slagmetod (samma bok-mot-bok-konflikt som ARCHITECTURE_RULE_AUDIT.md redan
@@ -1885,7 +1885,7 @@ DODE.movement = function (stoPlusFysPlusSmi) {
  * utrustningslistor viktsattes OBEROENDE av varandra för samma föremål. En
  * fullständig post-för-post-omtranskribering mot Spelarbokens egna tal
  * skulle blockera hela börda-funktionen på en stor kureringsomgång; ×3
- * kördes ändå (Johans beslut) som den enda praktiska vägen framåt. Se
+ * kördes ändå (Projektets beslut) som den enda praktiska vägen framåt. Se
  * backlogposten i DESIGN_DECISIONS.md för en eventuell framtida avstämning.
  */
 DODE.encumbranceTable = [
@@ -1938,14 +1938,14 @@ DODE.encumbranceStep = function (carriedKg, styKg) {
  * `encumbranceStep`) som SL matar in en manuellt uträknad total i, tills en
  * framtida session löser kroppsviktsluckan.
  *
- * ⚠ **Bärförmågans ÖVRE GRÄNS — avstegsbeslut, Johan 2026-09-06.** Magi-
+ * ⚠ **Bärförmågans ÖVRE GRÄNS — avstegsbeslut, 2026-09-06.** Magi-
  * regelbokens "3×STY BEP, vägrar flytta sig överlastad" (s.46) och KH:s
  * gradvisa tabell (ingen egen övre gräns angiven på s.28) beskrevs länge som
  * en möjlig sifferkonflikt i backlog 118. Utredning (`DODE_KH_Riddjur.md`s
  * "Konfliktundersökning") visade att Magi-regelbokens tak, omräknat med den
  * redan etablerade ×3 BEP→kg-faktorn (SPB s.12), landar nästan exakt på
  * KH:s egen `STY×8-9`-rad — samma modell sedd från två håll, inte en
- * motsägelse. Johan bekräftade denna tolkning via `AskUserQuestion`
+ * motsägelse. Denna tolkning bekräftades via `AskUserQuestion`
  * ("Treat as the same curve") — **KH:s tabell är själva mekaniken, Magi-
  * regelbokens omräknade tak (`9×STY kg`) är den bortre, absoluta gränsen
  * där riddjuret vägrar flytta sig alls.** Se CLAUDE.md "Beslutade avsteg".
@@ -2091,8 +2091,8 @@ DODE.bodyPlans = {
     ] }
   },
 
-  // ⚠ **KONSTRUERAD KROPPSBYGGNAD — creator decision, Johan 2026-07-29.**
-  // Böckerna har ingen fyrfotatabell. Johan: *"Kroppspoängtabell RP page 24 can
+  // ⚠ **KONSTRUERAD KROPPSBYGGNAD — creator decision, 2026-07-29.**
+  // Böckerna har ingen fyrfotatabell. Feedback: *"Kroppspoängtabell RP page 24 can
   // be used for quad pedals as well"* — KP-värdena är alltså bokens (samma
   // Kroppspoängstabell som humanoiden), medan **träfftabellen är påhittad**:
   // humanoidens två armar byts mot två extra ben, och bröstkorg+mage slås ihop
@@ -2263,7 +2263,7 @@ DODE.rollHitLocation = async function (bodyPlanKey, { defending = true, fromBehi
 
 /**
  * ⚠ **Egen rollpersonsegenskap som saknades helt i systemet** (upptäckt via
- * Johans fotografi av RP s.27, 2026-07-29).
+ * Projektets fotografi av RP s.27, 2026-07-29).
  *
  * "Den hand som du normalt använder (högerhanden för en högerhänt person) kommer
  * hädanefter alltid att kallas för **svärdshand**, medan den aviga handen kallas
@@ -2315,7 +2315,7 @@ DODE.SECONDS_PER_ROUND = 5;
 
 /** Vanliga tidssteg för SL:s tidsfönster, i sekunder. Se DESIGN_DECISIONS.md §10. */
 //
-// ⚠ Johan 2026-07-29: *"Day/week/month button will likely suffice."* Kortare steg
+// ⚠ 2026-07-29: *"Day/week/month button will likely suffice."* Kortare steg
 // finns i fritextfältet, men behövs sällan — **äventyrstid mäts i stridsrundor**
 // (5 s styck) och nedtid i dygn eller mer. Mellanskalan hade mest varit brus.
 DODE.timeSteps = [
@@ -2329,7 +2329,7 @@ DODE.timeSteps = [
 /**
  * Förbrukning som SL bör påminnas om när tid passerar.
  *
- * ⚠ **Ingen automatik — medvetet.** Johan 2026-07-29: *"Over days I think a note
+ * ⚠ **Ingen automatik — medvetet.** 2026-07-29: *"Over days I think a note
  * to GM to request removal of supplies will suffice."* Böckerna ger ingen
  * dagsranson eller förbrukningstakt (letat i UTRUSTNING.md), så att dra föremål
  * automatiskt vore att hitta på en regel. Påminnelsen står i chattkortet i
@@ -2571,7 +2571,7 @@ DODE.actorConditions = function (actor) {
 };
 
 /**
- * Ambidextriös-undantaget — CLAUDE.md "Beslutade avsteg", Johan 2026-08-04:
+ * Ambidextriös-undantaget — CLAUDE.md "Beslutade avsteg", 2026-08-04:
  * en Ambidextriös rollperson hoppar över Två vapen-träningskravet helt (RP:s
  * egen definition av Ambidextriös — "bägge händerna samtidigt ... utan några
  * som helst problem" — tolkas som att redan uppfylla vad färdigheten
@@ -2666,8 +2666,8 @@ function _queuePerActor(actorId, task) {
  * enskilt stridsrunde-tick; ett större `count` används av `advanceTime()` för
  * att lösa upp flera dagars/rundors ackumulerad effekt i ETT hopp i stället
  * för en loop, t.ex. "3 dagar strandsatt i öknen" utan att en Combat behöver
- * existera — se docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R20 och Johans
- * uttryckliga fråga 2026-08-05 om hur SL hanterar kvarvarande gifttickar
+ * existera — se docs/dev/AATERHAMTNING_ANVANDNINGSFALL.md UC-R20 och den
+ * uttryckliga frågan 2026-08-05 om hur SL hanterar kvarvarande gifttickar
  * UTANFÖR strid.
  *
  * Drar `amount × count` från HP eller en namngiven färdighets `system.bonus`
@@ -2680,13 +2680,13 @@ function _queuePerActor(actorId, task) {
  * blöder, ≤ −FYS: dör) kräver att KP kan gå negativt. Ett tidigare
  * `Math.max(0, ...)`-klamp här gjorde gift OFÖRMÖGET att döda, i strid mot
  * `anatomy.mjs#applyLocationDamage`, som redan aldrig klampar. Rättat
- * 2026-08-05 efter Johans fråga om hur en SL kan låta ett förgiftat offer dö
+ * 2026-08-05 efter Projektets fråga om hur en SL kan låta ett förgiftat offer dö
  * av exponering i öknen — svaret ska vara "ja, om giftet är dödligt nog",
  * inte "nej, motorn stoppar vid 0 oavsett".
  *
  * ⚠ **Serialiserad per aktör OCH läser färskt tillstånd vid körning, inte
  * vid anrop.** Rättat 2026-08-06 efter ett RIKTIGT canvas/token-drivet test
- * (Johan: "all characters should be on canvas with real test characters or
+ * (Feedback: "all characters should be on canvas with real test characters or
  * it cannot be considered a real test... hook tests are exactly the place
  * where things break") avslöjade att två snabbt påföljande
  * `combat.nextRound()`-anrop kunde tappa en tick helt TYST, utan
@@ -2752,7 +2752,7 @@ DODE.tickPeriodicEffect = async function (actor, effect, count = 1) {
  * är den enda platsen tiden rör sig när ingen `Combat` är igång, och fram
  * till nu tickade `cadence:"round"`-effekter ENDAST via `combatRound`-hooken
  * (dode.mjs) — en förgiftad karaktär som lämnar striden slutade alltså ta
- * skada helt, oavsett hur mycket speltid som gick. Johan, 2026-08-05: en SL
+ * skada helt, oavsett hur mycket speltid som gick. 2026-08-05: en SL
  * måste kunna låta en strandsatt, förgiftad rollperson dö av exponering i
  * öknen utan att först tvinga fram en påhittad stridssituation.
  *
@@ -2917,7 +2917,7 @@ DODE.resolveResistance = function (actor, damageType, incomingE = 0, weaponMater
   const entry = (actor?.system?.effectiveResistances ?? actor?.system?.resistances ?? [])
     .find((r) => r.damageType === damageType);
   if (!entry) {
-    // ⚠ "sun"/"water" har OMVÄND defaultsemantik — tillagt 2026-09-03, Johan:
+    // ⚠ "sun"/"water" har OMVÄND defaultsemantik — tillagt 2026-09-03, Feedback:
     // "almost ALL creatures are resistant to sun and water.. with a very
     // few exceptions." De representerar passiv miljöexponering (solljus,
     // regn), inte ett riktat anfall — till skillnad från fire/cold/poison
@@ -2981,7 +2981,7 @@ DODE.activeWeaponEnchantment = function (actor, weaponItemId) {
 };
 
 /**
- * Kreaturstyp + mål-varningssystem — tillagt 2026-09-03. Johans direktiv:
+ * Kreaturstyp + mål-varningssystem — tillagt 2026-09-03. Projektets direktiv:
  * "battle system should give a warning if someone try to throw a spell/
  * effect/weapon effect/potion/scroll on wrong type of target.. maybe not
  * block it." Denna omgång bygger BARA besvärjelse- och vapenvarningen (se

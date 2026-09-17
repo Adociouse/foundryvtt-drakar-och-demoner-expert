@@ -5,7 +5,7 @@ import { canEarnFromUse, rollEpAward, awardItemEp } from "../helpers/ep.mjs";
 /**
  * Stridsupplösning — **Spelledarboken s.16-18**.
  *
- * ⚠ **Träffområde slås ALLTID**, även i vanlig strid. Johans beslut 2026-07-29:
+ * ⚠ **Träffområde slås ALLTID**, även i vanlig strid. Projektets beslut 2026-07-29:
  * *"think of a generic attack always has a hidden riktad attack or if you switch
  * mid fight"*. Slaget är gratis, och genom att alltid ha det kan SL slå om till
  * detaljerad strid mitt i en strid utan att något behöver rekonstrueras — det
@@ -89,7 +89,7 @@ export function rangeClPenalty(weapon, attacker, distanceSpaces) {
  * ("...efter att vapnet trängt igenom skinnet").
  *
  * ⚠ `ammoMaterial` tillagd 2026-09-03 (backlog 104-uppföljning) — ÖVERORDNAR
- * `weapon.system.material` när den är satt. Johans rättelse: "a bow is just
+ * `weapon.system.material` när den är satt. Projektets rättelse: "a bow is just
  * a bow.. arrows is the ammo" — en Långbåge har inget eget `material` som
  * spelar roll i strid, det är PILEN (ett separat `utrustning`-item,
  * `category:"ammunition"`, se item-utrustning.mjs) som avgör om skottet
@@ -391,7 +391,7 @@ export async function resolveAttack({
   if (attackEp) out.pending.attackerEp = { skillId: attackEp.skillId, amount: attackEp.amount };
   if (parryEp) out.pending.defenderEp = { skillId: parryEp.skillId, amount: parryEp.amount };
 
-  // ⚠ Varning, INTE en blockering (Johan, 2026-09-03, kreaturstyp+mål-
+  // ⚠ Varning, INTE en blockering (2026-09-03, kreaturstyp+mål-
   // varningssystemet) — anfallet slås och skadan beräknas/appliceras
   // oförändrat oavsett detta. Bara NPC-mål har ett `creatureType`.
   if (target?.type === "npc" && target.system.creatureType) {
@@ -460,7 +460,7 @@ export async function resolveAttack({
     return out;
   }
 
-  // ⚠ **AVSTEG — "det rena utslaget". Creator decision, Johan 2026-07-29.**
+  // ⚠ **AVSTEG — "det rena utslaget". Creator decision, 2026-07-29.**
   // Ingen bok har någon motsvarighet. Ett PERFEKT anfallsslag med bedövande
   // avsikt mot ett RIKTAT huvudslag slår ut offret fullständigt: **noll skada**,
   // medvetslös i dagar, och inget spår av hur det gick till.
@@ -513,7 +513,7 @@ export async function resolveAttack({
   // Vi följer TEXTEN (ingen absorbering vid perfekt), eftersom den är ett
   // uttryckligt påstående medan diagrammet kan vara en förenkling. Skillnaden
   // är stor i praktiken: mot Abs 8 är ett perfekt hugg antingen förödande eller
-  // nästan verkningslöst. ⚠ Behöver Johans beslut — se DESIGN_DECISIONS.md.
+  // nästan verkningslöst. ⚠ Behöver Projektets beslut — se DESIGN_DECISIONS.md.
   const abs = verdict.ignoreArmour ? 0 : armourFor(target, out.location.location);
   damage = Math.max(0, damage - abs);
   // ⚠ Kreaturstyp-/vapenmaterialmotstånd (backlog 84) — ALLTID efter rustning,
@@ -620,7 +620,7 @@ function buildAttackCardContext(result, { attacker, target, weapon, parryItem, r
 
   return {
     attackerName: attacker.name,
-    // ⚠ Rättad 2026-08-21 (Johans fynd mitt i en liveverifiering — kortet
+    // ⚠ Rättad 2026-08-21 (Projektets fynd mitt i en liveverifiering — kortet
     // visade ett rått "Totala KP kvar: -1" utan att säga VEMS KP, tolkades
     // som anfallarens egna). `target` fanns redan tillgängligt i `postAttackCard`s
     // anropare (attack-dialog.mjs), bara aldrig vidarebefordrat hit — samma

@@ -3,7 +3,7 @@
     <strong>{{localize "DODE.Wizard.Header.Step" number=stepNumber count=stepCount label=stepLabel}}</strong>
     <span class="wizard-bp-ledger">{{localize "DODE.Wizard.Header.BpRemaining"}} <strong>{{bp.remaining}}</strong> / {{bp.start}}</span>
     <span class="wizard-bp-ledger" title="{{localize 'DODE.Wizard.Header.EpTooltip'}}">{{localize "DODE.Wizard.Header.EpRemaining"}} <strong>{{ep.remaining}}</strong> / {{ep.max}}</span>
-    {{!-- Johan, 2026-08-16: "kapital should probably be on top menu as well
+    {{!-- Feedback, 2026-08-16: "kapital should probably be on top menu as well
       ... so one sees it when doing the purchases as it scrolls away
       otherwise." Samma readout som redan fanns inne i utrustningssteget
       (equipmentResult.remaining/.budget), pinnad i den fasta headern precis
@@ -216,7 +216,7 @@
     </div>
     <button type="button" data-action="restartAttributes"><i class="fa-solid fa-rotate-left"></i> {{localize "DODE.Wizard.Attribut.RestartButton"}}</button>
 
-    {{!-- Referenstabell (backlog 35, Johan: "BC-tabellen UNDER köpraderna").
+    {{!-- Referenstabell (backlog 35, feedback: "BC-tabellen UNDER köpraderna").
           Kort och läsbar räckvidd — attribut går sällan över ~25. --}}
     <details class="wizard-group-reference">
       <summary>{{localize "DODE.Wizard.Attribut.ReferenceSummary"}}</summary>
@@ -276,7 +276,7 @@
                     block utan `../` — samma fälla gäller `slot.choicePool`. --}}
               <label>{{localize "DODE.Wizard.Formagor.ChoiceLabel"}} {{#if (gt slot.needsChoiceCount 1)}}{{choice.row}}{{/if}}
                 {{#if (eq slot.choicePool "sprak")}}
-                  {{!-- Backlog (Johan, 2026-08-16: "särkilda förmågot langauge
+                  {{!-- Backlog (feedback, 2026-08-16: "särkilda förmågot langauge
                     should have language selction") — riktig dropdown ur
                     CONFIG.DODE.languages, samma katalog språksteget redan
                     använder, i stället för fritext som riskerar att inte
@@ -405,7 +405,7 @@
         <h4 class="wizard-group-heading">
           {{localize "DODE.Wizard.Yrkesfardigheter.WeaponHeading"}} <span class="wizard-group-count">{{weaponSlotCount}}</span>
         </h4>
-        {{!-- Johan, 2026-08-16: antalet vapenval (1 hos Bard, 6 hos Gladiator)
+        {{!-- Feedback, 2026-08-16: antalet vapenval (1 hos Bard, 6 hos Gladiator)
           stod tidigare utan förklaring — bara siffran. RP s.11 sätter varje
           yrkes egen lista, men VARFÖR den varierar går att säga generellt
           utan att gissa någon enskild yrkesmotivering: stridsinriktade
@@ -606,7 +606,7 @@
     {{/unless}}
 
     {{!-- Referens: vad de olika språken faktiskt är och var de talas
-          (Johan 2026-08-07) — samma "referens under valen"-mönster som
+          (2026-08-07) — samma "referens under valen"-mönster som
           attributstegets grupptabell. --}}
     <details class="wizard-group-reference">
       <summary>{{localize "DODE.Wizard.Sprak.ReferenceSummary"}}</summary>
@@ -626,7 +626,7 @@
   <section class="wizard-step">
     <p class="hint">{{localize "DODE.Wizard.Fardigheter.Hint" maxFv=ep.maxStartFv}}</p>
     <h4>{{localize "DODE.Wizard.Fardigheter.PrimaryHeading"}} ({{skillPreview.primary.length}})
-      {{!-- Johan, 2026-08-16: "+1 and -1 button all primary and all
+      {{!-- Feedback, 2026-08-16: "+1 and -1 button all primary and all
         yrkesfärdigheter on category level as one has to click a lot
         otherwise" — en kategori kan ha 16+ rader, ett klick per steg per
         rad blir orimligt många klick för en hel rollperson. --}}
@@ -694,7 +694,7 @@
       <p class="hint">{{localize "DODE.Wizard.Livsmal.SelectedLabel"}} <strong>{{finalLifeGoal}}</strong></p>
     {{/if}}
 
-    {{!-- Johan, 2026-08-16: "livsmål probably need to have a sub table
+    {{!-- Feedback, 2026-08-16: "livsmål probably need to have a sub table
       explaining the contents, otherwise its hard to understand" — samma
       mönster som attributstegets grupptabell/språkstegets beskrivningstabell
       (backlog 35/64), ordagrann bokbeskrivning ur REG s.13-14. --}}
@@ -774,7 +774,7 @@
       {{/each}}
     </table>
 
-    {{!-- Johan 2026-08-08: granskningssteget visade bara ANTAL/summor (BP-ledger,
+    {{!-- 2026-08-08: granskningssteget visade bara ANTAL/summor (BP-ledger,
       "12 st färdigheter", "340 sm spenderat") — inget en spelare faktiskt kan
       läsa och känna igen sin rollperson i. Samma "namn + FV"-tabellstil som
       själva färdighetssteget (se showFardigheter ovan) och samma korttyp som

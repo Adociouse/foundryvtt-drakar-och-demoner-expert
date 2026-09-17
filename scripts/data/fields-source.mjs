@@ -3,7 +3,7 @@ const fields = foundry.data.fields;
 /**
  * Delat `source`-fält: vilken bok och sida innehållet kommer från.
  *
- * Bakgrund (Johan, 2026-07-28): "Kan inte komma ihåg hur många gånger vi har letat
+ * Bakgrund (2026-07-28): "Kan inte komma ihåg hur många gånger vi har letat
  * efter var en sak stod i böckerna." Fältet finns på alla innehållstyper — raser,
  * yrken, färdigheter, vapen, rustning, utrustning, besvärjelser, förmågor och NPC:er.
  *

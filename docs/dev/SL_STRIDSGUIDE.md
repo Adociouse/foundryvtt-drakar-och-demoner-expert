@@ -1,6 +1,6 @@
 # SL-guide till stridsmekanikens kantfall
 
-> Skapad 2026-09-04, Johans direktiv efter en plan-granskning: *"Viktigt att vi lägger till sådan här saker till 'SL/GM Battle Guideline' där man skriva dit sådan här fringe saker och kanske tips på hur en SL kan hantera det."*
+> Skapad 2026-09-04, Projektets direktiv efter en plan-granskning: *"Viktigt att vi lägger till sådan här saker till 'SL/GM Battle Guideline' där man skriva dit sådan här fringe saker och kanske tips på hur en SL kan hantera det."*
 
 **Syftet skiljer sig från `docs/dev/SPECIALANFALL_SL_GUIDE.md`** — den filen täcker mekanik som INTE är byggd än (en tillfällig manuell ersättning tills automatisering finns). Den här filen täcker det MOTSATTA: mekanik som ÄR byggd och automatiserad, men har ett kantfall eller beteende värt att SL:n känner till vid bordet innan det dyker upp mitt i en session.
 

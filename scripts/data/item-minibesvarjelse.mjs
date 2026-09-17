@@ -13,13 +13,13 @@ const fields = foundry.data.fields;
  * — magikern har den alltid. Det finns alltså inget slag, ingen effektgrad,
  * inget misslyckande och ingen snedtändning, vilket är det mesta av det
  * `besvarjelse` och `castSpell()` finns till för. Att dela typ hade betytt att
- * halva schemat är dött och att kastknappen gör fel sak. Johans bedömning
+ * halva schemat är dött och att kastknappen gör fel sak. Projektets bedömning
  * 2026-07-28, bekräftad mot MAG s.23.
  *
  * ⚠ **Åtkomst är härledd, inte ägd.** En magiker har automatiskt minimagin i
  * den skola där hen har **högst FV** (MAG s.23, "Allmän minimagi"). Därför
  * behöver de flesta rollpersoner inte äga posterna — arket visar dem utifrån
- * skolan. Typen finns ändå som Item för det Johan pekade på: SL ska kunna
+ * skolan. Typen finns ändå som Item för att SL ska kunna
  * dela ut en enskild minibesvärjelse ad hoc, till någon som annars inte skulle
  * ha den.
  *

@@ -30,7 +30,7 @@
           {{/each}}
         </select>
       {{else if ../slot.isWeaponPool}}
-        {{!-- Backlog 66 (Johan: "weapon selection UI... weird and not
+        {{!-- Backlog 66 (feedback: "weapon selection UI... weird and not
           natural") — riktig dropdown ur den faktiska vapenkatalogen,
           samma mönster som språkpoolerna, i stället för fritext med
           autokomplettering. Attributet (STY/SMI) visas per rad så
@@ -43,7 +43,7 @@
           {{/each}}
         </select>
       {{else if ../slot.isStridskonstPool}}
-        {{!-- Backlog 71/72 (Johan: "Build a DODE.stridskonster structure
+        {{!-- Backlog 71/72 (feedback: "Build a DODE.stridskonster structure
           like DODE.vapentekniker") — riktig dropdown ur den nu byggda
           teknikkatalogen, samma mönster som vapenpoolen. Fixar den
           rapporterade "gets ALL the stridskonster"-buggen: varje rad blir
@@ -56,7 +56,7 @@
           {{/each}}
         </select>
       {{else}}
-        {{!-- Johan, 2026-08-16: "hantverk valen har vapen som val?" —
+        {{!-- Feedback, 2026-08-16: "hantverk valen har vapen som val?" —
           `list="dode-weapon-suggestions"` var hårdkodat på HELA fritext-
           grenen, oavsett pool. Fel för hantverk (genuint öppen lista utan en
           sluten katalog i systemet), rätt bara av misstag för fall där

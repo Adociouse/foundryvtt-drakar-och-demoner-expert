@@ -8,7 +8,7 @@ import { clearEpTicks } from "./ep.mjs";
  * det har fonstret flyttar den i minuter till dygn. Vi haller ingen egen kalender
  * — samma linje som dnd5e, som bara anropar `game.time.advance`.
  *
- * ⚠ **Tiden har ett SLAG, inte bara en langd** (Johan 2026-07-29). Samma antal
+ * ⚠ **Tiden har ett SLAG, inte bara en langd** (2026-07-29). Samma antal
  * dygn far olika foljder beroende pa vad rollpersonerna gjorde:
  *
  * | Slag | Somnklocka | Vilosvit | Lakning (SLB s.20) |

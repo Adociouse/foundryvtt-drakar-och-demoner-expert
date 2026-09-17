@@ -14,7 +14,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static DEFAULT_OPTIONS = {
     tag: "form",
     classes: ["dode", "sheet", "actor", "character"],
-    // Johan 2026-08-02: 680×800 kändes för litet i praktiken (särskilt med
+    // 2026-08-02: 680×800 kändes för litet i praktiken (särskilt med
     // förmågeradernas nya <textarea>, se character-sheet.hbs) — höjt till
     // 900×1000. `resizable:true` gör detta bara till ett bekvämare default,
     // inte en spärr.
@@ -22,7 +22,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     window: { resizable: true },
     // ⚠ Denna array läses ALDRIG av installerad Foundry-version — ActorSheetV2s
     // egen `_dragDrop`-getter (foundry.mjs) hårdkodar `dragSelector: ".draggable"`
-    // och ignorerar `options.dragDrop` helt. Live-fynd 2026-08-22 (Johan: "row
+    // och ignorerar `options.dragDrop` helt. Live-fynd 2026-08-22 (Feedback: "row
     // dolk or eld does not seem selectable or dragable") — draget hade ALDRIG
     // fungerat för någon, GM inkluderat, oavsett `_canDragStart`-behörighet.
     // Den faktiska drag-aktiveringen sker via `class="draggable"` på raden i
@@ -73,7 +73,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // Utan det nollställs scroll-positionen vid VARJE re-render (ett
     // färdighetsslag, en equip-växling, ett förmåge-tillägg — allt som
     // uppdaterar aktören renderar om arket automatiskt), vilket kastar
-    // användaren till toppen av en lång lista efter varje klick. Johan
+    // användaren till toppen av en lång lista efter varje klick.
     // 2026-08-08 ("sett i fler menyer"). CSS-motparten (`overflow-y:auto`
     // flyttad från `.window-content` till just den här roten) i dode.css.
     form: { template: "systems/drakar-och-demoner-expert/templates/actor/character-sheet.hbs", scrollable: [""] }
@@ -99,7 +99,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     // getters och är svårt att lita på.
     context.skills = this.actor.items
       .filter((i) => i.type === "fardighet")
-      // Johan 2026-08-07: primära färdigheter ska stå före sekundära
+      // 2026-08-07: primära färdigheter ska stå före sekundära
       // erfarenheter (RP s.30/38-62) — annars beror ordningen på oavsiktlig
       // skapelseordning (t.ex. en sekundär färdighet utdelad före resten av
       // guiden hann köra klart hade kunnat hamna högst upp).
@@ -360,8 +360,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * när magikern lär sig en ny skola. Därför läses de ur kompendiet utifrån
    * rollpersonens skolfärdigheter i stället för att kopieras in på aktören.
    *
-   * ⚠ EN SKOLA → MÅNGA MINIBESVÄRJELSER, OCH FLERA SKOLOR SAMTIDIGT. Johans
-   * beslut 2026-07-29: en magiker som lär sig ytterligare en skola får också den
+   * ⚠ EN SKOLA → MÅNGA MINIBESVÄRJELSER, OCH FLERA SKOLOR SAMTIDIGT.
+   * Beslut 2026-07-29: en magiker som lär sig ytterligare en skola får också den
    * skolans minimagi. MAG s.23:s formulering "den tillhör automatiskt den skola
    * där magikern har högst FV" handlar om magiker som inte tillhör NÅGON skola —
    * direkt före står att "varje magiskola har sina egna minibesvärjelser". Den
@@ -462,7 +462,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * automatiskt"), och det gamla `fv: 1` gav fel värde för varje färdighet
    * vars grundegenskap låg över 3.
    *
-   * Besvärjelser hamnar här av ett skäl Johan tog upp: en icke-magiker kan få
+   * Besvärjelser hamnar här av ett skäl som togs upp: en icke-magiker kan få
    * en välsignelse av SL under äventyret. Mekaniskt är det samma sak — SL
    * lägger ett `besvarjelse`-Item på rollpersonen.
    */
@@ -659,7 +659,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * SL delar ut en besvärjelse eller välsignelse. Samma väg som färdigheter
    * ovan, men för `besvarjelse`-Items.
    *
-   * ⚠ Kräver INTE att rollpersonen är magiker. Johans exempel: en icke-magiker
+   * ⚠ Kräver INTE att rollpersonen är magiker. Projektets exempel: en icke-magiker
    * får en gudomlig välsignelse av SL mitt i kampanjen. Mekaniskt är en
    * välsignelse och en besvärjelse samma dokument — skillnaden är hur den
    * kom dit, vilket `grantedReason` fångar.
@@ -985,7 +985,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
    * INGEN spelare dra NÅGOT från sitt eget ägda ark (vapen till hotbaren,
    * utrustning till en annan aktör) — bara SL kan, eftersom draget aldrig
    * ens startar (`DragDrop#bind` sätter `draggable` bara om detta returnerar
-   * sant). Live-fynd 2026-08-22: Johan rapporterade att varken namn, ikon
+   * sant). Live-fynd 2026-08-22: varken namn, ikon
    * eller shift/ctrl-drag fungerade från Sylvies eget, ägda ark.
    * @override
    */

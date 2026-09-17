@@ -1,7 +1,7 @@
 /**
  * Schema-versionering för Actor-datamodellerna (character/npc).
  *
- * VARFÖR DEN HÄR FILEN FINNS (Johan 2026-08-08): "new features break legacy
+ * VARFÖR DEN HÄR FILEN FINNS (2026-08-08): "new features break legacy
  * artifacts... value building migration tools be rebuild items based on
  * requirements if needed" — samma princip som docs/dev/seed-test-party.js
  * följer för TESTFIXTURER (bygg om, migrera inte), men här gäller det
@@ -50,7 +50,7 @@ export const SCHEMA_LOG = [
       + "(vanlig/extraordinar/hjalte, användes före 2026-08-02:s point-buy-ombyggnad) "
       + "till nuvarande 4-nivå-skalan (vanlig/slumpens-hjalte/sann-hjalte/gudafodd). "
       + "⚠ extraordinar→sann-hjalte och hjalte→gudafodd är ett RIMLIGHETSVAL, inte "
-      + "bokbelagt eller Johan-beslutat (se DESIGN_DECISIONS.md §3 Critical #3) — "
+      + "bokbelagt eller projektbeslutat (se DESIGN_DECISIONS.md §3 Critical #3) — "
       + "migreringen loggar en konsolvarning så SL kan dubbelkolla BP-poolen manuellt "
       + "på en migrerad aktör, i stället för att tyst byta nivå utan spår."
   },

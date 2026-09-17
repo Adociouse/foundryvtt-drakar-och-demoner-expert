@@ -1,6 +1,6 @@
 # Maktnivå-analys — varför DoDE-rollpersoner tenderar bli mer episka än D&D-rollpersoner
 
-> Skriven 2026-09-08, som svar på Johans fråga efter hjältepoäng-spenderingsfönstrets bygge: *"Based on the rules so far it feels like DoDe is more powerful heroic charecters with much more potential than normal English D&D?"* **Ren reflektion — ingen kodändring, inget beslut att verkställa.** Sparad ändå, eftersom slutsatsen är grundad i konkreta mekanikjämförelser som är värda att ha kvar när frågan kommer upp igen (t.ex. vid balansdiskussioner eller när nytt HH/KH-innehåll portas).
+> Skriven 2026-09-08, som svar på Projektets fråga efter hjältepoäng-spenderingsfönstrets bygge: *"Based on the rules so far it feels like DoDe is more powerful heroic charecters with much more potential than normal English D&D?"* **Ren reflektion — ingen kodändring, inget beslut att verkställa.** Sparad ändå, eftersom slutsatsen är grundad i konkreta mekanikjämförelser som är värda att ha kvar när frågan kommer upp igen (t.ex. vid balansdiskussioner eller när nytt HH/KH-innehåll portas).
 
 ## Slutsatsen, kort
 
@@ -22,7 +22,7 @@ D&D:s motsvarighet (legendariska föremål, epic boons, höga subclass-features)
 
 ## 3. Handlingsekonomin kan staplas utan spärr
 
-Avstegstabellens rad om Vapenmästarens PSY-köpta bonusattacker (KH s.8-9), Johans uttryckliga beslut 2026-09-06: **"Take it literally, 3 attacks, no restriction"** — och uttalat att stapling utöver det (10 PSY = 2 köpta) INTE är förbjudet av texten. `DODE.grantBonusAction`/`getBonusActions` (config.mjs) har inget hårdkodat tak; själva handlingsekonomin (backlog 32) är fortfarande obyggd, så ingenting i koden ens FÖRSÖKER spärra det.
+Avstegstabellens rad om Vapenmästarens PSY-köpta bonusattacker (KH s.8-9), Projektets uttryckliga beslut 2026-09-06: **"Take it literally, 3 attacks, no restriction"** — och uttalat att stapling utöver det (10 PSY = 2 köpta) INTE är förbjudet av texten. `DODE.grantBonusAction`/`getBonusActions` (config.mjs) har inget hårdkodat tak; själva handlingsekonomin (backlog 32) är fortfarande obyggd, så ingenting i koden ens FÖRSÖKER spärra det.
 
 D&D:s Extra Attack-progression (1→2→3→4 attacker) är strikt klasslåst till specifika nivåer (5/11/20) och kan bara nås av EN klass (Fighter) vid toppen. Handlingsekonomin (en Action, en Bonus Action, Reactions) är själva ryggraden i spelets balans — DoDE har ingen motsvarande spärr att bygga en balansmodell kring.
 

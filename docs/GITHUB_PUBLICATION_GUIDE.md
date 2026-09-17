@@ -64,7 +64,7 @@ This is the real question. Here's the ruling, with reasoning.
 
 **The case against audit docs and migration plans in the repo:**
 
-Johan's instinct is right. These documents share three problems:
+This instinct is right. These documents share three problems:
 
 1. **They're snapshots, not living documents.** The audit describes the codebase as of 2026-07-21. The migration plan describes what *should* be done. Neither updates itself when the code changes. Within weeks they'll describe a codebase that no longer exists.
 

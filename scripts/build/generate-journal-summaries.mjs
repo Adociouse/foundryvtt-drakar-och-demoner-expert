@@ -132,7 +132,7 @@ const SCRIPT_STATS_ID = "RegenJournalScr0";
 const PORTALMAGI_INTRO =
   "<h2>Portalmagi</h2>" +
   "<p>Portalmagi är en egen magiskola, öppen för alla magiker — inte bara demonologer — som handlar om att öppna, forma och kontrollera portaler mellan denna värld och andra dimensioner. Skolan är nära besläktad med Demonologin men skild från den; en portalmagiker behöver inte alls syssla med demoner för att bemästra sina besvärjelser.</p>" +
-  "<p>⚠ Avsteg (Johan, 2026-09-02): Portalmagi läggs till som en uttalad 14:e magiskola, utöver MAG s.8-10:s slutna 13-skole-canon, eftersom Kaos Väktare (s.49) uttryckligen kallar den en ny, fristående skola. Se docs/DESIGN_DECISIONS.md, avsnittet \"Beslutade avsteg\".</p>";
+  "<p>⚠ Avsteg (2026-09-02): Portalmagi läggs till som en uttalad 14:e magiskola, utöver MAG s.8-10:s slutna 13-skole-canon, eftersom Kaos Väktare (s.49) uttryckligen kallar den en ny, fristående skola. Se docs/DESIGN_DECISIONS.md, avsnittet \"Beslutade avsteg\".</p>";
 
 function main() {
   const spellFiles = readdirSync(spellDir).filter((f) => f.endsWith(".json"));

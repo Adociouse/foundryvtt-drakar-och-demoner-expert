@@ -13,14 +13,14 @@ const WIZARD_AMBIENCE_SRC = "systems/drakar-och-demoner-expert/assets/audio/the-
 // (YRKEN.md "Grundegenskapskrav", RP s.11) går annars inte att kontrollera vid
 // valet — alla värden är null då, varje krav blir "overifierat" och kravkollen
 // blir dekoration. Se DESIGN_DECISIONS.md §2-raden om yrkeskrav.
-// ⚠ `alder` flyttad hit (2026-08-05, Johan) — kommer FÖRE attribut/yrke/kapital
+// ⚠ `alder` flyttad hit (2026-08-05) — kommer FÖRE attribut/yrke/kapital
 // eftersom `#effectiveAttributes()`, `#checkRequirements()` och
 // `ageCapitalMultiplier`-uppslaget i kapital-steget ALLA redan läste
 // `state.ageCategory` innan spelaren hunnit sätta den (defaultade tyst till
 // "Mogen"). Se docs/DESIGN_DECISIONS.md backlog 34 för hela utredningen —
 // utan den här ordningen ändras attributköpstegens siffror retroaktivt så
 // fort spelaren senare väljer en annan ålder än standardvärdet.
-// Omordnad 2026-08-06 för att följa RP s.23-31:s egen sekvens (Johans
+// Omordnad 2026-08-06 för att följa RP s.23-31:s egen sekvens (ett uttryckligt
 // direktiv) SÅ LÅNGT den går utan att återinföra en redan fixad bugg. Två
 // hårda beroenden styr vad som INTE kunde flyttas rakt av:
 //   - "alder" måste stå FÖRE "attribut" OCH "kapital" — båda läser
@@ -29,12 +29,12 @@ const WIZARD_AMBIENCE_SRC = "systems/drakar-och-demoner-expert/assets/audio/the-
 //     (ålder långt senare, efter startkapital) fungerar på papper eftersom
 //     den fysiska blanketten inte har någon "förhandsvisning" att räkna om
 //     — vår guide har det, så att flytta ålder dit skulle återinföra exakt
-//     den bugg backlog 34 fixade (redan bekräftat med Johan: ålder stannar
+//     den bugg backlog 34 fixade (redan bekräftat med Feedback: ålder stannar
 //     tidigt, en medveten guide-specifik avvikelse från bokordningen).
 //   - "ras"/"attribut"/"yrke"/"magiskola" måste komma i den ordningen —
 //     yrke kräver slutgiltiga (rasmodifierade) grundegenskaper för
 //     kravkontrollen, magiskola kräver ett valt yrke.
-// ⚠ RÄTTAD 2026-08-07 (Johan): "formagor" låg först direkt efter "attribut",
+// ⚠ RÄTTAD 2026-08-07: "formagor" låg först direkt efter "attribut",
 // FÖRE "yrke" — flyttad till EFTER "yrke" eftersom särskilda förmågor
 // (KH s.3) rimligen inte kan slås fram innan yrke är valt, en riktig
 // beroendekedja som fortfarande gäller (se nedan). Ursprungligen flyttad
@@ -42,7 +42,7 @@ const WIZARD_AMBIENCE_SRC = "systems/drakar-och-demoner-expert/assets/audio/the-
 // guide, dode-chargen/preview.html), med motiveringen att `special-ability-
 // effects.mjs`s `"yrkesUpgrade"`-effekttyp matchar mot redan valda
 // yrkesfärdigheter.
-// ⚠ OMPRÖVAD 2026-08-16 (Johan): "you will likely buy with EP differently"
+// ⚠ OMPRÖVAD 2026-08-16 (feedback): "you will likely buy with EP differently"
 // om man redan känner till sina särskilda förmågor — en genuin
 // budgetplaneringspoäng som INTE handlar om ett tekniskt beroende (en
 // kodgranskning samma dag, se DESIGN_DECISIONS.md backlog 69, visade att
@@ -192,7 +192,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     id: "dode-character-wizard",
     tag: "form",
     classes: ["dode", "sheet", "character-wizard"],
-    // Johan 2026-08-02: 640×640 var för litet i praktiken (samma anledning
+    // 2026-08-02: 640×640 var för litet i praktiken (samma anledning
     // som rollformuläret bumpades till 900×1000) — särskilt sena steg med
     // kortrutnät (yrke: upp till 19 kort) och hjältedåd-resultatlistan.
     // `resizable:true` sedan tidigare, det här är bara ett bekvämare default.
@@ -234,7 +234,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // scroll-position över en re-render — annars nollställs `.wizard-step-
     // container`s scrollTop varje gång `this.render()` körs efter ETT klick
     // (t.ex. ett enskilt yrkesfärdighetsval på Steg 14/18), vilket kastar
-    // användaren till toppen av en lång lista efter varje val. Johan
+    // användaren till toppen av en lång lista efter varje val.
     // 2026-08-08. Se scripts/apps/training.mjs och sheets/*.mjs för samma fix.
     form: { template: "systems/drakar-och-demoner-expert/templates/apps/character-wizard.hbs", scrollable: [".wizard-step-container"] }
   };
@@ -411,7 +411,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   // behöver rasdokumentet (raceGroup, för DODE.motherTongueSlots) synkront.
   #selectedRaceDoc = null;
   // Samma mönster igen — yrkesfärdighetsstegets vapenfärdighetspooler
-  // (backlog 66, Johan: "weapon selection UI... weird and not natural")
+  // (backlog 66, Feedback: "weapon selection UI... weird and not natural")
   // behöver en riktig lista att bygga en <select> av i #professionSkillState,
   // som körs utanför _prepareContext(). Alla `vapen`-kompendieposter, samma
   // källa som redan fanns för den fria textens autokomplettering
@@ -456,7 +456,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // enda-källa-princip som DataModellens prepareDerivedData använder).
     bp: { spentRas: 0, spentFormagor: 0, spentFardigheter: 0, spentAttribut: 0, spentSvardshand: 0 },
     // Hjältedåd (HH s.6-7) — bara hjälte-nivåer, inte "vanlig". EN TVÅSTEGS-
-    // RAKET (Johan 2026-08-02): #onRollHjaltedadCount slår 1T6 och sätter
+    // RAKET (2026-08-02): #onRollHjaltedadCount slår 1T6 och sätter
     // rollCount; #onRollHjaltedad slår sedan just så många 1T20 mot
     // DODE.hjaltedadTable in i `rolls`. bonusBP/bonusHjaltepoang är SUMMAN av
     // alla raderna, läggs på ovanpå de fasta 125 (se #bpLedger). `rolls` (med
@@ -623,10 +623,10 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       ...option,
       selected: option.value === this.state.kon
     }));
-    // Husregeln (Johan 2026-08-06/07) ger varje hjälte-nivå en EGEN
+    // Husregeln (2026-08-06/07) ger varje hjälte-nivå en EGEN
     // slag-antal-formel i stället för det delade 1T6 (HH s.6-7) — nivåkorten
     // ska visa VILKEN formel som gäller för just DEN nivån innan man ens
-    // valt, inte bara i detaljboxen efter valet (Johan: "under varje
+    // valt, inte bara i detaljboxen efter valet (Feedback: "under varje
     // hjälteikon hur många slag man får som text").
     const houseRuleOn = game.settings.get(game.system.id, "hjaltedadTieredRollCount");
     context.nivaOptions = NIVA_OPTIONS.map((option) => ({
@@ -641,7 +641,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       selected: option.value === this.state.niva
     }));
     context.selectedNivaOption = context.nivaOptions.find((option) => option.selected) ?? null;
-    // Johans fynd #2 (2026-08-02): EP-budgeten vid start beror på nivå (INTE bara
+    // Projektets fynd #2 (2026-08-02): EP-budgeten vid start beror på nivå (INTE bara
     // ålder), men det syntes ingenstans i nivåstegets sammanfattning. Visar alla
     // fyra åldersrader för den VALDA nivån — ålder väljs först i ett senare steg,
     // så exakt EP är inte känt än, men skillnaden mellan nivåerna är det.
@@ -658,7 +658,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     const socialResult = this.#socialStandingResult();
     const capitalResult = this.#startCapitalResult(socialResult);
     context.socialStanding = socialResult;
-    // Referenstabell under socialt stånd-steget (Johan 2026-08-07: "borde ha
+    // Referenstabell under socialt stånd-steget (2026-08-07: "borde ha
     // stödtabell under så man ser vad man kan få för val") — samma
     // "referens under valen"-mönster som svärdshandens 2T6-tabell och
     // språkstegets referenstabell. `min` härleds från föregående rads `max`,
@@ -697,7 +697,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // lärdom som backlogpost 6a: namn är inte identitet. Flaggan gör dessutom
     // att en kampanjmodul kan lägga sina egna raser i rätt grupp.
     const isElfLineage = (r) => r.raceGroup === "alvslakte";
-    // Progressiv visning (Johan 2026-08-02): en undergrupp (alvsläkten,
+    // Progressiv visning (2026-08-02): en undergrupp (alvsläkten,
     // yrkesspecialiseringar) syns bara när dess FÖRÄLDER faktiskt är vald —
     // annars är 13 rasval och 36 yrkesval ett för stort första intryck. Vald
     // ras/yrke avslöjar sin grupp via `flags.<id>.revealsRaceGroup`/
@@ -705,7 +705,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Lönnmördare/Bard) — generellt på VÄRDET, inte hårdkodat mot "alv", så
     // ett framtida Svartfolk-baskön med `revealsRaceGroup: "svartfolk"`
     // slotar in utan kodändring här, bara nytt kompendieinnehåll.
-    // ⚠ RÄTTAT 2026-08-02 (Johan): gruppen försvann så fort spelaren klickade
+    // ⚠ RÄTTAT 2026-08-02: gruppen försvann så fort spelaren klickade
     // en SPECIFIK undergruppsmedlem (t.ex. Mörkeralv) i stället för bara
     // föräldern (Alv) — `selectedRace` blev då lineage-itemet, som inte SJÄLVT
     // bär `revealsRaceGroup`-flaggan (bara Alv gör det), så gruppen stängdes
@@ -741,7 +741,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // guiden visar tydligt vad som inte är uppfyllt och låter bordet bestämma.
     const reqFor = (p) => DoDECharacterWizard.#checkRequirements(
       p.system.requirements, effectiveAttributes);
-    // ⚠ RÄTTAT 2026-08-02 (Johan: "10 av 36" visades trots att alla grund-
+    // ⚠ RÄTTAT 2026-08-02 (Feedback: "10 av 36" visades trots att alla grund-
     // egenskaper var köpta till 18 — borde ha varit nära 36/36). `allGroups`
     // byggs HÄR, FÖRE den progressiva avslöjningsfiltreringen, och är källan
     // för `allProfessions`/`qualifiedCount`/`noProfessionQualifies` nedan.
@@ -781,7 +781,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Förslagslista till förmågevalens "valfri sekundär färdighet"-inputs
     // (backlogpost 7/36) — samma "fritext, listan är bara hjälp"-princip.
     context.secondarySkillSuggestions = CONFIG.DODE.secondarySkills.map((s) => s.name).sort();
-    // Johan, 2026-08-16: sourcade hantverksexempel (äventyr/världsböcker) för
+    // 2026-08-16: sourcade hantverksexempel (äventyr/världsböcker) för
     // hantverksfältets datalist — se CONFIG.DODE.craftSuggestions för källor.
     context.craftSuggestions = CONFIG.DODE.craftSuggestions;
     context.selectedRace = selectedRace;
@@ -798,7 +798,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     context.effectiveAttributes = effectiveAttributes;
     context.requirementCheck = requirementCheck;
     context.motherTongue = this.#motherTongueResult(selectedRace, socialResult, effectiveAttributes);
-    // Referenstabell för språksteget (Johan 2026-08-07: "spelarna [ska]
+    // Referenstabell för språksteget (2026-08-07: "spelarna [ska]
     // förstå vad de väljer och varför") — samma "referens under valen"-mönster
     // som attributstegets grupptabell (backlog 35).
     context.languages = CONFIG.DODE.languages;
@@ -816,7 +816,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // needsChoice/choiceCount i special-ability-effects.mjs.
     context.specialAbilities = this.#specialAbilitySlots().map((slot) => {
       const choicePool = slot.effect?.pool === "hantverk" ? "hantverk" : (slot.effect?.pool ?? "");
-      // Johan, 2026-08-16: "särkilda förmågot langauge should have language
+      // 2026-08-16: "särkilda förmågot langauge should have language
       // selction" — samma fritext-mot-datalist-problem som vapenvalet redan
       // hade (backlog 66/67). Effekten (grantSecondary→addChosen) var redan
       // riktigt kopplad och skapar en verklig FV20-färdighet — det var bara
@@ -842,7 +842,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       .filter((name) => name.length > 0)
       .join(", ");
     context.lifeGoalOptions = CONFIG.DODE.lifeGoals.map((goal) => ({ value: goal.name, selected: goal.name === this.state.lifeGoal }));
-    // Referenstabell under valet (Johan, 2026-08-16: "livsmål probably need
+    // Referenstabell under valet (2026-08-16: "livsmål probably need
     // to have a sub table explaining the contents, otherwise its hard to
     // understand") — samma mönster som språkstegets redan existerande
     // beskrivningstabell (backlog 64).
@@ -1451,7 +1451,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   }
 
   /**
-   * Hovertext per utrustningskort (Johan, 2026-08-16) — bara de fält som
+   * Hovertext per utrustningskort (2026-08-16) — bara de fält som
    * faktiskt finns i respektive DataModel-schema (se item-vapen.mjs/
    * item-rustning.mjs/item-utrustning.mjs); INGET brytvärde (BV) här, det
    * fältet saknas fortfarande helt på både vapen och rustning (DESIGN_
@@ -1484,7 +1484,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   #equipmentResult(equipmentDocs, capitalResult) {
     const items = equipmentDocs.map((doc) => {
       const qty = this.state.equipment[doc.uuid] ?? 0;
-      // Mängdköpbara poster (Johan 2026-08-08: "purchasable/usable entity",
+      // Mängdköpbara poster (2026-08-08: "purchasable/usable entity",
       // se backlog 66) — ett fritextpris som "20 sm/g" är INTE referensdata,
       // det är ett styckpris per gram/dos/kagge som bara saknat ett mängdfält
       // i UI:t. DODE.parsePriceNote returnerar null för de FÅ notar som
@@ -1508,7 +1508,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         // Rena multiplikatornotar ("×0,5") har varken ett styckpris eller en
         // parsad enhet — de förblir referens-only, oköpbara här.
         purchasable: parsedNote ? true : (!doc.system.priceNote && price > 0),
-        // Johan, 2026-08-16: "hovering over the equipment a text should be
+        // 2026-08-16: "hovering over the equipment a text should be
         // shown about the characteristics" — ett kort blir annars bara en
         // bild+pris, med vapnets skada/vikt eller rustningens skydd gömt
         // en klick bort på själva kompendieposten.
@@ -1546,7 +1546,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       if (!buckets.has(key)) buckets.set(key, []);
       buckets.get(key).push(entry);
     }
-    // Johan, 2026-08-16: "utrustning should probably be alphabetically
+    // 2026-08-16: "utrustning should probably be alphabetically
     // indexed under each category" — korten låg tidigare i kompendiets
     // egen (skapelseordnings-)följd inom varje kategori, inte bokstavsordning.
     const groups = ORDER
@@ -1653,7 +1653,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         if (!kind || Number.isNaN(index)) return;
         this.state.motherTongues[kind][index] = ev.target.value;
         // Tala/Läsa-Skriva "human"-platser är SAMMA modersmål, inte två
-        // oberoende val (Johan 2026-08-07, se DODE.syncedHumanMotherTongueIndices)
+        // oberoende val (2026-08-07, se DODE.syncedHumanMotherTongueIndices)
         // — spegla värdet till motsvarande plats i den andra färdigheten.
         const synced = CONFIG.DODE.syncedHumanMotherTongueIndices(this.#selectedRaceDoc);
         if (synced) {
@@ -1666,7 +1666,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         this.render();
       });
     }
-    // Mängdköpbara utrustningsposter (Johan 2026-08-08, "purchasable/usable
+    // Mängdköpbara utrustningsposter (2026-08-08, "purchasable/usable
     // entity") — direkt mängdinmatning i stället för en ±1-stegare, eftersom
     // att klicka +1 30 gånger för att köpa 30 gram vore orimligt. Klampar mot
     // `maxQty` (redan köpt + vad kvarvarande kapital räcker till), se
@@ -1766,7 +1766,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       this.state.startCapital.bpSpent = Math.max(0, Number(ev.target.value) || 0);
       this.render();
     });
-    // ⚠ Saknades helt fram till 2026-08-02 (Johans fynd) — `name`-attributet på
+    // ⚠ Saknades helt fram till 2026-08-02 (Projektets fynd) — `name`-attributet på
     // fältet i mallen antydde auto-bindning, men wizardens form-handler är en
     // no-op (se DEFAULT_OPTIONS), så INGET fält binds automatiskt. #onRollSwordHand
     // läste `state.swordHand.bpSpent` som därför alltid stod kvar på sitt
@@ -1878,7 +1878,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         // som referenstext i stället, så STO-rutan inte står utan sammanhang
         // medan de andra sex visar "+N ras".
         raceStoLabel: isSto && selectedRace ? `${selectedRace.name}: normal ${stoNormal} (${stoMin}–${stoMax})` : null,
-        // BC-grupp (backlog 35, Johan 2026-08-05): "är nästa poäng värd det?"
+        // BC-grupp (backlog 35, 2026-08-05): "är nästa poäng värd det?"
         // går inte att avgöra utan att se om köpet faktiskt korsar en
         // gruppgräns — DODE.attributeToGroup (REG s.6) räknat på det
         // EFFEKTIVA värdet (inkl. rasmod), samma tal CL-beräkningar använder.
@@ -1987,7 +1987,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   /**
    * Vilka `"<Prefix> <Språk>"`-värden rollpersonen redan har via MODERSMÅL
    * (Tala/Läsa-Skriva) för den här poolen — utgråas i "Tala/Läsa-skriva
-   * Främmande Språk"-valen (Johan 2026-08-07: "annars blir det dubbelt").
+   * Främmande Språk"-valen (2026-08-07: "annars blir det dubbelt").
    * Ett SKILT huvudspråk för Tala vs Läsa/Skriva (Dvärgar/Halvorcher/
    * Halvalver) betyder att den här mängden är olika beroende på `kind` —
    * använder samma slot-modell som #motherTongueResult, inte en gissning.
@@ -2026,7 +2026,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         // Språk (RP s.58/42/44), vapenfärdighet (RP s.60, se
         // DODE.weaponGroupFor) och Stridskonst (RP s.56-58/KH s.91-93, se
         // DODE.stridskonster) har alla en STÄNGD katalog att välja ur — en
-        // riktig `<select>` i stället för fritext (backlog 66/71, Johan:
+        // riktig `<select>` i stället för fritext (backlog 66/71, Feedback:
         // "weapon selection UI... weird and not natural" / "Build a
         // DODE.stridskonster structure"). Andra pooler (hantverk) saknar
         // fortfarande en katalog i systemet och förblir fritext.
@@ -2099,8 +2099,8 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
               });
             } else if (isStridskonstPool) {
               // Riktig katalog (backlog 71/72, DODE.stridskonster) i stället
-              // för fritext — samma "gets ALL the stridskonster"-bugg Johan
-              // rapporterade (en enda hårdkodad monolitisk "Stridskonster"-
+              // för fritext — samma "gets ALL the stridskonster"-bugg som
+              // rapporterades (en enda hårdkodad monolitisk "Stridskonster"-
               // post) kunde annars återuppstå via fritext som inte matchar
               // katalogens riktiga tekniknamn. Varje rad blir EN specifik,
               // egen teknik (t.ex. "Krosslag"), inte en platt platshållare.
@@ -2129,7 +2129,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
         });
       }
     });
-    // Johan, 2026-08-16: "step 13 should have valfria separate in Weapons,
+    // 2026-08-16: "step 13 should have valfria separate in Weapons,
     // Languages and namngivna more clearly. maybe with separators between."
     // De tre poolsorterna renderas nu i egna grupper (samma
     // .wizard-group-heading-stil som redan skiljer ras-/yrkeskorten och
@@ -2229,7 +2229,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
   /**
    * Hjältedåd, STEG 1 av 2 — HH s.6-7. Bara hjälte-nivåerna (inte "vanlig")
    * får slå. Slår 1T6 för att avgöra hur MÅNGA gånger man sedan slår 1T20 mot
-   * DODE.hjaltedadTable (#onRollHjaltedad, steg 2). Johans fynd 2026-08-02:
+   * DODE.hjaltedadTable (#onRollHjaltedad, steg 2). Projektets fynd 2026-08-02:
    * en tidigare version slog och summerade båda stegen i EN knapptryckning
    * utan att någonsin posta 1T6-slaget till chatten — resultatet syntes bara
    * som en redan uträknad siffra, och Dice So Nice fick aldrig en riktig
@@ -2238,7 +2238,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * Separata knapptryckningar + separata chattkort med `rolls` löser båda:
    * 1T6-resultatet syns för sig, och tärningarna rullar synligt i båda stegen.
    *
-   * ⚠ HUSREGEL-VÄXEL (Johan, 2026-08-07): om SL:s inställning
+   * ⚠ HUSREGEL-VÄXEL (2026-08-07): om SL:s inställning
    * `hjaltedadTieredRollCount` är påslagen, ersätts det gemensamma 1T6 med
    * DODE.hjaltedadCountHouseRule[niva] (Slumpens hjälte 1T2, Sann hjälte
    * 2+1T2, Gudafödd 4+1T2) — INTE en boktabell, se den inställningens och
@@ -2257,7 +2257,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
       rolls: [countRoll],
       sound: CONFIG.sounds.dice
     });
-    // Johan 2026-08-02: Dice So Nice tar ~2s att landa, men resultatet syntes
+    // 2026-08-02: Dice So Nice tar ~2s att landa, men resultatet syntes
     // i guiden direkt när ChatMessage.create() löste ut — INTE när tärningen
     // faktiskt slutat rulla, eftersom DSN:s animation körs asynkront vid sidan
     // om chattkortets skapande, inte inuti det await:et. `this.render()` (som
@@ -2364,7 +2364,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
    * Svärdshand — RP s.27: 2T6 modifierat med antalet BP man väljer att spendera,
    * +1 per BP.
    *
-   * ⚠ **Den dolda pärlan i regelverket** (Johan 2026-07-29): 15 BP ger 2T6+15 =
+   * ⚠ **Den dolda pärlan i regelverket** (2026-07-29): 15 BP ger 2T6+15 =
    * lägst 17, vilket garanterar minst **Dubbelhänt** och ger **Ambidextriös på
    * 33/36 ≈ 92 %**. Att köpa bort sin sämre hand tidigt sparar enormt mycket
    * senare, eftersom sköldhanden annars är genomgående sämre (SLB s.17: −10 CL).
@@ -2378,7 +2378,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // slag är oförändrat (RP s.27, 2T6+BP), och postas nu alltid, som övriga
     // skapandeslag i guiden.
     const message = await roll.toMessage({ flavor: `Svärdshand — 2T6 + ${bp} BP` });
-    // Johan 2026-08-02: samma "text före tärning"-bugg som hjältedåd hade,
+    // 2026-08-02: samma "text före tärning"-bugg som hjältedåd hade,
     // funnen på svärdshanden — se CONFIG.DODE.waitForDiceAnimation (nu regel
     // för ALLA slag, DESIGN_DECISIONS.md §6). `state.swordHand.roll` sätts
     // (och avslöjas via render()) inte förrän DSN hunnit landa.
@@ -2389,7 +2389,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
   static async #onRollSocialStanding() {
     const roll = await new Roll("2d6").evaluate();
-    // Johan 2026-08-02: postade tidigare INGET chattkort alls (samma
+    // 2026-08-02: postade tidigare INGET chattkort alls (samma
     // "tyst slag"-bugg redan hittad och rättad för grundegenskaper/svärdshand)
     // — tärningen syntes aldrig, vare sig i chatten eller i Dice So Nice. Se
     // CONFIG.DODE.waitForDiceAnimation, nu regel för alla slag (§6).
@@ -2426,7 +2426,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
     // Kaos Väktare-överlagringen (backlog 88) väljs automatiskt för
     // Demonolog/Demonjägare/Demonkrigare — se DODE.rollSpecialAbility.
     const result = CONFIG.DODE.rollSpecialAbility(roll.total, this.#selectedProfessionDoc?.name ?? null);
-    // Johan 2026-08-02: postade tidigare INGET chattkort — samma "tysta slag"-
+    // 2026-08-02: postade tidigare INGET chattkort — samma "tysta slag"-
     // bugg som socialt stånd/startkapital, nu regel att undvika (§6).
     const message = await roll.toMessage({ flavor: "Särskild förmåga — 2T20+BP" });
     await CONFIG.DODE.waitForDiceAnimation(message);
@@ -2548,7 +2548,7 @@ export default class DoDECharacterWizard extends HandlebarsApplicationMixin(Appl
 
   /**
    * Höjer ALLA färdigheter i en kategori ("primar"/"yrkesfardighet") med +1
-   * FV var, i ett enda klick (Johan, 2026-08-16: "there would be good to
+   * FV var, i ett enda klick (2026-08-16: "there would be good to
    * have +1 and -1 button all primary and all yrkesfärdigheter on category
    * level as one has to click a lot otherwise" — en primär-kategori kan ha
    * 16+ rader). Samma EP-/max-FV-kontroll som `#onBuySkillFv` görs per rad,

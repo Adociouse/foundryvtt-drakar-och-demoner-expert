@@ -34,9 +34,9 @@ export async function rollFV({ actor, label, fv, item = null }) {
   // ruta som på det fysiska rollformuläret, se helpers/ep.mjs.
   // Här låg tidigare en SL-knapp för "stressigt läge" — den formuleringen kommer
   // från ett kurerat dokument och står inte i vare sig RP s.63 eller REG s.45.
-  // Bytt efter Johans beslut 2026-07-29, se DESIGN_DECISIONS.md backlogpost 39.
+  // Bytt efter Projektets beslut 2026-07-29, se DESIGN_DECISIONS.md backlogpost 39.
   //
-  // ⚠ Johan 2026-08-02: EP-strecket kryssades i (och synligt uppdaterade arket)
+  // ⚠ 2026-08-02: EP-strecket kryssades i (och synligt uppdaterade arket)
   // INNAN tärningarna hunnit landa i Dice So Nice — samma "text före tärning"-
   // bugg som hittades i guiden, men här i själva stridsmotorn. Tärningen slås
   // (för animationen) och beloppet beräknas HÄR, men `awardItemEp` (den

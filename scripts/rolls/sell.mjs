@@ -1,5 +1,5 @@
 /**
- * Sälj tillbaka till handlare — live-fynd 2026-08-21/22 (Johan, efter
+ * Sälj tillbaka till handlare — live-fynd 2026-08-21/22 (efter
  * plundringspasset): `actor-handlare.mjs`s `buybackRate`-fält fanns redan
  * (SL:s referenssiffra för återköp, se den filens docblock) men var
  * uttryckligen INTE automatiserat ("Återköp är inte automatiserat än" —
@@ -9,7 +9,7 @@
  * ⚠ Skiljer sig MEDVETET från plundring/anfall/besvärjelsers ägarskapsgrind
  * ("SL godkänner bara om spelaren INTE äger målet"): en spelare äger ALLTID
  * sin egen rollperson, så den vanliga gaten hade gjort försäljning alltid
- * direktapplicerad — ingen SL-koll alls. Johan bad uttryckligen om
+ * direktapplicerad — ingen SL-koll alls. Ett uttryckligt önskemål fanns om
  * godkännande "as well" för försäljning specifikt, för SL:s ekonomiska
  * översikt (vad flödar in/ut ur världens ekonomi), inte för en behörighets-
  * lucka. Gaten här är alltså `game.user.isGM`, inte `seller.isOwner`.

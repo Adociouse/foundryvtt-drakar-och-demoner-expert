@@ -117,7 +117,7 @@ export async function rollTrainingWeek(target) {
  *
  * ⚠ AVSTEG — se `trainingFeePerWeek` i dode.mjs. RP s.63 anger 150 sm/vecka
  * (magiker 300 sm) plus ×1,5 för elev av annan ras och ×3 för ensam elev; vi
- * tar en fast avgift per pass efter Johans beslut 2026-07-29.
+ * tar en fast avgift per pass efter Projektets beslut 2026-07-29.
  */
 export function trainingFee(mode, item) {
   if (mode !== "larare") return 0;

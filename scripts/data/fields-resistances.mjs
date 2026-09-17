@@ -27,8 +27,8 @@ const fields = foundry.data.fields;
  *    "double"` — samma primitiv åt andra hållet, en SÅRBARHET (Irrbloss:
  *    "tar dubbel skada av köldattacker").
  *  - `damageType` fick två nya poster: `"magic"` (en samlad "ren kraftskada"-
- *    kategori för besvärjelser som inte passar något grundelement — Johans
- *    ursprungliga backlog-anteckning) och `"weapon"` — **ett eget, medvetet
+ *    kategori för besvärjelser som inte passar något grundelement — en
+ *    ursprunglig backlog-anteckning) och `"weapon"` — **ett eget, medvetet
  *    SKILT spår från de fysikaliska skadetyperna.** Anledningen: Lindskiarnens
  *    regel gäller uttryckligen bara "besvärjelser" (magi), INTE vapen — hade
  *    `damageType:"physical"` återanvänts för BÅDE ett vapenhugg (attack.mjs)
@@ -59,7 +59,7 @@ const fields = foundry.data.fields;
  * `strikeType` FÖRST; bara om målet saknar en post för just den kategorin
  * faller den tillbaka på den generiska `"weapon"`-typen (Varulv/Vampyr/
  * Dödsgast/Kummelgast/Mörkgast — kategorilösa, rent materialstyrda regler,
- * ingen omkurering av dem behövdes). Johans egen observation samma session,
+ * ingen omkurering av dem behövdes). Projektets egen observation samma session,
  * efter att ha sett både detta OCH spelens `damageType` bredvid varandra:
  * *"Seems like 'damage type' is the consistent architecture?"* — bekräftat:
  * samma delade vokabulär täcker nu vapenslag, besvärjelseelement OCH,

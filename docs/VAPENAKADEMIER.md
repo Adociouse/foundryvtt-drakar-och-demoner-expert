@@ -1,6 +1,6 @@
 # Vapenakademier — SL-referens
 
-> Ren fluff/regelreferens för Vapentekniker/Vapenakademier-systemet (KH s.20, s.37-45). Ingenting här är mekaniskt inkopplat i Foundry-systemet — se `docs/DESIGN_DECISIONS.md`s post om Vapenakademier/Vapentekniker för varför (Johans beslut 2026-08-04: data + manuell tillämpning, inte guide- eller stridsintegrerat). De mekaniska katalogerna (teknikernas Egenskap/Grundkostnad/beskrivning, akademiernas kostnad/tid/EP-tak) ligger i `scripts/helpers/config.mjs` (`DODE.vapentekniker`/`DODE.vapenakademier`) och delas ut till en rollperson via arkets "Dela ut färdighet"-knapp (SL-låst), precis som vilken annan sekundär färdighet som helst.
+> Ren fluff/regelreferens för Vapentekniker/Vapenakademier-systemet (KH s.20, s.37-45). Ingenting här är mekaniskt inkopplat i Foundry-systemet — se `docs/DESIGN_DECISIONS.md`s post om Vapenakademier/Vapentekniker för varför (Projektets beslut 2026-08-04: data + manuell tillämpning, inte guide- eller stridsintegrerat). De mekaniska katalogerna (teknikernas Egenskap/Grundkostnad/beskrivning, akademiernas kostnad/tid/EP-tak) ligger i `scripts/helpers/config.mjs` (`DODE.vapentekniker`/`DODE.vapenakademier`) och delas ut till en rollperson via arkets "Dela ut färdighet"-knapp (SL-låst), precis som vilken annan sekundär färdighet som helst.
 
 ## Så fungerar det (KH s.37-38)
 

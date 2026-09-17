@@ -6,10 +6,10 @@
 
 ---
 
-## Två regelfrågor — besvarade av Johan 2026-08-04
+## Två regelfrågor — besvarade av 2026-08-04
 
 1. **Kräver Ambidextriös/Dubbelhänt fortfarande Två vapen-träning per vapenpar?** ✅ **Beslutat.** Ambidextriös hoppar över träningskravet helt — se `CLAUDE.md`s "Beslutade avsteg"-tabell för det fulla beslutet och motiveringen. **Dubbelhänt får INTE samma genväg** (RP s.27 definierar Dubbelhänt som uttryckligen "inte samtidigt" — precis den kvalitet Två vapen kräver). UC-F6/F7 nedan är uppdaterade i konsekvens; inget kvar att besluta här, bara att bygga (backlog 32).
-2. **Finns en sourcead regel om att Morgonstjärna (eller något annat vapen) ignorerar sköldparering?** ⚠ **Fortfarande obekräftat — Johan minns att ha läst den men inte var.** Sökt igenom `REGLER_STRID.md`, `UTRUSTNING.md` och `DODE_Grundregelbok_fullextract.md` i Roll20-projektet utan träff (Morgonstjärna förekommer bara i råa skada/BV/vikt/pris-tabeller). Johans direktiv: bygg logiken så den KAN hantera det när källan hittas, men sätt inte flaggan på Morgonstjärna än. Se det nya kravet i "Arkitekturkrav" nedan och UC-F20b.
+2. **Finns en sourcead regel om att Morgonstjärna (eller något annat vapen) ignorerar sköldparering?** ⚠ **Fortfarande obekräftat — ett minne av att ha läst den finns, men inte var.** Sökt igenom `REGLER_STRID.md`, `UTRUSTNING.md` och `DODE_Grundregelbok_fullextract.md` i Roll20-projektet utan träff (Morgonstjärna förekommer bara i råa skada/BV/vikt/pris-tabeller). Projektets direktiv: bygg logiken så den KAN hantera det när källan hittas, men sätt inte flaggan på Morgonstjärna än. Se det nya kravet i "Arkitekturkrav" nedan och UC-F20b.
 
 ---
 
@@ -47,7 +47,7 @@ Syfte: bevisa att `swordHand`-värdet **inte** smyger in en oavsiktlig bonus/str
 ### UC-F6 — Samma som UC-F5, men Ambidextriös
 **Setup:** Identiskt mot UC-F5 förutom `swordHand: "ambidextrios"`.
 **Situation:** Samma önskan.
-**Förväntat:** ✅ **TILLÅTET, utan tränad kombo.** Beslutat av Johan 2026-08-04 (se `CLAUDE.md`s avsteg-tabell) — Ambidextriös hoppar över Två vapen-träningskravet helt. Anfaller med Svärd(FV12) och Dolk(FV10) samma SR, var sitt vapens EGNA FV används direkt (inget kombo-FV-tak/auto-BC, eftersom inget `twoWeaponCombo`-item behövs eller skapas). Skiljer sig från UC-F8 nedan på just den punkten — en tränad kombo har ett gemensamt FV-tak, en Ambidextriös utan kombo har det inte.
+**Förväntat:** ✅ **TILLÅTET, utan tränad kombo.** Beslutat av 2026-08-04 (se `CLAUDE.md`s avsteg-tabell) — Ambidextriös hoppar över Två vapen-träningskravet helt. Anfaller med Svärd(FV12) och Dolk(FV10) samma SR, var sitt vapens EGNA FV används direkt (inget kombo-FV-tak/auto-BC, eftersom inget `twoWeaponCombo`-item behövs eller skapas). Skiljer sig från UC-F8 nedan på just den punkten — en tränad kombo har ett gemensamt FV-tak, en Ambidextriös utan kombo har det inte.
 
 ### UC-F7 — Samma som UC-F5, men Dubbelhänt
 **Förväntat:** ❌ **Fortfarande INTE tillåtet utan tränad kombo.** RP s.27 definierar Dubbelhänt uttryckligen som "inte samtidigt" — precis den egenskap Två vapen-färdigheten representerar, så Dubbelhänt får ingen genväg. Måste träna en `twoWeaponCombo` som alla andra icke-Ambidextriösa karaktärer (se Grupp C).
@@ -101,11 +101,11 @@ Förutsätter att UC-F5-liknande träning har skett och ett `twoWeaponCombo`-ite
 
 ## Grupp F — Skadad/upptagen arm
 
-### Sidofråga (Johan 2026-08-04): fördelas ett stort slag över flera kroppsdelar i vanlig strid, eller blir en enda kroppsdel obrukbar av det?
+### Sidofråga (2026-08-04): fördelas ett stort slag över flera kroppsdelar i vanlig strid, eller blir en enda kroppsdel obrukbar av det?
 
 **Svar, verifierat mot befintlig kod och källtext: ingen fördelning sker någonstans — och i vanligt (icke-detaljerat) läge finns kroppsdelar inte alls än.**
 
-- **Vanlig strid:** `resolveAttack()` slår träffområde **alltid** (Johans egna beslut 2026-07-29, "tänk att ett vanligt anfall alltid har en dold riktad attack"), men `ensureHitLocations()` — funktionen som faktiskt SKAPAR kroppsdelarnas egna KP-fack — anropas bara `if (detailed)`. I vanligt läge finns alltså `system.hitLocations` aldrig befolkat, och skadan drar bara av **Totala KP** som en klump. Ett stort slag "sprids" inte i vanligt läge av den enkla anledningen att det inte finns några delar att sprida DET på — exakt vad REGLER_STRID.md:s egen "Grundsystemet vs. Alternativa"-tabell säger ("En samlad KP" vs. "Tillgång till individuella kroppsdels-KP").
+- **Vanlig strid:** `resolveAttack()` slår träffområde **alltid** (Projektets egna beslut 2026-07-29, "tänk att ett vanligt anfall alltid har en dold riktad attack"), men `ensureHitLocations()` — funktionen som faktiskt SKAPAR kroppsdelarnas egna KP-fack — anropas bara `if (detailed)`. I vanligt läge finns alltså `system.hitLocations` aldrig befolkat, och skadan drar bara av **Totala KP** som en klump. Ett stort slag "sprids" inte i vanligt läge av den enkla anledningen att det inte finns några delar att sprida DET på — exakt vad REGLER_STRID.md:s egen "Grundsystemet vs. Alternativa"-tabell säger ("En samlad KP" vs. "Tillgång till individuella kroppsdels-KP").
 - **Detaljerad strid:** `applyLocationDamage()` drar HELA skadan från BÅDA spåren samtidigt — träffområdets egna KP OCH Totala KP (SLB s.18: "skadan räknas BÅDE från Totala KP och från den träffade kroppsdelen"). Det finns INGEN överspillslogik till andra kroppsdelar. Ett 40-skadeslag mot en arm med 8 i eget KP-tak går rakt av: armen blir kritisk (severed, `damageTaken >= max*2`) OCH Totala KP faller med hela 40, vilket normalt slår ut/dödar via den vanliga KP-tabellen. **Ingen källa hittad** (varken REGLER_STRID.md eller `anatomy.mjs`s befintliga kommentarer) som beskriver att överskjutande skada "smittar" till andra kroppsdelar — dubbelspårs-modellen (lokal + total) verkar vara bokens egna svar på samma problem, inte en lucka som behöver täckas separat. Flaggar detta som **redan korrekt** snarare än en ny sak att bygga, men noterar det tydligt eftersom frågan är rimlig att ställa och lätt att anta fel om.
 
 ### UC-F15 — Sköldhandens/off-hand-vapnets ARM blir obrukbar mitt i striden
@@ -121,14 +121,14 @@ Förutsätter att UC-F5-liknande träning har skett och ett `twoWeaponCombo`-ite
 **Setup:** Ingen `hitLocations`-skada alls — rent fiktionsdrivet/positionellt.
 **Förväntat:** Funktionellt samma resultat som UC-F15/F16 (förlorar den handens handling), men **det finns inget datafält för det här idag.** `hitLocations`-skademodellen är fel verktyg (ingen skada har skett). Behöver troligen en lättviktig markör (t.ex. en GM-satt flagga eller ett kort ActiveEffect-liknande tillstånd, "händerna upptagna") separat från skademodellen — ny design, inte återanvändning av anatomy.mjs.
 
-**→ Det här är exakt det fall Johans GM-effektfönster-idé (`docs/dev/GM_EFFEKTFONSTER_ANALYS.md`) löser** — ett "villkor"-typat, person-scopat, tillfälligt tillstånd utan numeriskt värde, precis den lucka analysen identifierar att ingen befintlig mekanism täcker.
+**→ Det här är exakt det fall Projektets GM-effektfönster-idé (`docs/dev/GM_EFFEKTFONSTER_ANALYS.md`) löser** — ett "villkor"-typat, person-scopat, tillfälligt tillstånd utan numeriskt värde, precis den lucka analysen identifierar att ingen befintlig mekanism täcker.
 
 ---
 
 ## Grupp G — Specialvapen
 
 ### UC-F18 — Kättingvapen (Stridsslaga) mot sköldbärande försvarare
-**Källa:** ✅ SB s.33, fullt transkriberad 2026-08-04 (Johan skickade sidan) — se `REGLER_STRID.md` "Specialvapen — Regler" i Roll20-projektet.
+**Källa:** ✅ SB s.33, fullt transkriberad 2026-08-04 (sidan tillhandahölls) — se `REGLER_STRID.md` "Specialvapen — Regler" i Roll20-projektet.
 **Setup:** Anfallare med Stridsslaga (kättingvapen), försvarare med vapen+sköld.
 **Förväntat:** Försvararens **pareringsförsök (vapen ELLER sköld) får CL halverad** — kättingen slår runt båda. Oberoende av det: om anfallaren själv slår **18, 19 eller 20** på sitt anfallsslag räknas det automatiskt som miss, och ett extra 1T20-slag avgör fummel (högre än eget FV → fumlat, ett rått 20 är alltid fummel). Två separata, oberoende kontroller — den ena drabbar försvararen, den andra anfallaren själv.
 
@@ -144,7 +144,7 @@ Förutsätter att UC-F5-liknande träning har skett och ett `twoWeaponCombo`-ite
 **Förväntat:** Vid träff + lyckat FV-slag blir armen obrukbar i **1T3 SR** (tidsbegränsat, till skillnad från UC-F15:s skademaskineri som är permanent tills läkning). Bra kontrastfall: två helt olika vägar till "obrukbar arm" (fysisk skada vs. tillfällig snärjning) som bör dela samma KONSEKVENS-logik (tappar handens handling) men olika VARAKTIGHET/återhämtning.
 
 ### UC-F20b — Morgonstjärna mot sköldbärande försvarare (uppdaterad efter att SB s.33 lästs i sin helhet — fortfarande inte samma sak)
-**Källa:** ⚠ **Fortfarande inget belägg för Morgonstjärna specifikt.** Nu när hela SB s.33 faktiskt är transkriberad (UC-F18/F19 ovan): sidan nämner **aldrig Morgonstjärna vid namn**. Det Johan mindes verkar vara **Kättingvapen**-regeln (Stridsslaga/Stridsgissel) — den säger uttryckligen att kättingen "kan slå runt vapen OCH sköldar", alltså slår den både vapen- och sköldparering, inte bara sköldens. Morgonstjärna själv står katalogiserad i vapengruppen **Enhands krossvapen** (`DODE.weaponGroups`, config.mjs), inte Kättingvapen — så antingen (a) var det en minnesförväxling och regeln gäller Stridsslaga/Stridsgissel som redan täcks av UC-F18, eller (b) Morgonstjärna hör egentligen hemma i Kättingvapen-gruppen i just DoDE:s tolkning (vissa utgåvor avbildar en morgonstjärna som ett kedjevapen, inte ett stelt krossvapen) och katalogiseringen behöver rättas. **Öppen fråga till Johan, inte gissad:** vilket av de två? Tills dess: ingen ändring av Morgonstjärnas gruppdata.
+**Källa:** ⚠ **Fortfarande inget belägg för Morgonstjärna specifikt.** Nu när hela SB s.33 faktiskt är transkriberad (UC-F18/F19 ovan): sidan nämner **aldrig Morgonstjärna vid namn**. Det som mindes verkar vara **Kättingvapen**-regeln (Stridsslaga/Stridsgissel) — den säger uttryckligen att kättingen "kan slå runt vapen OCH sköldar", alltså slår den både vapen- och sköldparering, inte bara sköldens. Morgonstjärna själv står katalogiserad i vapengruppen **Enhands krossvapen** (`DODE.weaponGroups`, config.mjs), inte Kättingvapen — så antingen (a) var det en minnesförväxling och regeln gäller Stridsslaga/Stridsgissel som redan täcks av UC-F18, eller (b) Morgonstjärna hör egentligen hemma i Kättingvapen-gruppen i just DoDE:s tolkning (vissa utgåvor avbildar en morgonstjärna som ett kedjevapen, inte ett stelt krossvapen) och katalogiseringen behöver rättas. **Öppen fråga, inte gissad:** vilket av de två? Tills dess: ingen ändring av Morgonstjärnas gruppdata.
 **Arkitekturkrav kvarstår oavsett svar:** när `item-vapen.mjs` och stridsupplösningen designas, lägg en generisk, tom-som-standard flagga (t.ex. `system.halvedParryVs: "alla" | ""` — Kättingvapen-regeln är ju redan bekräftad och behöver den ändå) på vapenmodellen i stället för att hårdkoda ett specialfall per vapen. Samma mönster som `revealsRaceGroup`-flaggan (`CLAUDE.md` Del C) — bygg kroken generellt, fyll data per vapen.
 
 ---
@@ -155,7 +155,7 @@ Förutsätter att UC-F5-liknande träning har skett och ett `twoWeaponCombo`-ite
 |---|---|---|---|
 | UC-F1–F4, F12 | ✅ | | |
 | UC-F5, F7 | | | Regel klar (SB s.33 / RP s.27), redo att bygga som en ren spärr |
-| UC-F6 | | ✅ | Regel klar (Johans avsteg 2026-08-04, se CLAUDE.md) |
+| UC-F6 | | ✅ | Regel klar (Projektets avsteg 2026-08-04, se CLAUDE.md) |
 | UC-F8–F10, F13–F16 | | ✅ | F15/F16 kräver hitLocations-koppling |
 | UC-F11 | | | Dropdown-filterbugg hittad, se anteckning — liten fristående fix |
 | UC-F17 | | ✅ | Nytt datafält saknas helt |

@@ -36,7 +36,7 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
       }),
       quantity: new fields.NumberField({ required: false, integer: true, initial: 1, min: 0 }),
       // Ammunitionsmaterial — tillagt 2026-09-03 (backlog 104-uppföljning,
-      // Johan: "must be able to buy a quiver of wodden arrows OR silver
+      // Feedback: "must be able to buy a quiver of wodden arrows OR silver
       // arrows.. a bow is just a bow.. arrows is the ammo"). Bara relevant
       // för `category:"ammunition"`. Systemet spårar inte pilräkning/
       // förbrukning (samma abstraktion som redan gäller för mundana pilar —
@@ -88,7 +88,7 @@ export default class DoDEUtrustningData extends foundry.abstract.TypeDataModel {
       // i actor-character.mjs (som redan skannar "utrustning"-typade items,
       // gated på `equipped`, se `#isModifierItemActive`) — bara fältet
       // saknades här, ingen ändring behövdes i själva summeringslogiken.
-      // Live-fynd 2026-08-21, Johan: "Malakor med... en stav som ger +3PSY".
+      // Live-fynd 2026-08-21, Feedback: "Malakor med... en stav som ger +3PSY".
       statModifiers: new fields.ArrayField(new fields.SchemaField({
         // "movement" tillagd 2026-09-06 — se item-formaga.mjs's motsvarande
         // kommentar.

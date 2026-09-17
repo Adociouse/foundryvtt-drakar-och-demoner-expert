@@ -17,7 +17,7 @@
  * respekterar redan eventuella `modifyMovementCost`-regioner (terräng, se
  * planens steg 1d), så nivåerna nedan är automatiskt terrängkorrekta.
  *
- * ⚠ Rent visuellt/analytiskt — ingen spärr, ingen varning. Johans uttryckliga
+ * ⚠ Rent visuellt/analytiskt — ingen spärr, ingen varning. Projektets uttryckliga
  * svar på AskUserQuestion 2026-09-06: "Display only, no warnings." SL dömer,
  * precis som SLB s.15 lägger terrängbedömningen hos SL.
  */

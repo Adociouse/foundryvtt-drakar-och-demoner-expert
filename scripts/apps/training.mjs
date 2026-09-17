@@ -16,7 +16,7 @@ export default class DoDETrainingApp extends DoDETrainingBase {
 
   static PARTS = {
     // Se character-wizard.mjs PARTS för varför `scrollable` behövs — samma
-    // scroll-till-toppen-vid-varje-klick-bugg gäller här (Johan 2026-08-08).
+    // scroll-till-toppen-vid-varje-klick-bugg gäller här (2026-08-08).
     body: { template: "systems/drakar-och-demoner-expert/templates/apps/training.hbs", scrollable: [".dode-training-body"] }
   };
 

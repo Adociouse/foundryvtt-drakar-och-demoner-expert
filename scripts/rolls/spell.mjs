@@ -86,7 +86,7 @@ export async function resolveSpellCast({ caster, item, effektgrad = 1, targets =
     const t = { actorId: target.id, name: target.name, resisted: null, fearDraw: null, instantEffect: null, statusApplied: null, spellEffectApplies: false };
     const pendingT = { actorId: target.id, instantEffect: null, status: null, spellEffect: false };
 
-    // ⚠ Varning, INTE en blockering (Johan, 2026-09-03) — resten av
+    // ⚠ Varning, INTE en blockering (2026-09-03) — resten av
     // funktionen körs oförändrat oavsett vad detta ger. Bara NPC-mål har ett
     // `creatureType` att jämföra mot; rollpersoner varnas aldrig.
     if (sys.targetRestriction && target.type === "npc") {
@@ -237,7 +237,7 @@ export async function applySpellResult(result, { caster, targets = [] }) {
       await target.update({ [path]: next });
     }
     if (pt.status) {
-      // ⚠ Live-fynd 2026-08-21 (Johan): när en statuseffekt applicerad av en
+      // ⚠ Live-fynd 2026-08-21: när en statuseffekt applicerad av en
       // besvärjelse senare tas bort (utgången varaktighet, botad, SL-borttagen)
       // ska det synas i chatten VILKEN besvärjelse det var — annars försvinner
       // ikonen tyst utan förklaring. `toggleStatusEffect` skapar/returnerar den
@@ -357,7 +357,7 @@ export async function postSpellCard(result, { caster, targets = [], pending = fa
     buildSpellCardContext(result, { caster, targets, pendingBanner: pending })
   );
 
-  // ⚠ Varje rulle märkt med en `flavor` — Johans live-feedback 2026-08-21:
+  // ⚠ Varje rulle märkt med en `flavor` — Projektets live-feedback 2026-08-21:
   // korten visade tärningar utan att säga VILKEN rulle det var (kastning?
   // skada?). Läses av mallen INTE (bara av Dice So Nice-tooltipen/loggen),
   // se spell-card.hbs:s egna "Kastning"/"Skada"-etiketter för den synliga
@@ -375,7 +375,7 @@ export async function postSpellCard(result, { caster, targets = [], pending = fa
     if (t.fearDraw?.roll) { t.fearDraw.roll.options.flavor = "Skräck"; restRolls.push(t.fearDraw.roll); }
   }
 
-  // ⚠ Riktig paus mellan "lyckades jag?" och "hur mycket skada?" — Johans
+  // ⚠ Riktig paus mellan "lyckades jag?" och "hur mycket skada?" —
   // live-feedback 2026-08-21 (samma dag som det TIDIGARE försöket med manuell
   // `showForRoll`-förhandsvisning reverterades, se den borttagna kommentaren
   // i git-historiken: det försöket dubbel-animerade eftersom SAMMA Roll-

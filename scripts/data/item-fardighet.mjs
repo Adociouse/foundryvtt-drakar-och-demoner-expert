@@ -84,7 +84,7 @@ export default class DoDEFardighetData extends foundry.abstract.TypeDataModel {
         //
         // ⚠ Systemet gjorde tidigare "1 EP per lyckat slag i ett stressigt läge
         // (SL bedömer)" efter den kurerade REGLER_FARDIGHETER.md. Den regeln står
-        // inte i NÅGON av böckerna — bytt till strecket efter Johans beslut
+        // inte i NÅGON av böckerna — bytt till strecket efter Projektets beslut
         // 2026-07-29. Se DESIGN_DECISIONS.md backlogpost 39.
         ticked: new fields.BooleanField({ required: false, initial: false }),
         earned: new fields.NumberField({ required: false, integer: true, initial: 0, min: 0 }),

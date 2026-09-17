@@ -50,7 +50,7 @@ export class DoDEFardighetSheet extends DoDEItemSheetBase {
 export class DoDERasSheet extends DoDEItemSheetBase {
   // Bredare/högre än basdefaulten — attributgrid + STO-intervall + förmågelista +
   // en ProseMirror-beskrivningseditor gör basdefaulten för trångt för att läsa
-  // utan att manuellt dra ut fönstret varje gång (Johan, 2026-09-02).
+  // utan att manuellt dra ut fönstret varje gång (2026-09-02).
   static DEFAULT_OPTIONS = { position: { width: 600, height: 700 } };
   static PARTS = {
     form: {
@@ -63,7 +63,7 @@ export class DoDERasSheet extends DoDEItemSheetBase {
 export class DoDEYrkeSheet extends DoDEItemSheetBase {
   // Bredare/högre än basdefaulten — förmågelista + TVÅ ProseMirror-editorer
   // (färdighetslista + beskrivning) är mer innehåll än övriga item-ark
-  // (Johan, 2026-09-02).
+  // (2026-09-02).
   static DEFAULT_OPTIONS = { position: { width: 640, height: 760 } };
   static PARTS = {
     form: {
