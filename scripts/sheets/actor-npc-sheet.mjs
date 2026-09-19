@@ -7,6 +7,10 @@ const { ActorSheetV2 } = foundry.applications.sheets;
 // besvärjelse/fardighet/formaga — NPC:er har varken färdighets- eller
 // ras/yrke-items (actor-npc.mjs: "inga färdighets-item — skills är fritext").
 const GEAR_TYPES = ["vapen", "rustning", "utrustning"];
+// Magi: en NPC-magiker har besvärjelser (kastas via kast-dialogen) och
+// minibesvärjelser (berättarverktyg, lyckas alltid) som ägda Items — NPC:er har
+// inga magiskolefärdigheter, så inget härleds; SL drar in dem ur kompendiet.
+const SPELL_TYPES = ["besvarjelse", "minibesvarjelse"];
 
 export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   static DEFAULT_OPTIONS = {
@@ -27,6 +31,8 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
       declareAttack: DoDENpcSheet.#onDeclareAttack,
       addAttack: DoDENpcSheet.#onAddAttack,
       deleteAttack: DoDENpcSheet.#onDeleteAttack,
+      castSpell: DoDENpcSheet.#onCastSpell,
+      castMinispell: DoDENpcSheet.#onCastMinispell,
       editItem: DoDENpcSheet.#onEditItem,
       deleteItem: DoDENpcSheet.#onDeleteItem,
       toggleEquipped: DoDENpcSheet.#onToggleEquipped,
@@ -89,6 +95,13 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
         canEquip: item.type === "vapen" || item.type === "rustning" || item.type === "utrustning",
         isNatural: !!item.system.natural
       }));
+    context.spells = this.actor.items.filter((i) => i.type === "besvarjelse")
+      .map((item) => ({ item, name: item.name, sValue: item.system.sValue }))
+      .sort((a, b) => a.name.localeCompare(b.name, "sv"));
+    context.minispells = this.actor.items.filter((i) => i.type === "minibesvarjelse")
+      .map((item) => ({ item, name: item.name, psyCost: item.system.psyCost }))
+      .sort((a, b) => a.name.localeCompare(b.name, "sv"));
+    context.hasMagic = context.spells.length + context.minispells.length > 0;
     return context;
   }
 
@@ -136,7 +149,27 @@ export default class DoDENpcSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     const item = await Item.implementation.fromDropData(data);
     if (!item) return;
-    if (GEAR_TYPES.includes(item.type)) await this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
+    if (GEAR_TYPES.includes(item.type) || (game.user.isGM && SPELL_TYPES.includes(item.type))) {
+      await this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
+    }
+  }
+
+  /** Kast-dialogen (samma som karaktärsarket) — kastaren är NPC:n, SL styr. */
+  static async #onCastSpell(event, target) {
+    const item = DoDENpcSheet.#itemFromEvent(this.actor, target);
+    if (!item) return;
+    const { default: DoDESpellDialog } = await import("../apps/spell-dialog.mjs");
+    new DoDESpellDialog(this.actor, { item }).render(true);
+  }
+
+  /** Minibesvärjelse med berättartext — se helpers/minispell.mjs. */
+  static async #onCastMinispell(event, target) {
+    const item = DoDENpcSheet.#itemFromEvent(this.actor, target);
+    if (!item) return;
+    const { castMinispell, promptMinispellStory } = await import("../helpers/minispell.mjs");
+    const story = await promptMinispellStory();
+    if (story === null) return;
+    await castMinispell(this.actor, item, { story });
   }
 
   static async #onRollAttack(event, target) {

@@ -17,11 +17,14 @@ const fields = foundry.data.fields;
  * 2026-07-28, bekräftad mot MAG s.23.
  *
  * ⚠ **Åtkomst är härledd, inte ägd.** En magiker har automatiskt minimagin i
- * den skola där hen har **högst FV** (MAG s.23, "Allmän minimagi"). Därför
- * behöver de flesta rollpersoner inte äga posterna — arket visar dem utifrån
- * skolan. Typen finns ändå som Item för att SL ska kunna
- * dela ut en enskild minibesvärjelse ad hoc, till någon som annars inte skulle
- * ha den.
+ * VARJE skola hen har färdighet i (beslut 2026-07-29, se CLAUDE.md
+ * "Beslutade avsteg" — MAG s.23:s "högst FV" gäller bara skol-lösa magiker),
+ * plus den allmänna minimagin (`allman`) så snart hen har minst en skola.
+ * Därför behöver de flesta rollpersoner inte äga posterna — arket visar dem
+ * utifrån skolorna (`#prepareMinimagi`). Typen finns ändå som Item för att SL
+ * ska kunna dela ut en enskild minibesvärjelse ad hoc, till någon som annars
+ * inte skulle ha den — och för NPC-magiker, som saknar skolfärdigheter och
+ * därför bara kan ha ägda minibesvärjelser.
  *
  * FV-trösklarna styr bara ÅTHÄVOR, inte utfallet: under 15 krävs normala
  * gester och ord, 15+ inga yttre åthävor, 25+ aktiveras nästan omedvetet.

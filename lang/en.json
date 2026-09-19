@@ -266,7 +266,9 @@
       "Magic": {
         "CannotCast": "{actor} cannot cast \"{spell}\".",
         "ApproveMissingActors": "The caster, spell, or a target no longer exists — cannot approve.",
-        "ApproveWriteFailed": "Could not write the spell's result — see the console."
+        "ApproveWriteFailed": "Could not write the spell's result — see the console.",
+        "MinispellNoPsy": "{actor} does not have enough PSY for \"{spell}\" ({cost} needed, {have} left).",
+        "MinispellNotOwner": "You do not own {actor}."
       },
       "Loot": {
         "ApproveWriteFailed": "Could not complete the loot — see the console.",
@@ -631,6 +633,10 @@
       "EditInWizardTitle": "Open the character in the wizard"
     },
     "NpcSheet": {
+      "MagicHeading": "Magic",
+      "MagicHint": "Drag spells and mini-spells here from the compendium. Mini-spells always succeed (1 PSY) and are meant as storytelling tools — e.g. to provoke the players so the fight looks like they started it.",
+      "CastMinispell": "Use (optionally write story text)",
+      "CastSpell": "Cast (opens the cast dialog)",
       "AttacksHeading": "Attacks",
       "NewAttack": "New attack",
       "NoAttacksYet": "No attacks yet.",
@@ -640,6 +646,10 @@
       "DescriptionHeading": "Description"
     },
     "Dialog": {
+      "MinispellStoryTitle": "Use mini-spell",
+      "MinispellStoryLabel": "Story text (optional, shown in chat)",
+      "MinispellStoryHint": "E.g. how the act looks to the players. Targeted tokens (Shift-click on the map) are named on the card.",
+      "MinispellStoryConfirm": "Use",
       "RestPeriod": "Rest period",
       "GrantBonusPoints": "Grant bonus points",
       "GrantHeroPoints": "Grant hero points",
@@ -719,6 +729,10 @@
       "PendingGmApproval": "Waiting for GM approval",
       "PhobiaPrefix": "Phobia:",
       "PsyRecovered": "recovered {amount} PSY",
+      "MinispellHeading": "{actor} — {spell}",
+      "MinispellMeta": "Mini-spell · {school}",
+      "MinispellTargets": "Aimed at: {targets}",
+      "MinispellCost": "{cost} PSY spent ({left} left). No CL check — always succeeds.",
       "PsySpent": "{amount} PSY spent.",
       "PsySpentMishap": "{amount} PSY spent. Fumble — Mishap Table: <strong>{name}</strong>. {description}",
       "PsySpentMishapNoTable": "{amount} PSY spent. Fumble — roll on the Mishap Table (the table could not be found in the compendium).",

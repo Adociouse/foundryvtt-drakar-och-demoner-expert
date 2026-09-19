@@ -3,7 +3,13 @@
 ## [Unreleased]
 
 ### Added
-- Real school descriptions on 12 of the 14 `journaler` compendium JournalEntry pages, sourced from Magi — Regelbok, replacing the placeholder text left by the initial auto-generated build. Universalism (no source file found), Alkemi and Allmänna besvärjelser remain on the backlog
+- **Mini-spells (minibesvärjelser) can now be used.** A cast button on every row of the character sheet's mini-spell list spends the fixed PSY cost (no CL check — they always succeed, MAG s.23), refuses when PSY is too low, and posts a chat card with the spell text and any targeted tokens; Shift-click adds optional story text. NPC sheets gained a GM-only **Magic** section (drag spells and mini-spells in from the compendium): mini-spells are used with an optional story text shown in chat — meant for provoking the players so a fight looks like they started it — and ordinary spells open the normal cast dialog with the NPC as caster (tested with an NPC mage casting Blixt against player tokens in a running combat)
+
+### Fixed
+- **The 12 general (`allman`) mini-spells were unreachable** — they could never appear because the sheet only derived mini-spells from `magiskola-*` skills and "allmän" isn't a learnable skill. Any character with at least one magic school now has them, with the gesture tier taken from their best school FV
+
+### Added
+- Real school descriptions on all 15 `journaler` compendium JournalEntry pages, sourced from Magi — Regelbok (Alkemi p.8, the schools p.9), replacing the placeholder text left by the initial auto-generated build. Allmänna besvärjelser has no school-philosophy text in the source, so it carries a short rules explanation instead
 - **"Choose 12 of N" profession-skill step** (RP s.11) — a new wizard step where the player picks 12 of the profession's possible skills, 9 for a magiker. Named skills are toggleable chips; the books' optional slots ("Maximalt fem valfria vapenfärdigheter") render as free-text fields with weapon-name suggestions. Previously every listed skill was granted, so a bard received 24 profession skills instead of 12
 - Profession skills for all 25 specialisations from Krigarens Handbok and Tjuvar och Lönnmördare — no profession ships with an empty list any more
 

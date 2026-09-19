@@ -267,7 +267,9 @@
       "Magic": {
         "CannotCast": "{actor} kan inte \"{spell}\".",
         "ApproveMissingActors": "Kastaren, besvärjelsen eller ett mål finns inte längre — kan inte godkänna.",
-        "ApproveWriteFailed": "Kunde inte skriva besvärjelsens resultat — se konsolen."
+        "ApproveWriteFailed": "Kunde inte skriva besvärjelsens resultat — se konsolen.",
+        "MinispellNoPsy": "{actor} har inte tillräckligt med PSY för \"{spell}\" ({cost} krävs, {have} kvar).",
+        "MinispellNotOwner": "Du äger inte {actor}."
       },
       "Loot": {
         "ApproveWriteFailed": "Kunde inte genomföra plundringen — se konsolen.",
@@ -632,6 +634,10 @@
       "EditInWizardTitle": "Öppna rollpersonen i guiden"
     },
     "NpcSheet": {
+      "MagicHeading": "Magi",
+      "MagicHint": "Dra besvärjelser och minibesvärjelser hit från kompendiet. Minibesvärjelser lyckas alltid (1 PSY) och är tänkta som berättarverktyg — t.ex. för att förolämpa spelarna så att striden ser ut att startas av dem.",
+      "CastMinispell": "Använd (skriv ev. berättartext)",
+      "CastSpell": "Kasta (öppnar kast-dialogen)",
       "AttacksHeading": "Anfall",
       "NewAttack": "Nytt anfall",
       "NoAttacksYet": "Inga anfall ännu.",
@@ -641,6 +647,10 @@
       "DescriptionHeading": "Beskrivning"
     },
     "Dialog": {
+      "MinispellStoryTitle": "Använd minibesvärjelse",
+      "MinispellStoryLabel": "Berättartext (valfri, visas i chatten)",
+      "MinispellStoryHint": "T.ex. hur handlingen ser ut för spelarna. Riktade tokens (Shift-klick på kartan) nämns på kortet.",
+      "MinispellStoryConfirm": "Använd",
       "RestPeriod": "Viloperiod",
       "GrantBonusPoints": "Dela ut bonuspoäng",
       "GrantHeroPoints": "Dela ut hjältepoäng",
@@ -720,6 +730,10 @@
       "PendingGmApproval": "Väntar på SL-godkännande",
       "PhobiaPrefix": "Fobi:",
       "PsyRecovered": "återfick {amount} PSY",
+      "MinispellHeading": "{actor} — {spell}",
+      "MinispellMeta": "Minibesvärjelse · {school}",
+      "MinispellTargets": "Riktad mot: {targets}",
+      "MinispellCost": "{cost} PSY förbrukat ({left} kvar). Ingen CL-kontroll — lyckas alltid.",
       "PsySpent": "{amount} PSY förbrukat.",
       "PsySpentMishap": "{amount} PSY förbrukat. Fummel — Snedtändningstabellen: <strong>{name}</strong>. {description}",
       "PsySpentMishapNoTable": "{amount} PSY förbrukat. Fummel — slå på Snedtändningstabellen (tabellen kunde inte hittas i kompendiet).",

@@ -54,6 +54,7 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
       useBonusAttack: DoDECharacterSheet.#onUseBonusAttack,
       useBonusParry: DoDECharacterSheet.#onUseBonusParry,
       castSpell: DoDECharacterSheet.#onCastSpell,
+      castMinispell: DoDECharacterSheet.#onCastMinispell,
       openTraining: DoDECharacterSheet.#onOpenTraining,
       openMagicTraining: DoDECharacterSheet.#onOpenMagicTraining,
       toggleRest: DoDECharacterSheet.#onToggleRest,
@@ -382,23 +383,35 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     const granted = this.actor.items.filter((i) => i.type === "minibesvarjelse");
     if (!schools.size && !granted.length) return null;
 
+    // "allman" är ingen lärbar skola (ingen `magiskola-allman`-färdighet finns),
+    // så den kan aldrig komma ur skolkartan ovan — utan denna rad blev de 12
+    // allmänna minibesvärjelserna onåbara för alla. Alla magiker med minst en
+    // skola har dem; FV för åthävo-trappan = högsta skolvärdet (MAG s.23).
+    const bestFv = schools.size ? Math.max(...schools.values()) : null;
+    const schoolLabel = (key) => key === "allman"
+      ? "Allmän minimagi"
+      : game.i18n.localize(CONFIG.DODE.magicSchools[key] ?? key);
+    const fvFor = (key) => key === "allman" ? bestFv : schools.get(key);
+    const hasAccess = (key) => key === "allman" ? schools.size > 0 : schools.has(key);
+
     const entries = [];
     for (const packId of CONFIG.DODE.contentPacks.spells) {
       const pack = game.packs.get(packId);
       if (!pack) continue;
       const docs = await pack.getDocuments({ type: "minibesvarjelse" });
       for (const doc of docs) {
-        if (!schools.has(doc.system.school)) continue;
+        if (!hasAccess(doc.system.school)) continue;
+        const fv = fvFor(doc.system.school);
         entries.push({
           name: doc.name, img: doc.img, school: doc.system.school,
-          schoolLabel: game.i18n.localize(CONFIG.DODE.magicSchools[doc.system.school]),
+          schoolLabel: schoolLabel(doc.system.school),
           psyCost: doc.system.psyCost,
-          fv: schools.get(doc.system.school),
+          uuid: doc.uuid, fv,
           // MAG s.23:s åthävotrappa — samma minibesvärjelse kräver olika mycket
           // av magikern beroende på FV i skolan.
-          gestures: schools.get(doc.system.school) >= 25
+          gestures: fv >= 25
             ? "Omedvetet — kräver ingen uppmärksamhet"
-            : schools.get(doc.system.school) >= 15
+            : fv >= 15
               ? "Inga yttre åthävor"
               : "Kräver gester och ord"
         });
@@ -407,8 +420,8 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
     for (const item of granted) {
       entries.push({
         name: item.name, img: item.img, school: item.system.school,
-        schoolLabel: game.i18n.localize(CONFIG.DODE.magicSchools[item.system.school]),
-        psyCost: item.system.psyCost, id: item.id, isGranted: true,
+        schoolLabel: schoolLabel(item.system.school),
+        psyCost: item.system.psyCost, id: item.id, fv: fvFor(item.system.school) ?? null, isGranted: true,
         gestures: "Utdelad av spelledaren"
       });
     }
@@ -428,6 +441,19 @@ export default class DoDECharacterSheet extends HandlebarsApplicationMixin(Actor
   static #itemFromEvent(actor, target) {
     const itemId = target.closest("[data-item-id]")?.dataset.itemId;
     return actor.items.get(itemId);
+  }
+
+  /** Minibesvärjelse: ingen CL-kontroll, drar bara PSY. Shift-klick ger en valfri berättartext. */
+  static async #onCastMinispell(event, target) {
+    const { castMinispell, resolveMinispell, promptMinispellStory } = await import("../helpers/minispell.mjs");
+    const item = await resolveMinispell(this.actor, target);
+    if (!item) return;
+    let story = "";
+    if (event.shiftKey) {
+      story = await promptMinispellStory();
+      if (story === null) return;
+    }
+    await castMinispell(this.actor, item, { fv: Number(target.closest("[data-fv]")?.dataset.fv) || null, story });
   }
 
   static async #onRollSkill(event, target) {

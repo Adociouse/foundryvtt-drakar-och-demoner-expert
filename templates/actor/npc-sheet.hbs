@@ -66,6 +66,33 @@
 </section>
 {{/if}}
 
+{{#if isGM}}{{#if hasMagic}}
+<section class="magic">
+  <header class="skills-header">
+    <h3>{{localize "DODE.NpcSheet.MagicHeading"}}</h3>
+  </header>
+  <p class="section-hint">{{localize "DODE.NpcSheet.MagicHint"}}</p>
+  <ol class="skill-list">
+    {{#each spells as |entry|}}
+      <li class="skill-row" data-item-id="{{entry.item.id}}">
+        <a data-action="editItem" class="skill-name">{{entry.name}}</a>
+        <span class="skill-fv">S{{entry.sValue}}</span>
+        <button type="button" data-action="castSpell" title="{{localize "DODE.NpcSheet.CastSpell"}}"><i class="fa-solid fa-hand-sparkles"></i></button>
+        <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{/each}}
+    {{#each minispells as |entry|}}
+      <li class="skill-row minimagi-row" data-item-id="{{entry.item.id}}">
+        <a data-action="editItem" class="skill-name">{{entry.name}}</a>
+        <span class="skill-fv">{{entry.psyCost}} PSY</span>
+        <button type="button" data-action="castMinispell" title="{{localize "DODE.NpcSheet.CastMinispell"}}"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+        <button type="button" data-action="deleteItem" title="Ta bort"><i class="fa-solid fa-trash"></i></button>
+      </li>
+    {{/each}}
+  </ol>
+</section>
+{{/if}}{{/if}}
+
 <section class="gear">
   <header class="skills-header">
     <h3>{{localize "DODE.Actor.Utrustning"}}</h3>

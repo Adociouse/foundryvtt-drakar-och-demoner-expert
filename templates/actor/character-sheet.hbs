@@ -256,9 +256,10 @@
      alltid Kvick (MAG s.23).</p>
   <ol class="skill-list">
     {{#each minimagi.entries as |mini|}}
-      <li class="skill-row minimagi-row">
+      <li class="skill-row minimagi-row" {{#if mini.uuid}}data-uuid="{{mini.uuid}}"{{else}}data-item-id="{{mini.id}}"{{/if}} data-fv="{{mini.fv}}">
         <img class="minimagi-img" src="{{mini.img}}" alt="" />
         <span class="skill-name">{{mini.name}}</span>
+        <button type="button" data-action="castMinispell" title="Använd (1 PSY, ingen CL-kontroll). Shift-klick: lägg till berättartext."><i class="fa-solid fa-hand-sparkles"></i></button>
         <span class="minimagi-school">{{mini.schoolLabel}}</span>
         <span class="minimagi-gestures" title="Åthävor vid FV {{mini.fv}} i skolan (MAG s.23)">{{mini.gestures}}</span>
         {{#if mini.isGranted}}<i class="fa-solid fa-gift granted-mark" title="Utdelad av spelledaren"></i>{{/if}}
