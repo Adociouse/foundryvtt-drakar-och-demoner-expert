@@ -113,6 +113,17 @@
       }
     },
     {
+      "name": "dimon",
+      "label": "Dimön — introduktionsäventyr (SL)",
+      "path": "packs/dimon",
+      "type": "Adventure",
+      "system": "drakar-och-demoner-expert",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
       "name": "handlare",
       "label": "Handlare & butiker (SL)",
       "path": "packs/handlare",
@@ -231,6 +242,7 @@
         "magiska-foremal",
         "monster",
         "handlare",
+        "dimon",
         "sl-regler",
         "scener"
       ]

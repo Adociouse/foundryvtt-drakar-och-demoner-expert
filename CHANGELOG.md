@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- **The introductory adventure Dimön ships with the system** as a GM-only `Adventure` compendium (`dimon`): a GM guide (own words + page references, expansions marked [TILLÄGG]), 32 NPC/monster actors with portraits and combat values converted from the 1984 percentage notation (÷5), four items, the journey's 1d100 encounter table and three scenes. New source-book key `dimon` in `CONFIG.DODE.books`
 - **Mini-spells (minibesvärjelser) can now be used.** A cast button on every row of the character sheet's mini-spell list spends the fixed PSY cost (no CL check — they always succeed, MAG s.23), refuses when PSY is too low, and posts a chat card with the spell text and any targeted tokens; Shift-click adds optional story text. NPC sheets gained a GM-only **Magic** section (drag spells and mini-spells in from the compendium): mini-spells are used with an optional story text shown in chat — meant for provoking the players so a fight looks like they started it — and ordinary spells open the normal cast dialog with the NPC as caster (tested with an NPC mage casting Blixt against player tokens in a running combat)
 
 ### Fixed

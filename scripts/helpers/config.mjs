@@ -71,7 +71,11 @@ DODE.books = {
   // Svartfolk/T&L. Se DESIGN_DECISIONS.md "Beslutade avsteg" för Portalmagi-
   // skolan (byggd härifrån) och namnkrocken med Formelbokens Demonologi-kapitel.
   kaosvaktare: { label: "Kaos Väktare", short: "KV" },
-  eget:        { label: "Eget innehåll (ingen bokkälla)", short: "—" }
+  // Introduktionsäventyret som levereras med systemet (Roger Undhagen,
+  // © 1984 TAMB Äventyrsspel HB). Innehållet i `packs/dimon` är återgivet med
+  // egna ord + sidhänvisning, aldrig ordagrant.
+  dimon:       { label: "Dimön (TAMB Äventyrsspel, 1984)", short: "Dimön" },
+  eget:       { label: "Eget innehåll (ingen bokkälla)", short: "—" }
 };
 
 /** "Alver s.22" — tom sträng om ingen källa är satt. Används av arken. */

@@ -14,6 +14,8 @@ export const PACKS = [
   { name: "journaler", type: "JournalEntry" },
   { name: "tabeller", type: "RollTable" },
   { name: "sl-regler", type: "JournalEntry" },
+  // Introduktionsäventyret Dimön (Adventure-dokument: aktörer, journal, tabell, föremål, scener).
+  { name: "dimon", type: "Adventure" },
   // Generiska platser — se DESIGN_DECISIONS.md §7.3: systemnivå betyder
   // spoilerfritt och äventyrsoberoende. Äventyrsscener hör hemma i modulen.
   { name: "scener", type: "Scene" }
