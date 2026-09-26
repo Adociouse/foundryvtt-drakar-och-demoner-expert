@@ -18,5 +18,5 @@ export const PACKS = [
   { name: "dimon", type: "Adventure" },
   // Generiska platser — se DESIGN_DECISIONS.md §7.3: systemnivå betyder
   // spoilerfritt och äventyrsoberoende. Äventyrsscener hör hemma i modulen.
-  { name: "scener", type: "Scene" }
+  { name: "scener", type: "Adventure" }
 ];

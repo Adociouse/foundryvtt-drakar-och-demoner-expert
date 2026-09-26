@@ -180,9 +180,9 @@
     },
     {
       "name": "scener",
-      "label": "Platser",
+      "label": "Platser (SL)",
       "path": "packs/scener",
-      "type": "Scene",
+      "type": "Adventure",
       "system": "drakar-och-demoner-expert",
       "ownership": {
         "PLAYER": "NONE",

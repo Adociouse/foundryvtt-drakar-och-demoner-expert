@@ -26,7 +26,7 @@ Ett fristående [Foundry Virtual Tabletop](https://foundryvtt.com/)-system för 
 
 3. **Importera det innehåll du vill ha.** Kompendierna följer med systemet och syns direkt i världens kompendiefönster — inget behöver importeras för att spela, men allt går att dra in i världen.
 
-> ⚠ **Scener måste importeras i två steg.** Foundry löser INTE automatiskt en importerad scens tokens: importerar du bara scenen `Värdshuset — Utkanten` får du en tom karta utan figurer. Importera **först** de aktörer scenen använder (från `handlare`- och `monster`-kompendierna), **sedan** själva scenen. Det här är en begränsning i Foundry, inte i systemet.
+> **Platser-packet importeras som ett äventyr.** `scener` (Platser) innehåller byn Utkanten (spelarvy och SL-vy med teckenförklaring) och värdshuset Tre Hjortar som en scen med tre våningar, tillsammans med värdshusvärden Lasslo och hans bardisk. Importera hela äventyret — då följer aktörerna med och scenernas tokens fungerar direkt. Andra scener som pekar på aktörer i `monster`/`handlare` måste fortfarande importeras i två steg (aktörerna först, sedan scenen): Foundry löser inte en enskild importerad scens tokens automatiskt.
 
 4. **Skapa en rollperson.** Skapa en Actor av typen `character` och klicka **Öppna rollpersonsskaparen** på arket — guiden tar dig genom alla 19 stegen (se nedan).
 
@@ -97,7 +97,7 @@ Bördetabellen (`system.encumbrance`, Spelarboken s.44) summerar buren vikt (rus
 | `handlare` | Handlar-/butiksaktörer (egen `handlare`-actortyp) |
 | `regler`, `sl-regler`, `tabeller` | Regeltext och slumptabeller som journal-/rolltable-dokument, sourcade ur källböckerna. `regler` innehåller även en Raser- och en Yrken-översiktssida (samtliga raser/yrken i tabellform), samt fullständiga regelsidor för Förflyttning, Bärförmåga & belastning, Ridning & riddjur, Strid, Att använda magi, Skräck & fobier, Träffområden & skador, Vapen & rustning och Hjältepoäng. Alla 12 sidor är fullt översatta till engelska och växlar automatiskt med klientens språkval (se "Kända begränsningar") — `sl-regler`/`tabeller` är fortfarande enbart svenska |
 | `journaler` (visas som "Magiskolreferenser") | 15 auto-genererade skolreferenssidor (14 magiskolor, inklusive Portalmagi, + Allmänna besvärjelser), en per skola, med en besvärjelse-/minimagitabell sammanställd ur `besvarjelser`-kompendiet (regenereras via `scripts/build/generate-journal-summaries.mjs` varje gång besvärjelser ändras), plus riktig skolbeskrivningstext för samtliga 15 |
-| `scener` | Färdiga scener, bl.a. rollpersonsskaparens egen bakgrundsscen |
+| `scener` | **Platser (SL)** — ett `Adventure`-dokument: byn Utkanten (spelarvy + SL-vy med teckenförklaring) och värdshuset Tre Hjortar (en scen, tre våningar, väggar, dörrar, trappa som byter våning) med Lasslo och bardisken |
 
 Kompendieinnehållet redigeras som JSON i `packs/<namn>/_source/`, och kompileras till det LevelDB-format Foundry faktiskt läser — se "Kompendiebyggnad" nedan.
 

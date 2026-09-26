@@ -28,7 +28,7 @@ A standalone [Foundry Virtual Tabletop](https://foundryvtt.com/) system for the 
 
 3. **Import whatever content you want.** The compendiums ship with the system and appear in the world's compendium sidebar immediately — nothing has to be imported in order to play, but everything can be dragged into the world.
 
-> ⚠ **Scenes must be imported in two steps.** Foundry does NOT automatically resolve an imported scene's tokens: import only the `Värdshuset — Utkanten` scene and you get an empty map with no figures. Import **first** the actors the scene uses (from the `handlare` and `monster` compendiums), **then** the scene itself. This is a Foundry limitation, not a system one.
+> **The Places pack imports as an adventure.** `scener` (Places) holds the village of Utkanten (player view and a GM view with a legend) and the inn Tre Hjortar as one scene with three floors, together with the innkeeper Lasslo and his bar counter. Import the whole adventure — the actors come along and the scenes' tokens work immediately. Other scenes that point at actors in `monster`/`handlare` must still be imported in two steps (actors first, then the scene): Foundry does not resolve a single imported scene's tokens automatically.
 
 4. **Create a character.** Create an Actor of type `character` and click **Öppna rollpersonsskaparen** on its sheet — the wizard walks through all 19 steps (see below).
 
@@ -99,7 +99,7 @@ The load table (`system.encumbrance`, Spelarboken p.44) sums carried weight (wor
 | `handlare` | Merchant/shop actors (own `handlare` actor type) |
 | `regler`, `sl-regler`, `tabeller` | Rules text and random tables as journal/roll-table documents, sourced from the rulebooks. `regler` also holds a Races and a Professions overview page (all races/professions in table form), plus full rules pages for Movement, Carrying Capacity & Encumbrance, Riding & Mounts, Combat, Using Magic, Fear & Phobias, Hit Locations & Damage, Weapons & Armor, and Hero Points. All 12 pages are fully translated to English and switch automatically with the client's language setting (see "Known limitations") — `sl-regler`/`tabeller` remain Swedish-only |
 | `journaler` (shown as "Magiskolreferenser") | 15 auto-generated school reference pages (14 magic schools, including Portalmagi, + General spells), one per school, with a spell/minor-spell table compiled from the `besvarjelser` compendium (regenerated via `scripts/build/generate-journal-summaries.mjs` whenever spells change), plus real description text for all 15 |
-| `scener` | Ready-made scenes, including the character wizard's own backdrop scene |
+| `scener` | **Places (GM)** — an `Adventure` document: the village of Utkanten (player view + GM view with a legend) and the inn Tre Hjortar (one scene, three floors, walls, doors, a staircase that changes floor) with Lasslo and the bar counter |
 
 Compendium content is edited as JSON under `packs/<name>/_source/`, then compiled to the LevelDB format Foundry actually reads — see "Building compendiums" below.
 
