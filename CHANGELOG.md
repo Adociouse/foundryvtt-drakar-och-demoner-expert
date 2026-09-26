@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Changed
+- **Dimön is one scene with three levels** (Ön / Nivå 1 / Nivå 2), aligned so the staircases sit on top of each other and Foundry's own Change Level prompt takes a token between them; players only see the levels their tokens stand on. The SL guide now links every named person to their actor (59 links), and the inn Tre Hjortar is run by Bryte and Ulvar with a trade counter, as in the adventure
 - **The generic Utkanten scenes were replaced** with the new village art that matches the adventure: the village (player view), a GM view with a legend of what is in each house, and the inn Tre Hjortar as one scene with three floors, walls, doors and a change-level staircase. The `scener` pack is now an `Adventure` pack (it includes Lasslo and his bar counter, so the scene tokens resolve on import) because scene compendiums cannot hold Foundry v14 Levels with the current packing tool
 
 ### Added
