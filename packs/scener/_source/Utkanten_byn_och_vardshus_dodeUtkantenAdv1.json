@@ -1,61 +1,88 @@
 {
-  "name": "Utkanten — byn och värdshus (generisk startplats)",
-  "caption": "Byn Utkante med värdshuset Tre Hjortar (tre våningar) och värdshusvärden Lasslo.",
-  "description": "<p>Systemets generiska startplats: byn (spelarvy och SL-vy med teckenförklaring) och värdshuset som en scen med tre våningar, väggar och dörrar. Värdshusvärden Lasslo och hans bardisk följer med, så scenens tokens fungerar direkt vid import.</p>",
+  "name": "Utkanten — byn och värdshuset Tre Hjortar",
+  "caption": "Byn Utkante och värdshuset Tre Hjortar (tre våningar) med Bryte, Ulvar och handelsboden.",
+  "description": "<p>Systemets generiska startplats: byn (spelarvy och SL-vy med teckenförklaring) och värdshuset som en scen med tre våningar, väggar och dörrar. Värdshusvärdarna Bryte och Ulvar och handelsboden följer med, så scenens tokens fungerar direkt vid import.</p>",
   "actors": [
     {
-      "name": "Lasslo Värdshusvärden",
+      "name": "Bryte (Värdshusvärd)",
       "type": "npc",
-      "_id": "dodeLassloPers01",
-      "img": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
       "system": {
         "attributes": {
           "sty": {
-            "value": 10
-          },
-          "sto": {
-            "value": 12
+            "value": 14
           },
           "fys": {
-            "value": 11
+            "value": 15
+          },
+          "sto": {
+            "value": 16
           },
           "smi": {
-            "value": 9
+            "value": 16
           },
           "int": {
-            "value": 11
-          },
-          "psy": {
             "value": 10
           },
+          "psy": {
+            "value": 7
+          },
           "kar": {
-            "value": 13
+            "value": 14
           }
         },
-        "hp": {
-          "value": 12,
-          "max": 12
-        },
-        "abs": 0,
+        "abs": 3,
         "damageBonus": "",
-        "movement": 8,
+        "movement": "",
         "moral": 12,
         "count": "1",
-        "habitat": "Den Trötta Draken, Utkanten",
+        "habitat": "Utkante, Tre Hjortar (4)",
         "rarity": "Unik",
-        "skills": "Köpslå, Lyssna, Bluffa — en värdshusvärd som hört allt två gånger",
-        "attacks": [],
-        "special": "<p>Fridsam värdshusvärd — inga anfall som standard. Lägg till en anfallsrad här om en scen kräver att Lasslo försvarar sig.</p>",
-        "biography": "<p>Samma godmodiga Lasslo som driver Den Trötta Draken (se den separata handlar-aktören för hans butiksdisk och lager). Det här är hans PERSON-token — placera den bakom disken för dialog/roleplay, medan butiksdisk-token sköter köp.</p>"
+        "attacks": [
+          {
+            "name": "Dolk",
+            "fv": 18,
+            "damage": "1d4+1",
+            "note": "Dimön: 90 %"
+          },
+          {
+            "name": "Kortsvärd",
+            "fv": 18,
+            "damage": "1d6+1",
+            "note": "Dimön: 90 %"
+          }
+        ],
+        "special": "<p>F.d. fredlös; driver Tre Hjortar tillsammans med Ulvar. Har dubbelnycklar till gästrummen (dörrarna kan inte reglas från insidan). Mördar inte gäster om han inte är säker på att undgå upptäckt. Läder + tyg 3 p.</p>",
+        "hp": {
+          "value": null,
+          "max": 0
+        },
+        "skills": "Hoppa 16, Klättra 18, Lyssna 18, Finna Dolda Ting 18, Gömma sig 17, Första hjälpen 14, Smyga 19, Rida 16, Simma 16, Ficktjuv 17, Öppna lås 18, Desarmera fällor 18.",
+        "biography": "<p>44 år, störst av de två värdshusvärdarna, ljust hår och ärliga blå ögon som byns flickor är svaga för. Står vanligen i boden.</p>",
+        "creatureType": "normal",
+        "bodyPlan": "humanoid",
+        "resistances": [],
+        "resources": {
+          "psy": {
+            "value": null,
+            "max": 0
+          }
+        },
+        "source": {
+          "book": "dimon",
+          "page": "34-35"
+        }
       },
+      "_id": "dd96e1b2d8009dcd",
+      "img": "systems/drakar-och-demoner-expert/assets/dimon/npc/bryte.png",
       "prototypeToken": {
-        "name": "Lasslo Värdshusvärden",
+        "name": "Bryte (Värdshusvärd)",
         "displayName": 30,
         "actorLink": false,
         "width": 1,
         "height": 1,
+        "depth": 1,
         "texture": {
-          "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+          "src": "systems/drakar-och-demoner-expert/assets/dimon/tokens/bryte.webp",
           "anchorX": 0.5,
           "anchorY": 0.5,
           "fit": "contain",
@@ -64,33 +91,510 @@
           "tint": "#ffffff",
           "alphaThreshold": 0.75
         },
-        "sight": {
-          "enabled": false
+        "lockRotation": false,
+        "rotation": 0,
+        "alpha": 1,
+        "disposition": 0,
+        "displayBars": 0,
+        "bar1": {
+          "attribute": null
         },
-        "disposition": 1,
-        "displayBars": 30
+        "bar2": {
+          "attribute": null
+        },
+        "light": {
+          "negative": false,
+          "priority": 0,
+          "alpha": 0.5,
+          "angle": 360,
+          "bright": 0,
+          "color": null,
+          "coloration": 1,
+          "dim": 0,
+          "attenuation": 0.5,
+          "luminosity": 0.5,
+          "saturation": 0,
+          "contrast": 0,
+          "shadows": 0,
+          "animation": {
+            "type": null,
+            "speed": 5,
+            "intensity": 5,
+            "reverse": false
+          },
+          "darkness": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        "sight": {
+          "enabled": false,
+          "range": 0,
+          "angle": 360,
+          "visionMode": "basic",
+          "color": null,
+          "attenuation": 0.1,
+          "brightness": 0,
+          "saturation": 0,
+          "contrast": 0
+        },
+        "detectionModes": {},
+        "occludable": {
+          "radius": 0
+        },
+        "ring": {
+          "enabled": true,
+          "colors": {
+            "ring": "#d2b56a",
+            "background": "#231e1a"
+          },
+          "effects": 1,
+          "subject": {
+            "scale": 1,
+            "texture": "systems/drakar-och-demoner-expert/assets/dimon/tokens/bryte.webp"
+          }
+        },
+        "turnMarker": {
+          "mode": 1,
+          "animation": null,
+          "src": null,
+          "disposition": false
+        },
+        "movementAction": null,
+        "flags": {},
+        "randomImg": false,
+        "appendNumber": false,
+        "prependAdjective": false
       },
-      "items": [],
+      "items": [
+        {
+          "name": "Dolk",
+          "type": "vapen",
+          "system": {
+            "equipped": true,
+            "grip": "1H",
+            "styGroup": 1,
+            "damage": "1d4+1",
+            "length": 1,
+            "weight": 1.5,
+            "baseValue": 9,
+            "weaponType": "latt",
+            "category": "narstrid",
+            "price": 40,
+            "range": "",
+            "description": "",
+            "source": {
+              "book": "regler",
+              "page": "49-62"
+            },
+            "strikeType": "piercing"
+          },
+          "_id": "5bffc2fd463d4697",
+          "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/dolk.png",
+          "effects": [],
+          "sort": 0,
+          "ownership": {
+            "default": 0
+          },
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.365",
+            "systemId": "drakar-och-demoner-expert",
+            "systemVersion": "0.1.0",
+            "createdTime": 1784389825211,
+            "modifiedTime": 1784389825213,
+            "lastModifiedBy": "WZKk8GW5BTYns1K8",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          }
+        },
+        {
+          "name": "Kortsvärd",
+          "type": "vapen",
+          "system": {
+            "equipped": false,
+            "grip": "1H",
+            "styGroup": 1,
+            "damage": "1d6+1",
+            "length": 1,
+            "weight": 3,
+            "baseValue": 15,
+            "weaponType": "latt",
+            "category": "narstrid",
+            "price": 190,
+            "range": "",
+            "description": "",
+            "source": {
+              "book": "regler",
+              "page": "49-62"
+            },
+            "strikeType": "slashing"
+          },
+          "_id": "2d1592c983dd9d79",
+          "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/kortsvard.png",
+          "effects": [],
+          "sort": 0,
+          "ownership": {
+            "default": 0
+          },
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.365",
+            "systemId": "drakar-och-demoner-expert",
+            "systemVersion": "0.1.0",
+            "createdTime": 1784389825211,
+            "modifiedTime": 1784389825214,
+            "lastModifiedBy": "WZKk8GW5BTYns1K8",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          }
+        }
+      ],
       "effects": [],
+      "folder": "dimonFldUtkante1",
       "sort": 0,
       "ownership": {
-        "default": 2
+        "default": 0
       },
       "flags": {},
       "_stats": {
         "coreVersion": "14.365",
         "systemId": "drakar-och-demoner-expert",
         "systemVersion": "0.1.0",
-        "createdTime": 1787340000000,
-        "modifiedTime": 1787340000000,
-        "lastModifiedBy": "WZKk8GW5BTYns1K8",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       }
     },
     {
-      "name": "Bar",
+      "name": "Ulvar (Värdshusvärd)",
+      "type": "npc",
+      "system": {
+        "attributes": {
+          "sty": {
+            "value": 8
+          },
+          "fys": {
+            "value": 9
+          },
+          "sto": {
+            "value": 14
+          },
+          "smi": {
+            "value": 18
+          },
+          "int": {
+            "value": 15
+          },
+          "psy": {
+            "value": 10
+          },
+          "kar": {
+            "value": 11
+          }
+        },
+        "abs": 3,
+        "damageBonus": "",
+        "movement": "",
+        "moral": 10,
+        "count": "1",
+        "habitat": "Utkante, Tre Hjortar (4)",
+        "rarity": "Unik",
+        "attacks": [
+          {
+            "name": "Spark",
+            "fv": 15,
+            "damage": "1d6",
+            "note": "Dimön: 75 %"
+          },
+          {
+            "name": "Dolk",
+            "fv": 19,
+            "damage": "1d4+1",
+            "note": "Dimön: 95 %"
+          },
+          {
+            "name": "Kortsvärd",
+            "fv": 18,
+            "damage": "1d6+1",
+            "note": "Dimön: 90 %"
+          },
+          {
+            "name": "Kastdolk",
+            "fv": 18,
+            "damage": "1d4",
+            "note": "Dimön: 90 %"
+          }
+        ],
+        "special": "<p>F.d. fredlös. Sköter inköpen och \"tänkandet\" i firman. Visar en gäst upp något värdefullt kan han vilja pröva sina flinka fingrar. Läder + tyg 3 p.</p>",
+        "hp": {
+          "value": null,
+          "max": 0
+        },
+        "skills": "Hoppa 18, Klättra 18, Lyssna 19, Finna Dolda Ting 19, Gömma sig 18, Första hjälpen 19, Smyga 19, Rida 16, Simma 14, Stjäla föremål 18, Dyrka upp lås 19, Desarmera fällor 18.",
+        "biography": "<p>Lång, mager och kutryggig med mörk uppsyn och kvicka fingrar.</p>",
+        "creatureType": "normal",
+        "bodyPlan": "humanoid",
+        "resistances": [],
+        "resources": {
+          "psy": {
+            "value": null,
+            "max": 0
+          }
+        },
+        "source": {
+          "book": "dimon",
+          "page": "34-35"
+        }
+      },
+      "_id": "ddfbacc7d0108c21",
+      "img": "systems/drakar-och-demoner-expert/assets/dimon/npc/ulvar.png",
+      "prototypeToken": {
+        "name": "Ulvar (Värdshusvärd)",
+        "displayName": 30,
+        "actorLink": false,
+        "width": 1,
+        "height": 1,
+        "depth": 1,
+        "texture": {
+          "src": "systems/drakar-och-demoner-expert/assets/dimon/tokens/ulvar.webp",
+          "anchorX": 0.5,
+          "anchorY": 0.5,
+          "fit": "contain",
+          "scaleX": 1,
+          "scaleY": 1,
+          "tint": "#ffffff",
+          "alphaThreshold": 0.75
+        },
+        "lockRotation": false,
+        "rotation": 0,
+        "alpha": 1,
+        "disposition": 0,
+        "displayBars": 0,
+        "bar1": {
+          "attribute": null
+        },
+        "bar2": {
+          "attribute": null
+        },
+        "light": {
+          "negative": false,
+          "priority": 0,
+          "alpha": 0.5,
+          "angle": 360,
+          "bright": 0,
+          "color": null,
+          "coloration": 1,
+          "dim": 0,
+          "attenuation": 0.5,
+          "luminosity": 0.5,
+          "saturation": 0,
+          "contrast": 0,
+          "shadows": 0,
+          "animation": {
+            "type": null,
+            "speed": 5,
+            "intensity": 5,
+            "reverse": false
+          },
+          "darkness": {
+            "min": 0,
+            "max": 1
+          }
+        },
+        "sight": {
+          "enabled": false,
+          "range": 0,
+          "angle": 360,
+          "visionMode": "basic",
+          "color": null,
+          "attenuation": 0.1,
+          "brightness": 0,
+          "saturation": 0,
+          "contrast": 0
+        },
+        "detectionModes": {},
+        "occludable": {
+          "radius": 0
+        },
+        "ring": {
+          "enabled": true,
+          "colors": {
+            "ring": "#d2b56a",
+            "background": "#231e1a"
+          },
+          "effects": 1,
+          "subject": {
+            "scale": 1,
+            "texture": "systems/drakar-och-demoner-expert/assets/dimon/tokens/ulvar.webp"
+          }
+        },
+        "turnMarker": {
+          "mode": 1,
+          "animation": null,
+          "src": null,
+          "disposition": false
+        },
+        "movementAction": null,
+        "flags": {},
+        "randomImg": false,
+        "appendNumber": false,
+        "prependAdjective": false
+      },
+      "items": [
+        {
+          "name": "Dolk",
+          "type": "vapen",
+          "system": {
+            "equipped": true,
+            "grip": "1H",
+            "styGroup": 1,
+            "damage": "1d4+1",
+            "length": 1,
+            "weight": 1.5,
+            "baseValue": 9,
+            "weaponType": "latt",
+            "category": "narstrid",
+            "price": 40,
+            "range": "",
+            "description": "",
+            "source": {
+              "book": "regler",
+              "page": "49-62"
+            },
+            "strikeType": "piercing"
+          },
+          "_id": "ca34c349993fcc68",
+          "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/dolk.png",
+          "effects": [],
+          "sort": 0,
+          "ownership": {
+            "default": 0
+          },
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.365",
+            "systemId": "drakar-och-demoner-expert",
+            "systemVersion": "0.1.0",
+            "createdTime": 1784389825211,
+            "modifiedTime": 1784389825213,
+            "lastModifiedBy": "WZKk8GW5BTYns1K8",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          }
+        },
+        {
+          "name": "Kortsvärd",
+          "type": "vapen",
+          "system": {
+            "equipped": false,
+            "grip": "1H",
+            "styGroup": 1,
+            "damage": "1d6+1",
+            "length": 1,
+            "weight": 3,
+            "baseValue": 15,
+            "weaponType": "latt",
+            "category": "narstrid",
+            "price": 190,
+            "range": "",
+            "description": "",
+            "source": {
+              "book": "regler",
+              "page": "49-62"
+            },
+            "strikeType": "slashing"
+          },
+          "_id": "6ee00211feab279c",
+          "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/kortsvard.png",
+          "effects": [],
+          "sort": 0,
+          "ownership": {
+            "default": 0
+          },
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.365",
+            "systemId": "drakar-och-demoner-expert",
+            "systemVersion": "0.1.0",
+            "createdTime": 1784389825211,
+            "modifiedTime": 1784389825214,
+            "lastModifiedBy": "WZKk8GW5BTYns1K8",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          }
+        },
+        {
+          "name": "Kastkniv",
+          "type": "vapen",
+          "system": {
+            "equipped": false,
+            "grip": "1H",
+            "styGroup": 1,
+            "damage": "1d4+1",
+            "length": 0,
+            "weight": 1.5,
+            "baseValue": 9,
+            "weaponType": "latt",
+            "category": "kast",
+            "price": 75,
+            "range": "STY×1 rutor",
+            "description": "",
+            "source": {
+              "book": "regler",
+              "page": "49-62"
+            },
+            "strikeType": "piercing"
+          },
+          "_id": "56af5b086bfa829d",
+          "img": "systems/drakar-och-demoner-expert/assets/tokens/utrustning/kastkniv.png",
+          "effects": [],
+          "sort": 0,
+          "ownership": {
+            "default": 0
+          },
+          "flags": {},
+          "_stats": {
+            "coreVersion": "14.365",
+            "systemId": "drakar-och-demoner-expert",
+            "systemVersion": "0.1.0",
+            "createdTime": 1788866762971,
+            "modifiedTime": 1788866762971,
+            "lastModifiedBy": "WZKk8GW5BTYns1K8",
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "exportSource": null
+          }
+        }
+      ],
+      "effects": [],
+      "folder": "dimonFldUtkante1",
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.365",
+        "systemId": "drakar-och-demoner-expert",
+        "systemVersion": "0.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    },
+    {
+      "name": "Handelsboden (Tre Hjortar)",
       "type": "handlare",
       "_id": "dodeLassloVard10",
       "img": "systems/drakar-och-demoner-expert/assets/tokens/npc/bardisk.png",
@@ -107,7 +611,7 @@
         }
       },
       "prototypeToken": {
-        "name": "Bar",
+        "name": "Handelsboden",
         "displayName": 30,
         "actorLink": true,
         "width": 1,
@@ -1597,9 +2101,9 @@
         "darknessLevel": 0,
         "darknessLock": false,
         "globalLight": {
-          "enabled": false,
+          "enabled": true,
           "alpha": 0.5,
-          "bright": false,
+          "bright": true,
           "color": null,
           "coloration": 1,
           "luminosity": 0,
@@ -1748,9 +2252,9 @@
         "darknessLevel": 0,
         "darknessLock": false,
         "globalLight": {
-          "enabled": false,
+          "enabled": true,
           "alpha": 0.5,
-          "bright": false,
+          "bright": true,
           "color": null,
           "coloration": 1,
           "luminosity": 0,
@@ -1899,9 +2403,9 @@
         "darknessLevel": 0,
         "darknessLock": false,
         "globalLight": {
-          "enabled": false,
+          "enabled": true,
           "alpha": 0.5,
-          "bright": false,
+          "bright": true,
           "color": null,
           "coloration": 1,
           "luminosity": 0,
@@ -1937,13 +2441,14 @@
       "drawings": [],
       "tokens": [
         {
-          "name": "Lasslo Värdshusvärden",
+          "name": "Bryte",
           "displayName": 30,
           "actorLink": false,
           "width": 1,
           "height": 1,
+          "depth": 1,
           "texture": {
-            "src": "systems/drakar-och-demoner-expert/assets/tokens/npc/lasslo-vardshusvarden.png",
+            "src": "systems/drakar-och-demoner-expert/assets/dimon/tokens/bryte.webp",
             "anchorX": 0.5,
             "anchorY": 0.5,
             "fit": "contain",
@@ -1952,22 +2457,189 @@
             "tint": "#ffffff",
             "alphaThreshold": 0.75
           },
-          "sight": {
-            "enabled": false
+          "lockRotation": false,
+          "rotation": 0,
+          "alpha": 1,
+          "disposition": 0,
+          "displayBars": 0,
+          "bar1": {
+            "attribute": null
           },
-          "disposition": 1,
-          "displayBars": 30,
-          "_id": "lassloPersonTok1",
-          "actorId": "dodeLassloPers01",
-          "x": 648,
-          "y": 504,
+          "bar2": {
+            "attribute": null
+          },
+          "light": {
+            "negative": false,
+            "priority": 0,
+            "alpha": 0.5,
+            "angle": 360,
+            "bright": 0,
+            "color": null,
+            "coloration": 1,
+            "dim": 0,
+            "attenuation": 0.5,
+            "luminosity": 0.5,
+            "saturation": 0,
+            "contrast": 0,
+            "shadows": 0,
+            "animation": {
+              "type": null,
+              "speed": 5,
+              "intensity": 5,
+              "reverse": false
+            },
+            "darkness": {
+              "min": 0,
+              "max": 1
+            }
+          },
+          "sight": {
+            "enabled": false,
+            "range": 0,
+            "angle": 360,
+            "visionMode": "basic",
+            "color": null,
+            "attenuation": 0.1,
+            "brightness": 0,
+            "saturation": 0,
+            "contrast": 0
+          },
+          "detectionModes": {},
+          "occludable": {
+            "radius": 0
+          },
+          "ring": {
+            "enabled": true,
+            "colors": {
+              "ring": "#d2b56a",
+              "background": "#231e1a"
+            },
+            "effects": 1,
+            "subject": {
+              "scale": 1,
+              "texture": "systems/drakar-och-demoner-expert/assets/dimon/tokens/bryte.webp"
+            }
+          },
+          "turnMarker": {
+            "mode": 1,
+            "animation": null,
+            "src": null,
+            "disposition": false
+          },
+          "movementAction": null,
+          "flags": {},
+          "randomImg": false,
+          "appendNumber": false,
+          "prependAdjective": false,
+          "_id": "innTokBryte00001",
+          "actorId": "dd96e1b2d8009dcd",
+          "x": 288,
+          "y": 432,
           "level": "df8cb4861ff0e119",
           "elevation": 0,
-          "hidden": false,
-          "flags": {}
+          "hidden": false
         },
         {
-          "name": "Bar",
+          "name": "Ulvar",
+          "displayName": 30,
+          "actorLink": false,
+          "width": 1,
+          "height": 1,
+          "depth": 1,
+          "texture": {
+            "src": "systems/drakar-och-demoner-expert/assets/dimon/tokens/ulvar.webp",
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "fit": "contain",
+            "scaleX": 1,
+            "scaleY": 1,
+            "tint": "#ffffff",
+            "alphaThreshold": 0.75
+          },
+          "lockRotation": false,
+          "rotation": 0,
+          "alpha": 1,
+          "disposition": 0,
+          "displayBars": 0,
+          "bar1": {
+            "attribute": null
+          },
+          "bar2": {
+            "attribute": null
+          },
+          "light": {
+            "negative": false,
+            "priority": 0,
+            "alpha": 0.5,
+            "angle": 360,
+            "bright": 0,
+            "color": null,
+            "coloration": 1,
+            "dim": 0,
+            "attenuation": 0.5,
+            "luminosity": 0.5,
+            "saturation": 0,
+            "contrast": 0,
+            "shadows": 0,
+            "animation": {
+              "type": null,
+              "speed": 5,
+              "intensity": 5,
+              "reverse": false
+            },
+            "darkness": {
+              "min": 0,
+              "max": 1
+            }
+          },
+          "sight": {
+            "enabled": false,
+            "range": 0,
+            "angle": 360,
+            "visionMode": "basic",
+            "color": null,
+            "attenuation": 0.1,
+            "brightness": 0,
+            "saturation": 0,
+            "contrast": 0
+          },
+          "detectionModes": {},
+          "occludable": {
+            "radius": 0
+          },
+          "ring": {
+            "enabled": true,
+            "colors": {
+              "ring": "#d2b56a",
+              "background": "#231e1a"
+            },
+            "effects": 1,
+            "subject": {
+              "scale": 1,
+              "texture": "systems/drakar-och-demoner-expert/assets/dimon/tokens/ulvar.webp"
+            }
+          },
+          "turnMarker": {
+            "mode": 1,
+            "animation": null,
+            "src": null,
+            "disposition": false
+          },
+          "movementAction": null,
+          "flags": {},
+          "randomImg": false,
+          "appendNumber": false,
+          "prependAdjective": false,
+          "_id": "innTokUlvar00001",
+          "actorId": "ddfbacc7d0108c21",
+          "x": 864,
+          "y": 648,
+          "level": "df8cb4861ff0e119",
+          "elevation": 0,
+          "hidden": false
+        },
+        {
+          "name": "Handelsboden",
           "displayName": 30,
           "actorLink": false,
           "width": 1,
@@ -1987,10 +2659,10 @@
           },
           "disposition": 1,
           "displayBars": 0,
-          "_id": "lassloBarTok0001",
+          "_id": "innTokBoden00001",
           "actorId": "dodeLassloVard10",
-          "x": 648,
-          "y": 576,
+          "x": 288,
+          "y": 216,
           "level": "df8cb4861ff0e119",
           "elevation": 0,
           "hidden": false,
