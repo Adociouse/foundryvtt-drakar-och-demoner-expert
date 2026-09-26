@@ -1,3 +1,4 @@
+import os
 """Grotta: golv = ljusa grusband (lum>thr) + hål som innehåller rumsnål; kontur = vägg.
 python cave_walls2.py <name> <thr> <close> <open> <erode> <eps>"""
 import sys, json, os
@@ -6,7 +7,7 @@ from PIL import Image
 ASSET = os.environ.get("DIMON_MAPS", "assets/dimon/maps")
 SP = os.environ.get("DIMON_WORK", "work")
 name, thr, cl, op, er, eps = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]), float(sys.argv[6])
-im = Image.open(f"{ASSET}/{name}.webp").convert("RGB")
+im = Image.open(f"{ASSET}\\{name}.webp").convert("RGB")
 rgb = np.asarray(im); lum = rgb.astype(float).mean(axis=2)
 k = lambda n: cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (n, n))
 m = ((lum > thr).astype("uint8")) * 255
@@ -16,7 +17,7 @@ n, lab, st, _ = cv2.connectedComponentsWithStats(m, 8)
 keep = np.zeros_like(m)
 for i in range(1, n):
     if st[i, cv2.CC_STAT_AREA] >= 2500: keep[lab == i] = 255
-pins = json.load(open(SP + f"/{name}_pins.json", encoding="utf-8"))
+pins = json.load(open(SP + f"/\{name}_pins.json", encoding="utf-8"))
 inv = 255 - keep
 n2, lab2, st2, _ = cv2.connectedComponentsWithStats(inv, 4)
 fill = set()
@@ -48,7 +49,7 @@ _n, _l, _s, _ = cv2.connectedComponentsWithStats(_inv, 4)
 for i in range(1, _n):
     x, y, w, h, a = _s[i]
     if a < 4000 and x > 0 and y > 0 and x + w < floor.shape[1] and y + h < floor.shape[0]: floor[_l == i] = 255
-np.save(SP + f"/{name}_floor.npy", floor)
+np.save(SP + f"/\{name}_floor.npy", floor)
 cnts, _ = cv2.findContours(floor, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
 walls = []
 for c in cnts:
@@ -58,11 +59,11 @@ for c in cnts:
         a, b = ap[i], ap[(i + 1) % len(ap)]
         if (a == b).all(): continue
         walls.append([int(a[0]), int(a[1]), int(b[0]), int(b[1])])
-json.dump(walls, open(SP + f"/{name}_walls.json", "w"))
+json.dump(walls, open(SP + f"/\{name}_walls.json", "w"))
 ov = rgb.copy()
 ov[floor > 0] = (ov[floor > 0] * 0.6 + np.array([0, 160, 0]) * 0.4).astype("uint8")
 for x1, y1, x2, y2 in walls: cv2.line(ov, (x1, y1), (x2, y2), (255, 0, 255), 2)
-t = Image.fromarray(ov); t.thumbnail((1000, 1000)); t.save(SP + f"/{name}_walls.png")
+t = Image.fromarray(ov); t.thumbnail((1000, 1000)); t.save(SP + f"/\{name}_walls.png")
 n4, lab4, _, _ = cv2.connectedComponentsWithStats(floor, 8)
 print("floor comps:", n4 - 1, "walls:", len(walls))
 for lbl, x, y in pins: print(lbl, "comp", int(lab4[y, x]), end=" | ")

@@ -6,9 +6,9 @@ from collections import deque
 SP = os.environ.get("DIMON_WORK", "work")
 name, gmin, gmax = sys.argv[1], int(sys.argv[2]), int(sys.argv[3])
 gstep = int(sys.argv[4]) if len(sys.argv) > 4 else 2
-floor = (np.load(SP + f"/{name}_floor.npy") > 0)
+floor = (np.load(SP + f"/\{name}_floor.npy") > 0)
 H, W = floor.shape
-pins = json.load(open(SP + f"/{name}_pins.json", encoding="utf-8"))
+pins = json.load(open(SP + f"/\{name}_pins.json", encoding="utf-8"))
 allfloor = floor.astype("uint8")
 
 def seg_ok(x1, y1, x2, y2):
@@ -37,6 +37,7 @@ def evaluate(g, ox, oy):
         for di in (-1, 0, 1):
             for dj in (-1, 0, 1):
                 if di == 0 and dj == 0: continue
+                if __import__('os').environ.get('DIR4') and di and dj: continue
                 k = (i + di, j + dj)
                 if k in valid and k not in seen:
                     x2, y2 = valid[k]
